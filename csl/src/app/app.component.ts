@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { FoodService } from './services/food.service';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,23 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'app';
+  	title = 'Macrolog Webapp';
+	foodResult: String = '';
+	newFoodResult;
+
+	constructor(private foodService: FoodService) {}
+
+	ngOnInit() {
+		this.foodService.getAllFood().subscribe(
+			data => this.foodResult = data
+		);
+	}
+
+	insertFood() {
+		this.foodService.insertFood().subscribe(
+			data => this.newFoodResult = data
+		);
+	}
+
+
 }
