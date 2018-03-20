@@ -1,11 +1,15 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1>
-    Welcome to {{ title }}!
-  </h1>
-</div>
-<div>
-    <p>{{foodResult}}</p>
-    <button (click)="insertFood()">Insert food</button>
-</div>
+<mat-drawer-container class="maxHeight">
+    <mat-drawer #sidenav mode="over">
+        <p>Menu Item 1</p>
+        <p>Menu Item 2</p>
+    </mat-drawer>
+    <mat-drawer-content>
+        <mat-toolbar class="coloredBackground center">
+            <button mat-button (click)="sidenav.toggle()">Menu</button>
+            <span>{{title}}</span>
+        </mat-toolbar>
+        <p>{{foodResult}}</p>
+    </mat-drawer-content>
+</mat-drawer-container>
+
 
