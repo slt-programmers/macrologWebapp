@@ -1,14 +1,16 @@
 <mat-drawer-container class="maxHeight">
     <mat-drawer #sidenav mode="over">
-        <p>Menu Item 1</p>
-        <p>Menu Item 2</p>
+        <mat-card (click)="sidenav.toggle()"
+                  routerLink="/log" routerLinkActive="active"><span>Daily Diary</span></mat-card>
+        <mat-card (click)="sidenav.toggle()"
+                  routerLink="/database" routerLinkActive="active"><span>Food Database</span></mat-card>
     </mat-drawer>
     <mat-drawer-content>
         <mat-toolbar class="coloredBackground center">
-            <button mat-button (click)="sidenav.toggle()">Menu</button>
+            <i class="material-icons" (click)="sidenav.toggle()">menu</i>
             <span>{{title}}</span>
         </mat-toolbar>
-        <p>{{foodResult}}</p>
+        <router-outlet></router-outlet>
     </mat-drawer-content>
 </mat-drawer-container>
 

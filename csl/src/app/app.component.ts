@@ -14,9 +14,7 @@ export class AppComponent {
 	constructor(private foodService: FoodService) {}
 
 	ngOnInit() {
-		this.foodService.getAllFood().subscribe(
-			data => this.foodResult = data
-		);
+
 	}
 
 	insertFood() {

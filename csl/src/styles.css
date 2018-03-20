@@ -32,3 +32,8 @@ body, h1, h2, h3 {
 .mat-drawer-backdrop.mat-drawer-shown {
 	background-color: rgba(0,0,0,.2);
 }
+
+.material-icons {
+	padding: 12px;
+	cursor: pointer;
+}
