@@ -9,7 +9,9 @@ import { DatabaseEntryComponent } from './database-entry/database-entry.componen
 })
 export class DatabaseComponent {
 
-  constructor(public dialog: MatDialog) { }
+  constructor(public dialog: MatDialog) {
+
+  }
 
   openDialog(): void {
 

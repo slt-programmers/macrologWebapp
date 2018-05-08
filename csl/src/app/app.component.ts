@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { FoodService } from './services/food.service';
 
 @Component({
   selector: 'app-root',
@@ -8,19 +7,11 @@ import { FoodService } from './services/food.service';
 })
 export class AppComponent implements OnInit {
   title: string;
-  newFoodResult: {};
 
-  constructor(private foodService: FoodService) {}
+  constructor() {}
 
   ngOnInit() {
     this.title = 'Macrolog Webapp';
   }
-
-  insertFood() {
-    this.foodService.insertFood().subscribe(
-      data => this.newFoodResult = data
-    );
-  }
-
 
 }
