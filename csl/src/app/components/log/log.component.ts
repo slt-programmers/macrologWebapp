@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FoodService } from '../../services/food.service'
+import { FoodService } from '../../services/food.service';
 
 @Component({
   selector: 'app-log',
@@ -8,14 +8,14 @@ import { FoodService } from '../../services/food.service'
 })
 export class LogComponent implements OnInit {
 
-	foodResult = '';
+  foodResult;
 
-	constructor(private foodService: FoodService) { }
+  constructor(private foodService: FoodService) { }
 
-  	ngOnInit() {
-		this.foodService.getAllFood().subscribe(
-			data => this.foodResult = data
-		);
-  	}
+    ngOnInit() {
+      this.foodService.getAllFood().subscribe(
+        data => this.foodResult = data
+      );
+    }
 
 }

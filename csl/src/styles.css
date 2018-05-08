@@ -12,15 +12,6 @@ body, h1, h2, h3 {
 	padding: 0;
 }
 
-.coloredBackground {
-	background: #006dad;
-	color: #fff;
-}
-
-.stdPdgMrg {
-	padding: 12px;
-}
-
 .center {
 	text-align: center;
 }
@@ -36,4 +27,16 @@ body, h1, h2, h3 {
 .material-icons {
 	padding: 12px;
 	cursor: pointer;
+}
+
+button.mat-icon-button {
+	height: 50px;
+	width: 50px;
+}
+
+div.fixed-bottom-right button{
+	position: fixed;
+	right: 20px;
+	bottom: 20px;
+	z-index: 1000;
 }

@@ -1,15 +1,25 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { MatDialog, MatDialogRef } from '@angular/material';
+import { DatabaseEntryComponent } from './database-entry/database-entry.component';
 
 @Component({
   selector: 'app-database',
   templateUrl: './database.component.html',
   styleUrls: ['./database.component.css']
 })
-export class DatabaseComponent implements OnInit {
+export class DatabaseComponent {
 
-  constructor() { }
+  constructor(public dialog: MatDialog) { }
 
-  ngOnInit() {
+  openDialog(): void {
+
+    const dialogRef = this.dialog.open(DatabaseEntryComponent, {
+      width: '360px'
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    });
   }
 
 }

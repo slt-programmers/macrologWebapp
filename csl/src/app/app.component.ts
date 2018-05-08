@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FoodService } from './services/food.service';
 
 @Component({
@@ -6,22 +6,21 @@ import { FoodService } from './services/food.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
-  	title = 'Macrolog Webapp';
-	foodResult: String = '';
-	newFoodResult;
+export class AppComponent implements OnInit {
+  title: string;
+  newFoodResult: {};
 
-	constructor(private foodService: FoodService) {}
+  constructor(private foodService: FoodService) {}
 
-	ngOnInit() {
+  ngOnInit() {
+    this.title = 'Macrolog Webapp';
+  }
 
-	}
-
-	insertFood() {
-		this.foodService.insertFood().subscribe(
-			data => this.newFoodResult = data
-		);
-	}
+  insertFood() {
+    this.foodService.insertFood().subscribe(
+      data => this.newFoodResult = data
+    );
+  }
 
 
 }
