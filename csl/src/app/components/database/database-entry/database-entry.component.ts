@@ -1,12 +1,11 @@
 import {Component} from'@angular/core';
-import {MatDialog, MatDialogRef}from '@angular/material';
 import {FoodService} from '../../../services/food.service';
 import {Food} from '../../../model/food'
 
 @Component({
   selector: 'app-database-entry',
   templateUrl: './database-entry.component.html',
-  styleUrls: ['./database-entry.component.css']
+  styleUrls: ['./database-entry.component.scss']
 })
 export class DatabaseEntryComponent {
 
@@ -19,13 +18,11 @@ export class DatabaseEntryComponent {
 		carbs: 0
 	};
 
-	constructor(public dialogRef: MatDialogRef<DatabaseEntryComponent>,
-				public foodService: FoodService) {
+	constructor(public foodService: FoodService) {
 		this.model.selectedUnit = 1;
 	}
 
 	onClose(): void {
-		this.dialogRef.close();
 	}
 
 	onSubmit(): void {
@@ -38,8 +35,8 @@ export class DatabaseEntryComponent {
 						this.model.fat,
 						this.model.carbs)
 		console.log(food);
-		this.foodService.insertFood(food);
-		this.dialogRef.close();
+		//this.foodService.insertFoodTwo(food);
+		this.foodService.insertFood();
 	}
 
 }

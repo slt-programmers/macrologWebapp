@@ -1,0 +1,31 @@
+<div class="">
+    <h2>Personal details</h2>
+    <label>Name</label>
+    <input name="name" type="text" [ngModel]="name">
+
+    <label>Height (cm)</label>
+    <input name="height" type="number" [ngModel]="height">
+
+    <label>Weight (kg)</label>
+    <input name="weight" type="number" [ngModel]="weight | number: '1.1-1'" step="0.1">
+
+    <label>Activity level</label>
+    <select name="activity">
+        <option>Sedentary</option>
+        <option>Lightly active</option>
+        <option>Moderately active</option>
+        <option>Very active</option>
+        <option>Extremely active</option>
+    </select>
+</div>
+
+<div>
+    <h2>Goals</h2>
+
+    <label>Daily intake</label>
+    <span>{{intakeGoal}} kcal</span>
+</div>
+
+<div class="weightGraph">
+    <h2>Weight graph TODO</h2>
+</div>

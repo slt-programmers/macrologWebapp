@@ -1,27 +1,26 @@
-import { Component } from '@angular/core';
-import { MatDialog, MatDialogRef } from '@angular/material';
+import { Component, OnInit } from '@angular/core';
 import { DatabaseEntryComponent } from './database-entry/database-entry.component';
+import { FoodService } from '../../services/food.service'
 
 @Component({
   selector: 'app-database',
   templateUrl: './database.component.html',
-  styleUrls: ['./database.component.css']
+  styleUrls: ['./database.component.scss']
 })
-export class DatabaseComponent {
+export class DatabaseComponent implements OnInit {
 
-  constructor(public dialog: MatDialog) {
+  	constructor(public foodService: FoodService) {
+  	}
 
-  }
+	allFood;
+	ngOnInit() {
+		this.foodService.getAllFood().subscribe(
+	        data => this.allFood = data
+	    );
+	}
 
-  openDialog(): void {
+ 	openDialog(): void {
 
-    const dialogRef = this.dialog.open(DatabaseEntryComponent, {
-      width: '360px'
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-    });
   }
 
 }

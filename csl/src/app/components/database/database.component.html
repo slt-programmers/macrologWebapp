@@ -1,6 +1,8 @@
 <div>
     <p>Database Vulling</p>
-    <span>{{dbvulling}}</span>
+    <p *ngFor="let food of allFood">
+        {{food.name}}
+    </p>
 
 </div>
 
@@ -16,8 +18,7 @@
 
 
 <div class="fixed-bottom-right">
-    <button mat-icon-button mat-raised-button color="primary"
-        (click)="openDialog()">
-        <mat-icon>add</mat-icon>
+    <button (click)="openDialog()">
+        <i class="fas fa-plus"></i>
     </button>
 </div>

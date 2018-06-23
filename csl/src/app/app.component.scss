@@ -1,0 +1,49 @@
+@import '../css/mixins';
+@import '../css/variables';
+
+.header {
+	background-color: #303f9f;
+	color: $white;
+	padding: $gutter;
+	margin-bottom: $gutter;
+
+	&__item {
+		padding-right: $gutter/2;
+		font-size: 20px;
+	}
+}
+
+.nav-wrapper {
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 1;
+	height: 100%;
+	width: 100%;
+	display: none;
+
+	&--visible {
+		display: flex;
+		flex-direction: column;
+	}
+}
+
+.nav {
+	@include elevation(4);
+	height: 100%;
+	width: 300px;
+	background-color: $ghost;
+
+	&__item {
+		padding: $gutter;
+		border-bottom: 1px solid $smoke;
+
+		&__top {
+			padding: $gutter;
+			font-size: 20px;
+			color: $white;
+			background-color: #303f9f;
+
+		}
+	}
+}

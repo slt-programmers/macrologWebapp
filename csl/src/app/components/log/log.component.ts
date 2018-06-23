@@ -4,7 +4,7 @@ import { FoodService } from '../../services/food.service';
 @Component({
   selector: 'app-log',
   templateUrl: './log.component.html',
-  styleUrls: ['./log.component.css']
+  styleUrls: ['./log.component.scss']
 })
 export class LogComponent implements OnInit {
 
@@ -13,9 +13,9 @@ export class LogComponent implements OnInit {
   constructor(private foodService: FoodService) { }
 
     ngOnInit() {
-      this.foodService.getAllFood().subscribe(
-        data => this.foodResult = data
-      );
+//      this.foodService.getAllFood().subscribe(
+//        data => this.foodResult = data
+//      );
     }
 
 }
