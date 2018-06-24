@@ -1,31 +1,100 @@
-<div class="">
-    <h2>Personal details</h2>
-    <label>Name</label>
-    <input name="name" type="text" [ngModel]="name">
+<div class="modal-backdrop" *ngIf="showCalcModal"></div>
+<div class="modal-wrapper" *ngIf="showCalcModal">
+    <div class="modal">
+        <div class="modal__header">
+            <span class="modal__header__title">Calculate your daily intake</span>
+            <i class="fas fa-times" (click)="showCalcModal = false"></i>
+        </div>
+        <div class="modal__content">
+            <div class="form-field__element">
+                <div class="radio-group">
+                    <label>Activity level</label>
+                    <select class="form-field" name="activity" [(ngModel)]="activity" (change)="calcCalories()">
+                        <option class="form-field__option" value="1.2">Sedentary</option>
+                        <option class="form-field__option" value="1.375">Lightly active</option>
+                        <option class="form-field__option" value="1.55">Moderately active</option>
+                        <option class="form-field__option" value="1.725">Very active</option>
+                        <option class="form-field__option" value="1.9">Extremely active</option>
+                    </select>
+                </div>
+            </div>
 
-    <label>Height (cm)</label>
-    <input name="height" type="number" [ngModel]="height">
+            <div class="form-field__element">
+                <label class="form-field__label">My goal is to: </label>
+                <input class="form-field__radio" name="difference" type="radio" [(ngModel)]="difference" value="lose" (change)="adjustDiff()">
+                <span class="radio__label">lose weight</span>
+                <input class="form-field__radio" name="difference" type="radio" [(ngModel)]="difference" value="same" (change)="adjustDiff()">
+                <span class="radio__label">stay the same weight</span>
+                <input class="form-field__radio" name="difference" type="radio" [(ngModel)]="difference" value="gain" (change)="adjustDiff()">
+                <span class="radio__label">gain weight</span>
+            </div>
 
-    <label>Weight (kg)</label>
-    <input name="weight" type="number" [ngModel]="weight | number: '1.1-1'" step="0.1">
+            <div class="calorie-adjuster">
+                <i class="calorie-adjuster__icon fas fa-sort-up" (click)="addOne()"></i>
+                <h2>{{calories | number : '1.0-0' }} Calories</h2>
+                <i class="calorie-adjuster__icon fas fa-sort-down" (click)="subtractOne()"></i>
+            </div>
 
-    <label>Activity level</label>
-    <select name="activity">
-        <option>Sedentary</option>
-        <option>Lightly active</option>
-        <option>Moderately active</option>
-        <option>Very active</option>
-        <option>Extremely active</option>
-    </select>
+            <span>Protein {{protein | number : '1.0-0'}}</span>
+            <span>Fat {{fat | number : '1.0-0'}}</span>
+            <span>Carbs {{carbs | number : '1.0-0'}}</span>
+        </div>
+    </div>
 </div>
 
-<div>
-    <h2>Goals</h2>
+<div class="container">
+    <h2 class="title">Personal details</h2>
+    <div class="personal">
+        <form>
+            <div class="form-field__element">
+                <label class="form-field__label">Slider</label>
+                <slider></slider>
+            </div>
 
-    <label>Daily intake</label>
-    <span>{{intakeGoal}} kcal</span>
+            <div class="form-field__element">
+                <label class="form-field__label">Name</label>
+                <input class="form-field" name="name" type="text" [(ngModel)]="name">
+            </div>
+
+            <div class="form-field__element">
+                <label class="form-field__label">Age</label>
+                <input class="form-field" name="age" type="number" [(ngModel)]="age">
+            </div>
+
+            <div class="form-field__element">
+                <div class="radio-group">
+                    <label class="form-field__label">Gender</label>
+                    <input class="form-field__radio" type="radio" name="gender" [(ngModel)]="gender" value="male">
+                    <span class="radio__label">Male</span>
+                    <input class="form-field__radio" type="radio" name="gender" [(ngModel)]="gender" value="female">
+                    <span class="radio__label">Female</span>
+                </div>
+            </div>
+
+            <div class="form-field__element">
+                <label class="form-field__label">Height (cm)</label>
+                <input class="form-field" name="height" type="number" [(ngModel)]="height">
+            </div>
+
+            <div class="form-field__element">
+                <label class="form-field__label">Current weight (kg)</label>
+                <input class="form-field" name="weight" type="number" [(ngModel)]="weight" step="0.1"
+                       (change)="calcCalories()">
+            </div>
+        </form>
+    </div>
 </div>
 
-<div class="weightGraph">
-    <h2>Weight graph TODO</h2>
+<div class="container">
+    <h2 class="title">Goals</h2>
+    <button class="button button--primary" (click)="openCalcModal()">Calculate intake</button>
 </div>
+
+<!--<div class="container">-->
+    <!--<h2 class="title">Weight graph TODO</h2>-->
+<!--</div>-->
+
+<!--<div class="container">-->
+    <!--<h2 class="title">Body size graph TODO</h2>-->
+<!--</div>-->
+

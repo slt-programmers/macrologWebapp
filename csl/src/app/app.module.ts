@@ -12,6 +12,7 @@ import {LogComponent}from './components/log/log.component';
 import {DatabaseComponent}from './components/database/database.component';
 import {DatabaseEntryComponent}from './components/database/database-entry/database-entry.component';
 import {AccountComponent}from './components/account/account.component';
+import { SliderComponent } from './components/slider/slider.component';
 
 const appRoutes: Routes = [
 {path: 'log', component: LogComponent},
@@ -27,7 +28,8 @@ const appRoutes: Routes = [
     LogComponent,
     DatabaseComponent,
     DatabaseEntryComponent,
-    AccountComponent
+    AccountComponent,
+    SliderComponent,
   ],
   imports: [
     BrowserModule,

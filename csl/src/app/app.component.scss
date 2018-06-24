@@ -1,8 +1,7 @@
-@import '../css/mixins';
-@import '../css/variables';
+@import '../css/public';
 
 .header {
-	background-color: #303f9f;
+	background-color: $primary;
 	color: $white;
 	padding: $gutter;
 	margin-bottom: $gutter;
@@ -42,7 +41,7 @@
 			padding: $gutter;
 			font-size: 20px;
 			color: $white;
-			background-color: #303f9f;
+			background-color: $primary;
 
 		}
 	}

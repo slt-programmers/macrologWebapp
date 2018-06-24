@@ -1,0 +1,21 @@
+<div #slider class="slider"
+
+     (mouseup)="onUp($event)"
+     (mousemove)="onMove($event)"
+     (mouseleave)="onUp($event)"
+     (mousedown)="onDown($event)"
+     (click)="onClick($event)">
+    <div class="slider-wrapper">
+        <div class="slider__content">
+            <div class="slider__track-container">
+                <div class="slider__track">
+                </div>
+                <div #trackFill class="slider__track slider__track--fill">
+                </div>
+            </div>
+            <div class="slider__handle-container">
+                <div #sliderHandle class="slider__handle"></div>
+            </div>
+        </div>
+    </div>
+</div>
