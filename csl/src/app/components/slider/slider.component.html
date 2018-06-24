@@ -2,8 +2,12 @@
 
      (mouseup)="onUp($event)"
      (mousemove)="onMove($event)"
-     (mouseleave)="onUp($event)"
      (mousedown)="onDown($event)"
+
+     (touchstart)="onDown($event)"
+     (touchmove)="onMove($event)"
+     (touchend)="onUp($event)"
+
      (click)="onClick($event)">
     <div class="slider-wrapper">
         <div class="slider__content">

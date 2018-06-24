@@ -28,19 +28,25 @@ export class SliderComponent implements OnInit {
 		};
   }
 
-	public onDown(event: MouseEvent) {
+	public onDown(event) {
+		event.preventDefault();
+		let location = this.getLocation(event);
+
 		this.mouseDown = true;
-		this.startXChord = event.clientX;
+		this.startXChord = location;
 		this.onClick(event);
 	}
 
-	public onUp(event: MouseEvent) {
+	public onUp(event) {
 		this.mouseDown = false;
 	}
 
-	public onMove(event: MouseEvent): void {
-		if (this.mouseDown && this.isInBoundary(event.clientX)) {
-			this.newXChord = event.clientX;
+	public onMove(event): void {
+		event.preventDefault();
+		let location = this.getLocation(event);
+
+		if (this.mouseDown && this.isInBoundary(location)) {
+			this.newXChord = location;
 			let distance = this.startXChord - this.newXChord;
 			this.startXChord = this.newXChord;
 			this.sliderHandle.style.left = (this.sliderHandle.offsetLeft - distance) + 'px';
@@ -50,9 +56,11 @@ export class SliderComponent implements OnInit {
 		}
 	}
 
-	public onClick(event: MouseEvent): void {
-		if (this.isInBoundary(event.clientX) {
-			this.newXChord = event.clientX - this.boundary.left;
+	public onClick(event): void {
+		event.preventDefault();
+		let location = this.getLocation(event);
+		if (this.isInBoundary(location) {
+			this.newXChord = location - this.boundary.left;
 			this.sliderHandle.style.left = (this.newXChord - (this.sliderHandle.clientWidth / 2)) + 'px';
 			this.track.style.width = this.newXChord + 'px';
 		}
@@ -60,5 +68,15 @@ export class SliderComponent implements OnInit {
 
 	private isInBoundary(location: number) {
 		return (location >= this.boundary.left && location <= (this.boundary.right));
+	}
+
+	private getLocation(event): number {
+		let location;
+		if (event.touches !== undefined) {
+			location = event.touches[0].clientX;
+		} else {
+			location = event.clientX;
+		}
+		return location;
 	}
 }
