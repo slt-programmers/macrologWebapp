@@ -37,7 +37,7 @@
 
             <div class="form-field__element">
                 <label class="form-field__label">Slider</label>
-                <slider></slider>
+                <slider [(value)]="calories" [upperBound]="4000" [lowerBound]="1000"></slider>
             </div>
 
             <span>Protein {{protein | number : '1.0-0'}}</span>
@@ -51,11 +51,6 @@
     <h2 class="title">Personal details</h2>
     <div class="personal">
         <form>
-            <div class="form-field__element">
-                <label class="form-field__label">Slider</label>
-                <slider></slider>
-            </div>
-
             <div class="form-field__element">
                 <label class="form-field__label">Name</label>
                 <input class="form-field" name="name" type="text" [(ngModel)]="name">
