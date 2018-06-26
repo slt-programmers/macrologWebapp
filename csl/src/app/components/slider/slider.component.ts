@@ -1,4 +1,4 @@
-import{Component, OnInit, Inject, ViewChild}from '@angular/core';
+import{ElementRef,Component, OnInit, Inject, ViewChild}from '@angular/core';
 
 @Component({
   selector: 'slider',
@@ -14,6 +14,10 @@ export class SliderComponent implements OnInit {
 	public mouseDown = false;
 	public startXChord;
 	public newXChord;
+  public slider;
+  public sliderHandle;
+  public track;
+  public boundary;
 
   constructor() { }
 
@@ -24,7 +28,7 @@ export class SliderComponent implements OnInit {
 
 		this.boundary = {
 			left: this.slider.offsetLeft,
-			right: this.slider.clientWidth + this.slider.offsetLeft)
+			right: this.slider.clientWidth + this.slider.offsetLeft
 		};
   }
 
@@ -59,7 +63,7 @@ export class SliderComponent implements OnInit {
 	public onClick(event): void {
 		event.preventDefault();
 		let location = this.getLocation(event);
-		if (this.isInBoundary(location) {
+		if (this.isInBoundary(location)) {
 			this.newXChord = location - this.boundary.left;
 			this.sliderHandle.style.left = (this.newXChord - (this.sliderHandle.clientWidth / 2)) + 'px';
 			this.track.style.width = this.newXChord + 'px';
