@@ -35,6 +35,11 @@
                 <i class="calorie-adjuster__icon fas fa-sort-down" (click)="subtractOne()"></i>
             </div>
 
+            <div class="form-field__element">
+                <label class="form-field__label">Slider</label>
+                <slider></slider>
+            </div>
+
             <span>Protein {{protein | number : '1.0-0'}}</span>
             <span>Fat {{fat | number : '1.0-0'}}</span>
             <span>Carbs {{carbs | number : '1.0-0'}}</span>

@@ -60,8 +60,8 @@ export class AccountComponent implements OnInit {
 		this.calcTDEE();
 		this.calories = this.tdee;
 
-#		this.calcCarbs();
-#		this.calories = (this.protein * 4) + (this.fat * 9) + (this.carbs * 4);
+//		this.calcCarbs();
+//    this.calories = (this.protein * 4) + (this.fat * 9) + (this.carbs * 4);
 	}
 
 	addOne(): void {

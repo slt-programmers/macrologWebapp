@@ -1,4 +1,4 @@
-import{Component, OnInit, Inject, ViewChild}from '@angular/core';
+import{Component, OnInit, Inject, ViewChild, ElementRef}from '@angular/core';
 
 @Component({
   selector: 'slider',
@@ -14,6 +14,12 @@ export class SliderComponent implements OnInit {
 	public mouseDown = false;
 	public startXChord;
 	public newXChord;
+	public slider;
+	public sliderHandle;
+	public track;
+	public boundary;
+
+	public sliderOffset;
 
   constructor() { }
 
@@ -22,13 +28,35 @@ export class SliderComponent implements OnInit {
 		this.sliderHandle = this.handleElement.nativeElement;
 		this.track = this.trackElement.nativeElement;
 
+		// position 0%
+		this.sliderOffsetLeft = this.getOffsetLeft(this.slider);
+		// position 100%
+		this.sliderOffsetRight = this.sliderOffsetLeft + this.slider.clientWidth;
+
+		console.log(this.sliderElement);
+		console.log(this.slider);
+		console.log(this.sliderOffsetLeft);
+		console.log(this.sliderOffsetRight);
+
 		this.boundary = {
-			left: this.slider.offsetLeft,
-			right: this.slider.clientWidth + this.slider.offsetLeft)
+			left: this.sliderOffsetLeft,
+			right: this.sliderOffsetRight
 		};
   }
 
+	getOffsetLeft(slider) {
+    let offsetLeft = 0;
+    do {
+      if ( !isNaN( slider.offsetLeft ) ) {
+				offsetLeft += slider.offsetLeft;
+      }
+    } while( slider = slider.offsetParent );
+    return offsetLeft;
+	}
+
 	public onDown(event) {
+		console.log(event);
+		console.log(event.path[0]);
 		event.preventDefault();
 		let location = this.getLocation(event);
 
@@ -59,7 +87,7 @@ export class SliderComponent implements OnInit {
 	public onClick(event): void {
 		event.preventDefault();
 		let location = this.getLocation(event);
-		if (this.isInBoundary(location) {
+		if (this.isInBoundary(location)) {
 			this.newXChord = location - this.boundary.left;
 			this.sliderHandle.style.left = (this.newXChord - (this.sliderHandle.clientWidth / 2)) + 'px';
 			this.track.style.width = this.newXChord + 'px';
