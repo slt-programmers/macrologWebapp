@@ -1,0 +1,27 @@
+<div class="center">
+
+  <p class="center">Overview of all the food you have registered!</p>
+
+  <table class="center">
+    <tr>
+      <Th>Name</Th>
+      <Th>Amount</Th>
+      <Th>Proteine</Th>
+      <Th>Carbs</Th>
+      <Th>Fat</Th>
+      <Th>Calories</Th>
+      <th></th>
+    </tr>
+    <tr *ngFor="let food of foodResult">
+      <td nowrap="">{{food.name}}</td>
+      <td nowrap="">{{food.amountNumber}} {{food.amountUnit}}</td>
+      <td align="right">{{food.protein | number:'1.1-1'}}</td>
+      <td align="right">{{food.carbs | number:'1.1-1'}}</td>
+      <td align="right">{{food.fat | number:'1.1-1'}}</td>
+      <td align="right">{{(food.fat*9 + food.carbs*4 + food.protein*4)| number:'1.2-2'}}</td>
+      <td><button class="button button--primary">
+          <i class="fas fa-plus"></i>
+      </button></td>
+    </tr>
+  </table>
+</div>

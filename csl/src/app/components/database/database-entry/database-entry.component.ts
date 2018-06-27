@@ -1,13 +1,15 @@
-import {Component} from'@angular/core';
+import {Component,Input} from'@angular/core';
 import {FoodService} from '../../../services/food.service';
 import {Food} from '../../../model/food'
 
 @Component({
-  selector: 'app-database-entry',
+  selector: 'database-entry',
   templateUrl: './database-entry.component.html',
   styleUrls: ['./database-entry.component.scss']
 })
 export class DatabaseEntryComponent {
+
+  @Input() food: string;
 
 	model = {name: '',
 		selectedUnit: 0,

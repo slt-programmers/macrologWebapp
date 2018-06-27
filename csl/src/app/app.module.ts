@@ -9,6 +9,7 @@ import {BrowserAnimationsModule}from '@angular/platform-browser/animations';
 import {AppComponent}from './app.component';
 import {FoodService}from './services/food.service';
 import {LogComponent}from './components/log/log.component';
+import {FoodComponent}from './components/food/food.component';
 import {DatabaseComponent}from './components/database/database.component';
 import {DatabaseEntryComponent}from './components/database/database-entry/database-entry.component';
 import {AccountComponent}from './components/account/account.component';
@@ -16,6 +17,7 @@ import { SliderComponent } from './components/slider/slider.component';
 
 const appRoutes: Routes = [
 {path: 'log', component: LogComponent},
+{path: 'food', component: FoodComponent},
 {path: 'database', component: DatabaseComponent},
 {path: 'account', component: AccountComponent},
 {path: '', redirectTo: '/log', pathMatch: 'full'},
@@ -26,6 +28,7 @@ const appRoutes: Routes = [
   declarations: [
     AppComponent,
     LogComponent,
+    FoodComponent,
     DatabaseComponent,
     DatabaseEntryComponent,
     AccountComponent,
