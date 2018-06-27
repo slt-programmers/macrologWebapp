@@ -1,48 +1,45 @@
 @import '../css/public';
 
 .header {
+	align-items: center;
 	background-color: $primary;
 	color: $white;
-	padding: $gutter;
+	display: flex;
 	margin-bottom: $gutter;
 
 	&__item {
-		padding-right: $gutter/2;
+		padding: $gutter;
 		font-size: 20px;
 	}
 }
 
 .nav-wrapper {
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+	left: 0;
 	position: absolute;
 	top: 0;
-	left: 0;
+	margin-left: -300px;
+	transition: 0.3s;
 	z-index: 1;
-	height: 100%;
-	width: 100%;
-	display: none;
-
-	&--visible {
-		display: flex;
-		flex-direction: column;
-	}
 }
 
 .nav {
 	@include elevation(4);
+	background-color: $ghost;
 	height: 100%;
 	width: 300px;
-	background-color: $ghost;
 
 	&__item {
-		padding: $gutter;
 		border-bottom: 1px solid $smoke;
+		padding: $gutter;
 
-		&__top {
-			padding: $gutter;
-			font-size: 20px;
-			color: $white;
+		&--top {
 			background-color: $primary;
-
+			color: $white;
+			font-size: 20px;
+			padding: $gutter;
 		}
 	}
 }
