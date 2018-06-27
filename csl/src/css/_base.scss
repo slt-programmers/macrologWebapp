@@ -53,6 +53,16 @@
 		background-color: $primary;
 		color: $white;
 	}
+
+	&__icon {
+		align-items: center;
+		display: flex;
+		border-radius: 100px;
+		justify-content: center;
+		padding: 15px;
+		height: 60px;
+		width: 60px;
+	}
 }
 
 div.fixed-bottom-right button{

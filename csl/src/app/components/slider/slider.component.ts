@@ -1,4 +1,4 @@
-import{ElementRef,Component, OnInit, Inject, ViewChild}from '@angular/core';
+import{Component, OnInit, Inject, ViewChild, ElementRef, Input, Output, EventEmitter}from '@angular/core';
 
 @Component({
   selector: 'slider',
@@ -11,13 +11,23 @@ export class SliderComponent implements OnInit {
   @ViewChild('sliderHandle') private handleElement: ElementRef;
 	@ViewChild('trackFill') private trackElement: ElementRef;
 
-	public mouseDown = false;
-	public startXChord;
-	public newXChord;
-  public slider;
-  public sliderHandle;
-  public track;
-  public boundary;
+	@Input() value;
+	@Input() upperBound;
+	@Input() lowerBound;
+
+	@Output() valueChange: EventEmitter<number> = new EventEmitter<string>();
+
+	private mouseDown = false;
+	private oldXChord;
+	private newXChord;
+	private slider;
+	private sliderHandle;
+	private track;
+	private boundary;
+
+	private sliderOffsetLeft;
+	private sliderOffsetRight;
+	private sliderWidth;
 
   constructor() { }
 
@@ -26,47 +36,77 @@ export class SliderComponent implements OnInit {
 		this.sliderHandle = this.handleElement.nativeElement;
 		this.track = this.trackElement.nativeElement;
 
+		this.sliderWidth = this.slider.clientWidth;
+		this.sliderOffsetLeft = this.getOffsetLeft(this.slider);
+		this.sliderOffsetRight = this.sliderOffsetLeft + this.sliderWidth;
+
 		this.boundary = {
-			left: this.slider.offsetLeft,
-			right: this.slider.clientWidth + this.slider.offsetLeft
+			left: this.sliderOffsetLeft,
+			right: this.sliderOffsetRight
 		};
+		this.initHandle();
   }
 
+	private initHandle() {
+		let part = this.value - this.lowerBound;
+		let percentage = part / this.upperBound * 100;
+		this.sliderHandle.style.left = percentage + '%';
+		this.track.style.width = percentage + '%';
+	}
+
+	private calculateValue() {
+		let total = this.upperBound - this.lowerBound;
+		this.value = (total * (this.newXChord / this.sliderWidth)) + this.lowerBound;
+		this.valueChange.emit(this.value);
+	}
+
+	// Mouse and touch behaviour
 	public onDown(event) {
-		event.preventDefault();
-		let location = this.getLocation(event);
+		console.log('Down');
+		console.log(event);
+		event.preventDefault(); // prevent mouseclick when mobile, good practice
+		let location = this.getMouseLocation(event);
 
 		this.mouseDown = true;
-		this.startXChord = location;
+		this.oldXChord = location - this.sliderOffsetLeft;
 		this.onClick(event);
 	}
 
 	public onUp(event) {
+		console.log('Up');
 		this.mouseDown = false;
 	}
 
 	public onMove(event): void {
 		event.preventDefault();
-		let location = this.getLocation(event);
+		let location = this.getMouseLocation(event);
 
 		if (this.mouseDown && this.isInBoundary(location)) {
-			this.newXChord = location;
-			let distance = this.startXChord - this.newXChord;
-			this.startXChord = this.newXChord;
+			console.log('Move');
+			this.newXChord = location - this.sliderOffsetLeft;
+			console.log(this.newXChord);
+			let distance = this.oldXChord - this.newXChord;
+			this.oldXChord = this.newXChord;
 			this.sliderHandle.style.left = (this.sliderHandle.offsetLeft - distance) + 'px';
 			this.track.style.width = (this.track.offsetWidth - distance) + 'px';
+
+			this.calculateValue();
 		} else {
+			//dragging out of boundary
 			this.mouseDown = false;
 		}
 	}
 
 	public onClick(event): void {
+		console.log('Click');
 		event.preventDefault();
-		let location = this.getLocation(event);
+		let location = this.getMouseLocation(event);
 		if (this.isInBoundary(location)) {
 			this.newXChord = location - this.boundary.left;
 			this.sliderHandle.style.left = (this.newXChord - (this.sliderHandle.clientWidth / 2)) + 'px';
 			this.track.style.width = this.newXChord + 'px';
+
+			this.calculateValue();
 		}
 	}
 
@@ -74,13 +114,23 @@ export class SliderComponent implements OnInit {
 		return (location >= this.boundary.left && location <= (this.boundary.right));
 	}
 
-	private getLocation(event): number {
+	private getMouseLocation(event): number {
 		let location;
 		if (event.touches !== undefined) {
-			location = event.touches[0].clientX;
+			location = event.touches[0].clientX; // mobile is different apparently
 		} else {
 			location = event.clientX;
 		}
 		return location;
+	}
+
+	private getOffsetLeft(slider) {
+    let offsetLeft = 0;
+    do {
+      if ( !isNaN( slider.offsetLeft ) ) {
+				offsetLeft += slider.offsetLeft;
+      }
+    } while( slider = slider.offsetParent );
+    return offsetLeft;
 	}
 }

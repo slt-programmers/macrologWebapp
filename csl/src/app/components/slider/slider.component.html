@@ -3,6 +3,7 @@
      (mouseup)="onUp($event)"
      (mousemove)="onMove($event)"
      (mousedown)="onDown($event)"
+     (mouseleave)="onUp($event)"
 
      (touchstart)="onDown($event)"
      (touchmove)="onMove($event)"
@@ -10,16 +11,15 @@
 
      (click)="onClick($event)">
     <div class="slider-wrapper">
-        <div class="slider__content">
-            <div class="slider__track-container">
-                <div class="slider__track">
-                </div>
-                <div #trackFill class="slider__track slider__track--fill">
-                </div>
+        <div class="slider__track-container">
+            <div class="slider__track">
             </div>
-            <div class="slider__handle-container">
-                <div #sliderHandle class="slider__handle"></div>
+            <div #trackFill class="slider__track slider__track--fill">
             </div>
         </div>
+        <div class="slider__handle-container">
+            <div #sliderHandle class="slider__handle"></div>
+        </div>
+        <div class="slider__bounds"></div>
     </div>
 </div>
