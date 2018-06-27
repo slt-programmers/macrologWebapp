@@ -15,7 +15,7 @@ export class SliderComponent implements OnInit {
 	@Input() upperBound;
 	@Input() lowerBound;
 
-	@Output() valueChange: EventEmitter<number> = new EventEmitter<string>();
+	@Output() valueChange: EventEmitter<number> = new EventEmitter<number>();
 
 	private mouseDown = false;
 	private oldXChord;
