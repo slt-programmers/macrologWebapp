@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -8,34 +8,32 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 export class AppComponent implements OnInit {
 
   @ViewChild('navbar') private navbarElement: ElementRef;
+	@ViewChild('navbarBackdrop') private backdropElement: ElementRef;
 
   public title: string;
 	private navbar;
-	public navToggle: boolean = false;
+	private backdrop;
 
   constructor() {}
 
   ngOnInit() {
     this.title = 'Macrolog Webapp';
 		this.navbar = this.navbarElement.nativeElement;
-		console.log(this.navbar);
-		console.log(this.navbarElement);
-		this.approot = this.navbar.parentElement;
-		this.body = this.approot.parentElement;
-		console.log(this.approot);
-		console.log(this.body);
+		this.backdrop = this.backdropElement.nativeElement;
   }
 
 
 	// Navigation
 	openNav() {
 		this.navbar.style.marginLeft = '0';
-		this.navbar.style.width = '100%';
+		this.backdrop.style.display = 'block';
+		this.backdrop.style.backgroundColor = 'rgba(0,0,0, 0.4)';
 	}
 
 	closeNav() {
 		this.navbar.style.marginLeft = '-300px';
-		this.navbar.style.width = 'auto';
+		this.backdrop.style.display = 'none';
+		this.backdrop.style.backgroundColor = 'transparent';
 	}
 
 }
