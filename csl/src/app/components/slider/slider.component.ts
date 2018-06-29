@@ -1,4 +1,4 @@
-import{Component, OnInit, Inject, ViewChild, ElementRef, Input, Output, EventEmitter}from '@angular/core';
+import{Component, OnInit, OnChanges, Inject, ViewChild, ElementRef, Input, Output, EventEmitter, SimpleChanges}from '@angular/core';
 
 @Component({
   selector: 'slider',
@@ -47,11 +47,18 @@ export class SliderComponent implements OnInit {
 		this.initHandle();
   }
 
+	ngOnChanges(changes: SimpleChanges) {
+		this.value = changes.value.currentValue;
+		this.initHandle();
+	}
+
 	private initHandle() {
 		let part = this.value - this.lowerBound;
 		let percentage = part / this.upperBound * 100;
-		this.sliderHandle.style.left = percentage + '%';
-		this.track.style.width = percentage + '%';
+		if (this.sliderHandle && this.track) {
+			this.sliderHandle.style.left = percentage + '%';
+			this.track.style.width = percentage + '%';
+		}
 	}
 
 	private calculateValue() {

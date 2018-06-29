@@ -20,6 +20,10 @@
 		display: flex;
 		flex-direction: row;
 		margin-bottom: $gutter/3;
+
+		&--spaced {
+		  justify-content: space-between;
+		}
 	}
 
 	&__label {
@@ -27,8 +31,16 @@
 		margin-right: $gutter/3;
 	}
 
+	&__text {
+		font-weight: bold;
+	}
+
 	&__option {
 		padding: $gutter/3;
+	}
+
+	&__slider {
+		flex-grow: 1;
 	}
 
 	&__radio {
