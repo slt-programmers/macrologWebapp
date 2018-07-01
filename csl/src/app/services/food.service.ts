@@ -13,6 +13,9 @@ export class FoodService {
  	getAllFood() {
     	return this.http.get(simpleJavaServletUrl, { responseType: 'json' });
   	}
+   getFood(foodName:String) {
+    	return this.http.get(simpleJavaServletUrl + "/"+ foodName, { responseType: 'json' });
+  	}
 
 	insertFood() {
 		const headers = {'Conent-Type': 'applicaton/json',

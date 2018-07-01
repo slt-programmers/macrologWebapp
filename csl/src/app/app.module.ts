@@ -10,14 +10,16 @@ import {AppComponent}from './app.component';
 import {FoodService}from './services/food.service';
 import {LogComponent}from './components/log/log.component';
 import {FoodComponent}from './components/food/food.component';
+import {FoodAliasComponent}from './components/food/foodalias/foodalias.component';
 import {DatabaseComponent}from './components/database/database.component';
 import {DatabaseEntryComponent}from './components/database/database-entry/database-entry.component';
 import {AccountComponent}from './components/account/account.component';
 import { SliderComponent } from './components/slider/slider.component';
-
+0
 const appRoutes: Routes = [
 {path: 'log', component: LogComponent},
 {path: 'food', component: FoodComponent},
+{path: 'foodalias', component: FoodAliasComponent},
 {path: 'database', component: DatabaseComponent},
 {path: 'account', component: AccountComponent},
 {path: '', redirectTo: '/log', pathMatch: 'full'},
@@ -29,6 +31,7 @@ const appRoutes: Routes = [
     AppComponent,
     LogComponent,
     FoodComponent,
+    FoodAliasComponent,
     DatabaseComponent,
     DatabaseEntryComponent,
     AccountComponent,

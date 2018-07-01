@@ -14,8 +14,15 @@ export class FoodComponent implements OnInit {
 
     ngOnInit() {
       this.foodService.getAllFood().subscribe(
-        data => this.foodResult = data
+        data => this.foodResult = data;
       );
-    }
+    };
+
+   getFood(foodName) {
+       return this.foodService.getFood(foodName).subscribe(
+          data => data.aliases;
+       );
+
+   }
 
 }
