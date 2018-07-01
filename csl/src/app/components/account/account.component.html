@@ -8,7 +8,7 @@
         <div class="modal__content">
             <div class="form-field__element">
                 <div class="radio-group">
-                    <label>Activity level</label>
+                    <label class="form-field__label">Activity level</label>
                     <select class="form-field" name="activity" [(ngModel)]="activity" (change)="calcCalories()">
                         <option class="form-field__option" value="1.2">Sedentary</option>
                         <option class="form-field__option" value="1.375">Lightly active</option>
@@ -21,15 +21,21 @@
 
             <div class="form-field__element">
                 <label class="form-field__label">My goal is to: </label>
-                <input class="form-field__radio" name="difference" type="radio" [(ngModel)]="difference" value="lose" (change)="adjustDiff()">
+                <input class="form-field__radio" name="difference" type="radio"
+                       [(ngModel)]="difference" value="lose" (change)="adjustDiff()"
+                       [ngClass]="{'form-field__radio--checked fas fa-check': difference === 'lose' }">
                 <span class="radio__label">lose weight</span>
-                <input class="form-field__radio" name="difference" type="radio" [(ngModel)]="difference" value="same" (change)="adjustDiff()">
+                <input class="form-field__radio" name="difference" type="radio"
+                       [(ngModel)]="difference" value="same" (change)="adjustDiff()"
+                       [ngClass]="{'form-field__radio--checked fas fa-check': difference === 'same' }">
                 <span class="radio__label">stay the same weight</span>
-                <input class="form-field__radio" name="difference" type="radio" [(ngModel)]="difference" value="gain" (change)="adjustDiff()">
+                <input class="form-field__radio" name="difference" type="radio"
+                       [(ngModel)]="difference" value="gain" (change)="adjustDiff()"
+                       [ngClass]="{'form-field__radio--checked fas fa-check': difference === 'gain' }">
                 <span class="radio__label">gain weight</span>
             </div>
 
-            <div class="calorie-adjuster">
+            <div class="calorie-box">
                 <i class="calorie-adjuster__icon fas fa-sort-up" (click)="addOne()"></i>
                 <h2>{{calories | number : '1.0-0' }} Calories</h2>
                 <i class="calorie-adjuster__icon fas fa-sort-down" (click)="subtractOne()"></i>
@@ -37,12 +43,25 @@
 
             <div class="form-field__element">
                 <label class="form-field__label">Slider</label>
-                <slider [(value)]="calories" [upperBound]="4000" [lowerBound]="1000"></slider>
+                <div class="form-field__slider">
+                    <slider [(value)]="calories" [upperBound]="4000" [lowerBound]="1000"></slider>
+                </div>
             </div>
 
-            <span>Protein {{protein | number : '1.0-0'}}</span>
-            <span>Fat {{fat | number : '1.0-0'}}</span>
-            <span>Carbs {{carbs | number : '1.0-0'}}</span>
+            <div class="form-field__element form-field__element--spaced">
+                <div class="form-field">
+                    <label class="form-field__label">Protein</label>
+                    <span class="form-field__text">{{protein | number : '1.0-0'}}gr</span>
+                </div>
+                <div class="form-field">
+                    <label class="form-field__label">Fat</label>
+                    <span class="form-field__text">{{fat | number : '1.0-0'}}gr</span>
+                </div>
+                <div class="form-field">
+                    <label class="form-field__label">Carbs</label>
+                    <span class="form-field__text">{{carbs | number : '1.0-0'}}gr</span>
+                </div>
+            </div>
         </div>
     </div>
 </div>
@@ -64,9 +83,13 @@
             <div class="form-field__element">
                 <div class="radio-group">
                     <label class="form-field__label">Gender</label>
-                    <input class="form-field__radio" type="radio" name="gender" [(ngModel)]="gender" value="male">
+                    <input class="form-field__radio" type="radio" name="gender"
+                           [(ngModel)]="gender" value="male"
+                           [ngClass]="{'form-field__radio--checked fas fa-check': gender === 'male' }">
                     <span class="radio__label">Male</span>
-                    <input class="form-field__radio" type="radio" name="gender" [(ngModel)]="gender" value="female">
+                    <input class="form-field__radio" type="radio" name="gender"
+                           [(ngModel)]="gender" value="female"
+                           [ngClass]="{'form-field__radio--checked fas fa-check': gender === 'female' }">
                     <span class="radio__label">Female</span>
                 </div>
             </div>
@@ -91,10 +114,10 @@
 </div>
 
 <!--<div class="container">-->
-    <!--<h2 class="title">Weight graph TODO</h2>-->
+<!--<h2 class="title">Weight graph TODO</h2>-->
 <!--</div>-->
 
 <!--<div class="container">-->
-    <!--<h2 class="title">Body size graph TODO</h2>-->
+<!--<h2 class="title">Body size graph TODO</h2>-->
 <!--</div>-->
 

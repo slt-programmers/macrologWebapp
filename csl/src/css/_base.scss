@@ -1,7 +1,6 @@
 @import './mixins';
 @import './variables';
 
-
 .container {
 	padding: 0 $gutter;
 	margin-bottom: $gutter;
@@ -17,27 +16,72 @@
 	padding: $gutter/3;
 
 	&__element {
+		align-items: center;
+		display: flex;
+		flex-direction: row;
 		margin-bottom: $gutter/3;
+
+		&--spaced {
+		  justify-content: space-between;
+		}
 	}
 
 	&__label {
+		flex-basis: 20%;
 		margin-right: $gutter/3;
+	}
+
+	&__text {
+		font-weight: bold;
 	}
 
 	&__option {
 		padding: $gutter/3;
 	}
+
+	&__slider {
+		flex-grow: 1;
+	}
+
+	&__radio {
+		-webkit-appearance: none;
+		position: relative;
+
+  	&::before {
+  		content: '';
+  		background-color: $white;
+  		border: 3px solid $primary;
+  		width: 20px;
+  		height: 20px;
+  		border-radius: 15px;
+  		position: absolute;
+  		top: -4px;
+  		left: -4px;
+  	}
+
+  	&--checked {
+    	&::before {
+ 		    align-items: center;
+    		background-color: $primary;
+    		color: $white;
+    	  content: "\f00c";
+        display: flex;
+        justify-content: center;
+    	}
+    }
+	}
 }
 
 .radio-group {
+	width: 100%;
 	align-items: center;
-  display: flex;
+	display: flex;
   flex-direction: row;
 }
 
 .radio {
 	&__label {
-		padding: 5px;
+		padding: 10px;
 		margin-right: $gutter/3;
 	}
 }
