@@ -8,6 +8,7 @@ import {BrowserAnimationsModule}from '@angular/platform-browser/animations';
 
 import {AppComponent}from './app.component';
 import {FoodService}from './services/food.service';
+import {LogService}from './services/log.service';
 import {LogComponent}from './components/log/log.component';
 import {FoodComponent}from './components/food/food.component';
 import {FoodAliasComponent}from './components/food/foodalias/foodalias.component';
@@ -44,7 +45,7 @@ const appRoutes: Routes = [
     RouterModule.forRoot(appRoutes),
     BrowserAnimationsModule
   ],
-  providers: [FoodService],
+  providers: [FoodService,LogService],
   bootstrap: [AppComponent],
   entryComponents: [
   	DatabaseEntryComponent,
