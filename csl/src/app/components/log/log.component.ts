@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FoodService } from '../../services/food.service';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-log',
@@ -8,14 +8,30 @@ import { FoodService } from '../../services/food.service';
 })
 export class LogComponent implements OnInit {
 
-  foodResult;
+	constructor(private http: HttpClient) { }
 
-  constructor(private foodService: FoodService) { }
+	public days;
 
-    ngOnInit() {
-//      this.foodService.getAllFood().subscribe(
-//        data => this.foodResult = data
-//      );
-    }
+	ngOnInit() {
+		this.getJson().subscribe(data => this.days = data,
+					error => console.log(error));
+  }
+
+	public getTotal(meals, macro) {
+		let total = 0.0;
+		for (let meal of meals) {
+			for (let ingredient of meal.ingredients) {
+				console.log(ingredient[macro]);
+				total += ingredient[macro];
+			}
+		}
+		return total;
+	}
+
+	private getJson() {
+		return this.http.get("assets/logentries.json");
+	}
+
+
 
 }

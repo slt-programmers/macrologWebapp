@@ -2,7 +2,6 @@
 
 .center  {
     margin: auto;
-    width: 50%;
     padding: 10px;
 }
 th, td {
@@ -10,8 +9,11 @@ th, td {
     padding:10px;
 }
 th {
-    background-color: #4CAF50;
+    background-color: $primary;
     color: white;
     padding:10px;
 }
-tr:nth-child(even) {background-color: #f2f2f2;}
+
+tr:nth-child(even) {
+	background-color: #f2f2f2;
+}

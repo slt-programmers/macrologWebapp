@@ -8,17 +8,16 @@ import { FoodService } from '../../../services/food.service';
 })
 export class FoodAliasComponent implements OnInit {
 
-  public food;
+	@Input() foodId = '';
 
-  @Input() foodId='';
+	public food;
 
   constructor(private foodService: FoodService) { }
 
-    ngOnInit() {
-      this.foodService.getFood(this.foodId).subscribe(
-        data => this.food = data;
-      );
-    };
-
+	ngOnInit() {
+    this.foodService.getFood(this.foodId).subscribe(
+      data => this.food = data
+    );
+	};
 
 }

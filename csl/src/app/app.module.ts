@@ -15,7 +15,7 @@ import {DatabaseComponent}from './components/database/database.component';
 import {DatabaseEntryComponent}from './components/database/database-entry/database-entry.component';
 import {AccountComponent}from './components/account/account.component';
 import { SliderComponent } from './components/slider/slider.component';
-0
+
 const appRoutes: Routes = [
 {path: 'log', component: LogComponent},
 {path: 'food', component: FoodComponent},
@@ -40,7 +40,7 @@ const appRoutes: Routes = [
   imports: [
     BrowserModule,
     FormsModule,
-	HttpClientModule,
+		HttpClientModule,
     RouterModule.forRoot(appRoutes),
     BrowserAnimationsModule
   ],

@@ -2,14 +2,11 @@
 @import './variables';
 
 .container {
-	padding: 0 $gutter;
-	margin-bottom: $gutter;
 	display: flex;
 	flex-direction: column;
-}
-
-.title {
-	margin-bottom: $gutter/2
+	margin: 0 auto $gutter auto;
+	max-width: 1400px;
+	padding: 0 $gutter;
 }
 
 .form-field {

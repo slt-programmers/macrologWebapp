@@ -1,29 +1,29 @@
 <div class="header">
-    <i class="header__item fas fa-bars" (click)="openNav()"></i>
+    <i class="header__item header__item--menu fas fa-bars" (click)="openNav()"></i>
     <span class="header__item">{{title}}</span>
 </div>
 
 <div #navbarBackdrop class="nav-backdrop" (click)="closeNav()"></div>
 <div #navbar class="nav-wrapper" (click)="closeNav()">
     <div class="nav">
-        <div class="nav__item--top">
+        <div class="nav__item nav__item--top">
             <i class="fas fa-arrow-left"></i>
         </div>
-        <div class="nav__item">
-            <a (click)="closeNav()"
-               routerLink="/account">My Settings</a>
+        <div class="nav__item" routerLink="/account"
+             (click)="closeNav()">
+            <a>My Settings</a>
         </div>
-        <div class="nav__item">
-            <a (click)="closeNav()"
-               routerLink="/log">Daily diary</a>
+        <div class="nav__item" routerLink="/log"
+             (click)="closeNav()">
+            <a>Daily diary</a>
         </div>
-        <div class="nav__item">
-            <a (click)="closeNav()"
-               routerLink="/food">Registered food</a>
+        <div class="nav__item" routerLink="/food"
+             (click)="closeNav()">
+            <a>Registered food</a>
         </div>
-        <div class="nav__item">
-            <a (click)="closeNav()"
-               routerLink="/database">Database overview</a>
+        <div class="nav__item" routerLink="/database"
+          (click)="closeNav()">
+            <a>Database overview</a>
         </div>
     </div>
 </div>

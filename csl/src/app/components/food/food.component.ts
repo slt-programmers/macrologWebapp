@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { FoodService } from '../../services/food.service';
+import{Component, OnInit}from '@angular/core';
+import {FoodService}from '../../services/food.service';
 
 @Component({
   selector: 'app-food',
@@ -8,21 +8,22 @@ import { FoodService } from '../../services/food.service';
 })
 export class FoodComponent implements OnInit {
 
-  foodResult;
+  public foodResult;
 
   constructor(private foodService: FoodService) { }
 
-    ngOnInit() {
-      this.foodService.getAllFood().subscribe(
-        data => this.foodResult = data;
-      );
-    };
+	ngOnInit() {
+    this.foodService.getAllFood().subscribe(
+      data => this.foodResult = data
+		);
+  };
 
-   getFood(foodName) {
-       return this.foodService.getFood(foodName).subscribe(
-          data => data.aliases;
-       );
-
-   }
+//	getFood(foodName) {
+//		console.log('getFood FoodComponent');
+//    return this.foodService.getFood(foodName).subscribe(
+//      data => {console.log(data); data.aliases;},
+//			error => console.log(error)
+//		);
+//	}
 
 }
