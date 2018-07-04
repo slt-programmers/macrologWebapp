@@ -57,7 +57,21 @@
 	justify-content: center;
 	margin-bottom: $gutter/3;
 
+	&__title {
+		margin: 0;
+	}
+
 	&__icon {
-		padding: 5px;
+		font-size: 20px;
+	}
+
+	.fa-sort-up {
+		margin-top: 10px;
+		margin-right: 10px;
+	}
+
+	.fa-sort-down {
+		margin-bottom: 10px;
+		margin-left: 10px;
 	}
 }

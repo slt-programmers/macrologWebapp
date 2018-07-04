@@ -1,5 +1,51 @@
 @import '../../../css/public';
 
+.intake-goal-wrapper {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+
+
+	&__numbers {
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+		flex-grow: 1;
+	}
+
+	&__graph {
+		flex-grow: 1;
+	}
+}
+
+.intake-goal {
+	@include elevation(1);
+	background-color: $white;
+	display: flex;
+	flex-direction: column;
+	padding: ($gutter/2);
+	margin-bottom: ($gutter/2);
+
+	&__calories {
+		font-size: 24px;
+		font-weight: bold;
+		margin-bottom: ($gutter/2);
+	}
+
+	&__macros {
+		display: flex;
+		flex-direction: row;
+	}
+
+	&__macro {
+		flex-basis: 20%;
+	}
+
+	&__graph {
+		width: 100%px;
+	}
+}
+
 .day {
 	@include elevation(1);
 	background-color: $white;

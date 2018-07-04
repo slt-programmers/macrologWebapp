@@ -1,5 +1,29 @@
 <div class="container">
 
+  <div class="intake-goal" *ngIf="days">
+    <div class="intake-goal-wrapper">
+      <div class="intake-goal-wrapper__numbers">
+        <div class="intake-goal__calories">
+          <span>{{getTotal(days[0].meals, "calories")}}</span>
+        </div>
+        <div class="intake-goal__macros">
+          <span class="intake-goal__macro">Protein: {{getTotal(days[0].meals, "protein")}}/<strong>{{goalP}}</strong></span>
+          <span class="intake-goal__macro">Fat: {{getTotal(days[0].meals, "fat")}}/<strong>{{goalF}}</strong></span>
+          <span class="intake-goal__macro">Carbs: {{getTotal(days[0].meals, "carbs")}}/<strong>{{goalC}}</strong></span>
+        </div>
+      </div>
+      <div class="intake-goal-wrapper__graph">
+        <div class="intake-goal__graph">
+          <div class="bargraph-wrapper">
+            <bargraph [percentage]="100"></bargraph>
+            <bargraph [percentage]="120"></bargraph>
+            <bargraph [percentage]="80"></bargraph>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <div class="day" *ngFor="let day of days">
     <div class="day__header">
       <span class="day__header__title">{{day.day}}</span>
@@ -27,5 +51,13 @@
       <span class="total__calories--label">kcal</span>
     </div>
   </div>
+
+  <div class="floating-action-button-wrapper">
+    <button class="button--floating-action button button--primary" (click)="openDialog()">
+      <i class="fas fa-plus"></i>
+    </button>
+  </div>
+
+
 
 </div>

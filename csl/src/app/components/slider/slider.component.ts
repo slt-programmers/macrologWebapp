@@ -91,6 +91,7 @@ export class SliderComponent implements OnInit {
 		if (this.mouseDown && this.isInBoundary(location)) {
 			console.log('Move');
 			this.newXChord = location - this.sliderOffsetLeft;
+			console.log(this.sliderOffsetLeft);
 			console.log(this.newXChord);
 			let distance = this.oldXChord - this.newXChord;
 			this.oldXChord = this.newXChord;
