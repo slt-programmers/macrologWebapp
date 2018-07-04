@@ -52,12 +52,19 @@
     </div>
   </div>
 
+  <!-- Onderstaand ombouwen naar filter per dag zodat bovenstaande ook mogelijk wordt met die divjes-->
+  <table>
+    <tr *ngFor="let log of allLogs">
+      <td>{{log.foodName}}</td>
+      <td>{{log.multiplier}} * </td>
+      <td>{{log.foodAlias.aliasName}}</td>
+      <td>{{log.multiplier * log.foodAlias.amountNumber}} grams</td>
+    </tr>
+  </table>
+
   <div class="floating-action-button-wrapper">
     <button class="button--floating-action button button--primary" (click)="openDialog()">
       <i class="fas fa-plus"></i>
     </button>
   </div>
-
-
-
 </div>

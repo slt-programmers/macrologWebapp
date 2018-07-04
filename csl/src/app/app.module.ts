@@ -10,9 +10,10 @@ import {AppComponent}from './app.component';
 import {FoodService}from './services/food.service';
 import {LogComponent}from './pages/log/log.component';
 import {FoodComponent}from './pages/food/food.component';
-import {FoodAliasComponent}from './components/food/foodalias/foodalias.component';
+import {LogService}from './services/log.service';
+import {FoodAliasComponent}from './components/foodalias/foodalias.component';
 import {DatabaseComponent}from './pages/database/database.component';
-import {DatabaseEntryComponent}from './components/database/database-entry/database-entry.component';
+import {DatabaseEntryComponent}from './components/database-entry/database-entry.component';
 import {AccountComponent}from './pages/account/account.component';
 import { SliderComponent } from './components/slider/slider.component';
 import { BargraphComponent } from './components/bargraph/bargraph.component';
@@ -46,7 +47,7 @@ const appRoutes: Routes = [
     RouterModule.forRoot(appRoutes),
     BrowserAnimationsModule
   ],
-  providers: [FoodService],
+  providers: [FoodService, LogService],
   bootstrap: [AppComponent],
   entryComponents: [
   	DatabaseEntryComponent,

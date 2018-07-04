@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import {LogService}from '../../services/log.service';
 
 @Component({
   selector: 'log',
@@ -10,9 +11,10 @@ export class LogComponent implements OnInit {
 
 	public modalIsVisible: boolean = false;
 
-	constructor(private http: HttpClient) { }
+	constructor(private http: HttpClient,private logService: LogService) { }
 
 	public days;
+  public allLogs;
 
 	public goalP: number = 120;
 	public goalF: number = 140;
@@ -21,6 +23,9 @@ export class LogComponent implements OnInit {
 	ngOnInit() {
 		this.getJson().subscribe(data => this.days = data,
 					error => console.log(error));
+    this.logService.getAllLogs().subscribe(
+      data => this.allLogs = data
+		);
   }
 
 	public getTotal(meals, macro) {

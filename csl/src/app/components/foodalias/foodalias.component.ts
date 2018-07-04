@@ -1,5 +1,5 @@
 import { Component, OnInit,Input } from '@angular/core';
-import { FoodService } from '../../../services/food.service';
+import { FoodService } from '../../services/food.service';
 
 @Component({
   selector: 'foodalias',

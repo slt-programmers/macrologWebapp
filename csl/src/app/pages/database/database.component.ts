@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { DatabaseEntryComponent } from './database-entry/database-entry.component';
+import { DatabaseEntryComponent } from '../../components/database-entry/database-entry.component';
 import { FoodService } from '../../services/food.service'
 
 @Component({

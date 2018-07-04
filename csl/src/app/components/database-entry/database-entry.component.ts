@@ -1,6 +1,6 @@
 import {Component,Input} from'@angular/core';
-import {FoodService} from '../../../services/food.service';
-import {Food} from '../../../model/food'
+import {FoodService} from '../../services/food.service';
+import {Food} from '../../model/food';
 
 @Component({
   selector: 'database-entry',
