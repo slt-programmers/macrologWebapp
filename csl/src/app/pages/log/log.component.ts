@@ -42,6 +42,10 @@ export class LogComponent implements OnInit {
 		this.modalIsVisible = true;
 	}
 
+	public closeModal(event) {
+		this.modalIsVisible = false;
+	}
+
 	private getJson() {
 		return this.http.get("assets/logentries.json");
 	}

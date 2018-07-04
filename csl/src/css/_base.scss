@@ -88,6 +88,11 @@
 	}
 }
 
+.button-wrapper {
+	display: flex;
+	justify-content: flex-end;
+}
+
 .button {
 	@include elevation(4);
 	border: 0;

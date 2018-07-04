@@ -17,6 +17,7 @@ import {DatabaseEntryComponent}from './components/database-entry/database-entry.
 import {AccountComponent}from './pages/account/account.component';
 import { SliderComponent } from './components/slider/slider.component';
 import { BargraphComponent } from './components/bargraph/bargraph.component';
+import { AddFoodModalComponent } from './components/add-food-modal/add-food-modal.component';
 
 const appRoutes: Routes = [
 {path: 'log', component: LogComponent},
@@ -39,6 +40,7 @@ const appRoutes: Routes = [
     AccountComponent,
     SliderComponent,
     BargraphComponent,
+    AddFoodModalComponent,
   ],
   imports: [
     BrowserModule,
