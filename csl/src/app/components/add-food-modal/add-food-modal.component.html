@@ -3,9 +3,67 @@
     <h3 class="modal__header__title">{{title}}</h3>
   </div>
   <div class="modal__content">
+    <div class="form-field">
+      <div class="form-field__element">
+        <label class="form-field__label">Food</label>
+        <input class="form-field__text" placeholder="e.g. 'Apple'">
+      </div>
+    </div>
+
+    <div class="form-field">
+      <div class="form-field__element">
+        <div class="radio-group">
+          <label class="form-field__label">Nutrients</label>
+          <input class="form-field__radio" type="radio" name="nutrients"
+                 [(ngModel)]="nutrients" value="grams"
+                 [ngClass]="{'form-field__radio--checked fas fa-check': nutrients === 'grams' }">
+          <span class="radio__label">per 100gr</span>
+          <input class="form-field__radio" type="radio" name="nutrients"
+                 [(ngModel)]="nutrients" value="unit"
+                 [ngClass]="{'form-field__radio--checked fas fa-check': nutrients === 'unit' }">
+          <span class="radio__label">per unit</span>
+        </div>
+      </div>
+    </div>
+
+    <ng-container *ngIf="nutrients === 'unit'">
+      <div class="form-field">
+        <div class="form-field__element">
+          <label class="form-field__label">Unit name</label>
+          <input class="form-field__text" placeholder="e.g. 'Piece', 'Slice'">
+        </div>
+
+        <div class="form-field__element">
+          <label class="form-field__label">Grams</label>
+          <input class="form-field__text" placeholder="(Optional)" type="number">
+        </div>
+      </div>
+
+    </ng-container>
+
+    <div class="form-field">
+      <div class="form-field__element">
+        <label class="form-field__label">Protein</label>
+        <input class="form-field__text" type="number" step="0.1">
+      </div>
+    </div>
+
+    <div class="form-field">
+      <div class="form-field__element">
+        <label class="form-field__label">Fat</label>
+        <input class="form-field__text" type="number" step="0.1">
+      </div>
+    </div>
+
+    <div class="form-field">
+      <div class="form-field__element">
+        <label class="form-field__label">Carbs</label>
+        <input class="form-field__text" type="number" step="0.1">
+      </div>
+    </div>
 
     <div class="button-wrapper">
-      <button class="button button--primary" (click)="closeModal()">close</button>
+      <button class="button button--primary" (click)="closeModal()">submit</button>
     </div>
-   </div>
+  </div>
 </div>

@@ -9,6 +9,7 @@ export class AddFoodModalComponent implements OnInit {
 	@Output() close: EventEmitter<boolean> = new EventEmitter<boolean>();
 
 	public title = 'Add food to the database';
+	public nutrients = 'grams';
 
   constructor() { }
 
