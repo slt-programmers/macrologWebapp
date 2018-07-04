@@ -15,7 +15,7 @@ body {
 	position: relative;
 }
 
-h1, h2, h3 {
+h1, h2, h3, p {
 	margin-bottom: ($gutter/2);
 	margin-top: 0
 }
@@ -33,4 +33,14 @@ input, select {
 }
 table {
   border-collapse:collapse;
+}
+
+.strong {
+	&--primary {
+		color: $primary;
+	}
+
+	&--signal {
+		color: deeppink;
+	}
 }

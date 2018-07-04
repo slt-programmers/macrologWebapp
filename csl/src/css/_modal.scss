@@ -33,4 +33,17 @@
 		border-radius: 0 0 ($gutter/2) ($gutter/2);
   	padding: $gutter;
 	}
+
+	&__section {
+		display: flex;
+
+		&--left {
+			margin-right: $gutter;
+		}
+
+		&--right {
+			display: flex;
+			flex-direction: column;
+		}
+	}
 }
