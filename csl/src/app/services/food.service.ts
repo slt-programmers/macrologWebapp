@@ -12,12 +12,12 @@ export class FoodService {
 
 	public addFood(addFoodRequest: Food) {
 		console.log('In addFood');
-   	const headers = {'Content-Type': 'applicaton/json',
+   	const headers = {'Content-Type': 'application/json',
    		'Access-Control-Allow-Origin': 'http://localhost:4200'
    	};
 
   	const options = { headers: headers };
-    return this.http.post<Food>(simpleJavaServletUrl + '/', addFoodRequest.toString(), options).subscribe(data => {
+    return this.http.post<Food>(simpleJavaServletUrl + '/', addFoodRequest, options).subscribe(data => {
         alert('ok');
       },
       error => {
