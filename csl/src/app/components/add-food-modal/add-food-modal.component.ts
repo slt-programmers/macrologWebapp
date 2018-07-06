@@ -1,6 +1,6 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 
-class Portion {
+export class Portion {
 	constructor() {
 		public grams: number = 0;
 		public unit: number = 0;
