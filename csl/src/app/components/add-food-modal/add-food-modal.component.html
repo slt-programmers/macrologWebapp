@@ -27,19 +27,19 @@
         <div class="form-field__element">
           <div class="radio-group">
             <label class="form-field__label">Nutrients</label>
-            <input class="form-field__radio" type="radio" name="nutrients"
-                   [(ngModel)]="nutrients" value="grams"
-                   [ngClass]="{'form-field__radio--checked fas fa-check': nutrients === 'grams' }" required>
+            <input class="form-field__radio" type="radio" name="measurementUnit"
+                   [(ngModel)]="measurementUnit" value="grams"
+                   [ngClass]="{'form-field__radio--checked fas fa-check': measurementUnit === 'grams' }" required>
             <span class="radio__label">per 100gr</span>
-            <input class="form-field__radio" type="radio" name="nutrients"
-                   [(ngModel)]="nutrients" value="unit"
-                   [ngClass]="{'form-field__radio--checked fas fa-check': nutrients === 'unit' }">
+            <input class="form-field__radio" type="radio" name="measurementUnit"
+                   [(ngModel)]="measurementUnit" value="unit"
+                   [ngClass]="{'form-field__radio--checked fas fa-check': measurementUnit === 'unit' }">
             <span class="radio__label">per unit</span>
           </div>
         </div>
       </div>
 
-      <ng-container *ngIf="nutrients === 'unit'">
+      <ng-container *ngIf="measurementUnit === 'unit'">
         <div class="form-field">
           <div class="form-field__element">
             <label class="form-field__label">Unit name</label>
@@ -57,15 +57,18 @@
       <div class="form-field form-field--column">
         <div class="form-field__element form-field__element--column">
           <label class="form-field__label">Protein</label>
-          <input class="form-field__text" #proteinField [(ngModel)]="protein" name="protein" type="number" step="0.1" required>
+          <input class="form-field__text" #proteinField [(ngModel)]="protein"
+                 name="protein" type="number" placeholder="0,0" step="0.1" required>
         </div>
         <div class="form-field__element form-field__element--column">
           <label class="form-field__label">Fat</label>
-          <input class="form-field__text" #fatField [(ngModel)]="fat" name="fat" type="number" step="0.1" required>
+          <input class="form-field__text" #fatField [(ngModel)]="fat"
+                 name="fat" type="number" placeholder="0,0" step="0.1" required>
         </div>
         <div class="form-field__element form-field__element--column">
           <label class="form-field__label">Carbs</label>
-          <input class="form-field__text" #carbsField [(ngModel)]="carbs" name="carbs" type="number" step="0.1" required>
+          <input class="form-field__text" #carbsField [(ngModel)]="carbs"
+                 name="carbs" type="number" placeholder="0,0" step="0.1" required>
         </div>
       </div>
 
@@ -73,16 +76,17 @@
 
       <div class="modal__portions" *ngFor="let port of portions; index as i">
         <div class="form-field form-field--column">
-          <div class="form-field__element form-field__element--column" *ngIf="nutrients === 'grams'">
+          <div class="form-field__element form-field__element--column" *ngIf="measurementUnit === 'grams'">
             <label class="form-field__label">Grams</label>
             <input class="form-field__text" [(ngModel)]="port.grams"
                    name="portionGrams_{{i}}" type="number" step="1" required>
           </div>
 
-          <div class="form-field__element form-field__element--column" *ngIf="nutrients === 'unit'">
+          <div class="form-field__element form-field__element--column" *ngIf="measurementUnit === 'unit'">
             <label class="form-field__label">{{unitName === '' ? 'Portion' : unitName}}</label>
             <input class="form-field__text" [(ngModel)]="port.unit"
-                   name="portionUnit_{{i}}" value="port.unit" type="number" step="0.1" required>
+                   name="portionUnit_{{i}}" value="port.unit" type="number"
+                   placeholder="0,0" step="0.1" required>
           </div>
 
           <div class="form-field__element form-field__element--column">
@@ -105,7 +109,7 @@
       </button>
 
       <div class="modal__button-wrapper">
-        <button class="button button--primary" (click)="addFood()"
+        <button type="button" class="button button--primary" (click)="addFood()"
             [disabled]="addFoodForm.invalid">Done</button>
       </div>
 
