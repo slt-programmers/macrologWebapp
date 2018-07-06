@@ -61,6 +61,8 @@
 
 	&__radio {
 		-webkit-appearance: none;
+		-moz-appearance: none;
+		-ms-appearance: none;
 		position: relative;
 
   	&::before {
@@ -102,3 +104,6 @@
 	}
 }
 
+input[type=number] {
+	-moz-appearance: textfield;
+}
