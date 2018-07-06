@@ -4,8 +4,12 @@
 	margin-bottom: 10px;
 
 	&--column {
+		@media (min-width: $lg) {
+			flex-direction: row;
+		}
 		padding-top: 10px;
-		flex-direction: row;
+		flex-direction: column;
+		flex-wrap: wrap;
 	}
 
 	&__element {
@@ -14,9 +18,15 @@
 		flex-direction: row;
 
 		&--column {
-			align-items: flex-start;
-			flex-direction: column;
+			@media (min-width: $lg) {
+				align-items: flex-start;
+				flex-direction: column;
+				margin-bottom: 0;
+			}
+			align-items: center;
+			flex-direction: row;
 			margin-right: 10px;
+			margin-bottom: 10px;
 		}
 
 		&--end {
@@ -31,7 +41,6 @@
 	&__label {
 		flex-basis: 20%;
 		margin-right: $gutter/3;
-		min-width: 150px;
 	}
 
 	&__text {
@@ -43,6 +52,7 @@
 
 		border: 1px solid $smoke;
 		border-radius: 5px;
+		max-width: 220px;
 	}
 
 	&__select {
