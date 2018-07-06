@@ -12,8 +12,6 @@ import {LogComponent}from './pages/log/log.component';
 import {FoodComponent}from './pages/food/food.component';
 import {LogService}from './services/log.service';
 import {FoodAliasComponent}from './components/foodalias/foodalias.component';
-import {DatabaseComponent}from './pages/database/database.component';
-import {DatabaseEntryComponent}from './components/database-entry/database-entry.component';
 import {AccountComponent}from './pages/account/account.component';
 import { SliderComponent } from './components/slider/slider.component';
 import { BargraphComponent } from './components/bargraph/bargraph.component';
@@ -23,7 +21,6 @@ const appRoutes: Routes = [
 {path: 'log', component: LogComponent},
 {path: 'food', component: FoodComponent},
 {path: 'foodalias', component: FoodAliasComponent},
-{path: 'database', component: DatabaseComponent},
 {path: 'account', component: AccountComponent},
 {path: '', redirectTo: '/log', pathMatch: 'full'},
 {path: '**', component: LogComponent}
@@ -35,8 +32,6 @@ const appRoutes: Routes = [
     LogComponent,
     FoodComponent,
     FoodAliasComponent,
-    DatabaseComponent,
-    DatabaseEntryComponent,
     AccountComponent,
     SliderComponent,
     BargraphComponent,
@@ -52,8 +47,6 @@ const appRoutes: Routes = [
   providers: [FoodService, LogService],
   bootstrap: [AppComponent],
   entryComponents: [
-  	DatabaseEntryComponent,
-	DatabaseComponent
   ]
 })
 export class AppModule { }
