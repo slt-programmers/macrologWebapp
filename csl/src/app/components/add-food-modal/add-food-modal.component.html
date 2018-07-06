@@ -73,9 +73,8 @@
 
       <div class="modal__portions" *ngFor="let port of portions; index as i">
         <div class="form-field form-field--column">
-          <span>{{port.grams}}</span>
           <div class="form-field__element form-field__element--column" *ngIf="nutrients === 'grams'">
-            <label class="form-field__label">Grams {{i}}</label>
+            <label class="form-field__label">Grams</label>
             <input class="form-field__text" [(ngModel)]="port.grams"
                    name="portionGrams_{{i}}" type="number" step="1" required>
           </div>
