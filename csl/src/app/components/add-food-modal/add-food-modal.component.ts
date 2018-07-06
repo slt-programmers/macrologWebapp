@@ -2,7 +2,8 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 
 class Portion {
 	constructor() {
-		public amount: string = '';
+		public grams: number = 0;
+		public unit: number = 0;
 		public description: string = '';
 	}
 }
@@ -20,10 +21,14 @@ export class AddFoodModalComponent implements OnInit {
 	public nutrients = 'grams';
 	public unitName = '';
 	public grams;
+	public protein: number;
+	public fat: number;
+	public carbs: number;
 
 	public portions = [];
 
-  constructor() { }
+  constructor() {
+	}
 
   ngOnInit() {
   }
@@ -32,12 +37,18 @@ export class AddFoodModalComponent implements OnInit {
 		this.close.emit(true);
 	}
 
-	onNext() {
-		this.currentStep = 'step2';
-	}
-
 	newPortion() {
-		this.portions.push(new Portion());
+		console.log(this.portions);
+
+		console.log('new portion');
+		let newP = new Portion();
+		console.log(newP);
+		console.log('before adding: ');
+		console.log(this.portions);
+
+		this.portions.push(newP);
+		console.log('after adding: ');
+		console.log(this.portions);
 	}
 
 	removePortion(index) {

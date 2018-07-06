@@ -17,6 +17,8 @@
 		background-color: $primary;
 		border-radius: ($gutter/2) ($gutter/2) 0 0;
 		color: $white;
+		display: flex;
+		justify-content: space-between;
 		padding: $gutter;
 
 		&__title {

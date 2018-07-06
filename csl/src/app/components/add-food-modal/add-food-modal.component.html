@@ -1,12 +1,17 @@
 <div class="modal">
   <div class="modal__header">
     <h3 class="modal__header__title">{{title}}</h3>
+
+    <button class="button button--icon button--primary" (click)="closeModal()">
+      <i class="fas fa-times"></i>
+    </button>
+
   </div>
 
   <div class="modal__content">
 
     <p>When it's more logical to measure in whole units, fill in the nutrients
-      <strong class="strong--signal">per unit</strong>. Like with an egg or food you can't easily make portions of.
+      <strong class="strong--signal">per unit</strong>. Like with an egg or other food you can't easily make portions of.
       We recommend you weigh the unit, although this is optional.
     </p>
 
@@ -14,7 +19,7 @@
       <div class="form-field">
         <div class="form-field__element">
           <label class="form-field__label">Food</label>
-          <input [(ngModel)]="food" name="food" class="form-field__text" placeholder="e.g. 'Pasta', 'Apple'">
+          <input [(ngModel)]="food" #foodField name="food" class="form-field__text" placeholder="e.g. 'Pasta', 'Apple'" required>
         </div>
       </div>
 
@@ -24,7 +29,7 @@
             <label class="form-field__label">Nutrients</label>
             <input class="form-field__radio" type="radio" name="nutrients"
                    [(ngModel)]="nutrients" value="grams"
-                   [ngClass]="{'form-field__radio--checked fas fa-check': nutrients === 'grams' }">
+                   [ngClass]="{'form-field__radio--checked fas fa-check': nutrients === 'grams' }" required>
             <span class="radio__label">per 100gr</span>
             <input class="form-field__radio" type="radio" name="nutrients"
                    [(ngModel)]="nutrients" value="unit"
@@ -38,13 +43,13 @@
         <div class="form-field">
           <div class="form-field__element">
             <label class="form-field__label">Unit name</label>
-            <input class="form-field__text" [(ngModel)]="unitName" name="unitName" placeholder="e.g. 'Piece', 'Slice'">
+            <input class="form-field__text" #unitNameField [(ngModel)]="unitName" name="unitName" placeholder="e.g. 'Piece', 'Slice'">
           </div>
         </div>
         <div class="form-field">
           <div class="form-field__element">
             <label class="form-field__label">Grams</label>
-            <input class="form-field__text" [(ngModel)]="grams" name="grams" placeholder="Optional" type="number">
+            <input class="form-field__text" #gramsField [(ngModel)]="grams" name="grams" placeholder="Optional" type="number">
           </div>
         </div>
       </ng-container>
@@ -52,35 +57,40 @@
       <div class="form-field form-field--column">
         <div class="form-field__element form-field__element--column">
           <label class="form-field__label">Protein</label>
-          <input class="form-field__text" type="number" step="0.1">
+          <input class="form-field__text" #proteinField [(ngModel)]="protein" name="protein" type="number" step="0.1" required>
         </div>
         <div class="form-field__element form-field__element--column">
           <label class="form-field__label">Fat</label>
-          <input class="form-field__text" type="number" step="0.1">
+          <input class="form-field__text" #fatField [(ngModel)]="fat" name="fat" type="number" step="0.1" required>
         </div>
         <div class="form-field__element form-field__element--column">
           <label class="form-field__label">Carbs</label>
-          <input class="form-field__text" type="number" step="0.1">
+          <input class="form-field__text" #carbsField [(ngModel)]="carbs" name="carbs" type="number" step="0.1" required>
         </div>
       </div>
 
       <label class="modal__label">Frequently used portions (optional)</label>
 
-      <div class="modal__portions" *ngFor="let portion of portions; index as i">
+      <div class="modal__portions" *ngFor="let port of portions; index as i">
         <div class="form-field form-field--column">
+          <span>{{port.grams}}</span>
           <div class="form-field__element form-field__element--column" *ngIf="nutrients === 'grams'">
-            <label class="form-field__label">Grams</label>
-            <input class="form-field__text" type="number" step="1">
+            <label class="form-field__label">Grams {{i}}</label>
+            <input class="form-field__text" [(ngModel)]="port.grams"
+                   name="{{portionGrams + i}}" value="port.grams" type="number" step="1" required>
           </div>
 
           <div class="form-field__element form-field__element--column" *ngIf="nutrients === 'unit'">
             <label class="form-field__label">{{unitName === '' ? 'Portion' : unitName}}</label>
-            <input class="form-field__text" type="number" step="0.1">
+            <input class="form-field__text" [(ngModel)]="portions[i].unit"
+                   name="{{portionUnit + i}}" value="port.unit" type="number" step="0.1" required>
           </div>
 
           <div class="form-field__element form-field__element--column">
             <label class="form-field__label">Description</label>
-            <input class="form-field__text" type="text" placeholder="e.g. 'Breakfast', 'Plate'">
+            <input class="form-field__text" [(ngModel)]="portions[i].description"
+                   name="{{portionDesc + i}}" type="text"
+                   placeholder="e.g. 'Breakfast', 'Plate'" required>
           </div>
 
           <div class="form-field__element form-field__element--column form-field__element--end">
@@ -96,7 +106,8 @@
       </button>
 
       <div class="modal__button-wrapper">
-        <button class="button button--primary" (click)="closeModal()">Done</button>
+        <button type="submit" class="button button--primary" (click)="closeModal()"
+            [disabled]="addFoodForm.invalid">Done</button>
       </div>
 
     </form>
