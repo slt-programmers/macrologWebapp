@@ -1,5 +1,3 @@
-@import './variables';
-
 // Elevation
 @mixin elevation($zValue, $color: $coal, $opacity: 1) {
   box-shadow: #{map-get(_get-umbra-map($color, $opacity), $zValue)},

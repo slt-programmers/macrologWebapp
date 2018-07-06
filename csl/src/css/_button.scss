@@ -1,0 +1,41 @@
+.button {
+	@include elevation(2);
+	background-color: $mist;
+	border: 0;
+	border-radius: 2px;
+	color: $storm;
+	font-size: 18px;
+	min-width: 100px;
+	padding: 10px;
+
+	&--primary {
+		background-color: $primary;
+		color: $white;
+	}
+
+	&--transparent {
+		@include elevation(0);
+		background-color: transparent;
+		color: $primary;
+		min-width: 0;
+	}
+
+	&--floating-action {
+		@include elevation(16);
+		align-items: center;
+		display: flex;
+		border-radius: 100px;
+		justify-content: center;
+		height: 60px;
+		min-width: 60px;
+		padding: 15px;
+		width: 60px;
+	}
+}
+
+.floating-action-button-wrapper {
+	bottom: 20px;
+	position: fixed;
+	right: 20px;
+	z-index: 16;
+}
