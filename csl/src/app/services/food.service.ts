@@ -10,6 +10,19 @@ export class FoodService {
 	constructor(private http: HttpClient) {
 	}
 
+	public addFood(foodEntry: FoodEntry) {
+		console.log('In addFood');
+   	const headers = {'Conent-Type': 'applicaton/json',
+   		'Access-Control-Allow-Origin': 'http://localhost:4200'
+   	};
+
+  	const options = { headers: headers };
+    return this.http.post<FoodEntry>(simpleJavaServletUrl + '/addFood', foodEntry.toString(), options);
+	}
+
+
+	// TODO: kijken wat uiteindelijk gebruikt wordt
+
  	getAllFood() {
    	return this.http.get(simpleJavaServletUrl, { responseType: 'json' });
 	}

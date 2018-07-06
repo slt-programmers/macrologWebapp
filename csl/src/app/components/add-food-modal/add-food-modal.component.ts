@@ -1,12 +1,8 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { FoodEntry } from '../../model/foodEntry';
+import { Portion } from '../../model/portion';
+import { FoodService } from '../../services/food.service';
 
-export class Portion {
-	constructor() {
-		public grams: number = 0;
-		public unit: number = 0;
-		public description: string = '';
-	}
-}
 
 @Component({
   selector: 'add-food-modal',
@@ -20,40 +16,46 @@ export class AddFoodModalComponent implements OnInit {
 	public food = '';
 	public nutrients = 'grams';
 	public unitName = '';
-	public grams;
+	public unitGrams: number;
 	public protein: number;
 	public fat: number;
 	public carbs: number;
 
 	public portions = [];
 
-  constructor() {
+  constructor(private foodService: FoodService) {
 	}
 
   ngOnInit() {
   }
+
+	addFood() {
+		let foodEntry = new FoodEntry();
+		foodEntry.food = this.food;
+		foodEntry.unit = this.nutrients;
+		if (this.nutrients === 'unit') {
+			foodEntry.unitName = this.unitName;
+			foodEntry.unitGrams = this.unitGrams;
+		}
+		foodEntry.protein = this.protein;
+		foodEntry.fat = this.fat;
+		foodEntry.carbs = this.carbs;
+		foodEntry.portions = this.portions;
+
+		this.foodService.addFood(foodEntry);
+
+		this.closeModal();
+	}
 
 	closeModal() {
 		this.close.emit(true);
 	}
 
 	newPortion() {
-		console.log(this.portions);
-
-		console.log('new portion');
-		let newP = new Portion();
-		console.log(newP);
-		console.log('before adding: ');
-		console.log(this.portions);
-
-		this.portions.push(newP);
-		console.log('after adding: ');
-		console.log(this.portions);
+		this.portions.push(new Portion());
 	}
 
 	removePortion(index) {
-		// start removing from index
-		// remove 1 item
 		this.portions.splice(index, 1);
 	}
 

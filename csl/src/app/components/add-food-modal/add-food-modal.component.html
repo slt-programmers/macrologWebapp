@@ -49,7 +49,7 @@
         <div class="form-field">
           <div class="form-field__element">
             <label class="form-field__label">Grams</label>
-            <input class="form-field__text" #gramsField [(ngModel)]="grams" name="grams" placeholder="Optional" type="number">
+            <input class="form-field__text" #gramsField [(ngModel)]="unitGrams" name="grams" placeholder="Optional" type="number">
           </div>
         </div>
       </ng-container>
@@ -105,7 +105,7 @@
       </button>
 
       <div class="modal__button-wrapper">
-        <button type="submit" class="button button--primary" (click)="closeModal()"
+        <button class="button button--primary" (click)="addFood()"
             [disabled]="addFoodForm.invalid">Done</button>
       </div>
 

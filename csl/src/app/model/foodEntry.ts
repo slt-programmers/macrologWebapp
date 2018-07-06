@@ -1,12 +1,12 @@
-export class Food {
+export class FoodEntry {
 	constructor(
-		public name: string,
-		public unit: number,
-		public unitName: String,
-		public optionalGrams: number,
+		public food: string,
+		public unit: string,
+		public unitName: string,
+		public unitGrams: number,
 		public protein: number,
 		public fat: number,
 		public carbs: number,
+		public portions: Portion[]
 	) {}
-
 }
