@@ -22,11 +22,13 @@
 				align-items: flex-start;
 				flex-direction: column;
 				margin-bottom: 0;
+				width: auto;
 			}
 			align-items: center;
 			flex-direction: row;
 			margin-right: 10px;
 			margin-bottom: 10px;
+			width: 100%;
 		}
 
 		&--end {
@@ -52,7 +54,9 @@
 
 		border: 1px solid $smoke;
 		border-radius: 5px;
+		flex-basis: 80%;
 		max-width: 220px;
+		min-width: 30px;
 	}
 
 	&__select {

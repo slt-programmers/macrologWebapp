@@ -58,6 +58,7 @@
         <div class="form-field__element form-field__element--column">
           <label class="form-field__label">Protein</label>
           <input class="form-field__text" #proteinField [(ngModel)]="protein"
+                 value="protein"
                  name="protein" type="number" placeholder="0,0" step="0.1" required>
         </div>
         <div class="form-field__element form-field__element--column">
@@ -78,7 +79,7 @@
         <div class="form-field form-field--column">
           <div class="form-field__element form-field__element--column" *ngIf="measurementUnit === 'grams'">
             <label class="form-field__label">Grams</label>
-            <input class="form-field__text" [(ngModel)]="port.grams"
+            <input class="form-field__text" [(ngModel)]="port.grams" placeholder="0,0"
                    name="portionGrams_{{i}}" type="number" step="1" required>
           </div>
 
