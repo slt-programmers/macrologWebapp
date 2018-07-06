@@ -1,5 +1,5 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { FoodEntry } from '../../model/foodEntry';
+import { Food } from '../../model/food';
 import { Portion } from '../../model/portion';
 import { FoodService } from '../../services/food.service';
 
@@ -13,7 +13,7 @@ export class AddFoodModalComponent implements OnInit {
 	@Output() close: EventEmitter<boolean> = new EventEmitter<boolean>();
 
 	public title = 'Add food to the database';
-	public food = '';
+	public name = '';
 	public nutrients = 'grams';
 	public unitName = '';
 	public unitGrams: number;
@@ -30,20 +30,19 @@ export class AddFoodModalComponent implements OnInit {
   }
 
 	addFood() {
-		let foodEntry = new FoodEntry();
-		foodEntry.food = this.food;
-		foodEntry.unit = this.nutrients;
+		let addFoodRequest = new Food();
+		addFoodRequest.name = this.name;
+		addFoodRequest.unit = this.nutrients;
 		if (this.nutrients === 'unit') {
-			foodEntry.unitName = this.unitName;
-			foodEntry.unitGrams = this.unitGrams;
+			addFoodRequest.unitName = this.unitName;
+			addFoodRequest.unitGrams = this.unitGrams;
 		}
-		foodEntry.protein = this.protein;
-		foodEntry.fat = this.fat;
-		foodEntry.carbs = this.carbs;
-		foodEntry.portions = this.portions;
+		addFoodRequest.protein = this.protein;
+		addFoodRequest.fat = this.fat;
+		addFoodRequest.carbs = this.carbs;
+		addFoodRequest.portions = this.portions;
 
-		this.foodService.addFood(foodEntry);
-
+		this.foodService.addFood(addFoodRequest);
 		this.closeModal();
 	}
 
@@ -52,7 +51,7 @@ export class AddFoodModalComponent implements OnInit {
 	}
 
 	newPortion() {
-		this.portions.push(new Portion());
+		this.portions.push(new Portion(0,0,''));
 	}
 
 	removePortion(index) {
