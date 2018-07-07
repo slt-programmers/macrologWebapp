@@ -18,7 +18,7 @@ export class AddFoodModalComponent implements OnInit {
 
 	public title = 'Add food to the database';
 	public name = '';
-	public measurementUnit = 'grams';
+	public measurementUnit = MeasurementUnit.Grams;
 	public unitName = '';
 	public unitGrams: number;
 	public protein: number;

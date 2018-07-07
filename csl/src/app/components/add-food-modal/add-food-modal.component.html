@@ -28,18 +28,18 @@
           <div class="radio-group">
             <label class="form-field__label">Nutrients</label>
             <input class="form-field__radio" type="radio" name="measurementUnit"
-                   [(ngModel)]="measurementUnit" value="grams"
-                   [ngClass]="{'form-field__radio--checked fas fa-check': measurementUnit === 'grams' }" required>
+                   [(ngModel)]="measurementUnit" value="GRAMS"
+                   [ngClass]="{'form-field__radio--checked fas fa-check': measurementUnit === 'GRAMS' }" required>
             <span class="radio__label">per 100gr</span>
             <input class="form-field__radio" type="radio" name="measurementUnit"
-                   [(ngModel)]="measurementUnit" value="unit"
-                   [ngClass]="{'form-field__radio--checked fas fa-check': measurementUnit === 'unit' }">
+                   [(ngModel)]="measurementUnit" value="UNIT"
+                   [ngClass]="{'form-field__radio--checked fas fa-check': measurementUnit === 'UNIT' }">
             <span class="radio__label">per unit</span>
           </div>
         </div>
       </div>
 
-      <ng-container *ngIf="measurementUnit === 'unit'">
+      <ng-container *ngIf="measurementUnit === 'UNIT'">
         <div class="form-field">
           <div class="form-field__element">
             <label class="form-field__label">Unit name</label>
@@ -77,13 +77,13 @@
 
       <div class="modal__portions" *ngFor="let port of portions; index as i">
         <div class="form-field form-field--column">
-          <div class="form-field__element form-field__element--column" *ngIf="measurementUnit === 'grams'">
+          <div class="form-field__element form-field__element--column" *ngIf="measurementUnit === 'GRAMS'">
             <label class="form-field__label">Grams</label>
             <input class="form-field__text" [(ngModel)]="port.grams" placeholder="0,0"
                    name="portionGrams_{{i}}" type="number" step="1" required>
           </div>
 
-          <div class="form-field__element form-field__element--column" *ngIf="measurementUnit === 'unit'">
+          <div class="form-field__element form-field__element--column" *ngIf="measurementUnit === 'UNIT'">
             <label class="form-field__label">{{unitName === '' ? 'Portion' : unitName}}</label>
             <input class="form-field__text" [(ngModel)]="port.unit"
                    name="portionUnit_{{i}}" value="port.unit" type="number"
