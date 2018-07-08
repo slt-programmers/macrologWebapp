@@ -37,7 +37,7 @@ export class AddFoodModalComponent implements OnInit {
 		let addFoodRequest = new Food();
 		addFoodRequest.name = this.name;
 		addFoodRequest.measurementUnit = this.measurementUnit;
-		if (this.measurementUnit === 'unit') {
+		if (this.measurementUnit === MeasurementUnit.Unit) {
 			addFoodRequest.unitName = this.unitName;
 			addFoodRequest.unitGrams = this.unitGrams;
 		}
