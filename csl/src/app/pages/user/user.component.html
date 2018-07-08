@@ -55,88 +55,128 @@
           </div>
         </div>
       </div>
-
     </div>
-
-
   </div>
 </div>
 
-<div class="container">
 
+
+<div class="container">
   <h2 class="title">Personal details</h2>
   <div class="personal">
-    <form>
+    <div class="section">
+      <div class="section__left">
+        <form>
 
-      <div class="form-field">
-        <div class="form-field__element">
-          <label class="form-field__label">Name</label>
-          <input class="form-field__text-input" name="name" type="text" [(ngModel)]="name">
-        </div>
-      </div>
-
-      <div class="form-field">
-        <div class="form-field__element">
-          <label class="form-field__label">Age</label>
-          <input class="form-field__text-input" name="age" type="number" [(ngModel)]="age">
-        </div>
-      </div>
-
-      <div class="form-field">
-        <div class="form-field__element">
-          <div class="radio-group">
-            <label class="form-field__label">Gender</label>
-            <input class="form-field__radio" type="radio" name="gender"
-                   [(ngModel)]="gender" value="MALE"
-                   [ngClass]="{'form-field__radio--checked fas fa-check': gender === 'MALE' }">
-            <span class="radio__label">Male</span>
-            <input class="form-field__radio" type="radio" name="gender"
-                   [(ngModel)]="gender" value="FEMALE"
-                   [ngClass]="{'form-field__radio--checked fas fa-check': gender === 'FEMALE' }">
-            <span class="radio__label">Female</span>
+          <div class="form-field">
+            <div class="form-field__element">
+              <label class="form-field__label">Name</label>
+              <input class="form-field__text-input" name="name" type="text" [(ngModel)]="name">
+            </div>
           </div>
-        </div>
+
+          <div class="form-field">
+            <div class="form-field__element">
+              <label class="form-field__label">Age</label>
+              <input class="form-field__text-input" name="age" type="number" [(ngModel)]="age">
+            </div>
+          </div>
+
+          <div class="form-field">
+            <div class="form-field__element">
+              <div class="radio-group">
+                <label class="form-field__label">Gender</label>
+                <input class="form-field__radio" type="radio" name="gender"
+                       [(ngModel)]="gender" value="MALE"
+                       [ngClass]="{'form-field__radio--checked fas fa-check': gender === 'MALE' }">
+                <span class="radio__label">Male</span>
+                <input class="form-field__radio" type="radio" name="gender"
+                       [(ngModel)]="gender" value="FEMALE"
+                       [ngClass]="{'form-field__radio--checked fas fa-check': gender === 'FEMALE' }">
+                <span class="radio__label">Female</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-field">
+            <div class="form-field__element">
+              <label class="form-field__label">Height (cm)</label>
+              <input class="form-field__text-input" name="height" type="number" [(ngModel)]="height">
+            </div>
+          </div>
+
+          <div class="form-field">
+            <div class="form-field__element">
+              <label class="form-field__label">Start weight (kg)</label>
+              <input class="form-field__text-input" name="weight" type="number" [(ngModel)]="weight" step="0.1"
+                     (change)="calcCalories()">
+            </div>
+          </div>
+
+          <div class="form-field form-field--spaced">
+            <div class="form-field__element">
+              <label class="form-field__label">Activity level</label>
+              <select class="form-field__select" name="activity" [(ngModel)]="activity" (change)="calcCalories()">
+                <option class="form-field__option" value="1.2">Sedentary</option>
+                <option class="form-field__option" value="1.375">Lightly active</option>
+                <option class="form-field__option" value="1.55">Moderately active</option>
+                <option class="form-field__option" value="1.725">Very active</option>
+                <option class="form-field__option" value="1.9">Extremely active</option>
+              </select>
+            </div>
+          </div>
+        </form>
       </div>
 
-      <div class="form-field">
-        <div class="form-field__element">
-          <label class="form-field__label">Height (cm)</label>
-          <input class="form-field__text-input" name="height" type="number" [(ngModel)]="height">
-        </div>
+      <div class="section__right">
+        <button class="button button--primary" (click)="saveUserSettings()">Save</button>
       </div>
-
-      <div class="form-field">
-        <div class="form-field__element">
-          <label class="form-field__label">Start weight (kg)</label>
-          <input class="form-field__text-input" name="weight" type="number" [(ngModel)]="weight" step="0.1"
-                 (change)="calcCalories()">
-        </div>
-      </div>
-
-      <div class="form-field">
-        <div class="form-field__element">
-          <label class="form-field__label">Activity level</label>
-          <select class="form-field__select" name="activity" [(ngModel)]="activity" (change)="calcCalories()">
-            <option class="form-field__option" value="1.2">Sedentary</option>
-            <option class="form-field__option" value="1.375">Lightly active</option>
-            <option class="form-field__option" value="1.55">Moderately active</option>
-            <option class="form-field__option" value="1.725">Very active</option>
-            <option class="form-field__option" value="1.9">Extremely active</option>
-          </select>
-        </div>
-      </div>
-
-    </form>
+    </div>
   </div>
 </div>
 
 <div class="container">
   <h2 class="title">Goals</h2>
-  <button class="button button--primary" (click)="openCalcModal()">Calculate intake</button>
+  <p>Your daily macro intake:</p>
+
+  <div class="section">
+    <div class="section__left">
+      <div class="form-field">
+        <div class="form-field__element">
+          <label class="form-field__label">Protein</label>
+          <input class="form-field__text-input">
+        </div>
+      </div>
+
+      <div class="form-field">
+        <div class="form-field__element">
+          <label class="form-field__label">Fat</label>
+          <input class="form-field__text-input">
+        </div>
+      </div>
+
+      <div class="form-field">
+        <div class="form-field__element">
+          <label class="form-field__label">Carbs</label>
+          <input class="form-field__text-input">
+        </div>
+      </div>
+    </div>
+
+    <div class="section__right">
+      <div class="calorie-box">
+        <i class="calorie-box__icon fas fa-sort-up" (click)="addOne()"></i>
+        <h2 class="calorie-box__title">{{(calories | number : '1.0-0') || '----' }} Calories</h2>
+        <i class="calorie-box__icon fas fa-sort-down" (click)="subtractOne()"></i>
+      </div>
+
+      <button class="button button--primary" (click)="openCalcModal()">Calculate intake</button>
+    </div>
+  </div>
+
+
 </div>
 
-<div class="container">
-  <button class="button button--primary" (click)="saveUserSettings()">Save</button>
-</div>
+
 
 

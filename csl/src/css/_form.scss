@@ -45,15 +45,14 @@
 	}
 
 	&__label {
-		flex-basis: 20%;
+		flex-basis: 40%;
 		margin-right: $gutter/3;
 	}
 
 	&__text {
-   	flex-basis: 80%;
+   	flex-basis: 60%;
    	font-weight: bold;
    	margin-top: 10px;
-   	max-width: 220px;
    	min-width: 30px;
   }
 
@@ -66,15 +65,15 @@
 
 		border: 1px solid $smoke;
 		border-radius: 5px;
-		flex-basis: 80%;
+		flex-basis: 60%;
 		max-width: 220px;
 		min-width: 30px;
 	}
 
 	&__select {
+		flex-basis: 60%;
 		border: 1px solid $smoke;
 		border-radius: 5px;
-		width: 202px;
 	}
 
 	&__option {
