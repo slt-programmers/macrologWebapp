@@ -3,6 +3,10 @@
 	flex-direction: column;
 	margin-bottom: 10px;
 
+	&--spaced {
+		justify-content: space-between;
+	}
+
 	&--column {
 		@media (min-width: $lg) {
 			flex-direction: row;
@@ -46,6 +50,14 @@
 	}
 
 	&__text {
+   	flex-basis: 80%;
+   	font-weight: bold;
+   	margin-top: 10px;
+   	max-width: 220px;
+   	min-width: 30px;
+  }
+
+	&__text-input {
 		&::placeholder {
 			color: $silver;
 			font-weight: normal;

@@ -11,19 +11,13 @@ export class UserService {
 	}
 
 	public addUserInfo(key: string, value: string) {
-		console.log('In addUserInfo');
    	const headers = {'Content-Type': 'application/json',
    		'Access-Control-Allow-Origin': 'http://localhost:4200'
    	};
 
 		let userInfo = { name: key, value: value }
   	const options = { headers: headers };
-    return this.http.post<Food>(macrologBackendUrl + '/', userInfo, options).subscribe(data => {
-        alert('ok');
-      },
-      error => {
-        console.log(error);
-      });
+    return this.http.put(macrologBackendUrl + '/', userInfo, options);
 	}
 
 	public getUserInfo(key: string) {

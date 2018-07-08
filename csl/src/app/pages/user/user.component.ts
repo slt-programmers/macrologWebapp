@@ -1,5 +1,8 @@
-import{Component, OnInit, OnChanges, SimpleChanges}from '@angular/core';
+import{Component, OnInit }from '@angular/core';
 import {UserService} from '../../services/user.service';
+
+import {Observable} from 'rxjs/Observable';
+import {forkJoin} from 'rxjs/observable/forkJoin';
 
 export enum Gender {
 	Male = 'MALE',
@@ -11,12 +14,13 @@ export enum Gender {
   templateUrl: './user.component.html',
   styleUrls: ['./user.component.scss']
 })
-export class UserComponent implements OnInit, OnChanges {
+export class UserComponent implements OnInit {
 
 	public name: string;
 	public age: number;
 	public gender: Gender;
 	public height: number;
+	public weight: number;
 	public activity: number;
 
 	public showCalcModal: boolean = false;
@@ -39,19 +43,15 @@ export class UserComponent implements OnInit, OnChanges {
 
   ngOnInit() {
 		this.userService.getAllSettings().subscribe(
-			result => { console.log(result);
+			result => {
 			 this.name = this.getKeyFromResultlist(result, 'name');
 			 this.age = parseInt(this.getKeyFromResultlist(result, 'age')) || undefined ;
        this.gender = this.getKeyFromResultlist(result, 'gender') || Gender.Male;
 			 this.height = parseInt(this.getKeyFromResultlist(result, 'height')) || undefined;
 			 this.weight = parseInt(this.getKeyFromResultlist(result, 'weight')) || undefined;
-			 this.activity = parseFloat(this.getKeyFromResultlist(result, 'activity')) || 1.2;
+			 this.activity = parseFloat(this.getKeyFromResultlist(result, 'activity')) || 1.2; },
 			error => { console.log(error) }
 		);
-	}
-
-	ngOnChanges(changes: SimpleChanges) {
-		console.log(this.userResult);
 	}
 
 	openCalcModal(): void {
@@ -90,7 +90,7 @@ export class UserComponent implements OnInit, OnChanges {
 	}
 
 	calcBMR(): void {
-		if (this.gender === 'male') {
+		if (this.gender === 'MALE') {
 			this.bmr = 66.5 + (13.7 * this.weight) + (5 * this.height) - (6.76 * this.age);
 		} else {
 			this.bmr = 655.0 + (9.56 * this.weight) + (1.8 * this.height) - (4.68 * this.age);
@@ -106,12 +106,22 @@ export class UserComponent implements OnInit, OnChanges {
 	}
 
 	public saveUserSettings(): void {
-		this.userService.addUserInfo();
+    forkJoin(
+			this.userService.addUserInfo('name', this.name),
+			this.userService.addUserInfo('age', this.age.toString()),
+			this.userService.addUserInfo('gender', this.gender.toString()),
+			this.userService.addUserInfo('height', this.height.toString()),
+			this.userService.addUserInfo('weight', this.weight.toString()),
+			this.userService.addUserInfo('activity', this.activity.toString())
+    ).subscribe(
+
+//TODO: Toast melding voor het succesvol opslaan maken
+        data => console.log(data),
+        error => console.error(error)
+    );
 	}
 
-
 	private getKeyFromResultlist(list: any, key: string) {
-		console.log(key);
 		for (let item of list) {
 			if (item.name === key) {
 				return item.value;

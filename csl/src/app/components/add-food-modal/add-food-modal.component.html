@@ -19,7 +19,7 @@
       <div class="form-field">
         <div class="form-field__element">
           <label class="form-field__label">Food</label>
-          <input [(ngModel)]="name" #foodField name="name" class="form-field__text" placeholder="e.g. 'Pasta', 'Apple'" required>
+          <input class="form-field__text-input" [(ngModel)]="name" #foodField name="name" placeholder="e.g. 'Pasta', 'Apple'" required>
         </div>
       </div>
 
@@ -43,13 +43,13 @@
         <div class="form-field">
           <div class="form-field__element">
             <label class="form-field__label">Unit name</label>
-            <input class="form-field__text" #unitNameField [(ngModel)]="unitName" name="unitName" placeholder="e.g. 'Piece', 'Slice'">
+            <input class="form-field__text-input" #unitNameField [(ngModel)]="unitName" name="unitName" placeholder="e.g. 'Piece', 'Slice'">
           </div>
         </div>
         <div class="form-field">
           <div class="form-field__element">
             <label class="form-field__label">Grams</label>
-            <input class="form-field__text" #gramsField [(ngModel)]="unitGrams" name="grams" placeholder="Optional" type="number">
+            <input class="form-field__text-input" #gramsField [(ngModel)]="unitGrams" name="grams" placeholder="Optional" type="number">
           </div>
         </div>
       </ng-container>
@@ -57,18 +57,18 @@
       <div class="form-field form-field--column">
         <div class="form-field__element form-field__element--column">
           <label class="form-field__label">Protein</label>
-          <input class="form-field__text" #proteinField [(ngModel)]="protein"
+          <input class="form-field__text-input" #proteinField [(ngModel)]="protein"
                  value="protein"
                  name="protein" type="number" placeholder="0,0" step="0.1" required>
         </div>
         <div class="form-field__element form-field__element--column">
           <label class="form-field__label">Fat</label>
-          <input class="form-field__text" #fatField [(ngModel)]="fat"
+          <input class="form-field__text-input-input" #fatField [(ngModel)]="fat"
                  name="fat" type="number" placeholder="0,0" step="0.1" required>
         </div>
         <div class="form-field__element form-field__element--column">
           <label class="form-field__label">Carbs</label>
-          <input class="form-field__text" #carbsField [(ngModel)]="carbs"
+          <input class="form-field__text-input" #carbsField [(ngModel)]="carbs"
                  name="carbs" type="number" placeholder="0,0" step="0.1" required>
         </div>
       </div>
@@ -79,20 +79,20 @@
         <div class="form-field form-field--column">
           <div class="form-field__element form-field__element--column" *ngIf="measurementUnit === 'GRAMS'">
             <label class="form-field__label">Grams</label>
-            <input class="form-field__text" [(ngModel)]="port.grams" placeholder="0,0"
+            <input class="form-field__text-input" [(ngModel)]="port.grams" placeholder="0,0"
                    name="portionGrams_{{i}}" type="number" step="1" required>
           </div>
 
           <div class="form-field__element form-field__element--column" *ngIf="measurementUnit === 'UNIT'">
             <label class="form-field__label">{{unitName === '' ? 'Portion' : unitName}}</label>
-            <input class="form-field__text" [(ngModel)]="port.unit"
+            <input class="form-field__text-input" [(ngModel)]="port.unit"
                    name="portionUnit_{{i}}" value="port.unit" type="number"
                    placeholder="0,0" step="0.1" required>
           </div>
 
           <div class="form-field__element form-field__element--column">
             <label class="form-field__label">Description</label>
-            <input class="form-field__text" [(ngModel)]="port.description"
+            <input class="form-field__text-input" [(ngModel)]="port.description"
                    name="portionDesc_{{i}}" type="text"
                    placeholder="e.g. 'Breakfast', 'Plate'" required>
           </div>
