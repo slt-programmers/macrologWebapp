@@ -1,21 +1,25 @@
-import{Component, OnInit}from '@angular/core';
+import{Component, OnInit, OnChanges, SimpleChanges}from '@angular/core';
+import {UserService} from '../../services/user.service';
+
+export enum Gender {
+	Male = 'MALE',
+	Female = 'FEMALE'
+}
 
 @Component({
-  selector: 'account',
-  templateUrl: './account.component.html',
-  styleUrls: ['./account.component.scss']
+  selector: 'user',
+  templateUrl: './user.component.html',
+  styleUrls: ['./user.component.scss']
 })
-export class AccountComponent implements OnInit {
+export class UserComponent implements OnInit, OnChanges {
 
 	public name: string;
 	public age: number;
-	public gender: string;
+	public gender: Gender;
 	public height: number;
+	public activity: number;
 
 	public showCalcModal: boolean = false;
-
-	public weight: number;
-	public activity: number;
 	public difference: string;
 
 	private bmr: number;
@@ -26,22 +30,28 @@ export class AccountComponent implements OnInit {
 	public carbs: number;
 	public calories: number;
 
-  constructor() {
-		this.name = 'John Doe';
-		this.age = 35;
-		this.gender = 'male';
-		this.height = 170;
-
-		this.weight = 75.0;
-		this.activity = 1.2;
+  constructor(private userService: UserService) {
 		this.difference = 'same';
-
 		this.protein;
 		this.fat;
-		this.carbs = 240;
+		this.carbs;
 	}
 
   ngOnInit() {
+		this.userService.getAllSettings().subscribe(
+			result => { console.log(result);
+			 this.name = this.getKeyFromResultlist(result, 'name');
+			 this.age = parseInt(this.getKeyFromResultlist(result, 'age')) || undefined ;
+       this.gender = this.getKeyFromResultlist(result, 'gender') || Gender.Male;
+			 this.height = parseInt(this.getKeyFromResultlist(result, 'height')) || undefined;
+			 this.weight = parseInt(this.getKeyFromResultlist(result, 'weight')) || undefined;
+			 this.activity = parseFloat(this.getKeyFromResultlist(result, 'activity')) || 1.2;
+			error => { console.log(error) }
+		);
+	}
+
+	ngOnChanges(changes: SimpleChanges) {
+		console.log(this.userResult);
 	}
 
 	openCalcModal(): void {
@@ -94,4 +104,19 @@ export class AccountComponent implements OnInit {
 	calcCarbs(): void {
 		this.carbs = (this.tdee - (this.protein * 4.0) - (this.fat * 9.0)) / 4.0;
 	}
+
+	public saveUserSettings(): void {
+		this.userService.addUserInfo();
+	}
+
+
+	private getKeyFromResultlist(list: any, key: string) {
+		console.log(key);
+		for (let item of list) {
+			if (item.name === key) {
+				return item.value;
+			}
+		}
+	}
+
 }

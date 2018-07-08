@@ -74,12 +74,12 @@
         <div class="radio-group">
           <label class="form-field__label">Gender</label>
           <input class="form-field__radio" type="radio" name="gender"
-                 [(ngModel)]="gender" value="male"
-                 [ngClass]="{'form-field__radio--checked fas fa-check': gender === 'male' }">
+                 [(ngModel)]="gender" value="MALE"
+                 [ngClass]="{'form-field__radio--checked fas fa-check': gender === 'MALE' }">
           <span class="radio__label">Male</span>
           <input class="form-field__radio" type="radio" name="gender"
-                 [(ngModel)]="gender" value="female"
-                 [ngClass]="{'form-field__radio--checked fas fa-check': gender === 'female' }">
+                 [(ngModel)]="gender" value="FEMALE"
+                 [ngClass]="{'form-field__radio--checked fas fa-check': gender === 'FEMALE' }">
           <span class="radio__label">Female</span>
         </div>
       </div>
@@ -116,11 +116,5 @@
   <button class="button button--primary" (click)="openCalcModal()">Calculate intake</button>
 </div>
 
-<!--<div class="container">-->
-<!--<h2 class="title">Weight graph TODO</h2>-->
-<!--</div>-->
-
-<!--<div class="container">-->
-<!--<h2 class="title">Body size graph TODO</h2>-->
-<!--</div>-->
+<button (click)="saveUserSettings()">Save my data!</button>
 

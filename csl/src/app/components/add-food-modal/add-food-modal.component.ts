@@ -4,8 +4,8 @@ import { Portion } from '../../model/portion';
 import { FoodService } from '../../services/food.service';
 
 export enum MeasurementUnit {
-	Grams = "GRAMS",
-	Unit = "UNIT"
+	Grams = 'GRAMS',
+	Unit = 'UNIT'
 }
 
 @Component({

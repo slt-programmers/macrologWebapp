@@ -12,7 +12,8 @@ import {LogComponent}from './pages/log/log.component';
 import {FoodComponent}from './pages/food/food.component';
 import {LogService}from './services/log.service';
 import {FoodAliasComponent}from './components/foodalias/foodalias.component';
-import {AccountComponent}from './pages/account/account.component';
+import {UserComponent}from './pages/user/user.component';
+import {UserService} from './services/user.service';
 import { SliderComponent } from './components/slider/slider.component';
 import { BargraphComponent } from './components/bargraph/bargraph.component';
 import { AddFoodModalComponent } from './components/add-food-modal/add-food-modal.component';
@@ -21,7 +22,7 @@ const appRoutes: Routes = [
 {path: 'log', component: LogComponent},
 {path: 'food', component: FoodComponent},
 {path: 'foodalias', component: FoodAliasComponent},
-{path: 'account', component: AccountComponent},
+{path: 'user', component: UserComponent},
 {path: '', redirectTo: '/log', pathMatch: 'full'},
 {path: '**', component: LogComponent}
 ];
@@ -32,7 +33,7 @@ const appRoutes: Routes = [
     LogComponent,
     FoodComponent,
     FoodAliasComponent,
-    AccountComponent,
+    UserComponent,
     SliderComponent,
     BargraphComponent,
     AddFoodModalComponent,
@@ -44,7 +45,7 @@ const appRoutes: Routes = [
     RouterModule.forRoot(appRoutes),
     BrowserAnimationsModule
   ],
-  providers: [FoodService, LogService],
+  providers: [FoodService, LogService, UserService],
   bootstrap: [AppComponent],
   entryComponents: [
   ]
