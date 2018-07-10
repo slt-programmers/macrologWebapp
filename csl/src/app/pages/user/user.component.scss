@@ -5,49 +5,6 @@
 	flex-direction: column;
 }
 
-.modal-backdrop {
-	position: absolute;
-	top: 0;
-	left: 0;
-	height: 100%;
-	width: 100%;
-	background-color: transparentize($black, 0.7);
-}
-
-.modal-wrapper {
-	display: flex;
-	justify-content: center;
-	position: relative;
-}
-
-.modal {
-	@include elevation(4);
-	width: 70%;
-	height: 70%;
-	max-width: 800px;
-	max-height: 1000px;
-	display: inline;
-	position: absolute;
-	z-index: 1;
-
-	&__header {
-		align-items: center;
-		background-color: $primary;
-		border-radius: 15px 15px 0 0;
-		color: $white;
-		display: flex;
-		font-size: 20px;
-		justify-content: space-between;
-		padding: $gutter;
-	}
-
-	&__content {
-		background-color: $ghost;
-		border-radius: 0 0 15px 15px;
-		padding: $gutter;
-	}
-}
-
 .calorie-box {
 	align-items: center;
 	display: flex;
