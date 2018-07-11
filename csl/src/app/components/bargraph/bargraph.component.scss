@@ -29,8 +29,10 @@
 			width: 1%;
 			transition: width 1.0s;
 		}
-
 	}
+	&__title {
+  			padding-left: 5px;
+  		}
 
 	&__numbers {
 		display: flex;

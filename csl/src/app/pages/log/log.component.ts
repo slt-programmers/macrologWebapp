@@ -15,10 +15,12 @@ export class LogComponent implements OnInit {
 
 	public days;
   public allLogs;
+  public displayDate = new Date();
 
 	public goalP: number = 120;
 	public goalF: number = 140;
 	public goalC: number = 35;
+	public goalCal: number = 1235;
 
 	ngOnInit() {
 		this.getJson().subscribe(data => this.days = data,

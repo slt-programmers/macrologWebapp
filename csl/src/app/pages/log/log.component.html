@@ -4,9 +4,10 @@
     <div class="intake-goal-wrapper">
       <div class="intake-goal-wrapper__numbers">
         <div class="intake-goal__calories">
-          <span>{{getTotal(days[0].meals, "calories")}}</span>
+          <span>Goal Calories:{{getTotal(days[0].meals, "calories")}}/{{goalCal}}</span>
         </div>
         <div class="intake-goal__macros">
+          <span class="intake-goal__macro"><strong>Daily goal:</strong></span>
           <span class="intake-goal__macro">Protein: {{getTotal(days[0].meals, "protein")}}/<strong>{{goalP}}</strong></span>
           <span class="intake-goal__macro">Fat: {{getTotal(days[0].meals, "fat")}}/<strong>{{goalF}}</strong></span>
           <span class="intake-goal__macro">Carbs: {{getTotal(days[0].meals, "carbs")}}/<strong>{{goalC}}</strong></span>
@@ -15,52 +16,198 @@
       <div class="intake-goal-wrapper__graph">
         <div class="intake-goal__graph">
           <div class="bargraph-wrapper">
-            <bargraph [percentage]="100"></bargraph>
-            <bargraph [percentage]="120"></bargraph>
-            <bargraph [percentage]="80"></bargraph>
+            <bargraph [percentage]="100" [title]="'Protein'"></bargraph>
+            <bargraph [percentage]="120" [title]="'Fat'"></bargraph>
+            <bargraph [percentage]="80"  [title]="'Carbs'"></bargraph>
           </div>
         </div>
       </div>
     </div>
   </div>
 
-  <div class="day" *ngFor="let day of days">
+  <!--<div class="day" *ngFor="let day of days">-->
+    <!--<div class="day__header">-->
+      <!--<span class="day__header__title">{{day.day}}</span>-->
+      <!--<i class="fas fa-pen"></i>-->
+    <!--</div>-->
+    <!--<div class="day__meal" *ngFor="let meal of day.meals">-->
+      <!--<span class="day__meal__title">{{meal.title}}</span>-->
+      <!--<div class="meal">-->
+        <!--<div class="meal__ingredient" *ngFor="let ingredient of meal.ingredients">-->
+          <!--<span class="meal__ingredient__name">{{ingredient.food}}</span>-->
+          <!--<span class="meal__ingredient__amount">{{ingredient.amount}} gram</span>-->
+          <!--<span class="meal__ingredient__macro">{{ingredient.protein}}</span>-->
+          <!--<span class="meal__ingredient__macro">{{ingredient.fat}}</span>-->
+          <!--<span class="meal__ingredient__macro">{{ingredient.carbs}}</span>-->
+          <!--<span class="meal__ingredient__calories">{{ingredient.calories}}</span>-->
+        <!--</div>-->
+      <!--</div>-->
+    <!--</div>-->
+    <!--<div class="day__total">-->
+      <!--<span class="day__total__title">Daily total</span>-->
+      <!--<span class="total__macro total__macro&#45;&#45;first">P {{getTotal(day.meals, "protein")}}</span>-->
+      <!--<span class="total__macro">F {{getTotal(day.meals, "fat")}}</span>-->
+      <!--<span class="total__macro">C {{getTotal(day.meals, "carbs")}}</span>-->
+      <!--<span class="total__calories">{{getTotal(day.meals, "calories")}}</span>-->
+      <!--<span class="total__calories&#45;&#45;label">kcal</span>-->
+    <!--</div>-->
+  <!--</div>-->
+
+  <div class="day">
     <div class="day__header">
-      <span class="day__header__title">{{day.day}}</span>
+      <span class="day__header__title"><i class="fas fa-arrow-alt-circle-left "></i>{{displayDate | date:'dd-MM-yyyy'}}<i class="fas fa-arrow-alt-circle-right"></i></span>
       <i class="fas fa-pen"></i>
     </div>
-    <div class="day__meal" *ngFor="let meal of day.meals">
-      <span class="day__meal__title">{{meal.title}}</span>
+    <div class="day__meal">
+      <span class="day__meal__title">Breakfast  </span>
       <div class="meal">
-        <div class="meal__ingredient" *ngFor="let ingredient of meal.ingredients">
-          <span class="meal__ingredient__name">{{ingredient.food}}</span>
-          <span class="meal__ingredient__amount">{{ingredient.amount}} gram</span>
-          <span class="meal__ingredient__macro">{{ingredient.protein}}</span>
-          <span class="meal__ingredient__macro">{{ingredient.fat}}</span>
-          <span class="meal__ingredient__macro">{{ingredient.carbs}}</span>
-          <span class="meal__ingredient__calories">{{ingredient.calories}}</span>
+        <div class="meal__ingredient">
+          <span class="meal__ingredient__name">Muesli</span>
+          <span class="meal__ingredient__amount">80  gram</span>
+          <span class="meal__ingredient__macro">312</span>
+          <span class="meal__ingredient__macro">121</span>
+          <span class="meal__ingredient__macro">323</span>
+          <span class="meal__ingredient__calories">5465</span>
+        </div>
+        <div class="meal__ingredient">
+          <span class="meal__ingredient__name">Yoghurt</span>
+          <span class="meal__ingredient__amount">200 gram</span>
+          <span class="meal__ingredient__macro">32</span>
+          <span class="meal__ingredient__macro">11</span>
+          <span class="meal__ingredient__macro">33</span>
+          <span class="meal__ingredient__calories">546</span>
+        </div>
+      </div>
+    </div>
+    <div class="day__meal">
+      <span class="day__meal__title">Lunch</span>
+      <div class="meal">
+        <div class="meal__ingredient">
+          <span class="meal__ingredient__name">Boterham</span>
+          <span class="meal__ingredient__amount"> 4 stuks</span>
+          <span class="meal__ingredient__macro">312</span>
+          <span class="meal__ingredient__macro">121</span>
+          <span class="meal__ingredient__macro">323</span>
+          <span class="meal__ingredient__calories">5465</span>
+        </div>
+        <div class="meal__ingredient">
+          <span class="meal__ingredient__name">Calve pindakaas</span>
+          <span class="meal__ingredient__amount">80 gram</span>
+          <span class="meal__ingredient__macro">32</span>
+          <span class="meal__ingredient__macro">11</span>
+          <span class="meal__ingredient__macro">33</span>
+          <span class="meal__ingredient__calories">546</span>
+        </div>
+      </div>
+    </div>
+    <div class="day__meal">
+      <span class="day__meal__title">Dinner</span>
+      <div class="meal">
+        <div class="meal__ingredient">
+          <span class="meal__ingredient__name">Kip</span>
+          <span class="meal__ingredient__amount">150 gram</span>
+          <span class="meal__ingredient__macro">312</span>
+          <span class="meal__ingredient__macro">121</span>
+          <span class="meal__ingredient__macro">323</span>
+          <span class="meal__ingredient__calories">5465</span>
+        </div>
+        <div class="meal__ingredient">
+          <span class="meal__ingredient__name">Aardappelen</span>
+          <span class="meal__ingredient__amount">120 gram</span>
+          <span class="meal__ingredient__macro">32</span>
+          <span class="meal__ingredient__macro">11</span>
+          <span class="meal__ingredient__macro">33</span>
+          <span class="meal__ingredient__calories">546</span>
+        </div>
+        <div class="meal__ingredient">
+          <span class="meal__ingredient__name">Broccoli</span>
+          <span class="meal__ingredient__amount">120 gram</span>
+          <span class="meal__ingredient__macro">32</span>
+          <span class="meal__ingredient__macro">11</span>
+          <span class="meal__ingredient__macro">33</span>
+          <span class="meal__ingredient__calories">546</span>
+        </div>
+      </div>
+    </div>
+    <div class="day__meal">
+      <span class="day__meal__title">Snacks</span>
+      <div class="meal">
+        <div class="meal__ingredient">
+          <span class="meal__ingredient__name">Ei</span>
+          <span class="meal__ingredient__amount">4 stuks (160g)</span>
+          <span class="meal__ingredient__macro">312</span>
+          <span class="meal__ingredient__macro">121</span>
+          <span class="meal__ingredient__macro">323</span>
+          <span class="meal__ingredient__calories">5465</span>
+        </div>
+        <div class="meal__ingredient">
+          <span class="meal__ingredient__name">Worst</span>
+          <span class="meal__ingredient__amount">2x halve</span>
+          <span class="meal__ingredient__macro">32</span>
+          <span class="meal__ingredient__macro">11</span>
+          <span class="meal__ingredient__macro">33</span>
+          <span class="meal__ingredient__calories">546</span>
+        </div>
+        <div class="meal__ingredient">
+          <span class="meal__ingredient__name">Broccoli</span>
+          <span class="meal__ingredient__amount">120 gram</span>
+          <span class="meal__ingredient__macro">32</span>
+          <span class="meal__ingredient__macro">11</span>
+          <span class="meal__ingredient__macro">33</span>
+          <span class="meal__ingredient__calories">546</span>
         </div>
       </div>
     </div>
     <div class="day__total">
       <span class="day__total__title">Daily total</span>
-      <span class="total__macro total__macro--first">P {{getTotal(day.meals, "protein")}}</span>
-      <span class="total__macro">F {{getTotal(day.meals, "fat")}}</span>
-      <span class="total__macro">C {{getTotal(day.meals, "carbs")}}</span>
-      <span class="total__calories">{{getTotal(day.meals, "calories")}}</span>
+      <span class="total__macro total__macro--first">P 3213</span>
+      <span class="total__macro">F 41</span>
+      <span class="total__macro">C 43</span>
+      <span class="total__calories">434 Calories</span>
       <span class="total__calories--label">kcal</span>
     </div>
-  </div>
 
-  <!-- Onderstaand ombouwen naar filter per dag zodat bovenstaande ook mogelijk wordt met die divjes-->
-  <table>
-    <tr *ngFor="let log of allLogs">
-      <td>{{log.foodName}}</td>
-      <td>{{log.multiplier}} * </td>
-      <td>{{log.foodAlias.aliasName}}</td>
-      <td>{{log.multiplier * log.foodAlias.amountNumber}} grams</td>
-    </tr>
-  </table>
+
+    <div class="day__add">
+       <span class="total__macro">
+
+        <select class="form-field">
+             <option>Breakfast</option>
+             <option>Lunch</option>
+             <option>Dinner</option>
+             <option>Snack</option>
+        </select>
+      </span>      <span class="day__total__title">
+        <input class="form-field__text-input" type="text" placeholder="Add meal">
+      </span>
+
+      <span class="total__macro" >
+
+         <!-- afhankelijk van gekozen voedsel uit de autocomplete vorige zijn volgende 2 te kiezen -->
+          <input class="form-field__text-input" type="text" placeholder="grams">
+      </span>
+      <span class="total__macro total__macro--first">
+         <select disabled class="form-field">
+             <option>grams</option>
+             <option>stuks</option>
+        </select>
+      </span>
+
+      <span class="total__calories"><input type="button" class="button button--primary" value="Add meal"></span>
+      <span class="total__calories--label"></span>
+    </div>
+</div>
+
+
+  <!--&lt;!&ndash; Onderstaand ombouwen naar filter per dag zodat bovenstaande ook mogelijk wordt met die divjes&ndash;&gt;-->
+  <!--<table>-->
+    <!--<tr *ngFor="let log of allLogs">-->
+      <!--<td >* {{log.food.name}}</td>-->
+      <!--<td>{{log.multiplier}} * </td>-->
+      <!--<td *ngIf="log.portion">{{log.portion.name}}</td>-->
+      <!--<td *ngIf="log.portion">{{log.multiplier * log.portion.grams}} grams</td>-->
+    <!--</tr>-->
+  <!--</table>-->
 
   <div class="floating-action-button-wrapper">
     <button class="button--floating-action button button--primary" (click)="openModal()">
