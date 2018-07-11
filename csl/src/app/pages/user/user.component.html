@@ -1,7 +1,7 @@
 <div class="modal-wrapper" *ngIf="showCalcModal">
   <div class="modal">
     <div class="modal__header">
-      <span class="modal__header__title">Calculate your daily intake</span>
+      <h3 class="modal__header__title">Calculate your daily intake</h3>
       <i class="fas fa-times" (click)="showCalcModal = false"></i>
     </div>
     <div class="modal__content">
@@ -28,9 +28,9 @@
 
 
       <div class="calorie-box">
-        <i class="calorie-box__icon fas fa-sort-up" (click)="addOne()"></i>
-        <h2 class="calorie-box__title">{{calories | number : '1.0-0' }} Calories</h2>
         <i class="calorie-box__icon fas fa-sort-down" (click)="subtractOne()"></i>
+        <h2 class="calorie-box__title">{{calories | number : '1.0-0'}} Calories</h2>
+        <i class="calorie-box__icon fas fa-sort-up" (click)="addOne()"></i>
       </div>
 
       <div class="form-field form-field--column form-field--spaced">
@@ -163,9 +163,9 @@
 
     <div class="section__right">
       <div class="calorie-box">
-        <i class="calorie-box__icon fas fa-sort-up" (click)="addOne()"></i>
-        <h2 class="calorie-box__title">{{(calories | number : '1.0-0') || '----' }} Calories</h2>
         <i class="calorie-box__icon fas fa-sort-down" (click)="subtractOne()"></i>
+        <h2 class="calorie-box__title">{{(calories | number : '1.0-0') || '----' }} Calories</h2>
+        <i class="calorie-box__icon fas fa-sort-up" (click)="addOne()"></i>
       </div>
 
       <button class="button button--primary" (click)="openCalcModal()">Calculate intake</button>
