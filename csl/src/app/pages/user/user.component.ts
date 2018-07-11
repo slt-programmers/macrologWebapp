@@ -55,10 +55,10 @@ export class UserComponent implements OnInit {
 	}
 
 	openCalcModal(): void {
-		this.showCalcModal = true;
-		this.calcCalories();
 		this.protein = this.weight * 1.8;
 		this.fat = this.weight * 0.8;
+		this.calcCalories();
+		this.showCalcModal = true;
 	}
 
 	closeCalcModal(close: boolean): void {
@@ -73,11 +73,15 @@ export class UserComponent implements OnInit {
 	}
 
 	addOne(): void {
-		this.calories = this.calories + 1;
+		if(this.calories < 4000) {
+			this.calories = this.calories + 1;
+		}
 	}
 
 	subtractOne(): void {
-		this.calories = this.calories -1;
+		if (this.calories > 1000) {
+			this.calories = this.calories -1;
+		}
 	}
 
 	adjustDiff(): void {
