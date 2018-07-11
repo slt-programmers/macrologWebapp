@@ -9,6 +9,7 @@ import {BrowserAnimationsModule}from '@angular/platform-browser/animations';
 import {AppComponent}from './app.component';
 import {FoodService}from './services/food.service';
 import {LogComponent}from './pages/log/log.component';
+import {LogMealComponent} from './components/log-meal/log-meal.component';
 import {FoodComponent}from './pages/food/food.component';
 import {LogService}from './services/log.service';
 import {FoodAliasComponent}from './components/foodalias/foodalias.component';
@@ -31,6 +32,7 @@ const appRoutes: Routes = [
   declarations: [
     AppComponent,
     LogComponent,
+    LogMealComponent,
     FoodComponent,
     FoodAliasComponent,
     UserComponent,

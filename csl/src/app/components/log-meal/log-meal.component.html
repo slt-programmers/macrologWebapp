@@ -1,0 +1,15 @@
+<div class="log-meal">
+  <div class="day__meal">
+    <span class="day__meal__title">{{meal}}</span>
+    <div class="meal">
+      <div *ngFor="let logEntry of logEntries" class="meal__ingredient">
+        <span class="meal__ingredient__name">{{logEntry.food.name}}</span>
+        <span class="meal__ingredient__amount">{{logEntry.food.unitGrams | number:'1.0-0'}}  gram</span>
+        <span class="meal__ingredient__macro">{{logEntry.macrosCalculated.proteins | number:'1.1-1'}}</span>
+        <span class="meal__ingredient__macro">{{logEntry.macrosCalculated.fat | number:'1.1-1'}}</span>
+        <span class="meal__ingredient__macro">{{logEntry.macrosCalculated.carbs | number:'1.1-1'}}</span>
+        <span class="meal__ingredient__calories">{{(logEntry.macrosCalculated.fat * 9 + logEntry.macrosCalculated.proteins *4 + logEntry.macrosCalculated.carbs *4) | number:'1.0-0'}}</span>
+      </div>
+    </div>
+  </div>
+</div>

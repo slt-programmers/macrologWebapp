@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import {LogService}from '../../services/log.service';
+import {LogEntry} from '../../model/logEntry';
 
 @Component({
   selector: 'log',
@@ -17,6 +18,11 @@ export class LogComponent implements OnInit {
   public allLogs;
   public displayDate = new Date();
 
+  public breakfastLogs = new Array<LogEntry>();
+  public lunchLogs = new Array<LogEntry>();
+  public dinnerLogs = new Array<LogEntry>();
+  public snacksLogs = new Array<LogEntry>();
+
 	public goalP: number = 120;
 	public goalF: number = 140;
 	public goalC: number = 35;
@@ -26,8 +32,25 @@ export class LogComponent implements OnInit {
 		this.getJson().subscribe(data => this.days = data,
 					error => console.log(error));
     this.logService.getAllLogs().subscribe(
-      data => this.allLogs = data
+      data => {
+          this.allLogs = data;
+          this.breakfastLogs = this.allLogs.filter(
+              entry => entry.meal === 'BREAKFAST'
+          );
+          this.lunchLogs = this.allLogs.filter(
+              entry => entry.meal === 'LUNCH'
+          );
+          this.dinnerLogs = this.allLogs.filter(
+              entry => entry.meal === 'DINNER'
+          );
+          this.snacksLogs = this.allLogs.filter(
+              entry => entry.meal === 'SNACKS'
+          );
+
+      }
+
 		);
+
   }
 
 	public getTotal(meals, macro) {

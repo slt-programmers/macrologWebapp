@@ -1,0 +1,95 @@
+@import '../../../css/public';
+
+.log-meal {
+
+}
+.day {
+	@include elevation(1);
+	background-color: $white;
+	display: flex;
+	flex-direction: column;
+
+	&__header {
+		border-bottom: 1px solid $cloud;
+		display: flex;
+		flex-direction: row;
+		padding: ($gutter/2);
+		justify-content: center;
+
+		&__title {
+			font-weight: bold;
+		}
+		&__previous{
+		  padding-right:10px;
+		  font-weight: normal;
+		}
+		&__next{
+		  font-weight: normal;
+		  padding-left:10px;
+		}
+	}
+
+	&__meal {
+		border-bottom: 1px solid $cloud;
+		display: flex;
+		flex-direction: column;
+		padding: ($gutter/2);
+
+		&__title {
+			flex-basis: 20%;
+			font-weight: bold;
+			margin-bottom: 5px;
+		}
+	}
+
+	&__total {
+		display: flex;
+		padding: ($gutter/2);
+
+		&__title {
+			flex-basis: 20%;
+			font-weight: bold;
+		}
+	}
+	&__add {
+  		display: flex;
+  		padding: ($gutter/2);
+      border-top: 1px solid $cloud;
+
+  		&__title {
+  			flex-basis: 20%;
+  			font-weight: bold;
+  		}
+  	}
+}
+
+.meal {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+
+	&__ingredient {
+		display: flex;
+		flex-direction: row;
+
+		&__name {
+      padding-left:10px;
+			flex-basis: 20%;
+		}
+
+		&__amount {
+			flex-basis: 20%;
+			text-align: end;
+		}
+
+		&__macro {
+			flex-basis: 10%;
+			text-align: end;
+		}
+
+		&__calories {
+			flex-basis: 20%;
+			text-align: end;
+		}
+	}
+}

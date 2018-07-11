@@ -25,139 +25,20 @@
     </div>
   </div>
 
-  <!--<div class="day" *ngFor="let day of days">-->
-    <!--<div class="day__header">-->
-      <!--<span class="day__header__title">{{day.day}}</span>-->
-      <!--<i class="fas fa-pen"></i>-->
-    <!--</div>-->
-    <!--<div class="day__meal" *ngFor="let meal of day.meals">-->
-      <!--<span class="day__meal__title">{{meal.title}}</span>-->
-      <!--<div class="meal">-->
-        <!--<div class="meal__ingredient" *ngFor="let ingredient of meal.ingredients">-->
-          <!--<span class="meal__ingredient__name">{{ingredient.food}}</span>-->
-          <!--<span class="meal__ingredient__amount">{{ingredient.amount}} gram</span>-->
-          <!--<span class="meal__ingredient__macro">{{ingredient.protein}}</span>-->
-          <!--<span class="meal__ingredient__macro">{{ingredient.fat}}</span>-->
-          <!--<span class="meal__ingredient__macro">{{ingredient.carbs}}</span>-->
-          <!--<span class="meal__ingredient__calories">{{ingredient.calories}}</span>-->
-        <!--</div>-->
-      <!--</div>-->
-    <!--</div>-->
-    <!--<div class="day__total">-->
-      <!--<span class="day__total__title">Daily total</span>-->
-      <!--<span class="total__macro total__macro&#45;&#45;first">P {{getTotal(day.meals, "protein")}}</span>-->
-      <!--<span class="total__macro">F {{getTotal(day.meals, "fat")}}</span>-->
-      <!--<span class="total__macro">C {{getTotal(day.meals, "carbs")}}</span>-->
-      <!--<span class="total__calories">{{getTotal(day.meals, "calories")}}</span>-->
-      <!--<span class="total__calories&#45;&#45;label">kcal</span>-->
-    <!--</div>-->
-  <!--</div>-->
+
 
   <div class="day">
     <div class="day__header">
-      <span class="day__header__title"><i class="fas fa-arrow-alt-circle-left "></i>{{displayDate | date:'dd-MM-yyyy'}}<i class="fas fa-arrow-alt-circle-right"></i></span>
-      <i class="fas fa-pen"></i>
+      <span class="day__header__previous"><i class="fas fa-arrow-alt-circle-left "></i></span>
+      <span class="day__header__title">{{displayDate | date:'dd-MM-yyyy'}}</span>
+      <span class="day__header__next"><i class="fas fa-arrow-alt-circle-right"></i></span>
     </div>
-    <div class="day__meal">
-      <span class="day__meal__title">Breakfast  </span>
-      <div class="meal">
-        <div class="meal__ingredient">
-          <span class="meal__ingredient__name">Muesli</span>
-          <span class="meal__ingredient__amount">80  gram</span>
-          <span class="meal__ingredient__macro">312</span>
-          <span class="meal__ingredient__macro">121</span>
-          <span class="meal__ingredient__macro">323</span>
-          <span class="meal__ingredient__calories">5465</span>
-        </div>
-        <div class="meal__ingredient">
-          <span class="meal__ingredient__name">Yoghurt</span>
-          <span class="meal__ingredient__amount">200 gram</span>
-          <span class="meal__ingredient__macro">32</span>
-          <span class="meal__ingredient__macro">11</span>
-          <span class="meal__ingredient__macro">33</span>
-          <span class="meal__ingredient__calories">546</span>
-        </div>
-      </div>
-    </div>
-    <div class="day__meal">
-      <span class="day__meal__title">Lunch</span>
-      <div class="meal">
-        <div class="meal__ingredient">
-          <span class="meal__ingredient__name">Boterham</span>
-          <span class="meal__ingredient__amount"> 4 stuks</span>
-          <span class="meal__ingredient__macro">312</span>
-          <span class="meal__ingredient__macro">121</span>
-          <span class="meal__ingredient__macro">323</span>
-          <span class="meal__ingredient__calories">5465</span>
-        </div>
-        <div class="meal__ingredient">
-          <span class="meal__ingredient__name">Calve pindakaas</span>
-          <span class="meal__ingredient__amount">80 gram</span>
-          <span class="meal__ingredient__macro">32</span>
-          <span class="meal__ingredient__macro">11</span>
-          <span class="meal__ingredient__macro">33</span>
-          <span class="meal__ingredient__calories">546</span>
-        </div>
-      </div>
-    </div>
-    <div class="day__meal">
-      <span class="day__meal__title">Dinner</span>
-      <div class="meal">
-        <div class="meal__ingredient">
-          <span class="meal__ingredient__name">Kip</span>
-          <span class="meal__ingredient__amount">150 gram</span>
-          <span class="meal__ingredient__macro">312</span>
-          <span class="meal__ingredient__macro">121</span>
-          <span class="meal__ingredient__macro">323</span>
-          <span class="meal__ingredient__calories">5465</span>
-        </div>
-        <div class="meal__ingredient">
-          <span class="meal__ingredient__name">Aardappelen</span>
-          <span class="meal__ingredient__amount">120 gram</span>
-          <span class="meal__ingredient__macro">32</span>
-          <span class="meal__ingredient__macro">11</span>
-          <span class="meal__ingredient__macro">33</span>
-          <span class="meal__ingredient__calories">546</span>
-        </div>
-        <div class="meal__ingredient">
-          <span class="meal__ingredient__name">Broccoli</span>
-          <span class="meal__ingredient__amount">120 gram</span>
-          <span class="meal__ingredient__macro">32</span>
-          <span class="meal__ingredient__macro">11</span>
-          <span class="meal__ingredient__macro">33</span>
-          <span class="meal__ingredient__calories">546</span>
-        </div>
-      </div>
-    </div>
-    <div class="day__meal">
-      <span class="day__meal__title">Snacks</span>
-      <div class="meal">
-        <div class="meal__ingredient">
-          <span class="meal__ingredient__name">Ei</span>
-          <span class="meal__ingredient__amount">4 stuks (160g)</span>
-          <span class="meal__ingredient__macro">312</span>
-          <span class="meal__ingredient__macro">121</span>
-          <span class="meal__ingredient__macro">323</span>
-          <span class="meal__ingredient__calories">5465</span>
-        </div>
-        <div class="meal__ingredient">
-          <span class="meal__ingredient__name">Worst</span>
-          <span class="meal__ingredient__amount">2x halve</span>
-          <span class="meal__ingredient__macro">32</span>
-          <span class="meal__ingredient__macro">11</span>
-          <span class="meal__ingredient__macro">33</span>
-          <span class="meal__ingredient__calories">546</span>
-        </div>
-        <div class="meal__ingredient">
-          <span class="meal__ingredient__name">Broccoli</span>
-          <span class="meal__ingredient__amount">120 gram</span>
-          <span class="meal__ingredient__macro">32</span>
-          <span class="meal__ingredient__macro">11</span>
-          <span class="meal__ingredient__macro">33</span>
-          <span class="meal__ingredient__calories">546</span>
-        </div>
-      </div>
-    </div>
+
+    <log-meal [meal]="'Breakfast'" [logEntries]="breakfastLogs"></log-meal>
+    <log-meal [meal]="'Lunch'"     [logEntries]="lunchLogs"></log-meal>
+    <log-meal [meal]="'Dinner'"    [logEntries]="dinnerLogs"></log-meal>
+    <log-meal [meal]="'Snacks'"    [logEntries]="snacksLogs"></log-meal>
+
     <div class="day__total">
       <span class="day__total__title">Daily total</span>
       <span class="total__macro total__macro--first">P 3213</span>
@@ -171,7 +52,7 @@
     <div class="day__add">
        <span class="total__macro">
 
-        <select class="form-field">
+        <select class="form-field__select">
              <option>Breakfast</option>
              <option>Lunch</option>
              <option>Dinner</option>
@@ -187,7 +68,7 @@
           <input class="form-field__text-input" type="text" placeholder="grams">
       </span>
       <span class="total__macro total__macro--first">
-         <select disabled class="form-field">
+         <select disabled class="form-field__select">
              <option>grams</option>
              <option>stuks</option>
         </select>
