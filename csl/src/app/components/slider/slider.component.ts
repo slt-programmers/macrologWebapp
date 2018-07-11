@@ -18,8 +18,8 @@ export class SliderComponent implements OnInit {
 	@Output() valueChange: EventEmitter<number> = new EventEmitter<number>();
 
 	private mouseDown = false;
-	private oldXChord;
-	private newXChord;
+	private oldXChord: number;
+	private newXChord: number;
 	private slider;
 	private sliderHandle;
 	private track;
@@ -54,10 +54,11 @@ export class SliderComponent implements OnInit {
 
 	private initHandle() {
 		let part = this.value - this.lowerBound;
-		let percentage = part / this.upperBound * 100;
+		let percentage = part / (this.upperBound - this.lowerBound);
+
 		if (this.sliderHandle && this.track) {
-			this.sliderHandle.style.left = percentage + '%';
-			this.track.style.width = percentage + '%';
+			this.sliderHandle.style.left = (this.sliderWidth * percentage) - (this.sliderHandle.clientWidth / 2) + 'px';
+			this.track.style.width = (this.sliderWidth * percentage) + 'px';
 		}
 	}
 
@@ -69,18 +70,12 @@ export class SliderComponent implements OnInit {
 
 	// Mouse and touch behaviour
 	public onDown(event) {
-		console.log('Down');
-		console.log(event);
 		event.preventDefault(); // prevent mouseclick when mobile, good practice
-		let location = this.getMouseLocation(event);
-
 		this.mouseDown = true;
-		this.oldXChord = location - this.sliderOffsetLeft;
 		this.onClick(event);
 	}
 
 	public onUp(event) {
-		console.log('Up');
 		this.mouseDown = false;
 	}
 
@@ -89,15 +84,11 @@ export class SliderComponent implements OnInit {
 		let location = this.getMouseLocation(event);
 
 		if (this.mouseDown && this.isInBoundary(location)) {
-			console.log('Move');
 			this.newXChord = location - this.sliderOffsetLeft;
-			console.log(this.sliderOffsetLeft);
-			console.log(this.newXChord);
 			let distance = this.oldXChord - this.newXChord;
 			this.oldXChord = this.newXChord;
 			this.sliderHandle.style.left = (this.sliderHandle.offsetLeft - distance) + 'px';
 			this.track.style.width = (this.track.offsetWidth - distance) + 'px';
-
 			this.calculateValue();
 		} else {
 			//dragging out of boundary
@@ -106,7 +97,6 @@ export class SliderComponent implements OnInit {
 	}
 
 	public onClick(event): void {
-		console.log('Click');
 		event.preventDefault();
 		let location = this.getMouseLocation(event);
 		if (this.isInBoundary(location)) {
@@ -141,4 +131,5 @@ export class SliderComponent implements OnInit {
     } while( slider = slider.offsetParent );
     return offsetLeft;
 	}
+
 }

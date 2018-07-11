@@ -26,6 +26,7 @@ a {
 }
 
 input, select {
+	box-sizing: border-box;
 	padding: 10px;
 	border: 0;
 	font-family: 'Roboto', sans-serif;

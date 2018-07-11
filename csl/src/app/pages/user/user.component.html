@@ -1,4 +1,3 @@
-<div class="modal-backdrop" *ngIf="showCalcModal"></div>
 <div class="modal-wrapper" *ngIf="showCalcModal">
   <div class="modal">
     <div class="modal__header">
@@ -8,20 +7,22 @@
     <div class="modal__content">
 
       <div class="form-field">
+        <label class="form-field__label form-field__label--small">My goal is to: </label>
         <div class="form-field__element">
-          <label class="form-field__label">My goal is to: </label>
-          <input class="form-field__radio" name="difference" type="radio"
-                 [(ngModel)]="difference" value="lose" (change)="adjustDiff()"
-                 [ngClass]="{'form-field__radio--checked fas fa-check': difference === 'lose' }">
-          <span class="radio__label">lose weight</span>
-          <input class="form-field__radio" name="difference" type="radio"
-                 [(ngModel)]="difference" value="same" (change)="adjustDiff()"
-                 [ngClass]="{'form-field__radio--checked fas fa-check': difference === 'same' }">
-          <span class="radio__label">stay the same weight</span>
-          <input class="form-field__radio" name="difference" type="radio"
-                 [(ngModel)]="difference" value="gain" (change)="adjustDiff()"
-                 [ngClass]="{'form-field__radio--checked fas fa-check': difference === 'gain' }">
-          <span class="radio__label">gain weight</span>
+          <div class="radio-group">
+            <input class="form-field__radio" name="difference" type="radio"
+                   [(ngModel)]="difference" value="lose" (change)="adjustDiff()"
+                   [ngClass]="{'form-field__radio--checked fas fa-check': difference === 'lose' }">
+            <span class="radio__label">lose weight</span>
+            <input class="form-field__radio" name="difference" type="radio"
+                   [(ngModel)]="difference" value="same" (change)="adjustDiff()"
+                   [ngClass]="{'form-field__radio--checked fas fa-check': difference === 'same' }">
+            <span class="radio__label">stay the same weight</span>
+            <input class="form-field__radio" name="difference" type="radio"
+                   [(ngModel)]="difference" value="gain" (change)="adjustDiff()"
+                   [ngClass]="{'form-field__radio--checked fas fa-check': difference === 'gain' }">
+            <span class="radio__label">gain weight</span>
+          </div>
         </div>
       </div>
 
@@ -48,17 +49,14 @@
       </div>
 
       <div class="form-field">
-        <div class="form-field__element">
-          <label class="form-field__label">Slider</label>
-          <div class="form-field__slider">
-            <slider [(value)]="calories" [upperBound]="4000" [lowerBound]="1000"></slider>
-          </div>
+        <div class="form-field__label">Manually adjust your caloric intake</div>
+        <div class="form-field__slider">
+          <slider [(value)]="calories" [upperBound]="4000" [lowerBound]="1000"></slider>
         </div>
       </div>
     </div>
   </div>
 </div>
-
 
 
 <div class="container">
@@ -69,23 +67,23 @@
         <form>
 
           <div class="form-field">
+            <label class="form-field__label">Name</label>
             <div class="form-field__element">
-              <label class="form-field__label">Name</label>
               <input class="form-field__text-input" name="name" type="text" [(ngModel)]="name">
             </div>
           </div>
 
           <div class="form-field">
+            <label class="form-field__label">Age</label>
             <div class="form-field__element">
-              <label class="form-field__label">Age</label>
               <input class="form-field__text-input" name="age" type="number" [(ngModel)]="age">
             </div>
           </div>
 
           <div class="form-field">
+            <label class="form-field__label">Gender</label>
             <div class="form-field__element">
               <div class="radio-group">
-                <label class="form-field__label">Gender</label>
                 <input class="form-field__radio" type="radio" name="gender"
                        [(ngModel)]="gender" value="MALE"
                        [ngClass]="{'form-field__radio--checked fas fa-check': gender === 'MALE' }">
@@ -99,23 +97,23 @@
           </div>
 
           <div class="form-field">
+            <label class="form-field__label">Height (cm)</label>
             <div class="form-field__element">
-              <label class="form-field__label">Height (cm)</label>
               <input class="form-field__text-input" name="height" type="number" [(ngModel)]="height">
             </div>
           </div>
 
           <div class="form-field">
+            <label class="form-field__label">Start weight (kg)</label>
             <div class="form-field__element">
-              <label class="form-field__label">Start weight (kg)</label>
               <input class="form-field__text-input" name="weight" type="number" [(ngModel)]="weight" step="0.1"
                      (change)="calcCalories()">
             </div>
           </div>
 
           <div class="form-field form-field--spaced">
+            <label class="form-field__label">Activity level</label>
             <div class="form-field__element">
-              <label class="form-field__label">Activity level</label>
               <select class="form-field__select" name="activity" [(ngModel)]="activity" (change)="calcCalories()">
                 <option class="form-field__option" value="1.2">Sedentary</option>
                 <option class="form-field__option" value="1.375">Lightly active</option>
@@ -142,22 +140,22 @@
   <div class="section">
     <div class="section__left">
       <div class="form-field">
+        <label class="form-field__label">Protein</label>
         <div class="form-field__element">
-          <label class="form-field__label">Protein</label>
           <input class="form-field__text-input">
         </div>
       </div>
 
       <div class="form-field">
+        <label class="form-field__label">Fat</label>
         <div class="form-field__element">
-          <label class="form-field__label">Fat</label>
           <input class="form-field__text-input">
         </div>
       </div>
 
       <div class="form-field">
+        <label class="form-field__label">Carbs</label>
         <div class="form-field__element">
-          <label class="form-field__label">Carbs</label>
           <input class="form-field__text-input">
         </div>
       </div>
