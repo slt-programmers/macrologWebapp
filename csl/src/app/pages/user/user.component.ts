@@ -39,6 +39,10 @@ export class UserComponent implements OnInit {
 	public fatManual: number;
 	public carbsManual: number;
 
+	public goalProtein: string;
+	public goalFat: string;
+	public goalCarbs: string;
+
 	@Input() public calories: number;
 
   constructor(private userService: UserService) {
@@ -56,9 +60,17 @@ export class UserComponent implements OnInit {
        this.gender = this.getKeyFromResultlist(result, 'gender') || Gender.Male;
 			 this.height = parseInt(this.getKeyFromResultlist(result, 'height')) || undefined;
 			 this.weight = parseInt(this.getKeyFromResultlist(result, 'weight')) || undefined;
-			 this.activity = parseFloat(this.getKeyFromResultlist(result, 'activity')) || 1.2; },
+			 this.activity = parseFloat(this.getKeyFromResultlist(result, 'activity')) || 1.2;
+			 this.setGoalMacros(result);
+			 },
 			error => { console.log(error) }
 		);
+	}
+
+	setGoalMacros(result) {
+		this.goalProtein = this.getKeyFromResultlist(result, 'goalProtein');
+		this.goalFat = this.getKeyFromResultlist(result, 'goalFat');
+		this.goalCarbs = this.getKeyFromResultlist(result, 'goalCarbs');
 	}
 
 	setMarkers() {
@@ -163,8 +175,10 @@ export class UserComponent implements OnInit {
 				this.userService.addUserInfo('goalFat', Math.round(this.fatManual).toString()),
 				this.userService.addUserInfo('goalCarbs', Math.round(this.carbsManual).toString())
       ).subscribe(
-//TODO: Toast melding voor het succesvol opslaan maken
-          data => console.log(data),
+          data => { this.goalProtein = Math.round(this.proteinManual).toString(),
+              this.goalFat = Math.round(this.fatManual).toString(),
+							this.goalCarbs = Math.round(this.carbsManual).toString()
+           },
           error => console.error(error)
 			);
 		} else {
@@ -174,7 +188,10 @@ export class UserComponent implements OnInit {
 				this.userService.addUserInfo('goalCarbs', Math.round(this.carbs).toString())
 			).subscribe(
 //TODO: Toast melding voor het succesvol opslaan maken
-          data => console.log(data),
+					data => { this.goalProtein = Math.round(this.protein).toString(),
+              this.goalFat = Math.round(this.fat).toString(),
+							this.goalCarbs = Math.round(this.carbs).toString()
+           },
           error => console.error(error)
 			);
 		}
@@ -187,6 +204,7 @@ export class UserComponent implements OnInit {
 				return item.value;
 			}
 		}
+		return '';
 	}
 
 }

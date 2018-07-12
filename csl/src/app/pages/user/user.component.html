@@ -170,22 +170,40 @@
 </div>
 
 <div class="container">
-  <h2 class="title">Goals</h2>
-  <p>Your daily macro intake:</p>
+  <h2 class="title">Daily intake</h2>
 
   <div class="section">
     <div class="section__left">
-      <button class="button button--primary" (click)="openCalcModal()">Calculate intake</button>
+      <div>
 
+        <div class="form">
+          <div class="form-field">
+            <label class="form-field__label">Protein</label>
+            <div class="form-field__element">
+              <span class="form-field__text">{{goalProtein ? goalProtein + ' gram' : ''}}</span>
+            </div>
+          </div>
+
+          <div class="form-field">
+            <label class="form-field__label">Fat</label>
+            <div class="form-field__element">
+              <span class="form-field__text">{{goalFat ? goalFat + ' gram' : ''}}</span>
+            </div>
+          </div>
+
+          <div class="form-field">
+            <label class="form-field__label">Carbs</label>
+            <div class="form-field__element">
+              <span class="form-field__text">{{goalCarbs ? goalCarbs + ' gram' : ''}}</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
     </div>
 
     <div class="section__right">
-      <!--<div class="calorie-box">-->
-      <!--<i class="calorie-box__icon fas fa-sort-down" (click)="subtractOne()"></i>-->
-      <!--<h2 class="calorie-box__title">{{(calories | number : '1.0-0') || '&#45;&#45;&#45;&#45;' }} Calories</h2>-->
-      <!--<i class="calorie-box__icon fas fa-sort-up" (click)="addOne()"></i>-->
-      <!--</div>-->
-
+      <button class="button button--primary" (click)="openCalcModal()">Calculate intake</button>
     </div>
   </div>
 
