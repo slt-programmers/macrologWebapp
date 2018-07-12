@@ -26,6 +26,7 @@ export class UserComponent implements OnInit {
 	public showCalcModal: boolean = false;
 	public showMoreOptions: boolean = false;
 	public difference: string;
+	public markers;
 
 	private bmr: number;
 	private tdee: number;
@@ -37,6 +38,10 @@ export class UserComponent implements OnInit {
 	public proteinManual: number;
 	public fatManual: number;
 	public carbsManual: number;
+
+	public goalProtein: string;
+	public goalFat: string;
+	public goalCarbs: string;
 
 	@Input() public calories: number;
 
@@ -55,9 +60,23 @@ export class UserComponent implements OnInit {
        this.gender = this.getKeyFromResultlist(result, 'gender') || Gender.Male;
 			 this.height = parseInt(this.getKeyFromResultlist(result, 'height')) || undefined;
 			 this.weight = parseInt(this.getKeyFromResultlist(result, 'weight')) || undefined;
-			 this.activity = parseFloat(this.getKeyFromResultlist(result, 'activity')) || 1.2; },
+			 this.activity = parseFloat(this.getKeyFromResultlist(result, 'activity')) || 1.2;
+			 this.setGoalMacros(result);
+			 },
 			error => { console.log(error) }
 		);
+	}
+
+	setGoalMacros(result) {
+		this.goalProtein = this.getKeyFromResultlist(result, 'goalProtein');
+		this.goalFat = this.getKeyFromResultlist(result, 'goalFat');
+		this.goalCarbs = this.getKeyFromResultlist(result, 'goalCarbs');
+	}
+
+	setMarkers() {
+		this.markers = [{title: 'deficit', value: (this.tdee - 200)},
+		{title: 'baseline', value: (this.tdee)},
+		{title: 'surplus', value: (this.tdee + 200)}];
 	}
 
 	openCalcModal(): void {
@@ -87,8 +106,8 @@ export class UserComponent implements OnInit {
 	}
 
 	calcCalories(): void {
-		this.calcBMR();
 		this.calcTDEE();
+		this.setMarkers();
 		this.calories = this.tdee;
 		this.calcCarbs();
 	}
@@ -119,16 +138,14 @@ export class UserComponent implements OnInit {
 		this.calcCarbs();
 	}
 
-	calcBMR(): void {
-		if (this.gender === 'MALE') {
-			this.bmr = 66.5 + (13.7 * this.weight) + (5 * this.height) - (6.76 * this.age);
-		} else {
-			this.bmr = 655.0 + (9.56 * this.weight) + (1.8 * this.height) - (4.68 * this.age);
-		}
-	}
-
 	calcTDEE(): void {
-		this.tdee = this.bmr * this.activity;
+		let bmr;
+		if (this.gender === 'MALE') {
+			bmr = 66.5 + (13.7 * this.weight) + (5 * this.height) - (6.76 * this.age);
+		} else {
+			bmr = 655.0 + (9.56 * this.weight) + (1.8 * this.height) - (4.68 * this.age);
+		}
+		this.tdee = bmr * this.activity;
 	}
 
 	calcCarbs(): void {
@@ -152,7 +169,33 @@ export class UserComponent implements OnInit {
 	}
 
 	public saveIntake() {
-		//TODO: Save intake
+		if (this.showMoreOptions) {
+			forkJoin(
+				this.userService.addUserInfo('goalProtein', Math.round(this.proteinManual).toString()),
+				this.userService.addUserInfo('goalFat', Math.round(this.fatManual).toString()),
+				this.userService.addUserInfo('goalCarbs', Math.round(this.carbsManual).toString())
+      ).subscribe(
+          data => { this.goalProtein = Math.round(this.proteinManual).toString(),
+              this.goalFat = Math.round(this.fatManual).toString(),
+							this.goalCarbs = Math.round(this.carbsManual).toString()
+           },
+          error => console.error(error)
+			);
+		} else {
+			forkJoin(
+				this.userService.addUserInfo('goalProtein', Math.round(this.protein).toString()),
+				this.userService.addUserInfo('goalFat', Math.round(this.fat).toString()),
+				this.userService.addUserInfo('goalCarbs', Math.round(this.carbs).toString())
+			).subscribe(
+//TODO: Toast melding voor het succesvol opslaan maken
+					data => { this.goalProtein = Math.round(this.protein).toString(),
+              this.goalFat = Math.round(this.fat).toString(),
+							this.goalCarbs = Math.round(this.carbs).toString()
+           },
+          error => console.error(error)
+			);
+		}
+		this.closeCalcModal(true);
 	}
 
 	private getKeyFromResultlist(list: any, key: string) {
@@ -161,6 +204,7 @@ export class UserComponent implements OnInit {
 				return item.value;
 			}
 		}
+		return '';
 	}
 
 }
