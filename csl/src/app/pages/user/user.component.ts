@@ -1,4 +1,4 @@
-import{Component, OnInit }from '@angular/core';
+import {Component, OnInit, OnChanges, SimpleChanges, Input }from '@angular/core';
 import {UserService} from '../../services/user.service';
 
 import {Observable} from 'rxjs/Observable';
@@ -24,6 +24,7 @@ export class UserComponent implements OnInit {
 	public activity: number;
 
 	public showCalcModal: boolean = false;
+	public showMoreOptions: boolean = false;
 	public difference: string;
 
 	private bmr: number;
@@ -32,7 +33,12 @@ export class UserComponent implements OnInit {
 	public protein: number;
 	public fat: number;
 	public carbs: number;
-	public calories: number;
+
+	public proteinManual: number;
+	public fatManual: number;
+	public carbsManual: number;
+
+	@Input() public calories: number;
 
   constructor(private userService: UserService) {
 		this.difference = 'same';
@@ -65,11 +71,30 @@ export class UserComponent implements OnInit {
 		this.showCalcModal = !close;
 	}
 
+	toggleOptions() {
+		if (this.showMoreOptions) {
+			this.calcCarbs();
+		}
+		this.proteinManual = Math.round(this.protein);
+		this.fatManual = Math.round(this.fat);
+		this.carbsManual = Math.round(this.carbs);
+		this.showMoreOptions = !this.showMoreOptions;
+	}
+
+	changeCalories(event) {
+		this.calories = event;
+		this.calcCarbs();
+	}
+
 	calcCalories(): void {
 		this.calcBMR();
 		this.calcTDEE();
 		this.calories = this.tdee;
 		this.calcCarbs();
+	}
+
+	calcCaloriesManual(): void {
+		this.calories = (this.proteinManual * 4) + (this.fatManual * 9) + (this.carbsManual * 4);
 	}
 
 	addOne(): void {
@@ -91,6 +116,7 @@ export class UserComponent implements OnInit {
 		} else if (this.difference === 'gain') {
 			this.calories = this.calories + 200;
 		}
+		this.calcCarbs();
 	}
 
 	calcBMR(): void {
@@ -106,7 +132,7 @@ export class UserComponent implements OnInit {
 	}
 
 	calcCarbs(): void {
-		this.carbs = (this.tdee - (this.protein * 4.0) - (this.fat * 9.0)) / 4.0;
+		this.carbs = (this.calories - (this.protein * 4.0) - (this.fat * 9.0)) / 4.0;
 	}
 
 	public saveUserSettings(): void {
@@ -123,6 +149,10 @@ export class UserComponent implements OnInit {
         data => console.log(data),
         error => console.error(error)
     );
+	}
+
+	public saveIntake() {
+		//TODO: Save intake
 	}
 
 	private getKeyFromResultlist(list: any, key: string) {

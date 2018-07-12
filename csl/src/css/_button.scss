@@ -13,6 +13,11 @@
 		color: $white;
 	}
 
+	&--secondary {
+  	background-color: $secondary;
+  	color: $white;
+  }
+
 	&--transparent {
 		@include elevation(0);
 		background-color: transparent;

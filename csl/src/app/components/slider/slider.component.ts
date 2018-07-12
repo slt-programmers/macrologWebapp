@@ -76,6 +76,8 @@ export class SliderComponent implements OnInit {
 	}
 
 	public onUp(event) {
+		this.sliderHandle.style.transition = 'left 0.3s';
+		this.track.style.transition = 'width 0.3s';
 		this.mouseDown = false;
 	}
 
@@ -88,7 +90,9 @@ export class SliderComponent implements OnInit {
 			let distance = this.oldXChord - this.newXChord;
 			this.oldXChord = this.newXChord;
 			this.sliderHandle.style.left = (this.sliderHandle.offsetLeft - distance) + 'px';
+			this.sliderHandle.style.transition = 'none';
 			this.track.style.width = (this.track.offsetWidth - distance) + 'px';
+			this.track.style.transition = 'none';
 			this.calculateValue();
 		} else {
 			//dragging out of boundary

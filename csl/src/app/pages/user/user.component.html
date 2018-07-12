@@ -5,55 +5,91 @@
       <i class="fas fa-times" (click)="showCalcModal = false"></i>
     </div>
     <div class="modal__content">
+      <p *ngIf="!showMoreOptions">Choose your goal or manually adjust your caloric intake. Click on
+      <strong class="strong--signal">Change macro's</strong>
+        if you want to change macro proportions entirely.</p>
 
-      <div class="form-field">
-        <label class="form-field__label form-field__label--small">My goal is to: </label>
-        <div class="form-field__element">
-          <div class="radio-group">
-            <input class="form-field__radio" name="difference" type="radio"
-                   [(ngModel)]="difference" value="lose" (change)="adjustDiff()"
-                   [ngClass]="{'form-field__radio--checked fas fa-check': difference === 'lose' }">
-            <span class="radio__label">lose weight</span>
-            <input class="form-field__radio" name="difference" type="radio"
-                   [(ngModel)]="difference" value="same" (change)="adjustDiff()"
-                   [ngClass]="{'form-field__radio--checked fas fa-check': difference === 'same' }">
-            <span class="radio__label">stay the same weight</span>
-            <input class="form-field__radio" name="difference" type="radio"
-                   [(ngModel)]="difference" value="gain" (change)="adjustDiff()"
-                   [ngClass]="{'form-field__radio--checked fas fa-check': difference === 'gain' }">
-            <span class="radio__label">gain weight</span>
+      <p *ngIf="showMoreOptions">Change the macro's according to your own preference. To use the
+        regular calculation, click on
+        <strong class="strong--signal">Change calories</strong>
+        if you want to change macro proportions entirely.</p>
+
+      <div class="form">
+        <div class="form-field" *ngIf="!showMoreOptions">
+          <label class="form-field__label form-field__label--small">My goal is to: </label>
+          <div class="form-field__element">
+            <div class="radio-group">
+              <input class="form-field__radio" name="difference" type="radio"
+                     [(ngModel)]="difference" value="lose" (change)="adjustDiff()"
+                     [ngClass]="{'form-field__radio--checked fas fa-check': difference === 'lose' }">
+              <span class="radio__label">lose weight</span>
+              <input class="form-field__radio" name="difference" type="radio"
+                     [(ngModel)]="difference" value="same" (change)="adjustDiff()"
+                     [ngClass]="{'form-field__radio--checked fas fa-check': difference === 'same' }">
+              <span class="radio__label">stay the same weight</span>
+              <input class="form-field__radio" name="difference" type="radio"
+                     [(ngModel)]="difference" value="gain" (change)="adjustDiff()"
+                     [ngClass]="{'form-field__radio--checked fas fa-check': difference === 'gain' }">
+              <span class="radio__label">gain weight</span>
+            </div>
           </div>
         </div>
       </div>
 
+      <div class="form" *ngIf="showMoreOptions">
+        <div class="form-field">
+          <label class="form-field__label">Protein</label>
+          <div class="form-field__element">
+            <input class="form-field__text-input" (change)="calcCaloriesManual()" [(ngModel)]="proteinManual" type="number">
+          </div>
+        </div>
+
+        <div class="form-field">
+          <label class="form-field__label">Fat</label>
+          <div class="form-field__element">
+            <input class="form-field__text-input" (change)="calcCaloriesManual()" [(ngModel)]="fatManual" type="number">
+          </div>
+        </div>
+
+        <div class="form-field">
+          <label class="form-field__label">Carbs</label>
+          <div class="form-field__element">
+            <input class="form-field__text-input" (change)="calcCaloriesManual()" [(ngModel)]="carbsManual" type="number">
+          </div>
+        </div>
+      </div>
 
       <div class="calorie-box">
-        <i class="calorie-box__icon fas fa-sort-down" (click)="subtractOne()"></i>
+        <i class="calorie-box__icon fas fa-sort-down" *ngIf="false" (click)="subtractOne()"></i>
         <h2 class="calorie-box__title">{{calories | number : '1.0-0'}} Calories</h2>
-        <i class="calorie-box__icon fas fa-sort-up" (click)="addOne()"></i>
+        <i class="calorie-box__icon fas fa-sort-up" *ngIf="false" (click)="addOne()"></i>
       </div>
 
-      <div class="form-field form-field--column form-field--spaced">
-        <div class="form-field__element form-field__element--column">
-          <label class="form-field__label">Protein</label>
-          <span class="form-field__text">{{protein | number : '1.0-0'}}gr</span>
-        </div>
-        <div class="form-field__element form-field__element--column">
-          <label class="form-field__label">Fat</label>
-          <span class="form-field__text">{{fat | number : '1.0-0'}}gr</span>
-        </div>
-        <div class="form-field__element form-field__element--column">
-          <label class="form-field__label">Carbs</label>
-          <span class="form-field__text">{{carbs | number : '1.0-0'}}gr</span>
-        </div>
-      </div>
-
-      <div class="form-field">
-        <div class="form-field__label">Manually adjust your caloric intake</div>
+      <div class="form-field" *ngIf="!showMoreOptions">
+        <div class="form-field__label form-field__label--small">Calories</div>
         <div class="form-field__slider">
-          <slider [(value)]="calories" [upperBound]="4000" [lowerBound]="1000"></slider>
+          <slider [value]="calories" (valueChange)="changeCalories($event)" [upperBound]="4000" [lowerBound]="1200" ></slider>
         </div>
       </div>
+
+      <div class="macro-box" *ngIf="!showMoreOptions">
+        <div class="macro-box__macro">
+          <h2>{{protein | number : '1.0-0'}} gr Protein</h2>
+        </div>
+        <div class="macro-box__macro">
+          <h2>{{fat | number : '1.0-0'}} gr Fat</h2>
+        </div>
+        <div class="macro-box__macro">
+          <h2>{{carbs | number : '1.0-0'}} gr Carbs</h2>
+        </div>
+      </div>
+
+      <div class="modal__button-wrapper">
+        <button class="button button--primary" *ngIf="showMoreOptions" (click)="toggleOptions()">Change calories</button>
+        <button class="button button--primary" *ngIf="!showMoreOptions" (click)="toggleOptions()">Change macro's</button>
+        <button class="button button--secondary" (click)="saveIntake()">Done</button>
+      </div>
+
     </div>
   </div>
 </div>
@@ -139,36 +175,17 @@
 
   <div class="section">
     <div class="section__left">
-      <div class="form-field">
-        <label class="form-field__label">Protein</label>
-        <div class="form-field__element">
-          <input class="form-field__text-input">
-        </div>
-      </div>
+      <button class="button button--primary" (click)="openCalcModal()">Calculate intake</button>
 
-      <div class="form-field">
-        <label class="form-field__label">Fat</label>
-        <div class="form-field__element">
-          <input class="form-field__text-input">
-        </div>
-      </div>
-
-      <div class="form-field">
-        <label class="form-field__label">Carbs</label>
-        <div class="form-field__element">
-          <input class="form-field__text-input">
-        </div>
-      </div>
     </div>
 
     <div class="section__right">
-      <div class="calorie-box">
-        <i class="calorie-box__icon fas fa-sort-down" (click)="subtractOne()"></i>
-        <h2 class="calorie-box__title">{{(calories | number : '1.0-0') || '----' }} Calories</h2>
-        <i class="calorie-box__icon fas fa-sort-up" (click)="addOne()"></i>
-      </div>
+      <!--<div class="calorie-box">-->
+      <!--<i class="calorie-box__icon fas fa-sort-down" (click)="subtractOne()"></i>-->
+      <!--<h2 class="calorie-box__title">{{(calories | number : '1.0-0') || '&#45;&#45;&#45;&#45;' }} Calories</h2>-->
+      <!--<i class="calorie-box__icon fas fa-sort-up" (click)="addOne()"></i>-->
+      <!--</div>-->
 
-      <button class="button button--primary" (click)="openCalcModal()">Calculate intake</button>
     </div>
   </div>
 
