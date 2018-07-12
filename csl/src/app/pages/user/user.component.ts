@@ -157,7 +157,28 @@ export class UserComponent implements OnInit {
 	}
 
 	public saveIntake() {
-		//TODO: Save intake
+		if (this.showMoreOptions) {
+			forkJoin(
+				this.userService.addUserInfo('goalProtein', Math.round(this.proteinManual).toString()),
+				this.userService.addUserInfo('goalFat', Math.round(this.fatManual).toString()),
+				this.userService.addUserInfo('goalCarbs', Math.round(this.carbsManual).toString())
+      ).subscribe(
+//TODO: Toast melding voor het succesvol opslaan maken
+          data => console.log(data),
+          error => console.error(error)
+			);
+		} else {
+			forkJoin(
+				this.userService.addUserInfo('goalProtein', Math.round(this.protein).toString()),
+				this.userService.addUserInfo('goalFat', Math.round(this.fat).toString()),
+				this.userService.addUserInfo('goalCarbs', Math.round(this.carbs).toString())
+			).subscribe(
+//TODO: Toast melding voor het succesvol opslaan maken
+          data => console.log(data),
+          error => console.error(error)
+			);
+		}
+		this.closeCalcModal(true);
 	}
 
 	private getKeyFromResultlist(list: any, key: string) {
