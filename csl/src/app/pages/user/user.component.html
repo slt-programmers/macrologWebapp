@@ -68,7 +68,8 @@
       <div class="form-field" *ngIf="!showMoreOptions">
         <div class="form-field__label form-field__label--small">Calories</div>
         <div class="form-field__slider">
-          <slider [value]="calories" (valueChange)="changeCalories($event)" [upperBound]="4000" [lowerBound]="1200" ></slider>
+          <slider [value]="calories" (valueChange)="changeCalories($event)"
+                  [upperBound]="4000" [lowerBound]="1200" [markers]="markers"></slider>
         </div>
       </div>
 

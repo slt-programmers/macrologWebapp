@@ -41,5 +41,16 @@
 		top: 16px;
 		transition: left 0.3s;
 	}
+
+	&__marker {
+		background-color: $secondary;
+		border-radius: 5px;
+		position: absolute;
+		top: 18px;
+		left: 0;
+		right: 0;
+		height: 16px;
+		width: 6px;
+	}
 }
 

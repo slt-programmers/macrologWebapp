@@ -26,6 +26,7 @@ export class UserComponent implements OnInit {
 	public showCalcModal: boolean = false;
 	public showMoreOptions: boolean = false;
 	public difference: string;
+	public markers;
 
 	private bmr: number;
 	private tdee: number;
@@ -60,6 +61,12 @@ export class UserComponent implements OnInit {
 		);
 	}
 
+	setMarkers() {
+		this.markers = [{title: 'deficit', value: (this.tdee - 200)},
+		{title: 'baseline', value: (this.tdee)},
+		{title: 'surplus', value: (this.tdee + 200)}];
+	}
+
 	openCalcModal(): void {
 		this.protein = this.weight * 1.8;
 		this.fat = this.weight * 0.8;
@@ -87,8 +94,8 @@ export class UserComponent implements OnInit {
 	}
 
 	calcCalories(): void {
-		this.calcBMR();
 		this.calcTDEE();
+		this.setMarkers();
 		this.calories = this.tdee;
 		this.calcCarbs();
 	}
@@ -119,16 +126,14 @@ export class UserComponent implements OnInit {
 		this.calcCarbs();
 	}
 
-	calcBMR(): void {
-		if (this.gender === 'MALE') {
-			this.bmr = 66.5 + (13.7 * this.weight) + (5 * this.height) - (6.76 * this.age);
-		} else {
-			this.bmr = 655.0 + (9.56 * this.weight) + (1.8 * this.height) - (4.68 * this.age);
-		}
-	}
-
 	calcTDEE(): void {
-		this.tdee = this.bmr * this.activity;
+		let bmr;
+		if (this.gender === 'MALE') {
+			bmr = 66.5 + (13.7 * this.weight) + (5 * this.height) - (6.76 * this.age);
+		} else {
+			bmr = 655.0 + (9.56 * this.weight) + (1.8 * this.height) - (4.68 * this.age);
+		}
+		this.tdee = bmr * this.activity;
 	}
 
 	calcCarbs(): void {

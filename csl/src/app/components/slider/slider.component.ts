@@ -1,4 +1,5 @@
-import{Component, OnInit, OnChanges, Inject, ViewChild, ElementRef, Input, Output, EventEmitter, SimpleChanges}from '@angular/core';
+import{Component, OnInit, OnChanges, Inject, ViewChild,
+ElementRef, Input, Output, EventEmitter, SimpleChanges}from '@angular/core';
 
 @Component({
   selector: 'slider',
@@ -10,10 +11,14 @@ export class SliderComponent implements OnInit {
 	@ViewChild('slider') private sliderElement: ElementRef;
   @ViewChild('sliderHandle') private handleElement: ElementRef;
 	@ViewChild('trackFill') private trackElement: ElementRef;
+	@ViewChild('lowerMark') private lowerMarkElement: ElementRef;
+	@ViewChild('baseMark') private baseMarkElement: ElementRef;
+	@ViewChild('upperMark') private upperMarkElement: ElementRef;
 
 	@Input() value;
 	@Input() upperBound;
 	@Input() lowerBound;
+	@Input() markers;
 
 	@Output() valueChange: EventEmitter<number> = new EventEmitter<number>();
 
@@ -23,18 +28,26 @@ export class SliderComponent implements OnInit {
 	private slider;
 	private sliderHandle;
 	private track;
+	private lowerMark;
+	private baseMark;
+	private upperMark;
 	private boundary;
 
 	private sliderOffsetLeft;
 	private sliderOffsetRight;
 	private sliderWidth;
 
-  constructor() { }
+  constructor() {
+	}
 
   ngOnInit() {
+		console.log('onInit');
 		this.slider = this.sliderElement.nativeElement;
 		this.sliderHandle = this.handleElement.nativeElement;
 		this.track = this.trackElement.nativeElement;
+		this.lowerMark = this.lowerMarkElement.nativeElement;
+		this.baseMark = this.baseMarkElement.nativeElement;
+		this.upperMark = this.upperMarkElement.nativeElement;
 
 		this.sliderWidth = this.slider.clientWidth;
 		this.sliderOffsetLeft = this.getOffsetLeft(this.slider);
@@ -45,6 +58,7 @@ export class SliderComponent implements OnInit {
 			right: this.sliderOffsetRight
 		};
 		this.initHandle();
+		this.initMarkers();
   }
 
 	ngOnChanges(changes: SimpleChanges) {
@@ -60,6 +74,21 @@ export class SliderComponent implements OnInit {
 			this.sliderHandle.style.left = (this.sliderWidth * percentage) - (this.sliderHandle.clientWidth / 2) + 'px';
 			this.track.style.width = (this.sliderWidth * percentage) + 'px';
 		}
+	}
+
+	private initMarkers() {
+		console.log('initMarkers');
+		let part = this.markers[0].value - this.lowerBound;
+		let percentage = part / (this.upperBound - this.lowerBound);
+		this.lowerMark.style.left = (this.sliderWidth * percentage) + 'px';
+
+		part = this.markers[1].value - this.lowerBound;
+		percentage = part / (this.upperBound - this.lowerBound);
+		this.baseMark.style.left = (this.sliderWidth * percentage) + 'px';
+
+		part = this.markers[2].value - this.lowerBound;
+		percentage = part / (this.upperBound - this.lowerBound);
+		this.upperMark.style.left = (this.sliderWidth * percentage) + 'px';
 	}
 
 	private calculateValue() {
