@@ -25,6 +25,11 @@ export class FoodService {
       });
 	}
 
+   getFood(foodId:string) {
+     console.log(simpleJavaServletUrl + "/"+ foodId);
+   	return this.http.get(simpleJavaServletUrl + "/"+ foodId, { responseType: 'json' });
+  }
+
 
 	// TODO: kijken wat uiteindelijk gebruikt wordt
 
@@ -32,9 +37,6 @@ export class FoodService {
    	return this.http.get(simpleJavaServletUrl, { responseType: 'json' });
 	}
 
-  getFood(foodName:String) {
-   	return this.http.get(simpleJavaServletUrl + "/"+ foodName, { responseType: 'json' });
-  }
 
 	insertFood() {
 		const headers = {'Conent-Type': 'applicaton/json',
