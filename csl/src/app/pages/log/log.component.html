@@ -4,10 +4,9 @@
     <div class="intake-goal-wrapper">
       <div class="intake-goal-wrapper__numbers">
         <div class="intake-goal__calories">
-          <span>Goal Calories:{{getTotal(days[0].meals, "calories")}}/{{goalCal}}</span>
+          <h3>{{getTotal(days[0].meals, "calories")}}/{{goalCal}}</h3>
         </div>
         <div class="intake-goal__macros">
-          <span class="intake-goal__macro"><strong>Daily goal:</strong></span>
           <span class="intake-goal__macro">Protein: {{getTotal(days[0].meals, "protein")}}/<strong>{{goalP}}</strong></span>
           <span class="intake-goal__macro">Fat: {{getTotal(days[0].meals, "fat")}}/<strong>{{goalF}}</strong></span>
           <span class="intake-goal__macro">Carbs: {{getTotal(days[0].meals, "carbs")}}/<strong>{{goalC}}</strong></span>
@@ -16,9 +15,9 @@
       <div class="intake-goal-wrapper__graph">
         <div class="intake-goal__graph">
           <div class="bargraph-wrapper">
-            <bargraph [percentage]="100" [title]="'Protein'"></bargraph>
-            <bargraph [percentage]="120" [title]="'Fat'"></bargraph>
-            <bargraph [percentage]="80"  [title]="'Carbs'"></bargraph>
+            <bargraph [percentage]="100" [title]="'P'"></bargraph>
+            <bargraph [percentage]="120" [title]="'F'"></bargraph>
+            <bargraph [percentage]="80"  [title]="'C'"></bargraph>
           </div>
         </div>
       </div>

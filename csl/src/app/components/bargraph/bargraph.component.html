@@ -1,15 +1,14 @@
 <div class="bargraph">
+  <div class="bargraph__title">{{title}}</div>
+
   <div class="bargraph__track-container">
     <div class="bargraph__track">
     </div>
     <div #trackFill class="bargraph__track bargraph__track--fill">
-      <div class="bargraph__title">{{title}}</div>
     </div>
   </div>
+
   <div class="bargraph__numbers">
     <span>{{percentage}}%</span>
-
-    <!--<input type="number" style="width: 50px;" (change)="onChange()" [(ngModel)]="percentage" value="percentage">-->
   </div>
-
 </div>

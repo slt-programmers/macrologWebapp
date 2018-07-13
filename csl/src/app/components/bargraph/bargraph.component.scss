@@ -30,9 +30,12 @@
 			transition: width 1.0s;
 		}
 	}
+
 	&__title {
-  			padding-left: 5px;
-  		}
+		flex-basis: 5%;
+		font-weight: 500;
+  	margin-right: 5px;
+  }
 
 	&__numbers {
 		display: flex;
