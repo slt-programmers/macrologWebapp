@@ -74,11 +74,11 @@
 
 		&__name {
       padding-left:10px;
-			flex-basis: 20%;
+			flex-basis: 30%;
 		}
 
 		&__amount {
-			flex-basis: 20%;
+			flex-basis: 10%;
 			text-align: end;
 		}
 
@@ -92,4 +92,65 @@
 			text-align: end;
 		}
 	}
+	&__edit-ingredient {
+  		display: flex;
+  		flex-direction: row;
+
+  		&__name {
+        padding-left:10px;
+  			flex-basis: 30%;
+  		}
+
+  		&__amount {
+  			flex-basis: 5%;
+  			text-align: end;
+  		}
+
+  		&__measurement {
+       	flex-basis: 10%;
+      	text-align: end;
+     	}
+
+  		&__macro {
+    		padding-top:12px;
+  			flex-basis: 10%;
+  			text-align: end;
+  		}
+
+  		&__calories {
+  		  padding-top:12px;
+  			flex-basis: 20%;
+  			text-align: end;
+  		}
+  }
+  &__new-ingredient {
+     display: flex;
+     flex-direction: row;
+     &__name {
+         padding-left:10px;
+     	flex-basis: 30%;
+     	}
+
+     &__amount {
+     	flex-basis: 5%;
+     	text-align: end;
+     	}
+
+     &__measurement {
+        	flex-basis: 10%;
+       	text-align: end;
+       	}
+
+     &__macro {
+      	padding-top:12px;
+     	flex-basis: 10%;
+     	text-align: end;
+     }
+
+     &__calories {
+       padding-top:12px;
+     	flex-basis: 20%;
+     	text-align: end;
+     }
+   }
 }
