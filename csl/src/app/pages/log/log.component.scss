@@ -53,6 +53,7 @@
 	flex-direction: column;
 
 	&__header {
+		align-items: center;
 		border-bottom: 1px solid $cloud;
 		display: flex;
 		flex-direction: row;
@@ -62,16 +63,23 @@
 		&__title {
 			font-weight: bold;
 		}
-		&__previous{
-		  padding-right:10px;
+
+		&__icon {
+			color: $primary;
+		}
+
+		&--previous{
+		  padding-right: 10px;
+		  font-size: 24px;
 		  font-weight: normal;
 		}
-		&__next{
+
+		&--next{
+		  padding-left: 10px;
+ 		  font-size: 24px;
 		  font-weight: normal;
-		  padding-left:10px;
 		}
 	}
-
 
 	&__total {
 		display: flex;

@@ -24,13 +24,11 @@
     </div>
   </div>
 
-
-
   <div class="day">
     <div class="day__header">
-      <span class="day__header__previous"><i class="fas fa-arrow-alt-circle-left "></i></span>
+      <span class="day__header--previous"><i class="day__header__icon fas fa-arrow-alt-circle-left "></i></span>
       <span class="day__header__title">{{displayDate | date:'dd-MM-yyyy'}}</span>
-      <span class="day__header__next"><i class="fas fa-arrow-alt-circle-right"></i></span>
+      <span class="day__header--next"><i class="day__header__icon fas fa-arrow-alt-circle-right"></i></span>
     </div>
 
     <log-meal [meal]="'Breakfast'" [logEntries]="breakfastLogs"></log-meal>
