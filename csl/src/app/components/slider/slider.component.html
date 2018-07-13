@@ -16,14 +16,31 @@
       <div #trackFill class="slider__track slider__track--fill">
       </div>
       <div>
-        <div #lowerMark class="slider__marker"></div>
-        <div #baseMark class="slider__marker"></div>
-        <div #upperMark class="slider__marker"></div>
+        <div #lowerMark class="slider__marker">
+          <div class="slider__marker__label-container">
+            <div class="slider__marker__label">
+              {{markers[0].value | number: '1.0-0'}}
+            </div>
+          </div>
+        </div>
+        <div #baseMark class="slider__marker">
+          <div class="slider__marker__label-container">
+            <div class="slider__marker__label">
+              {{markers[1].value | number: '1.0-0'}}
+            </div>
+          </div>
+        </div>
+        <div #upperMark class="slider__marker">
+          <div class="slider__marker__label-container">
+            <div class="slider__marker__label">
+              {{markers[2].value | number: '1.0-0' }}
+            </div>
+          </div>
+        </div>
       </div>
     </div>
     <div class="slider__handle-container">
       <div #sliderHandle class="slider__handle"></div>
     </div>
-    <div class="slider__bounds"></div>
   </div>
 </div>

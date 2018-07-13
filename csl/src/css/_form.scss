@@ -10,6 +10,10 @@
 	align-items: center;
 	margin-bottom: 10px;
 
+	&--slider {
+		align-items: start;
+	}
+
 	&--spaced {
 		justify-content: space-between;
 	}
@@ -56,6 +60,12 @@
 		&--small {
 			flex-basis: auto;
 			flex-grow: 1;
+		}
+
+		&--slider {
+			flex-basis: auto;
+    	flex-grow: 1;
+    	margin-top: 15px;
 		}
 	}
 

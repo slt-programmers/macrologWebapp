@@ -80,15 +80,15 @@ export class SliderComponent implements OnInit {
 		console.log('initMarkers');
 		let part = this.markers[0].value - this.lowerBound;
 		let percentage = part / (this.upperBound - this.lowerBound);
-		this.lowerMark.style.left = (this.sliderWidth * percentage) + 'px';
+		this.lowerMark.style.left = (this.sliderWidth * percentage - 2) + 'px';
 
 		part = this.markers[1].value - this.lowerBound;
 		percentage = part / (this.upperBound - this.lowerBound);
-		this.baseMark.style.left = (this.sliderWidth * percentage) + 'px';
+		this.baseMark.style.left = (this.sliderWidth * percentage - 2) + 'px';
 
 		part = this.markers[2].value - this.lowerBound;
 		percentage = part / (this.upperBound - this.lowerBound);
-		this.upperMark.style.left = (this.sliderWidth * percentage) + 'px';
+		this.upperMark.style.left = (this.sliderWidth * percentage - 2) + 'px';
 	}
 
 	private calculateValue() {

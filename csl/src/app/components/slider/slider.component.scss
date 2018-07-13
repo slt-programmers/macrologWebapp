@@ -9,7 +9,7 @@
 
 .slider {
 	height: 50px;
-	margin: 0 10px;
+	margin: 0 10px 10px;
 	min-width: 120px;
 	position: relative;
 
@@ -51,6 +51,17 @@
 		right: 0;
 		height: 16px;
 		width: 6px;
+
+		&__label-container {
+			position: relative;
+		}
+
+		&__label {
+			font-size: 12px;
+			position: absolute;
+			top: 25px;
+			left: -15px;
+		}
 	}
 }
 

@@ -18,6 +18,7 @@ import {UserService} from './services/user.service';
 import { SliderComponent } from './components/slider/slider.component';
 import { BargraphComponent } from './components/bargraph/bargraph.component';
 import { AddFoodModalComponent } from './components/add-food-modal/add-food-modal.component';
+import { CalculateIntakeModalComponent } from './components/calculate-intake-modal/calculate-intake-modal.component';
 
 const appRoutes: Routes = [
 {path: 'log', component: LogComponent},
@@ -39,6 +40,7 @@ const appRoutes: Routes = [
     SliderComponent,
     BargraphComponent,
     AddFoodModalComponent,
+		CalculateIntakeModalComponent
   ],
   imports: [
     BrowserModule,
