@@ -11,11 +11,19 @@
 	&--primary {
 		background-color: $primary;
 		color: $white;
+
+		&:hover {
+    	background-color: darken($primary, 5%);
+    }
 	}
 
 	&--secondary {
   	background-color: $secondary;
   	color: $white;
+
+  	&:hover {
+       background-color: darken($secondary, 5%);
+    }
   }
 
 	&--transparent {

@@ -79,9 +79,10 @@
 	}
 
 	&__select {
-		flex-basis: 60%;
 		border: 1px solid $smoke;
 		border-radius: 5px;
+		flex-basis: 60%;
+		max-height: 43px;
 		width: 100%;
 	}
 
