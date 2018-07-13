@@ -65,7 +65,10 @@
 		}
 
 		&__icon {
+			@include elevation(2);
+			border-radius: 100%;
 			color: $primary;
+			cursor: pointer;
 		}
 
 		&--previous{

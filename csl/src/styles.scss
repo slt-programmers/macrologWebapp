@@ -21,10 +21,16 @@ body {
 	width: 100%;
 }
 
-h1, h2, h3, p {
+h1, h2, h3 {
 	margin-bottom: ($gutter/2);
 	margin-top: 0;
 	font-weight: 500;
+}
+
+p {
+	margin-bottom: ($gutter/2);
+	margin-top: 0;
+	font-weight: 400;
 }
 
 a {
