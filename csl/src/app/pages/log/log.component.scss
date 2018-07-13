@@ -1,6 +1,13 @@
 @import '../../../css/public';
 
-.intake-goal-wrapper {
+.bargraph-wrapper {
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+	justify-content: space-around;
+}
+
+.intake-goal {
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
@@ -14,11 +21,27 @@
 	}
 
 	&__graph {
-		flex-grow: 1;
+		flex-grow: 2;
 	}
+
+	&__calories {
+  	font-size: 24px;
+  	margin-bottom: $gutter;
+  }
+
+  &__macros {
+  	display: flex;
+  	flex-direction: column;
+  }
+
+  &__macro {
+  	flex-basis: 33%;
+  	margin-bottom: 10px;
+  }
+
 }
 
-.intake-goal {
+.intake-goal-wrapper {
 	@include elevation(1);
 	background-color: $white;
 	display: flex;
@@ -26,24 +49,6 @@
 	padding: ($gutter/2);
 	margin-bottom: ($gutter/2);
 
-	&__calories {
-		font-size: 20px;
-		font-weight: bold;
-		margin-bottom: ($gutter/2);
-	}
-
-	&__macros {
-		display: flex;
-		flex-direction: row;
-	}
-
-	&__macro {
-		flex-basis: 33%;
-	}
-
-	&__graph {
-		width: 100%px;
-	}
 }
 
 .day {

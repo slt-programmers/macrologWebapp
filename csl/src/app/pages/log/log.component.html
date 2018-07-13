@@ -1,10 +1,10 @@
 <div class="container">
 
-  <div class="intake-goal" *ngIf="days">
-    <div class="intake-goal-wrapper">
-      <div class="intake-goal-wrapper__numbers">
+  <div class="intake-goal-wrapper" *ngIf="days">
+    <div class="intake-goal">
+      <div class="intake-goal__numbers">
         <div class="intake-goal__calories">
-          <h3>{{getTotal(days[0].meals, "calories")}}/{{goalCal}}</h3>
+          <span>Calories: {{getTotal(days[0].meals, "calories")}}/<strong>{{goalCal}}</strong></span>
         </div>
         <div class="intake-goal__macros">
           <span class="intake-goal__macro">Protein: {{getTotal(days[0].meals, "protein")}}/<strong>{{goalP}}</strong></span>
@@ -12,13 +12,11 @@
           <span class="intake-goal__macro">Carbs: {{getTotal(days[0].meals, "carbs")}}/<strong>{{goalC}}</strong></span>
         </div>
       </div>
-      <div class="intake-goal-wrapper__graph">
-        <div class="intake-goal__graph">
-          <div class="bargraph-wrapper">
-            <bargraph [percentage]="100" [title]="'P'"></bargraph>
-            <bargraph [percentage]="120" [title]="'F'"></bargraph>
-            <bargraph [percentage]="80"  [title]="'C'"></bargraph>
-          </div>
+      <div class="intake-goal__graph">
+        <div class="bargraph-wrapper">
+          <bargraph [percentage]="100" [title]="'P'"></bargraph>
+          <bargraph [percentage]="180" [title]="'F'"></bargraph>
+          <bargraph [percentage]="70" [title]="'C'"></bargraph>
         </div>
       </div>
     </div>
@@ -32,9 +30,9 @@
     </div>
 
     <log-meal [meal]="'Breakfast'" [logEntries]="breakfastLogs"></log-meal>
-    <log-meal [meal]="'Lunch'"     [logEntries]="lunchLogs"></log-meal>
-    <log-meal [meal]="'Dinner'"    [logEntries]="dinnerLogs"></log-meal>
-    <log-meal [meal]="'Snacks'"    [logEntries]="snacksLogs"></log-meal>
+    <log-meal [meal]="'Lunch'" [logEntries]="lunchLogs"></log-meal>
+    <log-meal [meal]="'Dinner'" [logEntries]="dinnerLogs"></log-meal>
+    <log-meal [meal]="'Snacks'" [logEntries]="snacksLogs"></log-meal>
 
     <div class="day__total">
       <span class="day__total__title">Daily total</span>
@@ -47,44 +45,44 @@
 
 
     <!--<div class="day__add">-->
-       <!--<span class="total__macro">-->
+    <!--<span class="total__macro">-->
 
-        <!--<select class="form-field__select">-->
-             <!--<option>Breakfast</option>-->
-             <!--<option>Lunch</option>-->
-             <!--<option>Dinner</option>-->
-             <!--<option>Snack</option>-->
-        <!--</select>-->
-      <!--</span>      <span class="day__total__title">-->
-        <!--<input class="form-field__text-input" type="text" placeholder="Add meal">-->
-      <!--</span>-->
+    <!--<select class="form-field__select">-->
+    <!--<option>Breakfast</option>-->
+    <!--<option>Lunch</option>-->
+    <!--<option>Dinner</option>-->
+    <!--<option>Snack</option>-->
+    <!--</select>-->
+    <!--</span>      <span class="day__total__title">-->
+    <!--<input class="form-field__text-input" type="text" placeholder="Add meal">-->
+    <!--</span>-->
 
-      <!--<span class="total__macro" >-->
+    <!--<span class="total__macro" >-->
 
-         <!--&lt;!&ndash; afhankelijk van gekozen voedsel uit de autocomplete vorige zijn volgende 2 te kiezen &ndash;&gt;-->
-          <!--<input class="form-field__text-input" type="text" placeholder="grams">-->
-      <!--</span>-->
-      <!--<span class="total__macro total__macro&#45;&#45;first">-->
-         <!--<select disabled class="form-field__select">-->
-             <!--<option>grams</option>-->
-             <!--<option>stuks</option>-->
-        <!--</select>-->
-      <!--</span>-->
+    <!--&lt;!&ndash; afhankelijk van gekozen voedsel uit de autocomplete vorige zijn volgende 2 te kiezen &ndash;&gt;-->
+    <!--<input class="form-field__text-input" type="text" placeholder="grams">-->
+    <!--</span>-->
+    <!--<span class="total__macro total__macro&#45;&#45;first">-->
+    <!--<select disabled class="form-field__select">-->
+    <!--<option>grams</option>-->
+    <!--<option>stuks</option>-->
+    <!--</select>-->
+    <!--</span>-->
 
-      <!--<span class="total__calories"><input type="button" class="button button&#45;&#45;primary" value="Add meal"></span>-->
-      <!--<span class="total__calories&#45;&#45;label"></span>-->
+    <!--<span class="total__calories"><input type="button" class="button button&#45;&#45;primary" value="Add meal"></span>-->
+    <!--<span class="total__calories&#45;&#45;label"></span>-->
     <!--</div>-->
-</div>
+  </div>
 
 
   <!--&lt;!&ndash; Onderstaand ombouwen naar filter per dag zodat bovenstaande ook mogelijk wordt met die divjes&ndash;&gt;-->
   <!--<table>-->
-    <!--<tr *ngFor="let log of allLogs">-->
-      <!--<td >* {{log.food.name}}</td>-->
-      <!--<td>{{log.multiplier}} * </td>-->
-      <!--<td *ngIf="log.portion">{{log.portion.name}}</td>-->
-      <!--<td *ngIf="log.portion">{{log.multiplier * log.portion.grams}} grams</td>-->
-    <!--</tr>-->
+  <!--<tr *ngFor="let log of allLogs">-->
+  <!--<td >* {{log.food.name}}</td>-->
+  <!--<td>{{log.multiplier}} * </td>-->
+  <!--<td *ngIf="log.portion">{{log.portion.name}}</td>-->
+  <!--<td *ngIf="log.portion">{{log.multiplier * log.portion.grams}} grams</td>-->
+  <!--</tr>-->
   <!--</table>-->
 
   <div class="floating-action-button-wrapper">

@@ -17,16 +17,27 @@ export class BargraphComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+		let percentCap = this.percentage > 150 ? 150 : this.percentage;
+		let hueDegree = this.calcHue(percentCap);
 		this.trackFill = this.trackFillElement.nativeElement;
-		this.trackFill.style.width = this.percentage + '%';
-
+		console.log(this.trackFillElement);
+		this.trackFill.style.width = percentCap + '%';
+		this.trackFill.style.filter = 'hue-rotate(' + hueDegree + 'deg)';
   }
 
 	onChange() {
-		console.log(this.percentage);
-    console.log(this.title);
-		this.trackFill.style.width = this.percentage + '%';
+		let percentCap = this.percentage > 150 ? 150 : this.percentage;
+		let hueDegree = this.calcHue(percentCap);
+		this.trackFill.style.width = percentCap + '%';
+		this.trackFill.style.filter = 'hue-rotate(' + hueDegree + 'deg)';
 	}
 
+	calcHue(percent: number): number {
+		// 150%  50   = -120deg;
+		// 100%  0    = 0deg;
+		// 50%   -50  = 120deg;
 
+		let deg = (percent - 100) * -2.4;
+		return deg;
+	}
 }
