@@ -14,16 +14,11 @@ export class FoodComponent implements OnInit {
 
 	ngOnInit() {
     this.foodService.getAllFood().subscribe(
-      data => this.foodResult = data
+      data => { this.foodResult = data;
+        console.log(this.foodResult);
+      },
+			error => console.log(error)
 		);
   };
-
-//	getFood(foodName) {
-//		console.log('getFood FoodComponent');
-//    return this.foodService.getFood(foodName).subscribe(
-//      data => {console.log(data); data.aliases;},
-//			error => console.log(error)
-//		);
-//	}
 
 }

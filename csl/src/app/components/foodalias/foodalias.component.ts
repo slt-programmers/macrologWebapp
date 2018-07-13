@@ -8,13 +8,14 @@ import { FoodService } from '../../services/food.service';
 })
 export class FoodAliasComponent implements OnInit {
 
-	@Input() foodId = '';
+	@Input() foodId: string;
 
 	public food;
 
   constructor(private foodService: FoodService) { }
 
 	ngOnInit() {
+		console.log(this.foodId);
     this.foodService.getFood(this.foodId).subscribe(
       data => this.food = data
     );

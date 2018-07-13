@@ -19,12 +19,14 @@ import { SliderComponent } from './components/slider/slider.component';
 import { BargraphComponent } from './components/bargraph/bargraph.component';
 import { AddFoodModalComponent } from './components/add-food-modal/add-food-modal.component';
 import { CalculateIntakeModalComponent } from './components/calculate-intake-modal/calculate-intake-modal.component';
+import { MealsComponent } from './pages/meals/meals.component';
 
 const appRoutes: Routes = [
 {path: 'log', component: LogComponent},
 {path: 'food', component: FoodComponent},
 {path: 'foodalias', component: FoodAliasComponent},
 {path: 'user', component: UserComponent},
+{path: 'meals', component: MealsComponent},
 {path: '', redirectTo: '/log', pathMatch: 'full'},
 {path: '**', component: LogComponent}
 ];
@@ -40,7 +42,8 @@ const appRoutes: Routes = [
     SliderComponent,
     BargraphComponent,
     AddFoodModalComponent,
-		CalculateIntakeModalComponent
+		CalculateIntakeModalComponent,
+		MealsComponent
   ],
   imports: [
     BrowserModule,

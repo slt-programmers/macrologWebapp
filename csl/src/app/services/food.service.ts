@@ -2,7 +2,7 @@ import {Injectable} from'@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Food} from '../model/food';
 
-const simpleJavaServletUrl = '//localhost:8090/food';
+const macrologBackendUrl = '//localhost:8090/food';
 
 @Injectable()
 export class FoodService {
@@ -17,7 +17,7 @@ export class FoodService {
    	};
 
   	const options = { headers: headers };
-    return this.http.post<Food>(simpleJavaServletUrl + '/', addFoodRequest, options).subscribe(data => {
+    return this.http.post<Food>(macrologBackendUrl + '/', addFoodRequest, options).subscribe(data => {
         alert('ok');
       },
       error => {
@@ -25,16 +25,17 @@ export class FoodService {
       });
 	}
 
-   getFood(foodId:string) {
-     console.log(simpleJavaServletUrl + "/"+ foodId);
-   	return this.http.get(simpleJavaServletUrl + "/"+ foodId, { responseType: 'json' });
+   getFood(foodId: string) {
+     console.log(macrologBackendUrl + "/" + foodId);
+   	return this.http.get(macrologBackendUrl + "/"+ foodId, { responseType: 'json' });
   }
 
 
 	// TODO: kijken wat uiteindelijk gebruikt wordt
 
  	getAllFood() {
-   	return this.http.get(simpleJavaServletUrl, { responseType: 'json' });
+		console.log('getFood');
+   	return this.http.get(macrologBackendUrl, { responseType: 'json' });
 	}
 
 
@@ -46,7 +47,7 @@ export class FoodService {
 		const params = { 'name': 'peer'};
 		const options = { headers: headers, params: params };
 		console.log(options);
-    return this.http.post(simpleJavaServletUrl + '/newFood', {'name': 'dates'}, options);
+    return this.http.post(macrologBackendUrl + '/newFood', {'name': 'dates'}, options);
 	}
 
 	insertFoodTwo(food: Food) {
@@ -56,7 +57,7 @@ export class FoodService {
 
    	const options = { headers: headers };
 		console.log(options);
-    return this.http.post<Food>(simpleJavaServletUrl + '/newFoodTwo', food, options);
+    return this.http.post<Food>(macrologBackendUrl + '/newFoodTwo', food, options);
 	}
 
 }
