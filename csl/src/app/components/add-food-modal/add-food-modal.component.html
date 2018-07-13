@@ -15,16 +15,16 @@
 
     <form #addFoodForm="ngForm">
       <div class="form-field">
+        <label class="form-field__label">Food</label>
         <div class="form-field__element">
-          <label class="form-field__label">Food</label>
           <input class="form-field__text-input" [(ngModel)]="name" #foodField name="name" placeholder="e.g. 'Pasta', 'Apple'" required>
         </div>
       </div>
 
       <div class="form-field">
+        <label class="form-field__label">Nutrients</label>
         <div class="form-field__element">
           <div class="radio-group">
-            <label class="form-field__label">Nutrients</label>
             <input class="form-field__radio" type="radio" name="measurementUnit"
                    [(ngModel)]="measurementUnit" value="GRAMS"
                    [ngClass]="{'form-field__radio--checked fas fa-check': measurementUnit === 'GRAMS' }" required>
@@ -39,33 +39,39 @@
 
       <ng-container *ngIf="measurementUnit === 'UNIT'">
         <div class="form-field">
+          <label class="form-field__label">Unit name</label>
           <div class="form-field__element">
-            <label class="form-field__label">Unit name</label>
             <input class="form-field__text-input" #unitNameField [(ngModel)]="unitName" name="unitName" placeholder="e.g. 'Piece', 'Slice'">
           </div>
         </div>
         <div class="form-field">
+          <label class="form-field__label">Grams</label>
           <div class="form-field__element">
-            <label class="form-field__label">Grams</label>
             <input class="form-field__text-input" #gramsField [(ngModel)]="unitGrams" name="grams" placeholder="Optional" type="number">
           </div>
         </div>
       </ng-container>
 
-      <div class="form-field form-field--column">
-        <div class="form-field__element form-field__element--column">
-          <label class="form-field__label">Protein</label>
+      <div class="form-field">
+        <label class="form-field__label">Protein</label>
+        <div class="form-field__element">
           <input class="form-field__text-input" #proteinField [(ngModel)]="protein"
                  value="protein"
                  name="protein" type="number" placeholder="0,0" step="0.1" required>
         </div>
-        <div class="form-field__element form-field__element--column">
-          <label class="form-field__label">Fat</label>
-          <input class="form-field__text-input-input" #fatField [(ngModel)]="fat"
+      </div>
+
+      <div class="form-field">
+        <label class="form-field__label">Fat</label>
+        <div class="form-field__element">
+          <input class="form-field__text-input" #fatField [(ngModel)]="fat"
                  name="fat" type="number" placeholder="0,0" step="0.1" required>
         </div>
-        <div class="form-field__element form-field__element--column">
-          <label class="form-field__label">Carbs</label>
+      </div>
+
+      <div class="form-field">
+        <label class="form-field__label">Carbs</label>
+        <div class="form-field__element">
           <input class="form-field__text-input" #carbsField [(ngModel)]="carbs"
                  name="carbs" type="number" placeholder="0,0" step="0.1" required>
         </div>
