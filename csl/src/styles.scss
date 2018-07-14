@@ -38,7 +38,7 @@ a {
 	color: $coal
 }
 
-input, select {
+select {
 	box-sizing: border-box;
 	padding: 0 10px;
 	border: 0;
@@ -46,9 +46,6 @@ input, select {
 	font-size: 16px;
 }
 
-input {
-	padding: 10px;
-}
 
 select {
 	-webkit-padding-after: 10px;

@@ -1,8 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import {LogService}from '../../services/log.service';
+import {UserService}from '../../services/user.service';
 import {FoodService}from '../../services/food.service';
 import {LogEntry} from '../../model/logEntry';
+
+import { Observable } from 'rxjs/Observable';
+import { forkJoin } from 'rxjs/observable/forkJoin';
 
 @Component({
   selector: 'log',
@@ -14,6 +18,7 @@ export class LogComponent implements OnInit {
 	public modalIsVisible: boolean = false;
 
 	constructor( private foodService: FoodService,
+							 private userService: UserService,
 							 private http: HttpClient,
 							 private logService: LogService) { }
 
@@ -27,15 +32,23 @@ export class LogComponent implements OnInit {
   public dinnerLogs = new Array<LogEntry>();
   public snacksLogs = new Array<LogEntry>();
 
-	public goalP: number = 120;
-	public goalF: number = 140;
-	public goalC: number = 35;
-	public goalCal: number = 1235;
+	public userGoals;
+	public goalCal;
 
 	ngOnInit() {
 		this.foodService.getAllFood().subscribe(
-			data => { this.food = data; console.log(this.food) },
-			error => console.log(error));
+			data => { this.food = data; console.log(this.food); },
+			error => { console.log(error); }
+		);
+
+		this.userService.getUserGoalStats().subscribe(
+			data => { this.userGoals = data;
+			 this.goalCal = (this.userGoals[0] * 4) + (this.userGoals[1] * 9) + (this.userGoals[2] * 4);
+			 },
+			error => console.log(error)
+		);
+		console.log('usergoals');
+		console.log(this.userGoals);
 
 		this.getJson().subscribe(data => this.days = data,
 					error => console.log(error));

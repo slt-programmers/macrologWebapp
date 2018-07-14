@@ -1,6 +1,7 @@
-import { Component, OnInit, OnChanges, ViewChild, SimpleChanges, ElementRef, Input } from '@angular/core';
-import {LogEntry} from '../../model/logEntry';
+import { Component, OnInit, OnChanges, ViewChild, SimpleChanges, Renderer, ElementRef, Input } from '@angular/core';
+import { LogEntry } from '../../model/logEntry';
 import { FoodService } from '../../services/food.service';
+
 @Component({
   selector: 'log-meal',
   templateUrl: './log-meal.component.html',
@@ -10,6 +11,7 @@ import { FoodService } from '../../services/food.service';
 export class LogMealComponent implements OnInit {
 
 	@ViewChild('newIngredient') private newIngredientEref: ElementRef;
+	@ViewChild('autoComplete') private autoCompleteEref: ElementRef;
 
 	@Input() food;
   @Input() meal: string;
@@ -20,7 +22,7 @@ export class LogMealComponent implements OnInit {
 	public foodName: string;
 	public showAutoComplete: boolean;
 
-  constructor ( private foodService: FoodService) { }
+  constructor ( private foodService: FoodService, private renderer: Renderer) { }
 
   ngOnInit() {
 
@@ -105,9 +107,32 @@ export class LogMealComponent implements OnInit {
   return 0;
   }
 
+	onKeyDown(event) {
+		console.log(event);
+		console.log(document.activeElement.classList.contains('form-field__text-input'));
+		if(this.autoCompleteEref) {
+			if(event.code === 'ArrowDown') {
+				console.log(this.autoCompleteEref);
+				console.log(this.autoCompleteEref.nativeElement.childNodes[1]);
+
+        this.renderer.invokeElementMethod(this.autoCompleteEref.nativeElement.childNodes[1], 'focus');
+
+			}
+			if(event.code === 'ArrowUp') {
+
+			}
+		}
+	}
+
 	closeAutoComplete(event) {
 		if (this.newIngredientEref && !this.newIngredientEref.nativeElement.contains(event.target)) {
 			this.showAutoComplete = false;
 		}
+	}
+
+	saveAndClose() {
+		//TODO: SAVE
+		this.editable = !this.editable;
+		console.log('save and close');
 	}
 }

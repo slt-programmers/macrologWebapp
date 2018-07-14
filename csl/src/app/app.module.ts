@@ -12,7 +12,6 @@ import {LogComponent}from './pages/log/log.component';
 import {LogMealComponent} from './components/log-meal/log-meal.component';
 import {FoodComponent}from './pages/food/food.component';
 import {LogService}from './services/log.service';
-import {FoodAliasComponent}from './components/foodalias/foodalias.component';
 import {UserComponent}from './pages/user/user.component';
 import {UserService} from './services/user.service';
 import { SliderComponent } from './components/slider/slider.component';
@@ -24,7 +23,6 @@ import { MealsComponent } from './pages/meals/meals.component';
 const appRoutes: Routes = [
 {path: 'log', component: LogComponent},
 {path: 'food', component: FoodComponent},
-{path: 'foodalias', component: FoodAliasComponent},
 {path: 'user', component: UserComponent},
 {path: 'meals', component: MealsComponent},
 {path: '', redirectTo: '/log', pathMatch: 'full'},
@@ -37,7 +35,6 @@ const appRoutes: Routes = [
     LogComponent,
     LogMealComponent,
     FoodComponent,
-    FoodAliasComponent,
     UserComponent,
     SliderComponent,
     BargraphComponent,

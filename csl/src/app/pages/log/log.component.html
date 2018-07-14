@@ -7,9 +7,9 @@
           <span>Calories: {{getTotal(days[0].meals, "calories")}}/<strong>{{goalCal}}</strong></span>
         </div>
         <div class="intake-goal__macros">
-          <span class="intake-goal__macro">Protein: {{getTotal(days[0].meals, "protein")}}/<strong>{{goalP}}</strong></span>
-          <span class="intake-goal__macro">Fat: {{getTotal(days[0].meals, "fat")}}/<strong>{{goalF}}</strong></span>
-          <span class="intake-goal__macro">Carbs: {{getTotal(days[0].meals, "carbs")}}/<strong>{{goalC}}</strong></span>
+          <span class="intake-goal__macro">Protein: {{getTotal(days[0].meals, "protein")}}/<strong>{{userGoals[0]}}</strong></span>
+          <span class="intake-goal__macro">Fat: {{getTotal(days[0].meals, "fat")}}/<strong>{{userGoals[1]}}</strong></span>
+          <span class="intake-goal__macro">Carbs: {{getTotal(days[0].meals, "carbs")}}/<strong>{{userGoals[2]}}</strong></span>
         </div>
       </div>
       <div class="intake-goal__graph">

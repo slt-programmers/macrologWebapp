@@ -13,6 +13,11 @@
 		&:last-child {
 			border-radius: 0 0 5px 5px;
 		}
+
+		&:first-child:last-child {
+			border-radius: 5px;
+		}
+
 	}
 
 }

@@ -40,10 +40,6 @@
 			font-weight: bold;
 			margin-bottom: 5px;
 		}
-
-		&__new-ingredient {
-			margin-top: ($gutter/3);
-		}
 	}
 
 	&__total {
@@ -96,65 +92,62 @@
 			text-align: end;
 		}
 	}
+
 	&__edit-ingredient {
+			align-items: center;
   		display: flex;
   		flex-direction: row;
+  		margin-bottom: 5px;
 
   		&__name {
-        padding-left:10px;
-  			flex-basis: 30%;
+        padding-left :10px;
+  			flex-basis: 35%;
   		}
 
   		&__amount {
-  			flex-basis: 5%;
+  		  align-self: stretch;
+  			flex-basis: 10%;
+  			padding-right: 5px;
   			text-align: end;
   		}
 
   		&__measurement {
-       	flex-basis: 10%;
+       	flex-basis: 15%;
       	text-align: end;
      	}
 
   		&__macro {
-    		padding-top:12px;
   			flex-basis: 10%;
   			text-align: end;
   		}
 
   		&__calories {
-  		  padding-top:12px;
-  			flex-basis: 20%;
+        padding-right: 10px;
+  			flex-basis: 10%;
   			text-align: end;
   		}
   }
+
   &__new-ingredient {
-     display: flex;
-     flex-direction: row;
-     &__name {
-         padding-left:10px;
-     	flex-basis: 30%;
-     	}
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
 
-     &__amount {
-     	flex-basis: 5%;
-     	text-align: end;
-     	}
+    &__name {
+      flex-basis: 35%;
+    }
 
-     &__measurement {
-        	flex-basis: 10%;
-       	text-align: end;
-       	}
+    &__save {
+      align-items: center;
+      background-color: $primary;
+      border-radius: 50%;
+      color: $white;
+      display: flex;
+      flex-basis: 5%;
+      justify-content: center;
+    }
 
-     &__macro {
-      	padding-top:12px;
-     	flex-basis: 10%;
-     	text-align: end;
-     }
+  }
 
-     &__calories {
-       padding-top:12px;
-     	flex-basis: 20%;
-     	text-align: end;
-     }
-   }
+
 }

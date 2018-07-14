@@ -1,8 +1,0 @@
-<div class="center">
-  <ul *ngIf="food">
-    <li *ngFor="let alias of food.aliases">
-      {{alias.aliasName}} ({{alias.amountNumber| number:'1.1-1'}} {{alias.amountUnit}})
-      {{alias.aliasProtein| number:'1.1-1'}}/{{alias.aliasCarbs| number:'1.1-1'}}/{{alias.aliasFat| number:'1.1-1'}}
-    </li>
-  </ul>
-</div>
