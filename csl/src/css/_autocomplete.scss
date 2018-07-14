@@ -1,0 +1,18 @@
+.autocomplete {
+
+	&__option {
+		padding: ($gutter/3);
+		border: 1px solid $smoke;
+		border-top: 0;
+
+		&:first-child {
+			border-top: 1px solid $smoke;
+			border-radius: 5px 5px 0 0;
+		}
+
+		&:last-child {
+			border-radius: 0 0 5px 5px;
+		}
+	}
+
+}

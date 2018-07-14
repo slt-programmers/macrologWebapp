@@ -1,7 +1,8 @@
 <div class="log-meal">
-  <div class="day__meal">
+  <div class="day__meal" (click)="editable = true">
     <span class="day__meal__title">{{meal}}</span>
-    <div class="meal__display" *ngIf="!editable" (click)="editable=!editable">
+
+    <div class="meal__display" *ngIf="!editable">
       <div *ngFor="let logEntry of logEntries" class="meal__ingredient">
         <span class="meal__ingredient__name">{{logEntry.food.name}}</span>
         <span class="meal__ingredient__amount" *ngIf="logEntry.portion">{{logEntry.multiplier | number:'1.0-0'}} {{logEntry.portion.description}}</span>
@@ -12,6 +13,7 @@
         <span class="meal__ingredient__calories">{{calculateCalories(logEntry) | number:'1.0-0'}}</span>
       </div>
     </div>
+
     <div class="meal__editable" *ngIf="editable">
       <div *ngFor="let logEntry of logEntries" class="meal__edit-ingredient">
         <span class="meal__edit-ingredient__name">
@@ -19,7 +21,8 @@
         </span>
         <span class="meal__edit-ingredient__amount">
           <input name="foodGrams" *ngIf="logEntry.portion" class="form-field__text-input" [value]="logEntry.multiplier" (input)="logEntry.multiplier = ($event.target.value)">
-          <input name="foodGrams" *ngIf="!logEntry.portion && logEntry.food.measurementUnit == 'GRAMS'" class="form-field__text-input" [value]="logEntry.multiplier * logEntry.food.unitGrams" (input)="logEntry.multiplier = ($event.target.value / logEntry.food.unitGrams)">
+          <input name="foodGrams" *ngIf="!logEntry.portion && logEntry.food.measurementUnit == 'GRAMS'" class="form-field__text-input" [value]="logEntry.multiplier * logEntry.food.unitGrams"
+                 (input)="logEntry.multiplier = ($event.target.value / logEntry.food.unitGrams)">
           <input name="foodUnits" *ngIf="!logEntry.portion && logEntry.food.measurementUnit == 'UNIT'" class="form-field__text-input" [value]="logEntry.multiplier" (input)="logEntry.multiplier = $event.target.value">
         </span>
         <span class="meal__new-ingredient__measurement">
@@ -28,33 +31,42 @@
             <option *ngIf="logEntry.portion" value="{{logEntry.portion.description}}">{{logEntry.portion.description}}</option>
           </select>
         </span>
-        <span class="meal__edit-ingredient__macro" (click)="editable=!editable">
+        <span class="meal__edit-ingredient__macro">
           {{calculateProtein(logEntry) | number:'1.1-1'}}
         </span>
-        <span class="meal__edit-ingredient__macro" (click)="editable=!editable">
+        <span class="meal__edit-ingredient__macro">
           {{calculateFat(logEntry) | number:'1.1-1'}}
         </span>
-        <span class="meal__edit-ingredient__macro" (click)="editable=!editable">
+        <span class="meal__edit-ingredient__macro">
           {{calculateCarbs(logEntry) | number:'1.1-1'}}
         </span>
-        <span class="meal__edit-ingredient__calories" (click)="editable=!editable">
+        <span class="meal__edit-ingredient__calories">
           {{calculateCalories(logEntry) | number:'1.0-0'}}
         </span>
       </div>
       <div class="meal__new-ingredient">
-        <span class="meal__new-ingredient__name">
-          <input name="foodName" class="form-field__text-input" placeholder="New {{meal}}"value="">
-        </span>
+        <div #newIngredient class="meal__new-ingredient__name">
+          <input class="meal__new-ingredient__input" #foodNameInput class="form-field__text-input" placeholder="What did you have for {{meal.toLowerCase()}}?"
+                 (input)="findFoodMatch($event)"
+                 [(ngModel)]="foodName"
+                 (focus)="showAutoComplete = true">
+          <div class="autocomplete" *ngIf="showAutoComplete">
+            <div class="autocomplete__option" *ngFor="let match of foodMatch">
+              <div (click)="addLogEntry(match); foodName = ''; showAutoComplete = false" >{{match.name}}</div>
+            </div>
+          </div>
+
+        </div>
         <!--<span class="meal__new-ingredient__amount">-->
-          <!--<input name="foodName" class="form-field__text-input" disabled placeholder="-" value="">-->
+        <!--<input name="foodName" class="form-field__text-input" disabled placeholder="-" value="">-->
         <!--</span>-->
         <!--<span class="meal__new-ingredient__measurement">-->
-          <!--<input  name="foodName" class="form-field__text-input" disabled placeholder="-" value="">-->
+        <!--<input  name="foodName" class="form-field__text-input" disabled placeholder="-" value="">-->
         <!--</span>-->
-        <span class="meal__new-ingredient__macro">-</span>
-        <span class="meal__new-ingredient__macro">-</span>
-        <span class="meal__new-ingredient__macro">-</span>
-        <span class="meal__new-ingredient__calories">-</span>
+        <span class="meal__new-ingredient__macro"></span>
+        <span class="meal__new-ingredient__macro"></span>
+        <span class="meal__new-ingredient__macro"></span>
+        <span class="meal__new-ingredient__calories"></span>
       </div>
     </div>
 

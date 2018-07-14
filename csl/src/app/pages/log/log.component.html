@@ -29,17 +29,17 @@
       <span class="day__header--next"><i class="day__header__icon fas fa-arrow-alt-circle-right"></i></span>
     </div>
 
-    <log-meal [meal]="'Breakfast'" [logEntries]="breakfastLogs"></log-meal>
-    <log-meal [meal]="'Lunch'" [logEntries]="lunchLogs"></log-meal>
-    <log-meal [meal]="'Dinner'" [logEntries]="dinnerLogs"></log-meal>
-    <log-meal [meal]="'Snacks'" [logEntries]="snacksLogs"></log-meal>
+    <log-meal [food]="food" [meal]="'Breakfast'" [logEntries]="breakfastLogs"></log-meal>
+    <log-meal [food]="food" [meal]="'Lunch'" [logEntries]="lunchLogs"></log-meal>
+    <log-meal [food]="food" [meal]="'Dinner'" [logEntries]="dinnerLogs"></log-meal>
+    <log-meal [food]="food" [meal]="'Snacks'" [logEntries]="snacksLogs"></log-meal>
 
     <div class="day__total">
       <span class="day__total__title">Daily total</span>
-      <span class="total__macro total__macro--first">P 3213</span>
+      <span class="total__macro total__macro--first">P 32</span>
       <span class="total__macro">F 41</span>
       <span class="total__macro">C 43</span>
-      <span class="total__calories">434 Calories</span>
+      <span class="total__calories">434</span>
       <span class="total__calories--label">kcal</span>
     </div>
 

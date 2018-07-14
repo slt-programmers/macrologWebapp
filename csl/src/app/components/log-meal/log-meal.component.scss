@@ -40,6 +40,10 @@
 			font-weight: bold;
 			margin-bottom: 5px;
 		}
+
+		&__new-ingredient {
+			margin-top: ($gutter/3);
+		}
 	}
 
 	&__total {

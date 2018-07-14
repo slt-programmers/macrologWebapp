@@ -30,34 +30,20 @@ export class FoodService {
    	return this.http.get(macrologBackendUrl + "/"+ foodId, { responseType: 'json' });
   }
 
-
-	// TODO: kijken wat uiteindelijk gebruikt wordt
-
  	getAllFood() {
 		console.log('getFood');
    	return this.http.get(macrologBackendUrl, { responseType: 'json' });
 	}
 
+	getAllFoodNameIds() {
+		let food;
+		this.getAllFood().subscribe(
+			data => food = data,
+			error => console.log(error)
+		);
 
-	insertFood() {
-		const headers = {'Conent-Type': 'applicaton/json',
-    		'Access-Control-Allow-Origin': 'http://localhost:4200'
-    	};
-
-		const params = { 'name': 'peer'};
-		const options = { headers: headers, params: params };
-		console.log(options);
-    return this.http.post(macrologBackendUrl + '/newFood', {'name': 'dates'}, options);
 	}
 
-	insertFoodTwo(food: Food) {
-   	const headers = {'Conent-Type': 'applicaton/json',
-   		'Access-Control-Allow-Origin': 'http://localhost:4200'
-   	};
 
-   	const options = { headers: headers };
-		console.log(options);
-    return this.http.post<Food>(macrologBackendUrl + '/newFoodTwo', food, options);
-	}
 
 }

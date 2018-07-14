@@ -4,22 +4,53 @@ import { FoodService } from '../../services/food.service';
 @Component({
   selector: 'log-meal',
   templateUrl: './log-meal.component.html',
-  styleUrls: ['./log-meal.component.scss']
+  styleUrls: ['./log-meal.component.scss'],
+	host: { '(document: click)': 'closeAutoComplete($event)' }
 })
 export class LogMealComponent implements OnInit {
 
-  @Input() meal:string;
-  @Input() logEntries:LogEntry[];
+	@ViewChild('newIngredient') private newIngredientEref: ElementRef;
 
+	@Input() food;
+  @Input() meal: string;
+  @Input() logEntries: LogEntry[];
 
-  public editable:boolean = false;
-  constructor(private foodService: FoodService) { }
+  public editable: boolean = false;
+	public foodMatch = new Array();
+	public foodName: string;
+	public showAutoComplete: boolean;
+
+  constructor ( private foodService: FoodService) { }
 
   ngOnInit() {
 
   }
 
 	onChange() {
+
+	}
+
+	findFoodMatch(event) {
+		console.log(this.foodName);
+		this.foodMatch = new Array();
+		if (event.data !== null) {
+			for (let item of this.food) {
+				if (item.name.toLowerCase().startsWith(this.foodName.toLowerCase())) {
+					console.log(item);
+					this.foodMatch.push(item);
+				}
+			}
+		}
+		console.log(this.foodMatch);
+	}
+
+	addLogEntry(food) {
+		let entry = new LogEntry();
+		entry.food = food;
+		if (food.portions) {
+			entry.portion = food.portions[0];
+		}
+		this.logEntries.push(entry);
 	}
 
   calculateProtein(currEntry){
@@ -33,6 +64,7 @@ export class LogMealComponent implements OnInit {
         }
      }
   }
+
   calculateFat(currEntry){
     if (currEntry.portion){
         return (currEntry.multiplier * currEntry.portion.macros.fat);
@@ -44,6 +76,7 @@ export class LogMealComponent implements OnInit {
         }
      }
   }
+
   calculateCarbs(currEntry){
      if (currEntry.portion){
         return (currEntry.multiplier * currEntry.portion.macros.carbs);
@@ -55,6 +88,7 @@ export class LogMealComponent implements OnInit {
         }
      }
   }
+
   calculateCalories(currEntry){
     console.log(this.calculateFat(currEntry) * 9 + this.calculateProtein(currEntry) * 4 + this.calculateCarbs(currEntry) * 4);
 
@@ -71,4 +105,9 @@ export class LogMealComponent implements OnInit {
   return 0;
   }
 
+	closeAutoComplete(event) {
+		if (this.newIngredientEref && !this.newIngredientEref.nativeElement.contains(event.target)) {
+			this.showAutoComplete = false;
+		}
+	}
 }

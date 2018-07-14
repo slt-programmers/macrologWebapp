@@ -20,7 +20,6 @@ export class BargraphComponent implements OnInit {
 		let percentCap = this.percentage > 150 ? 150 : this.percentage;
 		let hueDegree = this.calcHue(percentCap);
 		this.trackFill = this.trackFillElement.nativeElement;
-		console.log(this.trackFillElement);
 		this.trackFill.style.width = percentCap + '%';
 		this.trackFill.style.filter = 'hue-rotate(' + hueDegree + 'deg)';
   }

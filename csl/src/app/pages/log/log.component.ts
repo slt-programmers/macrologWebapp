@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import {LogService}from '../../services/log.service';
+import {FoodService}from '../../services/food.service';
 import {LogEntry} from '../../model/logEntry';
 
 @Component({
@@ -12,10 +13,13 @@ export class LogComponent implements OnInit {
 
 	public modalIsVisible: boolean = false;
 
-	constructor(private http: HttpClient,private logService: LogService) { }
+	constructor( private foodService: FoodService,
+							 private http: HttpClient,
+							 private logService: LogService) { }
 
 	public days;
   public allLogs;
+	public food;
   public displayDate = new Date();
 
   public breakfastLogs = new Array<LogEntry>();
@@ -29,8 +33,13 @@ export class LogComponent implements OnInit {
 	public goalCal: number = 1235;
 
 	ngOnInit() {
+		this.foodService.getAllFood().subscribe(
+			data => { this.food = data; console.log(this.food) },
+			error => console.log(error));
+
 		this.getJson().subscribe(data => this.days = data,
 					error => console.log(error));
+
     this.logService.getAllLogs().subscribe(
       data => {
           this.allLogs = data;
@@ -46,11 +55,8 @@ export class LogComponent implements OnInit {
           this.snacksLogs = this.allLogs.filter(
               entry => entry.meal === 'SNACKS'
           );
-
       }
-
 		);
-
   }
 
 	public getTotal(meals, macro) {
