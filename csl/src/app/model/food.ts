@@ -2,6 +2,7 @@ import {Portion} from './portion';
 
 export class Food {
 
+	public id: number;
   public name: string;
   public measurementUnit: string;
   public unitName: string;

@@ -4,6 +4,7 @@ import {LogService}from '../../services/log.service';
 import {UserService}from '../../services/user.service';
 import {FoodService}from '../../services/food.service';
 import {LogEntry} from '../../model/logEntry';
+import {Food} from '../../model/food';
 
 import { Observable } from 'rxjs/Observable';
 import { forkJoin } from 'rxjs/observable/forkJoin';
@@ -37,7 +38,9 @@ export class LogComponent implements OnInit {
 
 	ngOnInit() {
 		this.foodService.getAllFood().subscribe(
-			data => { this.food = data; console.log(this.food); },
+			data => { this.food = data;
+				this.getFoodPortionsList();
+			},
 			error => { console.log(error); }
 		);
 
@@ -92,6 +95,37 @@ export class LogComponent implements OnInit {
 
 	private getJson() {
 		return this.http.get("assets/logentries.json");
+	}
+
+	private getFoodPortionsList() {
+		let foodList = new Array();
+
+		for (let item of this.food) {
+			console.log(item);
+			foodList.push(item);
+
+			if (item.portions) {
+				for (let portion of item.portions) {
+					console.log(portion);
+
+					let newItem = new Food();
+
+					newItem.id = item.id;
+					newItem.name = item.name;
+					newItem.measurementUnit = item.measurementUnit;
+					newItem.unitName = item.unitName;
+					newItem.unitGrams = portion.grams;
+					newItem.protein = portion. protein;
+					newItem.fat = portion.fat;
+					newItem.carbs = portion.carbs;
+
+					foodList.push(newItem);
+				}
+			}
+		}
+
+		this.food = foodList;
+		console.log(this.food);
 	}
 
 }

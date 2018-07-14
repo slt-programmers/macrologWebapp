@@ -102,8 +102,9 @@
 		-webkit-appearance: none;
 		-moz-appearance: none;
 		-ms-appearance: none;
-		padding: 0px;
+		border: 0;
 		position: relative;
+		width: auto;
 
   	&::before {
   	  @include elevation(2);

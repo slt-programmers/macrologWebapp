@@ -24,13 +24,14 @@
         </div>
 
         <div class="meal__edit-ingredient__amount">
-          <input name="foodGrams" *ngIf="logEntry.portion" [value]="logEntry.multiplier" (input)="logEntry.multiplier = ($event.target.value)">
-          <input name="foodGrams" *ngIf="!logEntry.portion && logEntry.food.measurementUnit == 'GRAMS'" [value]="logEntry.multiplier * logEntry.food.unitGrams"
+          <input type="number" name="foodGrams" *ngIf="logEntry.portion" [value]="logEntry.multiplier" (input)="logEntry.multiplier = ($event.target.value)">
+          <input type="number" name="foodGrams" *ngIf="!logEntry.portion && logEntry.food.measurementUnit == 'GRAMS'" [value]="logEntry.multiplier * logEntry.food.unitGrams"
                  (input)="logEntry.multiplier = ($event.target.value / logEntry.food.unitGrams)">
-          <input name="foodUnits" *ngIf="!logEntry.portion && logEntry.food.measurementUnit == 'UNIT'" [value]="logEntry.multiplier" (input)="logEntry.multiplier = $event.target.value">
+          <input type="number" name="foodUnits" *ngIf="!logEntry.portion && logEntry.food.measurementUnit == 'UNIT'" [value]="logEntry.multiplier" (input)="logEntry.multiplier = $event.target.value">
         </div>
 
         <div class="meal__edit-ingredient__measurement">
+          <!--{{logEntry.food.unitName}}-->
           <select class="form-field__select">
             <option value="{{logEntry.food.unitName}}">{{logEntry.food.unitName}}</option>
             <option *ngIf="logEntry.portion" value="{{logEntry.portion.description}}">{{logEntry.portion.description}}</option>
@@ -59,7 +60,7 @@
                  (focus)="showAutoComplete = true">
           <div #autoComplete class="autocomplete" *ngIf="showAutoComplete">
             <div class="autocomplete__option" *ngFor="let match of foodMatch">
-              <div (click)="addLogEntry(match); foodName = ''; showAutoComplete = false">{{match.name}}</div>
+              <div (click)="addLogEntry(match); foodName = ''; showAutoComplete = false">{{match.name}} ({{match.unitGrams}} gram)</div>
             </div>
           </div>
         </div>

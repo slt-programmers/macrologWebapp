@@ -92,19 +92,7 @@ export class LogMealComponent implements OnInit {
   }
 
   calculateCalories(currEntry){
-    console.log(this.calculateFat(currEntry) * 9 + this.calculateProtein(currEntry) * 4 + this.calculateCarbs(currEntry) * 4);
-
-     return this.calculateFat(currEntry) * 9 + this.calculateProtein(currEntry) * 4 + this.calculateCarbs(currEntry) * 4;
-  }
-
-  getPortions(food) {
-
-//     var portions = this.foodService.getFood(food.id).subscribe(
-//			result => {
-//			      portions = result;
- //           console.log(portions);
- //    });
-  return 0;
+		return this.calculateFat(currEntry) * 9 + this.calculateProtein(currEntry) * 4 + this.calculateCarbs(currEntry) * 4;
   }
 
 	onKeyDown(event) {
