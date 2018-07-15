@@ -32,13 +32,13 @@
 
         <div class="meal__edit-ingredient__measurement">
           <!--{{logEntry.food.unitName}}-->
-          <select class="">
+          <select (change)="portionChange(logEntry,$event.target)">
             <!-- the default unitname -->
-            <option value="{{logEntry.food.unitName}}" selected="{{getSelected(logEntry.portion,undefined)}}">{{logEntry.food.unitName}}</option>
+            <option value="defaultUnit" selected="{{getSelected(logEntry.portion,undefined)}}">{{logEntry.food.unitName}}</option>
             <!-- all available portions -->
             <option *ngFor="let portion of getAvailablePortions(logEntry)"
                     selected="{{getSelected(logEntry.portion,portion)}}"
-                    value="portion.description">{{portion.description}}</option>
+                    value="{{portion.description}}">{{portion.description}}</option>
           </select>
         </div>
 

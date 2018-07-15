@@ -33,17 +33,14 @@ export class LogMealComponent implements OnInit {
 	}
 
 	findFoodMatch(event) {
-		console.log(this.foodName);
 		this.foodMatch = new Array();
 		if (event.data !== null) {
 			for (let item of this.food) {
 				if (item.name.toLowerCase().startsWith(this.foodName.toLowerCase())) {
-					console.log(item);
 					this.foodMatch.push(item);
 				}
 			}
 		}
-		console.log(this.foodMatch);
 	}
 
   getAvailablePortions(foodEntry) {
@@ -54,10 +51,48 @@ export class LogMealComponent implements OnInit {
 			}
   }
 
+  getSpecificPortion(foodEntry, portionDescription) {
+     let availablePortions = this.getAvailablePortions(foodEntry);
+     for (let portion of availablePortions) {
+        if (portion.description == portionDescription){
+           return portion;
+        }
+     }
+     return undefined;
+  }
+
+  portionChange(foodEntry, eventTarget){
+    let oldValue = foodEntry.portion;
+    if (oldValue){ // indien geen portion gebruikt
+      oldValue = oldValue.description;
+    } else {
+      oldValue = 'defaultUnit';
+    }
+    let newValue = eventTarget.value;
+    console.log('Change from ' + oldValue + ' to ' + newValue);
+
+    if (oldValue == 'defaultUnit' && newValue != 'defaultUnit'){
+       // van default naar een portie.
+       // Dit gaan we niet omrekenen, maar de gebruiker moet de oude waarde blijven zien.
+       foodEntry.portion = this.getSpecificPortion(foodEntry, newValue);
+       foodEntry.multiplier = foodEntry.multiplier * foodEntry.food.unitGrams;
+       console.log(foodEntry.portion);
+
+    } else if (newValue =='defaultUnit') {
+      // van een portie naar default. Dit gaan we omrekenen.
+      let oldPortion = this.getSpecificPortion(foodEntry, oldValue);
+      let oldAmount = foodEntry.multiplier * oldPortion.grams;
+
+      foodEntry.portion = undefined;
+      foodEntry.multiplier = oldAmount / foodEntry.food.unitGrams;
+
+    } else {
+      // wisselen tussen porties
+
+    }
+  }
+
   getSelected(logEntryPortion, portion){
-     console.log('getSelected')
-     console.log(logEntryPortion)
-     console.log(portion)
      if (!logEntryPortion){ // geen portion geselecteerd, dus select default
        return "selected";
      } if (logEntryPortion && portion && logEntryPortion.id == portion.id){ // portion geselecteerd. is dit het?

@@ -101,12 +101,10 @@ export class LogComponent implements OnInit {
 		let foodList = new Array();
 
 		for (let item of this.food) {
-			console.log(item);
 			foodList.push(item);
 
 			if (item.portions) {
 				for (let portion of item.portions) {
-					console.log(portion);
 
 					let newItem = new Food();
 
@@ -125,7 +123,6 @@ export class LogComponent implements OnInit {
 		}
 
 		this.food = foodList;
-		console.log(this.food);
 	}
 
 }
