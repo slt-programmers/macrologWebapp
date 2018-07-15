@@ -75,19 +75,27 @@ export class LogMealComponent implements OnInit {
        // van default naar een portie.
        // Dit gaan we niet omrekenen, maar de gebruiker moet de oude waarde blijven zien.
        foodEntry.portion = this.getSpecificPortion(foodEntry, newValue);
-       foodEntry.multiplier = foodEntry.multiplier * foodEntry.food.unitGrams;
+       if (foodEntry.food.measurementUnit == 'GRAMS'){
+         foodEntry.multiplier = foodEntry.multiplier * foodEntry.food.unitGrams;
+       }
        console.log(foodEntry.portion);
 
     } else if (newValue =='defaultUnit') {
       // van een portie naar default. Dit gaan we omrekenen.
       let oldPortion = this.getSpecificPortion(foodEntry, oldValue);
-      let oldAmount = foodEntry.multiplier * oldPortion.grams;
 
       foodEntry.portion = undefined;
-      foodEntry.multiplier = oldAmount / foodEntry.food.unitGrams;
+      if (foodEntry.food.measurementUnit == 'GRAMS'){
+         let oldAmount = foodEntry.multiplier * oldPortion.grams;
+         foodEntry.multiplier = oldAmount / foodEntry.food.unitGrams;
+      } else {
+         let oldAmount = foodEntry.multiplier * oldPortion.unitMultiplier;
+         foodEntry.multiplier = oldAmount;
+      }
 
     } else {
-      // wisselen tussen porties
+      // wisselen tussen porties. Eerst naar default unit en dan naar nieuwe unit.
+      // TODO :)
 
     }
   }
