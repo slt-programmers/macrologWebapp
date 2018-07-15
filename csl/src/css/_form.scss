@@ -5,18 +5,14 @@ form {
 }
 
 .form-field {
+	@media (min-width: $md) {
+		flex-direction: row;
+  	align-items: center;
+	}
+
 	display: flex;
-	flex-direction: row;
-	align-items: center;
+	flex-direction: column;
 	margin-bottom: 10px;
-
-	&--slider {
-		align-items: start;
-	}
-
-	&--spaced {
-		justify-content: space-between;
-	}
 
 	&--column {
 		@media (min-width: $lg) {
@@ -25,6 +21,31 @@ form {
 		padding-top: 10px;
 		flex-direction: column;
 		flex-wrap: wrap;
+	}
+
+	&--slider {
+		align-items: start;
+	}
+
+	&__label {
+		@media (min-width: $md) {
+			flex-basis: 40%;
+			margin-bottom: 0;
+
+    	&--small {
+    		flex-basis: auto;
+    		flex-grow: 1;
+    	}
+
+    	&--slider {
+    		flex-basis: auto;
+      	flex-grow: 1;
+      	margin-top: 15px;
+    	}
+		}
+
+   	margin-right: ($gutter/3);
+		margin-bottom: ($gutter/6);
 	}
 
 	&__element {
@@ -47,26 +68,6 @@ form {
 		&--end {
 			align-self: flex-end;
 		}
-
-		&--spaced {
-		  justify-content: space-between;
-		}
-	}
-
-	&__label {
-		flex-basis: 40%;
-		margin-right: $gutter/3;
-
-		&--small {
-			flex-basis: auto;
-			flex-grow: 1;
-		}
-
-		&--slider {
-			flex-basis: auto;
-    	flex-grow: 1;
-    	margin-top: 15px;
-		}
 	}
 
 	&__text {
@@ -76,19 +77,8 @@ form {
    	min-width: 30px;
   }
 
-
-
-	&__option {
-		padding: $gutter/3;
-	}
-
 	&__slider {
 		flex-basis: 100%;
 		flex-shrink: 1;
 	}
-
 }
-
-
-
-
