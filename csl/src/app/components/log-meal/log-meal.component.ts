@@ -46,6 +46,27 @@ export class LogMealComponent implements OnInit {
 		console.log(this.foodMatch);
 	}
 
+  getAvailablePortions(foodEntry) {
+      for (let item of this.food) {
+				if (item.id == (foodEntry.food.id)) {
+					return item.portions;
+				}
+			}
+  }
+
+  getSelected(logEntryPortion, portion){
+     console.log('getSelected')
+     console.log(logEntryPortion)
+     console.log(portion)
+     if (!logEntryPortion){ // geen portion geselecteerd, dus select default
+       return "selected";
+     } if (logEntryPortion && portion && logEntryPortion.id == portion.id){ // portion geselecteerd. is dit het?
+        return "selected";
+     } else {
+        return "";
+     }
+  }
+
 	addLogEntry(food) {
 		let entry = new LogEntry();
 		entry.food = food;

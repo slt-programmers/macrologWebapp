@@ -33,8 +33,12 @@
         <div class="meal__edit-ingredient__measurement">
           <!--{{logEntry.food.unitName}}-->
           <select class="form-field__select">
-            <option value="{{logEntry.food.unitName}}">{{logEntry.food.unitName}}</option>
-            <option *ngIf="logEntry.portion" value="{{logEntry.portion.description}}">{{logEntry.portion.description}}</option>
+            <!-- the default unitname -->
+            <option value="{{logEntry.food.unitName}}" selected="{{getSelected(logEntry.portion,undefined)}}">{{logEntry.food.unitName}} {{getSelected(logEntry.portion,undefined)}}</option>
+            <!-- all available portions -->
+            <option *ngFor="let portion of getAvailablePortions(logEntry)"
+                    selected="{{getSelected(logEntry.portion,portion)}}"
+                    value="portion.description">{{portion.description}} {{getSelected(logEntry.portion,portion)}}</option>
           </select>
         </div>
 
