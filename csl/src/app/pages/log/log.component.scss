@@ -1,55 +1,15 @@
 @import '../../../css/public';
 
 .bargraph-wrapper {
+	@media(min-width: $md) {
+		margin-left: ($gutter/2);
+	}
 	display: flex;
 	flex-direction: column;
 	height: 100%;
 	justify-content: space-around;
 }
 
-.intake-goal {
-	display: flex;
-	flex-direction: row;
-	justify-content: space-between;
-
-
-	&__numbers {
-		display: flex;
-		flex-direction: column;
-		justify-content: space-between;
-		flex-grow: 1;
-	}
-
-	&__graph {
-		flex-grow: 2;
-	}
-
-	&__calories {
-  	font-size: 24px;
-  	margin-bottom: $gutter;
-  }
-
-  &__macros {
-  	display: flex;
-  	flex-direction: column;
-  }
-
-  &__macro {
-  	flex-basis: 33%;
-  	margin-bottom: 10px;
-  }
-
-}
-
-.intake-goal-wrapper {
-	@include elevation(1);
-	background-color: $white;
-	display: flex;
-	flex-direction: column;
-	padding: ($gutter/2);
-	margin-bottom: ($gutter/2);
-
-}
 
 .day {
 	@include elevation(1);
