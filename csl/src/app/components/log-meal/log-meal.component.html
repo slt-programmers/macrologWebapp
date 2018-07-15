@@ -58,7 +58,7 @@
 
       <div class="meal__new-ingredient">
         <div #newIngredient class="meal__new-ingredient__name" (keydown)="onKeyDown($event)">
-          <input class="meal__new-ingredient__input" #foodNameInput class="form-field__text-input" placeholder="What did you have for {{meal.toLowerCase()}}?"
+          <input class="meal__new-ingredient__input" #foodNameInput class="" placeholder="What did you have for {{meal.toLowerCase()}}?"
                  (input)="findFoodMatch($event)"
                  [(ngModel)]="foodName"
                  (focus)="showAutoComplete = true">

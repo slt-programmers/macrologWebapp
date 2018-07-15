@@ -153,7 +153,7 @@ export class LogMealComponent implements OnInit {
 
 	onKeyDown(event) {
 		console.log(event);
-		console.log(document.activeElement.classList.contains('form-field__text-input'));
+		console.log(document.activeElement.classList.contains('//TODO Class toevoegen'));
 		if(this.autoCompleteEref) {
 			if(event.code === 'ArrowDown') {
 				console.log(this.autoCompleteEref);
