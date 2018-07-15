@@ -6,8 +6,7 @@ import {forkJoin} from 'rxjs/observable/forkJoin';
 
 @Component({
   selector: 'user',
-  templateUrl: './user.component.html',
-  styleUrls: ['./user.component.scss']
+  templateUrl: './user.component.html'
 })
 export class UserComponent implements OnInit {
 

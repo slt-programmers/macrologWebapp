@@ -109,16 +109,17 @@
         </div>
       </div>
 
-      <button class="button button--transparent" (click)="newPortion()">
-        <i class="fas fa-plus"></i>
-      </button>
-
-      <div class="modal__button-wrapper">
-        <button type="button" class="button button--primary" (click)="addFood()"
-            [disabled]="addFoodForm.invalid">Done</button>
+      <div class="button-wrapper button-wrapper--left">
+        <button class="button button--transparent" (click)="newPortion()">
+          <i class="fas fa-plus"></i>
+        </button>
       </div>
     </form>
 
+    <div class="button-wrapper">
+      <button type="button" class="button button--primary" (click)="addFood()"
+              [disabled]="addFoodForm.invalid">Done</button>
+    </div>
   </div>
 
 </div>

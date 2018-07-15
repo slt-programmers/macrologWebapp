@@ -1,17 +1,6 @@
 @import '../../../css/public';
 
-.calorie-box {
-	align-items: center;
-	display: flex;
-	flex-direction: row;
-	justify-content: center;
-	margin-bottom: $gutter/2;
 
-	&__title {
-		font-size: 24px;
-		font-weight: 600;
-	}
-}
 
 .macro-box {
 	display: flex;
