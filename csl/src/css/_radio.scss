@@ -1,0 +1,53 @@
+input[type=radio] {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+  border: 0;
+  height: 26px;
+  margin: 0;
+  padding: 0;
+  position: relative;
+  width: 26px;
+
+	&:before {
+		@include elevation(2);
+
+    content: '';
+    background-color: #ffffff;
+    border: 3px solid #303f9f;
+    width: 20px;
+    height: 20px;
+    border-radius: 15px;
+    position: absolute;
+  }
+
+  &.checked {
+
+    &:before {
+  	  align-items: center;
+     	background-color: $primary;
+     	color: $white;
+      content: '\f00c';
+      display: flex;
+      font-family: 'Font Awesome 5 Free', sans-serif;
+      font-weight: 600;
+      justify-content: center;
+    }
+  }
+}
+
+.radio-label {
+	padding: 10px;
+	margin-right: $gutter/3;
+}
+
+.radio-wrapper {
+	display: flex;
+	align-items: center;
+}
+
+.radio-option {
+	display: flex;
+	align-items: center;
+}
+

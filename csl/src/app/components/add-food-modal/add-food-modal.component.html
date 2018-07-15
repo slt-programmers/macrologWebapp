@@ -24,15 +24,15 @@
       <div class="form-field">
         <label class="form-field__label">Nutrients</label>
         <div class="form-field__element">
-          <div class="radio-group">
-            <input class="form-field__radio" type="radio" name="measurementUnit"
+          <div class="radio-wrapper">
+            <input class="" type="radio" name="measurementUnit"
                    [(ngModel)]="measurementUnit" value="GRAMS"
-                   [ngClass]="{'form-field__radio--checked fas fa-check': measurementUnit === 'GRAMS' }" required>
-            <span class="radio__label">per 100gr</span>
-            <input class="form-field__radio" type="radio" name="measurementUnit"
+                   [ngClass]="{'checked fas fa-check': measurementUnit === 'GRAMS' }" required>
+            <span class="radio-label">per 100gr</span>
+            <input class="" type="radio" name="measurementUnit"
                    [(ngModel)]="measurementUnit" value="UNIT"
-                   [ngClass]="{'form-field__radio--checked fas fa-check': measurementUnit === 'UNIT' }">
-            <span class="radio__label">per unit</span>
+                   [ngClass]="{'checked fas fa-check': measurementUnit === 'UNIT' }">
+            <span class="radio-label">per unit</span>
           </div>
         </div>
       </div>
