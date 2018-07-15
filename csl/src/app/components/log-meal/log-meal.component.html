@@ -24,21 +24,21 @@
         </div>
 
         <div class="meal__edit-ingredient__amount">
-          <input type="number" name="foodGrams" *ngIf="logEntry.portion" [value]="logEntry.multiplier" (input)="logEntry.multiplier = ($event.target.value)">
-          <input type="number" name="foodGrams" *ngIf="!logEntry.portion && logEntry.food.measurementUnit == 'GRAMS'" [value]="logEntry.multiplier * logEntry.food.unitGrams"
+          <input type="number" *ngIf="logEntry.portion" [value]="logEntry.multiplier" (input)="logEntry.multiplier = ($event.target.value)">
+          <input type="number" *ngIf="!logEntry.portion && logEntry.food.measurementUnit == 'GRAMS'" [value]="logEntry.multiplier * logEntry.food.unitGrams"
                  (input)="logEntry.multiplier = ($event.target.value / logEntry.food.unitGrams)">
-          <input type="number" name="foodUnits" *ngIf="!logEntry.portion && logEntry.food.measurementUnit == 'UNIT'" [value]="logEntry.multiplier" (input)="logEntry.multiplier = $event.target.value">
+          <input type="number" *ngIf="!logEntry.portion && logEntry.food.measurementUnit == 'UNIT'" [value]="logEntry.multiplier" (input)="logEntry.multiplier = $event.target.value">
         </div>
 
         <div class="meal__edit-ingredient__measurement">
           <!--{{logEntry.food.unitName}}-->
-          <select class="form-field__select">
+          <select class="">
             <!-- the default unitname -->
-            <option value="{{logEntry.food.unitName}}" selected="{{getSelected(logEntry.portion,undefined)}}">{{logEntry.food.unitName}} {{getSelected(logEntry.portion,undefined)}}</option>
+            <option value="{{logEntry.food.unitName}}" selected="{{getSelected(logEntry.portion,undefined)}}">{{logEntry.food.unitName}}</option>
             <!-- all available portions -->
             <option *ngFor="let portion of getAvailablePortions(logEntry)"
                     selected="{{getSelected(logEntry.portion,portion)}}"
-                    value="portion.description">{{portion.description}} {{getSelected(logEntry.portion,portion)}}</option>
+                    value="portion.description">{{portion.description}}</option>
           </select>
         </div>
 

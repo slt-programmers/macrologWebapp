@@ -76,18 +76,7 @@
    	min-width: 30px;
   }
 
-	&__text-input {
 
-		width: 100%;
-	}
-
-	&__select {
-		border: 1px solid $smoke;
-		border-radius: 5px;
-		flex-basis: 60%;
-		max-height: 43px;
-		width: 100%;
-	}
 
 	&__option {
 		padding: $gutter/3;
@@ -98,51 +87,8 @@
 		flex-shrink: 1;
 	}
 
-	&__radio {
-		-webkit-appearance: none;
-		-moz-appearance: none;
-		-ms-appearance: none;
-		border: 0;
-		position: relative;
-		width: auto;
-
-  	&::before {
-  	  @include elevation(2);
-  		content: '';
-  		background-color: $white;
-  		border: 3px solid $primary;
-  		width: 20px;
-  		height: 20px;
-  		border-radius: 15px;
-  		position: absolute;
-  		top: -4px;
-  		left: -4px;
-  	}
-
-  	&--checked {
-    	&::before {
- 		    align-items: center;
-    		background-color: $primary;
-    		color: $white;
-    	  content: "\f00c";
-        display: flex;
-        justify-content: center;
-    	}
-    }
-	}
 }
 
-.radio-group {
-	width: 100%;
-	align-items: center;
-	display: flex;
-  flex-direction: row;
-}
 
-.radio {
-	&__label {
-		padding: 10px;
-		margin-right: $gutter/3;
-	}
-}
+
 
