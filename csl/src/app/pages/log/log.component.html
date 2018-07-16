@@ -4,12 +4,12 @@
     <div class="intake-goal">
       <div class="intake-goal__numbers">
         <div class="intake-goal__calories">
-          <span>Calories: {{getTotal(days[0].meals, "calories")}}/<strong>{{goalCal}}</strong></span>
+          <span>Calories: {{getTotal("calories")  | number:'1.0-0'}}/<strong>{{goalCal}}</strong></span>
         </div>
         <div class="intake-goal__macros">
-          <span class="intake-goal__macro">Protein: {{getTotal(days[0].meals, "protein")}}/<strong>{{userGoals[0]}}</strong></span>
-          <span class="intake-goal__macro">Fat: {{getTotal(days[0].meals, "fat")}}/<strong>{{userGoals[1]}}</strong></span>
-          <span class="intake-goal__macro">Carbs: {{getTotal(days[0].meals, "carbs")}}/<strong>{{userGoals[2]}}</strong></span>
+          <span class="intake-goal__macro">Protein: {{getTotal("protein") | number:'1.1-1'}}/<strong>{{userGoals[0]}}</strong></span>
+          <span class="intake-goal__macro">Fat: {{getTotal("fat") | number:'1.1-1'}}/<strong>{{userGoals[1]}}</strong></span>
+          <span class="intake-goal__macro">Carbs: {{getTotal("carbs") | number:'1.1-1'}}/<strong>{{userGoals[2]}}</strong></span>
         </div>
       </div>
       <div class="intake-goal__graph">
@@ -29,17 +29,17 @@
       <span class="day__header--next"><i class="day__header__icon fas fa-arrow-alt-circle-right"></i></span>
     </div>
 
-    <log-meal [food]="food" [meal]="'Breakfast'" [logEntries]="breakfastLogs"></log-meal>
-    <log-meal [food]="food" [meal]="'Lunch'" [logEntries]="lunchLogs"></log-meal>
-    <log-meal [food]="food" [meal]="'Dinner'" [logEntries]="dinnerLogs"></log-meal>
-    <log-meal [food]="food" [meal]="'Snacks'" [logEntries]="snacksLogs"></log-meal>
+    <log-meal [food]="food" (notify)="notifyLogMeal($event)" [meal]="'Breakfast'" [logEntries]="breakfastLogs"></log-meal>
+    <log-meal [food]="food" (notify)="notifyLogMeal($event)" [meal]="'Lunch'" [logEntries]="lunchLogs"></log-meal>
+    <log-meal [food]="food" (notify)="notifyLogMeal($event)" [meal]="'Dinner'" [logEntries]="dinnerLogs"></log-meal>
+    <log-meal [food]="food" (notify)="notifyLogMeal($event)" [meal]="'Snacks'" [logEntries]="snacksLogs"></log-meal>
 
     <div class="day__total">
       <span class="day__total__title">Daily total</span>
-      <span class="total__macro total__macro--first">P 32</span>
-      <span class="total__macro">F 41</span>
-      <span class="total__macro">C 43</span>
-      <span class="total__calories">434</span>
+      <span class="total__macro total__macro--first">P {{getTotal("protein") | number:'1.1-1'}}</span>
+      <span class="total__macro">F {{getTotal( "fat") | number:'1.1-1'}}</span>
+      <span class="total__macro">C {{getTotal("carbs") | number:'1.1-1'}}</span>
+      <span class="total__calories">{{getTotal("calories")  | number:'1.0-0'}}</span>
       <span class="total__calories--label">kcal</span>
     </div>
 

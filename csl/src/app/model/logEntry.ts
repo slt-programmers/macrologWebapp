@@ -1,11 +1,14 @@
 export class LogEntry {
 
+  public id:number;
   public description: string;
 	public grams: number;
   public meal: string;
 	public food;
 	public portion;
 	public multiplier = 1;
+  public day;
+  public macrosCalculated;
 
 	constructor (description?: string, grams?: number, meal?: string) {
     this.description = description;

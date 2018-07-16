@@ -75,15 +75,28 @@ export class LogComponent implements OnInit {
 		);
   }
 
-	public getTotal(meals, macro) {
+  public notifyLogMeal($event) {
+     console.log('Notify received');
+     console.log($event);
+  }
+
+	public getTotal(macro) {
 		let total = 0.0;
-		for (let meal of meals) {
-			for (let ingredient of meal.ingredients) {
-				total += ingredient[macro];
-			}
-		}
+		for (let logentry of this.breakfastLogs) {
+				total += logentry.macrosCalculated[macro];
+    }
+		for (let logentry of this.lunchLogs) {
+				total += logentry.macrosCalculated[macro];
+    }
+		for (let logentry of this.dinnerLogs) {
+				total += logentry.macrosCalculated[macro];
+    }
+		for (let logentry of this.snacksLogs) {
+				total += logentry.macrosCalculated[macro];
+    }
 		return total;
 	}
+
 
 	public openModal() {
 		this.modalIsVisible = true;
