@@ -17,6 +17,7 @@ import { forkJoin } from 'rxjs/observable/forkJoin';
 export class LogComponent implements OnInit {
 
 	public modalIsVisible: boolean = false;
+	public getLogEntriesComplete: boolean = false;
 
 	constructor( private foodService: FoodService,
 							 private userService: UserService,
@@ -50,8 +51,6 @@ export class LogComponent implements OnInit {
 			 },
 			error => console.log(error)
 		);
-		console.log('usergoals');
-		console.log(this.userGoals);
 
 		this.getJson().subscribe(data => this.days = data,
 					error => console.log(error));
@@ -71,7 +70,9 @@ export class LogComponent implements OnInit {
           this.snacksLogs = this.allLogs.filter(
               entry => entry.meal === 'SNACKS'
           );
-      }
+      },
+			error => console.log(error),
+			() => this.getLogEntriesComplete = true
 		);
   }
 

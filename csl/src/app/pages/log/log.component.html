@@ -6,7 +6,7 @@
         <div class="intake-goal__calories">
           <span>Calories: {{getTotal("calories")  | number:'1.0-0'}}/<strong>{{goalCal}}</strong></span>
         </div>
-        <div class="intake-goal__macros">
+        <div class="intake-goal__macros" *ngIf="getLogEntriesComplete">
           <span class="intake-goal__macro">Protein: {{getTotal("protein") | number:'1.1-1'}}/<strong>{{userGoals[0]}}</strong></span>
           <span class="intake-goal__macro">Fat: {{getTotal("fat") | number:'1.1-1'}}/<strong>{{userGoals[1]}}</strong></span>
           <span class="intake-goal__macro">Carbs: {{getTotal("carbs") | number:'1.1-1'}}/<strong>{{userGoals[2]}}</strong></span>
