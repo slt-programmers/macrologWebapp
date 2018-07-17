@@ -87,8 +87,4 @@ export class DatepickerComponent implements OnInit {
 		}
 	}
 
-	open() {
-		this.isOpen = true;
-	}
-
 }

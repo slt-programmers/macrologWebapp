@@ -3,7 +3,7 @@
     <button class="button button--icon" (click)="previousDay()">
       <i class="date__icon fas fa-arrow-alt-circle-left"></i>
     </button>
-    <div class="date__selected-day" (click)="open()">{{selectedDate | date: dateformat}}</div>
+    <div class="date__selected-day" (click)="isOpen = !isOpen">{{selectedDate | date: dateformat}}</div>
     <button class="button button--icon" (click)="nextDay()">
       <i class="date__icon fas fa-arrow-alt-circle-right"></i>
     </button>

@@ -17,22 +17,35 @@
 	display: flex;
 	flex-direction: column;
 
-	&__header {
+	&__date {
 		align-items: center;
 		border-bottom: 1px solid $cloud;
 		display: flex;
 		flex-direction: row;
 		padding: ($gutter/2);
 		justify-content: center;
+	}
 
-		&__title {
-			font-weight: 500;
+	&__header {
+		border-bottom: 1px solid $cloud;
+		display: flex;
+		font-weight: 600;
+		padding: 10px;
+
+		&__macro {
+			text-align: end;
+			flex-basis: 10%;
+
+			&:first-child {
+				padding-left: 10px;
+				flex-basis: 50%;
+			}
 		}
-
 	}
 
 	&__total {
 		display: flex;
+		font-weight: 600;
 		padding: ($gutter/2);
 
 		&__title {

@@ -23,8 +23,14 @@
   </div>
 
   <div class="day">
-    <div class="day__header">
+    <div class="day__date">
       <datepicker (change)="getLogEntriesForDate($event)"></datepicker>
+    </div>
+
+    <div class="day__header">
+      <span class="day__header__macro">Protein</span>
+      <span class="day__header__macro">Fat</span>
+      <span class="day__header__macro">Carbs</span>
     </div>
 
     <log-meal [food]="food" (notify)="notifyLogMeal($event)" [meal]="'Breakfast'" [logEntries]="breakfastLogs"></log-meal>
@@ -34,9 +40,9 @@
 
     <div class="day__total">
       <span class="day__total__title">Daily total</span>
-      <span class="total__macro total__macro--first">P {{getTotal("protein") | number:'1.1-1'}}</span>
-      <span class="total__macro">F {{getTotal( "fat") | number:'1.1-1'}}</span>
-      <span class="total__macro">C {{getTotal("carbs") | number:'1.1-1'}}</span>
+      <span class="total__macro total__macro--first">{{getTotal("protein") | number:'1.1-1'}}</span>
+      <span class="total__macro">{{getTotal( "fat") | number:'1.1-1'}}</span>
+      <span class="total__macro">{{getTotal("carbs") | number:'1.1-1'}}</span>
       <span class="total__calories">{{getTotal("calories")  | number:'1.0-0'}}</span>
       <span class="total__calories--label">kcal</span>
     </div>
