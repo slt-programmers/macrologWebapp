@@ -34,16 +34,15 @@ export class AddFoodModalComponent implements OnInit {
   }
 
 	addFood() {
-		let addFoodRequest = new Food();
-		addFoodRequest.name = this.name;
-		addFoodRequest.measurementUnit = this.measurementUnit;
+		let addFoodRequest = new Food(this.name,
+			this.measurementUnit,
+			this.protein,
+			this.fat,
+			this.carbs);
 		if (this.measurementUnit === MeasurementUnit.Unit) {
 			addFoodRequest.unitName = this.unitName;
 			addFoodRequest.unitGrams = this.unitGrams;
 		}
-		addFoodRequest.protein = this.protein;
-		addFoodRequest.fat = this.fat;
-		addFoodRequest.carbs = this.carbs;
 		addFoodRequest.portions = this.portions;
 
 		this.foodService.addFood(addFoodRequest);

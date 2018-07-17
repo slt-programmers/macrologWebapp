@@ -119,17 +119,16 @@ export class LogComponent implements OnInit {
 			if (item.portions) {
 				for (let portion of item.portions) {
 
-					let newItem = new Food();
-
+					let newItem = new Food(
+						item.name,
+						item.measurementUnit,
+						portion.protein,
+						portion.fat,
+						portion.carbs
+					);
 					newItem.id = item.id;
-					newItem.name = item.name;
-					newItem.measurementUnit = item.measurementUnit;
 					newItem.unitName = item.unitName;
 					newItem.unitGrams = portion.grams;
-					newItem.protein = portion. protein;
-					newItem.fat = portion.fat;
-					newItem.carbs = portion.carbs;
-
 					foodList.push(newItem);
 				}
 			}

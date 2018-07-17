@@ -54,6 +54,11 @@
         <div class="meal__edit-ingredient__calories">
           {{logEntry.macrosCalculated.calories | number:'1.0-0'}}
         </div>
+        <div class="meal__edit-ingredient__delete">
+          <button class="button button--transparent" (click)="deleteLogEntry(logEntry)">
+            <i class="fas fa-trash"></i>
+          </button>
+        </div>
       </div>
 
       <div class="meal__new-ingredient">
@@ -67,6 +72,10 @@
               <button class="autocomplete__option" (click)="addLogEntry(match); foodName = ''; showAutoComplete = false">{{match.name}} ({{match.unitGrams}} gram)</button>
             </ng-container>
           </div>
+        </div>
+
+        <div>
+          {{logEntry}}
         </div>
 
         <div class="meal__new-ingredient__save" (click)="saveAndClose()">

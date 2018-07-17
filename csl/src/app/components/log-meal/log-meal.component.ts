@@ -3,6 +3,7 @@ import {LogEntry }from '../../model/logEntry';
 import {StoreLogRequest}from '../../model/storeLogRequest';
 import {FoodService}from '../../services/food.service';
 import {LogService}from '../../services/log.service';
+import {Food} from '../../model/food';
 
 @Component({
   selector: 'log-meal',
@@ -28,16 +29,10 @@ export class LogMealComponent implements OnInit {
 
   constructor ( private foodService: FoodService, private logService: LogService,private renderer: Renderer) { }
 
-  ngOnInit() {
-
-  }
-
-	onChange() {
-
-	}
+  ngOnInit() { }
 
 	findFoodMatch(event) {
-		this.foodMatch = new Array();
+		this.foodMatch = new Array<Food>();
 		if (event.data !== null) {
 			for (let item of this.food) {
 				if (item.name.toLowerCase().startsWith(this.foodName.toLowerCase())) {
@@ -130,58 +125,62 @@ export class LogMealComponent implements OnInit {
   }
 
 	addLogEntry(food) {
-		let entry = new LogEntry();
-		entry.food = food;
+		console.log(food);
+		let logEntry = new LogEntry();
+		logEntry.food = food;
 		if (food.portions) {
-			entry.portion = food.portions[0];
+			logEntry.portion = food.portions[0];
 		}
-		let protein = this.calculateProtein(entry);
-		let fat = this.calculateFat(entry);
-		let carbs = this.calculateCarbs(entry);
+
+		let protein = this.calculateProtein(logEntry);
+		let fat = this.calculateFat(logEntry);
+		let carbs = this.calculateCarbs(logEntry);
     let calories = (protein * 4) + (fat * 9) + (carbs * 4);
-		entry.macrosCalculated = { protein: protein, fat: fat, carbs: carbs, calories: calories };
-		entry.day = new Date();
-		this.logEntries.push(entry);
+		logEntry.macrosCalculated = { protein: protein, fat: fat, carbs: carbs, calories: calories };
+		logEntry.day = new Date();
+
+		console.log(logEntry);
+		this.logEntries.push(logEntry);
 	}
 
-  calculateProtein(currEntry){
-     if (currEntry.portion){
-        return (currEntry.multiplier * currEntry.portion.macros.protein);
+  calculateProtein(logEntry){
+     if (logEntry.portion){
+        return (logEntry.multiplier * logEntry.portion.macros.protein);
      } else {
-        if (currEntry.food.measurementUnit == "UNIT"){
-           return (currEntry.multiplier * currEntry.food.unitGrams * currEntry.food.protein);
+        if (logEntry.food.measurementUnit == "UNIT"){
+           return (logEntry.multiplier * logEntry.food.protein);
         } else {
-           return (currEntry.multiplier * currEntry.food.protein);
+           return (logEntry.multiplier * logEntry.food.protein);
         }
      }
   }
 
-  calculateFat(currEntry){
-    if (currEntry.portion){
-        return (currEntry.multiplier * currEntry.portion.macros.fat);
+  calculateFat(logEntry){
+    if (logEntry.portion){
+        return (logEntry.multiplier * logEntry.portion.macros.fat);
      } else {
-        if (currEntry.food.measurementUnit == "UNIT"){
-           return (currEntry.multiplier * currEntry.food.unitGrams * currEntry.food.fat);
+        if (logEntry.food.measurementUnit == "UNIT"){
+           return (logEntry.multiplier * logEntry.food.fat);
         } else {
-           return (currEntry.multiplier * currEntry.food.fat);
+           return (logEntry.multiplier * logEntry.food.fat);
         }
      }
   }
 
-  calculateCarbs(currEntry){
-     if (currEntry.portion){
-        return (currEntry.multiplier * currEntry.portion.macros.carbs);
+  calculateCarbs(logEntry){
+     if (logEntry.portion){
+        return (logEntry.multiplier * logEntry.portion.macros.carbs);
      } else {
-        if (currEntry.food.measurementUnit == "UNIT"){
-           return (currEntry.multiplier * currEntry.food.unitGrams * currEntry.food.carbs);
+        if (logEntry.food.measurementUnit == "UNIT"){
+           return (logEntry.multiplier * logEntry.food.carbs);
         } else {
-           return (currEntry.multiplier * currEntry.food.carbs);
+           return (logEntry.multiplier * logEntry.food.carbs);
         }
      }
   }
 
-  calculateCalories(currEntry){
-		return currEntry.macrosCalculated.calories;
+  calculateCalories(logEntry){
+		return logEntry.macrosCalculated.calories;
   }
 
 	onKeyDown(event) {
@@ -214,8 +213,12 @@ export class LogMealComponent implements OnInit {
 		}
 	}
 
+	deleteLogEntry(logEntry: LogEntry) {
+		console.log(logEntry);
+		this.logEntries
+	}
+
 	saveAndClose() {
-		//TODO: SAVE
 		this.editable = !this.editable;
 		console.log('save and close');
     for (let logEntry of this.logEntries) {

@@ -25,14 +25,14 @@ export class FoodService {
       });
 	}
 
-   getFood(foodId: string) {
-     console.log(macrologBackendUrl + "/" + foodId);
-   	return this.http.get(macrologBackendUrl + "/"+ foodId, { responseType: 'json' });
+	getFood(foodId: string) {
+    console.log(macrologBackendUrl + "/" + foodId);
+		return this.http.get<Food>(macrologBackendUrl + "/"+ foodId, { responseType: 'json' });
   }
 
  	getAllFood() {
-		console.log('getFood');
-   	return this.http.get(macrologBackendUrl, { responseType: 'json' });
+		console.log('getAllFood');
+   	return this.http.get<Food[]>(macrologBackendUrl, { responseType: 'json' });
 	}
 
 	getAllFoodNameIds() {
@@ -41,7 +41,6 @@ export class FoodService {
 			data => food = data,
 			error => console.log(error)
 		);
-
 	}
 
 

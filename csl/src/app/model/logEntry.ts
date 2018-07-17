@@ -1,6 +1,6 @@
 export class LogEntry {
 
-  public id:number;
+  public id: number;
   public description: string;
 	public grams: number;
   public meal: string;
