@@ -25,14 +25,21 @@
         </div>
 
         <div class="meal__edit-ingredient__amount">
-          <input  (keyup)="amountChange(logEntry,$event.target)" type="number" *ngIf="logEntry.portion" [value]="logEntry.multiplier" (input)="logEntry.multiplier = ($event.target.value)">
-          <input  (keyup)="amountChange(logEntry,$event.target)" type="number" *ngIf="!logEntry.portion && logEntry.food.measurementUnit == 'GRAMS'" [value]="logEntry.multiplier * logEntry.food.unitGrams"
+          <input (keyup)="amountChange(logEntry,$event.target)" type="number"
+                 *ngIf="logEntry.portion"
+                 [value]="logEntry.multiplier"
+                 (input)="logEntry.multiplier = ($event.target.value)">
+          <input (keyup)="amountChange(logEntry,$event.target)" type="number"
+                 *ngIf="!logEntry.portion && logEntry.food.measurementUnit == 'GRAMS'"
+                 [value]="logEntry.multiplier * logEntry.food.unitGrams"
                  (input)="logEntry.multiplier = ($event.target.value / logEntry.food.unitGrams)">
-          <input   (keyup)="amountChange(logEntry,$event.target)"type="number" *ngIf="!logEntry.portion && logEntry.food.measurementUnit == 'UNIT'" [value]="logEntry.multiplier" (input)="logEntry.multiplier = $event.target.value">
+          <input (keyup)="amountChange(logEntry,$event.target)" type="number"
+                 *ngIf="!logEntry.portion && logEntry.food.measurementUnit == 'UNIT'"
+                 [value]="logEntry.multiplier"
+                 (input)="logEntry.multiplier = $event.target.value" step="0.1">
         </div>
 
         <div class="meal__edit-ingredient__measurement">
-          <!--{{logEntry.food.unitName}}-->
           <select (change)="portionChange(logEntry,$event.target)">
             <!-- the default unitname -->
             <option value="defaultUnit" selected="{{getSelected(logEntry.portion,undefined)}}">{{logEntry.food.unitName}}</option>

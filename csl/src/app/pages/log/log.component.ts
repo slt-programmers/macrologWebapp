@@ -38,13 +38,7 @@ export class LogComponent implements OnInit {
 	public goalCal;
 
 	ngOnInit() {
-		this.foodService.getAllFood().subscribe(
-			data => { this.food = data;
-				this.getFoodPortionsList();
-			},
-			error => { console.log(error); }
-		);
-
+		this.getAllFood();
 		this.userService.getUserGoalStats().subscribe(
 			data => { this.userGoals = data;
 			 this.goalCal = (this.userGoals[0] * 4) + (this.userGoals[1] * 9) + (this.userGoals[2] * 4);
@@ -98,6 +92,9 @@ export class LogComponent implements OnInit {
 		return total;
 	}
 
+	public getLogEntriesForDate(event) {
+		console.log(event);
+	}
 
 	public openModal() {
 		this.modalIsVisible = true;
@@ -105,6 +102,16 @@ export class LogComponent implements OnInit {
 
 	public closeModal(event) {
 		this.modalIsVisible = false;
+		this.getAllFood();
+	}
+
+	private getAllFood() {
+		this.foodService.getAllFood().subscribe(
+			data => { this.food = data;
+				this.getFoodPortionsList();
+			},
+			error => { console.log(error); }
+		);
 	}
 
 	private getJson() {

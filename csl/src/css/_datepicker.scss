@@ -1,0 +1,60 @@
+.datepicker-wrapper {
+	position: relative;
+}
+
+.date {
+	display: flex;
+	align-items: center;
+
+	&__selected-day {
+		font-weight: 600;
+		margin: 0 10px;
+	}
+
+	&__icon {
+		@include elevation(2);
+  	border-radius: 100%;
+  	color: $primary;
+  	cursor: pointer;
+  	font-size: 24px;
+	}
+}
+
+.picker {
+	@include elevation(4);
+	background-color: $white;
+	padding: 10px;
+	position: absolute;
+	top: 30px;
+	right: calc(50% - 160px);
+	width: 300px;
+
+	&__header {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		padding: 10px;
+	}
+
+	&__days {
+		display: flex;
+		flex-wrap: wrap;
+	}
+
+	&__weekday {
+		flex-basis: calc((100% / 7) - 10px);
+		padding: 5px;
+		text-align: center;
+	}
+
+	&__day {
+		flex-basis: calc((100% / 7) - 10px);
+		padding: 5px 10px 5px 0;
+		text-align: right;
+
+		&:hover {
+			background-color: $mist;
+		}
+	}
+
+}

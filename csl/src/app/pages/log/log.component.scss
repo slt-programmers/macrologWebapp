@@ -29,24 +29,6 @@
 			font-weight: 500;
 		}
 
-		&__icon {
-			@include elevation(2);
-			border-radius: 100%;
-			color: $primary;
-			cursor: pointer;
-		}
-
-		&--previous{
-		  padding-right: 10px;
-		  font-size: 24px;
-		  font-weight: normal;
-		}
-
-		&--next{
-		  padding-left: 10px;
- 		  font-size: 24px;
-		  font-weight: normal;
-		}
 	}
 
 	&__total {
@@ -71,6 +53,7 @@
   		}
   	}
 }
+
 
 
 .total {

@@ -24,9 +24,7 @@
 
   <div class="day">
     <div class="day__header">
-      <span class="day__header--previous"><i class="day__header__icon fas fa-arrow-alt-circle-left "></i></span>
-      <span class="day__header__title">{{displayDate | date:'dd-MM-yyyy'}}</span>
-      <span class="day__header--next"><i class="day__header__icon fas fa-arrow-alt-circle-right"></i></span>
+      <datepicker (change)="getLogEntriesForDate($event)"></datepicker>
     </div>
 
     <log-meal [food]="food" (notify)="notifyLogMeal($event)" [meal]="'Breakfast'" [logEntries]="breakfastLogs"></log-meal>
@@ -42,48 +40,7 @@
       <span class="total__calories">{{getTotal("calories")  | number:'1.0-0'}}</span>
       <span class="total__calories--label">kcal</span>
     </div>
-
-
-    <!--<div class="day__add">-->
-    <!--<span class="total__macro">-->
-
-    <!--<select class="form-field__select">-->
-    <!--<option>Breakfast</option>-->
-    <!--<option>Lunch</option>-->
-    <!--<option>Dinner</option>-->
-    <!--<option>Snack</option>-->
-    <!--</select>-->
-    <!--</span>      <span class="day__total__title">-->
-    <!--<input class="form-field__text-input" type="text" placeholder="Add meal">-->
-    <!--</span>-->
-
-    <!--<span class="total__macro" >-->
-
-    <!--&lt;!&ndash; afhankelijk van gekozen voedsel uit de autocomplete vorige zijn volgende 2 te kiezen &ndash;&gt;-->
-    <!--<input class="form-field__text-input" type="text" placeholder="grams">-->
-    <!--</span>-->
-    <!--<span class="total__macro total__macro&#45;&#45;first">-->
-    <!--<select disabled class="form-field__select">-->
-    <!--<option>grams</option>-->
-    <!--<option>stuks</option>-->
-    <!--</select>-->
-    <!--</span>-->
-
-    <!--<span class="total__calories"><input type="button" class="button button&#45;&#45;primary" value="Add meal"></span>-->
-    <!--<span class="total__calories&#45;&#45;label"></span>-->
-    <!--</div>-->
   </div>
-
-
-  <!--&lt;!&ndash; Onderstaand ombouwen naar filter per dag zodat bovenstaande ook mogelijk wordt met die divjes&ndash;&gt;-->
-  <!--<table>-->
-  <!--<tr *ngFor="let log of allLogs">-->
-  <!--<td >* {{log.food.name}}</td>-->
-  <!--<td>{{log.multiplier}} * </td>-->
-  <!--<td *ngIf="log.portion">{{log.portion.name}}</td>-->
-  <!--<td *ngIf="log.portion">{{log.multiplier * log.portion.grams}} grams</td>-->
-  <!--</tr>-->
-  <!--</table>-->
 
   <div class="floating-action-button-wrapper">
     <button class="button--floating-action button button--primary" (click)="openModal()">
