@@ -1,8 +1,8 @@
-import { Component, OnInit, OnChanges, ViewChild, SimpleChanges, Renderer, ElementRef, Input,Output ,EventEmitter} from '@angular/core';
-import { LogEntry } from '../../model/logEntry';
-import { StoreLogRequest } from '../../model/storeLogRequest';
-import { FoodService } from '../../services/food.service';
-import { LogService } from '../../services/log.service';
+import{Component, OnInit, OnChanges, ViewChild, SimpleChanges, Renderer, ElementRef, Input,Output ,EventEmitter}from '@angular/core';
+import {LogEntry }from '../../model/logEntry';
+import {StoreLogRequest}from '../../model/storeLogRequest';
+import {FoodService}from '../../services/food.service';
+import {LogService}from '../../services/log.service';
 
 @Component({
   selector: 'log-meal',
@@ -47,16 +47,16 @@ export class LogMealComponent implements OnInit {
 		}
 	}
 
-  getAvailablePortions(foodEntry) {
+  getAvailablePortions(logEntry) {
       for (let item of this.food) {
-				if (item.id == (foodEntry.food.id)) {
+				if (item.id == (logEntry.food.id)) {
 					return item.portions;
 				}
 			}
   }
 
-  getSpecificPortion(foodEntry, portionDescription) {
-     let availablePortions = this.getAvailablePortions(foodEntry);
+  getSpecificPortion(logEntry, portionDescription) {
+     let availablePortions = this.getAvailablePortions(logEntry);
      for (let portion of availablePortions) {
         if (portion.description == portionDescription){
            return portion;
@@ -65,20 +65,21 @@ export class LogMealComponent implements OnInit {
      return undefined;
   }
 
-  amountChange(foodEntry, eventTarget) {
-     this.updateCalculatedMacros(foodEntry);
-  }
-  updateCalculatedMacros(foodEntry){
-    let protein =  this.calculateProtein(foodEntry);
-    let carbs = this.calculateCarbs(foodEntry)
-    let fat = this.calculateFat(foodEntry)
-    let calories = fat*9 + carbs*4 + protein*4;
-    foodEntry.macrosCalculated = {'protein':protein,'fat':fat,'carbs':carbs,'calories':calories};
-    this.notify.emit(foodEntry);
+  amountChange(logEntry, eventTarget) {
+     this.updateCalculatedMacros(logEntry);
   }
 
-  portionChange(foodEntry, eventTarget){
-    let oldValue = foodEntry.portion;
+  updateCalculatedMacros(logEntry){
+    let protein =  this.calculateProtein(logEntry);
+    let carbs = this.calculateCarbs(logEntry)
+    let fat = this.calculateFat(logEntry)
+    let calories = (protein * 4) + (fat * 9) + (carbs * 4);
+    logEntry.macrosCalculated = { protein: protein, fat: fat, carbs: carbs, calories: calories };
+    this.notify.emit(logEntry);
+  }
+
+  portionChange(logEntry, eventTarget){
+    let oldValue = logEntry.portion;
     if (oldValue){ // indien geen portion gebruikt
       oldValue = oldValue.description;
     } else {
@@ -90,23 +91,23 @@ export class LogMealComponent implements OnInit {
     if (oldValue == 'defaultUnit' && newValue != 'defaultUnit'){
        // van default naar een portie.
        // Dit gaan we niet omrekenen, maar de gebruiker moet de oude waarde blijven zien.
-       foodEntry.portion = this.getSpecificPortion(foodEntry, newValue);
-       if (foodEntry.food.measurementUnit == 'GRAMS'){
-         foodEntry.multiplier = foodEntry.multiplier * foodEntry.food.unitGrams;
+       logEntry.portion = this.getSpecificPortion(logEntry, newValue);
+       if (logEntry.food.measurementUnit == 'GRAMS'){
+         logEntry.multiplier = logEntry.multiplier * logEntry.food.unitGrams;
        }
-       console.log(foodEntry.portion);
+       console.log(logEntry.portion);
 
     } else if (newValue =='defaultUnit') {
       // van een portie naar default. Dit gaan we omrekenen.
-      let oldPortion = this.getSpecificPortion(foodEntry, oldValue);
+      let oldPortion = this.getSpecificPortion(logEntry, oldValue);
 
-      foodEntry.portion = undefined;
-      if (foodEntry.food.measurementUnit == 'GRAMS'){
-         let oldAmount = foodEntry.multiplier * oldPortion.grams;
-         foodEntry.multiplier = oldAmount / foodEntry.food.unitGrams;
+      logEntry.portion = undefined;
+      if (logEntry.food.measurementUnit == 'GRAMS'){
+         let oldAmount = logEntry.multiplier * oldPortion.grams;
+         logEntry.multiplier = oldAmount / logEntry.food.unitGrams;
       } else {
-         let oldAmount = foodEntry.multiplier * oldPortion.unitMultiplier;
-         foodEntry.multiplier = oldAmount;
+         let oldAmount = logEntry.multiplier * oldPortion.unitMultiplier;
+         logEntry.multiplier = oldAmount;
       }
 
     } else {
@@ -115,7 +116,7 @@ export class LogMealComponent implements OnInit {
 
     }
     // set de macros calculated! dan kun je dat terug emitten en hoeft daar het niet nogmaals uitgerekend te worden
-     this.updateCalculatedMacros(foodEntry);
+     this.updateCalculatedMacros(logEntry);
   }
 
   getSelected(logEntryPortion, portion){
@@ -134,6 +135,12 @@ export class LogMealComponent implements OnInit {
 		if (food.portions) {
 			entry.portion = food.portions[0];
 		}
+		let protein = this.calculateProtein(entry);
+		let fat = this.calculateFat(entry);
+		let carbs = this.calculateCarbs(entry);
+    let calories = (protein * 4) + (fat * 9) + (carbs * 4);
+		entry.macrosCalculated = { protein: protein, fat: fat, carbs: carbs, calories: calories };
+		entry.day = new Date();
 		this.logEntries.push(entry);
 	}
 
