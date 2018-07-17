@@ -1,6 +1,8 @@
-import { Component, OnInit, OnChanges, ViewChild, SimpleChanges, Renderer, ElementRef, Input } from '@angular/core';
+import { Component, OnInit, OnChanges, ViewChild, SimpleChanges, Renderer, ElementRef, Input,Output ,EventEmitter} from '@angular/core';
 import { LogEntry } from '../../model/logEntry';
+import { StoreLogRequest } from '../../model/storeLogRequest';
 import { FoodService } from '../../services/food.service';
+import { LogService } from '../../services/log.service';
 
 @Component({
   selector: 'log-meal',
@@ -17,13 +19,14 @@ export class LogMealComponent implements OnInit {
 	@Input() food;
   @Input() meal: string;
   @Input() logEntries: LogEntry[];
+  @Output() notify:EventEmitter<LogEntry> = new EventEmitter<LogEntry>();
 
   public editable: boolean = false;
 	public foodMatch = new Array();
 	public foodName: string;
 	public showAutoComplete: boolean;
 
-  constructor ( private foodService: FoodService, private renderer: Renderer) { }
+  constructor ( private foodService: FoodService, private logService: LogService,private renderer: Renderer) { }
 
   ngOnInit() {
 
@@ -60,6 +63,18 @@ export class LogMealComponent implements OnInit {
         }
      }
      return undefined;
+  }
+
+  amountChange(foodEntry, eventTarget) {
+     this.updateCalculatedMacros(foodEntry);
+  }
+  updateCalculatedMacros(foodEntry){
+    let protein =  this.calculateProtein(foodEntry);
+    let carbs = this.calculateCarbs(foodEntry)
+    let fat = this.calculateFat(foodEntry)
+    let calories = fat*9 + carbs*4 + protein*4;
+    foodEntry.macrosCalculated = {'protein':protein,'fat':fat,'carbs':carbs,'calories':calories};
+    this.notify.emit(foodEntry);
   }
 
   portionChange(foodEntry, eventTarget){
@@ -99,6 +114,8 @@ export class LogMealComponent implements OnInit {
       // TODO :)
 
     }
+    // set de macros calculated! dan kun je dat terug emitten en hoeft daar het niet nogmaals uitgerekend te worden
+     this.updateCalculatedMacros(foodEntry);
   }
 
   getSelected(logEntryPortion, portion){
@@ -157,7 +174,7 @@ export class LogMealComponent implements OnInit {
   }
 
   calculateCalories(currEntry){
-		return this.calculateFat(currEntry) * 9 + this.calculateProtein(currEntry) * 4 + this.calculateCarbs(currEntry) * 4;
+		return currEntry.macrosCalculated.calories;
   }
 
 	onKeyDown(event) {
@@ -194,5 +211,21 @@ export class LogMealComponent implements OnInit {
 		//TODO: SAVE
 		this.editable = !this.editable;
 		console.log('save and close');
+    for (let logEntry of this.logEntries) {
+      let newRequest = new StoreLogRequest();
+      newRequest.id = logEntry.id;
+      newRequest.foodId = logEntry.food.id;
+      if (logEntry.portion){
+         newRequest.portionId = logEntry.portion.id;
+      }
+      newRequest.multiplier = logEntry.multiplier;
+      newRequest.day = logEntry.day;
+      newRequest.meal = this.meal.toUpperCase();
+      console.log('store log');
+      console.log(newRequest);
+      this.logService.storeLogEntry(newRequest);
+    }
+    console.log(this.logEntries[0]);
+    this.notify.emit(this.logEntries[0])
 	}
 }
