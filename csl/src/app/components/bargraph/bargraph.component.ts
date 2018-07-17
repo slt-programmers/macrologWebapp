@@ -2,8 +2,7 @@ import { Component, OnInit, OnChanges, ViewChild, SimpleChanges, ElementRef, Inp
 
 @Component({
   selector: 'bargraph',
-  templateUrl: './bargraph.component.html',
-  styleUrls: ['./bargraph.component.scss']
+  templateUrl: './bargraph.component.html'
 })
 export class BargraphComponent implements OnInit {
 

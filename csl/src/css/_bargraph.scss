@@ -1,5 +1,3 @@
-@import '../../../css/public';
-
 .bargraph {
 	height: 40px;
 	min-width: 120px;
@@ -15,6 +13,7 @@
 	}
 
 	&__track {
+		@include elevation(1);
 		position: absolute;
 		background-color: $smoke;
 		height: 30px;
@@ -23,6 +22,8 @@
 		width: 100%;
 
 		&--fill {
+			@include elevation(2);
+
 			background-color: #29c646;
 			height: 20px;
 			top: 5px;

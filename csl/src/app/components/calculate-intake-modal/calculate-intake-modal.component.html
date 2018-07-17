@@ -61,7 +61,7 @@
 
     <div class="calorie-box">
       <i class="calorie-box__icon fas fa-sort-down" *ngIf="false" (click)="subtractOne()"></i>
-      <span class="calorie-box__title">{{calories | number : '1.0-0'}} Calories</span>
+      <h3 class="calorie-box__title">{{calories | number : '1.0-0'}} Calories</h3>
       <i class="calorie-box__icon fas fa-sort-up" *ngIf="false" (click)="addOne()"></i>
     </div>
 
@@ -75,13 +75,13 @@
 
     <div class="macro-box" *ngIf="!showMoreOptions">
       <div class="macro-box__macro">
-        <span class="macro-box__title">{{protein | number : '1.0-0'}} gr Protein</span>
+        <h3 class="macro-box__title">{{protein | number : '1.0-0'}} gr Protein</h3>
       </div>
       <div class="macro-box__macro">
-        <span class="macro-box__title">{{fat | number : '1.0-0'}} gr Fat</span>
+        <h3 class="macro-box__title">{{fat | number : '1.0-0'}} gr Fat</h3>
       </div>
       <div class="macro-box__macro">
-        <span class="macro-box__title">{{carbs | number : '1.0-0'}} gr Carbs</span>
+        <h3 class="macro-box__title">{{carbs | number : '1.0-0'}} gr Carbs</h3>
       </div>
     </div>
 

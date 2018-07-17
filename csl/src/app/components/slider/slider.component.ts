@@ -3,8 +3,7 @@ ElementRef, Input, Output, EventEmitter, SimpleChanges}from '@angular/core';
 
 @Component({
   selector: 'slider',
-  templateUrl: './slider.component.html',
-  styleUrls: ['./slider.component.scss']
+  templateUrl: './slider.component.html'
 })
 export class SliderComponent implements OnInit {
 
