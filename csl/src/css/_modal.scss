@@ -3,6 +3,7 @@
 	height: 100%;
 	left: 0;
 	overflow: scroll;
+	overflow-x: hidden;
 	position: fixed;
 	top: 0;
 	width: 100%;
@@ -11,7 +12,7 @@
 
 .modal {
 	margin: 7% auto;
-	max-width: 1200px;
+	max-width: 1000px;
 	width: 80%;
 
 	&__header {

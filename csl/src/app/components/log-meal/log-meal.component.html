@@ -58,14 +58,14 @@
 
       <div class="meal__new-ingredient">
         <div #newIngredient class="meal__new-ingredient__name" (keydown)="onKeyDown($event)">
-          <input class="meal__new-ingredient__input" #foodNameInput class="" placeholder="What did you have for {{meal.toLowerCase()}}?"
+          <input class="meal__new-ingredient__input" #foodNameInput placeholder="What did you have for {{meal.toLowerCase()}}?"
                  (input)="findFoodMatch($event)"
                  [(ngModel)]="foodName"
                  (focus)="showAutoComplete = true">
           <div #autoComplete class="autocomplete" *ngIf="showAutoComplete">
-            <div class="autocomplete__option" *ngFor="let match of foodMatch">
-              <div (click)="addLogEntry(match); foodName = ''; showAutoComplete = false">{{match.name}} ({{match.unitGrams}} gram)</div>
-            </div>
+            <ng-container *ngFor="let match of foodMatch">
+              <button class="autocomplete__option" (click)="addLogEntry(match); foodName = ''; showAutoComplete = false">{{match.name}} ({{match.unitGrams}} gram)</button>
+            </ng-container>
           </div>
         </div>
 

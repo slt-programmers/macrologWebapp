@@ -12,6 +12,7 @@ export class LogMealComponent implements OnInit {
 
 	@ViewChild('newIngredient') private newIngredientEref: ElementRef;
 	@ViewChild('autoComplete') private autoCompleteEref: ElementRef;
+	@ViewChild('test') private testRef: ElementRef;
 
 	@Input() food;
   @Input() meal: string;
@@ -161,17 +162,24 @@ export class LogMealComponent implements OnInit {
 
 	onKeyDown(event) {
 		console.log(event);
-		console.log(document.activeElement.classList.contains('//TODO Class toevoegen'));
+		console.log(document.activeElement);
+		console.log(document.activeElement.classList.contains('meal__new-ingredient__input'));
 		if(this.autoCompleteEref) {
-			if(event.code === 'ArrowDown') {
-				console.log(this.autoCompleteEref);
-				console.log(this.autoCompleteEref.nativeElement.childNodes[1]);
+			if(document.activeElement.classList.contains('meal__new-ingredient__input')) {
+				if(event.code === 'ArrowDown') {
+					let nodelist = this.autoCompleteEref.nativeElement.childNodes;
+					for (let index = 0; index < nodelist.length; index++) {
+						if (nodelist[index] !== 'comment') {
+							this.renderer.invokeElementMethod(nodelist[index], 'focus');
+							break;
+						}
+					}
+				}
+				if(event.code === 'ArrowUp') {
 
-        this.renderer.invokeElementMethod(this.autoCompleteEref.nativeElement.childNodes[1], 'focus');
-
-			}
-			if(event.code === 'ArrowUp') {
-
+				}
+			} else {
+				// option selected
 			}
 		}
 	}
