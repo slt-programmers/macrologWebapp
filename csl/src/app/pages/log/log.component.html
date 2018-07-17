@@ -12,11 +12,11 @@
           <span class="intake-goal__macro">Carbs: {{getTotal("carbs") | number:'1.1-1'}}/<strong>{{userGoals[2]}}</strong></span>
         </div>
       </div>
-      <div class="intake-goal__graph">
+      <div class="intake-goal__graph" *ngIf="getLogEntriesComplete">
         <div class="bargraph-wrapper">
-          <bargraph [percentage]="100" [title]="'P'"></bargraph>
-          <bargraph [percentage]="180" [title]="'F'"></bargraph>
-          <bargraph [percentage]="70" [title]="'C'"></bargraph>
+          <bargraph [percentage]="getTotal('protein')/userGoals[0]*100" [title]="'P'"></bargraph>
+          <bargraph [percentage]="getTotal('fat')/userGoals[1]*100" [title]="'F'"></bargraph>
+          <bargraph [percentage]="getTotal('carbs')/userGoals[2]*100" [title]="'C'"></bargraph>
         </div>
       </div>
     </div>
