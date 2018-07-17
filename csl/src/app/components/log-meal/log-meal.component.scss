@@ -90,6 +90,10 @@
 		&__calories {
 			flex-basis: 20%;
 			text-align: end;
+
+			&--label {
+				margin-left: 5px;
+			}
 		}
 	}
 
