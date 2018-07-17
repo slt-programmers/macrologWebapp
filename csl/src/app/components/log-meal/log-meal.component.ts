@@ -215,7 +215,11 @@ export class LogMealComponent implements OnInit {
 
 	deleteLogEntry(logEntry: LogEntry) {
 		console.log(logEntry);
-		this.logEntries
+    let index: number = this.logEntries.indexOf(logEntry);
+    if (index !== -1) {
+       this.logEntries.splice(index, 1);
+		}
+		this.logService.deleteLogEntry(logEntry);
 	}
 
 	saveAndClose() {

@@ -1,9 +1,9 @@
 import {Injectable} from'@angular/core';
 import {HttpClient} from '@angular/common/http';
-import { StoreLogRequest } from '../model/storeLogRequest';
+import {StoreLogRequest} from '../model/storeLogRequest';
+import {LogEntry} from '../model/logEntry';
 
-
-const simpleJavaServletUrl = '//localhost:8090/logs';
+const macrologBackendUrl = '//localhost:8090/logs';
 
 @Injectable()
 export class LogService {
@@ -12,8 +12,9 @@ export class LogService {
 	}
 
  	getAllLogs() {
-   	return this.http.get(simpleJavaServletUrl, { responseType: 'json' });
+   	return this.http.get(macrologBackendUrl, { responseType: 'json' });
 	}
+
 	public storeLogEntry(storeLogEntryRequest: StoreLogRequest) {
 		console.log('In storeLogRequest');
    	const headers = {'Content-Type': 'application/json',
@@ -21,7 +22,7 @@ export class LogService {
    	};
 
   	const options = { headers: headers };
-    return this.http.post<StoreLogRequest>(simpleJavaServletUrl + '/', storeLogEntryRequest, options).subscribe(data => {
+    return this.http.post<StoreLogRequest>(macrologBackendUrl + '/', storeLogEntryRequest, options).subscribe(data => {
         console.log('saved');
       },
       error => {
@@ -29,5 +30,19 @@ export class LogService {
       });
 	}
 
+	public deleteLogEntry(logEntry: LogEntry) {
+		console.log('In DeleteLogEntry');
+   	const headers = {'Content-Type': 'application/json',
+   		'Access-Control-Allow-Origin': 'http://localhost:4200'
+   	};
+
+  	const options = { headers: headers };
+    return this.http.delete<number>(macrologBackendUrl + '/' + logEntry.id, options).subscribe(data => {
+        console.log('deleted');
+      },
+      error => {
+        console.log(error);
+      });
+	}
 
 }
