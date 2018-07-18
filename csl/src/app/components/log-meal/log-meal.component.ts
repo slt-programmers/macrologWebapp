@@ -42,6 +42,10 @@ export class LogMealComponent implements OnInit {
 		}
 	}
 
+ doIt(el){
+    console.log(el);
+ }
+
   getAvailablePortions(logEntry) {
       for (let item of this.food) {
         // in foodSearchable zitten dubbele entries en ook zonder portions

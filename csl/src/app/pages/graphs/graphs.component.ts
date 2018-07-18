@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {LogService}from '../../services/log.service';
 import { DatePipe } from '@angular/common';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-graphs',
@@ -11,10 +12,28 @@ export class GraphsComponent implements OnInit {
 
    public macrosMonth;
 
-  constructor(private logService: LogService) { }
+  constructor(private logService: LogService,private sanitizer: DomSanitizer) { }
 
   ngOnInit() {
      this.getMacros();
+  }
+
+  ngAfterViewChecked(){
+     let pipe = new DatePipe('en-US');
+     for (let dayMacro of this.macrosMonth) {
+       let fetchDate = pipe.transform(dayMacro.day,'ddMMyyyy');
+       console.log(fetchDate);
+       let protein = document.getElementById('protein_'+fetchDate);
+       let fat = document.getElementById('fat_'+fetchDate);
+       let carbs = document.getElementById('carbs_'+fetchDate);
+       if (!protein) return;
+        console.log(Math.round(dayMacro.macro.protein) + 'px;');
+       protein.style.height = Math.round(dayMacro.macro.protein) + 'px';
+       fat.style.height = Math.round(dayMacro.macro.fat) + 'px';
+       carbs.style.height = Math.round(dayMacro.macro.carbs) + 'px';
+    }
+
+
   }
 
 
