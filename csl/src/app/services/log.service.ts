@@ -15,6 +15,9 @@ export class LogService {
    	return this.http.get(macrologBackendUrl, { responseType: 'json' });
 	}
 
+ 	getDayLogs(date) {
+   	return this.http.get(macrologBackendUrl + '/day/'+date, { responseType: 'json' });
+	}
 	public storeLogEntry(storeLogEntryRequest: StoreLogRequest) {
 		console.log('In storeLogRequest');
    	const headers = {'Content-Type': 'application/json',

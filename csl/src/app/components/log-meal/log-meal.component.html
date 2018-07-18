@@ -77,7 +77,7 @@
                  (focus)="showAutoComplete = true">
           <div #autoComplete class="autocomplete" *ngIf="showAutoComplete">
             <ng-container *ngFor="let match of foodMatch">
-              <button class="autocomplete__option" (click)="addLogEntry(match); foodName = ''; showAutoComplete = false">{{match.name}} ({{match.unitGrams}} gram)</button>
+              <button class="autocomplete__option" (click)="addLogEntry(match); foodName = ''; showAutoComplete = false">{{matchDescription(match)}}</button>
             </ng-container>
           </div>
         </div>

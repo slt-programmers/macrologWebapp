@@ -1,8 +1,6 @@
 export class LogEntry {
 
   public id: number;
-  public description: string;
-	public grams: number;
   public meal: string;
 	public food;
 	public portion;
@@ -10,9 +8,6 @@ export class LogEntry {
   public day;
   public macrosCalculated;
 
-	constructor (description?: string, grams?: number, meal?: string) {
-    this.description = description;
-    this.grams = grams;
-		this.meal = meal;
+	constructor () {
 	}
 }

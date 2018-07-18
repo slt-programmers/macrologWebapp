@@ -5,9 +5,11 @@ import {UserService}from '../../services/user.service';
 import {FoodService}from '../../services/food.service';
 import {LogEntry} from '../../model/logEntry';
 import {Food} from '../../model/food';
+import {FoodSearchable} from '../../model/foodSearchable';
 
 import { Observable } from 'rxjs/Observable';
 import { forkJoin } from 'rxjs/observable/forkJoin';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'log',
@@ -26,7 +28,8 @@ export class LogComponent implements OnInit {
 
 	public days;
   public allLogs;
-	public food;
+	public food; // alleen food, met portions eronder
+  public foodAndPortions; // food entries met mogelijke portions toegevoegd. (food platgeslagen)
   public displayDate = new Date();
 
   public breakfastLogs = new Array<LogEntry>();
@@ -49,7 +52,30 @@ export class LogComponent implements OnInit {
 		this.getJson().subscribe(data => this.days = data,
 					error => console.log(error));
 
-    this.logService.getAllLogs().subscribe(
+    this.getLogEntries();
+  }
+
+	public getTotal(macro) {
+		let total = 0.0;
+		for (let logentry of this.breakfastLogs) {
+				total += logentry.macrosCalculated[macro];
+    }
+		for (let logentry of this.lunchLogs) {
+				total += logentry.macrosCalculated[macro];
+    }
+		for (let logentry of this.dinnerLogs) {
+				total += logentry.macrosCalculated[macro];
+    }
+		for (let logentry of this.snacksLogs) {
+				total += logentry.macrosCalculated[macro];
+    }
+		return total;
+	}
+
+  private getLogEntries(){
+    let pipe = new DatePipe('en-US');
+    let fetchDate = pipe.transform(this.displayDate,'dd-MM-yyyy'));
+    this.logService.getDayLogs(fetchDate).subscribe(
       data => {
           this.allLogs = data;
           this.breakfastLogs = this.allLogs.filter(
@@ -70,30 +96,11 @@ export class LogComponent implements OnInit {
 		);
   }
 
-  public notifyLogMeal($event) {
-     console.log('Notify received');
-     console.log($event);
-  }
-
-	public getTotal(macro) {
-		let total = 0.0;
-		for (let logentry of this.breakfastLogs) {
-				total += logentry.macrosCalculated[macro];
-    }
-		for (let logentry of this.lunchLogs) {
-				total += logentry.macrosCalculated[macro];
-    }
-		for (let logentry of this.dinnerLogs) {
-				total += logentry.macrosCalculated[macro];
-    }
-		for (let logentry of this.snacksLogs) {
-				total += logentry.macrosCalculated[macro];
-    }
-		return total;
-	}
-
 	public getLogEntriesForDate(event) {
 		console.log(event);
+    this.displayDate = event;
+    this.getLogEntries();
+
 	}
 
 	public openModal() {
@@ -107,8 +114,9 @@ export class LogComponent implements OnInit {
 
 	private getAllFood() {
 		this.foodService.getAllFood().subscribe(
-			data => { this.food = data;
-				this.getFoodPortionsList();
+			data => {
+        this.food = data;
+				this.getFoodSearchableList(data);
 			},
 			error => { console.log(error); }
 		);
@@ -118,31 +126,23 @@ export class LogComponent implements OnInit {
 		return this.http.get("assets/logentries.json");
 	}
 
-	private getFoodPortionsList() {
+  // Maakt een lijst met daarin food en food + alle mogelijke portions
+	private getFoodSearchableList(food) {
 		let foodList = new Array();
 
-		for (let item of this.food) {
-			foodList.push(item);
+		for (let item of food) {
+      let matchZonderPortion = new FoodSearchable(item,undefined);
+			foodList.push(matchZonderPortion);
 
 			if (item.portions) {
-				for (let portion of item.portions) {
-
-					let newItem = new Food(
-						item.name,
-						item.measurementUnit,
-						portion.protein,
-						portion.fat,
-						portion.carbs
-					);
-					newItem.id = item.id;
-					newItem.unitName = item.unitName;
-					newItem.unitGrams = portion.grams;
-					foodList.push(newItem);
-				}
+				 for (let portion of item.portions) {
+           foodList.push(new FoodSearchable(item,portion));
+				 }
 			}
 		}
 
-		this.food = foodList;
+    console.log(foodList);
+		this.foodAndPortions = foodList;
 	}
 
 }

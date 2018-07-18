@@ -13,7 +13,7 @@
         </div>
       </div>
       <div class="intake-goal__graph" *ngIf="getLogEntriesComplete">
-        <div class="bargraph-wrapper">
+        <div #bargraph class="bargraph-wrapper">
           <bargraph [percentage]="getTotal('protein')/userGoals[0]*100" [title]="'P'"></bargraph>
           <bargraph [percentage]="getTotal('fat')/userGoals[1]*100" [title]="'F'"></bargraph>
           <bargraph [percentage]="getTotal('carbs')/userGoals[2]*100" [title]="'C'"></bargraph>
@@ -33,10 +33,10 @@
       <span class="day__header__macro">Carbs</span>
     </div>
 
-    <log-meal [food]="food" (notify)="notifyLogMeal($event)" [meal]="'Breakfast'" [logEntries]="breakfastLogs"></log-meal>
-    <log-meal [food]="food" (notify)="notifyLogMeal($event)" [meal]="'Lunch'" [logEntries]="lunchLogs"></log-meal>
-    <log-meal [food]="food" (notify)="notifyLogMeal($event)" [meal]="'Dinner'" [logEntries]="dinnerLogs"></log-meal>
-    <log-meal [food]="food" (notify)="notifyLogMeal($event)" [meal]="'Snacks'" [logEntries]="snacksLogs"></log-meal>
+    <log-meal [food]="foodAndPortions"  [meal]="'Breakfast'" [logEntries]="breakfastLogs"></log-meal>
+    <log-meal [food]="foodAndPortions"  [meal]="'Lunch'" [logEntries]="lunchLogs"></log-meal>
+    <log-meal [food]="foodAndPortions"  [meal]="'Dinner'" [logEntries]="dinnerLogs"></log-meal>
+    <log-meal [food]="foodAndPortions"  [meal]="'Snacks'" [logEntries]="snacksLogs"></log-meal>
 
     <div class="day__total">
       <span class="day__total__title">Daily total</span>

@@ -35,7 +35,9 @@ export class LogMealComponent implements OnInit {
 		this.foodMatch = new Array<Food>();
 		if (event.data !== null) {
 			for (let item of this.food) {
-				if (item.name.toLowerCase().startsWith(this.foodName.toLowerCase())) {
+        console.log(item);
+        let matchFoodName = item.food.name.toLowerCase().startsWith(this.foodName.toLowerCase());
+				if (matchFoodName) {
 					this.foodMatch.push(item);
 				}
 			}
@@ -44,10 +46,12 @@ export class LogMealComponent implements OnInit {
 
   getAvailablePortions(logEntry) {
       for (let item of this.food) {
-				if (item.id == (logEntry.food.id)) {
-					return item.portions;
+        // in foodSearchable zitten dubbele entries en ook zonder portions
+				if (item.food.id == logEntry.food.id) {
+					return item.food.portions;
 				}
 			}
+      return undefined;
   }
 
   getSpecificPortion(logEntry, portionDescription) {
@@ -124,21 +128,21 @@ export class LogMealComponent implements OnInit {
      }
   }
 
-	addLogEntry(food) {
-		console.log(food);
+	addLogEntry(foodSearchable) {
+    console.log('addLogEntry');
+		console.log(foodSearchable);
 		let logEntry = new LogEntry();
-		logEntry.food = food;
-		if (food.portions) {
-			logEntry.portion = food.portions[0];
+    logEntry.meal = this.meal.toUpperCase();
+		logEntry.food = foodSearchable.food;
+		if (foodSearchable.portion) {
+			logEntry.portion = foodSearchable.portion;
 		}
+    logEntry.multiplier = 1;
 
-		let protein = this.calculateProtein(logEntry);
-		let fat = this.calculateFat(logEntry);
-		let carbs = this.calculateCarbs(logEntry);
-    let calories = (protein * 4) + (fat * 9) + (carbs * 4);
-		logEntry.macrosCalculated = { protein: protein, fat: fat, carbs: carbs, calories: calories };
+    this.updateCalculatedMacros(logEntry);
 		logEntry.day = new Date();
 
+    console.log('result:');
 		console.log(logEntry);
 		this.logEntries.push(logEntry);
 	}
@@ -181,6 +185,18 @@ export class LogMealComponent implements OnInit {
 
   calculateCalories(logEntry){
 		return logEntry.macrosCalculated.calories;
+  }
+
+  matchDescription(foodSearchable) {
+   if (foodSearchable.portion){
+     return foodSearchable.food.name + " (" + foodSearchable.portion.description + ")";
+   } else {
+     if (foodSearchable.food.measurementUnit == "UNIT"){
+        return foodSearchable.food.name + " (" + foodSearchable.food.unitName +" )";
+     } else {
+        return foodSearchable.food.name + " (" + foodSearchable.food.unitGrams  + " " + foodSearchable.food.unitName +" )";
+      }
+   }
   }
 
 	onKeyDown(event) {

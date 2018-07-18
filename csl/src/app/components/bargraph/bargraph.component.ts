@@ -24,6 +24,7 @@ export class BargraphComponent implements OnInit {
   }
 
 	onChange() {
+    console.log('change');
 		let percentCap = this.percentage > 150 ? 150 : this.percentage;
 		let hueDegree = this.calcHue(percentCap);
 		this.trackFill.style.width = percentCap + '%';
