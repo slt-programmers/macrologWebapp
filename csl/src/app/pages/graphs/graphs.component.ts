@@ -4,9 +4,12 @@ import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-graphs',
-  templateUrl: './graphs.component.html'
+  templateUrl: './graphs.component.html',
+  styleUrls: ['./graphs.component.scss']
 })
 export class GraphsComponent implements OnInit {
+
+   public macrosMonth;
 
   constructor(private logService: LogService) { }
 
@@ -23,6 +26,7 @@ export class GraphsComponent implements OnInit {
       data => {
           this.macrosMonth = data;
       }
+    )
   }
 
 }

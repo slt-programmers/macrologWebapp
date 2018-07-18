@@ -1,7 +1,11 @@
 <div class="container">
   <p>Grafiekjes</p>
-  <div  *ngFor="let dailyMacro of macrosMonth" >
-      {{dailyMacro.day | date: 'dd-MM-yyyy'}} - {{dailyMacro.macro.protein | number:'1.1-1'}} - {{dailyMacro.macro.fat | number:'1.1-1'}} - {{dailyMacro.macro.carbs | number:'1.1-1'}} - {{dailyMacro.macro.calories | number:'1.1-1'}}
+  <div class="graph">
+    <div class="day" *ngFor="let dailyMacro of macrosMonth" >
+      <div class="protein" style="height: 100px">{{dailyMacro.macro.protein | number:'1.0-0'}} </div>
+      <div class="fat" style="height: 10px">{{dailyMacro.macro.fat | number:'1.0-0'}} </div>
+      <div class="carbs" style="height: 40px">{{dailyMacro.macro.carbs | number:'1.0-0'}} </div>
+      <!--{{dailyMacro.day | date: 'dd-MM-yyyy'}} - {{dailyMacro.macro.protein | number:'1.1-1'}} - {{dailyMacro.macro.fat | number:'1.1-1'}} - {{dailyMacro.macro.carbs | number:'1.1-1'}} - {{dailyMacro.macro.calories | number:'1.1-1'}}-->
+    </div>
   </div>
-
 </div>
