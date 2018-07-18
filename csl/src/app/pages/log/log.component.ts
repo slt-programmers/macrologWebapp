@@ -74,7 +74,7 @@ export class LogComponent implements OnInit {
 
   private getLogEntries(){
     let pipe = new DatePipe('en-US');
-    let fetchDate = pipe.transform(this.displayDate,'dd-MM-yyyy'));
+    let fetchDate = pipe.transform(this.displayDate,'dd-MM-yyyy');
     this.logService.getDayLogs(fetchDate).subscribe(
       data => {
           this.allLogs = data;
