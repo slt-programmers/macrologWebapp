@@ -108,6 +108,7 @@ export class LogComponent implements OnInit {
 	}
 
 	public closeModal(event) {
+    console.log('refreshed');
 		this.modalIsVisible = false;
 		this.getAllFood();
 	}
@@ -128,6 +129,7 @@ export class LogComponent implements OnInit {
 
   // Maakt een lijst met daarin food en food + alle mogelijke portions
 	private getFoodSearchableList(food) {
+    console.log('reconstruct searchable food');
 		let foodList = new Array();
 
 		for (let item of food) {

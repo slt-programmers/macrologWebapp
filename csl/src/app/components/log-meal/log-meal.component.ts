@@ -72,7 +72,7 @@ export class LogMealComponent implements OnInit {
     let fat = this.calculateFat(logEntry)
     let calories = (protein * 4) + (fat * 9) + (carbs * 4);
     logEntry.macrosCalculated = { protein: protein, fat: fat, carbs: carbs, calories: calories };
-    this.notify.emit(logEntry);
+
   }
 
   portionChange(logEntry, eventTarget){
