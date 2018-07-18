@@ -20,7 +20,6 @@ export class LogMealComponent implements OnInit {
 	@Input() food;
   @Input() meal: string;
   @Input() logEntries: LogEntry[];
-  @Output() notify:EventEmitter<LogEntry> = new EventEmitter<LogEntry>();
 
   public editable: boolean = false;
 	public foodMatch = new Array();
@@ -35,8 +34,7 @@ export class LogMealComponent implements OnInit {
 		this.foodMatch = new Array<Food>();
 		if (event.data !== null) {
 			for (let item of this.food) {
-        console.log(item);
-        let matchFoodName = item.food.name.toLowerCase().startsWith(this.foodName.toLowerCase());
+        let matchFoodName = item.food.name.toLowerCase().indexOf(this.foodName.toLowerCase()) >=0 ;
 				if (matchFoodName) {
 					this.foodMatch.push(item);
 				}
@@ -240,7 +238,6 @@ export class LogMealComponent implements OnInit {
 
 	saveAndClose() {
 		this.editable = !this.editable;
-		console.log('save and close');
     for (let logEntry of this.logEntries) {
       let newRequest = new StoreLogRequest();
       newRequest.id = logEntry.id;
@@ -251,11 +248,7 @@ export class LogMealComponent implements OnInit {
       newRequest.multiplier = logEntry.multiplier;
       newRequest.day = logEntry.day;
       newRequest.meal = this.meal.toUpperCase();
-      console.log('store log');
-      console.log(newRequest);
       this.logService.storeLogEntry(newRequest);
     }
-    console.log(this.logEntries[0]);
-    this.notify.emit(this.logEntries[0])
 	}
 }
