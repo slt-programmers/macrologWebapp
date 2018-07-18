@@ -19,6 +19,7 @@ import { BargraphComponent } from './components/bargraph/bargraph.component';
 import { AddFoodModalComponent } from './components/add-food-modal/add-food-modal.component';
 import { CalculateIntakeModalComponent } from './components/calculate-intake-modal/calculate-intake-modal.component';
 import { MealsComponent } from './pages/meals/meals.component';
+import { GraphsComponent } from './pages/graphs/graphs.component';
 import { DatepickerComponent } from './components/datepicker/datepicker.component';
 
 const appRoutes: Routes = [
@@ -26,6 +27,7 @@ const appRoutes: Routes = [
 {path: 'food', component: FoodComponent},
 {path: 'user', component: UserComponent},
 {path: 'meals', component: MealsComponent},
+{path: 'graphs', component: GraphsComponent},
 {path: '', redirectTo: '/log', pathMatch: 'full'},
 {path: '**', component: LogComponent}
 ];
@@ -42,6 +44,7 @@ const appRoutes: Routes = [
     AddFoodModalComponent,
 		CalculateIntakeModalComponent,
 		MealsComponent,
+    GraphsComponent,
 		DatepickerComponent
   ],
   imports: [
