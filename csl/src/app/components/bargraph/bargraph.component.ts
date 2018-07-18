@@ -24,12 +24,15 @@ export class BargraphComponent implements OnInit {
   }
 
 	onChange() {
-    console.log('change');
 		let percentCap = this.percentage > 150 ? 150 : this.percentage;
 		let hueDegree = this.calcHue(percentCap);
+		this.trackFill = this.trackFillElement.nativeElement;
 		this.trackFill.style.width = percentCap + '%';
 		this.trackFill.style.filter = 'hue-rotate(' + hueDegree + 'deg)';
 	}
+  ngOnChanges(){
+    this.onChange();
+  }
 
 	calcHue(percent: number): number {
 		// 150%  50   = -120deg;
