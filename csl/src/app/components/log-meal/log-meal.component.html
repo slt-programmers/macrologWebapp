@@ -5,9 +5,9 @@
     <div class="meal__display">
       <div *ngFor="let logEntry of logEntries" class="meal__ingredient">
         <span class="meal__ingredient__name">{{logEntry.food.name}}</span>
-        <span class="meal__ingredient__amount" *ngIf="logEntry.portion">{{logEntry.multiplier | number:'1.0-0'}} {{logEntry.portion.description}}</span>
-        <span class="meal__ingredient__amount" *ngIf="!logEntry.portion && logEntry.food.measurementUnit=='GRAMS'">{{logEntry.food.unitGrams * logEntry.multiplier | number:'1.0-0'}}  {{logEntry.food.unitName}}</span>
-        <span class="meal__ingredient__amount" *ngIf="!logEntry.portion && logEntry.food.measurementUnit=='UNIT'" >{{logEntry.multiplier | number:'1.0-0'}}  {{logEntry.food.unitName}}</span>
+        <span class="meal__ingredient__amount" *ngIf="logEntry.portion">{{logEntry.multiplier | number:'1.0-2'}} {{logEntry.portion.description}}</span>
+        <span class="meal__ingredient__amount" *ngIf="!logEntry.portion && logEntry.food.measurementUnit=='GRAMS'">{{logEntry.food.unitGrams * logEntry.multiplier | number:'1.0-2'}}  {{logEntry.food.unitName}}</span>
+        <span class="meal__ingredient__amount" *ngIf="!logEntry.portion && logEntry.food.measurementUnit=='UNIT'" >{{logEntry.multiplier | number:'1.0-2'}}  {{logEntry.food.unitName}}</span>
         <span class="meal__ingredient__macro">{{logEntry.macrosCalculated.protein | number:'1.1-1'}}</span>
         <span class="meal__ingredient__macro">{{logEntry.macrosCalculated.fat | number:'1.1-1'}}</span>
         <span class="meal__ingredient__macro">{{logEntry.macrosCalculated.carbs | number:'1.1-1'}}</span>
@@ -26,15 +26,15 @@
         </div>
 
         <div class="meal__edit-ingredient__amount">
-          <input (keyup)="amountChange(logEntry,$event.target)" type="number"
+          <input (keyup)="amountChange(logEntry,$event.target)" type="number" step=".01"
                  *ngIf="logEntry.portion"
                  [value]="logEntry.multiplier"
                  (input)="logEntry.multiplier = ($event.target.value)">
-          <input (keyup)="amountChange(logEntry,$event.target)" type="number"
+          <input (keyup)="amountChange(logEntry,$event.target)" type="number" step=".01"
                  *ngIf="!logEntry.portion && logEntry.food.measurementUnit == 'GRAMS'"
                  [value]="logEntry.multiplier * logEntry.food.unitGrams"
                  (input)="logEntry.multiplier = ($event.target.value / logEntry.food.unitGrams)">
-          <input (keyup)="amountChange(logEntry,$event.target)" type="number"
+          <input (keyup)="amountChange(logEntry,$event.target)" type="number" step=".01"
                  *ngIf="!logEntry.portion && logEntry.food.measurementUnit == 'UNIT'"
                  [value]="logEntry.multiplier"
                  (input)="logEntry.multiplier = $event.target.value" step="0.1">
