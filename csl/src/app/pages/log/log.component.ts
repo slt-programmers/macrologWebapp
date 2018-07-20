@@ -97,8 +97,8 @@ export class LogComponent implements OnInit {
   }
 
 	public getLogEntriesForDate(event) {
-		console.log(event);
     this.displayDate = event;
+		console.log(this.displayDate);
     this.getLogEntries();
 
 	}

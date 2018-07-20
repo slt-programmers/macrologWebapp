@@ -20,6 +20,7 @@ export class LogMealComponent implements OnInit, OnChanges {
 	@Input() food;
   @Input() meal: string;
   @Input() logEntries: LogEntry[];
+	@Input() date: Date;
 
   public editable: boolean = false;
 	public foodMatch = new Array();
@@ -31,7 +32,8 @@ export class LogMealComponent implements OnInit, OnChanges {
   ngOnInit() { }
 
 	ngOnChanges(changes) {
-
+		console.log(changes);
+		console.log(this.date);
 	}
 
 	findFoodMatch(event) {
@@ -142,7 +144,9 @@ export class LogMealComponent implements OnInit, OnChanges {
     logEntry.multiplier = 1;
 
     this.updateCalculatedMacros(logEntry);
-		logEntry.day = new Date();
+
+		console.log(this.date);
+		logEntry.day = this.date;
 
     console.log('result:');
 		console.log(logEntry);
@@ -277,6 +281,7 @@ export class LogMealComponent implements OnInit, OnChanges {
       }
       newRequest.multiplier = logEntry.multiplier;
       newRequest.day = logEntry.day;
+			console.log(newRequest.day);
       newRequest.meal = this.meal.toUpperCase();
       this.logService.storeLogEntry(newRequest);
     }

@@ -33,10 +33,10 @@
       <span class="day__header__macro">Carbs</span>
     </div>
 
-    <log-meal [food]="foodAndPortions"  [meal]="'Breakfast'" [logEntries]="breakfastLogs"></log-meal>
-    <log-meal [food]="foodAndPortions"  [meal]="'Lunch'" [logEntries]="lunchLogs"></log-meal>
-    <log-meal [food]="foodAndPortions"  [meal]="'Dinner'" [logEntries]="dinnerLogs"></log-meal>
-    <log-meal [food]="foodAndPortions"  [meal]="'Snacks'" [logEntries]="snacksLogs"></log-meal>
+    <log-meal [food]="foodAndPortions" [date]="displayDate" [meal]="'Breakfast'" [logEntries]="breakfastLogs"></log-meal>
+    <log-meal [food]="foodAndPortions" [date]="displayDate" [meal]="'Lunch'" [logEntries]="lunchLogs"></log-meal>
+    <log-meal [food]="foodAndPortions" [date]="displayDate" [meal]="'Dinner'" [logEntries]="dinnerLogs"></log-meal>
+    <log-meal [food]="foodAndPortions" [date]="displayDate" [meal]="'Snacks'" [logEntries]="snacksLogs"></log-meal>
 
     <div class="day__total">
       <span class="day__total__title">Daily total</span>
