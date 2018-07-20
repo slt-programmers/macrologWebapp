@@ -80,6 +80,7 @@
             <ng-container *ngFor="let match of foodMatch">
               <div class="autocomplete__option"
                    (click)="addLogEntry(match); foodName = ''; showAutoComplete = false"
+                   (keypress)="addLogEntry(match); foodName = ''; showAutoComplete = false"
                    tabindex="0">
                 {{matchDescription(match)}}
               </div>
