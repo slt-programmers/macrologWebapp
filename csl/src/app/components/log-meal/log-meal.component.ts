@@ -11,7 +11,7 @@ import {Food} from '../../model/food';
   styleUrls: ['./log-meal.component.scss'],
 	host: { '(document: click)': 'closeAutoComplete($event)' }
 })
-export class LogMealComponent implements OnInit {
+export class LogMealComponent implements OnInit, OnChanges {
 
 	@ViewChild('newIngredient') private newIngredientEref: ElementRef;
 	@ViewChild('autoComplete') private autoCompleteEref: ElementRef;
@@ -30,6 +30,10 @@ export class LogMealComponent implements OnInit {
 
   ngOnInit() { }
 
+	ngOnChanges(changes) {
+
+	}
+
 	findFoodMatch(event) {
 		this.foodMatch = new Array<Food>();
 		if (event.data !== null) {
@@ -41,10 +45,6 @@ export class LogMealComponent implements OnInit {
 			}
 		}
 	}
-
- doIt(el){
-    console.log(el);
- }
 
   getAvailablePortions(logEntry) {
       for (let item of this.food) {
@@ -202,25 +202,51 @@ export class LogMealComponent implements OnInit {
   }
 
 	onKeyDown(event) {
-		console.log(event);
-		console.log(document.activeElement);
-		console.log(document.activeElement.classList.contains('meal__new-ingredient__input'));
+		let autoCompleteInputSelected = document.activeElement.classList.contains('meal__new-ingredient__input');
+		let autoCompleteOptionSelected = document.activeElement.classList.contains('autocomplete__option');
+		let nodelist = this.autoCompleteEref.nativeElement.childNodes;
+
 		if(this.autoCompleteEref) {
-			if(document.activeElement.classList.contains('meal__new-ingredient__input')) {
-				if(event.code === 'ArrowDown') {
-					let nodelist = this.autoCompleteEref.nativeElement.childNodes;
+			if(autoCompleteInputSelected) {
+				if(event.key === 'ArrowDown') {
+					event.preventDefault();
 					for (let index = 0; index < nodelist.length; index++) {
-						if (nodelist[index] !== 'comment') {
+						if (nodelist[index].localName === 'div') {
 							this.renderer.invokeElementMethod(nodelist[index], 'focus');
 							break;
 						}
 					}
 				}
-				if(event.code === 'ArrowUp') {
-
+			} else if (autoCompleteOptionSelected) {
+				if(event.key === 'ArrowDown') {
+					event.preventDefault();
+					let activeElement = document.activeElement;
+					let nextSibling = activeElement.nextSibling;
+					for (;;) {
+						if (nextSibling && nextSibling.localName !== 'div') {
+							nextSibling = nextSibling.nextSibling;
+						} else if (nextSibling) {
+							this.renderer.invokeElementMethod(nextSibling, 'focus');
+							break;
+						} else {
+							break;
+						}
+					}
+				} else if (event.key === 'ArrowUp') {
+					event.preventDefault();
+					let activeElement = document.activeElement;
+					let previousSibling = activeElement.previousSibling;
+					for (;;) {
+						if (previousSibling && previousSibling.localName !== 'div') {
+							previousSibling = previousSibling.previousSibling;
+						} else if(previousSibling) {
+							this.renderer.invokeElementMethod(previousSibling, 'focus');
+							break;
+						} else {
+							break;
+						}
+					}
 				}
-			} else {
-				// option selected
 			}
 		}
 	}

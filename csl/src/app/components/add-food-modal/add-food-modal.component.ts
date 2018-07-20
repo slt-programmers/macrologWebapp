@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, Input, EventEmitter } from '@angular/core';
 import { Food } from '../../model/food';
 import { Portion } from '../../model/portion';
 import { FoodService } from '../../services/food.service';
@@ -45,8 +45,12 @@ export class AddFoodModalComponent implements OnInit {
 		}
 		addFoodRequest.portions = this.portions;
 
-		this.foodService.addFood(addFoodRequest);
-		this.closeModal();
+		let self = this;
+		let closeCallBack = () => {
+			self.closeModal();
+		}
+
+		this.foodService.addFood(addFoodRequest, closeCallBack);
 	}
 
 	closeModal() {

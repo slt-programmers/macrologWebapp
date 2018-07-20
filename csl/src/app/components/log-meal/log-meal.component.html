@@ -78,13 +78,13 @@
                  (focus)="showAutoComplete = true">
           <div #autoComplete class="autocomplete" *ngIf="showAutoComplete">
             <ng-container *ngFor="let match of foodMatch">
-              <button class="autocomplete__option" (click)="addLogEntry(match); foodName = ''; showAutoComplete = false">{{matchDescription(match)}}</button>
+              <div class="autocomplete__option"
+                   (click)="addLogEntry(match); foodName = ''; showAutoComplete = false"
+                   tabindex="0">
+                {{matchDescription(match)}}
+              </div>
             </ng-container>
           </div>
-        </div>
-
-        <div>
-          {{logEntry}}
         </div>
 
         <div class="meal__new-ingredient__save" (click)="saveAndClose()">
