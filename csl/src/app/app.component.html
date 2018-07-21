@@ -3,31 +3,31 @@
   <span class="header__item">{{title}}</span>
 </div>
 
-<div #navbarBackdrop class="nav-backdrop" (click)="closeNav()"></div>
-<div #navbar class="nav-wrapper" (click)="closeNav()">
+<div #navbarBackdrop class="nav-backdrop" (click)="closeNav(title)"></div>
+<div #navbar class="nav-wrapper" (click)="closeNav(title)">
   <div class="nav">
     <div class="nav__item nav__item--top">
       <i class="fas fa-arrow-left"></i>
     </div>
     <div class="nav__item" routerLink="/user"
-         (click)="closeNav()">
-      <a>My settings</a>
+         (click)="closeNav(userTitle)">
+      <a>{{userTitle}}</a>
     </div>
     <div class="nav__item" routerLink="/log"
-         (click)="closeNav()">
-      <a>My food diary</a>
+         (click)="closeNav(logTitle)">
+      <a>{{logTitle}}</a>
     </div>
     <div class="nav__item" routerLink="/graphs"
-         (click)="closeNav()">
-      <a>My graphs</a>
+         (click)="closeNav(graphsTitle)">
+      <a>{{graphsTitle}}</a>
     </div>
     <div class="nav__item" routerLink="/meals"
-         (click)="closeNav()">
-      <a>My meals</a>
+         (click)="closeNav(mealsTitle)">
+      <a>{{mealsTitle}}</a>
     </div>
     <div class="nav__item" routerLink="/food"
-         (click)="closeNav()">
-      <a>All my food</a>
+         (click)="closeNav(foodTitle)">
+      <a>{{foodTitle}}</a>
     </div>
   </div>
 </div>
