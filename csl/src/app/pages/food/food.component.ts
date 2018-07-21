@@ -9,6 +9,8 @@ import {FoodService}from '../../services/food.service';
 export class FoodComponent implements OnInit {
 
   public foodResult;
+	public modalIsVisible: boolean = false;
+  public selectedFood = 2;
 
   constructor(private foodService: FoodService) { }
 
@@ -20,5 +22,14 @@ export class FoodComponent implements OnInit {
 			error => console.log(error)
 		);
   };
+
+	public openModal(food) {
+    this.selectedFood= food;
+		this.modalIsVisible = true;
+	}
+  public closeModal(event) {
+    console.log('refreshed');
+		this.modalIsVisible = false;
+	}
 
 }

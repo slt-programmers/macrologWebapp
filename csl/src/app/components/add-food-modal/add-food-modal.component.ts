@@ -15,6 +15,7 @@ export enum MeasurementUnit {
 export class AddFoodModalComponent implements OnInit {
 
 	@Output() close: EventEmitter<boolean> = new EventEmitter<boolean>();
+  @Input() food;
 
 	public title = 'Add food to the database';
 	public name = '';
@@ -24,21 +25,37 @@ export class AddFoodModalComponent implements OnInit {
 	public protein: number;
 	public fat: number;
 	public carbs: number;
-
 	public portions = [];
 
   constructor(private foodService: FoodService) {
 	}
 
   ngOnInit() {
+    if (this.food){
+        this.title  = 'Edit food';
+        this.name = this.food.name;
+        this.measurementUnit = this.food.measurementUnit;
+        this.unitName = this.food.unitName;
+        this.unitGrams = this.food.unitGrams;
+        this.protein = this.food.protein;
+        this.fat = this.food.fat;
+        this.carbs = this.food.carbs;
+
+        this.portions = this.food.portions;
+
+    }
   }
 
-	addFood() {
+	saveFood() {
 		let addFoodRequest = new Food(this.name,
 			this.measurementUnit,
 			this.protein,
 			this.fat,
 			this.carbs);
+    if (this.food){
+      addFoodRequest.id = this.food.id;
+    }
+
 		if (this.measurementUnit === MeasurementUnit.Unit) {
 			addFoodRequest.unitName = this.unitName;
 			addFoodRequest.unitGrams = this.unitGrams;

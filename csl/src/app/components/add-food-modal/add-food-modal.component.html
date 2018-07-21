@@ -13,7 +13,7 @@
       We recommend you weigh the unit, although this is optional.
     </p>
 
-    <form #addFoodForm="ngForm">
+    <form #saveFoodForm="ngForm">
       <div class="form-field">
         <label class="form-field__label">Food</label>
         <div class="form-field__element">
@@ -117,8 +117,8 @@
     </form>
 
     <div class="button-wrapper">
-      <button type="button" class="button button--primary" (click)="addFood()"
-              [disabled]="addFoodForm.invalid">Done</button>
+      <button type="button" class="button button--primary" (click)="saveFood()"
+              [disabled]="saveFoodForm.invalid">Save</button>
     </div>
   </div>
 
