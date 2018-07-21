@@ -43,14 +43,12 @@ export class LogComponent implements OnInit {
 	ngOnInit() {
 		this.getAllFood();
 		this.userService.getUserGoalStats().subscribe(
-			data => { this.userGoals = data;
-			 this.goalCal = (this.userGoals[0] * 4) + (this.userGoals[1] * 9) + (this.userGoals[2] * 4);
-			 },
+			data => {
+				this.userGoals = data;
+				this.setGoalCal();
+			},
 			error => console.log(error)
 		);
-
-		this.getJson().subscribe(data => this.days = data,
-					error => console.log(error));
 
     this.getLogEntries();
   }
@@ -121,10 +119,6 @@ export class LogComponent implements OnInit {
 		);
 	}
 
-	private getJson() {
-		return this.http.get("assets/logentries.json");
-	}
-
   // Maakt een lijst met daarin food en food + alle mogelijke portions
 	private getFoodSearchableList(food) {
     console.log('reconstruct searchable food');
@@ -145,4 +139,11 @@ export class LogComponent implements OnInit {
 		this.foodAndPortions = foodList;
 	}
 
+	private setGoalCal() {
+		if (this.userGoals) {
+		  this.goalCal = (this.userGoals[0] * 4)
+		    + (this.userGoals[1] * 9)
+		    + (this.userGoals[2] * 4);
+		}
+	}
 }

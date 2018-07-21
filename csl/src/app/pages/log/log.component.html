@@ -1,6 +1,6 @@
 <div class="container">
 
-  <div class="intake-goal-wrapper" *ngIf="days">
+  <div class="intake-goal-wrapper" *ngIf="userGoals">
     <div class="intake-goal">
       <div class="intake-goal__numbers">
         <div class="intake-goal__calories">
@@ -19,6 +19,12 @@
           <bargraph [percentage]="getTotal('carbs')/userGoals[2]*100" [title]="'C'"></bargraph>
         </div>
       </div>
+    </div>
+  </div>
+
+  <div class="intake-goal-wrapper" *ngIf="!userGoals">
+    <div class="intake-goal intake-goal--placeholder">
+      <span>You haven't set your goal intake yet!</span>
     </div>
   </div>
 
