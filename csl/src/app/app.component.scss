@@ -68,7 +68,7 @@
 			background-color: $primary;
 			color: $white;
 			font-size: 20px;
-			padding: $gutter;
+			padding: ($gutter/3*2);
 		}
 	}
 }
