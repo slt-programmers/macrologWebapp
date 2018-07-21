@@ -1,9 +1,9 @@
 <div class="header">
-  <div class="header__item header__item--menu">
-    <i class="fas fa-bars" (click)="openNav()"></i>
+  <div class="header__item header__item--menu" (click)="openNav()">
+    <i class="fas fa-bars"></i>
   </div>
   <div class="header__item header__item--title">{{title}}</div>
-  <div class="header__item header__item--user">
+  <div class="header__item header__item--user" (click)="closeNav(userTitle)" routerLink="/user">
     <i class="fas fa-user-circle"></i>
   </div>
 </div>
@@ -13,10 +13,6 @@
   <div class="nav">
     <div class="nav__item nav__item--top">
       <i class="fas fa-arrow-left"></i>
-    </div>
-    <div class="nav__item" routerLink="/user"
-         (click)="closeNav(userTitle)">
-      <a>{{userTitle}}</a>
     </div>
     <div class="nav__item" routerLink="/log"
          (click)="closeNav(logTitle)">
