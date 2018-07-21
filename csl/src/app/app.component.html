@@ -1,33 +1,34 @@
 <div class="header">
-  <i class="header__item header__item--menu fas fa-bars" (click)="openNav()"></i>
-  <span class="header__item">{{title}}</span>
+  <div class="header__item header__item--menu" (click)="openNav()">
+    <i class="fas fa-bars"></i>
+  </div>
+  <div class="header__item header__item--title">{{title}}</div>
+  <div class="header__item header__item--user" (click)="closeNav(userTitle)" routerLink="/user">
+    <i class="fas fa-user-circle"></i>
+  </div>
 </div>
 
-<div #navbarBackdrop class="nav-backdrop" (click)="closeNav()"></div>
-<div #navbar class="nav-wrapper" (click)="closeNav()">
+<div #navbarBackdrop class="nav-backdrop" (click)="closeNav(title)"></div>
+<div #navbar class="nav-wrapper" (click)="closeNav(title)">
   <div class="nav">
     <div class="nav__item nav__item--top">
       <i class="fas fa-arrow-left"></i>
     </div>
-    <div class="nav__item" routerLink="/user"
-         (click)="closeNav()">
-      <a>My settings</a>
-    </div>
     <div class="nav__item" routerLink="/log"
-         (click)="closeNav()">
-      <a>My food diary</a>
-    </div>
-    <div class="nav__item" routerLink="/graphs"
-         (click)="closeNav()">
-      <a>My graphs</a>
+         (click)="closeNav(logTitle)">
+      <a>{{logTitle}}</a>
     </div>
     <div class="nav__item" routerLink="/meals"
-         (click)="closeNav()">
-      <a>My meals</a>
+         (click)="closeNav(mealsTitle)">
+      <a>{{mealsTitle}}</a>
     </div>
     <div class="nav__item" routerLink="/food"
-         (click)="closeNav()">
-      <a>All my food</a>
+         (click)="closeNav(foodTitle)">
+      <a>{{foodTitle}}</a>
+    </div>
+    <div class="nav__item" routerLink="/graphs"
+         (click)="closeNav(graphsTitle)">
+      <a>{{graphsTitle}}</a>
     </div>
   </div>
 </div>

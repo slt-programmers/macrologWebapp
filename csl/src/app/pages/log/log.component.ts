@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import {LogService}from '../../services/log.service';
-import {UserService}from '../../services/user.service';
-import {FoodService}from '../../services/food.service';
+import {Component, OnInit, ViewChild, ElementRef} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import {LogService} from '../../services/log.service';
+import {UserService} from '../../services/user.service';
+import {FoodService} from '../../services/food.service';
 import {LogEntry} from '../../model/logEntry';
 import {Food} from '../../model/food';
 import {FoodSearchable} from '../../model/foodSearchable';
@@ -14,9 +14,15 @@ import { DatePipe } from '@angular/common';
 @Component({
   selector: 'log',
   templateUrl: './log.component.html',
-  styleUrls: ['./log.component.scss']
+  styleUrls: ['./log.component.scss'],
+	host: { '(document: click)': 'documentClick($event)' }
 })
 export class LogComponent implements OnInit {
+
+	@ViewChild('breakfast') private breakfastEref: ElementRef;
+	@ViewChild('lunch') private lunchEref: ElementRef;
+	@ViewChild('dinner') private dinnerEref: ElementRef;
+	@ViewChild('snacks') private snacksRef: ElementRef;
 
 	public modalIsVisible: boolean = false;
 	public getLogEntriesComplete: boolean = false;
@@ -43,14 +49,12 @@ export class LogComponent implements OnInit {
 	ngOnInit() {
 		this.getAllFood();
 		this.userService.getUserGoalStats().subscribe(
-			data => { this.userGoals = data;
-			 this.goalCal = (this.userGoals[0] * 4) + (this.userGoals[1] * 9) + (this.userGoals[2] * 4);
-			 },
+			data => {
+				this.userGoals = data;
+				this.setGoalCal();
+			},
 			error => console.log(error)
 		);
-
-		this.getJson().subscribe(data => this.days = data,
-					error => console.log(error));
 
     this.getLogEntries();
   }
@@ -72,9 +76,14 @@ export class LogComponent implements OnInit {
 		return total;
 	}
 
+	public getLogEntriesForDate(event) {
+		this.displayDate = event;
+    this.getLogEntries();
+	}
+
   private getLogEntries(){
     let pipe = new DatePipe('en-US');
-    let fetchDate = pipe.transform(this.displayDate,'dd-MM-yyyy');
+    let fetchDate = pipe.transform(this.displayDate, 'yyyy-MM-dd');
     this.logService.getDayLogs(fetchDate).subscribe(
       data => {
           this.allLogs = data;
@@ -96,13 +105,6 @@ export class LogComponent implements OnInit {
 		);
   }
 
-	public getLogEntriesForDate(event) {
-    this.displayDate = event;
-		console.log(this.displayDate);
-    this.getLogEntries();
-
-	}
-
 	public openModal() {
 		this.modalIsVisible = true;
 	}
@@ -121,10 +123,6 @@ export class LogComponent implements OnInit {
 			},
 			error => { console.log(error); }
 		);
-	}
-
-	private getJson() {
-		return this.http.get("assets/logentries.json");
 	}
 
   // Maakt een lijst met daarin food en food + alle mogelijke portions
@@ -146,5 +144,18 @@ export class LogComponent implements OnInit {
     console.log(foodList);
 		this.foodAndPortions = foodList;
 	}
+
+	private setGoalCal() {
+		if (this.userGoals) {
+		  this.goalCal = (this.userGoals[0] * 4)
+		    + (this.userGoals[1] * 9)
+		    + (this.userGoals[2] * 4);
+		}
+	}
+
+	private documentClick(event) {
+		console.log(event.target);
+	}
+
 
 }

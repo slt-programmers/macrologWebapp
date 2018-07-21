@@ -1,5 +1,6 @@
 import {Injectable} from'@angular/core';
 import {HttpClient} from '@angular/common/http';
+import {DatePipe} from '@angular/common';
 import {StoreLogRequest} from '../model/storeLogRequest';
 import {LogEntry} from '../model/logEntry';
 
@@ -16,7 +17,7 @@ export class LogService {
 	}
 
  	getDayLogs(date) {
-   	return this.http.get(macrologBackendUrl + '/day/'+date, { responseType: 'json' });
+   	return this.http.get(macrologBackendUrl + '/day/' + date, { responseType: 'json' });
 	}
 
 	getMacros(dateFrom,dateTo) {
@@ -29,7 +30,6 @@ export class LogService {
    		'Access-Control-Allow-Origin': 'http://localhost:4200'
    	};
 
-		console.log(storeLogEntryRequest);
   	const options = { headers: headers };
     return this.http.post<StoreLogRequest>(macrologBackendUrl + '/', storeLogEntryRequest, options).subscribe(data => {
         console.log('saved');

@@ -14,14 +14,19 @@ export class AppComponent implements OnInit {
 	private navbar;
 	private backdrop;
 
+	public userTitle: string = 'My Settings';
+	public logTitle: string = 'My food diary';
+	public graphsTitle: string = 'My graphs';
+	public mealsTitle: string = 'My meals';
+	public foodTitle: string = 'All my food';
+
   constructor() {}
 
   ngOnInit() {
-    this.title = 'Macrolog Webapp';
+    this.title = this.logTitle;
 		this.navbar = this.navbarElement.nativeElement;
 		this.backdrop = this.backdropElement.nativeElement;
   }
-
 
 	// Navigation
 	openNav() {
@@ -30,7 +35,8 @@ export class AppComponent implements OnInit {
 		this.backdrop.style.backgroundColor = 'rgba(0,0,0, 0.4)';
 	}
 
-	closeNav() {
+	closeNav(tabTitle: string) {
+		this.title = tabTitle;
 		this.navbar.style.marginLeft = '-300px';
 		this.backdrop.style.display = 'none';
 		this.backdrop.style.backgroundColor = 'transparent';
