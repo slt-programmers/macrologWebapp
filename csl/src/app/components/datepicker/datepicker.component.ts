@@ -30,7 +30,7 @@ export class DatepickerComponent implements OnInit {
 
 	nextDay() {
 		this.selectedDate = new Date(this.selectedDate.getFullYear(),
-			this.selectedDate.getMonth(), this.selectedDate.getDate() + 1);
+		this.selectedDate.getMonth(), this.selectedDate.getDate() + 1);
 		this.setDaysInMonthArray();
 		this.getWeekdayPlaceholders();
 		this.change.emit(this.selectedDate);

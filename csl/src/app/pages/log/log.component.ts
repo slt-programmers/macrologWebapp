@@ -74,7 +74,7 @@ export class LogComponent implements OnInit {
 
   private getLogEntries(){
     let pipe = new DatePipe('en-US');
-    let fetchDate = pipe.transform(this.displayDate,'dd-MM-yyyy');
+    let fetchDate = pipe.transform(this.displayDate, 'yyyy-MM-dd');
     this.logService.getDayLogs(fetchDate).subscribe(
       data => {
           this.allLogs = data;
@@ -97,10 +97,8 @@ export class LogComponent implements OnInit {
   }
 
 	public getLogEntriesForDate(event) {
-    this.displayDate = event;
-		console.log(this.displayDate);
+		this.displayDate = event;
     this.getLogEntries();
-
 	}
 
 	public openModal() {

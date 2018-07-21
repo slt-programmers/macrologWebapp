@@ -1,8 +1,9 @@
 import{Component, OnInit, OnChanges, ViewChild, SimpleChanges, Renderer, ElementRef, Input,Output ,EventEmitter}from '@angular/core';
-import {LogEntry }from '../../model/logEntry';
-import {StoreLogRequest}from '../../model/storeLogRequest';
-import {FoodService}from '../../services/food.service';
-import {LogService}from '../../services/log.service';
+import {DatePipe} from '@angular/common';
+import {LogEntry} from '../../model/logEntry';
+import {StoreLogRequest} from '../../model/storeLogRequest';
+import {FoodService} from '../../services/food.service';
+import {LogService} from '../../services/log.service';
 import {Food} from '../../model/food';
 
 @Component({
@@ -27,13 +28,13 @@ export class LogMealComponent implements OnInit, OnChanges {
 	public foodName: string;
 	public showAutoComplete: boolean;
 
+	private datePipe: DatePipe = new DatePipe('en-US');
+
   constructor ( private foodService: FoodService, private logService: LogService,private renderer: Renderer) { }
 
   ngOnInit() { }
 
 	ngOnChanges(changes) {
-		console.log(changes);
-		console.log(this.date);
 	}
 
 	findFoodMatch(event) {
@@ -133,8 +134,6 @@ export class LogMealComponent implements OnInit, OnChanges {
   }
 
 	addLogEntry(foodSearchable) {
-    console.log('addLogEntry');
-		console.log(foodSearchable);
 		let logEntry = new LogEntry();
     logEntry.meal = this.meal.toUpperCase();
 		logEntry.food = foodSearchable.food;
@@ -144,12 +143,7 @@ export class LogMealComponent implements OnInit, OnChanges {
     logEntry.multiplier = 1;
 
     this.updateCalculatedMacros(logEntry);
-
-		console.log(this.date);
 		logEntry.day = this.date;
-
-    console.log('result:');
-		console.log(logEntry);
 		this.logEntries.push(logEntry);
 	}
 
@@ -262,7 +256,6 @@ export class LogMealComponent implements OnInit, OnChanges {
 	}
 
 	deleteLogEntry(logEntry: LogEntry) {
-		console.log(logEntry);
     let index: number = this.logEntries.indexOf(logEntry);
     if (index !== -1) {
        this.logEntries.splice(index, 1);
@@ -280,8 +273,7 @@ export class LogMealComponent implements OnInit, OnChanges {
          newRequest.portionId = logEntry.portion.id;
       }
       newRequest.multiplier = logEntry.multiplier;
-      newRequest.day = logEntry.day;
-			console.log(newRequest.day);
+      newRequest.day = this.datePipe.transform(logEntry.day, 'yyyy-MM-dd');
       newRequest.meal = this.meal.toUpperCase();
       this.logService.storeLogEntry(newRequest);
     }
