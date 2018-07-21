@@ -1,6 +1,11 @@
 <div class="header">
-  <i class="header__item header__item--menu fas fa-bars" (click)="openNav()"></i>
-  <span class="header__item">{{title}}</span>
+  <div class="header__item header__item--menu">
+    <i class="fas fa-bars" (click)="openNav()"></i>
+  </div>
+  <div class="header__item header__item--title">{{title}}</div>
+  <div class="header__item header__item--user">
+    <i class="fas fa-user-circle"></i>
+  </div>
 </div>
 
 <div #navbarBackdrop class="nav-backdrop" (click)="closeNav(title)"></div>

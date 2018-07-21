@@ -8,11 +8,24 @@
 	margin-bottom: $gutter;
 
 	&__item {
-		padding: $gutter;
 		font-size: 20px;
 
 		&--menu {
 			cursor: pointer;
+			flex-basis: 7%;
+			text-align: center;
+		}
+
+		&--title {
+			padding: ($gutter/3*2);
+			flex-grow: 1;
+		}
+
+		&--user {
+			cursor: pointer;
+			font-size: 30px;
+  		flex-basis: 7%;
+			text-align: center;
 		}
 	}
 }
