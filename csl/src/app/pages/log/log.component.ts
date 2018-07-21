@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import {LogService}from '../../services/log.service';
-import {UserService}from '../../services/user.service';
-import {FoodService}from '../../services/food.service';
+import {Component, OnInit, ViewChild, ElementRef} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import {LogService} from '../../services/log.service';
+import {UserService} from '../../services/user.service';
+import {FoodService} from '../../services/food.service';
 import {LogEntry} from '../../model/logEntry';
 import {Food} from '../../model/food';
 import {FoodSearchable} from '../../model/foodSearchable';
@@ -14,9 +14,15 @@ import { DatePipe } from '@angular/common';
 @Component({
   selector: 'log',
   templateUrl: './log.component.html',
-  styleUrls: ['./log.component.scss']
+  styleUrls: ['./log.component.scss'],
+	host: { '(document: click)': 'documentClick($event)' }
 })
 export class LogComponent implements OnInit {
+
+	@ViewChild('breakfast') private breakfastEref: ElementRef;
+	@ViewChild('lunch') private lunchEref: ElementRef;
+	@ViewChild('dinner') private dinnerEref: ElementRef;
+	@ViewChild('snacks') private snacksRef: ElementRef;
 
 	public modalIsVisible: boolean = false;
 	public getLogEntriesComplete: boolean = false;
@@ -70,6 +76,11 @@ export class LogComponent implements OnInit {
 		return total;
 	}
 
+	public getLogEntriesForDate(event) {
+		this.displayDate = event;
+    this.getLogEntries();
+	}
+
   private getLogEntries(){
     let pipe = new DatePipe('en-US');
     let fetchDate = pipe.transform(this.displayDate, 'yyyy-MM-dd');
@@ -93,11 +104,6 @@ export class LogComponent implements OnInit {
 			() => this.getLogEntriesComplete = true
 		);
   }
-
-	public getLogEntriesForDate(event) {
-		this.displayDate = event;
-    this.getLogEntries();
-	}
 
 	public openModal() {
 		this.modalIsVisible = true;
@@ -146,4 +152,10 @@ export class LogComponent implements OnInit {
 		    + (this.userGoals[2] * 4);
 		}
 	}
+
+	private documentClick(event) {
+		console.log(event.target);
+	}
+
+
 }
