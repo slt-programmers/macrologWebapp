@@ -19,10 +19,10 @@ import { DatePipe } from '@angular/common';
 })
 export class LogComponent implements OnInit {
 
-	@ViewChild('breakfast') private breakfastEref: ElementRef;
-	@ViewChild('lunch') private lunchEref: ElementRef;
-	@ViewChild('dinner') private dinnerEref: ElementRef;
-	@ViewChild('snacks') private snacksRef: ElementRef;
+	@ViewChild('breakfast') private breakfastEref;
+	@ViewChild('lunch') private lunchEref;
+	@ViewChild('dinner') private dinnerEref;
+	@ViewChild('snacks') private snacksRef;
 
 	public modalIsVisible: boolean = false;
 	public getLogEntriesComplete: boolean = false;
@@ -141,7 +141,6 @@ export class LogComponent implements OnInit {
 			}
 		}
 
-    console.log(foodList);
 		this.foodAndPortions = foodList;
 	}
 
@@ -154,8 +153,15 @@ export class LogComponent implements OnInit {
 	}
 
 	private documentClick(event) {
+		console.log('target');
 		console.log(event.target);
+		console.log(this.breakfastEref);
+		console.log(this.breakfastEref.logMealEref.nativeElement);
+		let bool = this.breakfastEref.logMealEref.nativeElement.contains(event.target);
+		console.log(bool);
+		bool = this.breakfastEref.logMealEref.nativeElement
+		if (bool) {
+			console.log('click in breakfast log-meal');
+		}
 	}
-
-
 }

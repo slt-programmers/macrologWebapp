@@ -20,7 +20,7 @@
       <div class="portions">
         <div class="portion" *ngFor="let portion of food.portions">
           <div class="portion__description">
-            <div class="portion__description-padded">{{portion.description}}</div>
+            <div class="portion__description--padded">{{portion.description}}</div>
           </div>
           <div class="portion__amount" *ngIf="food.measurementUnit=='GRAMS'">{{portion.grams}} {{food.unitName}}</div>
           <div class="portion__amount" *ngIf="food.measurementUnit=='UNIT'">1 {{portion.unitMultiplier}} {{food.unitName}}</div>

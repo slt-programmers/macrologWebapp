@@ -1,81 +1,94 @@
 @import '../../../css/public';
+
 .header {
-   display:flex;
-   flex-direction:row;
-   font-weight:bold;
-    color: white;
-    padding:10px;
-    background-color: $primary;
+  display:flex;
+  flex-direction:row;
+  font-weight:bold;
+	color: white;
+  padding:10px;
+  background-color: $primary;
+
   &__name {
-      			flex-basis: 50%;
-      	}
-      	&__amount {
-           flex-basis: 10%;
-        }
-      	&__protein {
-           flex-basis: 10%;
-        }
-      	&__fat {
-           flex-basis: 10%;
-        }
-      	&__carbs {
-           flex-basis: 10%;
-        }
+		flex-basis: 50%;
+ 	}
+
+  &__amount {
+    flex-basis: 10%;
+  }
+
+  &__protein {
+    flex-basis: 10%;
+  }
+
+  &__fat {
+    flex-basis: 10%;
+  }
+
+  &__carbs {
+    flex-basis: 10%;
+  }
 }
 
 .food {
-    display:flex;
+	display: flex;
+  flex-direction: row;
+  padding: 5px;
+  border-top: 1px solid $smoke;
 
-      flex-direction:row;
-    	&__name {
-    			flex-basis: 50%;
-    	}
-    	&__amount {
-         flex-basis: 10%;
-      }
-    	&__protein {
-         flex-basis: 10%;
-      }
-    	&__fat {
-         flex-basis: 10%;
-      }
-    	&__carbs {
-         flex-basis: 10%;
-      }
-      padding:5px;
-      spacing-top:10px;
-      border-style:groove;
-      border-width:1px 0 0px 0;
-      border-color:lightGrey;
+	&__name {
+		flex-basis: 50%;
+	}
 
+	&__amount {
+	  flex-basis: 10%;
+	}
 
+	&__protein {
+	  flex-basis: 10%;
+	}
+
+	&__fat {
+	  flex-basis: 10%;
+	}
+
+	&__carbs {
+	  flex-basis: 10%;
+	}
 }
+
 .portion {
-    display:flex;
-    flex-direction:row;
+  display: flex;
+  padding: 5px;
 
  	&__description {
 		flex-basis: 50%;
-		&-padded{
-		   padding-left:20px;
+
+		&--padded {
+	   padding-left: 20px;
 		}
   }
+
 	&__amount {
-     flex-basis: 10%;
+    flex-basis: 10%;
   }
+
 	&__protein {
-     flex-basis: 10%;
+    flex-basis: 10%;
   }
+
  	&__fat {
-     flex-basis: 10%;
+    flex-basis: 10%;
   }
+
  	&__carbs {
-     flex-basis: 10%;
+    flex-basis: 10%;
   }
 }
+
 .foodline{
-   :hover{
-     background-color:lightGrey;
-     cursor:pointer;
-   }
+
+  &:hover{
+    background-color:lightGrey;
+    cursor:pointer;
+  }
 }

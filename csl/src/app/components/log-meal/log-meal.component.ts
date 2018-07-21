@@ -277,10 +277,6 @@ export class LogMealComponent implements OnInit, OnChanges {
 
 	public closeAutoComplete(event) {
 		//Event vuurt 4x door 4 log-meal-components
-		console.log('close autocomplete event fired');
-		console.log(event.target);
-
-
 		if (this.newIngredientEref && !this.newIngredientEref.nativeElement.contains(event.target)) {
 			this.showAutoComplete = false;
 		}
