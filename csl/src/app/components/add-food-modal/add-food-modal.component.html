@@ -81,6 +81,13 @@
 
       <div class="modal__portions" *ngFor="let port of portions; index as i">
         <div class="form-field form-field--column">
+          <div class="form-field__element form-field__element--column">
+            <label class="form-field__label">Description</label>
+            <input class="" [(ngModel)]="port.description"
+                   name="portionDesc_{{i}}" type="text"
+                   placeholder="e.g. 'Breakfast', 'Plate'" required>
+          </div>
+
           <div class="form-field__element form-field__element--column" *ngIf="measurementUnit === 'GRAMS'">
             <label class="form-field__label">Grams</label>
             <input class="" [(ngModel)]="port.grams" placeholder="0,0"
@@ -94,12 +101,6 @@
                    placeholder="0,0" step="0.1" required>
           </div>
 
-          <div class="form-field__element form-field__element--column">
-            <label class="form-field__label">Description</label>
-            <input class="" [(ngModel)]="port.description"
-                   name="portionDesc_{{i}}" type="text"
-                   placeholder="e.g. 'Breakfast', 'Plate'" required>
-          </div>
 
           <div class="form-field__element form-field__element--column form-field__element--end">
             <button class="button button--transparent" (click)="removePortion(i)">
