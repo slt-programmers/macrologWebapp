@@ -84,6 +84,13 @@ export class LogComponent implements OnInit {
   private getLogEntries(){
     let pipe = new DatePipe('en-US');
     let fetchDate = pipe.transform(this.displayDate, 'yyyy-MM-dd');
+    this.allLogs = new Array();
+    this.breakfastLogs = new Array<LogEntry>();
+    this.lunchLogs = new Array<LogEntry>();
+    this.dinnerLogs = new Array<LogEntry>();
+    this.snacksLogs = new Array<LogEntry>();
+
+
     this.logService.getDayLogs(fetchDate).subscribe(
       data => {
           this.allLogs = data;
