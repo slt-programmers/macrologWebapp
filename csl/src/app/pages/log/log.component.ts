@@ -179,16 +179,12 @@ export class LogComponent implements OnInit {
 		if (!event.target.classList.contains('autocomplete__option') &&
 		    !event.target.classList.contains('fa-trash') &&
 		    !event.target.classList.contains('button--transparent')) {
-					
-			let clickedInBreakfast = this.breakfastEref.logMealEref.nativeElement.contains(event.target);
-			let clickedInLunch = this.lunchEref.logMealEref.nativeElement.contains(event.target);
-			let clickedInDinner = this.dinnerEref.logMealEref.nativeElement.contains(event.target);
-			let clickedInSnacks = this.snacksEref.logMealEref.nativeElement.contains(event.target);
 
-			this.breakfastOpen = clickedInBreakfast;
-			this.lunchOpen = clickedInLunch;
-			this.dinnerOpen = clickedInDinner;
-			this.snacksOpen = clickedInSnacks;
+			this.breakfastOpen = this.breakfastEref.logMealEref.nativeElement.contains(event.target);
+			this.lunchOpen = this.lunchEref.logMealEref.nativeElement.contains(event.target);
+			this.dinnerOpen = this.dinnerEref.logMealEref.nativeElement.contains(event.target);
+			this.snacksOpen = this.snacksEref.logMealEref.nativeElement.contains(event.target);
+
 		}
 	}
 }
