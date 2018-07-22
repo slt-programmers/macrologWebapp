@@ -19,6 +19,7 @@ export class LogMealComponent implements OnInit, OnChanges {
 	@ViewChild('autoComplete') private autoCompleteEref: ElementRef;
 	@ViewChild('test') private testRef: ElementRef;
 
+	@Input() open: boolean;
 	@Input() food;
   @Input() meal: string;
   @Input() logEntries: LogEntry[];

@@ -27,16 +27,11 @@ export class LogComponent implements OnInit {
 	public modalIsVisible: boolean = false;
 	public getLogEntriesComplete: boolean = false;
 
-	constructor( private foodService: FoodService,
-							 private userService: UserService,
-							 private http: HttpClient,
-							 private logService: LogService) { }
-
-	public days;
   public allLogs;
-	public food; // alleen food, met portions eronder
-  public foodAndPortions; // food entries met mogelijke portions toegevoegd. (food platgeslagen)
-  public displayDate = new Date();
+	public food;
+  public foodAndPortions;
+  public displayDate;
+	private pipe: DatePipe;
 
   public breakfastLogs = new Array<LogEntry>();
   public lunchLogs = new Array<LogEntry>();
@@ -46,17 +41,18 @@ export class LogComponent implements OnInit {
 	public userGoals;
 	public goalCal;
 
-	ngOnInit() {
-		this.getAllFood();
-		this.userService.getUserGoalStats().subscribe(
-			data => {
-				this.userGoals = data;
-				this.setGoalCal();
-			},
-			error => console.log(error)
-		);
+	constructor(private foodService: FoodService,
+							private userService: UserService,
+							private http: HttpClient,
+							private logService: LogService) {
+		this.displayDate = new Date();
+    this.pipe = new DatePipe('en-US');
+	}
 
-    this.getLogEntries();
+	ngOnInit() {
+		this.getUserGoals();
+		this.getAllFood();
+    this.getLogEntries(this.pipe.transform(this.displayDate, 'yyyy-MM-dd'));
   }
 
 	public getTotal(macro) {
@@ -76,41 +72,10 @@ export class LogComponent implements OnInit {
 		return total;
 	}
 
-	public getLogEntriesForDate(event) {
+	public getDifferentDay(event) {
 		this.displayDate = event;
-    this.getLogEntries();
+    this.getLogEntries(this.pipe.transform(this.displayDate, 'yyyy-MM-dd'));
 	}
-
-  private getLogEntries(){
-    let pipe = new DatePipe('en-US');
-    let fetchDate = pipe.transform(this.displayDate, 'yyyy-MM-dd');
-    this.allLogs = new Array();
-    this.breakfastLogs = new Array<LogEntry>();
-    this.lunchLogs = new Array<LogEntry>();
-    this.dinnerLogs = new Array<LogEntry>();
-    this.snacksLogs = new Array<LogEntry>();
-
-
-    this.logService.getDayLogs(fetchDate).subscribe(
-      data => {
-          this.allLogs = data;
-          this.breakfastLogs = this.allLogs.filter(
-              entry => entry.meal === 'BREAKFAST'
-          );
-          this.lunchLogs = this.allLogs.filter(
-              entry => entry.meal === 'LUNCH'
-          );
-          this.dinnerLogs = this.allLogs.filter(
-              entry => entry.meal === 'DINNER'
-          );
-          this.snacksLogs = this.allLogs.filter(
-              entry => entry.meal === 'SNACKS'
-          );
-      },
-			error => console.log(error),
-			() => this.getLogEntriesComplete = true
-		);
-  }
 
 	public openModal() {
 		this.modalIsVisible = true;
@@ -122,6 +87,16 @@ export class LogComponent implements OnInit {
 		this.getAllFood();
 	}
 
+	private getUserGoals() {
+		this.userService.getUserGoalStats().subscribe(
+			data => {
+				this.userGoals = data;
+				this.setGoalCal();
+			},
+			error => console.log(error)
+		);
+	}
+
 	private getAllFood() {
 		this.foodService.getAllFood().subscribe(
 			data => {
@@ -131,6 +106,38 @@ export class LogComponent implements OnInit {
 			error => { console.log(error); }
 		);
 	}
+
+  private getLogEntries(date){
+    this.logService.getDayLogs(date).subscribe(
+      data => {
+        this.allLogs = data;
+				this.breakfastLogs = new Array();
+        this.breakfastLogs = this.allLogs.filter(
+            entry => entry.meal === 'BREAKFAST'
+        );
+				this.lunchLogs = new Array();
+        this.lunchLogs = this.allLogs.filter(
+            entry => entry.meal === 'LUNCH'
+        );
+				this.dinnerLogs = new Array();
+        this.dinnerLogs = this.allLogs.filter(
+            entry => entry.meal === 'DINNER'
+        );
+				this.snacksLogs = new Array();
+        this.snacksLogs = this.allLogs.filter(
+            entry => entry.meal === 'SNACKS'
+        );
+      },
+			error => { console.log(error);
+				this.allLogs = new Array();
+				this.breakfastLogs = new Array();
+				this.lunchLogs = new Array();
+				this.dinnerLogs = new Array();
+				this.snacksLogs = new Array();
+			},
+			() => this.getLogEntriesComplete = true
+		);
+  }
 
   // Maakt een lijst met daarin food en food + alle mogelijke portions
 	private getFoodSearchableList(food) {
@@ -160,13 +167,12 @@ export class LogComponent implements OnInit {
 	}
 
 	private documentClick(event) {
-		console.log('target');
+		console.log('target:');
 		console.log(event.target);
 		console.log(this.breakfastEref);
 		console.log(this.breakfastEref.logMealEref.nativeElement);
 		let bool = this.breakfastEref.logMealEref.nativeElement.contains(event.target);
 		console.log(bool);
-		bool = this.breakfastEref.logMealEref.nativeElement
 		if (bool) {
 			console.log('click in breakfast log-meal');
 		}
