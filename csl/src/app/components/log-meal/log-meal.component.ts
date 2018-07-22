@@ -25,6 +25,8 @@ export class LogMealComponent implements OnInit, OnChanges {
 	@Input() date: Date;
 	@Input() open: boolean;
 
+	@Output() dataChanged: EventEmitter<boolean> = new EventEmitter<boolean>();
+
   public editable: boolean;
 	public foodMatch;
 	public foodName: string;
@@ -214,6 +216,7 @@ export class LogMealComponent implements OnInit, OnChanges {
 
 	public saveAndClose() {
 		this.editable = false;
+    let allEntries = [];
     for (let logEntry of this.logEntries) {
       let newRequest = new StoreLogRequest();
       newRequest.id = logEntry.id;
@@ -224,8 +227,13 @@ export class LogMealComponent implements OnInit, OnChanges {
       newRequest.multiplier = logEntry.multiplier;
       newRequest.day = this.pipe.transform(logEntry.day, 'yyyy-MM-dd');
       newRequest.meal = this.meal.toUpperCase();
-      this.logService.storeLogEntry(newRequest);
+      allEntries.push(newRequest);
     }
+      let closeCallBack = () => {
+		  	console.log('callback saveandclose');
+        this.dataChanged.emit(true);
+		  }
+      this.logService.storeLogEntries(allEntries,closeCallBack);
 	}
 
 

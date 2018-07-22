@@ -24,15 +24,16 @@ export class LogService {
    	return this.http.get(macrologBackendUrl + '/macros', { params:{from:dateFrom,to:dateTo},responseType: 'json' });
 	}
 
-	public storeLogEntry(storeLogEntryRequest: StoreLogRequest) {
+	public storeLogEntries(storeLogEntryRequest: StoreLogRequest[],callBack: Function) {
 		console.log('In storeLogRequest');
    	const headers = {'Content-Type': 'application/json',
    		'Access-Control-Allow-Origin': 'http://localhost:4200'
    	};
 
   	const options = { headers: headers };
-    return this.http.post<StoreLogRequest>(macrologBackendUrl + '/', storeLogEntryRequest, options).subscribe(data => {
+    return this.http.post<StoreLogRequest[]>(macrologBackendUrl + '/', storeLogEntryRequest, options).subscribe(data => {
         console.log('saved');
+        callBack();
       },
       error => {
         console.log(error);

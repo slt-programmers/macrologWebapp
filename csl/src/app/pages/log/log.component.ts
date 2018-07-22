@@ -60,6 +60,12 @@ export class LogComponent implements OnInit {
     this.getLogEntries(this.pipe.transform(this.displayDate, 'yyyy-MM-dd'));
   }
 
+  public refresh(){
+     console.log('refreshing');
+     this.getLogEntriesComplete=false;
+     console.log('refreshing');
+     this.getLogEntries(this.pipe.transform(this.displayDate, 'yyyy-MM-dd'));
+  }
 	public getTotal(macro) {
 		let total = 0.0;
 		for (let logentry of this.breakfastLogs) {
