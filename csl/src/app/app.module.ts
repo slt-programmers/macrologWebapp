@@ -8,6 +8,9 @@ import {BrowserAnimationsModule}from '@angular/platform-browser/animations';
 
 import {AppComponent}from './app.component';
 import {FoodService}from './services/food.service';
+import {ToastService}from './services/toast.service';
+import {ToastDirective}from './directives/toast.directive';
+import {ToastComponent}from './components/toast/toast.component';
 import {LogComponent}from './pages/log/log.component';
 import {LogMealComponent} from './components/log-meal/log-meal.component';
 import {FoodComponent}from './pages/food/food.component';
@@ -45,7 +48,9 @@ const appRoutes: Routes = [
 		CalculateIntakeModalComponent,
 		MealsComponent,
     GraphsComponent,
-		DatepickerComponent
+		DatepickerComponent,
+		ToastComponent,
+		ToastDirective
   ],
   imports: [
     BrowserModule,
@@ -54,7 +59,7 @@ const appRoutes: Routes = [
     RouterModule.forRoot(appRoutes),
     BrowserAnimationsModule
   ],
-  providers: [FoodService, LogService, UserService],
+  providers: [FoodService, LogService, UserService, ToastService],
   bootstrap: [AppComponent],
   entryComponents: [
   ]
