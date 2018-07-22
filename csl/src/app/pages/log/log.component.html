@@ -39,10 +39,10 @@
       <span class="day__header__macro">Carbs</span>
     </div>
 
-    <log-meal #breakfast [open]="false" [food]="foodAndPortions" [date]="displayDate" [meal]="'Breakfast'" [logEntries]="breakfastLogs"></log-meal>
-    <log-meal #lunch [open]="false"  [food]="foodAndPortions" [date]="displayDate" [meal]="'Lunch'" [logEntries]="lunchLogs"></log-meal>
-    <log-meal #dinner [open]="false" [food]="foodAndPortions" [date]="displayDate" [meal]="'Dinner'" [logEntries]="dinnerLogs"></log-meal>
-    <log-meal #snacks [open]="false" [food]="foodAndPortions" [date]="displayDate" [meal]="'Snacks'" [logEntries]="snacksLogs"></log-meal>
+    <log-meal #breakfast [open]="breakfastOpen" [food]="foodAndPortions" [date]="displayDate" [meal]="'Breakfast'" [logEntries]="breakfastLogs"></log-meal>
+    <log-meal #lunch [open]="lunchOpen" [food]="foodAndPortions" [date]="displayDate" [meal]="'Lunch'" [logEntries]="lunchLogs"></log-meal>
+    <log-meal #dinner [open]="dinnerOpen" [food]="foodAndPortions" [date]="displayDate" [meal]="'Dinner'" [logEntries]="dinnerLogs"></log-meal>
+    <log-meal #snacks [open]="snacksOpen" [food]="foodAndPortions" [date]="displayDate" [meal]="'Snacks'" [logEntries]="snacksLogs"></log-meal>
 
     <div class="day__total">
       <span class="day__total__title">Daily total</span>

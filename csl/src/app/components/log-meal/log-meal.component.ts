@@ -19,27 +19,44 @@ export class LogMealComponent implements OnInit, OnChanges {
 	@ViewChild('autoComplete') private autoCompleteEref: ElementRef;
 	@ViewChild('test') private testRef: ElementRef;
 
-	@Input() open: boolean;
 	@Input() food;
   @Input() meal: string;
   @Input() logEntries: LogEntry[];
 	@Input() date: Date;
+	@Input() open: boolean;
 
-  public editable: boolean = false;
-	public foodMatch = new Array();
+  public editable: boolean;
+	public foodMatch;
 	public foodName: string;
 	public showAutoComplete: boolean;
 
-	private datePipe: DatePipe = new DatePipe('en-US');
+	private pipe: DatePipe;
 
-  constructor ( private foodService: FoodService,
-                private logService: LogService,
-                private renderer: Renderer) { }
+  constructor (private foodService: FoodService,
+               private logService: LogService,
+               private renderer: Renderer) {
+    this.editable = false;
+		this.foodMatch = new Array();
+		this.pipe = new DatePipe('en-US');
+	}
 
-  ngOnInit() { }
+  ngOnInit() {
+
+	}
 
 	ngOnChanges(changes) {
+		console.log(changes);
+		if (changes['date'] && this.editable) {
+			this.saveAndClose();
+		}
 
+		if (changes['open'] && !changes['open'].firstChange) {
+			if (changes['open'].currentValue) {
+				this.editable = true;
+			} else {
+				this.saveAndClose();
+			}
+		}
 	}
 
 	public findFoodMatch(event) {
@@ -53,6 +70,10 @@ export class LogMealComponent implements OnInit, OnChanges {
 			}
 		}
 	}
+
+  public amountChange(logEntry) {
+     this.updateCalculatedMacros(logEntry);
+  }
 
   private getAvailablePortions(logEntry) {
       for (let item of this.food) {
@@ -74,10 +95,6 @@ export class LogMealComponent implements OnInit, OnChanges {
      return undefined;
   }
 
-  public amountChange(logEntry, eventTarget) {
-     this.updateCalculatedMacros(logEntry);
-  }
-
   private updateCalculatedMacros(logEntry){
     let protein =  this.calculateProtein(logEntry);
     let carbs = this.calculateCarbs(logEntry)
@@ -86,7 +103,7 @@ export class LogMealComponent implements OnInit, OnChanges {
     logEntry.macrosCalculated = { protein: protein, fat: fat, carbs: carbs, calories: calories };
   }
 
-  portionChange(logEntry, eventTarget){
+  public portionChange(logEntry, eventTarget){
     let oldValue = logEntry.portion;
     if (oldValue){ // indien geen portion gebruikt
       oldValue = oldValue.description;
@@ -137,7 +154,7 @@ export class LogMealComponent implements OnInit, OnChanges {
      }
   }
 
-	addLogEntry(foodSearchable) {
+	public addLogEntry(foodSearchable) {
 		let logEntry = new LogEntry();
     logEntry.meal = this.meal.toUpperCase();
 		logEntry.food = foodSearchable.food;
@@ -196,7 +213,7 @@ export class LogMealComponent implements OnInit, OnChanges {
 	}
 
 	public saveAndClose() {
-		this.editable = !this.editable;
+		this.editable = false;
     for (let logEntry of this.logEntries) {
       let newRequest = new StoreLogRequest();
       newRequest.id = logEntry.id;
@@ -205,7 +222,7 @@ export class LogMealComponent implements OnInit, OnChanges {
          newRequest.portionId = logEntry.portion.id;
       }
       newRequest.multiplier = logEntry.multiplier;
-      newRequest.day = this.datePipe.transform(logEntry.day, 'yyyy-MM-dd');
+      newRequest.day = this.pipe.transform(logEntry.day, 'yyyy-MM-dd');
       newRequest.meal = this.meal.toUpperCase();
       this.logService.storeLogEntry(newRequest);
     }

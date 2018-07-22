@@ -1,5 +1,5 @@
 <div #logMeal class="log-meal">
-  <div class="day__meal" *ngIf="!editable" (click)="editable = true">
+  <div class="day__meal" *ngIf="!editable">
     <span class="day__meal__title">{{meal}}</span>
 
     <div class="meal__display">
@@ -26,27 +26,27 @@
         </div>
 
         <div class="meal__edit-ingredient__amount">
-          <input (keyup)="amountChange(logEntry,$event.target)" type="number" step=".01"
+          <input (keyup)="amountChange(logEntry)" type="number" step=".01"
                  *ngIf="logEntry.portion"
                  [value]="logEntry.multiplier"
                  (input)="logEntry.multiplier = ($event.target.value)">
-          <input (keyup)="amountChange(logEntry,$event.target)" type="number" step=".01"
+          <input (keyup)="amountChange(logEntry)" type="number" step=".01"
                  *ngIf="!logEntry.portion && logEntry.food.measurementUnit == 'GRAMS'"
                  [value]="logEntry.multiplier * logEntry.food.unitGrams"
                  (input)="logEntry.multiplier = ($event.target.value / logEntry.food.unitGrams)">
-          <input (keyup)="amountChange(logEntry,$event.target)" type="number" step=".01"
+          <input (keyup)="amountChange(logEntry)" type="number"
                  *ngIf="!logEntry.portion && logEntry.food.measurementUnit == 'UNIT'"
                  [value]="logEntry.multiplier"
                  (input)="logEntry.multiplier = $event.target.value" step="0.1">
         </div>
 
         <div class="meal__edit-ingredient__measurement">
-          <select (change)="portionChange(logEntry,$event.target)">
+          <select (change)="portionChange(logEntry, $event.target)">
             <!-- the default unitname -->
-            <option value="defaultUnit" selected="{{getSelected(logEntry.portion,undefined)}}">{{logEntry.food.unitName}}</option>
+            <option value="defaultUnit" selected="{{getSelected(logEntry.portion, undefined)}}">{{logEntry.food.unitName}}</option>
             <!-- all available portions -->
             <option *ngFor="let portion of getAvailablePortions(logEntry)"
-                    selected="{{getSelected(logEntry.portion,portion)}}"
+                    selected="{{getSelected(logEntry.portion, portion)}}"
                     value="{{portion.description}}">{{portion.description}}</option>
           </select>
         </div>
@@ -88,11 +88,7 @@
           </div>
         </div>
 
-        <div class="meal__new-ingredient__save" (click)="saveAndClose()">
-          <i class="primary fas fa-check"></i>
-        </div>
       </div>
     </div>
-
   </div>
 </div>

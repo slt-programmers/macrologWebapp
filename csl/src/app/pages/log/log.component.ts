@@ -22,11 +22,11 @@ export class LogComponent implements OnInit {
 	@ViewChild('breakfast') private breakfastEref;
 	@ViewChild('lunch') private lunchEref;
 	@ViewChild('dinner') private dinnerEref;
-	@ViewChild('snacks') private snacksRef;
+	@ViewChild('snacks') private snacksEref;
 
 	public modalIsVisible: boolean = false;
 	public getLogEntriesComplete: boolean = false;
-
+	public isLogMealOpen: boolean;
   public allLogs;
 	public food;
   public foodAndPortions;
@@ -37,6 +37,11 @@ export class LogComponent implements OnInit {
   public lunchLogs = new Array<LogEntry>();
   public dinnerLogs = new Array<LogEntry>();
   public snacksLogs = new Array<LogEntry>();
+
+	public breakfastOpen = false;
+	public lunchOpen = false;
+	public dinnerOpen = false;
+	public snacksOpen = false;
 
 	public userGoals;
 	public goalCal;
@@ -74,6 +79,10 @@ export class LogComponent implements OnInit {
 
 	public getDifferentDay(event) {
 		this.displayDate = event;
+		this.breakfastOpen = false;
+		this.lunchOpen = false;
+		this.dinnerOpen = false;
+		this.snacksOpen = false;
     this.getLogEntries(this.pipe.transform(this.displayDate, 'yyyy-MM-dd'));
 	}
 
@@ -82,7 +91,6 @@ export class LogComponent implements OnInit {
 	}
 
 	public closeModal(event) {
-    console.log('refreshed');
 		this.modalIsVisible = false;
 		this.getAllFood();
 	}
@@ -167,14 +175,20 @@ export class LogComponent implements OnInit {
 	}
 
 	private documentClick(event) {
-		console.log('target:');
 		console.log(event.target);
-		console.log(this.breakfastEref);
-		console.log(this.breakfastEref.logMealEref.nativeElement);
-		let bool = this.breakfastEref.logMealEref.nativeElement.contains(event.target);
-		console.log(bool);
-		if (bool) {
-			console.log('click in breakfast log-meal');
+		if (!event.target.classList.contains('autocomplete__option') &&
+		    !event.target.classList.contains('fa-trash') &&
+		    !event.target.classList.contains('button--transparent')) {
+					
+			let clickedInBreakfast = this.breakfastEref.logMealEref.nativeElement.contains(event.target);
+			let clickedInLunch = this.lunchEref.logMealEref.nativeElement.contains(event.target);
+			let clickedInDinner = this.dinnerEref.logMealEref.nativeElement.contains(event.target);
+			let clickedInSnacks = this.snacksEref.logMealEref.nativeElement.contains(event.target);
+
+			this.breakfastOpen = clickedInBreakfast;
+			this.lunchOpen = clickedInLunch;
+			this.dinnerOpen = clickedInDinner;
+			this.snacksOpen = clickedInSnacks;
 		}
 	}
 }
