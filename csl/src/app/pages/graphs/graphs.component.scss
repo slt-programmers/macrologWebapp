@@ -4,13 +4,18 @@ $proteincolor: green;
 $fatcolor: blue;
 $carbscolor: red;
 
+.macrosperday {
+  display:flex;
+  flex-direction:row;
+}
+
 .graph{
   display:flex;
+  height:300px;
   flex-direction:row;
 }
 .day{
   width:20px;
-  height:200px;
   position:relative;
   display:flex;
   flex-direction:row;
@@ -38,8 +43,11 @@ $carbscolor: red;
 }
 .legenda {
 
+  position:relative;
+    margin-top: auto;
+  padding-left:10px;
   display:flex;
-  flex-direction:row;
+  flex-direction:column;
   padding-top:20px;
   &__protein{
       flex-basis: 10%;

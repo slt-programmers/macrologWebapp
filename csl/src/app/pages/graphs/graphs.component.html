@@ -1,19 +1,21 @@
 <div class="container">
   <p>Grafiekjes</p>
-  <div class="graph">
-    <div class="day" *ngFor="let dailyMacro of macrosMonth" >
-      <div id="protein_{{dailyMacro.day|date: 'ddMMyyyy'}}" class="protein" style="height: 100px"> </div>
-      <div  id="fat_{{dailyMacro.day|date: 'ddMMyyyy'}}" class="fat" style="height: 10px"></div>
-      <div  id="carbs_{{dailyMacro.day|date: 'ddMMyyyy'}}" class="carbs" style="height: 40px"></div>
 
-      <!--{{dailyMacro.day | date: 'dd-MM-yyyy'}} - {{dailyMacro.macro.protein | number:'1.1-1'}} - {{dailyMacro.macro.fat | number:'1.1-1'}} - {{dailyMacro.macro.carbs | number:'1.1-1'}} - {{dailyMacro.macro.calories | number:'1.1-1'}}-->
-      <!--<div  class="date" style="height: 200px">{{dailyMacro.day | date: 'dd'}}</div>-->
+  <div class="macrosperday">
+    <div class="graph">
+      <div id="day_{{dailyMacro.day|date: 'ddMMyyyy'}}"  class="day" *ngFor="let dailyMacro of macrosMonth">
+        <div id="protein_{{dailyMacro.day|date: 'ddMMyyyy'}}" title="{{dailyMacro.macro.protein | number:'1.1-1'}} gr" class="protein" style="height: 100px"></div>
+        <div id="fat_{{dailyMacro.day|date: 'ddMMyyyy'}}" title="{{dailyMacro.macro.fat | number:'1.1-1'}} gr" class="fat" style="height: 10px"></div>
+        <div id="carbs_{{dailyMacro.day|date: 'ddMMyyyy'}}" title="{{dailyMacro.macro.carbs | number:'1.1-1'}} gr" class="carbs" style="height: 40px"></div>
+
+        <!--{{dailyMacro.day | date: 'dd-MM-yyyy'}} - {{dailyMacro.macro.protein | number:'1.1-1'}} - {{dailyMacro.macro.fat | number:'1.1-1'}} - {{dailyMacro.macro.carbs | number:'1.1-1'}} - {{dailyMacro.macro.calories | number:'1.1-1'}}-->
+        <!--<div  class="date"> {{dailyMacro.day | date: 'dd'}}</div>-->
+      </div>
+    </div>
+    <div class="legenda">
+      <div class="legenda__protein">Protein</div>
+      <div class="legenda__fat">Fat</div>
+      <div class="legenda__carbs">Carbs</div>
     </div>
   </div>
-  <div class="legenda">
-     <div class="legenda__protein">Protein</div>
-     <div class="legenda__fat">Fat</div>
-     <div class="legenda__carbs">Carbs</div>
-  </div>
-
 </div>

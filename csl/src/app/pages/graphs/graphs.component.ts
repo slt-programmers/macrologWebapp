@@ -25,10 +25,14 @@ export class GraphsComponent implements OnInit {
        let protein = document.getElementById('protein_'+fetchDate);
        let fat = document.getElementById('fat_'+fetchDate);
        let carbs = document.getElementById('carbs_'+fetchDate);
-       if (!protein || !fat || !carbs) return;
-       protein.style.height = 5 * Math.round(dayMacro.macro.protein) + 'px';
-       fat.style.height = 5 *  Math.round(dayMacro.macro.fat) + 'px';
-       carbs.style.height = 5* Math.round(dayMacro.macro.carbs) + 'px';
+       let available = document.getElementById('day_'+fetchDate);
+       if (!protein || !fat || !carbs || !available) return;
+
+       let availableHeight = available.style.height; // = 100%
+
+       protein.style.height = Math.round(dayMacro.macro.protein) + 'px';
+       fat.style.height = Math.round(dayMacro.macro.fat) + 'px';
+       carbs.style.height = Math.round(dayMacro.macro.carbs) + 'px';
     }
 
 
