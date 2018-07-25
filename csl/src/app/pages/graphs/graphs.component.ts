@@ -5,8 +5,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-graphs',
-  templateUrl: './graphs.component.html',
-  styleUrls: ['./graphs.component.scss']
+  templateUrl: './graphs.component.html'
 })
 export class GraphsComponent implements OnInit {
 

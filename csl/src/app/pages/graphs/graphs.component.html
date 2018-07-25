@@ -3,19 +3,19 @@
 
   <div class="macrosperday">
     <div class="graph">
-      <div id="day_{{dailyMacro.day|date: 'ddMMyyyy'}}"  class="day" *ngFor="let dailyMacro of macrosMonth">
-        <div id="protein_{{dailyMacro.day|date: 'ddMMyyyy'}}" title="{{dailyMacro.macro.protein | number:'1.1-1'}} gr" class="protein" style="height: 100px"></div>
-        <div id="fat_{{dailyMacro.day|date: 'ddMMyyyy'}}" title="{{dailyMacro.macro.fat | number:'1.1-1'}} gr" class="fat" style="height: 10px"></div>
-        <div id="carbs_{{dailyMacro.day|date: 'ddMMyyyy'}}" title="{{dailyMacro.macro.carbs | number:'1.1-1'}} gr" class="carbs" style="height: 40px"></div>
+      <div id="day_{{dailyMacro.day|date: 'ddMMyyyy'}}"  class="graph-day" *ngFor="let dailyMacro of macrosMonth">
+        <div id="protein_{{dailyMacro.day|date: 'ddMMyyyy'}}" title="{{dailyMacro.macro.protein | number:'1.1-1'}} gr" class="graph-day__macro graph-day__macro--protein"></div>
+        <div id="fat_{{dailyMacro.day|date: 'ddMMyyyy'}}" title="{{dailyMacro.macro.fat | number:'1.1-1'}} gr" class="graph-day__macro graph-day__macro--fat"></div>
+        <div id="carbs_{{dailyMacro.day|date: 'ddMMyyyy'}}" title="{{dailyMacro.macro.carbs | number:'1.1-1'}} gr" class="graph-day__macro graph-day__macro--carbs"></div>
 
         <!--{{dailyMacro.day | date: 'dd-MM-yyyy'}} - {{dailyMacro.macro.protein | number:'1.1-1'}} - {{dailyMacro.macro.fat | number:'1.1-1'}} - {{dailyMacro.macro.carbs | number:'1.1-1'}} - {{dailyMacro.macro.calories | number:'1.1-1'}}-->
         <!--<div  class="date"> {{dailyMacro.day | date: 'dd'}}</div>-->
       </div>
     </div>
     <div class="legenda">
-      <div class="legenda__protein">Protein</div>
-      <div class="legenda__fat">Fat</div>
-      <div class="legenda__carbs">Carbs</div>
+      <div class="legenda__item legenda__item--protein">Protein</div>
+      <div class="legenda__item legenda__item--fat">Fat</div>
+      <div class="legenda__item legenda__item--carbs">Carbs</div>
     </div>
   </div>
 </div>

@@ -1,0 +1,59 @@
+$proteincolor: green;
+$fatcolor: blue;
+$carbscolor: red;
+
+.macrosperday {
+  display: flex;
+  flex-direction: row;
+}
+
+.graph{
+  display: flex;
+  height: 300px;
+}
+
+.graph-day{
+  width: 20px;
+  position: relative;
+  display: flex;
+  padding-right: 2px;
+
+	&__macro {
+		margin-top: auto;
+    flex-basis: 33%;
+    border-width: 2px 0 0 0 ;
+
+    &--protein {
+      background-color: $proteincolor;
+    }
+		&--fat {
+			background-color: $fatcolor;
+		}
+		&--carbs {
+			background-color: $carbscolor;
+		}
+	}
+}
+
+.legenda {
+  margin-top: auto;
+  padding: 20px 0 0 10px;
+  display: flex;
+  flex-direction: column;
+
+  &__item {
+    flex-basis: 10%;
+
+		&--protein {
+      background-color:$proteincolor;
+    }
+
+    &--fat{
+       background-color:$fatcolor;
+    }
+
+    &--carbs{
+       background-color:$carbscolor;
+    }
+  }
+}
