@@ -1,6 +1,4 @@
-@import '../../../css/public';
-
-.header {
+.table-header {
   display:flex;
   flex-direction:row;
   font-weight:bold;
@@ -86,9 +84,8 @@
 }
 
 .foodline{
-
   &:hover{
-    background-color:lightGrey;
+    background-color: $mist;
     cursor:pointer;
   }
 }

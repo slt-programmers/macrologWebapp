@@ -1,12 +1,12 @@
 <div class="container">
 
     <div>
-    <div class="header">
-      <div class="header__name">Name</div>
-      <div class="header__amount">Amount</div>
-      <div class="header__protein">Protein</div>
-      <div class="header__fat">Fat</div>
-      <div class="header__carbs">Carbs</div>
+    <div class="table-header">
+      <div class="table-header__name">Name</div>
+      <div class="table-header__amount">Amount</div>
+      <div class="table-header__protein">Protein</div>
+      <div class="table-header__fat">Fat</div>
+      <div class="table-header__carbs">Carbs</div>
     </div>
     <div class="foodline" *ngFor="let food of foodResult" (click)="openModal(food)">
       <div class="food" >
