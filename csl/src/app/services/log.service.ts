@@ -34,7 +34,7 @@ export class LogService {
 
   	const options = { headers: headers };
     return this.http.post<StoreLogRequest[]>(macrologBackendUrl + '/', storeLogEntryRequest, options).subscribe(data => {
-				this.toastService.setMessage('The food is saved!');
+				this.toastService.setMessage('Your meals have been saved!!');
         callBack();
       },
       error => {

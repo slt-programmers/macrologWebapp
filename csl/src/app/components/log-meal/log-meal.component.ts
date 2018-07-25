@@ -19,8 +19,6 @@ export class LogMealComponent implements OnInit, OnChanges {
 	@ViewChild('logMeal') private logMealEref: ElementRef;
 	@ViewChild('newIngredient') private newIngredientEref: ElementRef;
 	@ViewChild('autoComplete') private autoCompleteEref: ElementRef;
-	@ViewChild('foodNameInput') private foodNameInput: ElementRef;
-
 
 	@Input() food;
   @Input() meal: string;
@@ -48,15 +46,9 @@ export class LogMealComponent implements OnInit, OnChanges {
 
   ngOnInit() {
     this.editable = false;
-    this.showAutoComplete = true;
 	}
 
   ngAfterViewChecked(){
-    if(this.editable && this.showAutoComplete){
-      if (this.foodNameInput){
-        this.foodNameInput.nativeElement.focus();
-      }
-    }
   }
 
 	ngOnChanges(changes) {
@@ -96,7 +88,6 @@ export class LogMealComponent implements OnInit, OnChanges {
     }
     this.logService.getDayLogs(copyFrom).subscribe(
       data => {
-        this.logEntries = [];
         let tmpData = data;
         let filtered = new Array();
         filtered = tmpData.filter(
