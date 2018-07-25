@@ -26,7 +26,6 @@ export class LogComponent implements OnInit {
 	@ViewChild('toast') private toastEref;
 
 	public modalIsVisible: boolean = false;
-	public getLogEntriesComplete: boolean = false;
 	public isLogMealOpen: boolean;
   public allLogs;
 	public food;
@@ -62,11 +61,9 @@ export class LogComponent implements OnInit {
   }
 
   public refresh(){
-     console.log('refreshing');
-     this.getLogEntriesComplete=false;
-     console.log('refreshing');
-     this.getLogEntries(this.pipe.transform(this.displayDate, 'yyyy-MM-dd'));
+    this.getLogEntries(this.pipe.transform(this.displayDate, 'yyyy-MM-dd'));
   }
+
 	public getTotal(macro) {
 		let total = 0.0;
 		for (let logentry of this.breakfastLogs) {
@@ -149,8 +146,7 @@ export class LogComponent implements OnInit {
 				this.lunchLogs = new Array();
 				this.dinnerLogs = new Array();
 				this.snacksLogs = new Array();
-			},
-			() => this.getLogEntriesComplete = true
+			}
 		);
   }
 
