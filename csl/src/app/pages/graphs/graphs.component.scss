@@ -1,40 +1,57 @@
 @import '../../../css/public';
+
+$proteincolor: green;
+$fatcolor: blue;
+$carbscolor: red;
+
 .graph{
   display:flex;
   flex-direction:row;
 }
 .day{
-  width:30px;
-  height:150px;
+  width:20px;
+  height:200px;
   position:relative;
+  display:flex;
+  flex-direction:row;
+  padding-right:2px;
+
+  .protein {
+    margin-top: auto;
+    flex-basis: 33%;
+    border-width:2px 0 0 0 ;
+    background-color:$proteincolor;
+  }
+  .fat {
+    margin-top: auto;
+    flex-basis: 33%;
+    border-width:2px 0 0 0;
+    background-color:$fatcolor;
+  }
+  .carbs {
+    margin-top: auto;
+    flex-basis: 33%;
+    border-width:2px 0 0 0;
+    background-color:$carbscolor;
+  }
 
 }
-.protein {
-  width:30px;
-  border-color:green;
-  border-style: dotted;
-  border-width:2px 0 0 0 ;
-  bottom: 0px;
-  background-color:green;
+.legenda {
 
-}
-.fat {
-  width:30px;
-  border-color:blue;
-  border-style:dotted;
-  border-width:2px 0 0 0;
-  bottom: 0px;
-  background-color:blue;
-
-}
-.carbs {
-  width:30px;
-  border-color:red;
-  border-style:dotted;
-  border-width:2px 0 0 0;
-  bottom: 0px;
-  background-color:red;
-
-
+  display:flex;
+  flex-direction:row;
+  padding-top:20px;
+  &__protein{
+      flex-basis: 10%;
+       background-color:$proteincolor;
+  }
+  &__fat{
+     flex-basis: 10%;
+     background-color:$fatcolor;
+  }
+  &__carbs{
+     flex-basis: 10%;
+     background-color:$carbscolor;
+  }
 }
 

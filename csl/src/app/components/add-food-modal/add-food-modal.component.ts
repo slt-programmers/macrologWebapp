@@ -41,7 +41,11 @@ export class AddFoodModalComponent implements OnInit {
         this.fat = this.food.fat;
         this.carbs = this.food.carbs;
 
-        this.portions = this.food.portions;
+        if (this.food.portions){
+          this.portions = this.food.portions;
+        } else {
+         this.portions = [];
+        }
 
     }
   }

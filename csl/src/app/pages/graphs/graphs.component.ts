@@ -22,15 +22,13 @@ export class GraphsComponent implements OnInit {
      let pipe = new DatePipe('en-US');
      for (let dayMacro of this.macrosMonth) {
        let fetchDate = pipe.transform(dayMacro.day,'ddMMyyyy');
-       console.log(fetchDate);
        let protein = document.getElementById('protein_'+fetchDate);
        let fat = document.getElementById('fat_'+fetchDate);
        let carbs = document.getElementById('carbs_'+fetchDate);
-       if (!protein) return;
-        console.log(Math.round(dayMacro.macro.protein) + 'px;');
-       protein.style.height = Math.round(dayMacro.macro.protein) + 'px';
-       fat.style.height = Math.round(dayMacro.macro.fat) + 'px';
-       carbs.style.height = Math.round(dayMacro.macro.carbs) + 'px';
+       if (!protein || !fat || !carbs) return;
+       protein.style.height = 5 * Math.round(dayMacro.macro.protein) + 'px';
+       fat.style.height = 5 *  Math.round(dayMacro.macro.fat) + 'px';
+       carbs.style.height = 5* Math.round(dayMacro.macro.carbs) + 'px';
     }
 
 
