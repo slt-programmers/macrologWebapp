@@ -10,7 +10,8 @@
 	position: fixed;
 	text-align: center;
 	transition: height 0.2s;
-	width: 250px;
+	min-width: 250px;
+	padding:0 $gutter;
 
 	&__message {
 		padding-top: ($gutter/2);
