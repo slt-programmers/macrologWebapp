@@ -1,13 +1,15 @@
 import {Injectable} from'@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Food} from '../model/food';
+import {ToastService} from './toast.service';
 
 const macrologBackendUrl = '//localhost:8090/food';
 
 @Injectable()
 export class FoodService {
 
-	constructor(private http: HttpClient) {
+	constructor(private http: HttpClient,
+							private toastService: ToastService) {
 	}
 
 	public addFood(addFoodRequest: Food, callBack: Function) {
@@ -18,7 +20,7 @@ export class FoodService {
 
   	const options = { headers: headers };
     return this.http.post<Food>(macrologBackendUrl + '/', addFoodRequest, options).subscribe(data => {
-        alert('ok');
+        this.toastService.setMessage('The food has been added!');
 				callBack();
       },
       error => {

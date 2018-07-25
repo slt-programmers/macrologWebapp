@@ -3,6 +3,7 @@ import {UserService} from '../../services/user.service';
 import {Gender} from '../../model/gender';
 import {Observable} from 'rxjs/Observable';
 import {forkJoin} from 'rxjs/observable/forkJoin';
+import {ToastService} from '../../services/toast.service';
 
 @Component({
   selector: 'user',
@@ -23,7 +24,8 @@ export class UserComponent implements OnInit {
 	public goalFat: string;
 	public goalCarbs: string;
 
-  constructor(private userService: UserService) {
+  constructor(private userService: UserService,
+              private toastService: ToastService) {
 
 	}
 
@@ -69,9 +71,7 @@ export class UserComponent implements OnInit {
 			this.userService.addUserInfo('weight', this.weight.toString()),
 			this.userService.addUserInfo('activity', this.activity.toString())
     ).subscribe(
-
-//TODO: Toast melding voor het succesvol opslaan maken
-        data => console.log(data),
+        data => this.toastService.setMessage('Your data is saved!'),
         error => console.error(error)
     );
 	}

@@ -23,6 +23,7 @@ export class LogComponent implements OnInit {
 	@ViewChild('lunch') private lunchEref;
 	@ViewChild('dinner') private dinnerEref;
 	@ViewChild('snacks') private snacksEref;
+	@ViewChild('toast') private toastEref;
 
 	public modalIsVisible: boolean = false;
 	public getLogEntriesComplete: boolean = false;
@@ -193,4 +194,5 @@ export class LogComponent implements OnInit {
 
 		}
 	}
+
 }

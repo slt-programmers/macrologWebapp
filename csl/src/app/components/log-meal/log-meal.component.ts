@@ -47,7 +47,6 @@ export class LogMealComponent implements OnInit, OnChanges {
 	}
 
 	ngOnChanges(changes) {
-		console.log(changes);
 		if (changes['date'] && this.editable) {
 			this.saveAndClose();
 		}
@@ -233,7 +232,7 @@ export class LogMealComponent implements OnInit, OnChanges {
 		  	console.log('callback saveandclose');
         this.dataChanged.emit(true);
 		  }
-      this.logService.storeLogEntries(allEntries,closeCallBack);
+      this.logService.storeLogEntries(allEntries, closeCallBack);
 	}
 
 

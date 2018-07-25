@@ -1,0 +1,19 @@
+.toast {
+	background-color: $primary;
+	border-radius: 3px 3px 0 0;
+	bottom: 0;
+	color: $mist;
+	font-size: 16px;
+	font-weight: 300;
+	height: 0;
+	left: calc(50% - 125px);
+	position: fixed;
+	text-align: center;
+	transition: height 0.2s;
+	width: 250px;
+
+	&__message {
+		padding-top: ($gutter/2);
+	}
+
+}
