@@ -6,13 +6,13 @@
         <div class="intake-goal__calories">
           <span>Calories: {{getTotal("calories")  | number:'1.0-0'}}/<strong>{{goalCal}}</strong></span>
         </div>
-        <div class="intake-goal__macros" *ngIf="getLogEntriesComplete">
+        <div class="intake-goal__macros">
           <span class="intake-goal__macro">Protein: {{getTotal("protein") | number:'1.1-1'}}/<strong>{{userGoals[0]}}</strong></span>
           <span class="intake-goal__macro">Fat: {{getTotal("fat") | number:'1.1-1'}}/<strong>{{userGoals[1]}}</strong></span>
           <span class="intake-goal__macro">Carbs: {{getTotal("carbs") | number:'1.1-1'}}/<strong>{{userGoals[2]}}</strong></span>
         </div>
       </div>
-      <div class="intake-goal__graph" *ngIf="getLogEntriesComplete">
+      <div class="intake-goal__graph">
         <div #bargraph class="bargraph-wrapper">
           <bargraph [percentage]="getTotal('protein')/userGoals[0]*100" [title]="'P'"></bargraph>
           <bargraph [percentage]="getTotal('fat')/userGoals[1]*100" [title]="'F'"></bargraph>
