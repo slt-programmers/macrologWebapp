@@ -1,4 +1,4 @@
-<div #logMeal class="log-meal">
+<div #logMeal class="log-meal" [ngClass]="{'log-meal--grow': editable}">
   <div class="day__meal" *ngIf="!editable">
     <span class="day__meal__title">{{meal}}</span>
 
@@ -86,6 +86,12 @@
               </div>
             </ng-container>
           </div>
+        </div>
+
+        <div class="meal__new-ingredient__close">
+          <button (click)="saveAndClose()" class="button button--transparent">
+            <i class="fas fa-check"></i>
+          </button>
         </div>
 
       </div>

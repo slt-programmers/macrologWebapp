@@ -1,6 +1,12 @@
 @import '../../../css/public';
 
 .log-meal {
+	&--grow {
+		@include elevation(2);
+		background: $white;
+		margin-left: -8px;
+		width: calc(100% + 16px);
+	}
 
 }
 .day {
@@ -147,11 +153,8 @@
       position: relative;
     }
 
-    &__save {
+    &__close {
       align-items: center;
-      background-color: $primary;
-      border-radius: 50%;
-      color: $white;
       display: flex;
       flex-basis: 5%;
       justify-content: center;
