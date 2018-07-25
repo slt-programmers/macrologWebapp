@@ -15,13 +15,17 @@ export class FoodComponent implements OnInit {
   constructor(private foodService: FoodService) { }
 
 	ngOnInit() {
+     this.loadAllFood();
+  };
+
+ private loadAllFood(){
     this.foodService.getAllFood().subscribe(
       data => { this.foodResult = data;
         console.log(this.foodResult);
       },
 			error => console.log(error)
 		);
-  };
+ }
 
 	public openModal(food) {
     this.selectedFood= food;
@@ -29,6 +33,7 @@ export class FoodComponent implements OnInit {
 	}
   public closeModal(event) {
     console.log('refreshed');
+     this.loadAllFood();
 		this.modalIsVisible = false;
 	}
 
