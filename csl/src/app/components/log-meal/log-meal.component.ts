@@ -5,6 +5,8 @@ import {StoreLogRequest} from '../../model/storeLogRequest';
 import {FoodService} from '../../services/food.service';
 import {LogService} from '../../services/log.service';
 import {Food} from '../../model/food';
+import {ToastService} from '../../services/toast.service';
+
 
 @Component({
   selector: 'log-meal',
@@ -17,7 +19,6 @@ export class LogMealComponent implements OnInit, OnChanges {
 	@ViewChild('logMeal') private logMealEref: ElementRef;
 	@ViewChild('newIngredient') private newIngredientEref: ElementRef;
 	@ViewChild('autoComplete') private autoCompleteEref: ElementRef;
-	@ViewChild('test') private testRef: ElementRef;
 
 	@Input() food;
   @Input() meal: string;
@@ -36,22 +37,25 @@ export class LogMealComponent implements OnInit, OnChanges {
 
   constructor (private foodService: FoodService,
                private logService: LogService,
-               private renderer: Renderer) {
+               private renderer: Renderer,
+               private toastService: ToastService) {
     this.editable = false;
 		this.foodMatch = new Array();
 		this.pipe = new DatePipe('en-US');
 	}
 
   ngOnInit() {
-
+    this.editable = false;
 	}
 
+  ngAfterViewChecked(){
+  }
+
 	ngOnChanges(changes) {
+
 		if (changes['date'] && this.editable) {
 			this.saveAndClose();
-		}
-
-		if (changes['open'] && !changes['open'].firstChange) {
+		} else if (changes['open'] && !changes['open'].firstChange) {
 			if (changes['open'].currentValue) {
 				this.editable = true;
 			} else {
@@ -71,6 +75,41 @@ export class LogMealComponent implements OnInit, OnChanges {
 			}
 		}
 	}
+
+  public copyPrevious() {
+    let prevDay = new Date(this.date.getTime());
+    prevDay.setDate(prevDay.getDate() - 1);
+    let copyFrom = this.pipe.transform(prevDay, 'yyyy-MM-dd');
+    this.toastService.setMessage(this.meal + ' has been copied from ' + copyFrom);
+
+    for (let oldEntry of this.logEntries){
+		  this.logService.deleteLogEntry(oldEntry);
+      this.updateCalculatedMacros(oldEntry);
+    }
+    this.logService.getDayLogs(copyFrom).subscribe(
+      data => {
+        let tmpData = data;
+        let filtered = new Array();
+        filtered = tmpData.filter(
+              entry => entry.meal === this.meal.toUpperCase()
+         );
+        for (let copiedEntry of filtered) {
+           let logEntry = new LogEntry();
+           logEntry.meal = copiedEntry.meal;
+		       logEntry.food = copiedEntry.food;
+		       if (copiedEntry.portion) {
+			          logEntry.portion = copiedEntry.portion;
+		       }
+           logEntry.multiplier = copiedEntry.multiplier;
+           this.updateCalculatedMacros(logEntry);
+		       logEntry.day = this.date;
+           this.logEntries.push(logEntry);
+           this.updateCalculatedMacros(logEntry);
+        }
+      }
+    );
+
+ }
 
   public amountChange(logEntry) {
      this.updateCalculatedMacros(logEntry);
