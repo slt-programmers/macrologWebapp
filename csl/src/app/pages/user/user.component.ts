@@ -55,7 +55,6 @@ export class UserComponent implements OnInit {
 	}
 
 	closeCalcModal(event): void {
-		console.log(event);
 		this.goalProtein = event.goalProtein ? event.goalProtein : this.goalProtein;
 		this.goalFat = event.goalFat ? event.goalFat : this.goalFat;
 		this.goalCarbs = event.goalCarbs ? event.goalCarbs : this.goalCarbs;

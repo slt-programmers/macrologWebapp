@@ -27,14 +27,13 @@ export class LogService {
 	}
 
 	public storeLogEntries(storeLogEntryRequest: StoreLogRequest[], callBack: Function) {
-		console.log('In storeLogRequest');
    	const headers = {'Content-Type': 'application/json',
    		'Access-Control-Allow-Origin': 'http://localhost:4200'
    	};
 
   	const options = { headers: headers };
     return this.http.post<StoreLogRequest[]>(macrologBackendUrl + '/', storeLogEntryRequest, options).subscribe(data => {
-				this.toastService.setMessage('Your meals have been saved!!');
+				this.toastService.setMessage('Your meals have been saved!');
         callBack();
       },
       error => {
@@ -43,7 +42,6 @@ export class LogService {
 	}
 
 	public deleteLogEntry(logEntry: LogEntry) {
-		console.log('In DeleteLogEntry');
    	const headers = {'Content-Type': 'application/json',
    		'Access-Control-Allow-Origin': 'http://localhost:4200'
    	};

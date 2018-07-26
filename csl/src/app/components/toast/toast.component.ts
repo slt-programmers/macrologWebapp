@@ -14,7 +14,6 @@ export class ToastComponent {
 
 	constructor(private toastService: ToastService) {
 		this.toastService.messageObservable.subscribe((message: string) => {
-			console.log('In the subscribe');
 			this.message = message;
 			this.vc.showToast();
 		})

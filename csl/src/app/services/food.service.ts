@@ -13,7 +13,6 @@ export class FoodService {
 	}
 
 	public addFood(addFoodRequest: Food, callBack: Function) {
-		console.log('In addFood');
    	const headers = {'Content-Type': 'application/json',
    		'Access-Control-Allow-Origin': 'http://localhost:4200'
    	};
@@ -29,12 +28,10 @@ export class FoodService {
 	}
 
 	getFood(foodId: string) {
-    console.log(macrologBackendUrl + "/" + foodId);
 		return this.http.get<Food>(macrologBackendUrl + "/"+ foodId, { responseType: 'json' });
   }
 
  	getAllFood() {
-		console.log('getAllFood');
    	return this.http.get<Food[]>(macrologBackendUrl, { responseType: 'json' });
 	}
 

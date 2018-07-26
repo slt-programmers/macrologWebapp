@@ -1,4 +1,4 @@
-import{Component, OnInit, OnChanges, ViewChild, SimpleChanges, Renderer, ElementRef, Input,Output ,EventEmitter}from '@angular/core';
+import {Component, OnInit, OnChanges, ViewChild, SimpleChange, SimpleChanges, Renderer, ElementRef, Input,Output ,EventEmitter}from '@angular/core';
 import {DatePipe} from '@angular/common';
 import {LogEntry} from '../../model/logEntry';
 import {StoreLogRequest} from '../../model/storeLogRequest';
@@ -45,14 +45,12 @@ export class LogMealComponent implements OnInit, OnChanges {
 	}
 
   ngOnInit() {
-    this.editable = false;
 	}
 
   ngAfterViewChecked(){
   }
 
 	ngOnChanges(changes) {
-
 		if (changes['date'] && this.editable) {
 			this.saveAndClose();
 		} else if (changes['open'] && !changes['open'].firstChange) {
@@ -62,6 +60,10 @@ export class LogMealComponent implements OnInit, OnChanges {
 				this.saveAndClose();
 			}
 		}
+	}
+
+	close() {
+		this.editable = false;
 	}
 
 	public findFoodMatch(event) {
@@ -151,7 +153,6 @@ export class LogMealComponent implements OnInit, OnChanges {
       oldValue = 'defaultUnit';
     }
     let newValue = eventTarget.value;
-    console.log('Change from ' + oldValue + ' to ' + newValue);
 
     if (oldValue == 'defaultUnit' && newValue != 'defaultUnit'){
        // van default naar een portie.
@@ -160,7 +161,6 @@ export class LogMealComponent implements OnInit, OnChanges {
        if (logEntry.food.measurementUnit == 'GRAMS'){
          logEntry.multiplier = logEntry.multiplier * logEntry.food.unitGrams;
        }
-       console.log(logEntry.portion);
 
     } else if (newValue =='defaultUnit') {
       // van een portie naar default. Dit gaan we omrekenen.
@@ -253,7 +253,7 @@ export class LogMealComponent implements OnInit, OnChanges {
 	}
 
 	public saveAndClose() {
-		this.editable = false;
+		this.close();
     let allEntries = [];
     for (let logEntry of this.logEntries) {
       let newRequest = new StoreLogRequest();
@@ -268,7 +268,6 @@ export class LogMealComponent implements OnInit, OnChanges {
       allEntries.push(newRequest);
     }
       let closeCallBack = () => {
-		  	console.log('callback saveandclose');
         this.dataChanged.emit(true);
 		  }
       this.logService.storeLogEntries(allEntries, closeCallBack);
