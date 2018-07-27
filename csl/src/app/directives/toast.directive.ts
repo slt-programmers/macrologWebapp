@@ -13,8 +13,6 @@ export class ToastDirective {
 	}
 
 	public showToast() {
-		console.log('In the showToast');
-		console.log(this.nativeElement);
 		this.renderer.setElementStyle(this.nativeElement, 'height', '50px');
 		setTimeout( () => this.renderer.setElementStyle(this.nativeElement, 'height', '0'), 1200);
 	}

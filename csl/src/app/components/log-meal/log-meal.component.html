@@ -18,7 +18,10 @@
   </div>
 
   <div class="day__meal" *ngIf="editable">
-    <span class="day__meal__title">{{meal}} <i class="fas fa-file-import" title="copy {{meal.toLowerCase()}} from previous day" (click)="copyPrevious()"></i></span>
+    <span class="day__meal__title">{{meal}}
+      <i class=" day__meal__icon fas fa-file-import" title="copy {{meal.toLowerCase()}} from previous day"
+         (click)="copyPrevious()"></i>
+    </span>
     <div class="meal__editable">
       <div *ngFor="let logEntry of logEntries" class="meal__edit-ingredient">
         <div class="meal__edit-ingredient__name">
@@ -26,7 +29,8 @@
         </div>
 
         <div class="meal__edit-ingredient__amount">
-          <input (keyup)="amountChange(logEntry)" type="number" step=".01"
+          <input class="portioninput"
+                 (keyup)="amountChange(logEntry)" type="number" step="0.1"
                  *ngIf="logEntry.portion"
                  [value]="getValue(logEntry)"
                  (input)="setMultiplier($event,logEntry)">
@@ -89,7 +93,7 @@
         </div>
 
         <div class="meal__new-ingredient__close">
-          <button (click)="saveAndClose()" class="button button--transparent">
+          <button (click)="close()" class="button button--transparent">
             <i class="fas fa-check"></i>
           </button>
         </div>

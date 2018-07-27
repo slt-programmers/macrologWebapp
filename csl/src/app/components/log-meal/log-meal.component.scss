@@ -46,6 +46,11 @@
 			font-weight: bold;
 			margin-bottom: 5px;
 		}
+
+		&__icon {
+			color: $primary;
+			margin-left: $gutter/2;
+		}
 	}
 
 	&__total {

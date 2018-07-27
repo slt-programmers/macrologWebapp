@@ -115,7 +115,7 @@ export class LogComponent implements OnInit {
         this.food = data;
 				this.getFoodSearchableList(data);
 			},
-			error => { console.log(error); }
+			error => console.log(error)
 		);
 	}
 
@@ -152,7 +152,6 @@ export class LogComponent implements OnInit {
 
   // Maakt een lijst met daarin food en food + alle mogelijke portions
 	private getFoodSearchableList(food) {
-    console.log('reconstruct searchable food');
 		let foodList = new Array();
 
 		for (let item of food) {
@@ -178,7 +177,6 @@ export class LogComponent implements OnInit {
 	}
 
 	private documentClick(event) {
-		console.log(event.target);
 		if (!event.target.classList.contains('autocomplete__option') &&
 		    !event.target.classList.contains('fa-trash') &&
 		    !event.target.classList.contains('button--transparent')) {

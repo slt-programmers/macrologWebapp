@@ -40,7 +40,6 @@ export class SliderComponent implements OnInit {
 	}
 
   ngOnInit() {
-		console.log('onInit');
 		this.slider = this.sliderElement.nativeElement;
 		this.sliderHandle = this.handleElement.nativeElement;
 		this.track = this.trackElement.nativeElement;
@@ -76,7 +75,6 @@ export class SliderComponent implements OnInit {
 	}
 
 	private initMarkers() {
-		console.log('initMarkers');
 		let part = this.markers[0].value - this.lowerBound;
 		let percentage = part / (this.upperBound - this.lowerBound);
 		this.lowerMark.style.left = (this.sliderWidth * percentage - 2) + 'px';

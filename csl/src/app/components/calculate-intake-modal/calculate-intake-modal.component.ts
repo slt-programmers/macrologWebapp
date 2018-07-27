@@ -43,8 +43,6 @@ export class CalculateIntakeModalComponent implements OnInit {
 	}
 
   ngOnInit() {
-		console.log('init modal')
-		console.log(this.weight);
 		this.protein = this.weight * 1.8;
 		this.fat = this.weight * 0.8;
 		this.calcCalories();
@@ -78,11 +76,9 @@ export class CalculateIntakeModalComponent implements OnInit {
 	}
 
 	calcCalories(): void {
-		console.log('calc calories');
 		this.calcTDEE();
 		this.setMarkers();
 		this.calories = this.tdee;
-		console.log(this.calories);
 		this.calcCarbs();
 	}
 
@@ -101,7 +97,6 @@ export class CalculateIntakeModalComponent implements OnInit {
 	}
 
 	calcTDEE(): void {
-		console.log('TDEE');
 		let bmr;
 		if (this.gender === 'MALE') {
 			bmr = 66.5 + (13.7 * this.weight) + (5 * this.height) - (6.76 * this.age);
@@ -109,9 +104,6 @@ export class CalculateIntakeModalComponent implements OnInit {
 			bmr = 655.0 + (9.56 * this.weight) + (1.8 * this.height) - (4.68 * this.age);
 		}
 		this.tdee = bmr * this.activity;
-		console.log(this.activity);
-		console.log(this.gender);
-		console.log(bmr);
 	}
 
 	calcCarbs(): void {
@@ -119,7 +111,6 @@ export class CalculateIntakeModalComponent implements OnInit {
 	}
 
 	public saveIntake() {
-		console.log('save intake');
 		if (this.showMoreOptions) {
 			forkJoin(
 				this.userService.addUserInfo('goalProtein', Math.round(this.proteinManual).toString()),

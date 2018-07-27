@@ -17,7 +17,6 @@ export class ToastService {
 	}
 
 	public setMessage(message: string) {
-		console.log(message);
 		this.message.next(message);
 	}
 }

@@ -19,9 +19,7 @@ export class FoodComponent implements OnInit {
 
  private loadAllFood(){
     this.foodService.getAllFood().subscribe(
-      data => { this.foodResult = data;
-        console.log(this.foodResult);
-      },
+      data => this.foodResult = data,
 			error => console.log(error)
 		);
  }
@@ -31,8 +29,7 @@ export class FoodComponent implements OnInit {
 		this.modalIsVisible = true;
 	}
   public closeModal(event) {
-    console.log('refreshed');
-     this.loadAllFood();
+    this.loadAllFood();
 		this.modalIsVisible = false;
 	}
 
