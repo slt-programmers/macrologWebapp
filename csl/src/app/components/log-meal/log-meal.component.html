@@ -34,7 +34,7 @@
                  *ngIf="logEntry.portion"
                  [value]="getValue(logEntry)"
                  (input)="setMultiplier($event,logEntry)">
-          <input (keyup)="amountChange(logEntry)" type="number" step=".01"
+          <input (keyup)="amountChange(logEntry)" type="number" step="1"
                  *ngIf="!logEntry.portion && logEntry.food.measurementUnit == 'GRAMS'"
                  [value]="getValue(logEntry)"
                  (input)="setMultiplier($event,logEntry)">
