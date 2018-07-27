@@ -66,6 +66,26 @@ export class LogMealComponent implements OnInit, OnChanges {
 		this.editable = false;
 	}
 
+	evaluateInput(event, logEntry) {
+		// omgaan met puntjes en weghalen ervan
+		if (event.data == '.') {
+			return logEntry.multiplier;
+		}
+		return logEntry.multiplier = (event.target.valueAsNumber);
+	}
+
+	getValue(logEntry) {
+		return Math.round(logEntry.multiplier * logEntry.food.unitGrams);
+	}
+
+	evaluateGramsInput(event, logEntry) {
+		if (event.data == '.') {
+			return logEntry.multiplier;
+		}
+		return logEntry.multiplier = (event.target.value / logEntry.food.unitGrams)
+
+	}
+
 	public findFoodMatch(event) {
 		this.foodMatch = new Array<Food>();
 		if (event.data !== null) {
