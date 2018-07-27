@@ -28,16 +28,16 @@
         <div class="meal__edit-ingredient__amount">
           <input (keyup)="amountChange(logEntry)" type="number" step=".01"
                  *ngIf="logEntry.portion"
-                 [value]="logEntry.multiplier"
-                 (input)="logEntry.multiplier = ($event.target.value)">
+                 [value]="getValue(logEntry)"
+                 (input)="setMultiplier($event,logEntry)">
           <input (keyup)="amountChange(logEntry)" type="number" step=".01"
                  *ngIf="!logEntry.portion && logEntry.food.measurementUnit == 'GRAMS'"
-                 [value]="logEntry.multiplier * logEntry.food.unitGrams"
-                 (input)="logEntry.multiplier = ($event.target.value / logEntry.food.unitGrams)">
+                 [value]="getValue(logEntry)"
+                 (input)="setMultiplier($event,logEntry)">
           <input (keyup)="amountChange(logEntry)" type="number"
                  *ngIf="!logEntry.portion && logEntry.food.measurementUnit == 'UNIT'"
-                 [value]="logEntry.multiplier"
-                 (input)="logEntry.multiplier = $event.target.value" step="0.1">
+                 [value]="getValue(logEntry)"
+                 (input)="setMultiplier($event,logEntry)" step="0.1">
         </div>
 
         <div class="meal__edit-ingredient__measurement">

@@ -64,6 +64,27 @@ export class LogMealComponent implements OnInit, OnChanges {
 		}
 	}
 
+  public setMultiplier($event,logEntry){
+    if (logEntry.portion){
+      logEntry.multiplier = ($event.target.value);
+    } else if (logEntry.food.measurementUnit == 'GRAMS'){
+       logEntry.multiplier = ($event.target.value / logEntry.food.unitGrams);
+    } else if (logEntry.food.measurementUnit == 'UNIT'){
+       logEntry.multiplier = $event.target.value;
+    }
+    return logEntry.multiplier;
+  }
+
+  public getValue(logEntry) {
+    if(logEntry.portion){
+      return logEntry.multiplier;
+    } else if (logEntry.food.measurementUnit == 'GRAMS'){
+      return Math.round(logEntry.multiplier * logEntry.food.unitGrams);
+    } else if (logEntry.food.measurementUnit == 'UNIT') {
+      return logEntry.multiplier;
+    }
+  }
+
 	public findFoodMatch(event) {
 		this.foodMatch = new Array<Food>();
 		if (event.data !== null) {
