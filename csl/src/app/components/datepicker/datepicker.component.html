@@ -9,6 +9,7 @@
     </button>
   </div>
 
+  <div class="overlay" *ngIf="isOpen" (click)="toggleOpen()"></div>
   <div class="picker" *ngIf="isOpen">
     <div class="picker__header">
       <button class="button button--primary button--small" (click)="previousMonth()">Previous</button>
