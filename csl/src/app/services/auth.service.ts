@@ -13,19 +13,23 @@ export class AuthenticationService {
         console.log("login attempt");
         return this.http.post<any>(macrologBackendUrl, { username: username, password: password })
             .pipe(map((res:any) => {
-                
+
                 // login successful if there's a jwt token in the response
                 console.log(JSON.stringify({ username, token: res.token }));
 
                 if (res && res.token) {
-                    // store username and jwt token in local storage to keep user logged in between page refreshes
-                    localStorage.setItem('currentUser', JSON.stringify({ username, token: res.token }));
+                   // store username and jwt token in local storage to keep user logged in between page refreshes
+                   localStorage.setItem('currentUser', JSON.stringify({ username, token: res.token }));
                 }
             }));
     }
 
     logout() {
-        // remove user from local storage to log user out
-        localStorage.removeItem('currentUser');
+
+         setTimeout(() => {
+          // remove user from local storage to log user out
+          localStorage.removeItem('currentUser');
+          console.log('removed');
+        });
     }
 }

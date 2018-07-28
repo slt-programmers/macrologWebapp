@@ -42,8 +42,16 @@ export class AppComponent implements OnInit {
 	}
 
   public username() {
-    let currentUser = localStorage.getItem('currentUser');
-    return currentUser;
-   }
+    if (localStorage.getItem('currentUser') === null){
+      return "Guest";
+    } else {
+      let currentUser = JSON.parse(localStorage.getItem('currentUser'));
+      return currentUser.username;
+    }
+  }
+
+  public loggedIn(){
+    return localStorage.getItem('currentUser') !== null;
+  }
 
 }
