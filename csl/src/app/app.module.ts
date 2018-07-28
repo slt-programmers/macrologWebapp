@@ -1,6 +1,7 @@
 import {BrowserModule}from'@angular/platform-browser';
 import {NgModule}from '@angular/core';
 import {FormsModule}from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 import {HttpClientModule}from '@angular/common/http';
 import {RouterModule, Routes}from '@angular/router';
 
@@ -24,6 +25,7 @@ import { CalculateIntakeModalComponent } from './components/calculate-intake-mod
 import { MealsComponent } from './pages/meals/meals.component';
 import { GraphsComponent } from './pages/graphs/graphs.component';
 import { DatepickerComponent } from './components/datepicker/datepicker.component';
+import { LoginComponent} from './components/login/login.component';
 
 const appRoutes: Routes = [
 {path: 'log', component: LogComponent},
@@ -32,6 +34,7 @@ const appRoutes: Routes = [
 {path: 'meals', component: MealsComponent},
 {path: 'graphs', component: GraphsComponent},
 {path: '', redirectTo: '/log', pathMatch: 'full'},
+{path: 'login', component: LoginComponent },
 {path: '**', component: LogComponent}
 ];
 
@@ -50,10 +53,12 @@ const appRoutes: Routes = [
     GraphsComponent,
 		DatepickerComponent,
 		ToastComponent,
-		ToastDirective
+		ToastDirective,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
+    ReactiveFormsModule,
     FormsModule,
 		HttpClientModule,
     RouterModule.forRoot(appRoutes),

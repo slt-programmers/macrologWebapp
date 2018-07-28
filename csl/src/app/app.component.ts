@@ -41,4 +41,9 @@ export class AppComponent implements OnInit {
 		this.backdrop.style.backgroundColor = 'transparent';
 	}
 
+  public username() {
+    let currentUser = localStorage.getItem('currentUser');
+    return currentUser;
+   }
+
 }

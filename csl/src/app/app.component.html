@@ -2,7 +2,7 @@
   <div class="header__item header__item--menu" (click)="openNav()">
     <i class="fas fa-bars"></i>
   </div>
-  <div class="header__item header__item--title">{{title}}</div>
+  <div class="header__item header__item--title">{{title}} [{{username()}}]</div>
   <div class="header__item header__item--user" (click)="closeNav(userTitle)" routerLink="/user">
     <i class="fas fa-user-circle"></i>
   </div>
