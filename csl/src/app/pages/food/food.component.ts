@@ -7,9 +7,11 @@ import {FoodService}from '../../services/food.service';
 })
 export class FoodComponent implements OnInit {
 
-  public foodResult;
+  public foodResult = new Array();
+	public pagedFood = new Array();
 	public modalIsVisible: boolean = false;
-  public selectedFood = 2;
+	public currentPage = 1;
+	public itemsPerPage = 15;
 
   constructor(private foodService: FoodService) { }
 
@@ -17,17 +19,26 @@ export class FoodComponent implements OnInit {
      this.loadAllFood();
   };
 
- private loadAllFood(){
+	private loadAllFood(){
     this.foodService.getAllFood().subscribe(
-      data => this.foodResult = data,
+      data => { this.foodResult = data;
+        this.getPagedFood(this.currentPage);
+      },
 			error => console.log(error)
 		);
- }
+  }
+
+	getPagedFood(page: number) {
+		this.pagedFood = this.foodResult.slice(
+			(page * this.itemsPerPage) - this.itemsPerPage,
+			((page + 1) * this.itemsPerPage) - this.itemsPerPage);
+		console.log(this.pagedFood);
+	}
 
 	public openModal(food) {
-    this.selectedFood= food;
 		this.modalIsVisible = true;
 	}
+
   public closeModal(event) {
     this.loadAllFood();
 		this.modalIsVisible = false;

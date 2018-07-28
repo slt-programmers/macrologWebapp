@@ -4,8 +4,7 @@ import {Food} from './food';
 export class FoodSearchable {
 
 
-constructor(public food: Food,
-              public portion: Portion) {
+constructor(public food: Food, public portion: Portion) {
 
 	}
 } 

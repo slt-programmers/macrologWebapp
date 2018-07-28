@@ -18,8 +18,7 @@
   </div>
 
   <div class="day__meal" *ngIf="editable">
-    <span class="day__meal__title">{{meal}}
-      <i class=" day__meal__icon fas fa-file-import" title="copy {{meal.toLowerCase()}} from previous day"
+    <span class="day__meal__title">{{meal}}<i class="day__meal__icon fas fa-file-import" title="copy {{meal.toLowerCase()}} from previous day"
          (click)="copyPrevious()"></i>
     </span>
     <div class="meal__editable">

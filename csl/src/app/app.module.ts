@@ -17,13 +17,15 @@ import {FoodComponent}from './pages/food/food.component';
 import {LogService}from './services/log.service';
 import {UserComponent}from './pages/user/user.component';
 import {UserService} from './services/user.service';
-import { SliderComponent } from './components/slider/slider.component';
-import { BargraphComponent } from './components/bargraph/bargraph.component';
-import { AddFoodModalComponent } from './components/add-food-modal/add-food-modal.component';
-import { CalculateIntakeModalComponent } from './components/calculate-intake-modal/calculate-intake-modal.component';
-import { MealsComponent } from './pages/meals/meals.component';
-import { GraphsComponent } from './pages/graphs/graphs.component';
-import { DatepickerComponent } from './components/datepicker/datepicker.component';
+import {SliderComponent} from './components/slider/slider.component';
+import {BargraphComponent} from './components/bargraph/bargraph.component';
+import {AddFoodModalComponent} from './components/add-food-modal/add-food-modal.component';
+import {CalculateIntakeModalComponent} from './components/calculate-intake-modal/calculate-intake-modal.component';
+import {MealsComponent} from './pages/meals/meals.component';
+import {GraphsComponent} from './pages/graphs/graphs.component';
+import {DatepickerComponent} from './components/datepicker/datepicker.component';
+import {Pager} from './components/pager/pager';
+import {MakeMealModal} from './components/make-meal-modal/make-meal-modal';
 
 const appRoutes: Routes = [
 {path: 'log', component: LogComponent},
@@ -50,7 +52,9 @@ const appRoutes: Routes = [
     GraphsComponent,
 		DatepickerComponent,
 		ToastComponent,
-		ToastDirective
+		ToastDirective,
+		Pager,
+		MakeMealModal
   ],
   imports: [
     BrowserModule,

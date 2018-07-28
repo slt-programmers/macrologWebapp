@@ -1,6 +1,21 @@
 <div class="container">
-  <p>Your meals</p>
+  <div class="grid">
+    <div class="tile">
+      <!--meal title-->
+      <!--pichart with macro's-->
+      <!--foodlist (no macro's or portions, simple)-->
+    </div>
 
-  <datepicker></datepicker>
+  </div>
+
+  <div class="floating-action-button-wrapper">
+    <button class="button--floating-action button button--primary" (click)="openModal()">
+      <i class="fas fa-plus"></i>
+    </button>
+  </div>
+
+  <div class="modal-wrapper" *ngIf="modalIsVisible">
+    <make-meal-modal (close)="closeModal($event)"></make-meal-modal>
+  </div>
 
 </div>

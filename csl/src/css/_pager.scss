@@ -1,0 +1,41 @@
+.pager {
+	display: flex;
+	width: 100%;
+	margin-bottom: $gutter;
+
+	&__button-wrapper {
+		display: flex;
+		margin: 0;
+		padding: 0;
+		list-style-type: none;
+	}
+
+	&__button {
+		padding: ($gutter/2);
+		border: 1px solid $platinum;
+		border-left: 0;
+
+		&:hover {
+			background-color: $smoke;
+		}
+
+		&--selected {
+			background-color: $primary;
+  		color: $white;
+		}
+
+		&--selected:hover {
+			background-color: $primary;
+			color: $white;
+		}
+
+		&:first-child {
+			border-left: 1px solid $platinum;
+			border-radius: 3px 0 0 3px;
+		}
+
+		&:last-child {
+			border-radius: 0 3px 3px 0;
+		}
+	}
+}

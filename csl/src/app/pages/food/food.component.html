@@ -1,6 +1,6 @@
 <div class="container">
 
-    <div>
+  <div class="food-table">
     <div class="table-header">
       <div class="table-header__name">Name</div>
       <div class="table-header__amount">Amount</div>
@@ -8,8 +8,8 @@
       <div class="table-header__fat">Fat</div>
       <div class="table-header__carbs">Carbs</div>
     </div>
-    <div class="foodline" *ngFor="let food of foodResult" (click)="openModal(food)">
-      <div class="food" >
+    <div class="foodline" *ngFor="let food of pagedFood" (click)="openModal(food)">
+      <div class="food">
         <div class="food__name">{{food.name}}</div>
         <div class="food__amount" *ngIf="food.measurementUnit=='GRAMS'">{{food.unitGrams}} {{food.unitName}}</div>
         <div class="food__amount" *ngIf="food.measurementUnit=='UNIT'">1 {{food.unitName}}</div>
@@ -31,6 +31,9 @@
       </div>
     </div>
   </div>
+
+  <pager [page]="currentPage" (pageChange)="getPagedFood($event)" [itemsPerPage]="itemsPerPage" [listSize]="foodResult.length"></pager>
+
 </div>
 
 
