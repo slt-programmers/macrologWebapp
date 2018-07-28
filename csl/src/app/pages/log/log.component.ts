@@ -164,7 +164,6 @@ export class LogComponent implements OnInit {
 				 }
 			}
 		}
-
 		this.foodAndPortions = foodList;
 	}
 

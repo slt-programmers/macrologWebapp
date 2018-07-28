@@ -74,8 +74,9 @@
       </div>
 
       <div class="meal__new-ingredient">
-        <autocomplete-food [food]="food"
-                           [placeholder]="'What did you have for' + meal.toLowerCase() + '?'"
+        <autocomplete-food class="meal__new-ingredient__name"
+                           [food]="food"
+                           [placeholder]="'What did you have for ' + meal.toLowerCase() + '?'"
                            [selectFn]="addLogEntryCallBack">
         </autocomplete-food>
 

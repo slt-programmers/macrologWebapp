@@ -1,5 +1,5 @@
-<div #newIngredient class="meal__new-ingredient__name" (keydown)="onKeyDown($event)">
-  <input class="meal__new-ingredient__input" placeholder="placeholder"
+<div #newIngredient (keydown)="onKeyDown($event)">
+  <input class="meal__new-ingredient__input" placeholder="{{placeholder}}"
          (input)="findFoodMatch($event)"
          [(ngModel)]="foodName"
          (focus)="showAutoComplete = true">

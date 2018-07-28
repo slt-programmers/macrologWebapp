@@ -11,12 +11,14 @@
     <p>Add ingredients</p>
 
     <div>
-
+      <autocomplete-food [placeholder]="'Search for food'"
+                         [food]="foodAndPortions"
+                         [selectFn]="addIngredientCallBack">
+      </autocomplete-food>
     </div>
 
     <div class="button-wrapper">
-      <button type="button" class="button button--primary" (click)="saveFood()"
-              [disabled]="saveFoodForm.invalid">Save</button>
+      <button type="button" class="button button--primary" (click)="saveMeal()">Save</button>
     </div>
   </div>
 
