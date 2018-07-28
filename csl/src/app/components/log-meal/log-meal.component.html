@@ -74,22 +74,10 @@
       </div>
 
       <div class="meal__new-ingredient">
-        <div #newIngredient class="meal__new-ingredient__name" (keydown)="onKeyDown($event)">
-          <input class="meal__new-ingredient__input" #foodNameInput placeholder="What did you have for {{meal.toLowerCase()}}?"
-                 (input)="findFoodMatch($event)"
-                 [(ngModel)]="foodName"
-                 (focus)="showAutoComplete = true">
-          <div #autoComplete class="autocomplete" *ngIf="showAutoComplete">
-            <ng-container *ngFor="let match of foodMatch">
-              <div class="autocomplete__option"
-                   (click)="addLogEntry(match); foodName = ''; showAutoComplete = false"
-                   (keypress)="addLogEntry(match); foodName = ''; showAutoComplete = false"
-                   tabindex="0">
-                {{matchDescription(match)}}
-              </div>
-            </ng-container>
-          </div>
-        </div>
+        <autocomplete-food [food]="food"
+                           [placeholder]="'What did you have for' + meal.toLowerCase() + '?'"
+                           [selectFn]="addLogEntryCallBack">
+        </autocomplete-food>
 
         <div class="meal__new-ingredient__close">
           <button (click)="close()" class="button button--transparent">

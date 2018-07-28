@@ -26,6 +26,7 @@ import {GraphsComponent} from './pages/graphs/graphs.component';
 import {DatepickerComponent} from './components/datepicker/datepicker.component';
 import {Pager} from './components/pager/pager';
 import {MakeMealModal} from './components/make-meal-modal/make-meal-modal';
+import {AutocompleteFood} from './components/autocomplete-food/autocomplete-food';
 
 const appRoutes: Routes = [
 {path: 'log', component: LogComponent},
@@ -54,7 +55,8 @@ const appRoutes: Routes = [
 		ToastComponent,
 		ToastDirective,
 		Pager,
-		MakeMealModal
+		MakeMealModal,
+		AutocompleteFood
   ],
   imports: [
     BrowserModule,

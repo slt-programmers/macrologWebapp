@@ -1,0 +1,16 @@
+<div #newIngredient class="meal__new-ingredient__name" (keydown)="onKeyDown($event)">
+  <input class="meal__new-ingredient__input" placeholder="placeholder"
+         (input)="findFoodMatch($event)"
+         [(ngModel)]="foodName"
+         (focus)="showAutoComplete = true">
+  <div #autoComplete class="autocomplete" *ngIf="showAutoComplete">
+    <ng-container *ngFor="let match of foodMatch">
+      <div class="autocomplete__option"
+           (click)="selectFn(match); foodName = ''; showAutoComplete = false"
+           (keypress)="selectFn(match); foodName = ''; showAutoComplete = false"
+           tabindex="0">
+        {{matchDescription(match)}}
+      </div>
+    </ng-container>
+  </div>
+</div>

@@ -11,14 +11,11 @@ import {ToastService} from '../../services/toast.service';
 @Component({
   selector: 'log-meal',
   templateUrl: './log-meal.component.html',
-  styleUrls: ['./log-meal.component.scss'],
-	host: { '(document: click)': 'closeAutoComplete($event)' }
+  styleUrls: ['./log-meal.component.scss']
 })
 export class LogMealComponent implements OnInit, OnChanges {
 
 	@ViewChild('logMeal') private logMealEref: ElementRef;
-	@ViewChild('newIngredient') private newIngredientEref: ElementRef;
-	@ViewChild('autoComplete') private autoCompleteEref: ElementRef;
 
 	@Input() food;
   @Input() meal: string;
@@ -29,9 +26,7 @@ export class LogMealComponent implements OnInit, OnChanges {
 	@Output() dataChanged: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   public editable: boolean;
-	public foodMatch;
-	public foodName: string;
-	public showAutoComplete: boolean;
+	public addLogEntryCallBack: Function;
 
 	private pipe: DatePipe;
 
@@ -40,15 +35,12 @@ export class LogMealComponent implements OnInit, OnChanges {
                private renderer: Renderer,
                private toastService: ToastService) {
     this.editable = false;
-		this.foodMatch = new Array();
 		this.pipe = new DatePipe('en-US');
 	}
 
   ngOnInit() {
+		this.addLogEntryCallBack = this.addLogEntry.bind(this);
 	}
-
-  ngAfterViewChecked(){
-  }
 
 	ngOnChanges(changes) {
 		if (changes['date'] && this.editable) {
@@ -88,18 +80,6 @@ export class LogMealComponent implements OnInit, OnChanges {
     }
   }
 
-	public findFoodMatch(event) {
-		this.foodMatch = new Array<Food>();
-		if (event.data !== null) {
-			for (let item of this.food) {
-        let matchFoodName = item.food.name.toLowerCase().indexOf(this.foodName.toLowerCase()) >=0 ;
-				if (matchFoodName) {
-					this.foodMatch.push(item);
-				}
-			}
-		}
-	}
-
   public copyPrevious() {
     let prevDay = new Date(this.date.getTime());
     prevDay.setDate(prevDay.getDate() - 1);
@@ -110,6 +90,7 @@ export class LogMealComponent implements OnInit, OnChanges {
 		  this.logService.deleteLogEntry(oldEntry);
       this.updateCalculatedMacros(oldEntry);
     }
+
     this.logService.getDayLogs(copyFrom).subscribe(
       data => {
         let tmpData = data;
@@ -132,7 +113,6 @@ export class LogMealComponent implements OnInit, OnChanges {
         }
       }
     );
-
  }
 
   public amountChange(logEntry) {
@@ -217,6 +197,8 @@ export class LogMealComponent implements OnInit, OnChanges {
   }
 
 	public addLogEntry(foodSearchable) {
+		console.log('addLogEntry');
+		console.log(this);
 		let logEntry = new LogEntry();
     logEntry.meal = this.meal.toUpperCase();
 		logEntry.food = foodSearchable.food;
@@ -246,11 +228,11 @@ export class LogMealComponent implements OnInit, OnChanges {
     if (logEntry.portion){
         return (logEntry.multiplier * logEntry.portion.macros.fat);
     } else {
-       if (logEntry.food.measurementUnit == "UNIT"){
-          return (logEntry.multiplier * logEntry.food.fat);
-       } else {
-          return (logEntry.multiplier * logEntry.food.fat);
-       }
+			if (logEntry.food.measurementUnit == "UNIT"){
+         return (logEntry.multiplier * logEntry.food.fat);
+      } else {
+         return (logEntry.multiplier * logEntry.food.fat);
+      }
     }
   }
 
@@ -294,77 +276,4 @@ export class LogMealComponent implements OnInit, OnChanges {
 		  }
       this.logService.storeLogEntries(allEntries, closeCallBack);
 	}
-
-
-	// Autocomplete
-
-  public matchDescription(foodSearchable) {
-		if (foodSearchable.portion) {
-      return foodSearchable.food.name + " (" + foodSearchable.portion.description + ")";
-    } else {
-			if (foodSearchable.food.measurementUnit == "UNIT"){
-        return foodSearchable.food.name + " (" + foodSearchable.food.unitName +" )";
-      } else {
-        return foodSearchable.food.name + " (" + foodSearchable.food.unitGrams  + " " + foodSearchable.food.unitName +" )";
-			}
-    }
-  }
-
-	public onKeyDown(event) {
-		let autoCompleteInputSelected = document.activeElement.classList.contains('meal__new-ingredient__input');
-		let autoCompleteOptionSelected = document.activeElement.classList.contains('autocomplete__option');
-		let nodelist = this.autoCompleteEref.nativeElement.childNodes;
-
-		if(this.autoCompleteEref) {
-			if(autoCompleteInputSelected) {
-				if(event.key === 'ArrowDown') {
-					event.preventDefault();
-					for (let index = 0; index < nodelist.length; index++) {
-						if (nodelist[index].localName === 'div') {
-							this.renderer.invokeElementMethod(nodelist[index], 'focus');
-							break;
-						}
-					}
-				}
-			} else if (autoCompleteOptionSelected) {
-				if(event.key === 'ArrowDown') {
-					event.preventDefault();
-					let activeElement = document.activeElement;
-					let nextSibling = activeElement.nextSibling;
-					for (;;) {
-						if (nextSibling && nextSibling.localName !== 'div') {
-							nextSibling = nextSibling.nextSibling;
-						} else if (nextSibling) {
-							this.renderer.invokeElementMethod(nextSibling, 'focus');
-							break;
-						} else {
-							break;
-						}
-					}
-				} else if (event.key === 'ArrowUp') {
-					event.preventDefault();
-					let activeElement = document.activeElement;
-					let previousSibling = activeElement.previousSibling;
-					for (;;) {
-						if (previousSibling && previousSibling.localName !== 'div') {
-							previousSibling = previousSibling.previousSibling;
-						} else if(previousSibling) {
-							this.renderer.invokeElementMethod(previousSibling, 'focus');
-							break;
-						} else {
-							break;
-						}
-					}
-				}
-			}
-		}
-	}
-
-	public closeAutoComplete(event) {
-		//Event vuurt 4x door 4 log-meal-components
-		if (this.newIngredientEref && !this.newIngredientEref.nativeElement.contains(event.target)) {
-			this.showAutoComplete = false;
-		}
-	}
-
 }
