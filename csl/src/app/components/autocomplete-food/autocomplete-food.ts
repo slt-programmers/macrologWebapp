@@ -42,7 +42,7 @@ export class AutocompleteFood implements OnInit, OnChanges {
 	}
 
 	public onKeyDown(event) {
-		let autoCompleteInputSelected = document.activeElement.classList.contains('meal__new-ingredient__input');
+		let autoCompleteInputSelected = document.activeElement.classList.contains('autocomplete__input');
 		let autoCompleteOptionSelected = document.activeElement.classList.contains('autocomplete__option');
 		let nodelist = this.autoCompleteEref.nativeElement.childNodes;
 

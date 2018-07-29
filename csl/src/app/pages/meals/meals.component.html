@@ -1,6 +1,11 @@
 <div class="container">
   <div class="grid">
-    <div class="tile">
+    <div class="tile" *ngFor="let meal of allMeals">
+      <div class="">{{meal.name}}</div>
+      <div *ngFor="let ingredient of meal.ingredients">
+        Food: {{ingredient.foodId}},
+        Portion: {{ingredient.portionId}}
+      </div>
       <!--meal title-->
       <!--pichart with macro's-->
       <!--foodlist (no macro's or portions, simple)-->

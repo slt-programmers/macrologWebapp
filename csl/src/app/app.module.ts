@@ -27,6 +27,7 @@ import {DatepickerComponent} from './components/datepicker/datepicker.component'
 import {Pager} from './components/pager/pager';
 import {MakeMealModal} from './components/make-meal-modal/make-meal-modal';
 import {AutocompleteFood} from './components/autocomplete-food/autocomplete-food';
+import {MealService} from './services/meal.service';
 
 const appRoutes: Routes = [
 {path: 'log', component: LogComponent},
@@ -65,7 +66,7 @@ const appRoutes: Routes = [
     RouterModule.forRoot(appRoutes),
     BrowserAnimationsModule
   ],
-  providers: [FoodService, LogService, UserService, ToastService],
+  providers: [FoodService, LogService, UserService, ToastService, MealService],
   bootstrap: [AppComponent],
   entryComponents: [
   ]
