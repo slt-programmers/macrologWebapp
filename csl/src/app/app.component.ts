@@ -51,7 +51,8 @@ export class AppComponent implements OnInit {
   }
 
   public loggedIn(){
-    return localStorage.getItem('currentUser') !== null;
+   return true;
+//    return localStorage.getItem('currentUser') !== null;
   }
 
 }
