@@ -40,4 +40,17 @@ export class AppComponent implements OnInit {
 		this.backdrop.style.backgroundColor = 'transparent';
 	}
 
+  public username() {
+    if (localStorage.getItem('currentUser') === null){
+      return "Guest";
+    } else {
+      let currentUser = JSON.parse(localStorage.getItem('currentUser'));
+      return currentUser.username;
+    }
+  }
+
+  public loggedIn(){
+    return localStorage.getItem('currentUser') !== null;
+  }
+
 }

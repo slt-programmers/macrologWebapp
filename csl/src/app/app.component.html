@@ -1,16 +1,27 @@
 <div class="header">
-  <div class="header__item header__item--menu" (click)="openNav()">
+  <div *ngIf="loggedIn()" class="header__item header__item--menu" (click)="openNav()">
     <i class="fas fa-bars"></i>
   </div>
-  <div class="header__item header__item--title">{{title}}</div>
-  <div class="header__item header__item--user" (click)="closeNav(userTitle)" routerLink="/user">
-    <i class="fas fa-user-circle"></i>
+
+  <div *ngIf="loggedIn()"  class="header__item header__item--title">{{title}}</div>
+  <div *ngIf="!loggedIn()" class="header__item header__item--title">Welcome to Macrolog, the number 1 food tracker!</div>
+
+  <div *ngIf="!loggedIn()" title="Sign in" class="header__item header__item--user" (click)="closeNav(userTitle)" routerLink="/login">
+    <i class="fas fa-sign-in-alt"></i>
+  </div>
+
+  <div *ngIf="loggedIn()" class="header__item header__item--user" (click)="closeNav(userTitle)" routerLink="/user">
+    {{username()}} <i class="fas fa-user-circle"></i>
+  </div>
+
+  <div *ngIf="loggedIn()" title="Sign out" class="header__item header__item--user"  (click)="closeNav(userTitle)" routerLink="/logout">
+    <i class="fas fa-sign-out-alt"></i>
   </div>
 </div>
 
 <div #navbarBackdrop class="nav-backdrop" (click)="closeNav(title)"></div>
 <div #navbar class="nav-wrapper" (click)="closeNav(title)">
-  <div class="nav">
+  <div *ngIf="loggedIn()" class="nav">
     <div class="nav__item nav__item--top">
       <i class="fas fa-arrow-left"></i>
     </div>

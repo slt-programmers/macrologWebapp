@@ -1,7 +1,8 @@
 import {BrowserModule}from'@angular/platform-browser';
 import {NgModule}from '@angular/core';
 import {FormsModule}from '@angular/forms';
-import {HttpClientModule}from '@angular/common/http';
+import {ReactiveFormsModule } from '@angular/forms';
+import {HttpClientModule, HTTP_INTERCEPTORS}from '@angular/common/http';
 import {RouterModule, Routes}from '@angular/router';
 
 import {BrowserAnimationsModule}from '@angular/platform-browser/animations';
@@ -27,6 +28,8 @@ import {DatepickerComponent} from './components/datepicker/datepicker.component'
 import {Pager} from './components/pager/pager';
 import {MakeMealModal} from './components/make-meal-modal/make-meal-modal';
 import {AutocompleteFood} from './components/autocomplete-food/autocomplete-food';
+import {LoginComponent} from './components/login/login.component';
+import {JwtInterceptor } from './interceptors/jwt.interceptor';
 import {MealService} from './services/meal.service';
 
 const appRoutes: Routes = [
@@ -36,6 +39,8 @@ const appRoutes: Routes = [
 {path: 'meals', component: MealsComponent},
 {path: 'graphs', component: GraphsComponent},
 {path: '', redirectTo: '/log', pathMatch: 'full'},
+{path: 'login', component: LoginComponent },
+{path: 'logout', component: LoginComponent },
 {path: '**', component: LogComponent}
 ];
 
@@ -55,18 +60,26 @@ const appRoutes: Routes = [
 		DatepickerComponent,
 		ToastComponent,
 		ToastDirective,
+    LoginComponent,
 		Pager,
 		MakeMealModal,
 		AutocompleteFood
   ],
   imports: [
     BrowserModule,
+    ReactiveFormsModule,
     FormsModule,
 		HttpClientModule,
     RouterModule.forRoot(appRoutes),
     BrowserAnimationsModule
   ],
-  providers: [FoodService, LogService, UserService, ToastService, MealService],
+  providers: [FoodService,
+              LogService,
+              UserService,
+              ToastService,
+							MealService,
+              { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }
+              ],
   bootstrap: [AppComponent],
   entryComponents: [
   ]
