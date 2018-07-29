@@ -31,6 +31,7 @@ import {AutocompleteFood} from './components/autocomplete-food/autocomplete-food
 import {LoginComponent} from './components/login/login.component';
 import {JwtInterceptor } from './interceptors/jwt.interceptor';
 import {MealService} from './services/meal.service';
+import {Piechart} from './components/piechart/piechart';
 
 const appRoutes: Routes = [
 {path: 'log', component: LogComponent},
@@ -63,7 +64,8 @@ const appRoutes: Routes = [
     LoginComponent,
 		Pager,
 		MakeMealModal,
-		AutocompleteFood
+		AutocompleteFood,
+		Piechart
   ],
   imports: [
     BrowserModule,

@@ -36,4 +36,21 @@ export class MealsComponent implements OnInit {
 		this.getAllMeals();
 	}
 
+	public getTotal(meal: Meal, macro: string) {
+		let macros = {
+			protein: 0,
+			fat: 0,
+			carbs: 0
+		}
+
+		for (let ingredient of meal.ingredients) {
+			if(ingredient.portion == undefined) {
+				macros.protein += (ingredient.food.protein * ingredient.multiplier)
+				macros.fat += (ingredient.food.fat * ingredient.multiplier)
+				macros.carbs += (ingredient.food.carbs * ingredient.multiplier)
+			}
+		}
+		return macros;
+	}
+
 }

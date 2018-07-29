@@ -1,8 +1,12 @@
 <div class="container">
+
   <div class="grid">
       <div class="grid__tile" *ngFor="let meal of allMeals">
         <p class="paragraph">{{meal.name}}</p>
         <!--pichart with macro's-->
+
+        <piechart [mealId]="meal.id" [macros]="getTotal(meal)"></piechart>
+
         <div class="grid__tile__ingredients" *ngFor="let ingredient of meal.ingredients">
           <div class="grid__tile__text grid__tile__text--ingredient">{{ingredient.food.name}}</div>
           <div class="grid__tile__text grid__tile__text--amount" *ngIf="!ingredient.portion && ingredient.food.measurementUnit == 'GRAMS'">
