@@ -1,8 +1,8 @@
 import {BrowserModule}from'@angular/platform-browser';
 import {NgModule}from '@angular/core';
 import {FormsModule}from '@angular/forms';
-import { ReactiveFormsModule } from '@angular/forms';
-import {HttpClientModule}from '@angular/common/http';
+import {ReactiveFormsModule } from '@angular/forms';
+import {HttpClientModule, HTTP_INTERCEPTORS}from '@angular/common/http';
 import {RouterModule, Routes}from '@angular/router';
 
 import {BrowserAnimationsModule}from '@angular/platform-browser/animations';
@@ -26,6 +26,7 @@ import { MealsComponent } from './pages/meals/meals.component';
 import { GraphsComponent } from './pages/graphs/graphs.component';
 import { DatepickerComponent } from './components/datepicker/datepicker.component';
 import { LoginComponent} from './components/login/login.component';
+import { JwtInterceptor } from './interceptors/jwt.interceptor';
 
 const appRoutes: Routes = [
 {path: 'log', component: LogComponent},
@@ -65,7 +66,12 @@ const appRoutes: Routes = [
     RouterModule.forRoot(appRoutes),
     BrowserAnimationsModule
   ],
-  providers: [FoodService, LogService, UserService, ToastService],
+  providers: [FoodService,
+              LogService,
+              UserService,
+              ToastService,
+              { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }
+              ],
   bootstrap: [AppComponent],
   entryComponents: [
   ]
