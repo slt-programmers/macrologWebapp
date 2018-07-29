@@ -1,7 +1,10 @@
-import { Component, OnInit, Output, Input, EventEmitter } from '@angular/core';
-import { Food } from '../../model/food';
-import { FoodSearchable } from '../../model/foodSearchable';
-import { FoodService } from '../../services/food.service';
+import {Component, OnInit, Output, Input, EventEmitter} from '@angular/core';
+import {Food} from '../../model/food';
+import {Meal} from '../../model/meal';
+import {Ingredient} from '../../model/ingredient';
+import {FoodSearchable} from '../../model/foodSearchable';
+import {FoodService} from '../../services/food.service';
+import {MealService} from '../../services/meal.service';
 
 @Component({
   selector: 'make-meal-modal',
@@ -11,12 +14,15 @@ export class MakeMealModal implements OnInit {
 
 	@Output() close: EventEmitter<boolean> = new EventEmitter<boolean>();
 
-	public title = 'Make a meal';
+	public modalTitle = 'Make a meal';
+	public mealName = '';
 	public food;
 	public foodAndPortions = new Array();
 	public addIngredientCallBack: Function;
+	public ingredients: Ingredient[] = new Array();
 
-  constructor(private foodService: FoodService) {
+  constructor(private foodService: FoodService,
+              private mealService: MealService) {
 	}
 
   ngOnInit() {
@@ -24,12 +30,57 @@ export class MakeMealModal implements OnInit {
 		this.addIngredientCallBack = this.addIngredient.bind(this);
   }
 
-	addIngredient(ingredient) {
-		console.log(ingredient);
+	addIngredient(foodSearchable: FoodSearchable) {
+		let ingredient = new Ingredient();
+		ingredient.food = foodSearchable.food;
+		ingredient.foodId = ingredient.food.id;
+		ingredient.portion = foodSearchable.portion;
+		if (ingredient.portion != undefined) {
+			ingredient.portionId = ingredient.portion.id;
+		}
+		this.ingredients.push(ingredient);
+		console.log(this.ingredients);
+	}
+
+	removeIngredient(index) {
+		this.ingredients.splice(index, 1);
+		console.log(this.ingredients);
+	}
+
+	calculateMultiplier(event, ingredient) {
+		console.log(event.target.value);
+		if (ingredient.food.measurementUnit == 'GRAMS' && ingredient.portion == undefined) {
+			ingredient.multiplier = (event.target.value / ingredient.food.unitGrams);
+			console.log(ingredient.multiplier);
+			console.log(this.ingredients);
+		} else {
+			ingredient.multiplier = event.target.value;
+			console.log(this.ingredients);
+		}
+	}
+
+	getValue(ingredient) {
+		if (ingredient.food.measurementUnit == 'GRAMS' && ingredient.portion == undefined) {
+			return Math.round(ingredient.food.unitGrams * ingredient.multiplier);
+		} else {
+			return ingredient.multiplier;
+		}
+	}
+
+	getStep(ingredient) {
+		if(ingredient.food.measurementUnit == 'GRAMS' && ingredient.portion == undefined) {
+			return 1;
+		} else {
+			return 0.1;
+		}
 	}
 
 	saveMeal() {
-
+		console.log(this.mealName);
+		let meal = new Meal(this.mealName);
+		meal.ingredients = this.ingredients;
+		this.mealService.insertMeal(meal);
+		this.closeModal();
 	}
 
 	closeModal() {

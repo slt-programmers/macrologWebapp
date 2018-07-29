@@ -22,7 +22,6 @@ export class AppComponent implements OnInit {
   constructor() {}
 
   ngOnInit() {
-    this.title = this.logTitle;
 		this.navbar = this.navbarElement.nativeElement;
 		this.backdrop = this.backdropElement.nativeElement;
   }

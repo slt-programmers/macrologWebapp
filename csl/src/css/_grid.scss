@@ -1,0 +1,29 @@
+.grid {
+	display: flex;
+	width: 100%;
+	flex-wrap: wrap;
+
+	&__tile {
+		@include elevation(2);
+		background-color: $white;
+		margin: ($gutter / 2);
+		padding: ($gutter / 2);
+		flex-basis: calc(33% - 60px);
+		height: fit-content;
+
+		&__ingredients {
+			display: flex;
+		}
+
+		&__text {
+			&--ingredient {
+				flex-basis: 60%;
+			}
+
+			&--amount {
+				flex-basis: 40%;
+				text-align: right;
+			}
+		}
+	}
+}

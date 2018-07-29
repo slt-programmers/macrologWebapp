@@ -1,10 +1,22 @@
 <div class="container">
   <div class="grid">
-    <div class="tile">
-      <!--meal title-->
-      <!--pichart with macro's-->
-      <!--foodlist (no macro's or portions, simple)-->
-    </div>
+      <div class="grid__tile" *ngFor="let meal of allMeals">
+        <p class="paragraph">{{meal.name}}</p>
+        <!--pichart with macro's-->
+        <div class="grid__tile__ingredients" *ngFor="let ingredient of meal.ingredients">
+          <div class="grid__tile__text grid__tile__text--ingredient">{{ingredient.food.name}}</div>
+          <div class="grid__tile__text grid__tile__text--amount" *ngIf="!ingredient.portion && ingredient.food.measurementUnit == 'GRAMS'">
+            {{ingredient.food.unitGrams * ingredient.multiplier}} {{ingredient.food.unitName}}
+          </div>
+          <div class="grid__tile__text grid__tile__text--amount" *ngIf="ingredient.portion">
+            {{ingredient.multiplier}} {{ingredient.portion.description}}
+          </div>
+          <div class="grid__tile__text grid__tile__text--amount" *ngIf="ingredient.food.measurementUnit == 'UNIT'">
+            {{ingredient.multiplier}} {{ingredient.food.unitName}}
+          </div>
+        </div>
+      </div>
+
 
   </div>
 
