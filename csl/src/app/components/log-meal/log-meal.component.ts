@@ -10,8 +10,7 @@ import {ToastService} from '../../services/toast.service';
 
 @Component({
   selector: 'log-meal',
-  templateUrl: './log-meal.component.html',
-  styleUrls: ['./log-meal.component.scss']
+  templateUrl: './log-meal.component.html'
 })
 export class LogMealComponent implements OnInit, OnChanges {
 

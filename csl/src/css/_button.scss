@@ -103,3 +103,9 @@ button:disabled {
 	color: $grey;
 	cursor: default;
 }
+
+.icon {
+	&--large {
+		font-size: 30px;
+	}
+}

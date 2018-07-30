@@ -6,8 +6,7 @@ import { forkJoin } from 'rxjs/observable/forkJoin';
 
 @Component({
   selector: 'calculate-intake-modal',
-  templateUrl: './calculate-intake-modal.component.html',
-  styleUrls: ['./calculate-intake-modal.component.scss']
+  templateUrl: './calculate-intake-modal.component.html'
 })
 export class CalculateIntakeModalComponent implements OnInit {
 

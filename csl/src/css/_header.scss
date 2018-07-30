@@ -19,16 +19,23 @@
 			flex-grow: 1;
 		}
 
-		&--user {
-			cursor: pointer;
-			font-size: 30px;
-  		flex-basis: 7%;
+		&--right {
 			text-align: center;
+			cursor: pointer;
+			display: flex;
+			padding: 0 20px;
+			align-items: center;
 			white-space: nowrap;
 		}
 
 		&:focus {
 			outline: none;
 		}
+	}
+}
+
+.header-item {
+	&--text {
+		margin-right: 10px;
 	}
 }
