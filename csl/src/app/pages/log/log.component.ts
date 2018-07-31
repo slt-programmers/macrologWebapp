@@ -14,7 +14,6 @@ import { DatePipe } from '@angular/common';
 @Component({
   selector: 'log',
   templateUrl: './log.component.html',
-  styleUrls: ['./log.component.scss'],
 	host: { '(document: click)': 'documentClick($event)' }
 })
 export class LogComponent implements OnInit {

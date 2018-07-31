@@ -4,18 +4,19 @@
   </div>
 
   <div *ngIf="loggedIn()"  class="header__item header__item--title">{{title}}</div>
-  <div *ngIf="!loggedIn()" class="header__item header__item--title">Welcome to Macrolog, the number 1 food tracker!</div>
+  <div *ngIf="!loggedIn()" class="header__item header__item--title">Macrolog</div>
 
-  <div *ngIf="!loggedIn()" title="Sign in" class="header__item header__item--user" (click)="closeNav(userTitle)" routerLink="/login">
+  <div *ngIf="!loggedIn()" title="Sign in" class="header__item header__item--right" (click)="closeNav(userTitle)" routerLink="/login">
     <i class="fas fa-sign-in-alt"></i>
   </div>
 
-  <div *ngIf="loggedIn()" class="header__item header__item--user" (click)="closeNav(userTitle)" routerLink="/user">
-    {{username()}} <i class="fas fa-user-circle"></i>
+  <div *ngIf="loggedIn()" class="header__item header__item--right" (click)="closeNav(userTitle)" routerLink="/user">
+    <span class="header-item--text">{{username()}}</span>
+    <i class="icon--large fas fa-user-circle"></i>
   </div>
 
-  <div *ngIf="loggedIn()" title="Sign out" class="header__item header__item--user"  (click)="closeNav(userTitle)" routerLink="/logout">
-    <i class="fas fa-sign-out-alt"></i>
+  <div *ngIf="loggedIn()" title="Sign out" class="header__item header__item--right"  (click)="closeNav(userTitle)" routerLink="/logout">
+    <i class="icon--large fas fa-sign-out-alt"></i>
   </div>
 </div>
 
