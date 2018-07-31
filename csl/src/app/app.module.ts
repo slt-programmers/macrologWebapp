@@ -30,6 +30,7 @@ import {MakeMealModal} from './components/make-meal-modal/make-meal-modal';
 import {AutocompleteFood} from './components/autocomplete-food/autocomplete-food';
 import {LoginComponent} from './components/login/login.component';
 import {JwtInterceptor } from './interceptors/jwt.interceptor';
+import {ErrorInterceptor } from './interceptors/error.interceptor';
 import {MealService} from './services/meal.service';
 
 const appRoutes: Routes = [
@@ -78,7 +79,8 @@ const appRoutes: Routes = [
               UserService,
               ToastService,
 							MealService,
-              { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }
+              { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+              { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
               ],
   bootstrap: [AppComponent],
   entryComponents: [

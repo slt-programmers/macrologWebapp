@@ -52,7 +52,12 @@ export class LoginComponent implements OnInit {
                     this.router.navigate([this.returnUrl]);
                 },
                 error => {
-                    this.error = error;
+                    console.log(error);
+                    if (error.status === 401){
+                      this.error = "Invalid username/password"
+                    } else {
+                      this.error = "Unknown error:" + error.message;
+                    }
                     this.loading = false;
                 });
     }
