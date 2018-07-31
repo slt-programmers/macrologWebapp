@@ -14,7 +14,7 @@ export class AppComponent implements OnInit {
 	private backdrop;
 
 	public userTitle: string = 'My Settings';
-	public logTitle: string = 'My food diary';
+	public logTitle: string = 'My daily food diary';
 	public graphsTitle: string = 'My graphs';
 	public mealsTitle: string = 'My meals';
 	public foodTitle: string = 'All my food';

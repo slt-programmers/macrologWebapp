@@ -21,7 +21,7 @@ constructor(private authenticationService: AuthenticationService,private router:
                 // auto logout
                 this.authenticationService.logout();
                 this.router.navigateByUrl(`/login`)
-            } else if (err.status === 401) { {
+            } else if (err.status === 401) {
                // returning to login page
                console.log(err);
                return throwError(err);
