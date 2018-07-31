@@ -45,13 +45,12 @@ export class AppComponent implements OnInit {
       return "Guest";
     } else {
       let currentUser = JSON.parse(localStorage.getItem('currentUser'));
-      return currentUser.username;
+      return currentUser.user;
     }
   }
 
   public loggedIn(){
-   return true;
-//    return localStorage.getItem('currentUser') !== null;
+    return localStorage.getItem('currentUser') !== null;
   }
 
 }
