@@ -12,6 +12,7 @@ export class FoodComponent implements OnInit {
 	public modalIsVisible: boolean = false;
 	public currentPage = 1;
 	public itemsPerPage = 15;
+  public selectedFood = null; // input voor modal popup
 
   constructor(private foodService: FoodService) { }
 
@@ -36,6 +37,7 @@ export class FoodComponent implements OnInit {
 	}
 
 	public openModal(food) {
+    this.selectedFood = food;
 		this.modalIsVisible = true;
 	}
 
