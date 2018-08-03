@@ -14,7 +14,7 @@ export class AppComponent implements OnInit {
 	private backdrop;
 
 	public userTitle: string = 'My Settings';
-	public logTitle: string = 'My food diary';
+	public logTitle: string = 'My daily food diary';
 	public graphsTitle: string = 'My graphs';
 	public mealsTitle: string = 'My meals';
 	public foodTitle: string = 'All my food';
@@ -45,13 +45,12 @@ export class AppComponent implements OnInit {
       return "Guest";
     } else {
       let currentUser = JSON.parse(localStorage.getItem('currentUser'));
-      return currentUser.username;
+      return currentUser.user;
     }
   }
 
   public loggedIn(){
-   return true;
-//    return localStorage.getItem('currentUser') !== null;
+    return localStorage.getItem('currentUser') !== null;
   }
 
 }

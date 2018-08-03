@@ -19,7 +19,7 @@ export class LogService {
 	}
 
  	getDayLogs(date) {
-   	return this.http.get<any[]>(macrologBackendUrl + '/day/' + date, { responseType: 'json' });
+   	return this.http.get<any[]>(macrologBackendUrl + '/day/' + date);
 	}
 
 	getMacros(dateFrom,dateTo) {
