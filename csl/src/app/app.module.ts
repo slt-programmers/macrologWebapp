@@ -28,7 +28,7 @@ import {DatepickerComponent} from './components/datepicker/datepicker.component'
 import {Pager} from './components/pager/pager';
 import {MakeMealModal} from './components/make-meal-modal/make-meal-modal';
 import {AutocompleteFood} from './components/autocomplete-food/autocomplete-food';
-import {LoginComponent} from './components/login/login.component';
+import {LoginComponent} from './pages/login/login.component';
 import {JwtInterceptor } from './interceptors/jwt.interceptor';
 import {MealService} from './services/meal.service';
 import {Piechart} from './components/piechart/piechart';
