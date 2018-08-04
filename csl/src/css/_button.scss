@@ -21,7 +21,6 @@
 			margin-right: 10px;
 		}
 	}
-
 }
 
 .button {
@@ -96,12 +95,15 @@
 }
 
 button:disabled {
-	&:hover {
-		cursor: default;
-	}
 	background-color: $mist;
-	color: $grey;
 	cursor: default;
+	color: $grey;
+
+	&:hover {
+		background-color: $mist;
+		cursor: default;
+  	color: $grey;
+	}
 }
 
 .icon {

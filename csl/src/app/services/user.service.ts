@@ -37,4 +37,7 @@ export class UserService {
 		return this.http.get(macrologBackendUrl);
 	}
 
+	public getExport() {
+		return this.http.get('//localhost:8090/export');
+	}
 }

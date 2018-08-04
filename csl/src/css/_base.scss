@@ -4,4 +4,22 @@
 	margin: 0 auto $gutter auto;
 	max-width: 1400px;
 	padding: 0 $gutter;
+
+	&--row {
+		flex-direction: row;
+	}
+}
+
+.section {
+	display: flex;
+	flex-direction: column;
+
+	&--left {
+		margin-right: $gutter;
+		flex-basis: 60%;
+	}
+
+	&--right {
+		flex-basis: 40%;
+	}
 }

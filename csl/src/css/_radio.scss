@@ -42,8 +42,9 @@ input[type=radio] {
 }
 
 .radio-wrapper {
-	display: flex;
 	align-items: center;
+	display: flex;
+	padding: 7px 0;
 }
 
 .radio-option {

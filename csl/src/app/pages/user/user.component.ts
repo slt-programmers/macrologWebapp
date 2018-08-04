@@ -2,6 +2,7 @@ import {Component, OnInit, OnChanges, SimpleChanges, Input }from '@angular/core'
 import {UserService} from '../../services/user.service';
 import {Gender} from '../../model/gender';
 import {Observable} from 'rxjs/Observable';
+import 'rxjs/Rx';
 import {forkJoin} from 'rxjs/observable/forkJoin';
 import {ToastService} from '../../services/toast.service';
 
@@ -84,4 +85,20 @@ export class UserComponent implements OnInit {
 		return '';
 	}
 
+	public exportData() {
+		this.userService.getExport().subscribe(
+			data => this.downloadFile(data),
+			error => console.log(error)
+		);
+	}
+
+	public importData(event) {
+
+	}
+
+	downloadFile(data){
+    let blob = new Blob([JSON.stringify(data)], { type: 'text/json' });
+    let url= window.URL.createObjectURL(blob);
+    window.open(url);
+	}
 }

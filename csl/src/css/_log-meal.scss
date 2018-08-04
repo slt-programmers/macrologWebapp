@@ -5,78 +5,24 @@
 		margin-left: -8px;
 		width: calc(100% + 16px);
 	}
-
-}
-.day {
-	@include elevation(1);
-	background-color: $white;
-	display: flex;
-	flex-direction: column;
-
-	&__header {
-		border-bottom: 1px solid $cloud;
-		display: flex;
-		flex-direction: row;
-		padding: ($gutter/2);
-		justify-content: center;
-
-		&__title {
-			font-weight: bold;
-		}
-		&__previous{
-		  padding-right:10px;
-		  font-weight: normal;
-		}
-		&__next{
-		  font-weight: normal;
-		  padding-left:10px;
-		}
-	}
-
-	&__meal {
-		border-bottom: 1px solid $cloud;
-		display: flex;
-		flex-direction: column;
-		padding: ($gutter/2);
-
-		&__title {
-			flex-basis: 20%;
-			font-weight: bold;
-			margin-bottom: 5px;
-		}
-
-		&__icon {
-			color: $primary;
-			margin-left: $gutter/2;
-		}
-	}
-
-	&__total {
-		display: flex;
-		padding: ($gutter/2);
-
-		&__title {
-			flex-basis: 20%;
-			font-weight: bold;
-		}
-	}
-
-	&__add {
-  		display: flex;
-  		padding: ($gutter/2);
-      border-top: 1px solid $cloud;
-
-  		&__title {
-  			flex-basis: 20%;
-  			font-weight: bold;
-  		}
-  	}
 }
 
 .meal {
+	border-bottom: 1px solid $cloud;
 	display: flex;
 	flex-direction: column;
-	width: 100%;
+	padding: ($gutter/2);
+
+	&__title {
+		flex-basis: 20%;
+		font-weight: bold;
+		margin-bottom: 5px;
+	}
+
+	&__icon {
+		color: $primary;
+		margin-left: $gutter/2;
+	}
 
 	&__ingredient {
 		display: flex;
@@ -143,6 +89,7 @@
   		&__delete {
         padding-left: 10px;
       	flex-basis: 5%;
+      	text-align: center;
       }
   }
 
@@ -162,8 +109,5 @@
       flex-basis: 5%;
       justify-content: center;
     }
-
   }
-
-
 }

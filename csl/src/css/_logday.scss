@@ -1,15 +1,4 @@
-.bargraph-wrapper {
-	@media(min-width: $md) {
-		margin-left: ($gutter/2);
-	}
-	display: flex;
-	flex-direction: column;
-	height: 100%;
-	justify-content: space-around;
-}
-
-
-.day {
+.logday {
 	@include elevation(1);
 	background-color: $white;
 	display: flex;
@@ -52,17 +41,6 @@
 			padding-right: 10px;
 		}
 	}
-
-	&__add {
-  		display: flex;
-  		padding: ($gutter/2);
-      border-top: 1px solid $cloud;
-
-  		&__title {
-  			flex-basis: 20%;
-  			font-weight: bold;
-  		}
-  	}
 }
 
 .total {

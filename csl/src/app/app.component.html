@@ -6,7 +6,7 @@
   <div *ngIf="loggedIn()"  class="header__item header__item--title">{{title}}</div>
   <div *ngIf="!loggedIn()" class="header__item header__item--title">Macrolog</div>
 
-  <div *ngIf="!loggedIn()" title="Sign in" class="header__item header__item--right" (click)="closeNav(userTitle)" routerLink="/login">
+  <div *ngIf="!loggedIn()" title="Sign in" class="header__item header__item--right tooltip" (click)="closeNav(userTitle)" routerLink="/login">
     <i class="icon--large fas fa-sign-in-alt"></i>
   </div>
 

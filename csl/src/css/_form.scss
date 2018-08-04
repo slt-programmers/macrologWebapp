@@ -13,6 +13,7 @@ form {
 	display: flex;
 	flex-direction: column;
 	margin-bottom: 10px;
+	justify-content: space-between;
 
 	&--column {
 		@media (min-width: $lg) {
@@ -73,9 +74,7 @@ form {
 	}
 
 	&__text {
-   	flex-basis: 60%;
    	font-weight: 500;
-   	margin-top: 10px;
    	min-width: 30px;
   }
 
