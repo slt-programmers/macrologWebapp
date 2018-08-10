@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { first } from 'rxjs/operators';
-
-
 import { AuthenticationService } from '../../services/auth.service';
+import { ToastService } from '../../services/toast.service';
+
 @Component({
 	templateUrl: 'login.component.html'
 })
@@ -26,7 +26,8 @@ export class LoginComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private authService: AuthenticationService) {}
+    private authService: AuthenticationService,
+    private toastService: ToastService) {}
 
   ngOnInit() {
     // reset login status
@@ -55,7 +56,7 @@ export class LoginComponent implements OnInit {
 
 	signUp() {
 		this.signUpError = '';
-		this.authService.signup(this.newUsername, this.newPassword)
+		this.authService.signup(this.newUsername, this.newPassword, this.newEmail)
 			.subscribe(
 				data => {
 					this.authService.login(this.newUsername, this.newPassword)
@@ -68,13 +69,14 @@ export class LoginComponent implements OnInit {
             });
 					this.newUsername = '';
 					this.newPassword = '';
+					this.newEmail = '';
 				}, error => {
 					if (error.status === 401) {
 						this.signUpError = 'Username already in use';
 					} else {
 						this.signUpError = error.message;
 					}
-				}, () => {console.log('completed')});
+				});
 	}
 
 	public toggleForgotPwModal(toggle: boolean) {
@@ -82,9 +84,16 @@ export class LoginComponent implements OnInit {
 	}
 
 	sendPassword() {
-		this.toggleForgotPwModal(false);
-    this.forgotError = 'The email you entered did not match the email registered with your username';
-		// TODO: check if username and email match, then mail or show error
+		this.forgotError = '';
+		this.authService.validateEmail(this.username, this.forgotEmail)
+			.subscribe(data => {
+				this.toastService.setMessage('We have send an email with your password!');
+
+				// TODO actually send email
+				this.toggleForgotPwModal(false);
+			}, error => {
+			    this.forgotError = 'The email you entered did not match the email registered with your username';
+			});
 	}
 
 }

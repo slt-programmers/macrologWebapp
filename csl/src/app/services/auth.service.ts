@@ -23,7 +23,13 @@ export class AuthenticationService {
        });
     }
 
-	signup(username: string, password: string) {
-		return this.http.post(macrologBackendUrl + '/signup', { username: username, password: password });
+	signup(username: string, password: string, email: string) {
+		console.log(email);
+		return this.http.post(macrologBackendUrl + '/signup', { username: username, password: password, email: email });
 	}
+
+	validateEmail(username: string, email: string) {
+		return this.http.post(macrologBackendUrl + '/validate', { username: username, password: '', email: email });
+	}
+
 }
