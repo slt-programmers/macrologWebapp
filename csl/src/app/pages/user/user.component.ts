@@ -25,22 +25,29 @@ export class UserComponent implements OnInit {
 	public goalFat: string;
 	public goalCarbs: string;
 
+	public weighingDate: Date;
+	public newWeight: number;
+
   constructor(private userService: UserService,
               private toastService: ToastService) {
 
 	}
 
   ngOnInit() {
+		console.log('Init settings');
+
 		this.userService.getAllSettings().subscribe(
 			result => {
-			 this.name = this.getKeyFromResultlist(result, 'name');
-			 this.age = parseInt(this.getKeyFromResultlist(result, 'age')) || undefined ;
-       this.gender = this.getKeyFromResultlist(result, 'gender') || Gender.Male;
-			 this.height = parseInt(this.getKeyFromResultlist(result, 'height')) || undefined;
-			 this.weight = parseInt(this.getKeyFromResultlist(result, 'weight')) || undefined;
-			 this.activity = parseFloat(this.getKeyFromResultlist(result, 'activity')) || 1.2;
-			 this.setGoalMacros(result);
-			 },
+				this.name = this.getKeyFromResultlist(result, 'name');
+				this.age = parseInt(this.getKeyFromResultlist(result, 'age')) || undefined ;
+				this.gender = this.getKeyFromResultlist(result, 'gender') || Gender.Male;
+				this.height = parseInt(this.getKeyFromResultlist(result, 'height')) || undefined;
+				this.weight = parseInt(this.getKeyFromResultlist(result, 'weight')) || undefined;
+				this.activity = parseFloat(this.getKeyFromResultlist(result, 'activity')) || 1.2;
+			  this.setGoalMacros(result);
+
+				this.newWeight = this.weight;
+			},
 			error => { console.log(error) }
 		);
 	}
@@ -74,6 +81,14 @@ export class UserComponent implements OnInit {
         data => this.toastService.setMessage('Your data is saved!'),
         error => console.error(error)
     );
+	}
+
+	public saveNewWeight(): void {
+		this.userService.saveWeight(this.weighingDate, this.newWeight).
+			subscribe(
+				data => this.toastService.setMessage('Your new weight is saved'),
+				error => console.error(error)
+			);
 	}
 
 	private getKeyFromResultlist(list: any, key: string) {

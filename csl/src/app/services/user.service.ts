@@ -34,10 +34,15 @@ export class UserService {
 	}
 
 	public getAllSettings() {
+		console.log('Get all settings');
 		return this.http.get(macrologBackendUrl);
 	}
 
 	public getExport() {
 		return this.http.get('//localhost:8090/export');
+	}
+
+	public saveWeight(date, weight) {
+		return this.http.get(macrologBackendUrl + '/weight', { params: {weight: weight, date: date}, responseType: 'json' });
 	}
 }

@@ -8,23 +8,20 @@ import { AuthenticationService } from '../services/auth.service';
 
 @Injectable()
 export class ErrorInterceptor implements HttpInterceptor {
-constructor(private authenticationService: AuthenticationService,private router: Router) {}
-
-
+constructor(private authenticationService: AuthenticationService, private router: Router) {}
 
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         return next.handle(request).pipe(catchError(err => {
-            console.log(request);
             if (err.status === 403) {
-                // 401 = bad login
-                // 403 = forbidden page
-                // auto logout
+            // forbidden page
                 this.authenticationService.logout();
                 this.router.navigateByUrl(`/login`)
             } else if (err.status === 401) {
-               // returning to login page
-               console.log(err);
+            // unautorized
                return throwError(err);
+						} else if (err.status === 404){
+						// not found
+								return throwError(err);
             } else {
               const error = err.error.message || err.statusText;
               return throwError(error);

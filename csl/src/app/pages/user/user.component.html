@@ -93,6 +93,31 @@
     <div class="button-wrapper">
       <button class="button button--primary" (click)="openCalcModal()">Set daily intake</button>
     </div>
+
+  </div>
+</div>
+
+<div class="container">
+  <h3>Track weight</h3>
+
+  <p>See your weight progression on the <a href="/graphs">graphs</a> page</p>
+
+  <div class="form-field">
+    <label class="form-field__label">Date of measurement</label>
+    <div class="form-field__element">
+      <datepicker (change)="weighingDate = $event"></datepicker>
+    </div>
+  </div>
+
+  <div class="form-field">
+    <label class="form-field__label">Weight</label>
+    <div class="form-field__element">
+      <input [(ngModel)]="newWeight" type="number" step="0.1">
+    </div>
+  </div>
+
+  <div class="button-wrapper">
+    <button class="button button--primary" (click)="saveNewWeight()">Save</button>
   </div>
 </div>
 
@@ -100,8 +125,8 @@
   <h3>Options</h3>
 
   <div class="button-wrapper">
-    <button class="button button-primary" (click)="exportData()">Export data</button>
+    <button class="button button--primary" (click)="exportData()">Export data</button>
 
-    <button class="button button-primary" (change)="importData($event)" type="file">Import data</button>
+    <button class="button button--primary" (change)="importData($event)" type="file">Import data</button>
   </div>
 </div>

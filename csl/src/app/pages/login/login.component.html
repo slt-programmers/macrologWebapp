@@ -1,5 +1,5 @@
 <div class="container">
-  <h3>Login</h3>
+  <h3>Sign in</h3>
 
   <form #loginForm="ngForm">
     <div class="">
@@ -23,7 +23,34 @@
   <div class="button-wrapper">
     <button class="button button--primary"
             [disabled]="loginForm.invalid"
-            (click)="onSubmit()">Login</button>
+            (click)="login()">Sign in</button>
+  </div>
+
+  <h3>Sign up</h3>
+
+  <form #signUpForm="ngForm">
+    <div class="">
+      <label class="">Username</label>
+
+      <input class="" type="text" #usernameField
+             [(ngModel)]="newUsername"
+             name="newUsername" required/>
+    </div>
+
+    <div class="">
+      <label class="">Password</label>
+
+      <input class="" type="password" #passwordField
+             [(ngModel)]="newPassword"
+             name="newPassword" required/>
+    </div>
+    <div *ngIf="signUpError" class="">{{signUpError}}</div>
+  </form>
+
+  <div class="button-wrapper">
+    <button class="button button--primary"
+            [disabled]="signUpForm.invalid"
+            (click)="signUp()">Sign up</button>
   </div>
 
 </div>
