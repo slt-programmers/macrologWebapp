@@ -1,0 +1,57 @@
+.card {
+	@include elevation(2);
+	padding: $gutter;
+	margin-right: $gutter;
+
+	&:last-child {
+		margin-right: 0;
+	}
+}
+
+.card--col-1 {
+ 	@include columns(1, $gutter/2);
+}
+
+.card--col-2 {
+ 	@include columns(2, $gutter/2);
+}
+
+.card--col-3 {
+ 	@include columns(3, $gutter/2);
+}
+
+.card--col-4 {
+ 	@include columns(4, $gutter/2);
+}
+
+.card--col-5 {
+ 	@include columns(5, $gutter/2);
+}
+
+.card--col-6 {
+ 	@include columns(6, $gutter/2);
+}
+
+.card--col-7 {
+ 	@include columns(7, $gutter/2);
+}
+
+.card--col-8 {
+ 	@include columns(8, $gutter/2);
+}
+
+.card--col-9 {
+ 	@include columns(9, $gutter/2);
+}
+
+.card--col-10 {
+ 	@include columns(10, $gutter/2);
+}
+
+.card--col-11 {
+ 	@include columns(11, $gutter/2);
+}
+
+.card--col-12 {
+ 	@include columns(12, $gutter/2);
+}

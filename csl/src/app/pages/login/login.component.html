@@ -1,56 +1,63 @@
-<div class="container">
-  <h3>Sign in</h3>
+<div class="container container--row">
 
-  <form #loginForm="ngForm">
-    <div class="">
-      <label class="">Username</label>
+  <div class="card card--col-6">
+    <h3>Log in</h3>
 
-      <input class="" type="text" #usernameField
-             [(ngModel)]="username"
-             name="username" required/>
+    <form #loginForm="ngForm">
+      <div class="">
+        <label class="">Username</label>
+
+        <input class="" type="text" #usernameField
+               [(ngModel)]="username"
+               name="username" required/>
+      </div>
+
+      <div class="">
+        <label class="">Password</label>
+
+        <input class="" type="password" #passwordField
+               [(ngModel)]="password"
+               name="password" required/>
+      </div>
+      <div *ngIf="error" class="">{{error}}</div>
+    </form>
+
+    <a>Forgot password?</a>
+
+    <div class="button-wrapper">
+      <button class="button button--primary"
+              [disabled]="loginForm.invalid"
+              (click)="login()">Log in</button>
     </div>
-
-    <div class="">
-      <label class="">Password</label>
-
-      <input class="" type="password" #passwordField
-             [(ngModel)]="password"
-             name="password" required/>
-    </div>
-    <div *ngIf="error" class="">{{error}}</div>
-  </form>
-
-  <div class="button-wrapper">
-    <button class="button button--primary"
-            [disabled]="loginForm.invalid"
-            (click)="login()">Sign in</button>
   </div>
 
-  <h3>Sign up</h3>
+  <div class="card card--col-6">
+    <h3>Register</h3>
 
-  <form #signUpForm="ngForm">
-    <div class="">
-      <label class="">Username</label>
+    <form #signUpForm="ngForm">
+      <div class="">
+        <label class="">Username</label>
 
-      <input class="" type="text" #usernameField
-             [(ngModel)]="newUsername"
-             name="newUsername" required/>
+        <input class="" type="text" #usernameField
+               [(ngModel)]="newUsername"
+               name="newUsername" required/>
+      </div>
+
+      <div class="">
+        <label class="">Password</label>
+
+        <input class="" type="password" #passwordField
+               [(ngModel)]="newPassword"
+               name="newPassword" required/>
+      </div>
+      <div *ngIf="signUpError" class="">{{signUpError}}</div>
+    </form>
+
+    <div class="button-wrapper">
+      <button class="button button--primary"
+              [disabled]="signUpForm.invalid"
+              (click)="signUp()">Register</button>
     </div>
-
-    <div class="">
-      <label class="">Password</label>
-
-      <input class="" type="password" #passwordField
-             [(ngModel)]="newPassword"
-             name="newPassword" required/>
-    </div>
-    <div *ngIf="signUpError" class="">{{signUpError}}</div>
-  </form>
-
-  <div class="button-wrapper">
-    <button class="button button--primary"
-            [disabled]="signUpForm.invalid"
-            (click)="signUp()">Sign up</button>
   </div>
 
 </div>

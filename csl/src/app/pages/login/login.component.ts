@@ -52,18 +52,22 @@ export class LoginComponent implements OnInit {
 		this.authService.signup(this.newUsername, this.newPassword)
 			.subscribe(
 				data => {
-					console.log('Signup succesful');
-					this.signUpError = 'Signup succesful';
-					this.username = this.newUsername;
+					this.authService.login(this.newUsername, this.newPassword)
+						.subscribe(
+              data => {
+                this.router.navigate(['/user']);
+              }, error => {
+								console.log(error);
+                this.signUpError = error;
+            });
 					this.newUsername = '';
 					this.newPassword = '';
-					// TODO: navigate to user settings page to fill in info for the first time
 				}, error => {
 					if (error.status === 401) {
 						this.signUpError = 'Username already in use';
 					} else {
 						this.signUpError = error.message;
 					}
-				});
+				}, () => {console.log('completed')});
 	}
 }

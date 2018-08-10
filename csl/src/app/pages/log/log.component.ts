@@ -101,7 +101,11 @@ export class LogComponent implements OnInit {
 	private getUserGoals() {
 		this.userService.getUserGoalStats().subscribe(
 			data => {
-				this.userGoals = data;
+				if (data[0] === null) {
+					this.userGoals = null;
+				} else {
+					this.userGoals = data;
+				}
 				this.setGoalCal();
 			},
 			error => console.log(error)

@@ -1,3 +1,26 @@
+// Columns
+@mixin columns($number, $gutter) {
+	width: #{map-get(_get-column-map($gutter), $number)};
+}
+
+@function _get-column-map($gutter) {
+	@return (
+		1: 'calc((100% - (#{$gutter} * 11)) / 12 * 1)',
+		2: 'calc((100% - (#{$gutter} * 10)) / 12 * 2)',
+		3: 'calc((100% - (#{$gutter} * 9)) / 12 * 3)',
+		4: 'calc((100% - (#{$gutter} * 8)) / 12 * 4)',
+		5: 'calc((100% - (#{$gutter} * 7)) / 12 * 5)',
+		6: 'calc((100% - (#{$gutter} * 6)) / 12 * 6)',
+		7: 'calc((100% - (#{$gutter} * 5)) / 12 * 7)',
+		8: 'calc((100% - (#{$gutter} * 4)) / 12 * 8)',
+		9: 'calc((100% - (#{$gutter} * 3)) / 12 * 9)',
+		10: 'calc((100% - (#{$gutter} * 2)) / 12 * 10)',
+		11: 'calc((100% - (#{$gutter} * 1)) / 12 * 11)',
+		12: '100%'
+	)
+}
+
+
 // Elevation
 @mixin elevation($zValue, $color: $coal, $opacity: 1) {
   box-shadow: #{map-get(_get-umbra-map($color, $opacity), $zValue)},
