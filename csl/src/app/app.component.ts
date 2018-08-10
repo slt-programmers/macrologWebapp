@@ -52,6 +52,7 @@ export class AppComponent implements OnInit {
   public loggedIn(){
 		const loggedInBoolean = localStorage.getItem('currentUser') !== null;
     return loggedInBoolean;
+		console.log('test);
   }
 
 }
