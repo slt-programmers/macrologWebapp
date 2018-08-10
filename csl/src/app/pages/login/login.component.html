@@ -4,30 +4,30 @@
     <h3>Log in</h3>
 
     <form #loginForm="ngForm">
-      <div class="">
-        <label class="">Username</label>
-
-        <input class="" type="text" #usernameField
+      <div class="form-field form-field--small">
+        <label class="form-field__label">Username or email</label>
+        <input class="form-field__input" type="text" #usernameField
                [(ngModel)]="username"
                name="username" required/>
       </div>
 
-      <div class="">
-        <label class="">Password</label>
+      <div class="form-field form-field--small">
+        <label class="form-field__label">Password</label>
 
-        <input class="" type="password" #passwordField
+        <input class="form-field__input" type="password" #passwordField
                [(ngModel)]="password"
                name="password" required/>
       </div>
-      <div *ngIf="error" class="">{{error}}</div>
+      <p *ngIf="error" class="signal">{{error}}</p>
     </form>
 
-    <a>Forgot password?</a>
+    <a class="primary" (click)="toggleForgotPwModal(true)">Forgot password?</a>
 
     <div class="button-wrapper">
       <button class="button button--primary"
               [disabled]="loginForm.invalid"
-              (click)="login()">Log in</button>
+              (click)="login()">Log in
+      </button>
     </div>
   </div>
 
@@ -35,29 +35,80 @@
     <h3>Register</h3>
 
     <form #signUpForm="ngForm">
-      <div class="">
-        <label class="">Username</label>
+      <div class="form-field form-field--small">
+        <label class="form-field__label">Username</label>
 
-        <input class="" type="text" #usernameField
+        <input class="form-field__input" type="text" #usernameField
                [(ngModel)]="newUsername"
                name="newUsername" required/>
       </div>
 
-      <div class="">
-        <label class="">Password</label>
+      <div class="form-field form-field--small">
+        <label class="form-field__label">Password</label>
 
-        <input class="" type="password" #passwordField
+        <input class="form-field__input" type="password" #passwordField
                [(ngModel)]="newPassword"
                name="newPassword" required/>
       </div>
-      <div *ngIf="signUpError" class="">{{signUpError}}</div>
+
+      <div class="form-field form-field--small">
+        <label class="form-field__label">Email</label>
+
+        <input class="form-field__input" type="email" #emailField
+               [(ngModel)]="newEmail"
+               name="newEmail" required/>
+      </div>
+
+      <p *ngIf="signUpError" class="signal">{{signUpError}}</p>
     </form>
 
     <div class="button-wrapper">
       <button class="button button--primary"
               [disabled]="signUpForm.invalid"
-              (click)="signUp()">Register</button>
+              (click)="signUp()">Register
+      </button>
     </div>
   </div>
+</div>
 
+<div class="modal-wrapper" *ngIf="showForgotPwModal">
+  <div class="modal">
+    <div class="modal__header">
+      <h3 class="modal__header__title">Forgot your password?</h3>
+
+      <button class="button button--icon button--primary" (click)="toggleForgotPwModal(false)">
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
+
+    <div class="modal__content">
+      <p>Please confirm your username and email so we can send your password</p>
+      <form #forgotForm="ngForm">
+
+        <div class="form-field form-field--small">
+          <label>Username</label>
+          <input class="form-field__input" type="text" #forgotUsernameField
+                 [(ngModel)]="username"
+                 name="forgotUsername" required/>
+        </div>
+
+        <div class="form-field form-field--small">
+          <label class="form-field__label">Email</label>
+          <input class="form-field__input" type="email" #forgotEmailField
+                 [(ngModel)]="forgotEmail"
+                 name="forgotEmail" required/>
+        </div>
+      </form>
+
+      <p *ngIf="forgotError" class="signal">{{forgotError}}</p>
+
+      <div class="button-wrapper">
+        <button class="button button--primary"
+                [disabled]="forgotForm.invalid"
+                (click)="sendPassword()">Send
+        </button>
+      </div>
+
+    </div>
+  </div>
 </div>

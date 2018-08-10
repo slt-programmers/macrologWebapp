@@ -14,8 +14,14 @@ export class LoginComponent implements OnInit {
   public signUpError = '';
 	public username: string;
 	public password: string;
+
 	public newUsername: string;
 	public newPassword: string;
+	public newEmail: string;
+
+	public forgotEmail: string;
+	public forgotError: string;
+	public showForgotPwModal: boolean = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -70,4 +76,15 @@ export class LoginComponent implements OnInit {
 					}
 				}, () => {console.log('completed')});
 	}
+
+	public toggleForgotPwModal(toggle: boolean) {
+		this.showForgotPwModal = toggle;
+	}
+
+	sendPassword() {
+		this.toggleForgotPwModal(false);
+    this.forgotError = 'The email you entered did not match the email registered with your username';
+		// TODO: check if username and email match, then mail or show error
+	}
+
 }

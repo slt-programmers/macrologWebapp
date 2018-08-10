@@ -38,10 +38,13 @@ a {
 	color: $coal
 }
 
+a:hover {
+	cursor: pointer;
+}
 
-
-
-
+a.primary {
+	color: $primary;
+}
 
 button {
 	font-family: 'Roboto', sans-serif;
