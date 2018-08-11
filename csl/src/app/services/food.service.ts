@@ -2,11 +2,14 @@ import {Injectable} from'@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Food} from '../model/food';
 import {ToastService} from './toast.service';
+import { environment } from '../../environments/environment';
 
-const macrologBackendUrl = '//localhost:8090/food';
 
 @Injectable()
 export class FoodService {
+
+  macrologBackendUrl = '//'+environment.backend+'/food';
+
 
 	constructor(private http: HttpClient,
 							private toastService: ToastService) {
@@ -14,11 +17,11 @@ export class FoodService {
 
 	public addFood(addFoodRequest: Food, callBack: Function) {
    	const headers = {'Content-Type': 'application/json',
-   		'Access-Control-Allow-Origin': 'http://localhost:4200'
+   		'Access-Control-Allow-Origin': environment.origin
    	};
 
   	const options = { headers: headers };
-    return this.http.post<Food>(macrologBackendUrl + '/', addFoodRequest, options).subscribe(data => {
+    return this.http.post<Food>(this.macrologBackendUrl + '/', addFoodRequest, options).subscribe(data => {
         this.toastService.setMessage('The food has been added!');
 				callBack();
       },
@@ -28,11 +31,11 @@ export class FoodService {
 	}
 
 	getFood(foodId: string) {
-		return this.http.get<Food>(macrologBackendUrl + "/"+ foodId, { responseType: 'json' });
+		return this.http.get<Food>(this.macrologBackendUrl + "/"+ foodId, { responseType: 'json' });
   }
 
  	getAllFood() {
-   	return this.http.get<Food[]>(macrologBackendUrl, { responseType: 'json' });
+   	return this.http.get<Food[]>(this.macrologBackendUrl, { responseType: 'json' });
 	}
 
 	getAllFoodNameIds() {

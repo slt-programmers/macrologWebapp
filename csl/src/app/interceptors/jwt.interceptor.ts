@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpRequest, HttpHandler, HttpEvent, HttpInterceptor } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from '../../environments/environment';
 
 @Injectable()
 export class JwtInterceptor implements HttpInterceptor {
@@ -8,18 +9,12 @@ export class JwtInterceptor implements HttpInterceptor {
         // add authorization header with jwt token if available
         let currentUser = JSON.parse(localStorage.getItem('currentUser'));
 
-
-const headers = {'Content-Type': 'application/json',
-   		'Access-Control-Allow-Origin': 'http://localhost:4200'
-   	};
-const options = { headers: headers };
-
        if (currentUser && currentUser.token) {
             // Secured request
             request = request.clone({
                 setHeaders: {
                     'Authorization': `Bearer ${currentUser.token}`,
-                    'Access-Control-Allow-Origin': 'http://localhost:4200',
+                    'Access-Control-Allow-Origin': environment.origin ,
                     'Access-Control-Allow-Methods': 'PUT, GET, POST',
                     'Access-Control-Allow-Headers': 'Origin, Methods, Content-Type, Accept'
                 }
@@ -29,7 +24,7 @@ const options = { headers: headers };
              request = request.clone({
                 setHeaders: {
                     'Access-Control-Allow-Headers': 'Access-Control-Allow-Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers',
-                    'Access-Control-Allow-Origin': 'http://localhost:4200',
+                    'Access-Control-Allow-Origin': environment.origin,
                     'Access-Control-Allow-Methods': 'PUT, GET, POST'
                 }
             });

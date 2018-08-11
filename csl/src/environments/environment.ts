@@ -4,5 +4,9 @@
 // The list of which env maps to which file can be found in `.angular-cli.json`.
 
 export const environment = {
-  production: false
+  production: false,
+//  backend: 'localhost:8090',
+ backend: 'https://vast-sierra-37848.herokuapp.com/',
+ origin: 'https://macrolog.herokuapp.com/'
+//  origin: 'https://localhost:4200'
 };

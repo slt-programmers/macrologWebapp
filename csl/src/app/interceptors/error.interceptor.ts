@@ -29,7 +29,8 @@ constructor(private authenticationService: AuthenticationService, private router
 								return throwError(err);
             } else {
 							console.log('Else in interceptor');
-              const error = err.error.message || err.statusText;
+							console.log(err);
+           //   const error = err.error.message || err.statusText;
               return of(new HttpResponse({body: err}));
              }
         }))
