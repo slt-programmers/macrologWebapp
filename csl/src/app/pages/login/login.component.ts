@@ -85,11 +85,9 @@ export class LoginComponent implements OnInit {
 
 	sendPassword() {
 		this.forgotError = '';
-		this.authService.validateEmail(this.username, this.forgotEmail)
+		this.authService.retreivePassword(this.forgotEmail)
 			.subscribe(data => {
 				this.toastService.setMessage('We have send an email with your password!');
-
-				// TODO actually send email
 				this.toggleForgotPwModal(false);
 			}, error => {
 			    this.forgotError = 'The email you entered did not match the email registered with your username';

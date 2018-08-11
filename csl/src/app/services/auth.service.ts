@@ -28,8 +28,8 @@ export class AuthenticationService {
 		return this.http.post(macrologBackendUrl + '/signup', { username: username, password: password, email: email });
 	}
 
-	validateEmail(username: string, email: string) {
-		return this.http.post(macrologBackendUrl + '/validate', { username: username, password: '', email: email });
+	retreivePassword(email: string) {
+		return this.http.post(macrologBackendUrl + '/validate', { username: '', password: '', email: email });
 	}
 
 }

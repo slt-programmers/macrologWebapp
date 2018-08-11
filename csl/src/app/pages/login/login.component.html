@@ -82,15 +82,8 @@
     </div>
 
     <div class="modal__content">
-      <p>Please confirm your username and email so we can send your password</p>
+      <p>Please enter your email so we can send your password</p>
       <form #forgotForm="ngForm">
-
-        <div class="form-field form-field--small">
-          <label>Username</label>
-          <input class="form-field__input" type="text" #forgotUsernameField
-                 [(ngModel)]="username"
-                 name="forgotUsername" required/>
-        </div>
 
         <div class="form-field form-field--small">
           <label class="form-field__label">Email</label>

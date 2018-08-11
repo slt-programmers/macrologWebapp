@@ -1,8 +1,7 @@
 # Macrolog Webapp #
-Angular version of the macrolog application
-Also available for android
 
-goto csl directory
+go to csl directory
+
+npm install
 ng serve
-pm install @angular-devkit/build-angular
 
