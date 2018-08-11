@@ -33,9 +33,12 @@ import {JwtInterceptor } from './interceptors/jwt.interceptor';
 import {ErrorInterceptor } from './interceptors/error.interceptor';
 import {MealService} from './services/meal.service';
 import {Piechart} from './components/piechart/piechart';
+import { IntakeComponent } from './pages/intake/intake.component';
+import { StepperComponent } from './components/stepper/stepper.component';
 
 const appRoutes: Routes = [
 {path: 'log', component: LogComponent},
+{path: 'intake', component: IntakeComponent},
 {path: 'food', component: FoodComponent},
 {path: 'user', component: UserComponent},
 {path: 'meals', component: MealsComponent},
@@ -66,7 +69,9 @@ const appRoutes: Routes = [
 		Pager,
 		MakeMealModal,
 		AutocompleteFood,
-		Piechart
+		Piechart,
+		IntakeComponent,
+		StepperComponent
   ],
   imports: [
     BrowserModule,
