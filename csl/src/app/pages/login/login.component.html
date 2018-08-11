@@ -57,6 +57,11 @@
         <input class="form-field__input" type="email" #emailField
                [(ngModel)]="newEmail"
                name="newEmail" required/>
+        <label class="form-field__disclaimer">
+          We hate spam as much as you do. We will send you a confirmation
+          email and will not use your email address
+          for anything else besides password retreival.
+        </label>
       </div>
 
       <p *ngIf="signUpError" class="signal">{{signUpError}}</p>

@@ -89,4 +89,18 @@ form {
 		flex-basis: 100%;
 		flex-shrink: 1;
 	}
+
+	&__disclaimer {
+		color: $primary;
+		font-size: 14px;
+	}
+
+	&__input {
+		margin-bottom: 5px;
+
+		&:last-child {
+			margin-bottom: 0;
+		}
+	}
+
 }
