@@ -1,0 +1,38 @@
+.stepper {
+	display: flex;
+	margin-bottom: $gutter;
+}
+
+.step-wrapper {
+	display: flex;
+	align-items: center;
+}
+
+.step {
+	display: flex;
+	border-radius: 50%;
+	background-color: $primary;
+	color: $white;
+	padding: 5px;
+	width: $gutter;
+	height: $gutter;
+	justify-content: center;
+	align-items: center;
+	font-weight: bold;
+
+	&--current {
+		background-color: $secondary;
+	}
+}
+
+.step-arrow {
+	display: flex;
+	background-color: $smoke;
+	height: 3px;
+	width: 100px;
+	margin: 10px;
+
+	&--last {
+		display: none;
+	}
+}

@@ -5,8 +5,6 @@
 
 export const environment = {
   production: true,
-//  backend: 'localhost:8090',
- backend: 'https://vast-sierra-37848.herokuapp.com/',
- origin: 'https://macrolog.herokuapp.com/'
-//  origin: 'https://localhost:4200'
+  backend: 'localhost:8090',
+  origin: 'https://localhost:4200'
 };

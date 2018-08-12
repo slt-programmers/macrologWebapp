@@ -1,0 +1,147 @@
+<div class="container">
+
+  <stepper [currentStep]="currentStep" [numberOfSteps]="2"></stepper>
+
+  <div #step1 class="" *ngIf="currentStep === 1">
+    <h3 class="title">Personal details</h3>
+
+    <form>
+      <div class="form-field">
+        <label class="form-field__label">Name</label>
+        <div class="form-field__element">
+          <input class="" name="name" type="text" [(ngModel)]="name">
+        </div>
+      </div>
+
+      <div class="form-field">
+        <label class="form-field__label">Age</label>
+        <div class="form-field__element">
+          <input class="" name="age" type="number" [(ngModel)]="age">
+        </div>
+      </div>
+
+      <div class="form-field">
+        <label class="form-field__label">Gender</label>
+        <div class="form-field__element">
+          <div class="radio-wrapper">
+            <input type="radio" name="gender"
+                   [(ngModel)]="gender" value="MALE"
+                   [ngClass]="{'checked fas fa-check': gender === 'MALE' }">
+            <span class="radio-label">Male</span>
+            <input type="radio" name="gender"
+                   [(ngModel)]="gender" value="FEMALE"
+                   [ngClass]="{'checked fas fa-check': gender === 'FEMALE' }">
+            <span class="radio-label">Female</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-field">
+        <label class="form-field__label">Height (cm)</label>
+        <div class="form-field__element">
+          <input class="" name="height" type="number" [(ngModel)]="height">
+        </div>
+      </div>
+
+      <div class="form-field">
+        <label class="form-field__label">Start weight (kg)</label>
+        <div class="form-field__element">
+          <input class="" name="weight" type="number" [(ngModel)]="weight" step="0.1">
+        </div>
+      </div>
+
+      <div class="form-field">
+        <label class="form-field__label">Activity level</label>
+        <div class="form-field__element">
+          <select class="" name="activity" [(ngModel)]="activity">
+            <option class="" value="1.2">Sedentary</option>
+            <option class="" value="1.375">Lightly active</option>
+            <option class="" value="1.55">Moderately active</option>
+            <option class="" value="1.725">Very active</option>
+            <option class="" value="1.9">Extremely active</option>
+          </select>
+        </div>
+      </div>
+    </form>
+
+    <div class="button-wrapper">
+      <button class="button button--primary" (click)="saveUserSettings()">Next</button>
+    </div>
+  </div>
+
+  <div #step2 class="" *ngIf="currentStep === 2">
+    <h3 class="title">Set your intake goal</h3>
+
+    <p>Based on your previous answers we have calculated your caloric intake for
+      weight maintainance.</p>
+    <p>You can set your intake goal by dragging the slider or changing the macro's individually.
+      We suggest a surplus or deficit of 200 calories because we believe slow progress
+      is sustainable progress, but feel free to adjust according to your own preferences.</p>
+
+    <div class="calorie-box">
+      <h3 class="calorie-box__title">{{calories | number : '1.0-0'}} Calories</h3>
+    </div>
+
+    <div class="tabs">
+      <div class="tab" (click)="toggleOptions(false)"
+           [ngClass]="{'tab--active': !showMoreOptions}">Calories</div>
+      <div class="tab" (click)="toggleOptions(true)"
+           [ngClass]="{'tab--active': showMoreOptions}">Macro's</div>
+    </div>
+
+    <div *ngIf="!showMoreOptions">
+      <div class="form-field form-field--slider">
+        <div class="form-field__label form-field__label--slider">Calories</div>
+        <div class="form-field__slider">
+          <slider [value]="calories" (valueChange)="changeCalories($event)"
+                  [upperBound]="4000" [lowerBound]="1200" [markers]="markers"></slider>
+        </div>
+      </div>
+
+      <div class="form">
+        <div class="form-field">
+          <p>Protein: <strong class="macro-box__title">{{protein | number : '1.0-0'}} gr</strong></p>
+        </div>
+
+        <div class="form-field">
+          <p>Fat: <strong>{{fat | number : '1.0-0'}} gr</strong></p>
+        </div>
+
+        <div class="form-field">
+          <p>Carbs: <strong>{{carbs | number : '1.0-0'}} gr</strong></p>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="showMoreOptions">
+      <div class="form">
+        <div class="form-field">
+          <label class="form-field__label">Protein</label>
+          <div class="form-field__element">
+            <input class="" (change)="calcCaloriesManual()" [(ngModel)]="proteinManual" type="number">
+          </div>
+        </div>
+
+        <div class="form-field">
+          <label class="form-field__label">Fat</label>
+          <div class="form-field__element">
+            <input class="" (change)="calcCaloriesManual()" [(ngModel)]="fatManual" type="number">
+          </div>
+        </div>
+
+        <div class="form-field">
+          <label class="form-field__label">Carbs</label>
+          <div class="form-field__element">
+            <input class="" (change)="calcCaloriesManual()" [(ngModel)]="carbsManual" type="number">
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="button-wrapper">
+      <button class="button button--primary" (click)="previousStep()">Previous</button>
+      <button class="button button--secondary" (click)="saveIntake()">Done</button>
+    </div>
+  </div>
+</div>
