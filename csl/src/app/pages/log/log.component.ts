@@ -158,12 +158,12 @@ export class LogComponent implements OnInit {
 		let foodList = new Array();
 
 		for (let item of food) {
-      let matchZonderPortion = new FoodSearchable(item,undefined);
+      let matchZonderPortion = new FoodSearchable(item, undefined);
 			foodList.push(matchZonderPortion);
 
 			if (item.portions) {
 				 for (let portion of item.portions) {
-           foodList.push(new FoodSearchable(item,portion));
+           foodList.push(new FoodSearchable(item, portion));
 				 }
 			}
 		}
@@ -190,5 +190,4 @@ export class LogComponent implements OnInit {
 
 		}
 	}
-
 }

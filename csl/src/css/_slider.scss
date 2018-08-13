@@ -19,9 +19,9 @@
 		@include elevation(1);
 		background-color: lightgray;
 		border-radius: 2px;
-		height: 4px;
+		height: 6px;
 		position: absolute;
-		top: 24px;
+		top: 23px;
 		left: 0;
 		right: 0;
 
@@ -35,10 +35,10 @@
 	&__handle {
 		background-color: $primary;
 		position: absolute;
-		border-radius: 10px;
-		height: 20px;
-		width: 20px;
-		top: 16px;
+		border-radius: 50%;
+		height: 22px;
+		width: 22px;
+		top: 15px;
 		transition: left 0.3s;
 	}
 
@@ -58,10 +58,10 @@
 		}
 
 		&__label {
-			font-size: 12px;
+			font-size: 15px;
 			position: absolute;
 			top: 25px;
-			left: -15px;
+			left: -18px;
 		}
 	}
 }

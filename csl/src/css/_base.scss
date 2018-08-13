@@ -31,3 +31,13 @@
 .signal {
  color: $signal;
 }
+
+.title-wrapper {
+	display: flex;
+	justify-content: flex-start;
+
+	&--center {
+		justify-content: center;
+	}
+
+}

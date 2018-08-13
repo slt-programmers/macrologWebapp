@@ -13,11 +13,11 @@ export class AppComponent implements OnInit {
 	private navbar;
 	private backdrop;
 
-	public userTitle: string = 'My Settings';
-	public logTitle: string = 'My daily food diary';
-	public graphsTitle: string = 'My graphs';
-	public mealsTitle: string = 'My meals';
-	public foodTitle: string = 'All my food';
+	public userTitle: string = 'Settings';
+	public logTitle: string = 'Food diary';
+	public graphsTitle: string = 'Graphs';
+	public mealsTitle: string = 'Meals';
+	public foodTitle: string = 'All food';
 
   constructor() {}
 
