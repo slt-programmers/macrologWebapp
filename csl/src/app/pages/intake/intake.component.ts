@@ -1,15 +1,20 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { UserService } from '../../services/user.service';
 import { Gender } from '../../model/gender';
+import { Food } from '../../model/food';
+import { FoodSearchable } from '../../model/foodSearchable';
 import { Observable } from 'rxjs/Observable';
 import { forkJoin } from 'rxjs/observable/forkJoin';
 import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-intake',
-  templateUrl: './intake.component.html'
+  templateUrl: './intake.component.html',
+	host: { '(document: click)': 'documentClick($event)' }
 })
 export class IntakeComponent implements OnInit {
+
+	@ViewChild('breakfast') private breakfastEref;
 
 	// Step 1
 	public name: string;
@@ -32,10 +37,27 @@ export class IntakeComponent implements OnInit {
 
 
 	public currentStep: number;
-	public showMoreOptions: boolean = false;
+
+	// Step 3
+	public showCalories: boolean = false;
+	public showMacros: boolean =  false;
+	public expandMoreInfo: boolean = false;
+
+	// Step 4
+	public displayDate = new Date();
+	public breakfastOpen = false;
+  public food = new Array();
+
 
   constructor(private userService: UserService,
-              private router: Router) { }
+              private router: Router) {
+		const item = new Food('Apple', 'UNIT', 0.5, 0.3, 25);
+		item.unitName = 'piece';
+		item.unitGrams = 182;
+    const foodItem = new FoodSearchable(item, undefined);
+    this.food.push(foodItem);
+		console.log(this.food);
+	}
 
   ngOnInit() {
 		this.currentStep = 1;
@@ -93,14 +115,18 @@ export class IntakeComponent implements OnInit {
 		this.calories = (this.proteinManual * 4) + (this.fatManual * 9) + (this.carbsManual * 4);
 	}
 
-	toggleOptions(toggle: boolean) {
-		if (toggle) {
-			this.proteinManual = Math.round(this.protein);
-			this.fatManual = Math.round(this.fat);
-			this.carbsManual = Math.round(this.carbs);
-		}
+	showCaloriesTab() {
+		this.showCalories = true;
+		this.showMacros = false;
+	}
 
-		this.showMoreOptions = toggle;
+	showMacrosTab() {
+		this.showCalories = false;
+		this.showMacros = true;
+
+		this.proteinManual = Math.round(this.protein);
+		this.fatManual = Math.round(this.fat);
+		this.carbsManual = Math.round(this.carbs);
 	}
 
 	public saveUserSettings(): void {
@@ -118,14 +144,14 @@ export class IntakeComponent implements OnInit {
 	}
 
 	public saveIntake() {
-		if (this.showMoreOptions) {
+		if (this.showMacros) {
 			forkJoin(
 				this.userService.addUserInfo('goalProtein', Math.round(this.proteinManual).toString()),
 				this.userService.addUserInfo('goalFat', Math.round(this.fatManual).toString()),
 				this.userService.addUserInfo('goalCarbs', Math.round(this.carbsManual).toString())
       ).subscribe(
           data => {
-						this.router.navigate(['/log']);
+						this.nextStep();
            },
           error => console.error(error)
 			);
@@ -136,11 +162,29 @@ export class IntakeComponent implements OnInit {
 				this.userService.addUserInfo('goalCarbs', Math.round(this.carbs).toString())
 			).subscribe(
 					data => {
-						this.router.navigate(['/log']);
+						this.nextStep();
            },
           error => console.error(error)
 			);
 		}
+	}
+
+	dummy() {
+	}
+
+	private documentClick(event) {
+		if (this.breakfastEref &&
+				!event.target.classList.contains('autocomplete__option') &&
+		    !event.target.classList.contains('fa-trash') &&
+		    !event.target.classList.contains('button--transparent')) {
+
+			this.breakfastOpen = this.breakfastEref.logMealEref.nativeElement.contains(event.target);
+		}
+	}
+
+
+	finish() {
+		this.router.navigate(['/log']);
 	}
 
 }
