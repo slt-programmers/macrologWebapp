@@ -1,5 +1,5 @@
 export const environment = {
   production: true,
-  backend: 'vast-sierra-37848.herokuapp.com',
+  backend: 'macrolog-backend.herokuapp.com',
   origin: 'https://macrolog.herokuapp.com'
 };
