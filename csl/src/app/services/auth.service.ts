@@ -11,8 +11,7 @@ export class AuthenticationService {
     macrologBackendUrl = '//'+environment.backend+'/api';
 
     constructor(private http: HttpClient) {
-       console.log(this.macrologBackendUrl)
-    }
+   }
 
     login(username: string, password: string) {
         return this.http.post<any>(this.macrologBackendUrl + '/authenticate', { username: username, password: password })
@@ -30,7 +29,6 @@ export class AuthenticationService {
     }
 
 	signup(username: string, password: string, email: string) {
-		console.log(email);
 		return this.http.post(this.macrologBackendUrl + '/signup', { username: username, password: password, email: email });
 	}
 

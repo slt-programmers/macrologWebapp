@@ -33,7 +33,6 @@ export class FoodComponent implements OnInit {
 		this.pagedFood = this.foodResult.slice(
 			(page * this.itemsPerPage) - this.itemsPerPage,
 			((page + 1) * this.itemsPerPage) - this.itemsPerPage);
-		console.log(this.pagedFood);
 	}
 
 	public openModal(food) {
