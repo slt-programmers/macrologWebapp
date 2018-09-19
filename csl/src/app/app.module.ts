@@ -43,9 +43,8 @@ const appRoutes: Routes = [
 {path: 'user', component: UserComponent},
 {path: 'meals', component: MealsComponent},
 //{path: 'graphs', component: GraphsComponent},
-{path: '', redirectTo: '/log', pathMatch: 'full'},
+{path: '', redirectTo: '/login', pathMatch: 'full'},
 {path: 'login', component: LoginComponent },
-{path: 'logout', component: LoginComponent },
 {path: '**', redirectTo: '/log', pathMatch: 'full'}
 ];
 

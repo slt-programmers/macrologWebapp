@@ -1,6 +1,11 @@
 // Columns
 @mixin columns($number, $gutter) {
+
+	@media(max-width: $md) {
+		width: #{map-get(_get-column-map($gutter), 12)};
+	}
 	width: #{map-get(_get-column-map($gutter), $number)};
+
 }
 
 @function _get-column-map($gutter) {

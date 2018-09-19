@@ -1,12 +1,10 @@
 .card {
 	@include elevation(2);
 	height: fit-content;
-	margin-right: $gutter;
+	margin: ($gutter/2);
 	padding: $gutter;
+	width: 275px;
 
-	&:last-child {
-		margin-right: 0;
-	}
 }
 
 .card--col-1 {

@@ -2,6 +2,7 @@
 	display: flex;
 	width: 100%;
 	flex-wrap: wrap;
+	justify-content: center;
 
 	&__tile {
 		@include elevation(2);
@@ -25,5 +26,53 @@
 				text-align: right;
 			}
 		}
+	}
+
+	.col-1 {
+	 	@include columns(1, $gutter/2);
+	}
+
+	.col-2 {
+	 	@include columns(2, $gutter/2);
+	}
+
+	.col-3 {
+	 	@include columns(3, $gutter/2);
+	}
+
+	.col-4 {
+	 	@include columns(4, $gutter/2);
+	}
+
+	.col-5 {
+	 	@include columns(5, $gutter/2);
+	}
+
+	.col-6 {
+	 	@include columns(6, $gutter/2);
+	}
+
+	.col-7 {
+	 	@include columns(7, $gutter/2);
+	}
+
+	.col-8 {
+	 	@include columns(8, $gutter/2);
+	}
+
+	.col-9 {
+	 	@include columns(9, $gutter/2);
+	}
+
+	.col-10 {
+	 	@include columns(10, $gutter/2);
+	}
+
+	.col-11 {
+	 	@include columns(11, $gutter/2);
+	}
+
+	.col-12 {
+	 	@include columns(12, $gutter/2);
 	}
 }

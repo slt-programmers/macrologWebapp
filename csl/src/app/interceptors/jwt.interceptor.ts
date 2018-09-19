@@ -9,7 +9,7 @@ export class JwtInterceptor implements HttpInterceptor {
         // add authorization header with jwt token if available
         let currentUser = JSON.parse(localStorage.getItem('currentUser'));
 
-       if (currentUser && currentUser.token) {
+        if (currentUser && currentUser.token) {
             // Secured request
             request = request.clone({
                 setHeaders: {
@@ -23,7 +23,7 @@ export class JwtInterceptor implements HttpInterceptor {
              // Not logged in request
              request = request.clone({
                 setHeaders: {
-                    'Access-Control-Allow-Headers': 'Access-Control-Allow-Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers',
+                    'Access-Control-Allow-Headers': 'Access-Control-Allow-Origin, Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers',
                     'Access-Control-Allow-Origin': environment.origin,
                     'Access-Control-Allow-Methods': 'PUT, GET, POST'
                 }
