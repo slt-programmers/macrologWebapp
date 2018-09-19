@@ -1,78 +1,81 @@
-<div class="container container--row">
-  <div class="card card--col-6">
-    <h3>Log in</h3>
+<div class="container">
+  <div class="grid">
+    <div class="card">
+      <h3>Log in</h3>
 
-    <form #loginForm="ngForm">
-      <div class="form-field form-field--small">
-        <label class="form-field__label">Username or email</label>
-        <input class="form-field__input" type="text" #usernameField
-               [(ngModel)]="username"
-               name="username" required/>
+      <form #loginForm="ngForm">
+        <div class="form-field form-field--small">
+          <label class="form-field__label">Username or email</label>
+          <input class="form-field__input" type="text" #usernameField
+                 [(ngModel)]="username"
+                 name="username" required/>
+        </div>
+
+        <div class="form-field form-field--small">
+          <label class="form-field__label">Password</label>
+
+          <input class="form-field__input" type="password" #passwordField
+                 [(ngModel)]="password"
+                 name="password" required/>
+        </div>
+        <p *ngIf="error" class="signal">{{error}}</p>
+
+        <a class="primary" (click)="toggleForgotPwModal(true)">Forgot password?</a>
+      </form>
+
+      <div class="button-wrapper">
+        <button class="button button--primary"
+                [disabled]="loginForm.invalid"
+                (click)="login()">Log in
+        </button>
       </div>
+    </div>
 
-      <div class="form-field form-field--small">
-        <label class="form-field__label">Password</label>
+    <div class="card">
+      <h3>Register</h3>
 
-        <input class="form-field__input" type="password" #passwordField
-               [(ngModel)]="password"
-               name="password" required/>
+      <form #signUpForm="ngForm">
+        <div class="form-field form-field--small">
+          <label class="form-field__label">Username</label>
+
+          <input class="form-field__input" type="text" #usernameField
+                 [(ngModel)]="newUsername"
+                 name="newUsername" required/>
+        </div>
+
+        <div class="form-field form-field--small">
+          <label class="form-field__label">Password</label>
+
+          <input class="form-field__input" type="password" #passwordField
+                 [(ngModel)]="newPassword"
+                 name="newPassword" required/>
+        </div>
+
+        <div class="form-field form-field--small">
+          <label class="form-field__label">Email</label>
+
+          <input class="form-field__input" type="email" #emailField
+                 [(ngModel)]="newEmail"
+                 name="newEmail" required/>
+          <label class="form-field__disclaimer">
+            We hate spam as much as you do. We will send you a confirmation
+            email and will not use your email address
+            for anything else besides password retrieval.
+          </label>
+        </div>
+
+        <p *ngIf="signUpError" class="signal">{{signUpError}}</p>
+      </form>
+
+      <div class="button-wrapper">
+        <button class="button button--primary"
+                [disabled]="signUpForm.invalid"
+                (click)="signUp()">Register
+        </button>
       </div>
-      <p *ngIf="error" class="signal">{{error}}</p>
-    </form>
-
-    <a class="primary" (click)="toggleForgotPwModal(true)">Forgot password?</a>
-
-    <div class="button-wrapper">
-      <button class="button button--primary"
-              [disabled]="loginForm.invalid"
-              (click)="login()">Log in
-      </button>
     </div>
   </div>
 
-  <div class="card card--col-6">
-    <h3>Register</h3>
-
-    <form #signUpForm="ngForm">
-      <div class="form-field form-field--small">
-        <label class="form-field__label">Username</label>
-
-        <input class="form-field__input" type="text" #usernameField
-               [(ngModel)]="newUsername"
-               name="newUsername" required/>
-      </div>
-
-      <div class="form-field form-field--small">
-        <label class="form-field__label">Password</label>
-
-        <input class="form-field__input" type="password" #passwordField
-               [(ngModel)]="newPassword"
-               name="newPassword" required/>
-      </div>
-
-      <div class="form-field form-field--small">
-        <label class="form-field__label">Email</label>
-
-        <input class="form-field__input" type="email" #emailField
-               [(ngModel)]="newEmail"
-               name="newEmail" required/>
-        <label class="form-field__disclaimer">
-          We hate spam as much as you do. We will send you a confirmation
-          email and will not use your email address
-          for anything else besides password retrieval.
-        </label>
-      </div>
-
-      <p *ngIf="signUpError" class="signal">{{signUpError}}</p>
-    </form>
-
-    <div class="button-wrapper">
-      <button class="button button--primary"
-              [disabled]="signUpForm.invalid"
-              (click)="signUp()">Register
-      </button>
-    </div>
-  </div>
 </div>
 
 <div class="modal-wrapper" *ngIf="showForgotPwModal">
