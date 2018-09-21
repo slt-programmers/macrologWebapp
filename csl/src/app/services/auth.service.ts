@@ -3,15 +3,21 @@ import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { environment } from '../../environments/environment';
 
-
-
 @Injectable({ providedIn: 'root' })
 export class AuthenticationService {
 
     macrologBackendUrl = '//'+environment.backend+'/api';
 
-    constructor(private http: HttpClient) {
-   }
+  constructor(private http: HttpClient) {}
+
+	public isAuthenticated(): boolean {
+		const user = localStorage.getItem('currentUser');
+
+		console.log('Getting user from local storage:')
+		console.log(user);
+
+		return (user != null);
+	}
 
     login(username: string, password: string) {
         return this.http.post<any>(this.macrologBackendUrl + '/authenticate', { username: username, password: password })

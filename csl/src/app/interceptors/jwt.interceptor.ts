@@ -7,6 +7,10 @@ import { environment } from '../../environments/environment';
 export class JwtInterceptor implements HttpInterceptor {
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         // add authorization header with jwt token if available
+
+				console.log('JWT Interceptor called');
+				console.log(request);
+
         let currentUser = JSON.parse(localStorage.getItem('currentUser'));
 
         if (currentUser && currentUser.token) {

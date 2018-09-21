@@ -33,19 +33,20 @@ import {JwtInterceptor } from './interceptors/jwt.interceptor';
 import {ErrorInterceptor } from './interceptors/error.interceptor';
 import {MealService} from './services/meal.service';
 import {Piechart} from './components/piechart/piechart';
-import { IntakeComponent } from './pages/intake/intake.component';
-import { StepperComponent } from './components/stepper/stepper.component';
+import {IntakeComponent} from './pages/intake/intake.component';
+import {StepperComponent} from './components/stepper/stepper.component';
+import {AuthGuardService} from './services/auth-guard.service';
 
 const appRoutes: Routes = [
-{path: 'log', component: LogComponent},
-{path: 'intake', component: IntakeComponent},
-{path: 'food', component: FoodComponent},
-{path: 'user', component: UserComponent},
-{path: 'meals', component: MealsComponent},
+{path: 'log', component: LogComponent, canActivate: [AuthGuardService]},
+{path: 'intake', component: IntakeComponent, canActivate: [AuthGuardService]},
+{path: 'food', component: FoodComponent, canActivate: [AuthGuardService]},
+{path: 'user', component: UserComponent, canActivate: [AuthGuardService]},
+{path: 'meals', component: MealsComponent, canActivate: [AuthGuardService]},
 //{path: 'graphs', component: GraphsComponent},
-{path: '', redirectTo: '/login', pathMatch: 'full'},
+{path: '', redirectTo: '/log', pathMatch: 'full', canActivate: [AuthGuardService]},
 {path: 'login', component: LoginComponent },
-{path: '**', redirectTo: '/log', pathMatch: 'full'}
+{path: '**', redirectTo: '/log', pathMatch: 'full', canActivate: [AuthGuardService]}
 ];
 
 @NgModule({
@@ -85,6 +86,7 @@ const appRoutes: Routes = [
               UserService,
               ToastService,
 							MealService,
+							AuthGuardService,
               { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
               { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
               ],
