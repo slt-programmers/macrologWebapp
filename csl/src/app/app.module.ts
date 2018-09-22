@@ -4,7 +4,6 @@ import {FormsModule}from '@angular/forms';
 import {ReactiveFormsModule } from '@angular/forms';
 import {HttpClientModule, HTTP_INTERCEPTORS}from '@angular/common/http';
 import {RouterModule, Routes}from '@angular/router';
-
 import {BrowserAnimationsModule}from '@angular/platform-browser/animations';
 
 import {AppComponent}from './app.component';
@@ -38,14 +37,14 @@ import {StepperComponent} from './components/stepper/stepper.component';
 import {AuthGuardService} from './services/auth-guard.service';
 
 const appRoutes: Routes = [
+{path: 'login', component: LoginComponent },
 {path: 'log', component: LogComponent, canActivate: [AuthGuardService]},
+{path: 'user', component: UserComponent, canActivate: [AuthGuardService]},
 {path: 'intake', component: IntakeComponent, canActivate: [AuthGuardService]},
 {path: 'food', component: FoodComponent, canActivate: [AuthGuardService]},
-{path: 'user', component: UserComponent, canActivate: [AuthGuardService]},
 {path: 'meals', component: MealsComponent, canActivate: [AuthGuardService]},
 //{path: 'graphs', component: GraphsComponent},
 {path: '', redirectTo: '/log', pathMatch: 'full', canActivate: [AuthGuardService]},
-{path: 'login', component: LoginComponent },
 {path: '**', redirectTo: '/log', pathMatch: 'full', canActivate: [AuthGuardService]}
 ];
 

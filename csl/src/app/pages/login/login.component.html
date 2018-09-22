@@ -7,8 +7,8 @@
         <div class="form-field form-field--small">
           <label class="form-field__label">Username or email</label>
           <input class="form-field__input" type="text" #usernameField
-                 [(ngModel)]="username"
-                 name="username" required/>
+                 [(ngModel)]="usernameOrEmail"
+                 name="usernameOrEmail" required/>
         </div>
 
         <div class="form-field form-field--small">
@@ -105,7 +105,7 @@
       <div class="button-wrapper">
         <button class="button button--primary"
                 [disabled]="forgotForm.invalid"
-                (click)="sendPassword()">Send
+                (click)="retreivePassword()">Send
         </button>
       </div>
 

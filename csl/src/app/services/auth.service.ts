@@ -12,15 +12,13 @@ export class AuthenticationService {
 
 	public isAuthenticated(): boolean {
 		const user = localStorage.getItem('currentUser');
-
 		console.log('Getting user from local storage:')
 		console.log(user);
-
 		return (user != null);
 	}
 
-	login(username: string, password: string) {
-    return this.http.post<any>(this.macrologBackendUrl + '/authenticate', { username: username, password: password })
+	public login(usernameOrEmail: string, password: string) {
+    return this.http.post<any>(this.macrologBackendUrl + '/authenticate', { username: usernameOrEmail, password: password })
         .pipe(map((res:any) => {
           if (res && res.token) {
             localStorage.setItem('currentUser', JSON.stringify({ 'user':res.name, 'token': res.token }));
@@ -29,17 +27,17 @@ export class AuthenticationService {
 		);
 	}
 
-	logout() {
+	public logout() {
 		setTimeout(() => {
        localStorage.removeItem('currentUser');
     });
 	}
 
-	signup(username: string, password: string, email: string) {
+	public signUp(username: string, password: string, email: string) {
 		return this.http.post(this.macrologBackendUrl + '/signup', { username: username, password: password, email: email });
 	}
 
-	retreivePassword(email: string) {
+	public retreivePassword(email: string) {
 		return this.http.post(this.macrologBackendUrl + '/validate', { username: '', password: '', email: email });
 	}
 
