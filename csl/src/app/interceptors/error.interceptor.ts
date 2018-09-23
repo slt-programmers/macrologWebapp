@@ -20,8 +20,9 @@ constructor(private authenticationService: AuthenticationService, private router
           catchError(err => {
             if (err.status === 403) {
             // forbidden page
-                this.authenticationService.logout();
-                this.router.navigateByUrl(`/login`)
+              this.authenticationService.logout();
+              this.router.navigateByUrl(`/login`)
+              return throwError(err);
             } else if (err.status === 401) {
             // unautorized
                return throwError(err);
