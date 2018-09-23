@@ -72,7 +72,13 @@ export class LoginComponent implements OnInit {
 					this.newEmail = '';
 				}, error => {
 					if (error.status === 401) {
-						this.signUpError = 'Username already in use';
+            if (error.error === 'Username already in use') {
+						  this.signUpError = 'Username is already in use.';
+            } else if (error.error === 'Email already in use') {
+						  this.signUpError = 'Email is already in use. Use \"Forgot password\" to retrieve a new password.';
+            } else {
+						  this.signUpError = 'Unknown error during signup.';
+            }
 					} else {
 						this.signUpError = error.message;
 					}
