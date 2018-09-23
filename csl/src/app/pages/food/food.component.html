@@ -1,5 +1,13 @@
 <div class="container">
 
+  <div class="search-bar">
+    <label class="search-bar__label">Search</label>
+    <input class="search-bar__input"
+           [(ngModel)]="searchInput"
+           (input)="findFoodMatch()">
+    <button class="button button--primary" (click)="clearSearch()">Clear</button>
+  </div>
+
   <div class="food-table">
     <div class="table-header">
       <div class="table-header__name">Name</div>

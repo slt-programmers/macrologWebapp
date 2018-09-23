@@ -1,0 +1,15 @@
+.search-bar {
+
+	display: flex;
+	align-items: center;
+	margin-bottom: $gutter;
+
+	&__input {
+		margin-right: ($gutter/2);
+	}
+
+	&__label {
+		margin-right: ($gutter/2);
+	}
+
+}
