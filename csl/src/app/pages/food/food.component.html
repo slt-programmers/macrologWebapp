@@ -10,13 +10,13 @@
 
   <div class="food-table">
     <div class="table-header">
-      <div class="table-header__name">Name</div>
+      <div class="table-header__name" (click)="sortBy('name')">Name</div>
       <div class="table-header__amount">Amount</div>
-      <div class="table-header__protein">Protein</div>
-      <div class="table-header__fat">Fat</div>
-      <div class="table-header__carbs">Carbs</div>
+      <div class="table-header__protein" (click)="sortBy('protein')">Protein</div>
+      <div class="table-header__fat" (click)="sortBy('fat')">Fat</div>
+      <div class="table-header__carbs" (click)="sortBy('carbs')">Carbs</div>
     </div>
-    <div class="foodline" *ngFor="let food of pagedFood" (click)="openModal(food)">
+    <div class="foodline" *ngFor="let food of displayedFood" (click)="openModal(food)">
       <div class="food">
         <div class="food__name">{{food.name}}</div>
         <div class="food__amount" *ngIf="food.measurementUnit=='GRAMS'">{{food.unitGrams}} {{food.unitName}}</div>
