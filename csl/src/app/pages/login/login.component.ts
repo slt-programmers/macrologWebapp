@@ -12,7 +12,7 @@ export class LoginComponent implements OnInit {
   private returnUrl: string;
   public error = '';
   public signUpError = '';
-	public username: string;
+	public usernameOrEmail: string;
 	public password: string;
 
 	public newUsername: string;
@@ -39,7 +39,7 @@ export class LoginComponent implements OnInit {
 
   login() {
 		this.error = '';
-    this.authService.login(this.username, this.password)
+    this.authService.login(this.usernameOrEmail, this.password)
         .subscribe(
             data => {
                 this.router.navigate([this.returnUrl]);
@@ -49,14 +49,14 @@ export class LoginComponent implements OnInit {
                 if (error.status === 401){
                   this.error = 'Password invalid';
                 } else if (error.status === 404) {
-                  this.error = 'Username not found';
+                  this.error = 'Username or email not found';
                 }
             });
   }
 
 	signUp() {
 		this.signUpError = '';
-		this.authService.signup(this.newUsername, this.newPassword, this.newEmail)
+		this.authService.signUp(this.newUsername, this.newPassword, this.newEmail)
 			.subscribe(
 				data => {
 					this.authService.login(this.newUsername, this.newPassword)
@@ -89,7 +89,7 @@ export class LoginComponent implements OnInit {
 		this.showForgotPwModal = toggle;
 	}
 
-	sendPassword() {
+	public retreivePassword() {
 		this.forgotError = '';
 		this.authService.retreivePassword(this.forgotEmail)
 			.subscribe(data => {

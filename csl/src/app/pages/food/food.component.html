@@ -1,14 +1,22 @@
 <div class="container">
 
+  <div class="search-bar">
+    <label class="search-bar__label">Search</label>
+    <input class="search-bar__input"
+           [(ngModel)]="searchInput"
+           (input)="findFoodMatch()">
+    <button class="button button--primary" (click)="clearSearch()">Clear</button>
+  </div>
+
   <div class="food-table">
     <div class="table-header">
-      <div class="table-header__name">Name</div>
+      <div class="table-header__name" (click)="sortBy('name')">Name</div>
       <div class="table-header__amount">Amount</div>
-      <div class="table-header__protein">Protein</div>
-      <div class="table-header__fat">Fat</div>
-      <div class="table-header__carbs">Carbs</div>
+      <div class="table-header__protein" (click)="sortBy('protein')">Protein</div>
+      <div class="table-header__fat" (click)="sortBy('fat')">Fat</div>
+      <div class="table-header__carbs" (click)="sortBy('carbs')">Carbs</div>
     </div>
-    <div class="foodline" *ngFor="let food of pagedFood" (click)="openModal(food)">
+    <div class="foodline" *ngFor="let food of displayedFood" (click)="openModal(food)">
       <div class="food">
         <div class="food__name">{{food.name}}</div>
         <div class="food__amount" *ngIf="food.measurementUnit=='GRAMS'">{{food.unitGrams}} {{food.unitName}}</div>
@@ -32,7 +40,7 @@
     </div>
   </div>
 
-  <pager [page]="currentPage" (pageChange)="getPagedFood($event)" [itemsPerPage]="itemsPerPage" [listSize]="foodResult.length"></pager>
+  <pager [page]="currentPage" (pageChange)="getPagedFood($event)" [itemsPerPage]="itemsPerPage" [listSize]="searchableFood.length"></pager>
 
 </div>
 
