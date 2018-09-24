@@ -24,12 +24,13 @@
 	@include elevation(4);
 	background-color: $ghost;
 	height: 100%;
-	width: 300px;
+	width: 200px;
 
 	&__item {
 		border-bottom: 1px solid $smoke;
 		cursor: pointer;
-		padding: $gutter;
+		padding: $gutter/2;
+		font-size:15px;
 
 		&:hover {
 			background-color: $smoke;
