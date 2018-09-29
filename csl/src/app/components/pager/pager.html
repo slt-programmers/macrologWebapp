@@ -1,7 +1,7 @@
 <div class="pager">
   <ul class="pager__button-wrapper">
     <li class="pager__button"
-        [ngClass]="{'pager__button--selected': page == (i + 1)}"
+        [ngClass]="{'pager__button--selected': currentPage == (i + 1)}"
         *ngFor="let item of pages; index as i"
         (click)="selectPage(i)">
       <span>{{i + 1}}</span>
