@@ -33,7 +33,7 @@ import {ErrorInterceptor } from './interceptors/error.interceptor';
 import {MealService} from './services/meal.service';
 import {Piechart} from './components/piechart/piechart';
 import {IntakeComponent} from './pages/intake/intake.component';
-import {ResetPasswordComponent} from './pages/resetpassword/resetpassword.component';
+import {ChangePasswordComponent} from './pages/changepassword/changepassword.component';
 import {StepperComponent} from './components/stepper/stepper.component';
 import {AuthGuardService} from './services/auth-guard.service';
 
@@ -44,7 +44,7 @@ const appRoutes: Routes = [
 {path: 'intake', component: IntakeComponent, canActivate: [AuthGuardService]},
 {path: 'food', component: FoodComponent, canActivate: [AuthGuardService]},
 {path: 'meals', component: MealsComponent, canActivate: [AuthGuardService]},
-{path: 'resetpassword', component: ResetPasswordComponent, canActivate: [AuthGuardService]},
+{path: 'changepassword', component: ChangePasswordComponent, canActivate: [AuthGuardService]},
 //{path: 'graphs', component: GraphsComponent},
 {path: '', redirectTo: '/log', pathMatch: 'full', canActivate: [AuthGuardService]},
 {path: '**', redirectTo: '/log', pathMatch: 'full', canActivate: [AuthGuardService]}
@@ -73,7 +73,7 @@ const appRoutes: Routes = [
 		Piechart,
 		IntakeComponent,
 		StepperComponent,
-    ResetPasswordComponent
+    ChangePasswordComponent
   ],
   imports: [
     BrowserModule,

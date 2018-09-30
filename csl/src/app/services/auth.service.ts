@@ -27,6 +27,10 @@ export class AuthenticationService {
 		);
 	}
 
+  public changePassword(oldPassword: string, newPassword: string, confirmPassword: string) {
+    return this.http.post<any>(this.macrologBackendUrl + '/changePassword', { oldPassword: oldPassword, newPassword: newPassword, confirmPassword: confirmPassword});
+	}
+
 	public logout() {
 		setTimeout(() => {
        localStorage.removeItem('currentUser');

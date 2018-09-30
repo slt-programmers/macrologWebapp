@@ -23,7 +23,7 @@ export class AppComponent implements OnInit {
 	public mealsTitle: string = 'Meals';
 	public foodTitle: string = 'All food';
   public profileTitle:string = 'My profile';
-  public resetPasswordTitle:string = 'Reset password';
+  public changePasswordTitle:string = 'Reset password';
 
 
   constructor() {}
