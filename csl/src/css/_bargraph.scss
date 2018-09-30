@@ -9,7 +9,10 @@
 }
 
 .bargraph {
-	height: 40px;
+	@media(min-width: $md) {
+		height: 40px;
+	}
+	height: 30px;
 	min-width: 120px;
 	position: relative;
 	width: 100%;
@@ -17,33 +20,46 @@
 	align-items: center;
 
 	&__track-container {
+		@media(min-width: $md) {
+			height: 30px;
+		}
 		position: relative;
-		height: 30px;
-		flex-basis: 66%
+		height: 20px;
+		flex-basis: 80%
 	}
 
 	&__track {
+		@media(min-width: $md) {
+  		height: 30px;
+  	}
 		@include elevation(1);
 		position: absolute;
 		background-color: $smoke;
-		height: 30px;
+		height: 20px;
 		top: 0;
 		left: 0;
 		width: 100%;
 
 		&--fill {
+			@media(min-width: $md) {
+    		height: 20px;
+    		top: 5px;
+    	}
 			@include elevation(2);
-
 			background-color: #29c646;
-			height: 20px;
-			top: 5px;
+			height: 16px;
+			top: 2px;
 			width: 1%;
 			transition: width 0.3s;
 		}
 	}
 
 	&__title {
+		@media(min-width: $md) {
+			font-size: 16px;
+		}
 		flex-basis: 5%;
+		font-size: 14px;
 		font-weight: 500;
   	margin-right: 5px;
   }
