@@ -18,13 +18,8 @@ export class AppComponent implements OnInit {
   private usermenubackdrop;
 
 	public userTitle: string = 'Settings';
-	public logTitle: string = 'Food diary';
-	public graphsTitle: string = 'Graphs';
-	public mealsTitle: string = 'Meals';
-	public foodTitle: string = 'All food';
   public profileTitle:string = 'My profile';
   public resetPasswordTitle:string = 'Reset password';
-
 
   constructor() {}
 
@@ -37,17 +32,20 @@ export class AppComponent implements OnInit {
 
 	// Navigation
 	openNav() {
-		this.navbar.style.marginLeft = '0';
+		this.navbar.style.marginRight = '0';
 		this.backdrop.style.display = 'block';
 		this.backdrop.style.backgroundColor = 'rgba(0,0,0, 0.4)';
 	}
 
 	closeNav(tabTitle: string) {
 		this.setTitle(tabTitle);
-		this.navbar.style.marginLeft = '-300px';
+		const width = this.navbar.clientWidth;
+
+		this.navbar.style.marginRight = '-' + width + 'px';
 		this.backdrop.style.display = 'none';
 		this.backdrop.style.backgroundColor = 'transparent';
 	}
+
   setTitle(tabTitle: string) {
     if (tabTitle){
 		  this.title = tabTitle;
@@ -63,9 +61,8 @@ export class AppComponent implements OnInit {
     }
   }
 
-  public loggedIn(){
-		const loggedInBoolean = localStorage.getItem('currentUser') !== null;
-    return loggedInBoolean;
+  public loggedIn(): boolean {
+		return localStorage.getItem('currentUser') !== null;
   }
 
   public showUserMenu(){
