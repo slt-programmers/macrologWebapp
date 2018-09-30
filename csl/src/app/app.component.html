@@ -1,25 +1,57 @@
 <div class="header">
-  <div *ngIf="loggedIn()" class="header__item header__item--menu" (click)="openNav()">
-    <i class="fas fa-bars"></i>
+
+  <div class="header__section header__section--left">
+    <div class="header-item header-item--title">
+      <div class="header-item__text">Macrolog</div>
+    </div>
+    <div *ngIf="loggedIn()" class="header-item" routerLink="/log">
+      <div class="header-item__text">Diary</div>
+    </div>
+    <div *ngIf="loggedIn()" class="header-item" routerLink="/food">
+      <div class="header-item__text">Food</div>
+    </div>
+    <div *ngIf="loggedIn()" class="header-item" routerLink="/meals">
+      <div class="header-item__text">Meals</div>
+    </div>
+    <!--<div *ngIf="loggedIn()" class="header__item" routerLink="/graphs">Graphs</div>-->
   </div>
 
-  <div *ngIf="loggedIn()"  class="header__item header__item--title">{{title}}</div>
-  <div *ngIf="!loggedIn()" class="header__item header__item--title">Macrolog</div>
+  <div class="header__section header__section--right">
+    <div *ngIf="loggedIn()" class="header-item" (click)="showUserMenu()">
+      <i class="icon--large fas fa-user-circle"></i>
 
-  <div *ngIf="loggedIn()" class="header__item header__item--right" (click)="closeNav();showUserMenu()" >
-    <span class="header-item--text">{{username()}}</span>
-    <i class="icon--large fas fa-user-circle"></i>
+
+
+
+    </div>
+
+    <div *ngIf="false && loggedIn()" class="header-item" (click)="openNav()">
+      <i class="fas fa-bars"></i>
+    </div>
   </div>
-
 </div>
 
 <div #usermenuBackdrop class="usermenu-backdrop" (click)="closeUserMenu()"></div>
+
 <div #usermenu class="usermenu-wrapper" (click)="closeUserMenu()">
   <div class="usermenu">
-    <div class="usermenu__item usermenu__item--top">{{username()}} <i class="fas fa-arrow-up"></i></div>
-    <div *ngIf="loggedIn()" class="usermenu__item" (click)="setTitle(profileTitle)" routerLink="/user">My Profile</div>
-    <div *ngIf="loggedIn()" class="usermenu__item" (click)="setTitle(resetPasswordTitle)" routerLink="/resetpassword">Reset password</div>
-    <div *ngIf="loggedIn()" class="usermenu__item" routerLink="/login">Logout</div>
+    <!--<div class="usermenu__item usermenu__item&#45;&#45;top">-->
+      <!--<span>{{getUsername()}}</span>-->
+      <!--<i class="fas fa-arrow-up"></i>-->
+    <!--</div>-->
+    <div *ngIf="loggedIn()" class="usermenu__item" (click)="setTitle(profileTitle)"
+         routerLink="/user">
+      <div>My Profile</div>
+    </div>
+    <div *ngIf="loggedIn()" class="usermenu__item" (click)="setTitle(resetPasswordTitle)"
+         routerLink="/resetpassword">
+      <div>Reset password</div>
+    </div>
+    <div *ngIf="loggedIn()" class="usermenu__item" routerLink="/login">
+      <div>
+        Logout
+      </div>
+    </div>
   </div>
 </div>
 
@@ -42,8 +74,8 @@
       <a>{{foodTitle}}</a>
     </div>
     <!--<div class="nav__item" routerLink="/graphs"-->
-         <!--(click)="closeNav(graphsTitle)">-->
-      <!--<a>{{graphsTitle}}</a>-->
+    <!--(click)="closeNav(graphsTitle)">-->
+    <!--<a>{{graphsTitle}}</a>-->
     <!--</div>-->
   </div>
 </div>

@@ -33,7 +33,6 @@ export class AppComponent implements OnInit {
 		this.backdrop = this.backdropElement.nativeElement;
 		this.usermenu = this.userMenuElement.nativeElement;
 		this.usermenubackdrop = this.usermenubackdropElement.nativeElement;
-
   }
 
 	// Navigation
@@ -55,7 +54,7 @@ export class AppComponent implements OnInit {
     }
   }
 
-  public username() {
+  public getUsername() {
     if (localStorage.getItem('currentUser') === null){
       return "Guest";
     } else {
@@ -72,9 +71,9 @@ export class AppComponent implements OnInit {
   public showUserMenu(){
     this.usermenu.style.marginTop = '0';
 		this.usermenubackdrop.style.display = 'block';
-		this.usermenubackdrop.style.backgroundColor = 'rgba(0,0,0, 0.4)';
   }
-  closeUserMenu() {
+
+  public closeUserMenu() {
 		this.usermenu.style.marginTop = '-300px';
 		this.usermenubackdrop.style.display = 'none';
 		this.usermenubackdrop.style.backgroundColor = 'transparent';

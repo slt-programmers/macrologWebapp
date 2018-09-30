@@ -1,41 +1,36 @@
 .header {
-	align-items: center;
 	background-color: $primary;
 	color: $white;
 	display: flex;
+
+	justify-content: space-between;
 	margin-bottom: $gutter;
 
-	&__item {
-		font-size: 20px;
-
-		&--menu {
-			cursor: pointer;
-			padding: ($gutter/3*2);
-			text-align: center;
-		}
-
-		&--title {
-			padding: ($gutter/3*2);
-			flex-grow: 1;
-		}
-
-		&--right {
-			text-align: center;
-			cursor: pointer;
-			display: flex;
-			padding: 0 20px;
-			align-items: center;
-			white-space: nowrap;
-		}
-
-		&:focus {
-			outline: none;
-		}
+	&__section {
+		display: flex;
+		flex-direction: row;
 	}
 }
 
 .header-item {
-	&--text {
-		margin-right: 10px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	border-right: 1px solid rgba(250,250,250,0.5);
+	font-size: 18px;
+	padding: ($gutter/2);
+	cursor: pointer;
+
+	&--title {
+		opacity: 0.5;
+		cursor: default;
+	}
+
+	&--menu {
+		position: relative;
+	}
+
+	&:focus {
+		outline: none;
 	}
 }

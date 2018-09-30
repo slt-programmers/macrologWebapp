@@ -5,16 +5,15 @@
 	top: 0;
 	right: 0;
 	display: none;
-	transition: background-color 1.0s;
 	z-index: 20;
 }
 
 .usermenu-wrapper {
 	display: flex;
 	flex-direction: column;
-	right: 0;
+	right: 30px;
 	position: absolute;
-	top: 0;
+	top: 30px;
 	margin-top: -300px;
 	transition: 0.3s;
 	z-index: 20;
@@ -23,8 +22,6 @@
 .usermenu {
 	@include elevation(4);
 	background-color: $ghost;
-	height: 100%;
-	width: 200px;
 
 	&__item {
 		border-bottom: 1px solid $smoke;
