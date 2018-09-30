@@ -1,41 +1,67 @@
 .header {
-	align-items: center;
+	@media(min-width: $md) {
+		margin-bottom: $gutter;
+	}
+
 	background-color: $primary;
 	color: $white;
 	display: flex;
-	margin-bottom: $gutter;
+	justify-content: space-between;
 
-	&__item {
-		font-size: 20px;
+	&__section {
+		display: flex;
+    flex-direction: row;
 
-		&--menu {
-			cursor: pointer;
-			padding: ($gutter/3*2);
-			text-align: center;
-		}
-
-		&--title {
-			padding: ($gutter/3*2);
-			flex-grow: 1;
-		}
-
-		&--right {
-			text-align: center;
-			cursor: pointer;
-			display: flex;
-			padding: 0 20px;
-			align-items: center;
-			white-space: nowrap;
-		}
-
-		&:focus {
-			outline: none;
-		}
 	}
 }
 
 .header-item {
-	&--text {
-		margin-right: 10px;
+	border-left: 1px solid rgba(250, 250, 250, 0.5);
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	font-size: 18px;
+	padding: ($gutter/2);
+	cursor: pointer;
+
+	&:focus {
+		outline: none;
 	}
+
+	&:last-child {
+		border-right: 1px solid rgba(250, 250, 250, 0.5);
+	}
+
+	&--title {
+		&:last-child {
+			border-right: none;
+		}
+		opacity: 0.5;
+		cursor: default;
+	}
+
+	&--menu {
+		position: relative;
+	}
+
+	&--mobile {
+		@media(min-width: $md) {
+			display: none;
+		}
+
+		display: flex;
+		border: none;
+	}
+
+	&--mobile-hidden {
+		@media(min-width: $md) {
+			display: flex;
+		}
+
+		display: none;
+	}
+
+
+
+
 }

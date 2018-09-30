@@ -1,4 +1,4 @@
-import {Component, OnInit, OnChanges, SimpleChanges, Input, Output, EventEmitter} from '@angular/core';
+import {Component, OnInit, OnChanges, SimpleChange, Input, Output, EventEmitter} from '@angular/core';
 @Component({
 	selector: 'pager',
 	templateUrl: './pager.html'
@@ -6,35 +6,35 @@ import {Component, OnInit, OnChanges, SimpleChanges, Input, Output, EventEmitter
 export class Pager implements OnInit, OnChanges {
 
 	@Input() itemsPerPage: number = 20;
-	@Input() listSize: number;
-	@Input() page: number;
+	@Input() itemsInTotal: number;
+	@Input() currentPage: number = 1;
 
 	@Output() pageChange: EventEmitter<number> = new EventEmitter<number>();
 
-	public pages = new Array();
+	public pages;
 
 	constructor() {}
 
 	ngOnInit() {
 		this.getPages();
+		this.pageChange.emit(this.currentPage);
 	}
 
-	ngOnChanges(changes: SimpleChanges) {
+	ngOnChanges(changes) {
 		this.getPages();
+		this.pageChange.emit(this.currentPage);
 	}
 
-	getPages() {
+	public getPages() {
 		this.pages = new Array();
-		let numberOfPages = Math.ceil(this.listSize / this.itemsPerPage);
+		let numberOfPages = Math.ceil(this.itemsInTotal / this.itemsPerPage);
 		for (let i = 0; i < numberOfPages; i++) {
 			this.pages.push(i);
 		}
 	}
 
-	selectPage(pageNumber: number) {
-		console.log('select page');
-		this.page = pageNumber + 1;
-		this.pageChange.emit(pageNumber + 1);
+	public selectPage(pageNumber: number) {
+		this.currentPage = pageNumber + 1;
+		this.pageChange.emit(this.currentPage);
 	}
-
 }

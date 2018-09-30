@@ -1,9 +1,12 @@
 .container {
+	@media(min-width: $md) {
+		padding: 0 $gutter;
+	}
+
 	display: flex;
 	flex-direction: column;
 	margin: 0 auto $gutter auto;
 	max-width: 1400px;
-	padding: 0 $gutter;
 
 	&--row {
 		@media(max-width: $md) {

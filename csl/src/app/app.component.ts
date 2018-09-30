@@ -18,13 +18,8 @@ export class AppComponent implements OnInit {
   private usermenubackdrop;
 
 	public userTitle: string = 'Settings';
-	public logTitle: string = 'Food diary';
-	public graphsTitle: string = 'Graphs';
-	public mealsTitle: string = 'Meals';
-	public foodTitle: string = 'All food';
   public profileTitle:string = 'My profile';
   public changePasswordTitle:string = 'Reset password';
-
 
   constructor() {}
 
@@ -33,29 +28,31 @@ export class AppComponent implements OnInit {
 		this.backdrop = this.backdropElement.nativeElement;
 		this.usermenu = this.userMenuElement.nativeElement;
 		this.usermenubackdrop = this.usermenubackdropElement.nativeElement;
-
   }
 
 	// Navigation
 	openNav() {
-		this.navbar.style.marginLeft = '0';
+		this.navbar.style.marginRight = '0';
 		this.backdrop.style.display = 'block';
 		this.backdrop.style.backgroundColor = 'rgba(0,0,0, 0.4)';
 	}
 
 	closeNav(tabTitle: string) {
 		this.setTitle(tabTitle);
-		this.navbar.style.marginLeft = '-300px';
+		const width = this.navbar.clientWidth;
+
+		this.navbar.style.marginRight = '-' + width + 'px';
 		this.backdrop.style.display = 'none';
 		this.backdrop.style.backgroundColor = 'transparent';
 	}
+
   setTitle(tabTitle: string) {
     if (tabTitle){
 		  this.title = tabTitle;
     }
   }
 
-  public username() {
+  public getUsername() {
     if (localStorage.getItem('currentUser') === null){
       return "Guest";
     } else {
@@ -64,17 +61,16 @@ export class AppComponent implements OnInit {
     }
   }
 
-  public loggedIn(){
-		const loggedInBoolean = localStorage.getItem('currentUser') !== null;
-    return loggedInBoolean;
+  public loggedIn(): boolean {
+		return localStorage.getItem('currentUser') !== null;
   }
 
   public showUserMenu(){
     this.usermenu.style.marginTop = '0';
 		this.usermenubackdrop.style.display = 'block';
-		this.usermenubackdrop.style.backgroundColor = 'rgba(0,0,0, 0.4)';
   }
-  closeUserMenu() {
+
+  public closeUserMenu() {
 		this.usermenu.style.marginTop = '-300px';
 		this.usermenubackdrop.style.display = 'none';
 		this.usermenubackdrop.style.backgroundColor = 'transparent';

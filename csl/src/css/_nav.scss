@@ -10,13 +10,16 @@
 }
 
 .nav-wrapper {
+	@media(min-width: $md) {
+		display: none;
+	}
 	display: flex;
 	flex-direction: column;
 	height: 100%;
-	left: 0;
-	position: absolute;
+	right: 0;
+	position: fixed;
 	top: 0;
-	margin-left: -300px;
+	margin-right: -$md;
 	transition: 0.3s;
 	z-index: 20;
 }
@@ -25,12 +28,19 @@
 	@include elevation(4);
 	background-color: $ghost;
 	height: 100%;
-	width: 300px;
+	min-width: 200px;
 
 	&__item {
+		align-items: center;
 		border-bottom: 1px solid $smoke;
 		cursor: pointer;
-		padding: $gutter;
+		padding: ($gutter/2);
+		display: flex;
+		justify-content: space-between;
+
+		&__text {
+			padding-right: ($gutter/2);
+		}
 
 		&:hover {
 			background-color: $smoke;
@@ -44,11 +54,12 @@
 			background-color: $primary;
 			color: $white;
 			font-size: 20px;
-			padding: ($gutter/3*2);
+			padding: 16px;
 
 			&:hover {
 				background-color: $primary;
 			}
 		}
+
 	}
 }
