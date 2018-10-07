@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -21,7 +22,9 @@ export class AppComponent implements OnInit {
   public profileTitle:string = 'My profile';
   public changePasswordTitle:string = 'Reset password';
 
-  constructor() {}
+	public currentRoute;
+
+  constructor(public router: Router) {}
 
   ngOnInit() {
 		this.navbar = this.navbarElement.nativeElement;

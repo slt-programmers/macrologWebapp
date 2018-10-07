@@ -4,20 +4,28 @@
     <div class="header-item header-item--title">
       <div class="header-item__text">Macrolog</div>
     </div>
-    <div *ngIf="loggedIn()" class="header-item header-item--mobile-hidden" routerLink="/log">
+    <div *ngIf="loggedIn()" class="header-item header-item--mobile-hidden"
+         [ngClass]="{'header-item--active' : router.url === '/log'}"
+         routerLink="/log">
       <div class="header-item__text">Diary</div>
     </div>
-    <div *ngIf="loggedIn()" class="header-item header-item--mobile-hidden" routerLink="/food">
+    <div *ngIf="loggedIn()" class="header-item header-item--mobile-hidden"
+         [ngClass]="{'header-item--active' : router.url === '/food'}"
+         routerLink="/food">
       <div class="header-item__text">Food</div>
     </div>
-    <div *ngIf="loggedIn()" class="header-item header-item--mobile-hidden" routerLink="/meals">
+    <div *ngIf="loggedIn()" class="header-item header-item--mobile-hidden"
+         [ngClass]="{'header-item--active' : router.url === '/meals'}"
+         routerLink="/meals">
       <div class="header-item__text">Meals</div>
     </div>
     <!--<div *ngIf="loggedIn()" class="header__item" routerLink="/graphs">Graphs</div>-->
   </div>
 
   <div class="header__section header__section--right">
-    <div *ngIf="loggedIn()" class="header-item header-item--menu header-item--mobile-hidden" (click)="showUserMenu()">
+    <div *ngIf="loggedIn()" class="header-item header-item--menu header-item--mobile-hidden"
+         [ngClass]="{'header-item--active' : router.url === '/user'}"
+         (click)="showUserMenu()">
       <i class="icon--large fas fa-user-circle"></i>
     </div>
 

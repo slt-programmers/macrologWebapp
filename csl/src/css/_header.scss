@@ -1,12 +1,16 @@
 .header {
 	@media(min-width: $md) {
 		margin-bottom: $gutter;
+		position: relative;
 	}
 
 	background-color: $primary;
 	color: $white;
 	display: flex;
 	justify-content: space-between;
+	position: sticky;
+	top: 0;
+	z-index: 16;
 
 	&__section {
 		display: flex;
@@ -61,6 +65,9 @@
 		display: none;
 	}
 
+	&--active {
+		background-color: $secondary;
+	}
 
 
 
