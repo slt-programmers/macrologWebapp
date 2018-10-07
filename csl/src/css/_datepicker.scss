@@ -5,14 +5,17 @@
 
 .date {
 	@include elevation(2);
-	align-items: center;
+	align-items: end;
 	background-color: $primary;
 	border-radius: 2px;
 	color: $ghost;
 	display: flex;
-	padding: ($gutter/3);
+	padding: 5px ($gutter/3);
 
 	&__selected-day {
+		@media(min-width: $md) {
+			font-size: 16px;
+		}
 		font-size: 14px;
 		margin: 0 10px;
 	}

@@ -34,9 +34,11 @@
     </div>
 
     <div class="logday__header">
+      <span class="logday__header__macro"></span>
       <span class="logday__header__macro">Protein</span>
       <span class="logday__header__macro">Fat</span>
       <span class="logday__header__macro">Carbs</span>
+      <span class="logday__header__macro"></span>
     </div>
 
     <log-meal #breakfast [open]="breakfastOpen" [food]="foodAndPortions" [date]="displayDate" [meal]="'Breakfast'" [logEntries]="breakfastLogs" (dataChanged)="refresh()"></log-meal>
@@ -49,8 +51,7 @@
       <span class="total__macro total__macro--first">{{getTotal("protein") | number:'1.1-1'}}</span>
       <span class="total__macro">{{getTotal( "fat") | number:'1.1-1'}}</span>
       <span class="total__macro">{{getTotal("carbs") | number:'1.1-1'}}</span>
-      <span class="total__calories">{{getTotal("calories")  | number:'1.0-0'}}</span>
-      <span class="total__calories--label">kcal</span>
+      <span class="total__calories">{{getTotal("calories")  | number:'1.0-0'}} kcal</span>
     </div>
   </div>
 
