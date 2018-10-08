@@ -1,9 +1,11 @@
 .log-meal {
 	&--grow {
-		@include elevation(2);
-		background: $white;
-		margin-left: -8px;
-		width: calc(100% + 16px);
+		@media(min-width: $md) {
+			@include elevation(2);
+			background: $white;
+			margin-left: -8px;
+			width: calc(100% + 16px);
+		}
 	}
 }
 
@@ -28,51 +30,35 @@
 	}
 
 	&__ingredient {
-		@media(min-width: $md) {
-			flex-direction: row;
-		}
-
+		flex-direction: row;
 		display: flex;
-		flex-direction: column;
 		margin-bottom: 5px;
-
-		&--description {
-			@media(min-width: $md) {
-				flex-basis: 40%;
-				margin-bottom: 0;
-			}
-
-			display: flex;
-			justify-content: space-between;
-			padding-left: 5px;
-  		margin-bottom: 5px;
-		}
-
-		&--data {
-			@media(min-width: $md) {
-				padding-left: 0;
-				flex-basis: 60%;
-			}
-			display: flex;
-			padding-left: 5px;
-		}
+		flex-wrap: wrap;
+		padding: 0 10px;
 
 		&:last-child {
 			margin-bottom: 0;
 		}
 
 		&__name {
-			//flex-basis: 30%;
+			@media(min-width: $md) {
+				flex-basis: 30%
+			}
+
+			flex-basis: 60%;
 		}
 
 		&__amount {
-			//flex-basis: 10%;
+			@media(min-width: $md) {
+				flex-basis: 10%;
+			}
+			flex-basis: 40%;
 			text-align: end;
 		}
 
 		&__macro {
 			@media(min-width: $md) {
-    	//flex-basis: 10%;
+    	  flex-basis: 15%;
     	}
 			flex-basis: 25%;
 			text-align: center;
@@ -80,7 +66,7 @@
 
 		&__calories {
 			@media(min-width: $md) {
-    		//flex-basis: 20%;
+    		flex-basis: 15%;
     	}
 			flex-basis: 25%;
 			text-align: end;
@@ -92,43 +78,71 @@
   		display: flex;
   		flex-direction: row;
   		margin-bottom: 5px;
+  		flex-wrap: wrap;
+			padding: 0 10px;
 
   		&__name {
-        padding-left :10px;
-  			flex-basis: 30%;
+  		  @media(min-width: $md) {
+  		    flex-basis: 30%;
+  		  }
+  			flex-basis: 50%;
   		}
 
   		&__amount {
+  		  @media(min-width: $md) {
+        	flex-basis: 10%;
+        }
   		  align-self: stretch;
-  			flex-basis: 10%;
-  			padding-right: 5px;
+  			flex-basis: 20%;
   			text-align: end;
+
+  			&__input {
+  			  padding-right: 5px;
+  			}
+
   		}
 
   		&__measurement {
-       	flex-basis: 15%;
+  		  @media(min-width: $md) {
+           flex-basis: 15%;
+        }
+
+       	flex-basis: 30%;
      	}
 
   		&__macro {
-  			flex-basis: 10%;
-  			text-align: end;
+  		  @media(min-width: $md) {
+           flex-basis: 10%;
+           padding: 0;
+        }
+  			flex-basis: 25%;
+  			padding: 10px 0;
+  			text-align: center;
   		}
 
   		&__calories {
-  			flex-basis: 10%;
+  		  @media(min-width: $md) {
+          flex-basis: 10%;
+        }
+  			flex-basis: 25%;
   			text-align: end;
   		}
 
   		&__delete {
-        padding-left: 10px;
-      	flex-basis: 5%;
+  		  @media(min-width: $md) {
+          flex-basis: 5%;
+        }
+      	flex-basis: 100%;
       	text-align: center;
       }
   }
 
   &__new-ingredient {
+    @media(min-width: $md) {
+      flex-direction: row;
+    }
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: space-between;
 
     &__name {

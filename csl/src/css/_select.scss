@@ -1,13 +1,11 @@
 select {
-//	-webkit-padding-after: 10px;
-//	-webkit-padding-before: 10px;
 	border: 1px solid $smoke;
 	border-radius: 5px;
 	box-sizing: border-box;
 	font-family: 'Roboto', sans-serif;
 	font-size: 16px;
 	padding: 9px;
-
+	margin-top: -1px;
 	width: 100%;
 }
 
