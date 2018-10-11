@@ -66,11 +66,15 @@ export class IntakeComponent implements OnInit {
 
 	nextStep() {
 		this.currentStep = this.currentStep + 1;
-		this.initStepTwo();
+		if (this.currentStep === 2) {
+			this.initStepTwo();
+		}
+		window.scroll(0,0);
 	}
 
 	previousStep() {
 		this.currentStep = this.currentStep - 1;
+		window.scroll(0,0);
 	}
 
 	initStepTwo() {

@@ -24,6 +24,13 @@ form {
 		}
 	}
 
+	&--slider {
+		@include media-break($lg) {
+			flex-direction: row;
+		}
+		flex-direction: column;
+	}
+
 	&--column {
 		@media (min-width: $lg) {
 			flex-direction: row;
@@ -31,10 +38,6 @@ form {
 		padding-top: 10px;
 		flex-direction: column;
 		flex-wrap: wrap;
-	}
-
-	&--slider {
-		align-items: start;
 	}
 
 	&__label {
@@ -51,6 +54,7 @@ form {
     		flex-basis: auto;
       	flex-grow: 1;
       	margin-top: 15px;
+   			align-self: start;
     	}
 		}
 
@@ -97,8 +101,13 @@ form {
   }
 
 	&__slider {
-		flex-basis: 100%;
-		flex-shrink: 1;
+		@include media-break($lg) {
+				flex-basis: 100%;
+      	flex-shrink: 1;
+		}
+
+		width: 100%;
+
 	}
 
 	&__disclaimer {

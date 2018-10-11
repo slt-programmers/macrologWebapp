@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container container--first">
 
   <div class="title-wrapper title-wrapper--center">
     <h2>Let's get started!</h2>
@@ -8,7 +8,7 @@
     <stepper [currentStep]="currentStep" [numberOfSteps]="4"></stepper>
   </div>
 
-  <div #step1 *ngIf="currentStep === 1">
+  <div class="tile" #step1 *ngIf="currentStep === 1">
     <h3 class="title">Personal details</h3>
     <p>To calculate how much energy you need in a day, we need to know a few things
       about you. </p>
@@ -68,7 +68,7 @@
   </div>
 
 
-  <div #step2 *ngIf="currentStep === 2">
+  <div class="tile" #step2 *ngIf="currentStep === 2">
     <h3 class="title">Set your intake goal</h3>
 
     <p>This is the amount of calories you need to maintain your current weight. Increase or decrease the amount of calories to respectively
@@ -106,9 +106,9 @@
           <p>This results in the following macros:</p>
 
           <div class="macro-box">
-            <p class="macro"><strong>Protein: {{protein | number : '1.0-0'}} gr</strong></p>
-            <p class="macro"><strong>Fat: {{fat | number : '1.0-0'}} gr</strong></p>
-            <p class="macro"><strong>Carbs: {{carbs | number : '1.0-0'}} gr</strong></p>
+            <p class="macro-box__macro"><strong>Protein: {{protein | number : '1.0-0'}} gr</strong></p>
+            <p class="macro-box__macro"><strong>Fat: {{fat | number : '1.0-0'}} gr</strong></p>
+            <p class="macro-box__macro"><strong>Carbs: {{carbs | number : '1.0-0'}} gr</strong></p>
           </div>
         </div>
 
@@ -149,7 +149,7 @@
     </div>
   </div>
 
-  <div #step2 *ngIf="currentStep === 3">
+  <div class="tile" #step2 *ngIf="currentStep === 3">
     <h3>Adding food</h3>
 
     <p>The first step is to add food to your database. You do this by using the
@@ -215,12 +215,13 @@
     </div>
   </div>
 
-  <div #step4 *ngIf="currentStep === 4">
+  <div class="tile" #step4 *ngIf="currentStep === 4">
     <h3>Filling your diary</h3>
 
     <p>Clicking on a meal will enable you to add food to it. Try adding an apple.</p>
     <div class="logday">
       <div class="logday__header">
+        <span class="logday__header__macro"></span>
         <span class="logday__header__macro">Protein</span>
         <span class="logday__header__macro">Fat</span>
         <span class="logday__header__macro">Carbs</span>

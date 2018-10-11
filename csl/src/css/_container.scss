@@ -1,0 +1,13 @@
+.container {
+	@include media-break($md) {
+		padding: 0 $gutter;
+	}
+
+	margin: 0 auto $gutter auto;
+	max-width: 1400px;
+
+	&--first {
+		margin-top: $gutter;
+	}
+
+}

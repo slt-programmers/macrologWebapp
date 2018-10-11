@@ -14,13 +14,19 @@
 }
 
 .step {
+	@include media-break($lg) {
+		padding: 5px;
+		width: $gutter;
+    height: $gutter;
+	}
+
 	display: flex;
 	border-radius: 50%;
 	background-color: $primary;
 	color: $white;
-	padding: 5px;
-	width: $gutter;
-	height: $gutter;
+	padding: 3px;
+	width: ($gutter/2);
+  height: ($gutter/2);
 	justify-content: center;
 	align-items: center;
 	font-weight: bold;
@@ -31,10 +37,14 @@
 }
 
 .step-arrow {
+	@include media-break($lg) {
+		width: 100px;
+	}
+
 	display: flex;
 	background-color: $smoke;
 	height: 3px;
-	width: 100px;
+	width: 30px;
 	margin: 10px;
 
 	&--last {

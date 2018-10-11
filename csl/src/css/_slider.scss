@@ -58,10 +58,18 @@
 		}
 
 		&__label {
-			font-size: 15px;
+			font-size: 12px;
 			position: absolute;
 			top: 25px;
 			left: -18px;
+
+			&--above {
+				@include media-break($lg) {
+					top: 25px;
+				}
+
+				top: -25px;
+			}
 		}
 	}
 }

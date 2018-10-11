@@ -1,0 +1,18 @@
+.tile {
+
+	@include media-break($md) {
+		padding: 0 $gutter $gutter $gutter;
+
+		&--first {
+			padding-top: $gutter;
+		}
+
+	}
+
+	padding: 0 ($gutter/2) ($gutter/2) ($gutter/2);
+
+	&--first {
+		padding-top: ($gutter/2);
+	}
+
+}

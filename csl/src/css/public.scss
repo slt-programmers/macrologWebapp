@@ -1,12 +1,18 @@
+// Define variables and mixins
 @import 'variables';
-@import 'mixins';
+@import 'mixins/public';
 
+// Reset default styles
+@import 'reset';
+
+// Style components
 @import 'autocomplete';
 @import 'base';
 @import 'bargraph';
 @import 'button';
 @import 'calorie-box';
 @import 'card';
+@import 'container';
 @import 'datepicker';
 @import 'food-table';
 @import 'form';
@@ -29,4 +35,5 @@
 @import 'slider';
 @import 'stepper';
 @import 'tabs';
+@import 'tile';
 @import 'toast';
