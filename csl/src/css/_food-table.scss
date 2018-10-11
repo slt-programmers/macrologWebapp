@@ -1,33 +1,97 @@
 .food-table {
+	@include media-break($md) {
+		font-size: 16px;
+	}
+
+	font-size: 14px;
 	margin-bottom: $gutter;
 }
 
 .table-header {
-  display:flex;
-  flex-direction:row;
-  font-weight:bold;
-	color: white;
-  padding:10px;
+  display: flex;
+  flex-direction: row;
+  font-weight: bold;
+	color: $white;
+  padding: 10px;
   background-color: $primary;
 
   &__name {
 		flex-basis: 50%;
+		flex-grow: 1;
  	}
 
   &__amount {
-    flex-basis: 10%;
+    @include media-break($md) {
+      flex-basis: 10%;
+    }
+    flex-basis: 20%;
   }
 
   &__protein {
+    @include media-break($md) {
+      display: flex;
+    }
     flex-basis: 10%;
+    display: none;
+		justify-content: center;
+
+    &--mobile {
+      @include media-break($md) {
+        display: none;
+      }
+      display: flex;
+      flex-basis: 10%;
+			justify-content: center;
+    }
+
+    &--percent {
+    	flex-basis: 15%;
+    }
   }
 
   &__fat {
+    @include media-break($md) {
+      display: flex;
+    }
     flex-basis: 10%;
+    display: none;
+		justify-content: center;
+
+    &--mobile {
+      @include media-break($md) {
+        display: none;
+      }
+      display: flex;
+      flex-basis: 10%;
+			justify-content: center;
+    }
+
+		&--percent {
+			flex-basis: 15%;
+		}
+
   }
 
   &__carbs {
+    @include media-break($md) {
+      display: flex;
+    }
     flex-basis: 10%;
+    display: none;
+		justify-content: center;
+
+    &--mobile {
+      @include media-break($md) {
+        display: none;
+      }
+      display: flex;
+      flex-basis: 10%;
+			justify-content: center;
+    }
+
+    &--percent {
+    	flex-basis: 15%;
+    }
   }
 }
 
@@ -39,22 +103,40 @@
 
 	&__name {
 		flex-basis: 50%;
+		flex-grow: 1;
 	}
 
 	&__amount {
-	  flex-basis: 10%;
-	}
+    @include media-break($md) {
+      flex-basis: 10%;
+    }
+    flex-basis: 20%;	}
 
 	&__protein {
 	  flex-basis: 10%;
+	  text-align: right;
+
+	  &--percent {
+	    flex-basis: 15%;
+	  }
 	}
 
 	&__fat {
 	  flex-basis: 10%;
+ 	  text-align: right;
+
+ 	  &--percent {
+      flex-basis: 15%;
+    }
 	}
 
 	&__carbs {
 	  flex-basis: 10%;
+	  text-align: right;
+
+	  &--percent {
+      flex-basis: 15%;
+    }
 	}
 }
 
@@ -64,6 +146,7 @@
 
  	&__description {
 		flex-basis: 50%;
+		flex-grow: 1;
 
 		&--padded {
 	   padding-left: 20px;
@@ -71,19 +154,25 @@
   }
 
 	&__amount {
-    flex-basis: 10%;
+    @include media-break($md) {
+      flex-basis: 10%;
+    }
+    flex-basis: 20%;
   }
 
 	&__protein {
     flex-basis: 10%;
+    text-align: right;
   }
 
  	&__fat {
     flex-basis: 10%;
-  }
+    text-align: right;
+	}
 
  	&__carbs {
     flex-basis: 10%;
+	  text-align: right;
   }
 }
 
