@@ -10,4 +10,8 @@
 		margin-top: $gutter;
 	}
 
+	&--last {
+		margin-bottom: ($gutter * 3);
+	}
+
 }
