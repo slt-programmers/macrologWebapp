@@ -1,0 +1,70 @@
+<div>
+  <div class="tile">
+    <h3 class="title">Personal details</h3>
+
+    <form>
+      <div class="form-field">
+        <label class="form-field__label">Name</label>
+        <div class="form-field__element">
+          <input class="" name="name" type="text" [(ngModel)]="name">
+        </div>
+      </div>
+
+      <div class="form-field">
+        <label class="form-field__label">Age</label>
+        <div class="form-field__element">
+          <input class="" name="age" type="number" [(ngModel)]="age">
+        </div>
+      </div>
+
+      <div class="form-field">
+        <label class="form-field__label">Gender</label>
+        <div class="form-field__element">
+          <div class="radio-wrapper">
+            <input type="radio" name="gender"
+                   [(ngModel)]="gender" value="MALE"
+                   [ngClass]="{'checked fas fa-check': gender === 'MALE' }">
+            <span class="radio-label">Male</span>
+            <input type="radio" name="gender"
+                   [(ngModel)]="gender" value="FEMALE"
+                   [ngClass]="{'checked fas fa-check': gender === 'FEMALE' }">
+            <span class="radio-label">Female</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-field">
+        <label class="form-field__label">Height (cm)</label>
+        <div class="form-field__element">
+          <input class="" name="height" type="number" [(ngModel)]="height">
+        </div>
+      </div>
+
+      <div class="form-field">
+        <label class="form-field__label">Start weight (kg)</label>
+        <div class="form-field__element">
+          <input class="" name="weight" type="number" [(ngModel)]="weight" step="0.1">
+        </div>
+      </div>
+
+      <div class="form-field">
+        <label class="form-field__label">Activity level</label>
+        <div class="form-field__element">
+          <select class="" name="activity" [(ngModel)]="activity">
+            <option class="" value="1.2">Sedentary</option>
+            <option class="" value="1.375">Lightly active</option>
+            <option class="" value="1.55">Moderately active</option>
+            <option class="" value="1.725">Very active</option>
+            <option class="" value="1.9">Extremely active</option>
+          </select>
+        </div>
+      </div>
+    </form>
+
+    <div class="button-wrapper">
+      <button class="button button--primary" (click)="saveUserSettings()">Save</button>
+    </div>
+  </div>
+
+
+</div>

@@ -1,0 +1,24 @@
+<div>
+  <div class="tile">
+    <h3 class="title">Daily intake</h3>
+
+    <div class="form-field">
+      <label class="form-field__label">Protein</label>
+      <span class="form-field__text">{{goalProtein ? goalProtein + ' gram' : ''}}</span>
+    </div>
+
+    <div class="form-field">
+      <label class="form-field__label">Fat</label>
+      <span class="form-field__text">{{goalFat ? goalFat + ' gram' : ''}}</span>
+    </div>
+
+    <div class="form-field">
+      <label class="form-field__label">Carbs</label>
+      <span class="form-field__text">{{goalCarbs ? goalCarbs + ' gram' : ''}}</span>
+    </div>
+
+    <div class="button-wrapper">
+      <button class="button button--primary" (click)="openCalcModal()">Set daily intake</button>
+    </div>
+  </div>
+</div>

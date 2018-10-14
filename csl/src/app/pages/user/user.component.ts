@@ -1,4 +1,5 @@
 import {Component, OnInit, OnChanges, SimpleChanges, Input }from '@angular/core';
+import {Router}from '@angular/router';
 import {UserService} from '../../services/user.service';
 import {Gender} from '../../model/gender';
 import {Observable} from 'rxjs/Observable';
@@ -29,7 +30,8 @@ export class UserComponent implements OnInit {
 	public newWeight: number;
 
   constructor(private userService: UserService,
-              private toastService: ToastService) {
+              private toastService: ToastService,
+              public router: Router) {
 
 	}
 

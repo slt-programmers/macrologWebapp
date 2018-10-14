@@ -16,6 +16,9 @@ import {LogMealComponent} from './components/log-meal/log-meal.component';
 import {FoodComponent}from './pages/food/food.component';
 import {LogService}from './services/log.service';
 import {UserComponent}from './pages/user/user.component';
+import {UserIntakeComponent}from './pages/user/subpages/user.intake.component';
+import {UserPersonalComponent}from './pages/user/subpages/user.personal.component';
+import {UserAccountComponent}from './pages/user/subpages/user.account.component';
 import {UserService} from './services/user.service';
 import {SliderComponent} from './components/slider/slider.component';
 import {BargraphComponent} from './components/bargraph/bargraph.component';
@@ -40,7 +43,17 @@ import {AuthGuardService} from './services/auth-guard.service';
 const appRoutes: Routes = [
 {path: 'login', component: LoginComponent },
 {path: 'log', component: LogComponent, canActivate: [AuthGuardService]},
-{path: 'user', component: UserComponent, canActivate: [AuthGuardService]},
+{
+	path: 'user',
+	component: UserComponent,
+	canActivate: [AuthGuardService],
+	children: [
+		{path: '', redirectTo: 'foodintake', pathMatch: 'full'},
+		{path: 'foodintake', component: UserIntakeComponent},
+		{path: 'personal', component: UserPersonalComponent},
+		{path: 'account', component: UserAccountComponent}
+	]
+},
 {path: 'intake', component: IntakeComponent, canActivate: [AuthGuardService]},
 {path: 'food', component: FoodComponent, canActivate: [AuthGuardService]},
 {path: 'meals', component: MealsComponent, canActivate: [AuthGuardService]},
@@ -57,6 +70,9 @@ const appRoutes: Routes = [
     LogMealComponent,
     FoodComponent,
     UserComponent,
+    UserIntakeComponent,
+    UserPersonalComponent,
+    UserAccountComponent,
     SliderComponent,
     BargraphComponent,
     AddFoodModalComponent,
