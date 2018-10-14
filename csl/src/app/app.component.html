@@ -40,7 +40,6 @@
   <div class="usermenu">
     <div class="usermenu__item usermenu__item--top">{{getUsername()}} <i class="fas fa-arrow-up"></i></div>
     <div *ngIf="loggedIn()" class="usermenu__item" (click)="setTitle(profileTitle)" routerLink="/user">My Profile</div>
-    <div *ngIf="loggedIn()" class="usermenu__item" (click)="setTitle(changePasswordTitle)" routerLink="/changepassword">Change password</div>
     <div *ngIf="loggedIn()" class="usermenu__item" routerLink="/login">Logout</div>
   </div>
 </div>
