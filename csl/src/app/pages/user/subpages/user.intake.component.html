@@ -1,7 +1,5 @@
 <div>
   <div class="tile">
-    <h3 class="title">Daily intake</h3>
-
     <div class="form-field">
       <label class="form-field__label">Protein</label>
       <span class="form-field__text">{{goalProtein ? goalProtein + ' gram' : ''}}</span>
@@ -18,7 +16,13 @@
     </div>
 
     <div class="button-wrapper">
-      <button class="button button--primary" (click)="openCalcModal()">Set daily intake</button>
+      <button class="button button--primary" (click)="openCalcModal()">Adjust intake</button>
     </div>
   </div>
+</div>
+
+<div class="modal-wrapper" *ngIf="showCalcModal">
+  <calculate-intake-modal (close)="closeCalcModal($event)" [age]="age" [gender]="gender"
+                          [height]="height" [weight]="weight" [activity]="activity">
+  </calculate-intake-modal>
 </div>

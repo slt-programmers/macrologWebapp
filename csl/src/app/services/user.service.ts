@@ -9,7 +9,7 @@ import { environment } from '../../environments/environment';
 @Injectable()
 export class UserService {
 
-  macrologBackendUrl = '//'+environment.backend+'/settings';
+  macrologBackendUrl = '//' + environment.backend + '/settings';
 
 	constructor(private http: HttpClient) {
 	}
