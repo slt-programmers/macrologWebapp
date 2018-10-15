@@ -79,8 +79,11 @@ export class MakeMealModal implements OnInit {
 		console.log(this.mealName);
 		let meal = new Meal(this.mealName);
 		meal.ingredients = this.ingredients;
-		this.mealService.insertMeal(meal);
-		this.closeModal();
+    let self = this;
+		let closeCallBack = () => {
+			self.closeModal();
+		}
+		this.mealService.insertMeal(meal,closeCallBack);
 	}
 
 	closeModal() {

@@ -18,7 +18,7 @@ export class MealService {
    	return this.http.get<Meal[]>(this.macrologBackendUrl, { responseType: 'json' });
 	}
 
-	public insertMeal(meal: Meal) {
+	public insertMeal(meal: Meal, callBack: Function) {
    	const headers = {'Content-Type': 'application/json',
    		'Access-Control-Allow-Origin': environment.origin
    	};
@@ -26,6 +26,8 @@ export class MealService {
   	const options = { headers: headers };
     return this.http.post<Meal>(this.macrologBackendUrl + '/', meal, options).subscribe(data => {
 				this.toastService.setMessage('Your meal have been saved!');
+        console.log('saved');
+        callBack();
       },
       error => {
         console.log(error);
