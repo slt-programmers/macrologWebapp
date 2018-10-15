@@ -48,7 +48,11 @@ export class MealsComponent implements OnInit {
 				macros.protein += (ingredient.food.protein * ingredient.multiplier)
 				macros.fat += (ingredient.food.fat * ingredient.multiplier)
 				macros.carbs += (ingredient.food.carbs * ingredient.multiplier)
-			}
+			} else {
+				macros.protein += (ingredient.portion.macros.protein * ingredient.multiplier)
+				macros.fat += (ingredient.portion.macros.fat * ingredient.multiplier)
+				macros.carbs += (ingredient.portion.macros.carbs * ingredient.multiplier)
+      }
 		}
 		return macros;
 	}
