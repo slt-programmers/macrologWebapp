@@ -196,20 +196,34 @@ export class LogMealComponent implements OnInit, OnChanges {
   }
 
 	public addLogEntry(foodSearchable) {
-		console.log('addLogEntry');
-		console.log(this);
-		let logEntry = new LogEntry();
-    logEntry.meal = this.meal.toUpperCase();
-		logEntry.food = foodSearchable.food;
-		if (foodSearchable.portion) {
-			logEntry.portion = foodSearchable.portion;
-		}
-    logEntry.multiplier = 1;
+    if  (foodSearchable.food.ingredients) {
+      for (let  ingredient of foodSearchable.food.ingredients) {
+        let logEntry = new LogEntry();
+        logEntry.meal = this.meal.toUpperCase();
+        logEntry.food = ingredient.food;
+        if (ingredient.portion) {
+          logEntry.portion = ingredient.portion;
+        }
+        logEntry.multiplier = ingredient.multiplier;
+        this.updateCalculatedMacros(logEntry);
+        logEntry.day = this.date;
+        this.logEntries.push(logEntry);
+      }
+    } else {
+      let logEntry = new LogEntry();
+      logEntry.meal = this.meal.toUpperCase();
+      logEntry.food = foodSearchable.food;
+      if (foodSearchable.portion) {
+        logEntry.portion = foodSearchable.portion;
+      }
+      logEntry.multiplier = 1;
 
-    this.updateCalculatedMacros(logEntry);
-		logEntry.day = this.date;
-		this.logEntries.push(logEntry);
+      this.updateCalculatedMacros(logEntry);
+      logEntry.day = this.date;
+		  this.logEntries.push(logEntry);
+    }
 	}
+
 
   private calculateProtein(logEntry){
      if (logEntry.portion){
