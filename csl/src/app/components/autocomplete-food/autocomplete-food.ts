@@ -30,12 +30,9 @@ export class AutocompleteFood implements OnInit, OnChanges {
 	ngOnChanges() {}
 
 	public findFoodMatch(event) {
-		console.log(event);
 		this.foodMatch = new Array<Food>();
 		if (event.data !== null) {
-			console.log(this.food);
 			for (let item of this.food) {
-				console.log(item);
         let matchFoodName = item.food.name.toLowerCase().indexOf(this.foodName.toLowerCase()) >= 0;
 				if (matchFoodName) {
 					this.foodMatch.push(item);
@@ -97,6 +94,8 @@ export class AutocompleteFood implements OnInit, OnChanges {
   public matchDescription(foodSearchable) {
 		if (foodSearchable.portion) {
       return foodSearchable.food.name + " (" + foodSearchable.portion.description + ")";
+    } else if (foodSearchable.food.ingredients) {
+      return foodSearchable.food.name + " (Meal)";
     } else {
 			if (foodSearchable.food.measurementUnit == "UNIT"){
         return foodSearchable.food.name + " (" + foodSearchable.food.unitName +" )";

@@ -10,14 +10,12 @@ export class ErrorInterceptor implements HttpInterceptor {
 constructor(private authenticationService: AuthenticationService, private router: Router) {}
 
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-        console.log('Error Interceptor called:');
-        console.log(request);
-
         return next.handle(request).pipe(
 					map(result => {
 							return result;
 					}),
           catchError(err => {
+            console.log("In error interceptor intercepting error",err);
             if (err.status === 403) {
             // forbidden page
               this.authenticationService.logout();

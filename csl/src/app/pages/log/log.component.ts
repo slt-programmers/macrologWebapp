@@ -3,6 +3,7 @@ import {HttpClient} from '@angular/common/http';
 import {LogService} from '../../services/log.service';
 import {UserService} from '../../services/user.service';
 import {FoodService} from '../../services/food.service';
+import {MealService} from '../../services/meal.service';
 import {LogEntry} from '../../model/logEntry';
 import {Food} from '../../model/food';
 import {FoodSearchable} from '../../model/foodSearchable';
@@ -28,6 +29,7 @@ export class LogComponent implements OnInit {
 	public isLogMealOpen: boolean;
   public allLogs;
 	public food;
+  public meals;
   public foodAndPortions;
   public displayDate;
 	private pipe: DatePipe;
@@ -48,7 +50,8 @@ export class LogComponent implements OnInit {
 	constructor(private foodService: FoodService,
 							private userService: UserService,
 							private http: HttpClient,
-							private logService: LogService) {
+							private logService: LogService,
+							private mealService: MealService) {
 		this.displayDate = new Date();
     this.pipe = new DatePipe('en-US');
 	}
@@ -116,11 +119,20 @@ export class LogComponent implements OnInit {
 		this.foodService.getAllFood().subscribe(
 			data => {
         this.food = data;
-				this.getFoodSearchableList(data);
+        this.getAllMeals();
 			},
 			error => console.log(error)
 		);
 	}
+  private getAllMeals(){
+   this.mealService.getAllMeals().subscribe(
+     data => {
+        this.meals = data;
+        this.getFoodSearchableList();
+     },
+     error => console.log(error)
+   );
+  }
 
   private getLogEntries(date){
     this.logService.getDayLogs(date).subscribe(
@@ -154,10 +166,10 @@ export class LogComponent implements OnInit {
   }
 
   // Maakt een lijst met daarin food en food + alle mogelijke portions
-	private getFoodSearchableList(food) {
+	private getFoodSearchableList() {
 		let foodList = new Array();
 
-		for (let item of food) {
+		for (let item of this.food) {
       let matchZonderPortion = new FoodSearchable(item, undefined);
 			foodList.push(matchZonderPortion);
 
@@ -167,6 +179,10 @@ export class LogComponent implements OnInit {
 				 }
 			}
 		}
+		for (let meal of this.meals) {
+      foodList.push(new FoodSearchable(meal,undefined));
+		}
+
 		this.foodAndPortions = foodList;
 	}
 
