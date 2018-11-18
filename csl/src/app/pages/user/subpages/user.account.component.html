@@ -1,38 +1,40 @@
 <div>
-  <h3>Update password</h3>
+  <div class="tile">
 
-  <form #updateForm="ngForm">
-    <div class="form-field">
-      <label class="form-field__label">Old password</label>
-      <input class="form-field__input" type="password"
-             [(ngModel)]="oldPassword"
-             name="oldPassword" required/>
+    <h3>Update password</h3>
+
+    <form #updateForm="ngForm">
+      <div class="form-field">
+        <label class="form-field__label">Old password</label>
+        <input class="form-field__input" type="password"
+               [(ngModel)]="oldPassword"
+               name="oldPassword" required/>
+      </div>
+
+      <div class="form-field">
+        <label class="form-field__label">New password</label>
+
+        <input class="form-field__input" type="password"
+               [(ngModel)]="newPassword"
+               name="newPassword" required/>
+      </div>
+
+      <div class="form-field">
+        <label class="form-field__label">Confirm new password</label>
+
+        <input class="form-field__input" type="password"
+               [(ngModel)]="confirmPassword"
+               name="confirmPassword" required/>
+      </div>
+
+      <p *ngIf="message" class="secondary">{{message}}</p>
+    </form>
+
+    <div class="button-wrapper">
+      <button class="button button--primary"
+              [disabled]="updateForm.invalid"
+              (click)="changePassword()">Change password
+      </button>
     </div>
-
-    <div class="form-field">
-      <label class="form-field__label">New password</label>
-
-      <input class="form-field__input" type="password"
-             [(ngModel)]="newPassword"
-             name="newPassword" required/>
-    </div>
-
-    <div class="form-field">
-      <label class="form-field__label">Confirm new password</label>
-
-      <input class="form-field__input" type="password"
-             [(ngModel)]="confirmPassword"
-             name="confirmPassword" required/>
-    </div>
-
-    <p *ngIf="message" class="secondary">{{message}}</p>
-  </form>
-
-  <div class="button-wrapper">
-    <button class="button button--primary"
-            [disabled]="updateForm.invalid"
-            (click)="changePassword()">Change password
-    </button>
   </div>
-
 </div>

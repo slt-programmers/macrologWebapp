@@ -61,7 +61,8 @@
     </form>
 
     <div class="button-wrapper">
-      <button class="button button--primary" (click)="saveUserSettings()">Save</button>
+      <button class="button button--primary" (click)="saveUserSettings()"
+        [disabled]="isInputUnchanged()">Save</button>
     </div>
   </div>
 

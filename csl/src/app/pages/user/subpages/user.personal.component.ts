@@ -1,4 +1,4 @@
-import {Component, OnInit }from '@angular/core';
+import {Component}from '@angular/core';
 import {forkJoin} from 'rxjs/observable/forkJoin';
 
 import {UserService} from '../../../services/user.service';
@@ -9,7 +9,9 @@ import {ToastService} from '../../../services/toast.service';
   selector: 'userPersonal',
   templateUrl: './user.personal.component.html'
 })
-export class UserPersonalComponent implements OnInit {
+export class UserPersonalComponent {
+
+	private originalResult;
 
 	public name;
 	public age;
@@ -24,6 +26,7 @@ export class UserPersonalComponent implements OnInit {
 							private toastService: ToastService) {
 		this.userService.getAllSettings().subscribe(
 			result => {
+				this.originalResult = result;
 				this.name = this.getKeyFromResultlist(result, 'name');
 				this.age = parseInt(this.getKeyFromResultlist(result, 'age')) || undefined ;
 				this.gender = this.getKeyFromResultlist(result, 'gender') || Gender.Male;
@@ -35,10 +38,6 @@ export class UserPersonalComponent implements OnInit {
 			},
 			error => { console.log(error) }
 		);
-	}
-
-	ngOnInit() {
-
 	}
 
 	public saveUserSettings(): void {
@@ -53,6 +52,21 @@ export class UserPersonalComponent implements OnInit {
         data => this.toastService.setMessage('Your data is saved!'),
         error => console.error(error)
     );
+	}
+
+	public isInputUnchanged(): boolean {
+		if (this.originalResult !== undefined) {
+			if (this.name === this.getKeyFromResultlist(this.originalResult, 'name')
+					&& this.age === parseInt(this.getKeyFromResultlist(this.originalResult, 'age'))
+					&& this.gender === this.getKeyFromResultlist(this.originalResult, 'gender')
+					&& this.height === parseInt(this.getKeyFromResultlist(this.originalResult, 'height'))
+					&& this.weight === parseInt(this.getKeyFromResultlist(this.originalResult, 'weight'))
+					&& this.activity.toString() === this.getKeyFromResultlist(this.originalResult, 'activity')
+					) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	private getKeyFromResultlist(list: any, key: string) {

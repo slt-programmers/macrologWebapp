@@ -63,7 +63,8 @@
     </form>
 
     <div class="button-wrapper">
-      <button class="button button--primary" (click)="saveUserSettings()">Next</button>
+      <button class="button button--primary"
+              (click)="saveUserSettings()">Next</button>
     </div>
   </div>
 
@@ -75,6 +76,10 @@
       gain or lose weight. Do this by adjusting the calories or the macro's.
     </p>
 
+    <div class="calorie-box">
+      <span class="calorie-box__title">{{calories | number : '1.0-0'}} Calories</span>
+    </div>
+
     <div class="tabs">
       <div class="tabs-header">
         <div class="tab" (click)="showCaloriesTab()"
@@ -85,9 +90,6 @@
         </div>
       </div>
       <div class="tabs-content">
-        <div class="calorie-box">
-          <span class="calorie-box__title">{{calories | number : '1.0-0'}} Calories</span>
-        </div>
 
         <!--Calories-->
         <div *ngIf="showCalories">
