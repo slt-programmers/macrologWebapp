@@ -66,8 +66,16 @@ export class FoodComponent implements OnInit {
 	}
 
 	public openModal(food) {
-    this.selectedFood = food;
-		this.modalIsVisible = true;
+		if (food.id === undefined) {
+			for (let searchableFood of this.allFoodFromDB) {
+				if (searchableFood.name === food.name) {
+					this.selectedFood = searchableFood;
+				}
+			}
+		} else {
+			this.selectedFood = food;
+		}
+    this.modalIsVisible = true;
 	}
 
   public closeModal(event) {
