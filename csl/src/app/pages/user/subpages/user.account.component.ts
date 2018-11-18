@@ -1,5 +1,6 @@
-import {Component }from '@angular/core';
+import  {Component }from '@angular/core';
 import { AuthenticationService } from '../../../services/auth.service';
+import { ToastService } from '../../../services/toast.service';
 
 
 @Component({
@@ -13,10 +14,12 @@ export class UserAccountComponent {
 	public newPassword: string;
 	public confirmPassword: string;
 
-  constructor(private authService: AuthenticationService) {
+  constructor(private authService: AuthenticationService,
+              private toastService: ToastService) {
   }
 
   changePassword() {
+		this.message = '';
 		if (this.newPassword !== this.confirmPassword) {
 			this.message = 'The confirmation password does not match with the new password.';
 		} else {
@@ -26,7 +29,10 @@ export class UserAccountComponent {
                 if (data.status === 400 && data.error === "passwords do not match"){
 									this.message = 'The confirmation password does not match with the new password.'
                 } else if (data.status === 200){
-                  this.message = 'Password changed.';
+									this.toastService.setMessage('Your password has changed');
+									this.oldPassword = '';
+									this.newPassword = '';
+									this.confirmPassword = '';
                 }
             },
             error => {
@@ -37,5 +43,4 @@ export class UserAccountComponent {
             });
 		}
   }
-
 }
