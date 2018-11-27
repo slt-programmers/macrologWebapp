@@ -1,12 +1,11 @@
-import {Component }from '@angular/core';
-import {Subscription} from 'rxjs';
-
-import {UserService} from '../../../services/user.service';
-import {Gender} from '../../../model/gender';
+import { Component } from '@angular/core';
+import { Subscription } from 'rxjs/Subscription';
+import { UserService } from '../../../services/user.service';
+import { Gender } from '../../../model/gender';
 
 @Component({
-  selector: 'userIntake',
-  templateUrl: './user.intake.component.html'
+	selector: 'user-intake',
+	templateUrl: './user.intake.component.html'
 })
 export class UserIntakeComponent {
 
@@ -20,17 +19,17 @@ export class UserIntakeComponent {
 	public weight;
 	public activity;
 
-	public showCalcModal: boolean = false;
+	public showCalcModal = false;
 
 	constructor(private userService: UserService) {
 		this.userService.getAllSettings().subscribe(
 			result => {
 
 				// FOR CALC MODAL
-				this.age = parseInt(this.getKeyFromResultlist(result, 'age')) || undefined ;
+				this.age = parseInt(this.getKeyFromResultlist(result, 'age'), 10) || undefined ;
 				this.gender = this.getKeyFromResultlist(result, 'gender') || Gender.Male;
-				this.height = parseInt(this.getKeyFromResultlist(result, 'height')) || undefined;
-				this.weight = parseInt(this.getKeyFromResultlist(result, 'weight')) || undefined;
+				this.height = parseInt(this.getKeyFromResultlist(result, 'height'), 10) || undefined;
+				this.weight = parseInt(this.getKeyFromResultlist(result, 'weight'), 10) || undefined;
 				this.activity = parseFloat(this.getKeyFromResultlist(result, 'activity')) || 1.2;
 
 				this.goalProtein = this.getKeyFromResultlist(result, 'goalProtein');
@@ -51,12 +50,11 @@ export class UserIntakeComponent {
 	}
 
 	private getKeyFromResultlist(list: any, key: string) {
-		for (let item of list) {
+		for (const item of list) {
 			if (item.name === key) {
 				return item.value;
 			}
 		}
 		return '';
 	}
-
 }

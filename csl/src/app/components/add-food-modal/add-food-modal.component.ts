@@ -9,13 +9,13 @@ export enum MeasurementUnit {
 }
 
 @Component({
-  selector: 'add-food-modal',
-  templateUrl: './add-food-modal.component.html'
+	selector: 'add-food-modal',
+	templateUrl: './add-food-modal.component.html'
 })
 export class AddFoodModalComponent implements OnInit {
 
 	@Output() close: EventEmitter<boolean> = new EventEmitter<boolean>();
-  @Input() food;
+	@Input() food;
 
 	public title = 'Add food to the database';
 	public name = '';
@@ -27,38 +27,37 @@ export class AddFoodModalComponent implements OnInit {
 	public carbs: number;
 	public portions = [];
 
-  constructor(private foodService: FoodService) {
+	constructor(private foodService: FoodService) {
 	}
 
-  ngOnInit() {
-    if (this.food){
-        this.title  = 'Edit food';
-        this.name = this.food.name;
-        this.measurementUnit = this.food.measurementUnit;
-        this.unitName = this.food.unitName;
-        this.unitGrams = this.food.unitGrams;
-        this.protein = this.food.protein;
-        this.fat = this.food.fat;
-        this.carbs = this.food.carbs;
+	ngOnInit() {
+		if (this.food) {
+			this.title  = 'Edit food';
+			this.name = this.food.name;
+			this.measurementUnit = this.food.measurementUnit;
+			this.unitName = this.food.unitName;
+			this.unitGrams = this.food.unitGrams;
+			this.protein = this.food.protein;
+			this.fat = this.food.fat;
+			this.carbs = this.food.carbs;
 
-        if (this.food.portions){
-          this.portions = this.food.portions;
-        } else {
-         this.portions = [];
-        }
+			if (this.food.portions) {
+				this.portions = this.food.portions;
+			} else {
+				this.portions = [];
+			}
+		}
+	}
 
-    }
-  }
-
-	saveFood() {
-		let addFoodRequest = new Food(this.name,
+	public saveFood() {
+		const addFoodRequest = new Food(this.name,
 			this.measurementUnit,
 			this.protein,
 			this.fat,
 			this.carbs);
-    if (this.food){
-      addFoodRequest.id = this.food.id;
-    }
+		if (this.food) {
+			addFoodRequest.id = this.food.id;
+		}
 
 		if (this.measurementUnit === MeasurementUnit.Unit) {
 			addFoodRequest.unitName = this.unitName;
@@ -66,24 +65,23 @@ export class AddFoodModalComponent implements OnInit {
 		}
 		addFoodRequest.portions = this.portions;
 
-		let self = this;
-		let closeCallBack = () => {
+		const self = this;
+		const closeCallBack = () => {
 			self.closeModal();
-		}
+		};
 
 		this.foodService.addFood(addFoodRequest, closeCallBack);
 	}
 
-	closeModal() {
+	public closeModal() {
 		this.close.emit(true);
 	}
 
-	newPortion() {
+	public newPortion() {
 		this.portions.push(new Portion());
 	}
 
-	removePortion(index) {
+	public removePortion(index) {
 		this.portions.splice(index, 1);
 	}
-
 }

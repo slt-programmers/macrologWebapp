@@ -1,15 +1,15 @@
-import {Component, OnInit}from '@angular/core';
-import {FoodService}from '../../services/food.service';
-import {Food} from '../../model/food';
+import { Component, OnInit } from '@angular/core';
+import { FoodService } from '../../services/food.service';
+import { Food} from '../../model/food';
 
 @Component({
-  selector: 'app-food',
-  templateUrl: './food.component.html'
+	selector: 'app-food',
+	templateUrl: './food.component.html'
 })
 export class FoodComponent implements OnInit {
 
 	// All food from database, don't overwrite
-  private allFoodFromDB = new Array();
+	private allFoodFromDB = new Array();
 
 	// All food but converted to percentages of macro's
 	public percentageFood = new Array();
@@ -20,31 +20,31 @@ export class FoodComponent implements OnInit {
 	// Displayed on one page
 	public displayedFood = new Array();
 
-	public modalIsVisible: boolean = false;
+	public modalIsVisible = false;
 	public currentPage = 1;
 	public itemsPerPage = 15;
-  public selectedFood = null; // input voor modal popup
+	public selectedFood = null; // input voor modal popup
 	public searchInput = '';
 	public currentSortHeader = 'name';
 	public sortReverse = false;
 	public displayMode = 'grams';
 
-  constructor(private foodService: FoodService) { }
+	constructor(private foodService: FoodService) { }
 
 	ngOnInit() {
-     this.loadAllFood();
-  };
+		this.loadAllFood();
+	}
 
-	private loadAllFood(){
-    this.foodService.getAllFood().subscribe(
-      data => {
-        this.allFoodFromDB = data;
+	private loadAllFood() {
+		this.foodService.getAllFood().subscribe(
+			data => {
+				this.allFoodFromDB = data;
 				this.percentageFood = this.calculatePercentages();
 				this.searchableFood = this.allFoodFromDB;
-      },
+			},
 			error => console.log(error)
 		);
-  }
+	}
 
 	public getPagedFood(page: number): void {
 		this.currentPage = page;
@@ -54,9 +54,9 @@ export class FoodComponent implements OnInit {
 	}
 
 	public findFoodMatch(): void {
-		let foodMatch = new Array<Food>();
-		for (let food of this.searchableFood) {
-      let matchFoodName = food.name.toLowerCase().indexOf(this.searchInput.toLowerCase()) >= 0;
+		const foodMatch = new Array<Food>();
+		for (const food of this.searchableFood) {
+			const matchFoodName = food.name.toLowerCase().indexOf(this.searchInput.toLowerCase()) >= 0;
 			if (matchFoodName) {
 				foodMatch.push(food);
 			}
@@ -67,7 +67,7 @@ export class FoodComponent implements OnInit {
 
 	public openModal(food) {
 		if (food.id === undefined) {
-			for (let searchableFood of this.allFoodFromDB) {
+			for (const searchableFood of this.allFoodFromDB) {
 				if (searchableFood.name === food.name) {
 					this.selectedFood = searchableFood;
 				}
@@ -75,11 +75,11 @@ export class FoodComponent implements OnInit {
 		} else {
 			this.selectedFood = food;
 		}
-    this.modalIsVisible = true;
+		this.modalIsVisible = true;
 	}
 
-  public closeModal(event) {
-    this.loadAllFood();
+	public closeModal(event) {
+		this.loadAllFood();
 		this.modalIsVisible = false;
 	}
 
@@ -100,7 +100,7 @@ export class FoodComponent implements OnInit {
 	public sortBy(header: string): void {
 		this.setReversed(header);
 
-		let sortedArray = this.searchableFood;
+		const sortedArray = this.searchableFood;
 		sortedArray.sort((a: Food, b: Food) => {
 			if (a[header] < b[header]) {
 				return 1;
@@ -111,7 +111,7 @@ export class FoodComponent implements OnInit {
 			}
 		});
 
-		if(this.sortReverse) {
+		if (this.sortReverse) {
 			sortedArray.reverse();
 		}
 
@@ -129,29 +129,27 @@ export class FoodComponent implements OnInit {
 			this.searchableFood = this.percentageFood;
 		}
 
-		this.searchableFood
-
 		this.findFoodMatch();
 		this.getPagedFood(this.currentPage);
 	}
 
 	private calculatePercentages() {
-		let percentageFood = new Array();
+		const percentageFood = new Array();
 
-		for (let food of this.allFoodFromDB) {
-			let total = food.protein + food.fat + food.carbs;
-			let newProtein = food.protein / total * 100;
-			let newFat = food.fat / total * 100;
-			let newCarbs = food.carbs / total * 100;
+		for (const food of this.allFoodFromDB) {
+			const total = food.protein + food.fat + food.carbs;
+			const newProtein = food.protein / total * 100;
+			const newFat = food.fat / total * 100;
+			const newCarbs = food.carbs / total * 100;
 
-			let newFood = { name: food.name,
+			const newFood = { name: food.name,
 					protein: newProtein,
 					fat: newFat,
-					carbs: newCarbs }
+					carbs: newCarbs
+			};
 
 			percentageFood.push(newFood);
 		}
 		return percentageFood;
 	}
-
 }

@@ -3,8 +3,8 @@ import {ToastService} from '../../services/toast.service';
 import {ToastDirective} from '../../directives/toast.directive';
 
 @Component({
-  selector: 'toast-component',
-  templateUrl: './toast.component.html'
+	selector: 'toast-component',
+	templateUrl: './toast.component.html'
 })
 export class ToastComponent {
 
@@ -16,7 +16,6 @@ export class ToastComponent {
 		this.toastService.messageObservable.subscribe((message: string) => {
 			this.message = message;
 			this.vc.showToast();
-		})
+		});
 	}
-
 }

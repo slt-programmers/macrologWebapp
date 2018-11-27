@@ -1,4 +1,4 @@
-import {Directive, Injectable, Renderer, ElementRef} from'@angular/core';
+import { Directive, Injectable, Renderer, ElementRef } from '@angular/core';
 
 @Directive({
 	selector: '[toast]'
@@ -14,7 +14,7 @@ export class ToastDirective {
 
 	public showToast() {
 		this.renderer.setElementStyle(this.nativeElement, 'height', '50px');
-		setTimeout( () => this.renderer.setElementStyle(this.nativeElement, 'height', '0'), 1200);
+		setTimeout(() => this.renderer.setElementStyle(this.nativeElement, 'height', '0'), 1200);
 	}
 
 }

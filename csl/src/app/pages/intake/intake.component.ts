@@ -8,8 +8,8 @@ import { forkJoin } from 'rxjs/observable/forkJoin';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-intake',
-  templateUrl: './intake.component.html',
+	selector: 'app-intake',
+	templateUrl: './intake.component.html',
 	host: { '(document: click)': 'documentClick($event)' }
 })
 export class IntakeComponent implements OnInit {
@@ -35,46 +35,44 @@ export class IntakeComponent implements OnInit {
 	public fatManual: number;
 	public carbsManual: number;
 
-
-	public currentStep: number;
-
 	// Step 3
-	public showCalories: boolean = false;
-	public showMacros: boolean =  false;
-	public expandMoreInfo: boolean = false;
+	public showCalories = false;
+	public showMacros =  false;
+	public expandMoreInfo = false;
 
 	// Step 4
 	public displayDate = new Date();
 	public breakfastOpen = false;
-  public food = new Array();
+	public food = new Array();
 
+	public currentStep: number;
 
-  constructor(private userService: UserService,
-              private router: Router) {
+	constructor(private userService: UserService,
+							private router: Router) {
 		const item = new Food('Apple', 'UNIT', 0.5, 0.3, 25);
 		item.unitName = 'piece';
 		item.unitGrams = 182;
-    const foodItem = new FoodSearchable(item, undefined);
-    this.food.push(foodItem);
+		const foodItem = new FoodSearchable(item, undefined);
+		this.food.push(foodItem);
 		console.log(this.food);
 	}
 
-  ngOnInit() {
+	ngOnInit() {
 		this.currentStep = 1;
 		this.gender = Gender.Male;
-  }
+	}
 
 	nextStep() {
 		this.currentStep = this.currentStep + 1;
 		if (this.currentStep === 2) {
 			this.initStepTwo();
 		}
-		window.scroll(0,0);
+		window.scroll(0, 0);
 	}
 
 	previousStep() {
 		this.currentStep = this.currentStep - 1;
-		window.scroll(0,0);
+		window.scroll(0, 0);
 	}
 
 	initStepTwo() {
@@ -134,17 +132,17 @@ export class IntakeComponent implements OnInit {
 	}
 
 	public saveUserSettings(): void {
-    forkJoin(
+		forkJoin(
 			this.userService.addUserInfo('name', this.name),
 			this.userService.addUserInfo('age', this.age.toString()),
 			this.userService.addUserInfo('gender', this.gender.toString()),
 			this.userService.addUserInfo('height', this.height.toString()),
 			this.userService.addUserInfo('weight', this.weight.toString()),
 			this.userService.addUserInfo('activity', this.activity.toString())
-    ).subscribe(
-        data => this.nextStep(),
-        error => console.error(error)
-    );
+		).subscribe(
+				data => this.nextStep(),
+				error => console.error(error)
+		);
 	}
 
 	public saveIntake() {
@@ -153,11 +151,11 @@ export class IntakeComponent implements OnInit {
 				this.userService.addUserInfo('goalProtein', Math.round(this.proteinManual).toString()),
 				this.userService.addUserInfo('goalFat', Math.round(this.fatManual).toString()),
 				this.userService.addUserInfo('goalCarbs', Math.round(this.carbsManual).toString())
-      ).subscribe(
-          data => {
+			).subscribe(
+					data => {
 						this.nextStep();
-           },
-          error => console.error(error)
+					},
+					error => console.error(error)
 			);
 		} else {
 			forkJoin(
@@ -167,8 +165,8 @@ export class IntakeComponent implements OnInit {
 			).subscribe(
 					data => {
 						this.nextStep();
-           },
-          error => console.error(error)
+					},
+					error => console.error(error)
 			);
 		}
 	}
@@ -179,9 +177,8 @@ export class IntakeComponent implements OnInit {
 	private documentClick(event) {
 		if (this.breakfastEref &&
 				!event.target.classList.contains('autocomplete__option') &&
-		    !event.target.classList.contains('fa-trash') &&
-		    !event.target.classList.contains('button--transparent')) {
-
+				!event.target.classList.contains('fa-trash') &&
+				!event.target.classList.contains('button--transparent')) {
 			this.breakfastOpen = this.breakfastEref.logMealEref.nativeElement.contains(event.target);
 		}
 	}

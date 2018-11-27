@@ -1,15 +1,13 @@
-import {Injectable, ViewChild} from'@angular/core';
-import {ToastDirective} from '../directives/toast.directive';
+import { Injectable, ViewChild } from '@angular/core';
 import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Observable';
-
 
 @Injectable()
 export class ToastService {
 
 	private message: Subject<string>;
 
-	messageObservable: Observable<string>;
+	public messageObservable: Observable<string>;
 
 	constructor() {
 		this.message = new Subject<string>();

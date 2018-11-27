@@ -7,10 +7,10 @@ import {FoodService} from '../../services/food.service';
 import {MealService} from '../../services/meal.service';
 
 @Component({
-  selector: 'make-meal-modal',
-  templateUrl: './make-meal-modal.html'
+	selector: 'make-meal-modal',
+	templateUrl: './make-meal-modal.component.html'
 })
-export class MakeMealModal implements OnInit {
+export class MakeMealModalComponent implements OnInit {
 
 	@Output() close: EventEmitter<boolean> = new EventEmitter<boolean>();
 
@@ -21,21 +21,21 @@ export class MakeMealModal implements OnInit {
 	public addIngredientCallBack: Function;
 	public ingredients: Ingredient[] = new Array();
 
-  constructor(private foodService: FoodService,
-              private mealService: MealService) {
+	constructor(private foodService: FoodService,
+							private mealService: MealService) {
 	}
 
-  ngOnInit() {
+	ngOnInit() {
 		this.getAllFood();
 		this.addIngredientCallBack = this.addIngredient.bind(this);
-  }
+	}
 
 	addIngredient(foodSearchable: FoodSearchable) {
-		let ingredient = new Ingredient();
+		const ingredient = new Ingredient();
 		ingredient.food = foodSearchable.food;
 		ingredient.foodId = ingredient.food.id;
 		ingredient.portion = foodSearchable.portion;
-		if (ingredient.portion != undefined) {
+		if (ingredient.portion !== undefined) {
 			ingredient.portionId = ingredient.portion.id;
 		}
 		this.ingredients.push(ingredient);
@@ -49,7 +49,7 @@ export class MakeMealModal implements OnInit {
 
 	calculateMultiplier(event, ingredient) {
 		console.log(event.target.value);
-		if (ingredient.food.measurementUnit == 'GRAMS' && ingredient.portion == undefined) {
+		if (ingredient.food.measurementUnit === 'GRAMS' && ingredient.portion === undefined) {
 			ingredient.multiplier = (event.target.value / ingredient.food.unitGrams);
 			console.log(ingredient.multiplier);
 			console.log(this.ingredients);
@@ -59,41 +59,41 @@ export class MakeMealModal implements OnInit {
 		}
 	}
 
-	getValue(ingredient) {
-		if (ingredient.food.measurementUnit == 'GRAMS' && ingredient.portion == undefined) {
+	public getValue(ingredient) {
+		if (ingredient.food.measurementUnit === 'GRAMS' && ingredient.portion === undefined) {
 			return Math.round(ingredient.food.unitGrams * ingredient.multiplier);
 		} else {
 			return ingredient.multiplier;
 		}
 	}
 
-	getStep(ingredient) {
-		if(ingredient.food.measurementUnit == 'GRAMS' && ingredient.portion == undefined) {
+	public getStep(ingredient) {
+		if (ingredient.food.measurementUnit === 'GRAMS' && ingredient.portion === undefined) {
 			return 1;
 		} else {
 			return 0.1;
 		}
 	}
 
-	saveMeal() {
+	public saveMeal() {
 		console.log(this.mealName);
-		let meal = new Meal(this.mealName);
+		const meal = new Meal(this.mealName);
 		meal.ingredients = this.ingredients;
-    let self = this;
-		let closeCallBack = () => {
+		const self = this;
+		const closeCallBack = () => {
 			self.closeModal();
-		}
-		this.mealService.insertMeal(meal,closeCallBack);
+		};
+		this.mealService.insertMeal(meal, closeCallBack);
 	}
 
-	closeModal() {
+	public closeModal() {
 		this.close.emit(true);
 	}
 
 	private getAllFood() {
 		this.foodService.getAllFood().subscribe(
 			data => {
-        this.food = data;
+				this.food = data;
 				this.getFoodSearchableList(data);
 			},
 			error => console.log(error)
@@ -101,16 +101,16 @@ export class MakeMealModal implements OnInit {
 	}
 
 	private getFoodSearchableList(food) {
-		let foodList = new Array();
+		const foodList = new Array();
 
-		for (let item of food) {
-      let matchZonderPortion = new FoodSearchable(item,undefined);
+		for (const item of food) {
+			const matchZonderPortion = new FoodSearchable(item, undefined);
 			foodList.push(matchZonderPortion);
 
 			if (item.portions) {
-				 for (let portion of item.portions) {
-           foodList.push(new FoodSearchable(item,portion));
-				 }
+				for (const portion of item.portions) {
+					foodList.push(new FoodSearchable(item, portion));
+				}
 			}
 		}
 		this.foodAndPortions = foodList;

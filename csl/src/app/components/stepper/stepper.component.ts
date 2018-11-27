@@ -1,8 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
-  selector: 'stepper',
-  templateUrl: './stepper.component.html'
+	selector: 'stepper',
+	templateUrl: './stepper.component.html'
 })
 export class StepperComponent implements OnInit {
 
@@ -11,13 +11,12 @@ export class StepperComponent implements OnInit {
 
 	public steps: Array<number>;
 
-  constructor() { }
+	constructor() { }
 
-  ngOnInit() {
+	ngOnInit() {
 		this.steps = new Array<number>();
 		for (let i = 1; i <= this.numberOfSteps; i++) {
 			this.steps.push(i);
 		}
-  }
-
+	}
 }

@@ -5,8 +5,8 @@ import { Observable } from 'rxjs/Observable';
 import { forkJoin } from 'rxjs/observable/forkJoin';
 
 @Component({
-  selector: 'calculate-intake-modal',
-  templateUrl: './calculate-intake-modal.component.html'
+	selector: 'calculate-intake-modal',
+	templateUrl: './calculate-intake-modal.component.html'
 })
 export class CalculateIntakeModalComponent implements OnInit {
 
@@ -16,8 +16,8 @@ export class CalculateIntakeModalComponent implements OnInit {
 	@Input() weight: number;
 	@Input() activity: number;
 
-	public showMoreOptions: boolean = false;
-	public difference: string = 'same';
+	public showMoreOptions = false;
+	public difference = 'same';
 	public markers;
 
 	private bmr: number;
@@ -38,14 +38,14 @@ export class CalculateIntakeModalComponent implements OnInit {
 
 	@Output() close: EventEmitter<any> = new EventEmitter<any>();
 
-  constructor(private userService: UserService) {
+	constructor(private userService: UserService) {
 	}
 
-  ngOnInit() {
+	ngOnInit() {
 		this.protein = this.weight * 1.8;
 		this.fat = this.weight * 0.8;
 		this.calcCalories();
-  }
+	}
 
 	closeModal() {
 		this.close.emit({goalProtein: this.goalProtein,
@@ -115,13 +115,14 @@ export class CalculateIntakeModalComponent implements OnInit {
 				this.userService.addUserInfo('goalProtein', Math.round(this.proteinManual).toString()),
 				this.userService.addUserInfo('goalFat', Math.round(this.fatManual).toString()),
 				this.userService.addUserInfo('goalCarbs', Math.round(this.carbsManual).toString())
-      ).subscribe(
-          data => { this.goalProtein = Math.round(this.proteinManual).toString(),
-              this.goalFat = Math.round(this.fatManual).toString(),
-							this.goalCarbs = Math.round(this.carbsManual).toString()
-           },
-          error => console.error(error),
-					() => { this.closeModal() }
+			).subscribe(
+					data => {
+						this.goalProtein = Math.round(this.proteinManual).toString();
+						this.goalFat = Math.round(this.fatManual).toString();
+						this.goalCarbs = Math.round(this.carbsManual).toString();
+					},
+					error => console.error(error),
+					() => { this.closeModal(); }
 			);
 		} else {
 			forkJoin(
@@ -129,11 +130,12 @@ export class CalculateIntakeModalComponent implements OnInit {
 				this.userService.addUserInfo('goalFat', Math.round(this.fat).toString()),
 				this.userService.addUserInfo('goalCarbs', Math.round(this.carbs).toString())
 			).subscribe(
-					data => { this.goalProtein = Math.round(this.protein).toString(),
-              this.goalFat = Math.round(this.fat).toString(),
-							this.goalCarbs = Math.round(this.carbs).toString()
-           },
-          error => console.error(error),
+					data => {
+						this.goalProtein = Math.round(this.protein).toString();
+						this.goalFat = Math.round(this.fat).toString();
+						this.goalCarbs = Math.round(this.carbs).toString();
+					},
+					error => console.error(error),
 					() => this.closeModal()
 			);
 		}

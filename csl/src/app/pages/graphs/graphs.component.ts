@@ -1,52 +1,50 @@
-import { Component, OnInit } from '@angular/core';
-import {LogService}from '../../services/log.service';
+import { Component, OnInit, AfterViewChecked } from '@angular/core';
+import {LogService} from '../../services/log.service';
 import { DatePipe } from '@angular/common';
 import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
-  selector: 'app-graphs',
-  templateUrl: './graphs.component.html'
+	selector: 'app-graphs',
+	templateUrl: './graphs.component.html'
 })
-export class GraphsComponent implements OnInit {
+export class GraphsComponent implements OnInit, AfterViewChecked {
 
-   public macrosMonth;
+	public macrosMonth;
 
-  constructor(private logService: LogService,private sanitizer: DomSanitizer) { }
+	constructor(private logService: LogService, private sanitizer: DomSanitizer) { }
 
-  ngOnInit() {
-     this.getMacros();
-  }
+	ngOnInit() {
+		this.getMacros();
+	}
 
-  ngAfterViewChecked(){
-     let pipe = new DatePipe('en-US');
-     for (let dayMacro of this.macrosMonth) {
-       let fetchDate = pipe.transform(dayMacro.day,'ddMMyyyy');
-       let protein = document.getElementById('protein_'+fetchDate);
-       let fat = document.getElementById('fat_'+fetchDate);
-       let carbs = document.getElementById('carbs_'+fetchDate);
-       let available = document.getElementById('day_'+fetchDate);
-       if (!protein || !fat || !carbs || !available) return;
+	ngAfterViewChecked() {
+		const pipe = new DatePipe('en-US');
+		for (const dayMacro of this.macrosMonth) {
+			const fetchDate = pipe.transform(dayMacro.day, 'ddMMyyyy');
+			const protein = document.getElementById('protein_' + fetchDate);
+			const fat = document.getElementById('fat_' + fetchDate);
+			const carbs = document.getElementById('carbs_' + fetchDate);
+			const available = document.getElementById('day_' + fetchDate);
 
-       let availableHeight = available.style.height; // = 100%
+			if (!protein || !fat || !carbs || !available) {
+				return;
+			}
 
-       protein.style.height = Math.round(dayMacro.macro.protein) + 'px';
-       fat.style.height = Math.round(dayMacro.macro.fat) + 'px';
-       carbs.style.height = Math.round(dayMacro.macro.carbs) + 'px';
-    }
+			const availableHeight = available.style.height; // = 100%
 
+			protein.style.height = Math.round(dayMacro.macro.protein) + 'px';
+			fat.style.height = Math.round(dayMacro.macro.fat) + 'px';
+			carbs.style.height = Math.round(dayMacro.macro.carbs) + 'px';
+		}
+	}
 
-  }
-
-
-  getMacros(){
-    let pipe = new DatePipe('en-US');
-    let fetchDate = pipe.transform(new Date(),'dd-MM-yyyy');
-    let fetchDate2 = pipe.transform(new Date(),'dd-MM-yyyy');
-    this.logService.getMacros(fetchDate,fetchDate2).subscribe(
-      data => {
-          this.macrosMonth = data;
-      }
-    )
-  }
-
+	public getMacros() {
+		const pipe = new DatePipe('en-US');
+		const fetchDate = pipe.transform(new Date(), 'dd-MM-yyyy');
+		const fetchDate2 = pipe.transform(new Date(), 'dd-MM-yyyy');
+		this.logService.getMacros(fetchDate, fetchDate2).subscribe(
+			data => {
+				this.macrosMonth = data;
+			});
+	}
 }

@@ -1,20 +1,19 @@
-import {Component, OnInit, ViewChild, ElementRef} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
-import {LogService} from '../../services/log.service';
-import {UserService} from '../../services/user.service';
-import {FoodService} from '../../services/food.service';
-import {MealService} from '../../services/meal.service';
-import {LogEntry} from '../../model/logEntry';
-import {Food} from '../../model/food';
-import {FoodSearchable} from '../../model/foodSearchable';
-
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { LogService } from '../../services/log.service';
+import { UserService } from '../../services/user.service';
+import { FoodService } from '../../services/food.service';
+import { MealService } from '../../services/meal.service';
+import { LogEntry } from '../../model/logEntry';
+import { Food } from '../../model/food';
+import { FoodSearchable } from '../../model/foodSearchable';
 import { Observable } from 'rxjs/Observable';
 import { forkJoin } from 'rxjs/observable/forkJoin';
 import { DatePipe } from '@angular/common';
 
 @Component({
-  selector: 'log',
-  templateUrl: './log.component.html',
+	selector: 'log-page',
+	templateUrl: './log.component.html',
 	host: { '(document: click)': 'documentClick($event)' }
 })
 export class LogComponent implements OnInit {
@@ -25,19 +24,19 @@ export class LogComponent implements OnInit {
 	@ViewChild('snacks') private snacksEref;
 	@ViewChild('toast') private toastEref;
 
-	public modalIsVisible: boolean = false;
+	public modalIsVisible = false;
 	public isLogMealOpen: boolean;
-  public allLogs;
+	public allLogs;
 	public food;
-  public meals;
-  public foodAndPortions;
-  public displayDate;
+	public meals;
+	public foodAndPortions;
+	public displayDate;
 	private pipe: DatePipe;
 
-  public breakfastLogs = new Array<LogEntry>();
-  public lunchLogs = new Array<LogEntry>();
-  public dinnerLogs = new Array<LogEntry>();
-  public snacksLogs = new Array<LogEntry>();
+	public breakfastLogs = new Array<LogEntry>();
+	public lunchLogs = new Array<LogEntry>();
+	public dinnerLogs = new Array<LogEntry>();
+	public snacksLogs = new Array<LogEntry>();
 
 	public breakfastOpen = false;
 	public lunchOpen = false;
@@ -53,33 +52,33 @@ export class LogComponent implements OnInit {
 							private logService: LogService,
 							private mealService: MealService) {
 		this.displayDate = new Date();
-    this.pipe = new DatePipe('en-US');
+		this.pipe = new DatePipe('en-US');
 	}
 
 	ngOnInit() {
 		this.getUserGoals();
 		this.getAllFood();
-    this.getLogEntries(this.pipe.transform(this.displayDate, 'yyyy-MM-dd'));
-  }
+		this.getLogEntries(this.pipe.transform(this.displayDate, 'yyyy-MM-dd'));
+	}
 
-  public refresh(){
-    this.getLogEntries(this.pipe.transform(this.displayDate, 'yyyy-MM-dd'));
-  }
+	public refresh() {
+		this.getLogEntries(this.pipe.transform(this.displayDate, 'yyyy-MM-dd'));
+	}
 
 	public getTotal(macro) {
 		let total = 0.0;
-		for (let logentry of this.breakfastLogs) {
-				total += logentry.macrosCalculated[macro];
-    }
-		for (let logentry of this.lunchLogs) {
-				total += logentry.macrosCalculated[macro];
-    }
-		for (let logentry of this.dinnerLogs) {
-				total += logentry.macrosCalculated[macro];
-    }
-		for (let logentry of this.snacksLogs) {
-				total += logentry.macrosCalculated[macro];
-    }
+		for (const logentry of this.breakfastLogs) {
+			total += logentry.macrosCalculated[macro];
+		}
+		for (const logentry of this.lunchLogs) {
+			total += logentry.macrosCalculated[macro];
+		}
+		for (const logentry of this.dinnerLogs) {
+			total += logentry.macrosCalculated[macro];
+		}
+		for (const logentry of this.snacksLogs) {
+			total += logentry.macrosCalculated[macro];
+		}
 		return total;
 	}
 
@@ -89,7 +88,7 @@ export class LogComponent implements OnInit {
 		this.lunchOpen = false;
 		this.dinnerOpen = false;
 		this.snacksOpen = false;
-    this.getLogEntries(this.pipe.transform(this.displayDate, 'yyyy-MM-dd'));
+		this.getLogEntries(this.pipe.transform(this.displayDate, 'yyyy-MM-dd'));
 	}
 
 	public openModal() {
@@ -118,43 +117,43 @@ export class LogComponent implements OnInit {
 	private getAllFood() {
 		this.foodService.getAllFood().subscribe(
 			data => {
-        this.food = data;
-        this.getAllMeals();
+				this.food = data;
+				this.getAllMeals();
 			},
 			error => console.log(error)
 		);
 	}
-  private getAllMeals(){
-   this.mealService.getAllMeals().subscribe(
-     data => {
-        this.meals = data;
-        this.getFoodSearchableList();
-     },
-     error => console.log(error)
-   );
-  }
+	private getAllMeals() {
+		this.mealService.getAllMeals().subscribe(
+			data => {
+				this.meals = data;
+				this.getFoodSearchableList();
+			},
+			error => console.log(error)
+		);
+	}
 
-  private getLogEntries(date){
-    this.logService.getDayLogs(date).subscribe(
-      data => {
-        this.allLogs = data;
+	private getLogEntries(date) {
+		this.logService.getDayLogs(date).subscribe(
+			data => {
+				this.allLogs = data;
 				this.breakfastLogs = new Array();
-        this.breakfastLogs = this.allLogs.filter(
-            entry => entry.meal === 'BREAKFAST'
-        );
+				this.breakfastLogs = this.allLogs.filter(
+					entry => entry.meal === 'BREAKFAST'
+				);
 				this.lunchLogs = new Array();
-        this.lunchLogs = this.allLogs.filter(
-            entry => entry.meal === 'LUNCH'
-        );
+				this.lunchLogs = this.allLogs.filter(
+					entry => entry.meal === 'LUNCH'
+				);
 				this.dinnerLogs = new Array();
-        this.dinnerLogs = this.allLogs.filter(
-            entry => entry.meal === 'DINNER'
-        );
+				this.dinnerLogs = this.allLogs.filter(
+					entry => entry.meal === 'DINNER'
+				);
 				this.snacksLogs = new Array();
-        this.snacksLogs = this.allLogs.filter(
-            entry => entry.meal === 'SNACKS'
-        );
-      },
+				this.snacksLogs = this.allLogs.filter(
+					entry => entry.meal === 'SNACKS'
+				);
+			},
 			error => { console.log(error);
 				this.allLogs = new Array();
 				this.breakfastLogs = new Array();
@@ -163,24 +162,24 @@ export class LogComponent implements OnInit {
 				this.snacksLogs = new Array();
 			}
 		);
-  }
+	}
 
-  // Maakt een lijst met daarin food en food + alle mogelijke portions
+	// Maakt een lijst met daarin food en food + alle mogelijke portions
 	private getFoodSearchableList() {
-		let foodList = new Array();
+		const foodList = new Array();
 
-		for (let item of this.food) {
-      let matchZonderPortion = new FoodSearchable(item, undefined);
+		for (const item of this.food) {
+			const matchZonderPortion = new FoodSearchable(item, undefined);
 			foodList.push(matchZonderPortion);
 
 			if (item.portions) {
-				 for (let portion of item.portions) {
-           foodList.push(new FoodSearchable(item, portion));
-				 }
+				for (const portion of item.portions) {
+					foodList.push(new FoodSearchable(item, portion));
+				}
 			}
 		}
-		for (let meal of this.meals) {
-      foodList.push(new FoodSearchable(meal,undefined));
+		for (const meal of this.meals) {
+			foodList.push(new FoodSearchable(meal, undefined));
 		}
 
 		this.foodAndPortions = foodList;
@@ -188,16 +187,16 @@ export class LogComponent implements OnInit {
 
 	private setGoalCal() {
 		if (this.userGoals) {
-		  this.goalCal = (this.userGoals[0] * 4)
-		    + (this.userGoals[1] * 9)
-		    + (this.userGoals[2] * 4);
+			this.goalCal = (this.userGoals[0] * 4)
+				+ (this.userGoals[1] * 9)
+				+ (this.userGoals[2] * 4);
 		}
 	}
 
 	private documentClick(event) {
 		if (!event.target.classList.contains('autocomplete__option') &&
-		    !event.target.classList.contains('fa-trash') &&
-		    !event.target.classList.contains('button--transparent')) {
+				!event.target.classList.contains('fa-trash') &&
+				!event.target.classList.contains('button--transparent')) {
 
 			this.breakfastOpen = this.breakfastEref.logMealEref.nativeElement.contains(event.target);
 			this.lunchOpen = this.lunchEref.logMealEref.nativeElement.contains(event.target);

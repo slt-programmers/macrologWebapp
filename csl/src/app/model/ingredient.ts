@@ -7,8 +7,9 @@ export class Ingredient {
 	public foodId: number;
 	public portion: Portion;
 	public portionId: number;
-	public multiplier: number = 1;
+	public multiplier = 1;
 
-	constructor() {}
+	constructor() {
+	}
 
 }

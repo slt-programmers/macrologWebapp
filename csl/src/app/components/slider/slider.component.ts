@@ -1,14 +1,14 @@
-import{Component, OnInit, OnChanges, Inject, ViewChild,
-ElementRef, Input, Output, EventEmitter, SimpleChanges}from '@angular/core';
+import { Component, OnInit, OnChanges, Inject, ViewChild,
+ElementRef, Input, Output, EventEmitter, SimpleChanges } from '@angular/core';
 
 @Component({
-  selector: 'slider',
-  templateUrl: './slider.component.html'
+	selector: 'slider',
+	templateUrl: './slider.component.html'
 })
-export class SliderComponent implements OnInit {
+export class SliderComponent implements OnInit, OnChanges {
 
 	@ViewChild('slider') private sliderElement: ElementRef;
-  @ViewChild('sliderHandle') private handleElement: ElementRef;
+	@ViewChild('sliderHandle') private handleElement: ElementRef;
 	@ViewChild('trackFill') private trackElement: ElementRef;
 	@ViewChild('lowerMark') private lowerMarkElement: ElementRef;
 	@ViewChild('baseMark') private baseMarkElement: ElementRef;
@@ -36,10 +36,10 @@ export class SliderComponent implements OnInit {
 	private sliderOffsetRight;
 	private sliderWidth;
 
-  constructor() {
+	constructor() {
 	}
 
-  ngOnInit() {
+	ngOnInit() {
 		this.slider = this.sliderElement.nativeElement;
 		this.sliderHandle = this.handleElement.nativeElement;
 		this.track = this.trackElement.nativeElement;
@@ -57,7 +57,7 @@ export class SliderComponent implements OnInit {
 		};
 		this.initHandle();
 		this.initMarkers();
-  }
+	}
 
 	ngOnChanges(changes: SimpleChanges) {
 		this.value = changes.value.currentValue;
@@ -65,8 +65,8 @@ export class SliderComponent implements OnInit {
 	}
 
 	private initHandle() {
-		let part = this.value - this.lowerBound;
-		let percentage = part / (this.upperBound - this.lowerBound);
+		const part = this.value - this.lowerBound;
+		const percentage = part / (this.upperBound - this.lowerBound);
 
 		if (this.sliderHandle && this.track) {
 			this.sliderHandle.style.left = (this.sliderWidth * percentage) - (this.sliderHandle.clientWidth / 2) + 'px';
@@ -89,7 +89,7 @@ export class SliderComponent implements OnInit {
 	}
 
 	private calculateValue() {
-		let total = this.upperBound - this.lowerBound;
+		const total = this.upperBound - this.lowerBound;
 		this.value = (total * (this.newXChord / this.sliderWidth)) + this.lowerBound;
 		this.valueChange.emit(this.value);
 	}
@@ -109,11 +109,11 @@ export class SliderComponent implements OnInit {
 
 	public onMove(event): void {
 		event.preventDefault();
-		let location = this.getMouseLocation(event);
+		const location = this.getMouseLocation(event);
 
 		if (this.mouseDown && this.isInBoundary(location)) {
 			this.newXChord = location - this.sliderOffsetLeft;
-			let distance = this.oldXChord - this.newXChord;
+			const distance = this.oldXChord - this.newXChord;
 			this.oldXChord = this.newXChord;
 			this.sliderHandle.style.left = (this.sliderHandle.offsetLeft - distance) + 'px';
 			this.sliderHandle.style.transition = 'none';
@@ -121,14 +121,14 @@ export class SliderComponent implements OnInit {
 			this.track.style.transition = 'none';
 			this.calculateValue();
 		} else {
-			//dragging out of boundary
+			// dragging out of boundary
 			this.mouseDown = false;
 		}
 	}
 
 	public onClick(event): void {
 		event.preventDefault();
-		let location = this.getMouseLocation(event);
+		const location = this.getMouseLocation(event);
 		if (this.isInBoundary(location)) {
 			this.newXChord = location - this.boundary.left;
 			this.sliderHandle.style.left = (this.newXChord - (this.sliderHandle.clientWidth / 2)) + 'px';
@@ -153,13 +153,13 @@ export class SliderComponent implements OnInit {
 	}
 
 	private getOffsetLeft(slider) {
-    let offsetLeft = 0;
-    do {
-      if ( !isNaN( slider.offsetLeft ) ) {
+		let offsetLeft = 0;
+		do {
+			if (!isNaN(slider.offsetLeft)) {
 				offsetLeft += slider.offsetLeft;
-      }
-    } while( slider = slider.offsetParent );
-    return offsetLeft;
+			}
+		} while (slider = slider.offsetParent);
+		return offsetLeft;
 	}
 
 }
