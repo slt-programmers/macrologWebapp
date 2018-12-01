@@ -28,15 +28,16 @@
 	@include elevation(4);
 	background-color: $ghost;
 	height: 100%;
-	min-width: 200px;
+	min-width: 150px;
 
 	&__item {
 		align-items: center;
 		border-bottom: 1px solid $smoke;
 		cursor: pointer;
-		padding: ($gutter/2);
 		display: flex;
+		height: 52px;
 		justify-content: space-between;
+		padding: 0 ($gutter/2);
 
 		&__text {
 			padding-right: ($gutter/2);
@@ -53,8 +54,6 @@
 		&--top {
 			background-color: $primary;
 			color: $white;
-			font-size: 20px;
-			padding: 16px;
 
 			&:hover {
 				background-color: $primary;
