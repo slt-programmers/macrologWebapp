@@ -12,8 +12,6 @@ export class AuthenticationService {
 
 	public isAuthenticated(): boolean {
 		const user = localStorage.getItem('currentUser');
-		console.log('Getting user from local storage:');
-		console.log(user);
 		return (user != null);
 	}
 

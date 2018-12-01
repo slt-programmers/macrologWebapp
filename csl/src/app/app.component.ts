@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild, ElementRef, Renderer2 } from '@angular/core';
 import { Router } from '@angular/router';
 import { ScrollBehaviourService } from './services/scroll-behaviour.service';
+import { HealthcheckService } from './services/healthcheck.service';
 
 @Component({
 	selector: 'app-root',
@@ -14,6 +15,8 @@ export class AppComponent implements OnInit {
 	@ViewChild('usermenuBackdrop') private usermenubackdropElement: ElementRef;
 
 	public title: string;
+
+	private asleep = true;
 	private navbar;
 	private backdrop;
 	private usermenu;
@@ -27,15 +30,26 @@ export class AppComponent implements OnInit {
 
 	constructor(public router: Router,
 							private renderer: Renderer2,
+							private healthcheckService: HealthcheckService,
 							private sbs: ScrollBehaviourService) {
+		console.log('Doing healthcheck...');
+		this.healthcheckService.checkState().subscribe((result => {
+			console.log('Healthcheck succeeded');
+			this.asleep = !result;
+		});
 		sbs.renderer = renderer;
 	}
 
 	ngOnInit() {
+		console.log('App started');
 		this.navbar = this.navbarElement.nativeElement;
 		this.backdrop = this.backdropElement.nativeElement;
 		this.usermenu = this.userMenuElement.nativeElement;
 		this.usermenubackdrop = this.usermenubackdropElement.nativeElement;
+	}
+
+	public stillSleeping(): boolean {
+		return this.asleep;
 	}
 
 	// Navigation

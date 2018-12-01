@@ -1,5 +1,12 @@
-<div class="header">
+<div class="loading-overlay" *ngIf="stillSleeping()">
+  <h2>Macrolog</h2>
 
+  <p class="paragraph">The hamsters in the treadmill powering the application are still asleep.</p>
+
+  <p class="paragraph">Please wait while we wake them up...</p>
+</div>
+
+<div class="header">
   <div class="header__section header__section--left">
     <div class="header-item header-item--title">
       <div class="header-item__text">Macrolog</div>

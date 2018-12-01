@@ -39,6 +39,7 @@ import { IntakeComponent } from './pages/intake/intake.component';
 import { StepperComponent } from './components/stepper/stepper.component';
 import { AuthGuardService } from './services/auth-guard.service';
 import { ScrollBehaviourService } from './services/scroll-behaviour.service';
+import { HealthcheckService } from './services/healthcheck.service';
 
 const appRoutes: Routes = [
 	{path: 'login', component: LoginComponent },
@@ -105,6 +106,7 @@ const appRoutes: Routes = [
 		MealService,
 		AuthGuardService,
 		ScrollBehaviourService,
+		HealthcheckService,
 		{ provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
 		{ provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
 	],
