@@ -11,17 +11,25 @@
 }
 
 .modal {
+	@media(min-width: $md) {
+		width: 80%;
+	}
 	margin: 8% auto;
 	max-width: 1000px;
-	width: 80%;
+	width: 95%;
 
 	&__header {
+		@media(min-width: $md) {
+			border-radius: ($gutter/2) ($gutter/2) 0 0;
+		}
+		align-items: center;
 		background-color: $primary;
-		border-radius: ($gutter/2) ($gutter/2) 0 0;
+		border-radius: 5px 5px 0 0;
 		color: $white;
 		display: flex;
+		height: 52px;
 		justify-content: space-between;
-		padding: $gutter;
+		padding: 0 ($gutter/2);
 
 		&__title {
 			font-weight: normal;
@@ -30,9 +38,12 @@
 	}
 
 	&__content {
+		@media(min-width: $md) {
+			border-radius: 0 0 ($gutter/2) ($gutter/2);
+		}
 		background-color: $ghost;
-		border-radius: 0 0 ($gutter/2) ($gutter/2);
-  	padding: $gutter;
+		border-radius: 0 0 5px 5px;
+  	padding: ($gutter/2);
 	}
 
 	&__label {

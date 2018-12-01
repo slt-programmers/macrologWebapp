@@ -17,7 +17,7 @@ export class AddFoodModalComponent implements OnInit {
 	@Output() close: EventEmitter<boolean> = new EventEmitter<boolean>();
 	@Input() food;
 
-	public title = 'Add food to the database';
+	public title = 'Add food';
 	public name = '';
 	public measurementUnit = MeasurementUnit.Grams;
 	public unitName = '';
