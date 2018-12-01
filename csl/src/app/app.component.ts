@@ -1,5 +1,6 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, Renderer2 } from '@angular/core';
 import { Router } from '@angular/router';
+import { ScrollBehaviourService } from './services/scroll-behaviour.service';
 
 @Component({
 	selector: 'app-root',
@@ -24,7 +25,11 @@ export class AppComponent implements OnInit {
 
 	public currentRoute;
 
-	constructor(public router: Router) {}
+	constructor(public router: Router,
+							private renderer: Renderer2,
+							private sbs: ScrollBehaviourService) {
+		sbs.renderer = renderer;
+	}
 
 	ngOnInit() {
 		this.navbar = this.navbarElement.nativeElement;
@@ -38,6 +43,7 @@ export class AppComponent implements OnInit {
 		this.navbar.style.marginRight = '0';
 		this.backdrop.style.display = 'block';
 		this.backdrop.style.backgroundColor = 'rgba(0,0,0, 0.4)';
+		this.sbs.preventScrolling(true);
 	}
 
 	public closeNav(tabTitle: string) {
@@ -47,6 +53,7 @@ export class AppComponent implements OnInit {
 		this.navbar.style.marginRight = '-' + width + 'px';
 		this.backdrop.style.display = 'none';
 		this.backdrop.style.backgroundColor = 'transparent';
+		this.sbs.preventScrolling(false);
 	}
 
 	setTitle(tabTitle: string) {
@@ -68,14 +75,16 @@ export class AppComponent implements OnInit {
 		return localStorage.getItem('currentUser') !== null;
 	}
 
-	public showUserMenu() {
+	public openUserMenu() {
 		this.usermenu.style.marginTop = '0';
 		this.usermenubackdrop.style.display = 'block';
+		this.sbs.preventScrolling(true);
 	}
 
 	public closeUserMenu() {
 		this.usermenu.style.marginTop = '-300px';
 		this.usermenubackdrop.style.display = 'none';
 		this.usermenubackdrop.style.backgroundColor = 'transparent';
+		this.sbs.preventScrolling(false);
 	}
 }

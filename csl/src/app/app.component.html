@@ -25,7 +25,7 @@
   <div class="header__section header__section--right">
     <div *ngIf="loggedIn()" class="header-item header-item--menu header-item--mobile-hidden"
          [ngClass]="{'header-item--active' : router.url === '/user'}"
-         (click)="showUserMenu()">
+         (click)="openUserMenu()">
       <i class="icon--large fas fa-user-circle"></i>
     </div>
 
@@ -36,6 +36,7 @@
 </div>
 
 <div #usermenuBackdrop class="usermenu-backdrop" (click)="closeUserMenu()"></div>
+
 <div #usermenu class="usermenu-wrapper" (click)="closeUserMenu()">
   <div class="usermenu">
     <div class="usermenu__item usermenu__item--top">{{getUsername()}} <i class="fas fa-arrow-up"></i></div>

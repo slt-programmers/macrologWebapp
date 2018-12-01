@@ -1,5 +1,4 @@
 .subnav {
-
 	border-bottom: 1px solid $smoke;
   margin-bottom: 15px;
 
@@ -10,12 +9,13 @@
 		padding: 15px;
 
 		&:hover {
-			border-bottom: 2px solid $smoke;
+			@media(min-width: $md) {
+			  border-bottom: 2px solid $smoke;
+			}
 		}
 
 		&--active {
 			border-bottom: 2px solid $primary;
 		}
 	}
-
 }

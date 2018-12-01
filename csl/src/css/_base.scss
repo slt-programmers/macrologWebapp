@@ -39,7 +39,11 @@
 		color: $primary;
 	}
 
+	&--secondary {
+		color: $secondary;
+	}
+
 	&--signal {
-		color: deeppink;
+		color: $signal;
 	}
 }

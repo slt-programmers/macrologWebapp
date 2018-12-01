@@ -2,6 +2,7 @@ import { Component, OnInit, Output, Input, EventEmitter } from '@angular/core';
 import { Food } from '../../model/food';
 import { Portion } from '../../model/portion';
 import { FoodService } from '../../services/food.service';
+import { ScrollBehaviourService } from '../../services/scroll-behaviour.service';
 
 export enum MeasurementUnit {
 	Grams = 'GRAMS',
@@ -14,8 +15,9 @@ export enum MeasurementUnit {
 })
 export class AddFoodModalComponent implements OnInit {
 
-	@Output() close: EventEmitter<boolean> = new EventEmitter<boolean>();
 	@Input() food;
+
+	@Output() close: EventEmitter<boolean> = new EventEmitter<boolean>();
 
 	public title = 'Add food';
 	public name = '';
@@ -27,10 +29,12 @@ export class AddFoodModalComponent implements OnInit {
 	public carbs: number;
 	public portions = [];
 
-	constructor(private foodService: FoodService) {
+	constructor(private foodService: FoodService,
+							private sbs: ScrollBehaviourService) {
 	}
 
 	ngOnInit() {
+		this.sbs.preventScrolling(true);
 		if (this.food) {
 			this.title  = 'Edit food';
 			this.name = this.food.name;
@@ -74,6 +78,7 @@ export class AddFoodModalComponent implements OnInit {
 	}
 
 	public closeModal() {
+		this.sbs.preventScrolling(false);
 		this.close.emit(true);
 	}
 

@@ -1,94 +1,75 @@
 <div class="modal">
   <div class="modal__header">
-    <h3 class="modal__header__title">Calculate your daily intake</h3>
+    <h3 class="modal__header__title">Set your daily intake</h3>
 
     <i class="fas fa-times" (click)="closeModal()"></i>
   </div>
 
   <div class="modal__content">
-    <p *ngIf="!showMoreOptions">Choose your goal or manually adjust your caloric intake. Click on
-      <strong class="strong--signal">Change macro's</strong>
-      if you want to change macro proportions entirely.</p>
+    <div class="calorie-box">
+      <span class="calorie-box__title">{{calories | number : '1.0-0'}} Calories</span>
+    </div>
 
-    <p *ngIf="showMoreOptions">Change the macro's according to your own preference. To use the
-      regular calculation, click on
-      <strong class="strong--signal">Change calories</strong></p>
+    <div class="tabs">
+      <div class="tabs-header">
+        <div class="tab" (click)="showCaloriesTab()"
+             [ngClass]="{'tab--active': showCalories}">Adjust calories
+        </div>
+        <div class="tab" (click)="showMacrosTab()"
+             [ngClass]="{'tab--active': showMacros}">Adjust macro's
+        </div>
+      </div>
 
-    <div class="form">
-      <div class="form-field" *ngIf="!showMoreOptions">
-        <label class="form-field__label form-field__label--small">My goal is to: </label>
-        <div class="form-field__element">
-          <div class="radio-wrapper">
-            <input class="" name="difference" type="radio"
-                   [(ngModel)]="difference" value="lose" (change)="adjustDiff()"
-                   [ngClass]="{'checked': difference === 'lose' }">
-            <span class="radio-label">lose weight</span>
-            <input class="" name="difference" type="radio"
-                   [(ngModel)]="difference" value="same" (change)="adjustDiff()"
-                   [ngClass]="{'checked': difference === 'same' }">
-            <span class="radio-label">stay the same weight</span>
-            <input class="" name="difference" type="radio"
-                   [(ngModel)]="difference" value="gain" (change)="adjustDiff()"
-                   [ngClass]="{'checked': difference === 'gain' }">
-            <span class="radio-label">gain weight</span>
+      <div class="tabs-content">
+        <!--Calories-->
+        <div *ngIf="showCalories">
+          <div class="form-field form-field--slider">
+            <div class="form-field__label form-field__label--slider">Calories</div>
+            <div class="form-field__slider">
+              <slider [value]="calories" (valueChange)="changeCalories($event)"
+                      [upperBound]="3000" [lowerBound]="1200" [markers]="markers"></slider>
+            </div>
+          </div>
+
+          <p>This results in the following macros:</p>
+
+          <div class="macro-box">
+            <p class="macro-box__macro"><strong>Protein: {{protein | number : '1.0-0'}} gr</strong></p>
+            <p class="macro-box__macro"><strong>Fat: {{fat | number : '1.0-0'}} gr</strong></p>
+            <p class="macro-box__macro"><strong>Carbs: {{carbs | number : '1.0-0'}} gr</strong></p>
+          </div>
+        </div>
+
+        <!--Macros-->
+        <div *ngIf="showMacros">
+          <div class="form">
+            <div class="form-field">
+              <label class="form-field__label">Protein</label>
+              <div class="form-field__element">
+                <input class="form-field__input" (change)="calcCaloriesManual()" [(ngModel)]="proteinManual" type="number">
+              </div>
+            </div>
+
+            <div class="form-field">
+              <label class="form-field__label">Fat</label>
+              <div class="form-field__element">
+                <input class="form-field__input" (change)="calcCaloriesManual()" [(ngModel)]="fatManual" type="number">
+              </div>
+            </div>
+
+            <div class="form-field">
+              <label class="form-field__label">Carbs</label>
+              <div class="form-field__element">
+                <input class="form-field__input" (change)="calcCaloriesManual()" [(ngModel)]="carbsManual" type="number">
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </div>
 
-    <div class="form" *ngIf="showMoreOptions">
-      <div class="form-field">
-        <label class="form-field__label">Protein</label>
-        <div class="form-field__element">
-          <input class="" (change)="calcCaloriesManual()" [(ngModel)]="proteinManual" type="number">
-        </div>
-      </div>
-
-      <div class="form-field">
-        <label class="form-field__label">Fat</label>
-        <div class="form-field__element">
-          <input class="" (change)="calcCaloriesManual()" [(ngModel)]="fatManual" type="number">
-        </div>
-      </div>
-
-      <div class="form-field">
-        <label class="form-field__label">Carbs</label>
-        <div class="form-field__element">
-          <input class="" (change)="calcCaloriesManual()" [(ngModel)]="carbsManual" type="number">
-        </div>
-      </div>
-    </div>
-
-    <div class="calorie-box">
-      <i class="calorie-box__icon fas fa-sort-down" *ngIf="false" (click)="subtractOne()"></i>
-      <h3 class="calorie-box__title">{{calories | number : '1.0-0'}} Calories</h3>
-      <i class="calorie-box__icon fas fa-sort-up" *ngIf="false" (click)="addOne()"></i>
-    </div>
-
-    <div class="form-field form-field--slider" *ngIf="!showMoreOptions">
-      <div class="form-field__label form-field__label--slider">Calories</div>
-      <div class="form-field__slider">
-        <slider [value]="calories" (valueChange)="changeCalories($event)"
-                [upperBound]="4000" [lowerBound]="1200" [markers]="markers"></slider>
-      </div>
-    </div>
-
-    <div class="macro-box" *ngIf="!showMoreOptions">
-      <div class="macro-box__macro">
-        <h3 class="macro-box__title">{{protein | number : '1.0-0'}} gr Protein</h3>
-      </div>
-      <div class="macro-box__macro">
-        <h3 class="macro-box__title">{{fat | number : '1.0-0'}} gr Fat</h3>
-      </div>
-      <div class="macro-box__macro">
-        <h3 class="macro-box__title">{{carbs | number : '1.0-0'}} gr Carbs</h3>
-      </div>
-    </div>
-
     <div class="button-wrapper">
-      <button class="button button--primary" *ngIf="showMoreOptions" (click)="toggleOptions()">Change calories</button>
-      <button class="button button--primary" *ngIf="!showMoreOptions" (click)="toggleOptions()">Change macro's</button>
-      <button class="button button--secondary" (click)="saveIntake()">Done</button>
+      <button class="button button--secondary" (click)="saveIntake()">Save</button>
     </div>
   </div>
 </div>

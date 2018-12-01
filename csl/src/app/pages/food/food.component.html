@@ -61,9 +61,6 @@
       </div>
     </div>
 
-    <!--<button class="button button&#45;&#45;primary" (click)="itemsPerPage = 5">5</button>-->
-    <!--<button class="button button&#45;&#45;primary" (click)="itemsPerPage = 10">10</button>-->
-
     <pager [itemsInTotal]="searchableFood.length"
            [currentPage]="currentPage"
            (pageChange)="getPagedFood($event)"

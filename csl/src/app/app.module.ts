@@ -38,6 +38,7 @@ import { PiechartComponent } from './components/piechart/piechart.component';
 import { IntakeComponent } from './pages/intake/intake.component';
 import { StepperComponent } from './components/stepper/stepper.component';
 import { AuthGuardService } from './services/auth-guard.service';
+import { ScrollBehaviourService } from './services/scroll-behaviour.service';
 
 const appRoutes: Routes = [
 	{path: 'login', component: LoginComponent },
@@ -103,6 +104,7 @@ const appRoutes: Routes = [
 		ToastService,
 		MealService,
 		AuthGuardService,
+		ScrollBehaviourService,
 		{ provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
 		{ provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
 	],

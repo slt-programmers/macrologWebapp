@@ -23,6 +23,8 @@
 
 <div class="modal-wrapper" *ngIf="showCalcModal">
   <calculate-intake-modal (close)="closeCalcModal($event)" [age]="age" [gender]="gender"
-                          [height]="height" [weight]="weight" [activity]="activity">
+                          [height]="height" [weight]="weight" [activity]="activity"
+                          [currentProtein]="goalProtein" [currentFat]="goalFat"
+                          [currentCarbs]="goalCarbs">
   </calculate-intake-modal>
 </div>

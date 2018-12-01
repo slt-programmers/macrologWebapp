@@ -16,14 +16,16 @@ export class CalculateIntakeModalComponent implements OnInit {
 	@Input() weight: number;
 	@Input() activity: number;
 
-	public showMoreOptions = false;
-	public difference = 'same';
+	@Input() currentProtein: number;
+	@Input() currentFat: number;
+	@Input() currentCarbs: number;
+
+	public showCalories = false;
+	public showMacros = false;
 	public markers;
 
-	private bmr: number;
-	private tdee: number;
+	public calories: number;
 
-	@Input() calories: number;
 	public protein: number;
 	public fat: number;
 	public carbs: number;
@@ -32,9 +34,12 @@ export class CalculateIntakeModalComponent implements OnInit {
 	public fatManual: number;
 	public carbsManual: number;
 
-	public goalProtein: string;
-	public goalFat: string;
-	public goalCarbs: string;
+	private bmr: number;
+	private tdee: number;
+
+	private goalProtein: string;
+	private goalFat: string;
+	private goalCarbs: string;
 
 	@Output() close: EventEmitter<any> = new EventEmitter<any>();
 
@@ -42,60 +47,60 @@ export class CalculateIntakeModalComponent implements OnInit {
 	}
 
 	ngOnInit() {
+		this.calories = (this.currentProtein * 4) + (this.currentFat * 9) +
+			(this.currentCarbs * 4);
+		this.proteinManual = this.currentProtein;
+		this.fatManual = this.currentFat;
+		this.carbsManual = this.currentCarbs;
+	}
+
+	public showCaloriesTab() {
 		this.protein = this.weight * 1.8;
 		this.fat = this.weight * 0.8;
 		this.calcCalories();
+		this.showCalories = true;
+		this.showMacros = false;
 	}
 
-	closeModal() {
+	public showMacrosTab() {
+		this.calories = (this.currentProtein * 4) + (this.currentFat * 9) +
+			(this.currentCarbs * 4);
+		this.showCalories = false;
+		this.showMacros = true;
+	}
+
+
+	public closeModal() {
 		this.close.emit({goalProtein: this.goalProtein,
 			goalFat: this.goalFat, goalCarbs: this.goalCarbs
 		});
 	}
 
-	setMarkers() {
-		this.markers = [{title: 'deficit', value: (this.tdee - 200)},
-		{title: 'baseline', value: (this.tdee)},
-		{title: 'surplus', value: (this.tdee + 200)}];
+	private setMarkers() {
+		this.markers = [
+			{title: 'deficit', value: (this.tdee - 200)},
+			{title: 'baseline', value: (this.tdee)},
+			{title: 'surplus', value: (this.tdee + 200)}
+		];
 	}
 
-	toggleOptions() {
-		if (this.showMoreOptions) {
-			this.calcCarbs();
-		}
-		this.proteinManual = Math.round(this.protein);
-		this.fatManual = Math.round(this.fat);
-		this.carbsManual = Math.round(this.carbs);
-		this.showMoreOptions = !this.showMoreOptions;
-	}
-
-	changeCalories(event) {
+	public changeCalories(event) {
 		this.calories = event;
 		this.calcCarbs();
 	}
 
-	calcCalories(): void {
+	private calcCalories(): void {
 		this.calcTDEE();
 		this.setMarkers();
 		this.calories = this.tdee;
 		this.calcCarbs();
 	}
 
-	calcCaloriesManual(): void {
+	public calcCaloriesManual(): void {
 		this.calories = (this.proteinManual * 4) + (this.fatManual * 9) + (this.carbsManual * 4);
 	}
 
-	adjustDiff(): void {
-		this.calcCalories();
-		if (this.difference === 'lose') {
-			this.calories = this.calories - 200;
-		} else if (this.difference === 'gain') {
-			this.calories = this.calories + 200;
-		}
-		this.calcCarbs();
-	}
-
-	calcTDEE(): void {
+	private calcTDEE(): void {
 		let bmr;
 		if (this.gender === 'MALE') {
 			bmr = 66.5 + (13.7 * this.weight) + (5 * this.height) - (6.76 * this.age);
@@ -105,12 +110,12 @@ export class CalculateIntakeModalComponent implements OnInit {
 		this.tdee = bmr * this.activity;
 	}
 
-	calcCarbs(): void {
+	private calcCarbs(): void {
 		this.carbs = (this.calories - (this.protein * 4.0) - (this.fat * 9.0)) / 4.0;
 	}
 
 	public saveIntake() {
-		if (this.showMoreOptions) {
+		if (this.showMacros) {
 			forkJoin(
 				this.userService.addUserInfo('goalProtein', Math.round(this.proteinManual).toString()),
 				this.userService.addUserInfo('goalFat', Math.round(this.fatManual).toString()),
@@ -140,4 +145,7 @@ export class CalculateIntakeModalComponent implements OnInit {
 			);
 		}
 	}
+
+
+
 }
