@@ -6,8 +6,7 @@
 }
 
 .slider {
-	height: 50px;
-	margin: 0 10px 10px;
+	height: 70px;
 	min-width: 120px;
 	position: relative;
 
@@ -21,7 +20,7 @@
 		border-radius: 2px;
 		height: 6px;
 		position: absolute;
-		top: 23px;
+		top: 32px;
 		left: 0;
 		right: 0;
 
@@ -38,7 +37,7 @@
 		border-radius: 50%;
 		height: 22px;
 		width: 22px;
-		top: 15px;
+		top: 24px;
 		transition: left 0.3s;
 	}
 
@@ -47,7 +46,7 @@
 		background-color: $secondary;
 		border-radius: 5px;
 		position: absolute;
-		top: 18px;
+		top: 27px;
 		left: 0;
 		right: 0;
 		height: 16px;
@@ -64,10 +63,6 @@
 			left: -18px;
 
 			&--above {
-				@include media-break($lg) {
-					top: 25px;
-				}
-
 				top: -25px;
 			}
 		}

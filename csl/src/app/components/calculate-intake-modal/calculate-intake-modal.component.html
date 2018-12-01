@@ -23,11 +23,12 @@
       <div class="tabs-content">
         <!--Calories-->
         <div *ngIf="showCalories">
-          <div class="form-field form-field--slider">
-            <div class="form-field__label form-field__label--slider">Calories</div>
-            <div class="form-field__slider">
+          <div class="form-field">
+            <div class="form-field__label form-field__label--small">Calories</div>
+            <div class="form-field__element">
               <slider [value]="calories" (valueChange)="changeCalories($event)"
                       [upperBound]="3000" [lowerBound]="1200" [markers]="markers"></slider>
+
             </div>
           </div>
 

@@ -21,6 +21,7 @@
 	&__header {
 		@media(min-width: $md) {
 			border-radius: ($gutter/2) ($gutter/2) 0 0;
+			padding: 0 $gutter;
 		}
 		align-items: center;
 		background-color: $primary;
@@ -40,6 +41,7 @@
 	&__content {
 		@media(min-width: $md) {
 			border-radius: 0 0 ($gutter/2) ($gutter/2);
+	  	padding: $gutter;
 		}
 		background-color: $ghost;
 		border-radius: 0 0 5px 5px;

@@ -12,8 +12,11 @@
 }
 
 .tabs-content {
+	@media(min-width: $md) {
+		padding: $gutter;
+	}
 	border: 1px solid $smoke;
-	padding: $gutter;
+	padding: ($gutter/2);
 }
 
 .tab {
