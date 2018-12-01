@@ -4,14 +4,14 @@
       <h3>Log in</h3>
 
       <form #loginForm="ngForm">
-        <div class="form-field form-field--small">
+        <div class="form-field form-field--vertical">
           <label class="form-field__label">Username or email</label>
           <input class="form-field__input" type="text" #usernameField
                  [(ngModel)]="usernameOrEmail"
                  name="usernameOrEmail" required/>
         </div>
 
-        <div class="form-field form-field--small">
+        <div class="form-field form-field--vertical">
           <label class="form-field__label">Password</label>
 
           <input class="form-field__input" type="password" #passwordField
@@ -36,7 +36,7 @@
       <h3>Register</h3>
 
       <form #signUpForm="ngForm">
-        <div class="form-field form-field--small">
+        <div class="form-field form-field--vertical">
           <label class="form-field__label">Username</label>
 
           <input class="form-field__input" type="text" #usernameField
@@ -44,7 +44,7 @@
                  name="newUsername" required/>
         </div>
 
-        <div class="form-field form-field--small">
+        <div class="form-field form-field--vertical">
           <label class="form-field__label">Password</label>
 
           <input class="form-field__input" type="password" #passwordField
@@ -52,7 +52,7 @@
                  name="newPassword" required/>
         </div>
 
-        <div class="form-field form-field--small">
+        <div class="form-field form-field--vertical">
           <label class="form-field__label">Email</label>
 
           <input class="form-field__input" type="email" #emailField
@@ -94,7 +94,7 @@
       <p>Please enter your email so we can send your password</p>
       <form #forgotForm="ngForm">
 
-        <div class="form-field form-field--small">
+        <div class="form-field form-field--vertical">
           <label class="form-field__label">Email</label>
           <input class="form-field__input" type="email" #forgotEmailField
                  [(ngModel)]="forgotEmail"
