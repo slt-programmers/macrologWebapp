@@ -1,23 +1,42 @@
-<div class="container container--last">
+<div class="container container--first container--last">
+  <div class="tile">
+    <div class="form-field form-field--horizontal">
+      <label class="form-field__label">Protein</label>
+      <div class="meal-card__legenda meal-card__legenda--protein"></div>
+    </div>
+
+    <div class="form-field form-field--horizontal">
+      <label class="form-field__label">Fat</label>
+      <div class="meal-card__legenda meal-card__legenda--fat"></div>
+    </div>
+
+    <div class="form-field form-field--horizontal">
+      <label class="form-field__label">Carbs</label>
+      <div class="meal-card__legenda meal-card__legenda--carbs"></div>
+    </div>
+  </div>
+
   <div class="grid">
-    <div class="grid__tile" *ngFor="let meal of allMeals">
-      <p class="paragraph">{{meal.name}}</p>
+    <div class="card" *ngFor="let meal of allMeals">
+      <div class="meal-card">
+        <h3 class="meal-card__title">{{meal.name}}</h3>
 
-      <piechart [mealId]="meal.id" [macros]="getTotal(meal)"></piechart>
+        <piechart class="meal-card__pie" [mealId]="meal.id" [macros]="getTotal(meal)"></piechart>
 
-      <div class="grid__tile__ingredients" *ngFor="let ingredient of meal.ingredients">
-        <div class="grid__tile__text grid__tile__text--ingredient">{{ingredient.food.name}}</div>
+        <div class="grid__tile__ingredients" *ngFor="let ingredient of meal.ingredients">
+          <div class="grid__tile__text grid__tile__text--ingredient">{{ingredient.food.name}}</div>
 
-        <div class="grid__tile__text grid__tile__text--amount" *ngIf="!ingredient.portion && ingredient.food.measurementUnit == 'GRAMS'">
-          {{ingredient.food.unitGrams * ingredient.multiplier}} {{ingredient.food.unitName}}
-        </div>
+          <div class="grid__tile__text grid__tile__text--amount" *ngIf="!ingredient.portion && ingredient.food.measurementUnit == 'GRAMS'">
+            {{ingredient.food.unitGrams * ingredient.multiplier}} {{ingredient.food.unitName}}
+          </div>
 
-        <div class="grid__tile__text grid__tile__text--amount" *ngIf="ingredient.portion">
-          {{ingredient.multiplier}} {{ingredient.portion.description}}
-        </div>
+          <div class="grid__tile__text grid__tile__text--amount" *ngIf="ingredient.portion">
+            {{ingredient.multiplier}} {{ingredient.portion.description}}
+          </div>
 
-        <div class="grid__tile__text grid__tile__text--amount" *ngIf="ingredient.food.measurementUnit == 'UNIT'">
-          {{ingredient.multiplier}} {{ingredient.food.unitName}}
+          <div class="grid__tile__text grid__tile__text--amount" *ngIf="ingredient.food.measurementUnit == 'UNIT'">
+            {{ingredient.multiplier}} {{ingredient.food.unitName}}
+          </div>
         </div>
       </div>
     </div>
