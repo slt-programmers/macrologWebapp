@@ -33,7 +33,7 @@ export class AppComponent implements OnInit {
 							private healthcheckService: HealthcheckService,
 							private sbs: ScrollBehaviourService) {
 		console.log('Doing healthcheck...');
-		this.healthcheckService.checkState().subscribe((result => {
+		this.healthcheckService.checkState().subscribe(result => {
 			console.log('Healthcheck succeeded');
 			this.asleep = !result;
 		});
