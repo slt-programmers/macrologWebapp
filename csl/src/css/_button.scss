@@ -90,12 +90,10 @@ button {
 		@include elevation(16);
 		align-items: center;
 		display: flex;
-		border-radius: 100px;
+		border-radius: 100%;
 		justify-content: center;
-		height: 60px;
-		min-width: 60px;
-		padding: 15px;
-		width: 60px;
+		height: 52px;
+		min-width: 52px;
 	}
 
 	&:hover {

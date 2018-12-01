@@ -8,11 +8,19 @@
 	justify-content: space-around;
 }
 
+bargraph {
+	margin-bottom: 8px;
+
+	&:last-child {
+		margin-bottom: 0;
+	}
+}
+
 .bargraph {
 	@media(min-width: $md) {
 		height: 40px;
 	}
-	height: 30px;
+	height: 16px;
 	min-width: 120px;
 	position: relative;
 	width: 100%;
@@ -24,7 +32,7 @@
 			height: 30px;
 		}
 		position: relative;
-		height: 20px;
+		height: 16px;
 		flex-basis: 80%
 	}
 
@@ -35,7 +43,7 @@
 		@include elevation(1);
 		position: absolute;
 		background-color: $smoke;
-		height: 20px;
+		height: 16px;
 		top: 0;
 		left: 0;
 		width: 100%;
@@ -47,7 +55,7 @@
     	}
 			@include elevation(2);
 			background-color: #29c646;
-			height: 16px;
+			height: 12px;
 			top: 2px;
 			width: 1%;
 			transition: width 0.3s;
@@ -56,10 +64,10 @@
 
 	&__title {
 		@media(min-width: $md) {
-			font-size: 16px;
+			font-size: 1.2rem;
 		}
 		flex-basis: 5%;
-		font-size: 14px;
+		font-size: 1rem;
 		font-weight: 500;
   	margin-right: 5px;
   }
