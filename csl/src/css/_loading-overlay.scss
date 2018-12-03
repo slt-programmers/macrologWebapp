@@ -1,13 +1,15 @@
 .loading-overlay {
-	position: fixed;
+	align-items: center;
+	background-color: $primary;
+	box-sizing: border-box;
+	color: $ghost;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
-	align-items: center;
 	height: 100%;
-	background-color: $primary;
-	color: $ghost;
 	text-align: center;
 	padding: $gutter;
+	position: fixed;
+	width: 100%;
 	z-index: 20;
 }
