@@ -36,6 +36,12 @@ export class AppComponent implements OnInit {
 		this.healthcheckService.checkState().subscribe(result => {
 			console.log('Healthcheck succeeded');
 			this.asleep = !result;
+		}, error => {
+			console.log(error);
+			if (error.status === 403) {
+				console.log('Healthcheck succeeded but logged out');
+				this.asleep = !error;
+			}
 		});
 		sbs.renderer = renderer;
 	}
@@ -70,7 +76,7 @@ export class AppComponent implements OnInit {
 		this.sbs.preventScrolling(false);
 	}
 
-	setTitle(tabTitle: string) {
+	public setTitle(tabTitle: string) {
 		if (tabTitle) {
 			this.title = tabTitle;
 		}

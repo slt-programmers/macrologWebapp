@@ -14,23 +14,27 @@ constructor(private authenticationService: AuthenticationService, private router
 	intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 		return next.handle(request).pipe(
 				map(result => {
+					console.log('Error interceptor positive', result);
 					return result;
 				}),
 				catchError(err => {
-					console.log('In error interceptor intercepting error', err);
+					console.log('Error interceptor negative', err);
 					if (err.status === 403) {
-						// forbidden page
+						console.log(err.status)
 						this.authenticationService.logout();
 						this.router.navigateByUrl('/login');
 						return throwError(err);
 					} else if (err.status === 401) {
-						// unautorized
+						console.log(err.status)
 						return throwError(err);
 					} else if (err.status === 404) {
-						// not found
+						console.log(err.status);
+						return throwError(err);
+					} else if (err.status === 0) {
+						console.log(err.status);
 						return throwError(err);
 					} else {
-						console.log('Else in interceptor');
+						console.log('Else in interceptor, WHY?');
 						console.log(err);
 						return of(new HttpResponse({body: err}));
 					}
