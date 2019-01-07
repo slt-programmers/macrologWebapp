@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns="http://www.w3.org/2000/svg"
+   version="1.1"
+   viewBox="0 0 79.269158 30.42708"
+   height="114.99998"
+   width="299.59998">
+	<style>
+		#header-arch {
+			fill: #303f9f;
+		}
+	</style>
+  <g>
+    <path
+			id="header-arch"
+       d="M 0.0,0 0,23.1668
+       c 8.4366198,4.505519 23.434351,7.26075 39.60205,7.260279 16.264631,0 31.33612,-2.78933 39.739539,-7.338489
+       L 79.374989,0 Z"
+		/>
+  </g>
+</svg>
