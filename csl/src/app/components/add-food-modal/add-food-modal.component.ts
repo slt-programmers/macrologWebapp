@@ -4,11 +4,6 @@ import { Portion } from '../../model/portion';
 import { FoodService } from '../../services/food.service';
 import { ScrollBehaviourService } from '../../services/scroll-behaviour.service';
 
-export enum MeasurementUnit {
-	Grams = 'GRAMS',
-	Unit = 'UNIT'
-}
-
 @Component({
 	selector: 'add-food-modal',
 	templateUrl: './add-food-modal.component.html'
@@ -21,7 +16,6 @@ export class AddFoodModalComponent implements OnInit {
 
 	public title = 'Add food';
 	public name = '';
-	public measurementUnit = MeasurementUnit.Grams;
 	public unitName = '';
 	public unitGrams: number;
 	public protein: number;
@@ -38,7 +32,6 @@ export class AddFoodModalComponent implements OnInit {
 		if (this.food) {
 			this.title  = 'Edit food';
 			this.name = this.food.name;
-			this.measurementUnit = this.food.measurementUnit;
 			this.unitName = this.food.unitName;
 			this.unitGrams = this.food.unitGrams;
 			this.protein = this.food.protein;
@@ -55,7 +48,7 @@ export class AddFoodModalComponent implements OnInit {
 
 	public saveFood() {
 		const addFoodRequest = new Food(this.name,
-			this.measurementUnit,
+			"GRAMS",
 			this.protein,
 			this.fat,
 			this.carbs);
@@ -63,10 +56,6 @@ export class AddFoodModalComponent implements OnInit {
 			addFoodRequest.id = this.food.id;
 		}
 
-		if (this.measurementUnit === MeasurementUnit.Unit) {
-			addFoodRequest.unitName = this.unitName;
-			addFoodRequest.unitGrams = this.unitGrams;
-		}
 		addFoodRequest.portions = this.portions;
 
 		const self = this;

@@ -163,22 +163,6 @@
     </button>
     <p></p>
 
-    <h3>Grams or units</h3>
-    <p>You can add items by 100 grams or per unit. This may come in handy when
-      you eat food that isn't logically measured in portions of 100 grams,
-      like apples or eggs.
-    </p>
-
-    <div class="radio-wrapper">
-      <input class="checked fas fa-check" type="radio" name="measurementUnit"
-             value="GRAMS">
-      <span class="radio-label">per 100gr</span>
-      <input type="radio" name="measurementUnit"
-             value="UNIT">
-      <span class="radio-label">per unit</span>
-    </div>
-    <p></p>
-
     <h3>Portions</h3>
     <p>To make diary entries easier you can add portions that you
       regularly use. This is entirely optional. You add a portion by clicking on the
@@ -228,7 +212,7 @@
         <span class="logday__header__macro">Fat</span>
         <span class="logday__header__macro">Carbs</span>
       </div>
-      <log-meal #breakfast [open]="breakfastOpen" [food]="food" [date]="displayDate" [meal]="'Breakfast'" [logEntries]="[]" (dataChanged)="dummy()"></log-meal>
+      <log-meal #breakfast [open]="breakfastOpen" [searchables]="foodSearchables" [date]="displayDate" [meal]="'Breakfast'" [logEntries]="[]" (dataChanged)="dummy()"></log-meal>
     </div>
 
     <p></p>

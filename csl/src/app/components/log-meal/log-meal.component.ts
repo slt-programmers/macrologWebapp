@@ -6,6 +6,7 @@ import { StoreLogRequest } from '../../model/storeLogRequest';
 import { FoodService } from '../../services/food.service';
 import { LogService } from '../../services/log.service';
 import { Food } from '../../model/food';
+import { FoodSearchable } from '../../model/foodSearchable';
 import { ToastService } from '../../services/toast.service';
 
 @Component({
@@ -16,7 +17,7 @@ export class LogMealComponent implements OnInit, OnChanges {
 
 	@ViewChild('logMeal') private logMealEref: ElementRef;
 
-	@Input() food;
+	@Input() searchables: FoodSearchable[];
 	@Input() meal: string;
 	@Input() logEntries: LogEntry[];
 	@Input() date: Date;
@@ -62,7 +63,7 @@ export class LogMealComponent implements OnInit, OnChanges {
 			return logEntry.multiplier;
 		}
 
-		if (!logEntry.portion &&  logEntry.food.measurementUnit === 'GRAMS') {
+		if (!logEntry.portion) {
 			logEntry.multiplier = (event.target.value / logEntry.food.unitGrams);
 		} else {
 			logEntry.multiplier = event.target.value;
@@ -72,7 +73,7 @@ export class LogMealComponent implements OnInit, OnChanges {
 	}
 
 	public getValue(logEntry) {
-		if (!logEntry.portion && logEntry.food.measurementUnit === 'GRAMS') {
+		if (!logEntry.portion) {
 			return Math.round(logEntry.multiplier * logEntry.food.unitGrams);
 		} else {
 			return logEntry.multiplier;
@@ -119,7 +120,7 @@ export class LogMealComponent implements OnInit, OnChanges {
 	}
 
 	private getAvailablePortions(logEntry) {
-		for (const item of this.food) {
+		for (const item of this.searchables) {
 			// in foodSearchable zitten dubbele entries en ook zonder portions
 			if (item.food.id === logEntry.food.id) {
 				return item.food.portions;
@@ -159,23 +160,13 @@ export class LogMealComponent implements OnInit, OnChanges {
 			// van default naar een portie.
 			// Dit gaan we niet omrekenen, maar de gebruiker moet de oude waarde blijven zien.
 			logEntry.portion = this.getSpecificPortion(logEntry, newValue);
-			if (logEntry.food.measurementUnit === 'GRAMS') {
-				logEntry.multiplier = logEntry.multiplier * logEntry.food.unitGrams;
-			}
-
+			logEntry.multiplier = logEntry.multiplier * logEntry.food.unitGrams;
 		} else if (newValue === 'defaultUnit') {
 			// van een portie naar default. Dit gaan we omrekenen.
 			const oldPortion = this.getSpecificPortion(logEntry, oldValue);
-
 			logEntry.portion = undefined;
-			if (logEntry.food.measurementUnit === 'GRAMS') {
-				const oldAmount = logEntry.multiplier * oldPortion.grams;
-				logEntry.multiplier = oldAmount / logEntry.food.unitGrams;
-			} else {
-				const oldAmount = logEntry.multiplier * oldPortion.unitMultiplier;
-				logEntry.multiplier = oldAmount;
-			}
-
+			const oldAmount = logEntry.multiplier * oldPortion.grams;
+			logEntry.multiplier = oldAmount / logEntry.food.unitGrams;
 		} else {
 			// wisselen tussen porties. Eerst naar default unit en dan naar nieuwe unit.
 			// TODO :)
@@ -227,11 +218,7 @@ export class LogMealComponent implements OnInit, OnChanges {
 		if (logEntry.portion) {
 			return (logEntry.multiplier * logEntry.portion.macros.protein);
 		} else {
-			if (logEntry.food.measurementUnit === 'UNIT') {
-				return (logEntry.multiplier * logEntry.food.protein);
-			} else {
-				return (logEntry.multiplier * logEntry.food.protein);
-			}
+			return (logEntry.multiplier * logEntry.food.protein);
 		}
 	}
 
@@ -239,11 +226,7 @@ export class LogMealComponent implements OnInit, OnChanges {
 		if (logEntry.portion) {
 			return (logEntry.multiplier * logEntry.portion.macros.fat);
 		} else {
-			if (logEntry.food.measurementUnit === 'UNIT') {
-				return (logEntry.multiplier * logEntry.food.fat);
-			} else {
-				return (logEntry.multiplier * logEntry.food.fat);
-			}
+			return (logEntry.multiplier * logEntry.food.fat);
 		}
 	}
 
@@ -251,11 +234,7 @@ export class LogMealComponent implements OnInit, OnChanges {
 		if (logEntry.portion) {
 			return (logEntry.multiplier * logEntry.portion.macros.carbs);
 		} else {
-			if (logEntry.food.measurementUnit === 'UNIT') {
-				return (logEntry.multiplier * logEntry.food.carbs);
-			} else {
-				return (logEntry.multiplier * logEntry.food.carbs);
-			}
+			return (logEntry.multiplier * logEntry.food.carbs);
 		}
 	}
 

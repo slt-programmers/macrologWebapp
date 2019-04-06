@@ -2,6 +2,8 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { UserService } from '../../services/user.service';
 import { Gender } from '../../model/gender';
 import { Food } from '../../model/food';
+import { Portion } from '../../model/portion';
+import { Macro } from '../../model/macro';
 import { FoodSearchable } from '../../model/foodSearchable';
 import { Observable } from 'rxjs/Observable';
 import { forkJoin } from 'rxjs/observable/forkJoin';
@@ -43,18 +45,31 @@ export class IntakeComponent implements OnInit {
 	// Step 4
 	public displayDate = new Date();
 	public breakfastOpen = false;
-	public food = new Array();
+	public foodSearchables = new Array();
 
 	public currentStep: number;
 
 	constructor(private userService: UserService,
 							private router: Router) {
-		const item = new Food('Apple', 'UNIT', 0.5, 0.3, 25);
-		item.unitName = 'piece';
-		item.unitGrams = 182;
-		const foodItem = new FoodSearchable(item, undefined);
-		this.food.push(foodItem);
-		console.log(this.food);
+		const item = new Food('Apple', 'GRAMS', 0.4, 0.0, 12);
+		item.portions = [];
+		let portion = new Portion();
+		let macros = new Macro();
+		macros.protein = 0.8;
+		macros.fat = 0.0;
+		macros.carbs = 24;
+		portion.macros = macros;
+		portion.grams = 200;
+		portion.description = 'piece';
+		item.portions.push(portion);
+		item.unitName = 'grams';
+		item.unitGrams = 100;
+
+		const searchable = new FoodSearchable(item, portion);
+		const searchable2 = new FoodSearchable(item, undefined);
+		this.foodSearchables.push(searchable);
+		this.foodSearchables.push(searchable2);
+		console.log(this.foodSearchables);
 	}
 
 	ngOnInit() {

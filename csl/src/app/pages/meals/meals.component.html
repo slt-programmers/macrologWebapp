@@ -26,16 +26,12 @@
         <div class="grid__tile__ingredients" *ngFor="let ingredient of meal.ingredients">
           <div class="grid__tile__text grid__tile__text--ingredient">{{ingredient.food.name}}</div>
 
-          <div class="grid__tile__text grid__tile__text--amount" *ngIf="!ingredient.portion && ingredient.food.measurementUnit == 'GRAMS'">
+          <div class="grid__tile__text grid__tile__text--amount" *ngIf="!ingredient.portion">
             {{ingredient.food.unitGrams * ingredient.multiplier}} {{ingredient.food.unitName}}
           </div>
 
           <div class="grid__tile__text grid__tile__text--amount" *ngIf="ingredient.portion">
             {{ingredient.multiplier}} {{ingredient.portion.description}}
-          </div>
-
-          <div class="grid__tile__text grid__tile__text--amount" *ngIf="ingredient.food.measurementUnit == 'UNIT'">
-            {{ingredient.multiplier}} {{ingredient.food.unitName}}
           </div>
         </div>
       </div>

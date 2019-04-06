@@ -41,10 +41,10 @@
       <span class="logday__header__macro"></span>
     </div>
 
-    <log-meal #breakfast [open]="breakfastOpen" [food]="foodAndPortions" [date]="displayDate" [meal]="'Breakfast'" [logEntries]="breakfastLogs" (dataChanged)="refresh()"></log-meal>
-    <log-meal #lunch [open]="lunchOpen" [food]="foodAndPortions" [date]="displayDate" [meal]="'Lunch'" [logEntries]="lunchLogs" (dataChanged)="refresh()"></log-meal>
-    <log-meal #dinner [open]="dinnerOpen" [food]="foodAndPortions" [date]="displayDate" [meal]="'Dinner'" [logEntries]="dinnerLogs" (dataChanged)="refresh()"></log-meal>
-    <log-meal #snacks [open]="snacksOpen" [food]="foodAndPortions" [date]="displayDate" [meal]="'Snacks'" [logEntries]="snacksLogs" (dataChanged)="refresh()"></log-meal>
+    <log-meal #breakfast [open]="breakfastOpen" [searchables]="foodAndPortions" [date]="displayDate" [meal]="'Breakfast'" [logEntries]="breakfastLogs" (dataChanged)="refresh()"></log-meal>
+    <log-meal #lunch [open]="lunchOpen" [searchables]="foodAndPortions" [date]="displayDate" [meal]="'Lunch'" [logEntries]="lunchLogs" (dataChanged)="refresh()"></log-meal>
+    <log-meal #dinner [open]="dinnerOpen" [searchables]="foodAndPortions" [date]="displayDate" [meal]="'Dinner'" [logEntries]="dinnerLogs" (dataChanged)="refresh()"></log-meal>
+    <log-meal #snacks [open]="snacksOpen" [searchables]="foodAndPortions" [date]="displayDate" [meal]="'Snacks'" [logEntries]="snacksLogs" (dataChanged)="refresh()"></log-meal>
 
     <div class="logday__total">
       <span class="logday__total__title">Daily total</span>

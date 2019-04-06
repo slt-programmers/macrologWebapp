@@ -15,7 +15,7 @@ export class AutocompleteFoodComponent implements OnInit, OnChanges {
 
 	@Input() placeholder = '';
 	@Input() selectFn: Function;
-	@Input() food;
+	@Input() food: FoodSearchable[];
 
 	public foodMatch = new Array();
 	public foodName: string;
@@ -92,16 +92,13 @@ export class AutocompleteFoodComponent implements OnInit, OnChanges {
 	}
 
 	public matchDescription(foodSearchable) {
+		console.log(foodSearchable);
 		if (foodSearchable.portion) {
 			return foodSearchable.food.name + ' (' + foodSearchable.portion.description + ')';
 		} else if (foodSearchable.food.ingredients) {
 			return foodSearchable.food.name + ' (Meal)';
 		} else {
-			if (foodSearchable.food.measurementUnit === 'UNIT') {
-				return foodSearchable.food.name + ' (' + foodSearchable.food.unitName + ')';
-			} else {
-				return foodSearchable.food.name + ' (' + foodSearchable.food.unitGrams  + ' ' + foodSearchable.food.unitName + ')';
-			}
+			return foodSearchable.food.name + ' (' + foodSearchable.food.unitGrams  + ' ' + foodSearchable.food.unitName + ')';
 		}
 	}
 

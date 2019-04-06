@@ -49,7 +49,7 @@ export class MakeMealModalComponent implements OnInit {
 
 	calculateMultiplier(event, ingredient) {
 		console.log(event.target.value);
-		if (ingredient.food.measurementUnit === 'GRAMS' && ingredient.portion === undefined) {
+		if (ingredient.portion === undefined) {
 			ingredient.multiplier = (event.target.value / ingredient.food.unitGrams);
 			console.log(ingredient.multiplier);
 			console.log(this.ingredients);
@@ -60,7 +60,7 @@ export class MakeMealModalComponent implements OnInit {
 	}
 
 	public getValue(ingredient) {
-		if (ingredient.food.measurementUnit === 'GRAMS' && ingredient.portion === undefined) {
+		if (ingredient.portion === undefined) {
 			return Math.round(ingredient.food.unitGrams * ingredient.multiplier);
 		} else {
 			return ingredient.multiplier;
@@ -68,7 +68,7 @@ export class MakeMealModalComponent implements OnInit {
 	}
 
 	public getStep(ingredient) {
-		if (ingredient.food.measurementUnit === 'GRAMS' && ingredient.portion === undefined) {
+		if (ingredient.portion === undefined) {
 			return 1;
 		} else {
 			return 0.1;
