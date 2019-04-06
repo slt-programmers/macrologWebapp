@@ -51,7 +51,7 @@ export class IntakeComponent implements OnInit {
 
 	constructor(private userService: UserService,
 							private router: Router) {
-		const item = new Food('Apple', 'GRAMS', 0.4, 0.0, 12);
+		const item = new Food('Apple', 0.4, 0.0, 12);
 		item.portions = [];
 		let portion = new Portion();
 		let macros = new Macro();

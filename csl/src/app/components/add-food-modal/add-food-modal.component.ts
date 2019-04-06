@@ -48,7 +48,6 @@ export class AddFoodModalComponent implements OnInit {
 
 	public saveFood() {
 		const addFoodRequest = new Food(this.name,
-			"GRAMS",
 			this.protein,
 			this.fat,
 			this.carbs);

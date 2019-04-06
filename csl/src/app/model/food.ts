@@ -8,7 +8,6 @@ export class Food {
 	public portions: Portion[];
 
 	constructor(public name: string,
-							public measurementUnit: string,
 							public protein: number,
 							public fat: number,
 							public carbs: number) {
