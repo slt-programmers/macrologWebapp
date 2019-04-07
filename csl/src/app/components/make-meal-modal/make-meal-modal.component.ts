@@ -20,6 +20,8 @@ export class MakeMealModalComponent implements OnInit {
 	public foodAndPortions = new Array();
 	public addIngredientCallBack: Function;
 	public ingredients: Ingredient[] = new Array();
+	public unitName: string = 'gram';
+	public unitGrams: number = 100.00;
 
 	constructor(private foodService: FoodService,
 							private mealService: MealService) {
@@ -50,7 +52,7 @@ export class MakeMealModalComponent implements OnInit {
 	calculateMultiplier(event, ingredient) {
 		console.log(event.target.value);
 		if (ingredient.portion === undefined) {
-			ingredient.multiplier = (event.target.value / ingredient.food.unitGrams);
+			ingredient.multiplier = (event.target.value / this.unitGrams);
 			console.log(ingredient.multiplier);
 			console.log(this.ingredients);
 		} else {
@@ -61,7 +63,7 @@ export class MakeMealModalComponent implements OnInit {
 
 	public getValue(ingredient) {
 		if (ingredient.portion === undefined) {
-			return Math.round(ingredient.food.unitGrams * ingredient.multiplier);
+			return Math.round(this.unitGrams * ingredient.multiplier);
 		} else {
 			return ingredient.multiplier;
 		}

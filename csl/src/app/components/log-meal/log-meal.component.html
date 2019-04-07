@@ -6,7 +6,7 @@
       <div *ngFor="let logEntry of logEntries" class="meal__ingredient">
         <span class="meal__ingredient__name">{{logEntry.food.name}}</span>
         <span class="meal__ingredient__amount" *ngIf="logEntry.portion">{{logEntry.multiplier | number:'1.0-2'}} {{logEntry.portion.description}}</span>
-        <span class="meal__ingredient__amount" *ngIf="!logEntry.portion">{{logEntry.food.unitGrams * logEntry.multiplier | number:'1.0-2'}}  {{logEntry.food.unitName}}</span>
+        <span class="meal__ingredient__amount" *ngIf="!logEntry.portion">{{unitGrams * logEntry.multiplier | number:'1.0-2'}}  {{unitName}}</span>
         <span class="meal__ingredient__macro">{{logEntry.macrosCalculated.protein | number:'1.1-1'}}</span>
         <span class="meal__ingredient__macro">{{logEntry.macrosCalculated.fat | number:'1.1-1'}}</span>
         <span class="meal__ingredient__macro">{{logEntry.macrosCalculated.carbs | number:'1.1-1'}}</span>
@@ -44,7 +44,7 @@
         <div class="meal__edit-ingredient__measurement">
           <select (change)="portionChange(logEntry, $event.target)">
             <!-- the default unitname -->
-            <option value="defaultUnit" selected="{{getSelected(logEntry.portion, undefined)}}">{{logEntry.food.unitName}}</option>
+            <option value="defaultUnit" selected="{{getSelected(logEntry.portion, undefined)}}">{{unitName}}</option>
             <!-- all available portions -->
             <option *ngFor="let portion of getAvailablePortions(logEntry)"
                     selected="{{getSelected(logEntry.portion, portion)}}"

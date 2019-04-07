@@ -62,8 +62,6 @@ export class IntakeComponent implements OnInit {
 		portion.grams = 200;
 		portion.description = 'piece';
 		item.portions.push(portion);
-		item.unitName = 'grams';
-		item.unitGrams = 100;
 
 		const searchable = new FoodSearchable(item, portion);
 		const searchable2 = new FoodSearchable(item, undefined);

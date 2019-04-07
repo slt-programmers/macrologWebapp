@@ -28,6 +28,9 @@ export class LogMealComponent implements OnInit, OnChanges {
 	public editable: boolean;
 	public addLogEntryCallBack: Function;
 
+	public unitGrams: number = 100.00;
+	public unitName: string = 'gram';
+
 	private pipe: DatePipe;
 
 	constructor(private foodService: FoodService,
@@ -64,7 +67,7 @@ export class LogMealComponent implements OnInit, OnChanges {
 		}
 
 		if (!logEntry.portion) {
-			logEntry.multiplier = (event.target.value / logEntry.food.unitGrams);
+			logEntry.multiplier = (event.target.value / this.unitGrams);
 		} else {
 			logEntry.multiplier = event.target.value;
 		}
@@ -74,7 +77,7 @@ export class LogMealComponent implements OnInit, OnChanges {
 
 	public getValue(logEntry) {
 		if (!logEntry.portion) {
-			return Math.round(logEntry.multiplier * logEntry.food.unitGrams);
+			return Math.round(logEntry.multiplier * this.unitGrams);
 		} else {
 			return logEntry.multiplier;
 		}
@@ -160,13 +163,13 @@ export class LogMealComponent implements OnInit, OnChanges {
 			// van default naar een portie.
 			// Dit gaan we niet omrekenen, maar de gebruiker moet de oude waarde blijven zien.
 			logEntry.portion = this.getSpecificPortion(logEntry, newValue);
-			logEntry.multiplier = logEntry.multiplier * logEntry.food.unitGrams;
+			logEntry.multiplier = logEntry.multiplier * this.unitGrams;
 		} else if (newValue === 'defaultUnit') {
 			// van een portie naar default. Dit gaan we omrekenen.
 			const oldPortion = this.getSpecificPortion(logEntry, oldValue);
 			logEntry.portion = undefined;
 			const oldAmount = logEntry.multiplier * oldPortion.grams;
-			logEntry.multiplier = oldAmount / logEntry.food.unitGrams;
+			logEntry.multiplier = oldAmount / this.unitGrams;
 		} else {
 			// wisselen tussen porties. Eerst naar default unit en dan naar nieuwe unit.
 			// TODO :)

@@ -28,6 +28,8 @@ export class FoodComponent implements OnInit {
 	public currentSortHeader = 'name';
 	public sortReverse = false;
 	public displayMode = 'grams';
+	public unitName: string = 'gram';
+	public unitGrams: number = 100.00;
 
 	constructor(private foodService: FoodService) { }
 

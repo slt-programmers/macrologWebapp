@@ -10,6 +10,8 @@ export class MealsComponent implements OnInit {
 
 	public allMeals: Meal[];
 	public modalIsVisible = false;
+	public unitName = 'gram';
+	public unitGrams = 100.00;
 
 	constructor(private mealService: MealService) { }
 

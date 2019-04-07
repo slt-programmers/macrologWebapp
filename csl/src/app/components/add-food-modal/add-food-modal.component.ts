@@ -16,8 +16,8 @@ export class AddFoodModalComponent implements OnInit {
 
 	public title = 'Add food';
 	public name = '';
-	public unitName = '';
-	public unitGrams: number;
+	public unitName = 'gram';
+	public unitGrams: number = 100.00;
 	public protein: number;
 	public fat: number;
 	public carbs: number;
@@ -32,8 +32,6 @@ export class AddFoodModalComponent implements OnInit {
 		if (this.food) {
 			this.title  = 'Edit food';
 			this.name = this.food.name;
-			this.unitName = this.food.unitName;
-			this.unitGrams = this.food.unitGrams;
 			this.protein = this.food.protein;
 			this.fat = this.food.fat;
 			this.carbs = this.food.carbs;

@@ -98,7 +98,7 @@ export class AutocompleteFoodComponent implements OnInit, OnChanges {
 		} else if (foodSearchable.food.ingredients) {
 			return foodSearchable.food.name + ' (Meal)';
 		} else {
-			return foodSearchable.food.name + ' (' + foodSearchable.food.unitGrams  + ' ' + foodSearchable.food.unitName + ')';
+			return foodSearchable.food.name + ' (100 gram)';
 		}
 	}
 

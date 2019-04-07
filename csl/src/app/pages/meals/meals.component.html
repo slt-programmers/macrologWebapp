@@ -27,7 +27,7 @@
           <div class="grid__tile__text grid__tile__text--ingredient">{{ingredient.food.name}}</div>
 
           <div class="grid__tile__text grid__tile__text--amount" *ngIf="!ingredient.portion">
-            {{ingredient.food.unitGrams * ingredient.multiplier}} {{ingredient.food.unitName}}
+            {{unitGrams * ingredient.multiplier}} {{unitName}}
           </div>
 
           <div class="grid__tile__text grid__tile__text--amount" *ngIf="ingredient.portion">
