@@ -13,6 +13,7 @@ import { ToastDirective } from './directives/toast.directive';
 import { ToastComponent } from './components/toast/toast.component';
 import { LogComponent } from './pages/log/log.component';
 import { LogMealComponent } from './components/log-meal/log-meal.component';
+import { LogActivityComponent } from './components/log-activity/log-activity.component';
 import { FoodComponent } from './pages/food/food.component';
 import { LogService } from './services/log.service';
 import { UserComponent } from './pages/user/user.component';
@@ -34,6 +35,7 @@ import { LoginComponent } from './pages/login/login.component';
 import { JwtInterceptor } from './interceptors/jwt.interceptor';
 import { ErrorInterceptor } from './interceptors/error.interceptor';
 import { MealService } from './services/meal.service';
+import { ActivityService } from './services/activity.service';
 import { PiechartComponent } from './components/piechart/piechart.component';
 import { IntakeComponent } from './pages/intake/intake.component';
 import { StepperComponent } from './components/stepper/stepper.component';
@@ -58,7 +60,7 @@ const appRoutes: Routes = [
 	{path: 'intake', component: IntakeComponent, canActivate: [AuthGuardService]},
 	{path: 'food', component: FoodComponent, canActivate: [AuthGuardService]},
 	{path: 'meals', component: MealsComponent, canActivate: [AuthGuardService]},
-	// {path: 'graphs', component: GraphsComponent},
+  	// {path: 'graphs', component: GraphsComponent},
 	{path: '', redirectTo: '/log', pathMatch: 'full', canActivate: [AuthGuardService]},
 	{path: '**', redirectTo: '/log', pathMatch: 'full', canActivate: [AuthGuardService]}
 ];
@@ -68,6 +70,7 @@ const appRoutes: Routes = [
 		AppComponent,
 		LogComponent,
 		LogMealComponent,
+    LogActivityComponent,
 		FoodComponent,
 		UserComponent,
 		UserIntakeComponent,
@@ -99,6 +102,7 @@ const appRoutes: Routes = [
 		BrowserAnimationsModule
 	],
 	providers: [
+    ActivityService,
 		FoodService,
 		LogService,
 		UserService,

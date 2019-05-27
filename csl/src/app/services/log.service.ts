@@ -39,6 +39,7 @@ export class LogService {
 				callBack();
 			},
 			error => {
+				this.toastService.setMessage('Your meals could not be saved!');
 				console.log(error);
 			});
 	}
@@ -53,6 +54,7 @@ export class LogService {
 				console.log('deleted');
 			},
 			error => {
+				this.toastService.setMessage('Your entry has not been deleted!');
 				console.log(error);
 			});
 	}

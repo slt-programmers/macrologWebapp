@@ -1,10 +1,12 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { LogService } from '../../services/log.service';
+import { ActivityService } from '../../services/activity.service';
 import { UserService } from '../../services/user.service';
 import { FoodService } from '../../services/food.service';
 import { MealService } from '../../services/meal.service';
 import { LogEntry } from '../../model/logEntry';
+import { LogActivity } from '../../model/logActivity';
 import { Food } from '../../model/food';
 import { FoodSearchable } from '../../model/foodSearchable';
 import { Observable } from 'rxjs/Observable';
@@ -22,6 +24,7 @@ export class LogComponent implements OnInit {
 	@ViewChild('lunch') private lunchEref;
 	@ViewChild('dinner') private dinnerEref;
 	@ViewChild('snacks') private snacksEref;
+	@ViewChild('activities') private activitiesEref;
 	@ViewChild('toast') private toastEref;
 
 	public modalIsVisible = false;
@@ -37,11 +40,13 @@ export class LogComponent implements OnInit {
 	public lunchLogs = new Array<LogEntry>();
 	public dinnerLogs = new Array<LogEntry>();
 	public snacksLogs = new Array<LogEntry>();
+	public activitiesLogs = new Array<LogActivity>();
 
 	public breakfastOpen = false;
 	public lunchOpen = false;
 	public dinnerOpen = false;
 	public snacksOpen = false;
+  public activitiesOpen = false;
 
 	public userGoals;
 	public goalCal;
@@ -50,6 +55,7 @@ export class LogComponent implements OnInit {
 							private userService: UserService,
 							private http: HttpClient,
 							private logService: LogService,
+              private activityService: ActivityService,
 							private mealService: MealService) {
 		this.displayDate = new Date();
 		this.pipe = new DatePipe('en-US');
@@ -88,6 +94,7 @@ export class LogComponent implements OnInit {
 		this.lunchOpen = false;
 		this.dinnerOpen = false;
 		this.snacksOpen = false;
+    this.activitiesOpen = false;
 		this.getLogEntries(this.pipe.transform(this.displayDate, 'yyyy-MM-dd'));
 	}
 
@@ -153,6 +160,10 @@ export class LogComponent implements OnInit {
 				this.snacksLogs = this.allLogs.filter(
 					entry => entry.meal === 'SNACKS'
 				);
+        this.activitiesLogs = new Array();
+  			this.activitiesLogs.push( { id : 1, day: '01-01-2010',name: 'Cycling', calories: 912});
+  			this.activitiesLogs.push( { id : 2, day: '02-01-2010',name: 'Running', calories: 350});
+        console.log('dummy activities made')
 			},
 			error => { console.log(error);
 				this.allLogs = new Array();
@@ -160,8 +171,21 @@ export class LogComponent implements OnInit {
 				this.lunchLogs = new Array();
 				this.dinnerLogs = new Array();
 				this.snacksLogs = new Array();
+        this.activitiesLogs = new Array();
 			}
 		);
+    this.activityService.getDayActivities(date).subscribe(
+			data => {
+        this.activitiesLogs = data;
+//  			this.activitiesLogs.push( { id : 1, day: '01-01-2010',name: 'Cycling', calories: 912});
+//  			this.activitiesLogs.push( { id : 2, day: '02-01-2010',name: 'Running', calories: 350});
+        console.log('dummy activities made')
+			},
+			error => { console.log(error);
+        this.activitiesLogs = new Array();
+			}
+		);
+
 	}
 
 	// Maakt een lijst met daarin food en food + alle mogelijke portions
@@ -202,6 +226,7 @@ export class LogComponent implements OnInit {
 			this.lunchOpen = this.lunchEref.logMealEref.nativeElement.contains(event.target);
 			this.dinnerOpen = this.dinnerEref.logMealEref.nativeElement.contains(event.target);
 			this.snacksOpen = this.snacksEref.logMealEref.nativeElement.contains(event.target);
+			this.activitiesOpen = this.activitiesEref.logMealEref.nativeElement.contains(event.target);
 
 		}
 	}

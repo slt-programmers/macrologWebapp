@@ -1,0 +1,51 @@
+<div #logMeal class="log-activity" [ngClass]="{'log-activity--grow': editable}">
+  <div class="activity" *ngIf="!editable">
+    <span class="activity__title">Activities</span>
+
+    <div class="activity__display">
+      <div *ngFor="let logActivity of logActivities" class="activity__line">
+        <span class="activity__name">{{logActivity.name}}</span>
+        <span class="activity__calories">{{logActivity.calories| number:'1.0-0'}} kcal</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="activity" *ngIf="editable">
+    <span class="activity__title">Activities
+    </span>
+
+		<div *ngFor="let logActivity of logActivities" class="activity__edit-activity">
+			<div class="activity__edit-activity__name">
+				<input [(ngModel)]="logActivity.name">
+			</div>
+			<div class="activity__edit-activity__filler"></div>
+			<div class="activity__edit-activity__calories">
+				<input type=number [(ngModel)]="logActivity.calories">
+			</div>
+			<div class="activity__edit-activity__delete">
+				<button class="button button--transparent" (click)="deleteLogActivity(logActivity)">
+					<i class="fas fa-trash"></i>
+				</button>
+			</div>
+		</div>
+
+		<div class="activity__new-activity">
+
+			<div class="activity__new-activity__name">
+				<input (change)="addActivity()"  [(ngModel)]="newActivityName" placeholder="What did you do?">
+			</div>
+			<div class="activity__new-activity__filler">
+			</div>
+
+
+			<div class="meal__new-ingredient__close">
+				<button (click)="close()" class="button button--transparent">
+					<i class="fas fa-check"></i>
+				</button>
+			</div>
+
+		</div>
+
+
+  </div>
+</div>
