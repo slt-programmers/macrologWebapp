@@ -28,7 +28,6 @@ export class ActivityService {
 			'Access-Control-Allow-Origin': environment.origin
 		};
     console.log(storeActivityRequest);
-    callBack();
 
 		const options = { headers: headers };
  		return this.http.post<StoreActivityRequest[]>(this.macrologBackendUrl + '/', storeActivityRequest, options).subscribe(data => {
@@ -49,7 +48,7 @@ export class ActivityService {
 		const options = { headers: headers };
 
 		return this.http.delete<number>(this.macrologBackendUrl + '/' + logActivity.id, options).subscribe(data => {
-				console.log('deleted');
+				console.log('activity deleted');
 			},
 			error => {
 				this.toastService.setMessage('Your activity could not be deleted!');

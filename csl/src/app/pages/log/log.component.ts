@@ -160,10 +160,6 @@ export class LogComponent implements OnInit {
 				this.snacksLogs = this.allLogs.filter(
 					entry => entry.meal === 'SNACKS'
 				);
-        this.activitiesLogs = new Array();
-  			this.activitiesLogs.push( { id : 1, day: '01-01-2010',name: 'Cycling', calories: 912});
-  			this.activitiesLogs.push( { id : 2, day: '02-01-2010',name: 'Running', calories: 350});
-        console.log('dummy activities made')
 			},
 			error => { console.log(error);
 				this.allLogs = new Array();
@@ -177,9 +173,6 @@ export class LogComponent implements OnInit {
     this.activityService.getDayActivities(date).subscribe(
 			data => {
         this.activitiesLogs = data;
-//  			this.activitiesLogs.push( { id : 1, day: '01-01-2010',name: 'Cycling', calories: 912});
-//  			this.activitiesLogs.push( { id : 2, day: '02-01-2010',name: 'Running', calories: 350});
-        console.log('dummy activities made')
 			},
 			error => { console.log(error);
         this.activitiesLogs = new Array();
