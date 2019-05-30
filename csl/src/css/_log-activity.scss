@@ -71,14 +71,12 @@
   		  @media(min-width: $md) {
   		    flex-basis: 30%;
   		  }
-  			flex-basis: 50%;
-
+  			flex-basis: 75%;
   		}
   		&__filler {
   		  @media(min-width: $md) {
           flex-basis: 55%;
         }
-        text-align: end;
       }
 
   		&__calories {
@@ -98,36 +96,25 @@
   }
 
   &__new-activity {
-   align-items: center;
-   display: flex;
-        		flex-direction: row;
-        		margin-bottom: 5px;
-        		flex-wrap: wrap;
-      			padding: 0 10px;
 
-        		&__name {
-        		  @media(min-width: $md) {
-        		    flex-basis: 30%;
-        		  }
-        			flex-basis: 50%;
+    @media(min-width: $md) {
+      flex-direction: row;
+    }
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 
-        		}
-        		&__filler {
-        		  @media(min-width: $md) {
-                flex-basis: 65%;
-              }
-              text-align: end;
-            }
+    &__name {
+      flex-basis: 30%;
+      position: relative;
+      padding-left:10px;
+    }
 
-
-        		&__close {
-        		  @media(min-width: $md) {
-                flex-basis: 5%;
-              }
-            	flex-basis: 100%;
-            	text-align: center;
-            }
-
-
+    &__close {
+      align-items: center;
+      display: flex;
+      flex-basis: 5%;
+      justify-content: center;
+    }
   }
 }
