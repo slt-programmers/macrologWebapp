@@ -1,0 +1,44 @@
+<div>
+  <div class="tile">
+
+    <form  #weightForm="ngForm">
+      <div class="form-field">
+        <label class="form-field__label">Measurement date</label>
+        <div class="form-field__element">
+					<input required validdate placeholder="DD-MM-YYYY"  name="birthday" [(ngModel)]="measurementDate">
+        </div>
+      </div>
+
+      <div class="form-field">
+        <label class="form-field__label">Start weight (kg)</label>
+        <div class="form-field__element">
+          <input required class="" name="weight" type="number" [(ngModel)]="weight" step="0.1">
+        </div>
+      </div>
+
+			<div class="button-wrapper">
+				<button class="button button--primary" (click)="saveWeight(weightForm)"
+					[disabled]="weightForm.invalid">Save</button>
+			</div>
+
+		</form>
+
+  </div>
+
+	<div>
+
+
+		<div class="logweight__header">
+			<span class="logweight__titleDay">Date</span>
+			<span class="logweight__titleWeight">Weight</span>
+		</div>
+
+		<div *ngFor="let logWeight of trackedWeights" class="weight__line">
+			<div class="weight__cellDay">{{logWeight.day | date:'dd-MM-yyyy'}}</div>
+			<div class="weight__cellWeight">{{logWeight.weight | number:'1.0-0'}}</div>
+		</div>
+
+	</div>
+
+
+</div>

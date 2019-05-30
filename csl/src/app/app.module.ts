@@ -21,6 +21,7 @@ import { UserComponent } from './pages/user/user.component';
 import { UserIntakeComponent } from './pages/user/subpages/user.intake.component';
 import { UserPersonalComponent } from './pages/user/subpages/user.personal.component';
 import { UserAccountComponent } from './pages/user/subpages/user.account.component';
+import { UserWeightTrackerComponent } from './pages/user/subpages/user.weighttracker.component';
 import { UserService } from './services/user.service';
 import { SliderComponent } from './components/slider/slider.component';
 import { BargraphComponent } from './components/bargraph/bargraph.component';
@@ -37,6 +38,7 @@ import { JwtInterceptor } from './interceptors/jwt.interceptor';
 import { ErrorInterceptor } from './interceptors/error.interceptor';
 import { MealService } from './services/meal.service';
 import { ActivityService } from './services/activity.service';
+import { WeightService } from './services/weight.service';
 import { PiechartComponent } from './components/piechart/piechart.component';
 import { IntakeComponent } from './pages/intake/intake.component';
 import { StepperComponent } from './components/stepper/stepper.component';
@@ -55,6 +57,7 @@ const appRoutes: Routes = [
 			{path: '', redirectTo: 'personal', pathMatch: 'full'},
       {path: 'personal', component: UserPersonalComponent},
 			{path: 'foodintake', component: UserIntakeComponent},
+      {path: 'weighttracker', component: UserWeightTrackerComponent},
 			{path: 'account', component: UserAccountComponent}
 		]
 	},
@@ -77,6 +80,7 @@ const appRoutes: Routes = [
 		UserIntakeComponent,
 		UserPersonalComponent,
 		UserAccountComponent,
+    UserWeightTrackerComponent,
 		SliderComponent,
 		BargraphComponent,
 		AddFoodModalComponent,
@@ -110,6 +114,7 @@ const appRoutes: Routes = [
 		UserService,
 		ToastService,
 		MealService,
+    WeightService,
 		AuthGuardService,
 		ScrollBehaviourService,
 		HealthcheckService,

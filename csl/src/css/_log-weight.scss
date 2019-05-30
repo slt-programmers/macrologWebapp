@@ -1,0 +1,80 @@
+.logweight {
+
+	&--grow {
+		@media(min-width: $md) {
+			@include elevation(2);
+			background: $white;
+			margin-left: -8px;
+			width: calc(100% + 16px);
+		}
+	}
+
+	&__header {
+		border-bottom: 1px solid $cloud;
+		display: flex;
+		font-weight: 600;
+		padding: 10px;
+		justify-content:center;
+	}
+
+	&__titleDay {
+  		flex-basis: 10%;
+  		font-weight: bold;
+  		margin-bottom: 5px;
+
+  	}
+  &__titleWeight {
+    		flex-basis: 5%;
+    		font-weight: bold;
+    		margin-bottom: 5px;
+    	}
+}
+
+.weight {
+	@media(min-width: $md) {
+		padding: ($gutter/2);
+	}
+	border-bottom: 1px solid $cloud;
+	display: flex;
+	flex-direction: column;
+	padding: ($gutter/3);
+
+
+	&__line {
+		justify-content:center;
+
+  		flex-direction: row;
+  		display: flex;
+  		margin-bottom: 5px;
+  		flex-wrap: wrap;
+  		padding: 0 10px;
+
+  		&:last-child {
+  			margin-bottom: 0;
+  		}
+  }
+
+	&__cellDay {
+			@media(min-width: $md) {
+				flex-basis: 10%
+			}
+
+			flex-basis: 10%;
+	}
+	&__cellWeight {
+  			@media(min-width: $md) {
+  				flex-basis: 5%
+  			}
+
+  			flex-basis: 5%;
+  			text-align:right;
+  	}
+
+
+	&__icon {
+		color: $primary;
+		margin-left: $gutter/2;
+	}
+
+
+}
