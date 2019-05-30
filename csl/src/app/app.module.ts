@@ -52,9 +52,9 @@ const appRoutes: Routes = [
 		component: UserComponent,
 		canActivate: [AuthGuardService],
 		children: [
-			{path: '', redirectTo: 'foodintake', pathMatch: 'full'},
+			{path: '', redirectTo: 'personal', pathMatch: 'full'},
+      {path: 'personal', component: UserPersonalComponent},
 			{path: 'foodintake', component: UserIntakeComponent},
-			{path: 'personal', component: UserPersonalComponent},
 			{path: 'account', component: UserAccountComponent}
 		]
 	},
