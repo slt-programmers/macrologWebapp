@@ -13,7 +13,7 @@ import { ToastService } from '../../services/toast.service';
 export class UserComponent implements OnInit {
 
 	public name: string;
-	public age: number;
+	public birthday: number;
 	public gender: Gender;
 	public height: number;
 	public weight: number;
@@ -37,7 +37,7 @@ export class UserComponent implements OnInit {
 		this.userService.getAllSettings().subscribe(
 			result => {
 				this.name = this.getKeyFromResultlist(result, 'name');
-				this.age = parseInt(this.getKeyFromResultlist(result, 'age'), 10) || undefined ;
+				this.birthday = this.getKeyFromResultlist(result, 'birthday');
 				this.gender = this.getKeyFromResultlist(result, 'gender') || Gender.Male;
 				this.height = parseInt(this.getKeyFromResultlist(result, 'height'), 10) || undefined;
 				this.weight = parseInt(this.getKeyFromResultlist(result, 'weight'), 10) || undefined;

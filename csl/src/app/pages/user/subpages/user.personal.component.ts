@@ -3,6 +3,8 @@ import { forkJoin } from 'rxjs/observable/forkJoin';
 import { UserService } from '../../../services/user.service';
 import { Gender } from '../../../model/gender';
 import { ToastService } from '../../../services/toast.service';
+import { DateValidator } from '../../../directives/date.directive';
+import { FormGroup,  FormBuilder,  Validators } from '@angular/forms';
 
 @Component({
 	selector: 'user-personal',
@@ -13,7 +15,7 @@ export class UserPersonalComponent {
 	private originalResult;
 
 	public name;
-	public age;
+	public birthday;
 	public gender;
 	public height;
 	public weight;
@@ -27,7 +29,7 @@ export class UserPersonalComponent {
 			result => {
 				this.originalResult = result;
 				this.name = this.getKeyFromResultlist(result, 'name');
-				this.age = parseInt(this.getKeyFromResultlist(result, 'age'), 10) || undefined ;
+				this.birthday =this.getKeyFromResultlist(result, 'birthday');
 				this.gender = this.getKeyFromResultlist(result, 'gender') || Gender.Male;
 				this.height = parseInt(this.getKeyFromResultlist(result, 'height'), 10) || undefined;
 				this.weight = parseInt(this.getKeyFromResultlist(result, 'weight'), 10) || undefined;
@@ -42,7 +44,7 @@ export class UserPersonalComponent {
 	public saveUserSettings(): void {
 		forkJoin(
 			this.userService.addUserInfo('name', this.name),
-			this.userService.addUserInfo('age', this.age.toString()),
+			this.userService.addUserInfo('birthday', this.birthday.toString()),
 			this.userService.addUserInfo('gender', this.gender.toString()),
 			this.userService.addUserInfo('height', this.height.toString()),
 			this.userService.addUserInfo('weight', this.weight.toString()),
@@ -56,7 +58,7 @@ export class UserPersonalComponent {
 	public isInputUnchanged(): boolean {
 		if (this.originalResult !== undefined) {
 			if (this.name === this.getKeyFromResultlist(this.originalResult, 'name')
-					&& this.age === parseInt(this.getKeyFromResultlist(this.originalResult, 'age'), 10)
+					&& this.birthday === this.getKeyFromResultlist(this.originalResult, 'birthday')
 					&& this.gender === this.getKeyFromResultlist(this.originalResult, 'gender')
 					&& this.height === parseInt(this.getKeyFromResultlist(this.originalResult, 'height'), 10)
 					&& this.weight === parseInt(this.getKeyFromResultlist(this.originalResult, 'weight'), 10)

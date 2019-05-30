@@ -8,10 +8,15 @@ input {
 	padding: 10px;
 	width: 100%;
 
+
 	&::placeholder {
   	color: $silver;
   	font-weight: normal;
   	font-size: 12px;
+  }
+
+  &.ng-touched.ng-invalid {
+     border-color:red;
   }
 }
 

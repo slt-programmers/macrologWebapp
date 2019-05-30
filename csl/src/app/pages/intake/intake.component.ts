@@ -8,6 +8,7 @@ import { FoodSearchable } from '../../model/foodSearchable';
 import { Observable } from 'rxjs/Observable';
 import { forkJoin } from 'rxjs/observable/forkJoin';
 import { Router } from '@angular/router';
+import * as moment from 'moment';
 
 @Component({
 	selector: 'app-intake',
@@ -20,7 +21,7 @@ export class IntakeComponent implements OnInit {
 
 	// Step 1
 	public name: string;
-	public age: number;
+	public birthday: string;
 	public gender: Gender;
 	public height: number;
 	public weight: number;
@@ -103,10 +104,16 @@ export class IntakeComponent implements OnInit {
 
 	calcTDEE(): void {
 		let bmr;
+    let age;
+    var birthdayDate = moment(this.birthday, 'D-M-YYYY', true);
+    if (birthdayDate.isValid()){
+       age = moment().diff(birthdayDate, 'years');
+    }
+    console.log(age);
 		if (this.gender === 'MALE') {
-			bmr = 66.5 + (13.7 * this.weight) + (5 * this.height) - (6.76 * this.age);
+			bmr = 66.5 + (13.7 * this.weight) + (5 * this.height) - (6.76 * age);
 		} else {
-			bmr = 655.0 + (9.56 * this.weight) + (1.8 * this.height) - (4.68 * this.age);
+			bmr = 655.0 + (9.56 * this.weight) + (1.8 * this.height) - (4.68 * age);
 		}
 		this.tdee = bmr * this.activity;
 	}
@@ -147,7 +154,7 @@ export class IntakeComponent implements OnInit {
 	public saveUserSettings(): void {
 		forkJoin(
 			this.userService.addUserInfo('name', this.name),
-			this.userService.addUserInfo('age', this.age.toString()),
+			this.userService.addUserInfo('birthday', this.birthday.toString()),
 			this.userService.addUserInfo('gender', this.gender.toString()),
 			this.userService.addUserInfo('height', this.height.toString()),
 			this.userService.addUserInfo('weight', this.weight.toString()),

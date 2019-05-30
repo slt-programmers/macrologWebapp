@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
 import { UserService } from '../../../services/user.service';
 import { Gender } from '../../../model/gender';
+import * as moment from 'moment';
 
 @Component({
 	selector: 'user-intake',
@@ -14,6 +15,7 @@ export class UserIntakeComponent {
 	public goalCarbs: string;
 
 	public age;
+  public birthday;
 	public gender;
 	public height;
 	public weight;
@@ -26,7 +28,7 @@ export class UserIntakeComponent {
 			result => {
 
 				// FOR CALC MODAL
-				this.age = parseInt(this.getKeyFromResultlist(result, 'age'), 10) || undefined ;
+				this.birthday = this.getKeyFromResultlist(result, 'birthday');
 				this.gender = this.getKeyFromResultlist(result, 'gender') || Gender.Male;
 				this.height = parseInt(this.getKeyFromResultlist(result, 'height'), 10) || undefined;
 				this.weight = parseInt(this.getKeyFromResultlist(result, 'weight'), 10) || undefined;
@@ -35,6 +37,15 @@ export class UserIntakeComponent {
 				this.goalProtein = this.getKeyFromResultlist(result, 'goalProtein');
 				this.goalFat = this.getKeyFromResultlist(result, 'goalFat');
 				this.goalCarbs = this.getKeyFromResultlist(result, 'goalCarbs');
+
+        // derived age:
+        var birthdayDate = moment(this.birthday, 'D-M-YYYY', true);
+        if (birthdayDate.isValid()){
+           this.age = moment().diff(birthdayDate, 'years');
+        } else {
+           // indien age opgevoerd in verleden
+           this.age = parseInt(this.getKeyFromResultlist(result, 'age'), 10) || undefined ;
+        }
 			});
 	}
 

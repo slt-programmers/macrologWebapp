@@ -10,6 +10,7 @@ import { AppComponent } from './app.component';
 import { FoodService } from './services/food.service';
 import { ToastService } from './services/toast.service';
 import { ToastDirective } from './directives/toast.directive';
+import { DateValidator } from './directives/date.directive';
 import { ToastComponent } from './components/toast/toast.component';
 import { LogComponent } from './pages/log/log.component';
 import { LogMealComponent } from './components/log-meal/log-meal.component';
@@ -85,6 +86,7 @@ const appRoutes: Routes = [
 		DatepickerComponent,
 		ToastComponent,
 		ToastDirective,
+    DateValidator,
 		LoginComponent,
 		PagerComponent,
 		MakeMealModalComponent,

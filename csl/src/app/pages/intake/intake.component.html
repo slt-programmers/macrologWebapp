@@ -20,8 +20,8 @@
       </div>
 
       <div class="form-field">
-        <label class="form-field__label">Age</label>
-        <input class="form-field__input" name="age" type="number" [(ngModel)]="age" required>
+				<label class="form-field__label">Date of birth</label>
+				<input class="form-field__input" required validdate placeholder="DD-MM-YYYY, eg 26-3-1989"  name="birthday" [(ngModel)]="birthday">
       </div>
 
       <div class="form-field">
