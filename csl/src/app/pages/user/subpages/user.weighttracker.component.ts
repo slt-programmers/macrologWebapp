@@ -11,7 +11,8 @@ import * as moment from 'moment';
 
 @Component({
 	selector: 'user-weighttracker',
-	templateUrl: './user.weighttracker.component.html'
+	templateUrl: './user.weighttracker.component.html',
+	host: { '(document: click)': 'documentClick($event)' }
 })
 export class UserWeightTrackerComponent {
 
@@ -22,6 +23,8 @@ export class UserWeightTrackerComponent {
 	public measurementDate;
 	public weight;
   public weightForm;
+
+  public openWeight;
 
   private pipe: DatePipe;
 
@@ -53,10 +56,7 @@ export class UserWeightTrackerComponent {
     else return 0;
 }
 
-  public reset() {
-     this.weightForm.reset();
-  }
-	public saveWeight(formUsed): void {
+	public saveNewWeight(formUsed): void {
 
     const newRequest = new LogWeight();
     newRequest.weight=this.weight;
@@ -66,11 +66,67 @@ export class UserWeightTrackerComponent {
   	const closeCallBack = () => {
 			this.getAllWeights();
       formUsed.reset();
-
 		};
 
   	this.weightService.storeWeight(newRequest,closeCallBack);
 	}
+  public editWeight(w){
+    console.log('ee')
+    if (this.openWeight) {
+       if (this.openWeight.id === w.id) {
+         // do nothing
+       } else {
+         //close previous
+         this.openWeight.editable=false;
+         this.initOpenWeight(w);
+       }
+    } else {
+       this.initOpenWeight(w);
+    }
+  }
 
+  private initOpenWeight(w){
+         this.openWeight = w;
+         // init new
+         var date = moment(this.openWeight.day, 'YYYY-M-D', true);
+         this.openWeight.dayString = this.pipe.transform( date, 'dd-MM-yyyy');
+         this.openWeight.weightString = this.openWeight.weight;
+         w.editable = true;
+  }
 
+  public deleteWeight(w){
+    	const closeCallBack = () => {
+			this.getAllWeights();
+      this.toastService.setMessage('Your weight measurement has been deleted!');
+		};
+    this.weightService.deleteWeight(w,closeCallBack);
+  }
+
+ public saveWeight(w){
+    const closeCallBack = () => {
+			this.getAllWeights();
+      this.toastService.setMessage('Your weight measurement has been updated!');
+		};
+    var date = moment(w.dayString, 'D-M-YYYY', true);
+    w.day = this.pipe.transform( date, 'yyyy-MM-dd');
+    w.weight = w.weightString;
+    this.weightService.storeWeight(w,closeCallBack);
+  }
+
+  private documentClick(event) {
+    console.log(event.target.classList)
+		if (!event.target.classList.contains('weight__day') &&
+		    !event.target.classList.contains('weight__weight') &&
+        !event.target.classList.contains('editweight__day-input') &&
+		    !event.target.classList.contains('editweight__weight-input') &&
+        !event.target.classList.contains('editweight__day') &&
+		    !event.target.classList.contains('editweight__weight') &&
+		    !event.target.classList.contains('editweight')
+		    ) {
+      console.log('close')
+      if (this.openWeight) {
+         this.openWeight.editable=false;
+      }
+		}
+	}
 }

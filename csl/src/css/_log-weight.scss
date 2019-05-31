@@ -1,80 +1,79 @@
-.logweight {
 
-	&--grow {
-		@media(min-width: $md) {
-			@include elevation(2);
-			background: $white;
-			margin-left: -8px;
-			width: calc(100% + 16px);
-		}
-	}
 
-	&__header {
-		border-bottom: 1px solid $cloud;
-		display: flex;
-		font-weight: 600;
-		padding: 10px;
-		justify-content:center;
-	}
+.weight-table-header {
+  display: flex;
+  flex-direction: row;
+  font-weight: bold;
+	color: $white;
+  padding: 10px;
+  background-color: $primary;
+  flex-basis:30%;
 
-	&__titleDay {
-  		flex-basis: 10%;
-  		font-weight: bold;
-  		margin-bottom: 5px;
+  &__date {
+		flex-basis: 20%;
+		flex-grow: 1;
+ 	}
 
-  	}
-  &__titleWeight {
-    		flex-basis: 5%;
-    		font-weight: bold;
-    		margin-bottom: 5px;
-    	}
+  &__weight {
+    @include media-break($md) {
+      flex-basis: 10%;
+    }
+    flex-basis: 20%;
+  }
 }
-
 .weight {
-	@media(min-width: $md) {
-		padding: ($gutter/2);
-	}
-	border-bottom: 1px solid $cloud;
 	display: flex;
-	flex-direction: column;
-	padding: ($gutter/3);
+  flex-direction: row;
+  padding: 5px;
+  border-top: 1px solid $smoke;
 
-
-	&__line {
-		justify-content:center;
-
-  		flex-direction: row;
-  		display: flex;
-  		margin-bottom: 5px;
-  		flex-wrap: wrap;
-  		padding: 0 10px;
-
-  		&:last-child {
-  			margin-bottom: 0;
-  		}
+  &:hover {
+    border-top: 2px solid $smoke;
+    background-color: $cloud;
   }
 
-	&__cellDay {
-			@media(min-width: $md) {
-				flex-basis: 10%
-			}
-
-			flex-basis: 10%;
-	}
-	&__cellWeight {
-  			@media(min-width: $md) {
-  				flex-basis: 5%
-  			}
-
-  			flex-basis: 5%;
-  			text-align:right;
-  	}
-
-
-	&__icon {
-		color: $primary;
-		margin-left: $gutter/2;
+	&__day {
+		flex-basis: 50%;
+		flex-grow: 1;
 	}
 
-
+	&__weight {
+    @include media-break($md) {
+      flex-basis: 10%;
+    }
+    text-align: right;
+    flex-basis: 20%;
+    padding-right:35px;
+  }
 }
+
+.editweight {
+	display: flex;
+  flex-direction: row;
+  padding: 5px;
+  border-top: 1px solid $smoke;
+
+  &:hover {
+    border-top: 2px solid $smoke;
+    background-color: $cloud;
+  }
+
+	&__day {
+		flex-basis: 50%;
+		flex-grow: 1;
+    input {
+       width:150px;
+    }
+	}
+
+	&__weight {
+    @include media-break($md) {
+      flex-basis: 10%;
+    }
+    text-align: right;
+    flex-basis: 20%;
+    padding-right:35px;
+  }
+}
+
+

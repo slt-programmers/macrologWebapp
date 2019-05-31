@@ -41,18 +41,19 @@ export class WeightService {
 			});
 	}
 
-  public deleteLogActivity(logActivity: LogActivity) {
+  public deleteWeight(logWeight: LogWeight, callBack: Function) {
 		const headers = {'Content-Type': 'application/json',
 			'Access-Control-Allow-Origin': environment.origin
 		};
 
 		const options = { headers: headers };
 
-		return this.http.delete<number>(this.macrologBackendUrl + '/' + logActivity.id, options).subscribe(data => {
-				console.log('activity deleted');
+		return this.http.delete<number>(this.macrologBackendUrl + '/' + logWeight.id, options).subscribe(data => {
+				console.log('weight deleted');
+        callBack();
 			},
 			error => {
-				this.toastService.setMessage('Your activity could not be deleted!');
+				this.toastService.setMessage('Your weight measurement could not be deleted!');
 				console.log(error);
 			});
 	}

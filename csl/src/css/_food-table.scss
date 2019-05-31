@@ -138,6 +138,10 @@
       flex-basis: 15%;
     }
 	}
+	  &:hover {
+      border-top: 2px solid $smoke;
+      background-color: $cloud;
+    }
 }
 
 .portion {
