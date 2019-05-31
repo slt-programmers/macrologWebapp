@@ -97,6 +97,7 @@ export class UserWeightTrackerComponent {
   public deleteWeight(w){
     	const closeCallBack = () => {
 			this.getAllWeights();
+      this.openWeight = null;
       this.toastService.setMessage('Your weight measurement has been deleted!');
 		};
     this.weightService.deleteWeight(w,closeCallBack);
@@ -105,6 +106,7 @@ export class UserWeightTrackerComponent {
  public saveWeight(w){
     const closeCallBack = () => {
 			this.getAllWeights();
+      this.openWeight = null;
       this.toastService.setMessage('Your weight measurement has been updated!');
 		};
     var date = moment(w.dayString, 'D-M-YYYY', true);
