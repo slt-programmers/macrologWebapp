@@ -89,9 +89,9 @@ export class LoginComponent implements OnInit {
 		this.showForgotPwModal = toggle;
 	}
 
-	public retreivePassword() {
+	public resetPassword() {
 		this.forgotError = '';
-		this.authService.retreivePassword(this.forgotEmail)
+		this.authService.resetPassword(this.forgotEmail)
 			.subscribe(data => {
 				this.toastService.setMessage('We have send an email with your password!');
 				this.toggleForgotPwModal(false);
