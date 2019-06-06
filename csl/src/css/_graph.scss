@@ -1,65 +1,41 @@
-$proteincolor: green;
-$fatcolor: blue;
-$carbscolor: red;
+$proteincolor: '#5bd086';
+$fatcolor: '#f7ed70';
+$carbscolor: '#fb8353';
 
-.macrosperday {
+.graph  {
   display: flex;
-  flex-direction: row;
-}
+	flex-direction: column;
 
-.graph{
-  display: flex;
-  height: 300px;
-}
 
-.graph-day{
-  width: 20px;
-  position: relative;
-  display: flex;
-  padding-right: 2px;
-
-	&__macro {
-		margin-top: auto;
-    flex-basis: 33%;
-    border-width: 2px 0 0 0 ;
-
-    &--protein {
-      background-color: $proteincolor;
-    }
-		&--fat {
-			background-color: $fatcolor;
-		}
-		&--carbs {
-			background-color: $carbscolor;
-		}
-	}
-}
-
-.legenda {
-  margin-top: auto;
-  padding: 20px 0 0 10px;
-  display: flex;
-  flex-direction: column;
-
-  &__item {
-    flex-basis: 10%;
-
-		&--protein {
-      background-color:$proteincolor;
-    }
-
-    &--fat{
-       background-color:$fatcolor;
-    }
-
-    &--carbs{
-       background-color:$carbscolor;
-    }
+  &__image {
+     display: flex;
+  	 flex-direction: row;
+      justify-content: center;
   }
+
+  &__svg {
+    background-color: $cloud;
+  }
+  &__datelabel{
+     font-weight:bold;
+      padding: 15px 0;
+  }
+  &__controls {
+     display: flex;
+  	 flex-direction: row;
+     justify-content: center;
+  }
+
+  &__details {
+     display: flex;
+  	 flex-direction: row;
+     justify-content: center;
+     padding-left:25px;
+     spacing-left:25px;
+     text-align:right;
+  }
+
+
 }
 
-.piechart {
-	margin-bottom: ($gutter/2);
-	width: 120px;
-}
 

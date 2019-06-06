@@ -24,8 +24,9 @@ export class LogService {
 		return this.http.get<any[]>(this.macrologBackendUrl + '/day/' + date);
 	}
 
+
 	public getMacros(dateFrom, dateTo) {
-		return this.http.get(this.macrologBackendUrl + '/macros', { params: { from: dateFrom, to: dateTo }, responseType: 'json' });
+		return this.http.get<any[]>(this.macrologBackendUrl + '/macros', { params: { from: dateFrom, to: dateTo }, responseType: 'json' });
 	}
 
 	public storeLogEntries(storeLogEntryRequest: StoreLogRequest[], callBack: Function) {

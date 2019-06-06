@@ -58,13 +58,14 @@ const appRoutes: Routes = [
       {path: 'personal', component: UserPersonalComponent},
 			{path: 'foodintake', component: UserIntakeComponent},
       {path: 'weighttracker', component: UserWeightTrackerComponent},
+      {path: 'graphs', component: GraphsComponent},
 			{path: 'account', component: UserAccountComponent}
 		]
 	},
 	{path: 'intake', component: IntakeComponent, canActivate: [AuthGuardService]},
 	{path: 'food', component: FoodComponent, canActivate: [AuthGuardService]},
 	{path: 'meals', component: MealsComponent, canActivate: [AuthGuardService]},
-  	// {path: 'graphs', component: GraphsComponent},
+  {path: 'graphs', component: GraphsComponent, canActivate: [AuthGuardService]},
 	{path: '', redirectTo: '/log', pathMatch: 'full', canActivate: [AuthGuardService]},
 	{path: '**', redirectTo: '/log', pathMatch: 'full', canActivate: [AuthGuardService]}
 ];
