@@ -34,6 +34,7 @@ export class UserWeightTrackerComponent {
 
      this.getAllWeights();
      this.pipe = new DatePipe('en-US');
+     this.measurementDate = moment().format('DD-MM-YYYY')
 	}
 	private getAllWeights() {
 		this.weightService.getAllWeights().subscribe(
@@ -116,7 +117,6 @@ export class UserWeightTrackerComponent {
   }
 
   private documentClick(event) {
-    console.log(event.target.classList)
 		if (!event.target.classList.contains('weight__day') &&
 		    !event.target.classList.contains('weight__weight') &&
         !event.target.classList.contains('editweight__day-input') &&
