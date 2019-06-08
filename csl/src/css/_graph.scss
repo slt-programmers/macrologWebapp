@@ -6,6 +6,13 @@ $carbscolor: '#fb8353';
   display: flex;
 	flex-direction: column;
 
+  &--loading {
+     display: flex;
+  	 flex-direction: row;
+     justify-content: center;
+     padding-top:250px;
+     height:150px;
+  }
 
   &__image {
      display: flex;
@@ -24,6 +31,11 @@ $carbscolor: '#fb8353';
      display: flex;
   	 flex-direction: row;
      justify-content: center;
+
+     button[disabled] {
+        background-color:$ghost;
+        color:$grey;
+     }
   }
 
   &__details {

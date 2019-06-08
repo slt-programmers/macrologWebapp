@@ -21,6 +21,7 @@ export class GraphsComponent implements AfterContentInit  {
  graphHeight=400;
  graphLegenda=20;
 
+ public loading=true;
  public allLogs = new Array();
  public infoMacro = null;
 
@@ -31,11 +32,14 @@ export class GraphsComponent implements AfterContentInit  {
 
   ngAfterContentInit() {
 
+    this.dateFrom = moment().subtract(1,'months');
+    this.dateTo = moment();
     this.getData();
 
   }
 
  getData(){
+    this.loading=true;
     this.logBars = new Array();
     this.allLogs = new Array();
     console.log('fetching data')
@@ -43,6 +47,7 @@ export class GraphsComponent implements AfterContentInit  {
 			data => {
 				this.allLogs = data;
         this.matchLogs();
+        this.loading=false;
 			},
 			error => { console.log(error);
 				this.allLogs = new Array();
@@ -64,14 +69,14 @@ export class GraphsComponent implements AfterContentInit  {
   }
 
   monthBack(){
+     this.dateTo = this.dateFrom.clone();
      this.dateFrom = this.dateFrom.clone().subtract(1, 'months');
-     this.dateTo = this.dateFrom.clone().endOf('month');
      this.getData();
 
   }
   monthForward(){
-     this.dateFrom = this.dateFrom.clone().add(1, 'months');
-     this.dateTo = this.dateFrom.clone().endOf('month');
+     this.dateFrom = this.dateTo.clone();
+     this.dateTo = this.dateTo.clone().add(1, 'months');
      this.getData();
   }
 
