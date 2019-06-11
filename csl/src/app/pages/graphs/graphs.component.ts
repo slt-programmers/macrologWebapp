@@ -14,12 +14,18 @@ import { filter } from 'rxjs/operators';
 })
 export class GraphsComponent implements AfterContentInit  {
 
- radius = 10;
  barWidth=20;
 
  graphWidth=650;
- graphHeight=400;
+ graphHeight=500;
  graphLegenda=20;
+
+ splitted=true;
+ splitOffset=20;
+
+ maxProtein=0;
+ maxFat=0;
+ maxCarbs=0;
 
  public loading=true;
  public allLogs = new Array();
@@ -42,8 +48,7 @@ export class GraphsComponent implements AfterContentInit  {
     this.loading=true;
     this.logBars = new Array();
     this.allLogs = new Array();
-    console.log('fetching data')
-     this.logService.getMacros(this.dateFrom.format('YYYY-MM-DD'), this.dateTo.format('YYYY-MM-DD')).subscribe(
+    this.logService.getMacros(this.dateFrom.format('YYYY-MM-DD'), this.dateTo.format('YYYY-MM-DD')).subscribe(
 			data => {
 				this.allLogs = data;
         this.matchLogs();
@@ -51,7 +56,6 @@ export class GraphsComponent implements AfterContentInit  {
 			},
 			error => { console.log(error);
 				this.allLogs = new Array();
-
 			}
 		); }
 
@@ -60,9 +64,14 @@ export class GraphsComponent implements AfterContentInit  {
     while (pointerDate.isBefore(this.dateTo)) {
        let filtered = 	this.allLogs.filter(i => i.day === pointerDate.format('YYYY-MM-DD'))[0];
        if (filtered){
-        this.logBars.push(filtered)
+
+          this.maxProtein = Math.max(this.maxProtein, filtered.macro.protein);
+          this.maxFat = Math.max(this.maxFat,filtered.macro.fat);
+          this.maxCarbs = Math.max(this.maxCarbs, filtered.macro.carbs);
+
+          this.logBars.push(filtered)
        } else {
-        this.logBars.push({'day':pointerDate.format('YYYY-MM-DD')})
+          this.logBars.push({'day':pointerDate.format('YYYY-MM-DD')})
        }
        pointerDate.add(1,'day');
     }
@@ -85,17 +94,52 @@ export class GraphsComponent implements AfterContentInit  {
 
   showPercentage = true;
 
-  getYPosProtein(logEntry) { if (!logEntry || !logEntry.macro ) {return 0} return this.graphHeight - this.graphLegenda - logEntry.macro.protein/2}
-  getHeightProtein(logEntry) {if (!logEntry || !logEntry.macro ) {return 0} return logEntry.macro.protein/2}
+  getYPosProtein(logEntry) {
+     if (!logEntry || !logEntry.macro ) {
+       return 0
+     }
+     if (this.splitted) {
+       return this.graphHeight - this.graphLegenda - this.getHeightProtein(logEntry)
+     } else {
+       return this.graphHeight - this.graphLegenda - this.getHeightProtein(logEntry)
+     }
+  }
 
-  getYPosFat(logEntry){if (!logEntry || !logEntry.macro ) {return 0} return this.graphHeight - this.graphLegenda - (logEntry.macro.protein/2 + logEntry.macro.fat/2)}
-  getHeightFat(logEntry) {if (!logEntry || !logEntry.macro ) {return 0} return logEntry.macro.fat/2}
+  getHeightProtein(logEntry) {
+    if (!logEntry || !logEntry.macro ) {return 0}
+    return logEntry.macro.protein/2
+  }
 
-  getYPosCarbs(logEntry){if (!logEntry || !logEntry.macro ) {return 0} return this.graphHeight - this.graphLegenda- (logEntry.macro.protein/2 + logEntry.macro.fat/2 + logEntry.macro.carbs/2)}
-  getHeightCarbs(logEntry) {if (!logEntry || !logEntry.macro ) {return 0} return logEntry.macro.carbs/2}
+  getYPosFat(logEntry){
+    if (!logEntry || !logEntry.macro ) {return 0}
+     if (this.splitted) {
+       return this.graphHeight - this.graphLegenda - (this.splitOffset + this.maxProtein/2 + this.getHeightFat(logEntry))
+     } else {
+       return this.graphHeight - this.graphLegenda - (this.getHeightProtein(logEntry) + this.getHeightFat(logEntry))
+     }
+  }
+  getHeightFat(logEntry) {
+    if (!logEntry || !logEntry.macro ) {
+      return 0
+    }
+    return logEntry.macro.fat/2
+  }
 
- constructor(private logService: LogService) {
-	}
+  getYPosCarbs(logEntry){
+    if (!logEntry || !logEntry.macro ) {return 0}
+     if (this.splitted) {
+        return this.graphHeight - this.graphLegenda- (this.splitOffset*2 + this.maxProtein/2 + this.maxFat/2 + this.getHeightCarbs(logEntry))
+     } else {
+        return this.graphHeight - this.graphLegenda- (this.getHeightProtein(logEntry) +this.getHeightFat(logEntry) + this.getHeightCarbs(logEntry))
+     }
+  }
+
+  getHeightCarbs(logEntry) {
+    if (!logEntry || !logEntry.macro ) {return 0}
+    return logEntry.macro.carbs/2
+  }
+
+ constructor(private logService: LogService) {}
 
 
   data = [

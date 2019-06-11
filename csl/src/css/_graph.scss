@@ -37,6 +37,11 @@ $carbscolor: '#fb8353';
         color:$grey;
      }
   }
+   &__options {
+       display: flex;
+    	 flex-direction: row;
+       justify-content: center;
+    }
 
   &__details {
      display: flex;

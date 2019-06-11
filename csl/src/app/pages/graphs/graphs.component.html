@@ -37,7 +37,7 @@
 
 
 	<div *ngIf=!loading class="graph__image">
-		<svg width="650" height="400" class="graph__svg">
+		<svg width="650" height="500" class="graph__svg">
 
 			<g *ngFor="let d of logBars; let i = index" (mouseover)="showMacros(d)">
 				<text [attr.x]="(barWidth* i)" [attr.y]="graphHeight - graphLegenda + 15 " [attr.fill]="d.c">
@@ -60,6 +60,10 @@
 		<button [disabled]="loading" class="button button--transparent" (click)="monthForward()">
 			<i class="fas fa-arrow-right"></i>
 		</button>
+	</div>
+	<div class="graph__options">
+		 <div><input id=splittedOption type="checkbox" [(ngModel)]="splitted">
+			<label for="splittedOption">Split bars</label></div>
 	</div>
 
   <div class="graph__details">
