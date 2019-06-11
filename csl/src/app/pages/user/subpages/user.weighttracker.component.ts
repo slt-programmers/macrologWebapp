@@ -22,6 +22,8 @@ export class UserWeightTrackerComponent {
 
 	public measurementDate;
 	public weight;
+  public remark;
+
   public weightForm;
 
   public openWeight;
@@ -34,7 +36,7 @@ export class UserWeightTrackerComponent {
 
      this.getAllWeights();
      this.pipe = new DatePipe('en-US');
-     this.measurementDate = moment().format('DD-MM-YYYY')
+     this.init();
 	}
 	private getAllWeights() {
 		this.weightService.getAllWeights().subscribe(
@@ -51,6 +53,11 @@ export class UserWeightTrackerComponent {
 		);
 	}
 
+ public init(){
+   this.measurementDate = moment().format('DD-MM-YYYY');
+
+ }
+
  private compare(momentA, momentB) {
     if (momentA.isBefore(momentB)) return 1;
     else if (momentA.isAfter(momentB)) return -1;
@@ -63,10 +70,12 @@ export class UserWeightTrackerComponent {
     newRequest.weight=this.weight;
     var date = moment(this.measurementDate, 'D-M-YYYY', true);
     newRequest.day= this.pipe.transform(date, 'yyyy-MM-dd');
+    newRequest.remark = this.remark;
 
   	const closeCallBack = () => {
-			this.getAllWeights();
       formUsed.reset();
+			this.getAllWeights();
+      this.init();
 		};
 
   	this.weightService.storeWeight(newRequest,closeCallBack);
@@ -76,6 +85,8 @@ export class UserWeightTrackerComponent {
     if (this.openWeight) {
        if (this.openWeight.id === w.id) {
          // do nothing
+         w.editable = true;
+         console.log('already open')
        } else {
          //close previous
          this.openWeight.editable=false;
@@ -117,12 +128,16 @@ export class UserWeightTrackerComponent {
   }
 
   private documentClick(event) {
+    console.log(event.target.classList)
 		if (!event.target.classList.contains('weight__day') &&
 		    !event.target.classList.contains('weight__weight') &&
+		    !event.target.classList.contains('weight__remark') &&
         !event.target.classList.contains('editweight__day-input') &&
 		    !event.target.classList.contains('editweight__weight-input') &&
+		    !event.target.classList.contains('editweight__remark-input') &&
         !event.target.classList.contains('editweight__day') &&
 		    !event.target.classList.contains('editweight__weight') &&
+		    !event.target.classList.contains('editweight__remark') &&
 		    !event.target.classList.contains('editweight')
 		    ) {
       console.log('close')

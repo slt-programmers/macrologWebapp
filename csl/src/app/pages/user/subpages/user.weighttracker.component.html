@@ -16,6 +16,13 @@
         </div>
       </div>
 
+			<div class="form-field">
+				<label class="form-field__label">Remark</label>
+				<div class="form-field__element">
+					<input class="" name="remark" type="text" [(ngModel)]="remark">
+				</div>
+			</div>
+
 			<div class="button-wrapper">
 				<button class="button button--primary" (click)="saveNewWeight(weightForm)"
 					[disabled]="weightForm.invalid">Save</button>
@@ -29,7 +36,8 @@
 
 		<div class="table">
 			<div class="weight-table-header">
-				<div class="weight-table-header__date">Date</div>
+				<div class="weight-table-header__day">Date</div>
+				<div class="weight-table-header__remark">Remark</div>
 				<div class="weight-table-header__weight">Weight</div>
 			</div>
 		</div>
@@ -37,17 +45,21 @@
 		<div class="table-row" *ngFor="let logWeight of trackedWeights" (click)="editWeight(logWeight)">
 			<div class="weight" *ngIf="!logWeight.editable">
 				<div class="weight__day">{{logWeight.day | date :'dd-MM-yyyy'}}</div>
+				<div class="weight__remark">{{logWeight.remark}}</div>
 				<div class="weight__weight">{{logWeight.weight | number:'1.1-1'}}</div>
+				<div class="weight__hiddenbuttons"></div>
 			</div>
 
 			<div class="editweight" *ngIf="logWeight.editable">
 				<div class="editweight__day">
 					<input required class="editweight__day-input" validdate placeholder="DD-MM-YYYY"  [(ngModel)]="logWeight.dayString">
 				</div>
-				<div class="editweight__weight">
-					<input required class="editweight__weight-input" name="weight" type="number" [(ngModel)]="logWeight.weightString" step="0.1">
+				<div class="editweight__remark">
+					<input required class="input editweight__remark-input" name="remark" type="text" [(ngModel)]="logWeight.remark">
 				</div>
-
+				<div class="editweight__weight">
+					<input class="editweight__weight-input" name="weight" type="number" [(ngModel)]="logWeight.weightString" step="0.1">
+				</div>
 				<div class="editweight__close">
 					<button (click)="saveWeight(logWeight)" class="button button--transparent">
 						<i class="fas fa-check"></i>
@@ -62,16 +74,6 @@
 			</div>
 
 		</div>
-
-		<!--<div class="logweight__header">-->
-			<!--<span class="logweight__titleDay">Date</span>-->
-			<!--<span class="logweight__titleWeight">Weight</span>-->
-		<!--</div>-->
-
-		<!--<div *ngFor="let logWeight of trackedWeights" class="weight__line">-->
-			<!--<div class="weight__cellDay">{{logWeight.day | date:'dd-MM-yyyy'}}</div>-->
-			<!--<div class="weight__cellWeight">{{logWeight.weight | number:'1.1-1'}}</div>-->
-		<!--</div>-->
 
 	</div>
 
