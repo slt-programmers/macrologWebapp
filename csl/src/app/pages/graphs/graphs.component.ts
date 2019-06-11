@@ -15,6 +15,7 @@ import { filter } from 'rxjs/operators';
 export class GraphsComponent implements AfterContentInit  {
 
  barWidth=20;
+ radius = 30;
 
  graphWidth=650;
  graphHeight=500;
