@@ -48,13 +48,13 @@
 				<rect [attr.x]="i*barWidth" [attr.width]="barWidth" [attr.y]="getYPosFat(d)" [attr.height]="getHeightFat(d)" [attr.fill]="'#f7ed70'"  style="stroke:black;stroke-width:1;opacity:0.5"/>
 				<rect [attr.x]="i*barWidth" [attr.width]="barWidth" [attr.y]="getYPosCarbs(d)" [attr.height]="getHeightCarbs(d)" [attr.fill]="'#fb8353'"  style="stroke:black;stroke-width:1;opacity:0.5"/>
 
-				<text x="0" [attr.y]="getGoalProteinPos()-2" fill="grey">{{getGoalProtein()}}</text>
+				<text x="0" [attr.y]="getGoalProteinPos()-2" fill="grey">P {{getGoalProtein() | number:'1.1-1'}}</text>
 				<line x1="0" [attr.y1]="getGoalProteinPos()" [attr.x2]="logBars.length * barWidth" [attr.y2]="getGoalProteinPos()" style="stroke:grey;stroke-width:1;stroke-dasharray:5.5" />
 
-				<text x="0" [attr.y]="getGoalFatPos()-2" fill="grey">{{getGoalFat()}}</text>
+				<text x="0" [attr.y]="getGoalFatPos()-2" fill="grey">F {{getGoalFat() | number:'1.1-1'}}</text>
 				<line x1="0" [attr.y1]="getGoalFatPos()" [attr.x2]="logBars.length * barWidth" [attr.y2]="getGoalFatPos()" style="stroke:grey;stroke-width:1;stroke-dasharray:5.5" />
 
-				<text x="0" [attr.y]="getGoalCarbsPos()-2" fill="grey">{{getGoalCarbs()}}</text>
+				<text x="0" [attr.y]="getGoalCarbsPos()-2" fill="grey">C {{getGoalCarbs() | number:'1.1-1'}}</text>
 				<line x1="0" [attr.y1]="getGoalCarbsPos()" [attr.x2]="logBars.length * barWidth" [attr.y2]="getGoalCarbsPos()" style="stroke:grey;stroke-width:1;stroke-dasharray:5.5" />
 			</g>
 		</svg>
@@ -70,12 +70,18 @@
 		</button>
 	</div>
 	<div class="graph__options">
-		 <div><input id=splittedOption type="checkbox" [(ngModel)]="splitted">
-			<label for="splittedOption">Split bars</label></div>
+		 <div class="graph_option">
+			 <input id=splittedOption type="checkbox" (change)="calculateZoom()" [(ngModel)]="splitted">
+			<label for="splittedOption">Split bars</label>
+		 </div>
+		<div class="graph__option">
+			<input id=percentageOption type="checkbox" (change)="calculateZoom()" [(ngModel)]="percentages">
+			<label for="percentageOption">Show percentages</label>
+		</div>
 	</div>
 
   <div class="graph__details">
-		<table *ngIf="infoMacro">
+		<table *ngIf="false">
 			<tr>
 				<td>Day</td>
 				<td>{{infoMacro.day | date:'dd MMMM'}}</td>
