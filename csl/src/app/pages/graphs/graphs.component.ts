@@ -1,6 +1,7 @@
 import { Component, OnInit, AfterViewChecked } from '@angular/core';
 import { AfterContentInit } from '@angular/core';
 import {LogService} from '../../services/log.service';
+import { UserService } from '../../services/user.service';
 import { DatePipe } from '@angular/common';
 import { DomSanitizer } from '@angular/platform-browser';
 import * as d3 from 'd3';
@@ -27,6 +28,8 @@ export class GraphsComponent implements AfterContentInit  {
  maxProtein=0;
  maxFat=0;
  maxCarbs=0;
+ public userGoals;
+ public goalCal;
 
  public loading=true;
  public allLogs = new Array();
@@ -37,11 +40,14 @@ export class GraphsComponent implements AfterContentInit  {
  public dateFrom = moment().subtract(1, 'months').startOf('month');
  public dateTo = moment().subtract(1, 'months').endOf('month');
 
+
+
   ngAfterContentInit() {
 
     this.dateFrom = moment().subtract(1,'months');
     this.dateTo = moment();
     this.getData();
+    this.getGoals();
 
   }
 
@@ -59,6 +65,28 @@ export class GraphsComponent implements AfterContentInit  {
 				this.allLogs = new Array();
 			}
 		); }
+
+  getGoals(){
+		this.userService.getUserGoalStats().subscribe(
+			data => {
+				if (data[0] === null) {
+					this.userGoals = null;
+				} else {
+					this.userGoals = data;
+				}
+				this.setGoalCal();
+			},
+			error => console.log(error)
+		);
+	}
+
+  private setGoalCal() {
+		if (this.userGoals) {
+			this.goalCal = (this.userGoals[0] * 4)
+				+ (this.userGoals[1] * 9)
+				+ (this.userGoals[2] * 4);
+		}
+	}
 
   matchLogs() {
     let pointerDate = this.dateFrom.clone();
@@ -96,9 +124,6 @@ export class GraphsComponent implements AfterContentInit  {
   showPercentage = true;
 
   getYPosProtein(logEntry) {
-     if (!logEntry || !logEntry.macro ) {
-       return 0
-     }
      if (this.splitted) {
        return this.graphHeight - this.graphLegenda - this.getHeightProtein(logEntry)
      } else {
@@ -112,7 +137,6 @@ export class GraphsComponent implements AfterContentInit  {
   }
 
   getYPosFat(logEntry){
-    if (!logEntry || !logEntry.macro ) {return 0}
      if (this.splitted) {
        return this.graphHeight - this.graphLegenda - (this.splitOffset + this.maxProtein/2 + this.getHeightFat(logEntry))
      } else {
@@ -127,7 +151,6 @@ export class GraphsComponent implements AfterContentInit  {
   }
 
   getYPosCarbs(logEntry){
-    if (!logEntry || !logEntry.macro ) {return 0}
      if (this.splitted) {
         return this.graphHeight - this.graphLegenda- (this.splitOffset*2 + this.maxProtein/2 + this.maxFat/2 + this.getHeightCarbs(logEntry))
      } else {
@@ -140,7 +163,39 @@ export class GraphsComponent implements AfterContentInit  {
     return logEntry.macro.carbs/2
   }
 
- constructor(private logService: LogService) {}
+  getGoalProteinPos(){
+    return this.getYPosProtein(null) -  this.userGoals[0]/2;
+  }
+
+  getGoalFatPos(){
+    if (this.splitted) {
+      return this.getYPosFat(null) -  this.userGoals[1]/2;
+    } else {
+      return this.getYPosFat(null) -  (this.userGoals[0]/2 + this.userGoals[1]/2);
+    }
+   }
+
+  getGoalCarbsPos(){
+    if (this.splitted) {
+      return this.getYPosCarbs(null) -  this.userGoals[2]/2;
+    } else {
+      return this.getYPosCarbs(null) -  (this.userGoals[0]/2 + this.userGoals[1]/2 + this.userGoals[2]/2);
+    }
+  }
+ getGoalProtein(){
+    return this.userGoals[0]/2;
+  }
+
+  getGoalFat(){
+    return this.userGoals[1]/2;
+  }
+
+  getGoalCarbs(){
+    return this.userGoals[2]/2;
+  }
+
+ constructor(private logService: LogService,
+             private userService: UserService) {}
 
 
   data = [

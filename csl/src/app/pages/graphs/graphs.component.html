@@ -48,6 +48,14 @@
 				<rect [attr.x]="i*barWidth" [attr.width]="barWidth" [attr.y]="getYPosFat(d)" [attr.height]="getHeightFat(d)" [attr.fill]="'#f7ed70'"  style="stroke:black;stroke-width:1;opacity:0.5"/>
 				<rect [attr.x]="i*barWidth" [attr.width]="barWidth" [attr.y]="getYPosCarbs(d)" [attr.height]="getHeightCarbs(d)" [attr.fill]="'#fb8353'"  style="stroke:black;stroke-width:1;opacity:0.5"/>
 
+				<text x="0" [attr.y]="getGoalProteinPos()-2" fill="grey">{{getGoalProtein()}}</text>
+				<line x1="0" [attr.y1]="getGoalProteinPos()" [attr.x2]="logBars.length * barWidth" [attr.y2]="getGoalProteinPos()" style="stroke:grey;stroke-width:1;stroke-dasharray:5.5" />
+
+				<text x="0" [attr.y]="getGoalFatPos()-2" fill="grey">{{getGoalFat()}}</text>
+				<line x1="0" [attr.y1]="getGoalFatPos()" [attr.x2]="logBars.length * barWidth" [attr.y2]="getGoalFatPos()" style="stroke:grey;stroke-width:1;stroke-dasharray:5.5" />
+
+				<text x="0" [attr.y]="getGoalCarbsPos()-2" fill="grey">{{getGoalCarbs()}}</text>
+				<line x1="0" [attr.y1]="getGoalCarbsPos()" [attr.x2]="logBars.length * barWidth" [attr.y2]="getGoalCarbsPos()" style="stroke:grey;stroke-width:1;stroke-dasharray:5.5" />
 			</g>
 		</svg>
   </div>
