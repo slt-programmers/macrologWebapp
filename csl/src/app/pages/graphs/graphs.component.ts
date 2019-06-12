@@ -22,7 +22,7 @@ export class GraphsComponent implements AfterContentInit  {
  graphHeight=500;
  graphLegenda=20;
 
- splitted=true;
+ splitted=false;
  percentages=true;
 
  zoomX = 2;
