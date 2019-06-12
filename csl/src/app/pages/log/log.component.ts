@@ -213,7 +213,7 @@ export class LogComponent implements OnInit {
 	private documentClick(event) {
 		if (!event.target.classList.contains('autocomplete__option') &&
 				!event.target.classList.contains('fa-trash') &&
-				!event.target.classList.contains('button--transparent')) {
+				!event.target.classList.contains('button--delete')) {
 
 			this.breakfastOpen = this.breakfastEref.logMealEref.nativeElement.contains(event.target);
 			this.lunchOpen = this.lunchEref.logMealEref.nativeElement.contains(event.target);

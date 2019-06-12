@@ -14,7 +14,6 @@ constructor(private authenticationService: AuthenticationService, private router
 	intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 		return next.handle(request).pipe(
 				map(result => {
-					console.log('Error interceptor positive', result);
 					return result;
 				}),
 				catchError(err => {

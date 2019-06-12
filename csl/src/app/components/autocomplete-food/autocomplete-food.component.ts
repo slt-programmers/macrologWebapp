@@ -92,7 +92,6 @@ export class AutocompleteFoodComponent implements OnInit, OnChanges {
 	}
 
 	public matchDescription(foodSearchable) {
-		console.log(foodSearchable);
 		if (foodSearchable.portion) {
 			return foodSearchable.food.name + ' (' + foodSearchable.portion.description + ')';
 		} else if (foodSearchable.food.ingredients) {

@@ -81,12 +81,10 @@ export class UserWeightTrackerComponent {
   	this.weightService.storeWeight(newRequest,closeCallBack);
 	}
   public editWeight(w){
-    console.log('ee')
     if (this.openWeight) {
        if (this.openWeight.id === w.id) {
          // do nothing
          w.editable = true;
-         console.log('already open')
        } else {
          //close previous
          this.openWeight.editable=false;
@@ -128,7 +126,6 @@ export class UserWeightTrackerComponent {
   }
 
   private documentClick(event) {
-    console.log(event.target.classList)
 		if (!event.target.classList.contains('weight__day') &&
 		    !event.target.classList.contains('weight__weight') &&
 		    !event.target.classList.contains('weight__remark') &&
@@ -140,7 +137,6 @@ export class UserWeightTrackerComponent {
 		    !event.target.classList.contains('editweight__remark') &&
 		    !event.target.classList.contains('editweight')
 		    ) {
-      console.log('close')
       if (this.openWeight) {
          this.openWeight.editable=false;
       }
