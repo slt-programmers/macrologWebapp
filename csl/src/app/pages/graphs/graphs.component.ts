@@ -1,6 +1,5 @@
 import { Component, OnInit, AfterViewChecked } from '@angular/core';
 import { AfterContentInit } from '@angular/core';
-import { AfterInit } from '@angular/core';
 import { ViewChild, ElementRef  } from '@angular/core';
 
 import { LogService} from '../../services/log.service';
