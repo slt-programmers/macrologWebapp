@@ -31,6 +31,7 @@ export class GraphsComponent implements AfterContentInit  {
  percentages=false;
 
  zoomX = 1;
+ zoomXCalories=1;
 
  splitOffset=10;
 
@@ -38,6 +39,7 @@ export class GraphsComponent implements AfterContentInit  {
  maxFat=0;
  maxCarbs=0;
  maxTotal=0;
+ maxCalories=0;
 
  maxProteinPerc=0;
  maxFatPerc=0;
@@ -67,15 +69,16 @@ export class GraphsComponent implements AfterContentInit  {
   }
 
   getSVGWidth(){
-     return this.marginLeft + 32 * this.barWidth;
+     return this.marginLeft + 33 * this.barWidth;
 //   return this.clientWidth;
   }
   getSVGHeight(){
-    return this.clientHeight;
+    return this.clientHeight * 0.66;
   }
 
-
-
+  getSVGHeightCalories(){
+    return this.clientHeight * 0.33;
+  }
 
  getData(){
     this.loading=true;
@@ -129,6 +132,7 @@ export class GraphsComponent implements AfterContentInit  {
           this.maxFat = Math.max(this.maxFat,filtered.macro.fat);
           this.maxCarbs = Math.max(this.maxCarbs, filtered.macro.carbs);
           this.maxTotal = Math.max(this.maxTotal, filtered.macro.protein+filtered.macro.fat+filtered.macro.carbs);
+          this.maxCalories = Math.max(this.maxCalories, filtered.macro.calories);
 
           this.maxProteinPerc = Math.max(this.maxProteinPerc, filtered.macro.protein * 100 /total);
           this.maxFatPerc = Math.max(this.maxFatPerc,filtered.macro.fat  * 100 /total);
@@ -156,16 +160,22 @@ export class GraphsComponent implements AfterContentInit  {
   }
 
 
-
-
-  showPercentage = true;
-
   getYPosProtein(logEntry) {
      if (this.splitted) {
        return this.getSVGHeight() - this.graphLegenda - this.getHeightProtein(logEntry)
      } else {
        return this.getSVGHeight() - this.graphLegenda - this.getHeightProtein(logEntry)
      }
+  }
+
+  getYPosCalories(logEntry) {
+    return this.getSVGHeightCalories() - this.graphLegenda - this.getHeightCalories(logEntry)
+  }
+
+ getHeightCalories(logEntry) {
+    if (!logEntry || !logEntry.macro ) {return 0}
+
+    return logEntry.macro.calories * this.zoomXCalories;
   }
 
   getHeightProtein(logEntry) {
@@ -184,7 +194,7 @@ export class GraphsComponent implements AfterContentInit  {
         if (this.percentages){
           return this.getSVGHeight() - this.graphLegenda - (this.splitOffset + this.maxProteinPerc * this.zoomX + this.getHeightFat(logEntry));
         } else {
-          return this.getSVGHeight() - this.graphLegenda - (this.splitOffset + this.getGoalProtein() * this.zoomX + this.getHeightFat(logEntry));
+          return this.getSVGHeight() - this.graphLegenda - (this.splitOffset + this.maxProtein * this.zoomX + this.getHeightFat(logEntry));
         }
 
      } else {
@@ -252,6 +262,13 @@ export class GraphsComponent implements AfterContentInit  {
     }
   }
 
+ getGoalCaloriesPos(){
+    return this.getYPosCalories(null) -  (this.getGoalCalories() * this.zoomXCalories);
+  }
+ getGoalCalories(){
+    return this.goalCal;
+  }
+
 
  getGoalProtein(){
     if (this.percentages) {
@@ -287,6 +304,7 @@ export class GraphsComponent implements AfterContentInit  {
 
     if (!this.getSVGHeight()) {
        this.zoomX=0;
+       this.zoomXCalories=0;
        return;
     }
 
@@ -303,18 +321,15 @@ export class GraphsComponent implements AfterContentInit  {
 					 this.zoomX = (this.getSVGHeight() -40 ) / this.maxTotal ;
       }
      }
+console.log(this.maxCalories);
+console.log(this.getSVGHeightCalories());
+     this.zoomXCalories = (this.getSVGHeightCalories() - 40) / this.maxCalories;
+
 
  }
 
  constructor(private logService: LogService,
              private userService: UserService) {}
-
-
-  data = [
-    {"x":10, "y":100,"r":20,"c":"red"},
-    {"x":130, "y":60,"r":40,"c":"green"},
-    {"x":360, "y":200,"r":20,"c":"orange"}
-        ];
 
 
  public showMacros(logEntry){
@@ -324,13 +339,5 @@ export class GraphsComponent implements AfterContentInit  {
      this.infoMacro = null;
    }
  }
- clicked(event: any) {
-    d3.select(event.target).append('circle')
-      .attr('cx', event.x)
-      .attr('cy', event.y)
-      .attr('r', () => {
-        return this.radius;
-      })
-      .attr('fill', 'red');
-}
+
 }

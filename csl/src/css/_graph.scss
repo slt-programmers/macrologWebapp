@@ -42,7 +42,7 @@ $carbscolor: '#fb8353';
     padding-top:15px;
     display:flex;
     flex-direction:column;
-    justify-content:center;
+    justify-content:flex-start;
 
 		label {
 			display: flex;
@@ -68,6 +68,7 @@ $carbscolor: '#fb8353';
          font-weight:bold;
           padding: 15px 0;
       }
+
 
 }
 

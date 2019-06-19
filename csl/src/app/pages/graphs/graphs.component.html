@@ -45,12 +45,13 @@
 			</button>
 		</div>`
 
-		<div class="graph__image">
-			<svg [attr.height]="getSVGHeight()" [attr.width]="getSVGWidth()"  class="graph__svg" xmlns="http://www.w3.org/2000/svg">
 
+		<div class="graph__image">
+			 <div class="graph__svgs">
+		   	 <svg [attr.height]="getSVGHeight()" [attr.width]="getSVGWidth()"  class="graph__svg" xmlns="http://www.w3.org/2000/svg">
 				<g *ngFor="let d of logBars; let i = index" (mouseover)="showMacros(d)">
 					<text [attr.x]="marginLeft +  (barWidth* i)" [attr.y]="getSVGHeight() - graphLegenda + 15 " [attr.fill]="d.c">
-						<tspan> {{d.day | date:'dd'}} </tspan>
+						<tspan [attr.width]="barWidth">{{d.day | date:'dd'}} </tspan>
 					</text>
 
 					<rect [attr.x]="marginLeft + i*barWidth" [attr.width]="barWidth" [attr.y]="getYPosProtein(d)" [attr.height]="getHeightProtein(d)" [attr.fill]="'#5bd086'"  style="stroke:black;stroke-width:1;opacity:0.5" />
@@ -67,9 +68,21 @@
 					<line x1="0" [attr.y1]="getGoalCarbsPos()" [attr.x2]="marginLeft +  logBars.length * barWidth" [attr.y2]="getGoalCarbsPos()" style="stroke:grey;stroke-width:1;stroke-dasharray:5.5" />
 				</g>
 			</svg>
+				 <svg [attr.height]="getSVGHeightCalories()" [attr.width]="getSVGWidth()"  class="graph__svg" xmlns="http://www.w3.org/2000/svg">
+					 <g *ngFor="let d of logBars; let i = index" (mouseover)="showMacros(d)">
+						 <text [attr.x]="marginLeft +  (barWidth* i)" [attr.y]="getSVGHeightCalories() - graphLegenda + 15 " [attr.fill]="d.c">
+							 <tspan [attr.width]="barWidth">{{d.day | date:'dd'}} </tspan>
+						 </text>
 
-		<div class="graph__options">
+						 <rect [attr.x]="marginLeft + i*barWidth" [attr.width]="barWidth" [attr.y]="getYPosCalories(d)" [attr.height]="getHeightCalories(d)" [attr.fill]="'#0DEEF0'"  style="stroke:black;stroke-width:1;opacity:0.5"/>
+					 </g>
 
+						 <text x="0" [attr.y]="getGoalCaloriesPos()-2" fill="grey">P {{getGoalCalories() | number:'1.1-1'}}</text>
+						 <line x1="0" [attr.y1]="getGoalCaloriesPos()" [attr.x2]="marginLeft + logBars.length * barWidth" [attr.y2]="getGoalCaloriesPos()" style="stroke:grey;stroke-width:1;stroke-dasharray:5.5" />
+				 </svg>
+			 </div>
+
+	  	<div class="graph__options">
         <div>
 					Options:
 				</div>
@@ -82,7 +95,6 @@
 					<input id=percentageOption type="checkbox" (change)="calculateZoom()" [(ngModel)]="percentages">
 					Show percentages
 				</label>
-
 		</div>
   	</div>
 
