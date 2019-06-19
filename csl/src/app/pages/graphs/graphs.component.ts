@@ -1,8 +1,9 @@
 import { Component, OnInit, AfterViewChecked } from '@angular/core';
 import { AfterContentInit } from '@angular/core';
 import { AfterInit } from '@angular/core';
+import { ViewChild, ElementRef  } from '@angular/core';
 
-import {LogService} from '../../services/log.service';
+import { LogService} from '../../services/log.service';
 import { UserService } from '../../services/user.service';
 import { DatePipe } from '@angular/common';
 import { DomSanitizer } from '@angular/platform-browser';
@@ -11,8 +12,6 @@ import { LogEntry } from '../../model/logEntry';
 import * as moment from 'moment';
 import { filter } from 'rxjs/operators';
 
-import { Component, OnInit } from '@angular/core';
-import { ViewChild, ElementRef  } from '@angular/core';
 
 @Component({
 	selector: 'app-graphs',
