@@ -40,7 +40,7 @@ export class UserComponent implements OnInit {
 				this.birthday = this.getKeyFromResultlist(result, 'birthday');
 				this.gender = this.getKeyFromResultlist(result, 'gender') || Gender.Male;
 				this.height = parseInt(this.getKeyFromResultlist(result, 'height'), 10) || undefined;
-				this.weight = parseInt(this.getKeyFromResultlist(result, 'weight'), 10) || undefined;
+				this.weight = parseInt(this.getKeyFromResultlist(result, 'currentWeight'), 10) || undefined;
 				this.activity = parseFloat(this.getKeyFromResultlist(result, 'activity')) || 1.2;
 
 				this.newWeight = this.weight;
@@ -57,15 +57,13 @@ export class UserComponent implements OnInit {
 			);
 	}
 
-	private getKeyFromResultlist(list: any, key: string) {
-		for (const item of list) {
-			if (item.name === key) {
-				return item.value;
-			}
-		}
+	private getKeyFromResultlist(userSettingsDto: any, key: string) {
+
+    if (userSettingsDto[key]) {
+       return userSettingsDto[key];
+    }
 		return '';
 	}
-
 
 	// DEVTOOLS
 	public exportData() {

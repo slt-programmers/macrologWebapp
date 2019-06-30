@@ -23,21 +23,21 @@ constructor(private http: HttpClient) {
 		return this.http.put(this.macrologBackendUrl + '/', userInfo, options);
 	}
 
-	public getUserGoalStats() {
+	public getUserGoalStats(date) {
 		return forkJoin(
-			this.getUserInfo('goalProtein'),
-			this.getUserInfo('goalFat'),
-			this.getUserInfo('goalCarbs')
+			this.getUserInfo('goalProtein',date),
+			this.getUserInfo('goalFat',date),
+			this.getUserInfo('goalCarbs',date)
 		);
 	}
 
-	public getUserInfo(key: string) {
-		return this.http.get(this.macrologBackendUrl + '/' + key, { responseType: 'json' });
+	public getUserInfo(key: string, date:string) {
+		return this.http.get(this.macrologBackendUrl + '/' + key,{ params: {date: date} ,  responseType: 'json' });
 	}
 
 	public getAllSettings() {
 		console.log('Get all settings');
-		return this.http.get(this.macrologBackendUrl);
+		return this.http.get(this.macrologBackendUrl +'/user');
 	}
 
 	public getExport() {

@@ -62,7 +62,7 @@ export class LogComponent implements OnInit {
 	}
 
 	ngOnInit() {
-		this.getUserGoals();
+		this.getUserGoals(this.pipe.transform(this.displayDate, 'yyyy-MM-dd'));
 		this.getAllFood();
 		this.getLogEntries(this.pipe.transform(this.displayDate, 'yyyy-MM-dd'));
 	}
@@ -95,6 +95,7 @@ export class LogComponent implements OnInit {
 		this.dinnerOpen = false;
 		this.snacksOpen = false;
     this.activitiesOpen = false;
+		this.getUserGoals(this.pipe.transform(this.displayDate, 'yyyy-MM-dd'));
 		this.getLogEntries(this.pipe.transform(this.displayDate, 'yyyy-MM-dd'));
 	}
 
@@ -107,8 +108,9 @@ export class LogComponent implements OnInit {
 		this.getAllFood();
 	}
 
-	private getUserGoals() {
-		this.userService.getUserGoalStats().subscribe(
+	private getUserGoals(date) {
+
+		this.userService.getUserGoalStats(date).subscribe(
 			data => {
 				if (data[0] === null) {
 					this.userGoals = null;

@@ -26,12 +26,11 @@ export class UserIntakeComponent {
 	constructor(private userService: UserService) {
 		this.userService.getAllSettings().subscribe(
 			result => {
-
 				// FOR CALC MODAL
 				this.birthday = this.getKeyFromResultlist(result, 'birthday');
 				this.gender = this.getKeyFromResultlist(result, 'gender') || Gender.Male;
 				this.height = parseInt(this.getKeyFromResultlist(result, 'height'), 10) || undefined;
-				this.weight = parseInt(this.getKeyFromResultlist(result, 'weight'), 10) || undefined;
+				this.weight = parseInt(this.getKeyFromResultlist(result, 'currentWeight'), 10) || undefined;
 				this.activity = parseFloat(this.getKeyFromResultlist(result, 'activity')) || 1.2;
 
 				this.goalProtein = this.getKeyFromResultlist(result, 'goalProtein');
@@ -39,13 +38,14 @@ export class UserIntakeComponent {
 				this.goalCarbs = this.getKeyFromResultlist(result, 'goalCarbs');
 
         // derived age:
-        var birthdayDate = moment(this.birthday, 'D-M-YYYY', true);
+        var birthdayDate = moment(this.birthday, 'YYYY-M-D', true);
         if (birthdayDate.isValid()){
            this.age = moment().diff(birthdayDate, 'years');
         } else {
            // indien age opgevoerd in verleden
            this.age = parseInt(this.getKeyFromResultlist(result, 'age'), 10) || undefined ;
         }
+
 			});
 	}
 
@@ -60,12 +60,11 @@ export class UserIntakeComponent {
 		this.showCalcModal = false;
 	}
 
-	private getKeyFromResultlist(list: any, key: string) {
-		for (const item of list) {
-			if (item.name === key) {
-				return item.value;
-			}
-		}
+	private getKeyFromResultlist(userSettingsDto: any, key: string) {
+
+    if (userSettingsDto[key]) {
+       return userSettingsDto[key];
+    }
 		return '';
 	}
 }

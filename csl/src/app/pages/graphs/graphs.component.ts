@@ -82,7 +82,7 @@ export class GraphsComponent implements AfterContentInit  {
 
  getData(){
     this.loading=true;
-
+    this.getGoals();
     this.logBars = new Array();
     this.allLogs = new Array();
     this.logService.getMacros(this.dateFrom.format('YYYY-MM-DD'), this.dateTo.format('YYYY-MM-DD')).subscribe(
@@ -100,7 +100,7 @@ export class GraphsComponent implements AfterContentInit  {
 		); }
 
   getGoals(){
-		this.userService.getUserGoalStats().subscribe(
+		this.userService.getUserGoalStats(this.dateFrom.format('YYYY-MM-DD')).subscribe(
 			data => {
 				if (data[0] === null) {
 					this.userGoals = null;

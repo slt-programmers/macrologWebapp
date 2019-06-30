@@ -21,7 +21,7 @@ export class IntakeComponent implements OnInit {
 
 	// Step 1
 	public name: string;
-	public birthday: string;
+	public birthday: string; // D-M-YYYY
 	public gender: Gender;
 	public height: number;
 	public weight: number;

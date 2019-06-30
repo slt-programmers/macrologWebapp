@@ -5,6 +5,7 @@ import { Gender } from '../../../model/gender';
 import { ToastService } from '../../../services/toast.service';
 import { DateValidator } from '../../../directives/date.directive';
 import { FormGroup,  FormBuilder,  Validators } from '@angular/forms';
+import * as moment from 'moment';
 
 @Component({
 	selector: 'user-personal',
@@ -30,9 +31,12 @@ export class UserPersonalComponent {
 				this.originalResult = result;
 				this.name = this.getKeyFromResultlist(result, 'name');
 				this.birthday =this.getKeyFromResultlist(result, 'birthday');
+        var birthdayDate = moment(this.birthday, 'YYYY-M-D', true);
+        this.birthday = birthdayDate.format('DD-MM-YYYY');
+
 				this.gender = this.getKeyFromResultlist(result, 'gender') || Gender.Male;
 				this.height = parseInt(this.getKeyFromResultlist(result, 'height'), 10) || undefined;
-				this.weight = parseInt(this.getKeyFromResultlist(result, 'weight'), 10) || undefined;
+				this.weight = parseInt(this.getKeyFromResultlist(result, 'currentWeight'), 10) || undefined;
 				this.activity = parseFloat(this.getKeyFromResultlist(result, 'activity')) || 1.2;
 
 				this.newWeight = this.weight;
@@ -47,7 +51,7 @@ export class UserPersonalComponent {
 			this.userService.addUserInfo('birthday', this.birthday.toString()),
 			this.userService.addUserInfo('gender', this.gender.toString()),
 			this.userService.addUserInfo('height', this.height.toString()),
-			this.userService.addUserInfo('weight', this.weight.toString()),
+			this.userService.addUserInfo('currentWeight', this.weight.toString()),
 			this.userService.addUserInfo('activity', this.activity.toString())
 		).subscribe(
 				data => this.toastService.setMessage('Your data is saved!'),
@@ -61,7 +65,7 @@ export class UserPersonalComponent {
 					&& this.birthday === this.getKeyFromResultlist(this.originalResult, 'birthday')
 					&& this.gender === this.getKeyFromResultlist(this.originalResult, 'gender')
 					&& this.height === parseInt(this.getKeyFromResultlist(this.originalResult, 'height'), 10)
-					&& this.weight === parseInt(this.getKeyFromResultlist(this.originalResult, 'weight'), 10)
+					&& this.weight === parseInt(this.getKeyFromResultlist(this.originalResult, 'currentWeight'), 10)
 					&& this.activity.toString() === this.getKeyFromResultlist(this.originalResult, 'activity')
 					) {
 				return true;
@@ -70,12 +74,9 @@ export class UserPersonalComponent {
 		return false;
 	}
 
-	private getKeyFromResultlist(list: any, key: string) {
-		for (const item of list) {
-			if (item.name === key) {
-				return item.value;
-			}
-		}
-		return '';
+	private getKeyFromResultlist(userSettingsDto: any, key: string) {
+    if (userSettingsDto[key]) {
+       return userSettingsDto[key];
+    }		return '';
 	}
 }
