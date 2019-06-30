@@ -36,7 +36,7 @@ export class UserPersonalComponent {
 
 				this.gender = this.getKeyFromResultlist(result, 'gender') || Gender.Male;
 				this.height = parseInt(this.getKeyFromResultlist(result, 'height'), 10) || undefined;
-				this.weight = parseInt(this.getKeyFromResultlist(result, 'currentWeight'), 10) || undefined;
+				this.weight = parseFloat(this.getKeyFromResultlist(result, 'currentWeight'), 10) || undefined;
 				this.activity = parseFloat(this.getKeyFromResultlist(result, 'activity')) || 1.2;
 
 				this.newWeight = this.weight;
