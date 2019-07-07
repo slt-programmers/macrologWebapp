@@ -5,10 +5,11 @@ node_js:
 - '10.4.1'
 
 before_script:
-  - npm install -g @angular/cli
 
 script:
 - cd csl
+- npm install
+- npm install -g @angular/cli
 - ng build --prod --aot --base-href https://macrolog.heroku.com/
 
 env:
