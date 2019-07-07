@@ -7,10 +7,11 @@ node_js:
 before_script:
 
 script:
-- cd csl
-- npm install
+  - cd csl
+  - npm install
 #- npm install -g @angular/cli
 #- ng build --prod --aot --base-href https://macrolog.heroku.com/
+  - sonar-scanner
 
 addons:
   sonarcloud:
@@ -18,9 +19,9 @@ addons:
     token:
     secure: dAmqIYByVtTkOxYdMnbA49IGrX1VNMRsfWaNKxJxVNl0dPI3L+l6L8nTSIxdEb11hn4/5ZzNWzzZkxOND16YbHexmdFuuOxLjvpUmsFchFhMm9FdeSTM5aB8nEdfKOifpOX90TPmWW9HbH/GM59iIbJyGCQzo2c1rd89yzjoZkekXU7GEyxr+4XNtRE8QKx4VJ8u/3g6aQUa2Y6yBkNdY1qKqbGliU0CcvJawKTKDR0/aU98RX0kQUECOeso4BWZHwLTy7c6NkyeWzh6XkmTc13yVpPgN2Ta12YuLL1mxEW2zGMzbsSSUW9r5VxDDYEy6UmV25RzViVK0xeIzhb3dXcWZhU0KeYea4wqbITr2hJ9H27W7dV9Ow5zUSEVS1BL8D3thQVpBn4WOOEuUd3HlJej11PdAUpsprzLAZxl1DHWFN53SRrLo7hiNNi0wsNZfTnZ0NRIkW8MV1fzaVZv1xVXq9D+BjBNuBCSiabNFCcd11B7okGsAQLx/XHvJGIxcPBI9xBpNT7VsOJ6jsA36AbTK57BX1g3GJaeq69DKc53dXMppufUf8dbbMfX2gB8Mdm3Jo8job9VitIkuW3lIQ03X11z8szcH8w7bLZAY/zXeuf5Zdqr4dopci7oB3l4FqtUE1LDQwxcpGfP/L5lCc8u2ObPnTn3g4Bv00+Suxo=
 
-script:
+#script:
   # the following command line builds the project, runs the tests with coverage and then execute the SonarCloud analysis
-  - sonar-scanner
+
 
 #env:
 #  global:
