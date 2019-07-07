@@ -9,7 +9,7 @@ before_script:
 script:
 - cd csl
 - npm install
-- sonar-scanner
+- sonar-scanner -Dsonar.projectKey=slt-programmers_macrologWebapp
 
 addons:
   sonarcloud:
