@@ -9,6 +9,7 @@ before_script:
 script:
 - cd csl
 - npm install
+- ng test
 - sonar-scanner -Dsonar.projectKey=slt-programmers_macrologWebapp
 
 addons:
