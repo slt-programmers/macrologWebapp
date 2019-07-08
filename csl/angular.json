@@ -103,8 +103,14 @@
               "src/favicon.ico",
               "src/assets"
             ],
-						"tsConfig": "tsconfig.json"
-          }
+						"tsConfig": "tsconfig.json",
+						"codeCoverage": true,
+						"codeCoverageExclude": [
+							"src/test/**",
+							"src/app/app.module.ts",
+							"src/test/**/*.mock.ts"
+						]
+					}
         },
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
