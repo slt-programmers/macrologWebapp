@@ -19,12 +19,12 @@ constructor(private authenticationService: AuthenticationService, private router
 				catchError(err => {
 					console.log('Error interceptor negative', err);
 					if (err.status === 403) {
-						console.log(err.status)
+						console.log(err.status);
 						this.authenticationService.logout();
 						this.router.navigateByUrl('/login');
 						return throwError(err);
 					} else if (err.status === 401) {
-						console.log(err.status)
+						console.log(err.status);
 						return throwError(err);
 					} else if (err.status === 404) {
 						console.log(err.status);

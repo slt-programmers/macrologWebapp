@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { AfterContentInit } from '@angular/core';
 import { ViewChild, ElementRef } from '@angular/core';
-
 import { LogService } from '../../services/log.service';
 import { UserService } from '../../services/user.service';
 import * as moment from 'moment';
@@ -17,44 +16,44 @@ export class GraphsComponent implements AfterContentInit {
   constructor(private logService: LogService,
     private userService: UserService) { }
 
-  barWidth = 20;
-  radius = 30;
-  marginLeft = 70;
+  private barWidth = 20;
+  private radius = 30;
+  private marginLeft = 70;
 
-  graphLegenda = 20;
+  private graphLegenda = 20;
 
-  splitted = true;
-  percentages = false;
+  private splitted = true;
+  private percentages = false;
 
-  zoomX = 1;
-  zoomXCalories = 1;
+  private zoomX = 1;
+  private zoomXCalories = 1;
 
-  splitOffset = 10;
+  private splitOffset = 10;
 
-  maxProtein = 0;
-  maxFat = 0;
-  maxCarbs = 0;
-  maxTotal = 0;
-  maxCalories = 0;
+  private maxProtein = 0;
+  private maxFat = 0;
+  private maxCarbs = 0;
+  private maxTotal = 0;
+  private maxCalories = 0;
 
-  maxProteinPerc = 0;
-  maxFatPerc = 0;
-  maxCarbsPerc = 0;
+  private maxProteinPerc = 0;
+  private maxFatPerc = 0;
+  private maxCarbsPerc = 0;
 
-  clientWidth = 0;
-  clientHeight = 0;
+  private clientWidth = 0;
+  private clientHeight = 0;
 
-  public userGoals;
-  public goalCal;
+  private userGoals;
+  private goalCal;
 
-  public loading = true;
-  public allLogs = new Array();
-  public infoMacro = null;
+  private loading = true;
+  private allLogs = new Array();
+  private infoMacro = null;
 
-  logBars = new Array();
+  private logBars = new Array();
 
-  public dateFrom;
-  public dateTo;
+  private dateFrom;
+  private dateTo;
 
   ngAfterContentInit() {
     this.dateFrom = moment().subtract(1, 'months');
@@ -90,8 +89,7 @@ export class GraphsComponent implements AfterContentInit {
       error => {
         console.log(error);
         this.allLogs = new Array();
-      }
-    );
+      });
   }
 
   getGoals() {
@@ -110,18 +108,16 @@ export class GraphsComponent implements AfterContentInit {
 
   private setGoalCal() {
     if (this.userGoals) {
-      this.goalCal = (this.userGoals[0] * 4)
-        + (this.userGoals[1] * 9)
-        + (this.userGoals[2] * 4);
+      this.goalCal = (this.userGoals[0] * 4) + (this.userGoals[1] * 9) + (this.userGoals[2] * 4);
     }
   }
 
   matchLogs() {
-    let pointerDate = this.dateFrom.clone();
+    const pointerDate = this.dateFrom.clone();
     while (pointerDate.isBefore(this.dateTo)) {
-      let filtered = this.allLogs.filter(i => i.day === pointerDate.format('YYYY-MM-DD'))[0];
+      const filtered = this.allLogs.filter(i => i.day === pointerDate.format('YYYY-MM-DD'))[0];
       if (filtered) {
-        let total = filtered.macro.protein + filtered.macro.fat + filtered.macro.carbs;
+        const total = filtered.macro.protein + filtered.macro.fat + filtered.macro.carbs;
 
         this.maxProtein = Math.max(this.maxProtein, filtered.macro.protein);
         this.maxFat = Math.max(this.maxFat, filtered.macro.fat);
@@ -133,9 +129,9 @@ export class GraphsComponent implements AfterContentInit {
         this.maxFatPerc = Math.max(this.maxFatPerc, filtered.macro.fat * 100 / total);
         this.maxCarbsPerc = Math.max(this.maxCarbsPerc, filtered.macro.carbs * 100 / total);
 
-        this.logBars.push(filtered)
+        this.logBars.push(filtered);
       } else {
-        this.logBars.push({ 'day': pointerDate.format('YYYY-MM-DD') })
+        this.logBars.push({ 'day': pointerDate.format('YYYY-MM-DD') });
       }
       pointerDate.add(1, 'day');
     }
@@ -153,30 +149,32 @@ export class GraphsComponent implements AfterContentInit {
     this.getData();
   }
 
-
   getYPosProtein(logEntry) {
     if (this.splitted) {
-      return this.getSVGHeight() - this.graphLegenda - this.getHeightProtein(logEntry)
+      return this.getSVGHeight() - this.graphLegenda - this.getHeightProtein(logEntry);
     } else {
-      return this.getSVGHeight() - this.graphLegenda - this.getHeightProtein(logEntry)
+      return this.getSVGHeight() - this.graphLegenda - this.getHeightProtein(logEntry);
     }
   }
 
   getYPosCalories(logEntry) {
-    return this.getSVGHeightCalories() - this.graphLegenda - this.getHeightCalories(logEntry)
+    return this.getSVGHeightCalories() - this.graphLegenda - this.getHeightCalories(logEntry);
   }
 
   getHeightCalories(logEntry) {
-    if (!logEntry || !logEntry.macro) { return 0 }
-
+    if (!logEntry || !logEntry.macro) {
+      return 0;
+    }
     return logEntry.macro.calories * this.zoomXCalories;
   }
 
   getHeightProtein(logEntry) {
-    if (!logEntry || !logEntry.macro) { return 0 }
+    if (!logEntry || !logEntry.macro) {
+      return 0;
+    }
     if (this.percentages) {
-      let total = logEntry.macro.protein + logEntry.macro.fat + logEntry.macro.carbs;
-      let percentage = logEntry.macro.protein * 100 / total;
+      const total = logEntry.macro.protein + logEntry.macro.fat + logEntry.macro.carbs;
+      const percentage = logEntry.macro.protein * 100 / total;
       return percentage * this.zoomX;
     } else {
       return logEntry.macro.protein * this.zoomX;
@@ -192,16 +190,16 @@ export class GraphsComponent implements AfterContentInit {
       }
 
     } else {
-      return this.getSVGHeight() - this.graphLegenda - (this.getHeightProtein(logEntry) + this.getHeightFat(logEntry))
+      return this.getSVGHeight() - this.graphLegenda - (this.getHeightProtein(logEntry) + this.getHeightFat(logEntry));
     }
   }
   getHeightFat(logEntry) {
     if (!logEntry || !logEntry.macro) {
-      return 0
+      return 0;
     }
     if (this.percentages) {
-      let total = logEntry.macro.protein + logEntry.macro.fat + logEntry.macro.carbs;
-      let percentage = logEntry.macro.fat * 100 / total;
+      const total = logEntry.macro.protein + logEntry.macro.fat + logEntry.macro.carbs;
+      const percentage = logEntry.macro.fat * 100 / total;
       return percentage * this.zoomX;
     } else {
       return logEntry.macro.fat * this.zoomX;
@@ -211,21 +209,23 @@ export class GraphsComponent implements AfterContentInit {
   getYPosCarbs(logEntry) {
     if (this.splitted) {
       if (this.percentages) {
-        let maxUsed = this.maxProteinPerc + this.maxFatPerc;
-        return this.getSVGHeight() - this.graphLegenda - (this.splitOffset * 2 + maxUsed * this.zoomX + this.getHeightCarbs(logEntry))
+        const maxUsed = this.maxProteinPerc + this.maxFatPerc;
+        return this.getSVGHeight() - this.graphLegenda - (this.splitOffset * 2 + maxUsed * this.zoomX + this.getHeightCarbs(logEntry));
       } else {
-        return this.getSVGHeight() - this.graphLegenda - (this.splitOffset * 2 + this.maxProtein * this.zoomX + this.maxFat * this.zoomX + this.getHeightCarbs(logEntry))
+        return this.getSVGHeight() - this.graphLegenda - (this.splitOffset * 2 + this.maxProtein * this.zoomX + this.maxFat * this.zoomX + this.getHeightCarbs(logEntry));
       }
     } else {
-      return this.getSVGHeight() - this.graphLegenda - (this.getHeightProtein(logEntry) + this.getHeightFat(logEntry) + this.getHeightCarbs(logEntry))
+      return this.getSVGHeight() - this.graphLegenda - (this.getHeightProtein(logEntry) + this.getHeightFat(logEntry) + this.getHeightCarbs(logEntry));
     }
   }
 
   getHeightCarbs(logEntry) {
-    if (!logEntry || !logEntry.macro) { return 0 }
+    if (!logEntry || !logEntry.macro) {
+      return 0;
+    }
     if (this.percentages) {
-      let total = logEntry.macro.protein + logEntry.macro.fat + logEntry.macro.carbs;
-      let percentage = logEntry.macro.carbs * 100 / total;
+      const total = logEntry.macro.protein + logEntry.macro.fat + logEntry.macro.carbs;
+      const percentage = logEntry.macro.carbs * 100 / total;
       return percentage * this.zoomX;
     } else {
       return logEntry.macro.carbs * this.zoomX;
@@ -265,18 +265,18 @@ export class GraphsComponent implements AfterContentInit {
 
   getGoalProtein() {
     if (this.percentages) {
-      let total = this.userGoals[0] + this.userGoals[1] + this.userGoals[2];
-      let percentage = this.userGoals[0] * 100 / total
+      const total = this.userGoals[0] + this.userGoals[1] + this.userGoals[2];
+      const percentage = this.userGoals[0] * 100 / total;
       return percentage;
     } else {
-      return this.userGoals[0]
+      return this.userGoals[0];
     }
   }
 
   getGoalFat() {
     if (this.percentages) {
-      let total = this.userGoals[0] + this.userGoals[1] + this.userGoals[2];
-      let percentage = this.userGoals[1] * 100 / total
+      const total = this.userGoals[0] + this.userGoals[1] + this.userGoals[2];
+      const percentage = this.userGoals[1] * 100 / total;
       return percentage;
     } else {
       return this.userGoals[1];
@@ -285,8 +285,8 @@ export class GraphsComponent implements AfterContentInit {
 
   getGoalCarbs() {
     if (this.percentages) {
-      let total = this.userGoals[0] + this.userGoals[1] + this.userGoals[2];
-      let percentage = this.userGoals[2] * 100 / total
+      const total = this.userGoals[0] + this.userGoals[1] + this.userGoals[2];
+      const percentage = this.userGoals[2] * 100 / total;
       return percentage;
     } else {
       return this.userGoals[2];

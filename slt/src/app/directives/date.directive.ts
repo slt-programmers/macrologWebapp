@@ -1,33 +1,27 @@
-import { Directive, forwardRef, Injectable, Renderer, ElementRef } from '@angular/core';
+import { Directive, forwardRef } from '@angular/core';
 import { Validator, AbstractControl, NG_VALIDATORS } from '@angular/forms';
 import * as moment from 'moment';
 
 @Directive({
-	selector: '[validdate]',
+  selector: '[validDate]',
   providers: [
-        { provide: NG_VALIDATORS, useExisting: forwardRef(() => DateValidator), multi: true }
-    ]
+    { provide: NG_VALIDATORS, useExisting: forwardRef(() => DateValidator), multi: true }
+  ]
 })
 export class DateValidator implements Validator {
 
-private nativeElement: Node;
-
   public validDate = true;
-	constructor(private renderer: Renderer,
-							private element: ElementRef) {
-		this.nativeElement = element.nativeElement;
-	}
 
-  ngOnInit() {
+  constructor() {
   }
 
   validate(c: AbstractControl): { [key: string]: any } {
-    let v = c.value;
+    const value = c.value;
 
-    if (v!= null && v != undefined && v!= "") {
-      var date = moment(v, 'D-M-YYYY', true);
-      if (!date.isValid()){
-        return { "DateValidator": true };
+    if (value !== null && value !== undefined && value !== '') {
+      const date = moment(value, 'D-M-YYYY', true);
+      if (!date.isValid()) {
+        return { 'DateValidator': true };
       }
     }
 

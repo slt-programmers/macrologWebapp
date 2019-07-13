@@ -5,7 +5,6 @@ import { Food } from '../../model/food';
 import { Portion } from '../../model/portion';
 import { Macro } from '../../model/macro';
 import { FoodSearchable } from '../../model/foodSearchable';
-import { Observable } from 'rxjs/Observable';
 import { forkJoin } from 'rxjs/observable/forkJoin';
 import { Router } from '@angular/router';
 import * as moment from 'moment';
@@ -17,7 +16,7 @@ import * as moment from 'moment';
 })
 export class IntakeComponent implements OnInit {
 
-	@ViewChild('breakfast',  {static: false}) private breakfastEref;
+	@ViewChild('breakfast', { static: false }) private breakfastEref;
 
 	// Step 1
 	public name: string;
@@ -40,7 +39,7 @@ export class IntakeComponent implements OnInit {
 
 	// Step 3
 	public showCalories = false;
-	public showMacros =  false;
+	public showMacros = false;
 	public expandMoreInfo = false;
 
 	// Step 4
@@ -51,11 +50,11 @@ export class IntakeComponent implements OnInit {
 	public currentStep: number;
 
 	constructor(private userService: UserService,
-							private router: Router) {
+		private router: Router) {
 		const item = new Food('Apple', 0.4, 0.0, 12);
 		item.portions = [];
-		let portion = new Portion();
-		let macros = new Macro();
+		const portion = new Portion();
+		const macros = new Macro();
 		macros.protein = 0.8;
 		macros.fat = 0.0;
 		macros.carbs = 24;
@@ -104,12 +103,12 @@ export class IntakeComponent implements OnInit {
 
 	calcTDEE(): void {
 		let bmr;
-    let age;
-    var birthdayDate = moment(this.birthday, 'D-M-YYYY', true);
-    if (birthdayDate.isValid()){
-       age = moment().diff(birthdayDate, 'years');
-    }
-    console.log(age);
+		let age;
+		const birthdayDate = moment(this.birthday, 'D-M-YYYY', true);
+		if (birthdayDate.isValid()) {
+			age = moment().diff(birthdayDate, 'years');
+		}
+		console.log(age);
 		if (this.gender === 'MALE') {
 			bmr = 66.5 + (13.7 * this.weight) + (5 * this.height) - (6.76 * age);
 		} else {
@@ -119,9 +118,9 @@ export class IntakeComponent implements OnInit {
 	}
 
 	setMarkers() {
-		this.markers = [{title: 'deficit', value: (this.tdee - 200)},
-		{title: 'baseline', value: (this.tdee)},
-		{title: 'surplus', value: (this.tdee + 200)}];
+		this.markers = [{ title: 'deficit', value: (this.tdee - 200) },
+		{ title: 'baseline', value: (this.tdee) },
+		{ title: 'surplus', value: (this.tdee + 200) }];
 	}
 
 	calcCarbs(): void {
@@ -160,8 +159,8 @@ export class IntakeComponent implements OnInit {
 			this.userService.addUserInfo('weight', this.weight.toString()),
 			this.userService.addUserInfo('activity', this.activity.toString())
 		).subscribe(
-				data => this.nextStep(),
-				error => console.error(error)
+			data => this.nextStep(),
+			error => console.error(error)
 		);
 	}
 
@@ -172,10 +171,10 @@ export class IntakeComponent implements OnInit {
 				this.userService.addUserInfo('goalFat', Math.round(this.fatManual).toString()),
 				this.userService.addUserInfo('goalCarbs', Math.round(this.carbsManual).toString())
 			).subscribe(
-					data => {
-						this.nextStep();
-					},
-					error => console.error(error)
+				data => {
+					this.nextStep();
+				},
+				error => console.error(error)
 			);
 		} else {
 			forkJoin(
@@ -183,10 +182,10 @@ export class IntakeComponent implements OnInit {
 				this.userService.addUserInfo('goalFat', Math.round(this.fat).toString()),
 				this.userService.addUserInfo('goalCarbs', Math.round(this.carbs).toString())
 			).subscribe(
-					data => {
-						this.nextStep();
-					},
-					error => console.error(error)
+				data => {
+					this.nextStep();
+				},
+				error => console.error(error)
 			);
 		}
 	}
@@ -196,16 +195,14 @@ export class IntakeComponent implements OnInit {
 
 	private documentClick(event) {
 		if (this.breakfastEref &&
-				!event.target.classList.contains('autocomplete__option') &&
-				!event.target.classList.contains('fa-trash') &&
-				!event.target.classList.contains('button--transparent')) {
+			!event.target.classList.contains('autocomplete__option') &&
+			!event.target.classList.contains('fa-trash') &&
+			!event.target.classList.contains('button--transparent')) {
 			this.breakfastOpen = this.breakfastEref.logMealEref.nativeElement.contains(event.target);
 		}
 	}
 
-
 	finish() {
 		this.router.navigate(['/log']);
 	}
-
 }

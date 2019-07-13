@@ -1,10 +1,9 @@
-import {Component, OnInit, Output, Input, EventEmitter} from '@angular/core';
-import {Food} from '../../model/food';
-import {Meal} from '../../model/meal';
-import {Ingredient} from '../../model/ingredient';
-import {FoodSearchable} from '../../model/foodSearchable';
-import {FoodService} from '../../services/food.service';
-import {MealService} from '../../services/meal.service';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Meal } from '../../model/meal';
+import { Ingredient } from '../../model/ingredient';
+import { FoodSearchable } from '../../model/foodSearchable';
+import { FoodService } from '../../services/food.service';
+import { MealService } from '../../services/meal.service';
 
 @Component({
 	selector: 'make-meal-modal',
@@ -14,17 +13,17 @@ export class MakeMealModalComponent implements OnInit {
 
 	@Output() close: EventEmitter<boolean> = new EventEmitter<boolean>();
 
-	public modalTitle = 'Make a meal';
-	public mealName = '';
-	public food;
-	public foodAndPortions = new Array();
-	public addIngredientCallBack: Function;
-	public ingredients: Ingredient[] = new Array();
-	public unitName: string = 'gram';
-	public unitGrams: number = 100.00;
+	private modalTitle = 'Make a meal';
+	private mealName = '';
+	private food;
+	private foodAndPortions = new Array();
+	private addIngredientCallBack: Function;
+	private ingredients: Ingredient[] = new Array();
+	private unitName = 'gram';
+	private unitGrams = 100.00;
 
 	constructor(private foodService: FoodService,
-							private mealService: MealService) {
+		private mealService: MealService) {
 	}
 
 	ngOnInit() {

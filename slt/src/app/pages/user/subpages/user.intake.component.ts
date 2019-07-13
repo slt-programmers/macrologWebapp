@@ -10,18 +10,18 @@ import * as moment from 'moment';
 })
 export class UserIntakeComponent {
 
-	public goalProtein: string;
-	public goalFat: string;
-	public goalCarbs: string;
+	private goalProtein: string;
+	private goalFat: string;
+	private goalCarbs: string;
 
-	public age;
-  public birthday;
-	public gender;
-	public height;
-	public weight;
-	public activity;
+	private age;
+	private birthday;
+	private gender;
+	private height;
+	private weight;
+	private activity;
 
-	public showCalcModal = false;
+	private showCalcModal = false;
 
 	constructor(private userService: UserService) {
 		this.userService.getAllSettings().subscribe(
@@ -37,15 +37,14 @@ export class UserIntakeComponent {
 				this.goalFat = this.getKeyFromResultlist(result, 'goalFat');
 				this.goalCarbs = this.getKeyFromResultlist(result, 'goalCarbs');
 
-        // derived age:
-        var birthdayDate = moment(this.birthday, 'YYYY-M-D', true);
-        if (birthdayDate.isValid()){
-           this.age = moment().diff(birthdayDate, 'years');
-        } else {
-           // indien age opgevoerd in verleden
-           this.age = parseInt(this.getKeyFromResultlist(result, 'age'), 10) || undefined ;
-        }
-
+				// derived age:
+				const birthdayDate = moment(this.birthday, 'YYYY-M-D', true);
+				if (birthdayDate.isValid()) {
+					this.age = moment().diff(birthdayDate, 'years');
+				} else {
+					// indien age opgevoerd in verleden
+					this.age = parseInt(this.getKeyFromResultlist(result, 'age'), 10) || undefined;
+				}
 			});
 	}
 
@@ -61,10 +60,9 @@ export class UserIntakeComponent {
 	}
 
 	private getKeyFromResultlist(userSettingsDto: any, key: string) {
-
-    if (userSettingsDto[key]) {
-       return userSettingsDto[key];
-    }
+		if (userSettingsDto[key]) {
+			return userSettingsDto[key];
+		}
 		return '';
 	}
 }

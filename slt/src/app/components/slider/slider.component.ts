@@ -1,13 +1,13 @@
 import {
-	Component, OnInit, OnChanges, ViewChild,
-	ElementRef, Input, Output, EventEmitter, SimpleChanges
+	Component, OnChanges, ViewChild,
+	ElementRef, Input, Output, EventEmitter, SimpleChanges, AfterViewInit
 } from '@angular/core';
 
 @Component({
 	selector: 'slider',
 	templateUrl: './slider.component.html'
 })
-export class SliderComponent implements OnInit, OnChanges {
+export class SliderComponent implements AfterViewInit, OnChanges {
 
 	@ViewChild('slider', { static: false }) private sliderElement: ElementRef;
 	@ViewChild('sliderHandle', { static: false }) private handleElement: ElementRef;
@@ -41,10 +41,6 @@ export class SliderComponent implements OnInit, OnChanges {
 	constructor() {
 	}
 
-	ngOnInit() {
-
-	}
-
 	ngAfterViewInit() {
 		this.slider = this.sliderElement.nativeElement;
 		this.sliderHandle = this.handleElement.nativeElement;
@@ -67,7 +63,7 @@ export class SliderComponent implements OnInit, OnChanges {
 
 	ngOnChanges(changes: SimpleChanges) {
 		this.value = changes.value.currentValue;
-		if (this.slider != undefined) {
+		if (this.slider !== undefined) {
 			this.initHandle();
 		}
 	}

@@ -3,8 +3,6 @@ import { forkJoin } from 'rxjs/observable/forkJoin';
 import { UserService } from '../../../services/user.service';
 import { Gender } from '../../../model/gender';
 import { ToastService } from '../../../services/toast.service';
-import { DateValidator } from '../../../directives/date.directive';
-import { FormGroup,  FormBuilder,  Validators } from '@angular/forms';
 import * as moment from 'moment';
 
 @Component({
@@ -15,12 +13,12 @@ export class UserPersonalComponent {
 
 	private originalResult;
 
-	public name;
-	public birthday;
-	public gender;
-	public height;
-	public weight;
-	public activity;
+	private name;
+	private birthday;
+	private gender;
+	private height;
+	private weight;
+	private activity;
 
 	public newWeight;
 
@@ -30,10 +28,7 @@ export class UserPersonalComponent {
 			result => {
 				this.originalResult = result;
 				this.name = this.getKeyFromResultlist(result, 'name');
-				this.birthday =this.getKeyFromResultlist(result, 'birthday');
-        var birthdayDate = moment(this.birthday, 'YYYY-M-D', true);
-        this.birthday = birthdayDate.format('DD-MM-YYYY');
-
+				this.birthday = moment(this.getKeyFromResultlist(result, 'birthday'), 'YYYY-M-D', true).format('DD-MM-YYYY');
 				this.gender = this.getKeyFromResultlist(result, 'gender') || Gender.Male;
 				this.height = parseInt(this.getKeyFromResultlist(result, 'height'), 10) || undefined;
 				this.weight = parseFloat(this.getKeyFromResultlist(result, 'currentWeight')) || undefined;

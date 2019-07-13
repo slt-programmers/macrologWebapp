@@ -20,21 +20,20 @@
       </div>
 
       <div class="form-field">
-				<label class="form-field__label">Date of birth</label>
-				<input class="form-field__input" required validdate placeholder="DD-MM-YYYY, eg 26-3-1989"  name="birthday" [(ngModel)]="birthday">
+        <label class="form-field__label">Date of birth</label>
+        <input class="form-field__input" required validDate placeholder="DD-MM-YYYY, eg 26-3-1989" name="birthday"
+          [(ngModel)]="birthday">
       </div>
 
       <div class="form-field">
         <label class="form-field__label">Gender</label>
         <div class="form-field__input">
           <div class="radio-wrapper">
-            <input type="radio" name="gender"
-                   [(ngModel)]="gender" value="MALE"
-                   [ngClass]="{'checked fas fa-check': gender === 'MALE' }">
+            <input type="radio" name="gender" [(ngModel)]="gender" value="MALE"
+              [ngClass]="{'checked fas fa-check': gender === 'MALE' }">
             <span class="radio-label">Male</span>
-            <input type="radio" name="gender"
-                   [(ngModel)]="gender" value="FEMALE"
-                   [ngClass]="{'checked fas fa-check': gender === 'FEMALE' }">
+            <input type="radio" name="gender" [(ngModel)]="gender" value="FEMALE"
+              [ngClass]="{'checked fas fa-check': gender === 'FEMALE' }">
             <span class="radio-label">Female</span>
           </div>
         </div>
@@ -63,8 +62,7 @@
     </form>
 
     <div class="button-wrapper">
-      <button class="button button--primary"
-              (click)="saveUserSettings()">Next</button>
+      <button class="button button--primary" (click)="saveUserSettings()">Next</button>
     </div>
   </div>
 
@@ -72,7 +70,8 @@
   <div class="tile" #step2 *ngIf="currentStep === 2">
     <h3 class="title">Set your intake goal</h3>
 
-    <p>This is the amount of calories you need to maintain your current weight. Increase or decrease the amount of calories to respectively
+    <p>This is the amount of calories you need to maintain your current weight. Increase or decrease the amount of
+      calories to respectively
       gain or lose weight. Do this by adjusting the calories or the macro's.
     </p>
 
@@ -82,11 +81,9 @@
 
     <div class="tabs">
       <div class="tabs-header">
-        <div class="tab" (click)="showCaloriesTab()"
-             [ngClass]="{'tab--active': showCalories}">Adjust calories
+        <div class="tab" (click)="showCaloriesTab()" [ngClass]="{'tab--active': showCalories}">Adjust calories
         </div>
-        <div class="tab" (click)="showMacrosTab()"
-             [ngClass]="{'tab--active': showMacros}">Adjust macro's
+        <div class="tab" (click)="showMacrosTab()" [ngClass]="{'tab--active': showMacros}">Adjust macro's
         </div>
       </div>
       <div class="tabs-content">
@@ -100,8 +97,8 @@
           <div class="form-field form-field--slider">
             <div class="form-field__label form-field__label--slider">Calories</div>
             <div class="form-field__slider">
-              <slider [value]="calories" (valueChange)="changeCalories($event)"
-                      [upperBound]="4000" [lowerBound]="1200" [markers]="markers"></slider>
+              <slider [value]="calories" (valueChange)="changeCalories($event)" [upperBound]="4000" [lowerBound]="1200"
+                [markers]="markers"></slider>
             </div>
           </div>
 
@@ -120,7 +117,8 @@
             <div class="form-field">
               <label class="form-field__label">Protein</label>
               <div class="form-field__element">
-                <input class="form-field__input" (change)="calcCaloriesManual()" [(ngModel)]="proteinManual" type="number">
+                <input class="form-field__input" (change)="calcCaloriesManual()" [(ngModel)]="proteinManual"
+                  type="number">
               </div>
             </div>
 
@@ -134,7 +132,8 @@
             <div class="form-field">
               <label class="form-field__label">Carbs</label>
               <div class="form-field__element">
-                <input class="form-field__input" (change)="calcCaloriesManual()" [(ngModel)]="carbsManual" type="number">
+                <input class="form-field__input" (change)="calcCaloriesManual()" [(ngModel)]="carbsManual"
+                  type="number">
               </div>
             </div>
           </div>
@@ -146,7 +145,7 @@
     <div class="button-wrapper button-wrapper--space-between">
       <button class="button button--primary" (click)="previousStep()">Previous</button>
       <button class="button button--primary" (click)="saveIntake()"
-              [disabled]="showCalories === false && showMacros === false">Next
+        [disabled]="showCalories === false && showMacros === false">Next
       </button>
     </div>
   </div>
@@ -212,7 +211,8 @@
         <span class="logday__header__macro">Fat</span>
         <span class="logday__header__macro">Carbs</span>
       </div>
-      <log-meal #breakfast [open]="breakfastOpen" [searchables]="foodSearchables" [date]="displayDate" [meal]="'Breakfast'" [logEntries]="[]" (dataChanged)="dummy()"></log-meal>
+      <log-meal #breakfast [open]="breakfastOpen" [searchables]="foodSearchables" [date]="displayDate"
+        [meal]="'Breakfast'" [logEntries]="[]" (dataChanged)="dummy()"></log-meal>
     </div>
 
     <p></p>

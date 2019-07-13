@@ -1,5 +1,7 @@
-import { Component, OnInit, OnChanges, ViewChild, SimpleChange, SimpleChanges,
-	Renderer, ElementRef, Input, Output, EventEmitter } from '@angular/core';
+import {
+	Component, OnInit, OnChanges, ViewChild,
+	Renderer, ElementRef, Input, Output, EventEmitter
+} from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { LogEntry } from '../../model/logEntry';
 import { StoreLogRequest } from '../../model/storeLogRequest';
@@ -14,7 +16,7 @@ import { ToastService } from '../../services/toast.service';
 })
 export class LogMealComponent implements OnInit, OnChanges {
 
-	@ViewChild('logMeal',  {static: false}) private logMealEref: ElementRef;
+	@ViewChild('logMeal', { static: false }) private logMealEref: ElementRef;
 
 	@Input() searchables: FoodSearchable[];
 	@Input() meal: string;
@@ -27,15 +29,15 @@ export class LogMealComponent implements OnInit, OnChanges {
 	public editable: boolean;
 	public addLogEntryCallBack: Function;
 
-	public unitGrams: number = 100.00;
-	public unitName: string = 'gram';
+	public unitGrams: 100.00;
+	public unitName: 'gram';
 
 	private pipe: DatePipe;
 
 	constructor(private foodService: FoodService,
-							private logService: LogService,
-							private renderer: Renderer,
-							private toastService: ToastService) {
+		private logService: LogService,
+		private renderer: Renderer,
+		private toastService: ToastService) {
 		this.editable = false;
 		this.pipe = new DatePipe('en-US');
 	}
@@ -142,7 +144,7 @@ export class LogMealComponent implements OnInit, OnChanges {
 	}
 
 	private updateCalculatedMacros(logEntry) {
-		const protein =  this.calculateProtein(logEntry);
+		const protein = this.calculateProtein(logEntry);
 		const carbs = this.calculateCarbs(logEntry);
 		const fat = this.calculateFat(logEntry);
 		const calories = (protein * 4) + (fat * 9) + (carbs * 4);
