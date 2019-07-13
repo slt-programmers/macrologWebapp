@@ -46,7 +46,7 @@ export class GraphsComponent implements AfterContentInit {
   private userGoals;
   private goalCal;
 
-  private loading = true;
+  public loading = true;
   private allLogs = new Array();
   private infoMacro = null;
 

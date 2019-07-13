@@ -13,12 +13,13 @@ export class MakeMealModalComponent implements OnInit {
 
 	@Output() close: EventEmitter<boolean> = new EventEmitter<boolean>();
 
-	private modalTitle = 'Make a meal';
-	private mealName = '';
-	private food;
-	private foodAndPortions = new Array();
-	private addIngredientCallBack: Function;
-	private ingredients: Ingredient[] = new Array();
+	public modalTitle = 'Make a meal';
+	public mealName = '';
+	public food;
+	public foodAndPortions = new Array();
+	public addIngredientCallBack: Function;
+	public ingredients: Ingredient[] = new Array();
+
 	private unitName = 'gram';
 	private unitGrams = 100.00;
 

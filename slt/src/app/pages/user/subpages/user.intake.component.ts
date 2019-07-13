@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { Subscription } from 'rxjs/Subscription';
 import { UserService } from '../../../services/user.service';
 import { Gender } from '../../../model/gender';
 import * as moment from 'moment';
@@ -10,9 +9,9 @@ import * as moment from 'moment';
 })
 export class UserIntakeComponent {
 
-	private goalProtein: string;
-	private goalFat: string;
-	private goalCarbs: string;
+	public goalProtein: string;
+	public goalFat: string;
+	public goalCarbs: string;
 
 	private age;
 	private birthday;
@@ -21,7 +20,7 @@ export class UserIntakeComponent {
 	private weight;
 	private activity;
 
-	private showCalcModal = false;
+	public showCalcModal = false;
 
 	constructor(private userService: UserService) {
 		this.userService.getAllSettings().subscribe(

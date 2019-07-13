@@ -12,11 +12,11 @@ import * as moment from 'moment';
 })
 export class UserWeightTrackerComponent {
 
-  private trackedWeights = new Array<LogWeight>();
-  private measurementDate: string;
-  private weight;
-  private remark: string;
-  private openWeight;
+  public trackedWeights = new Array<LogWeight>();
+  public measurementDate: string;
+  public weight;
+  public remark: string;
+  public openWeight;
 
   private pipe: DatePipe;
 

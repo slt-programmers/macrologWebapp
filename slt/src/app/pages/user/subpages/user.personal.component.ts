@@ -12,18 +12,18 @@ import * as moment from 'moment';
 export class UserPersonalComponent {
 
 	private originalResult;
-
-	private name;
-	private birthday;
-	private gender;
-	private height;
-	private weight;
-	private activity;
+	
+	public name;
+	public birthday;
+	public gender;
+	public height;
+	public weight;
+	public activity;
 
 	public newWeight;
 
 	constructor(private userService: UserService,
-							private toastService: ToastService) {
+		private toastService: ToastService) {
 		this.userService.getAllSettings().subscribe(
 			result => {
 				this.originalResult = result;
@@ -49,20 +49,20 @@ export class UserPersonalComponent {
 			this.userService.addUserInfo('currentWeight', this.weight.toString()),
 			this.userService.addUserInfo('activity', this.activity.toString())
 		).subscribe(
-				data => this.toastService.setMessage('Your data is saved!'),
-				error => console.error(error)
+			data => this.toastService.setMessage('Your data is saved!'),
+			error => console.error(error)
 		);
 	}
 
 	public isInputUnchanged(): boolean {
 		if (this.originalResult !== undefined) {
 			if (this.name === this.getKeyFromResultlist(this.originalResult, 'name')
-					&& this.birthday === this.getKeyFromResultlist(this.originalResult, 'birthday')
-					&& this.gender === this.getKeyFromResultlist(this.originalResult, 'gender')
-					&& this.height === parseInt(this.getKeyFromResultlist(this.originalResult, 'height'), 10)
-					&& this.weight === parseInt(this.getKeyFromResultlist(this.originalResult, 'currentWeight'), 10)
-					&& this.activity.toString() === this.getKeyFromResultlist(this.originalResult, 'activity')
-					) {
+				&& this.birthday === this.getKeyFromResultlist(this.originalResult, 'birthday')
+				&& this.gender === this.getKeyFromResultlist(this.originalResult, 'gender')
+				&& this.height === parseInt(this.getKeyFromResultlist(this.originalResult, 'height'), 10)
+				&& this.weight === parseInt(this.getKeyFromResultlist(this.originalResult, 'currentWeight'), 10)
+				&& this.activity.toString() === this.getKeyFromResultlist(this.originalResult, 'activity')
+			) {
 				return true;
 			}
 		}
@@ -70,8 +70,8 @@ export class UserPersonalComponent {
 	}
 
 	private getKeyFromResultlist(userSettingsDto: any, key: string) {
-    if (userSettingsDto[key]) {
-       return userSettingsDto[key];
-    }		return '';
+		if (userSettingsDto[key]) {
+			return userSettingsDto[key];
+		} return '';
 	}
 }
