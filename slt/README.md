@@ -1,6 +1,6 @@
 # Macrolog Webapp #
 
-go to csl directory
+go to SLT directory
 
 npm install
 ng serve
