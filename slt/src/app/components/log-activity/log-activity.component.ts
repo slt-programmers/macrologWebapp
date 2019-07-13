@@ -1,5 +1,4 @@
-import { Component, OnInit, OnChanges, ViewChild, SimpleChange, SimpleChanges,
-	Renderer, ElementRef, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, OnChanges, Renderer, Input, Output, EventEmitter, ViewChild, ElementRef } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { LogActivity } from '../../model/logActivity';
 import { StoreActivityRequest } from '../../model/storeActivityRequest';
@@ -12,7 +11,7 @@ import { ToastService } from '../../services/toast.service';
 })
 export class LogActivityComponent implements OnInit, OnChanges {
 
-	@ViewChild('logMeal') private logMealEref: ElementRef;
+	@ViewChild('logActivity',  {static: false}) private logActivityEref: ElementRef;
 
 	@Input() logActivities: LogActivity[];
 	@Input() date: Date;
@@ -27,9 +26,7 @@ export class LogActivityComponent implements OnInit, OnChanges {
 
 	private pipe: DatePipe;
 
-	constructor(private activityService: ActivityService,
-							private renderer: Renderer,
-							private toastService: ToastService) {
+	constructor(private activityService: ActivityService) {
 		this.editable = false;
 		this.pipe = new DatePipe('en-US');
 	}
@@ -54,7 +51,6 @@ export class LogActivityComponent implements OnInit, OnChanges {
 		this.editable = false;
 	}
 
-
 	public addActivity() {
     if (this.newActivityName.length > 0) {
 		  console.log('add Activity' + this.newActivityName)
@@ -62,7 +58,6 @@ export class LogActivityComponent implements OnInit, OnChanges {
     }
     this.newActivityName = null;
 	}
-
 
 	public deleteLogActivity(logActivity: LogActivity) {
 

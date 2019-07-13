@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef, Renderer2 } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, Renderer2, AfterViewInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ScrollBehaviourService } from './services/scroll-behaviour.service';
 import { HealthcheckService } from './services/healthcheck.service';
@@ -7,12 +7,12 @@ import { HealthcheckService } from './services/healthcheck.service';
 	selector: 'app-root',
 	templateUrl: './app.component.html'
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, AfterViewInit {
 
-	@ViewChild('navbar') private navbarElement: ElementRef;
-	@ViewChild('navbarBackdrop') private backdropElement: ElementRef;
-	@ViewChild('usermenu') private userMenuElement: ElementRef;
-	@ViewChild('usermenuBackdrop') private usermenubackdropElement: ElementRef;
+	@ViewChild('navbar',  {static: false}) private navbarElement;
+	@ViewChild('navbarBackdrop',  {static: false}) private backdropElement: ElementRef;
+	@ViewChild('usermenu',  {static: false}) private userMenuElement: ElementRef;
+	@ViewChild('usermenuBackdrop',  {static: false}) private usermenubackdropElement: ElementRef;
 
 	public title: string;
 
@@ -47,7 +47,9 @@ export class AppComponent implements OnInit {
 	}
 
 	ngOnInit() {
-		console.log('App started');
+	}
+
+	ngAfterViewInit() {
 		this.navbar = this.navbarElement.nativeElement;
 		this.backdrop = this.backdropElement.nativeElement;
 		this.usermenu = this.userMenuElement.nativeElement;

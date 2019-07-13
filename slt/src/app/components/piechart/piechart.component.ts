@@ -1,12 +1,12 @@
-import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 
 @Component({
 	templateUrl: './piechart.component.html',
 	selector: 'piechart'
 })
-export class PiechartComponent implements OnInit {
+export class PiechartComponent implements OnInit, AfterViewInit {
 
-	@ViewChild('thisOne') piechartRef: ElementRef;
+	@ViewChild('thisOne' ,  {static: false}) piechartRef: ElementRef;
 
 	@Input() mealId;
 	@Input() macros;
@@ -37,7 +37,9 @@ export class PiechartComponent implements OnInit {
 		this.proteinPercent = this.protein / this.total;
 		this.fatPercent = this.fat / this.total;
 		this.carbsPercent = this.carbs / this.total;
+	}
 
+	ngAfterViewInit() {
 		this.calculatePie();
 	}
 
@@ -48,11 +50,6 @@ export class PiechartComponent implements OnInit {
 	}
 
 	public calculatePie() {
-		console.log(this.proteinPercent);
-		console.log(this.fatPercent);
-		console.log(this.carbsPercent);
-		console.log(this.proteinPercent + this.fatPercent + this.carbsPercent);
-
 		this.cumulativePercent = 0;
 		this.svgEl = this.piechartRef.nativeElement;
 		const slices = [

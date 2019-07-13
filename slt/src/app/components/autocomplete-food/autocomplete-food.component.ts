@@ -10,8 +10,8 @@ import { Food } from '../../model/food';
 })
 export class AutocompleteFoodComponent implements OnInit, OnChanges {
 
-	@ViewChild('newIngredient') private newIngredientEref: ElementRef;
-	@ViewChild('autoComplete') private autoCompleteEref: ElementRef;
+	@ViewChild('newIngredient',  {static: false}) private newIngredientEref: ElementRef;
+	@ViewChild('autoComplete',  {static: false}) private autoCompleteEref: ElementRef;
 
 	@Input() placeholder = '';
 	@Input() selectFn: Function;
@@ -63,7 +63,7 @@ export class AutocompleteFoodComponent implements OnInit, OnChanges {
 					const activeElement = document.activeElement;
 					let nextSibling = activeElement.nextSibling;
 					for (;;) {
-						if (nextSibling && nextSibling.localName !== 'div') {
+						if (nextSibling && nextSibling.nodeName !== 'div') {
 							nextSibling = nextSibling.nextSibling;
 						} else if (nextSibling) {
 							this.renderer.invokeElementMethod(nextSibling, 'focus');
@@ -77,7 +77,7 @@ export class AutocompleteFoodComponent implements OnInit, OnChanges {
 					const activeElement = document.activeElement;
 					let previousSibling = activeElement.previousSibling;
 					for (;;) {
-						if (previousSibling && previousSibling.localName !== 'div') {
+						if (previousSibling && previousSibling.nodeName !== 'div') {
 							previousSibling = previousSibling.previousSibling;
 						} else if (previousSibling) {
 							this.renderer.invokeElementMethod(previousSibling, 'focus');

@@ -21,13 +21,13 @@
     ],
     "import-spacing": true,
     "indent": [
-      true,
+      false,
       "tabs"
     ],
     "interface-over-type-literal": true,
     "label-position": true,
     "max-line-length": [
-      true,
+      false,
       140
     ],
     "member-access": false,
@@ -71,7 +71,6 @@
     "no-trailing-whitespace": true,
     "no-unnecessary-initializer": true,
     "no-unused-expression": true,
-    "no-use-before-declare": true,
     "no-var-keyword": true,
     "object-literal-sort-keys": false,
     "one-line": [
@@ -108,7 +107,7 @@
     "unified-signatures": true,
     "variable-name": false,
     "whitespace": [
-      true,
+      false,
       "check-branch",
       "check-decl",
       "check-operator",
@@ -118,8 +117,6 @@
     "directive-selector": false,
     "component-selector": false,
     "no-output-on-prefix": true,
-    "use-input-property-decorator": true,
-    "use-output-property-decorator": true,
     "use-host-property-decorator": false,
     "no-input-rename": true,
     "no-output-rename": true,

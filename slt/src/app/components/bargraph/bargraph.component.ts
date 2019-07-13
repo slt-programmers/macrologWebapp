@@ -1,12 +1,12 @@
-import { Component, OnInit, OnChanges, ViewChild, SimpleChanges, ElementRef, Input } from '@angular/core';
+import { Component, OnInit, OnChanges, ViewChild, SimpleChanges, ElementRef, Input, AfterViewInit } from '@angular/core';
 
 @Component({
 	selector: 'bargraph',
 	templateUrl: './bargraph.component.html'
 })
-export class BargraphComponent implements OnInit, OnChanges {
+export class BargraphComponent implements OnInit, OnChanges, AfterViewInit {
 
-	@ViewChild('trackFill') private trackFillElement: ElementRef;
+	@ViewChild('trackFill', { static: false }) private trackFillElement: ElementRef;
 
 	@Input() percentage: number;
 	@Input() title: string;
@@ -16,6 +16,14 @@ export class BargraphComponent implements OnInit, OnChanges {
 	constructor() { }
 
 	ngOnInit() {
+
+	}
+
+	ngOnChanges() {
+		this.onChange();
+	}
+
+	ngAfterViewInit() {
 		const percentCap = this.percentage > 115 ? 115 : this.percentage;
 		const hueDegree = this.calcHue(percentCap);
 		this.trackFill = this.trackFillElement.nativeElement;
@@ -24,15 +32,13 @@ export class BargraphComponent implements OnInit, OnChanges {
 	}
 
 	onChange() {
-		const percentCap = this.percentage > 115 ? 115 : this.percentage;
-		const hueDegree = this.calcHue(percentCap);
-		this.trackFill = this.trackFillElement.nativeElement;
-		this.trackFill.style.width = percentCap + '%';
-		this.trackFill.style.filter = 'hue-rotate(' + hueDegree + 'deg)';
-	}
-
-	ngOnChanges() {
-		this.onChange();
+		if (this.trackFill) {
+			const percentCap = this.percentage > 115 ? 115 : this.percentage;
+			const hueDegree = this.calcHue(percentCap);
+			this.trackFill = this.trackFillElement.nativeElement;
+			this.trackFill.style.width = percentCap + '%';
+			this.trackFill.style.filter = 'hue-rotate(' + hueDegree + 'deg)';
+		}
 	}
 
 	calcHue(percent: number): number {

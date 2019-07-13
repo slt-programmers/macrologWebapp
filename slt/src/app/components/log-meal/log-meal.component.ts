@@ -5,7 +5,6 @@ import { LogEntry } from '../../model/logEntry';
 import { StoreLogRequest } from '../../model/storeLogRequest';
 import { FoodService } from '../../services/food.service';
 import { LogService } from '../../services/log.service';
-import { Food } from '../../model/food';
 import { FoodSearchable } from '../../model/foodSearchable';
 import { ToastService } from '../../services/toast.service';
 
@@ -15,7 +14,7 @@ import { ToastService } from '../../services/toast.service';
 })
 export class LogMealComponent implements OnInit, OnChanges {
 
-	@ViewChild('logMeal') private logMealEref: ElementRef;
+	@ViewChild('logMeal',  {static: false}) private logMealEref: ElementRef;
 
 	@Input() searchables: FoodSearchable[];
 	@Input() meal: string;

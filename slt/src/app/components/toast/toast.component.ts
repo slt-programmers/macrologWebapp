@@ -8,14 +8,14 @@ import {ToastDirective} from '../../directives/toast.directive';
 })
 export class ToastComponent {
 
-	@ViewChild(ToastDirective) vc: ToastDirective;
+	@ViewChild(ToastDirective,  {static: false}) toast: ToastDirective;
 
 	public message: string;
 
 	constructor(private toastService: ToastService) {
 		this.toastService.messageObservable.subscribe((message: string) => {
 			this.message = message;
-			this.vc.showToast();
+			this.toast.showToast();
 		});
 	}
 }

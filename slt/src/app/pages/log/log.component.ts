@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { LogService } from '../../services/log.service';
 import { ActivityService } from '../../services/activity.service';
@@ -7,10 +7,7 @@ import { FoodService } from '../../services/food.service';
 import { MealService } from '../../services/meal.service';
 import { LogEntry } from '../../model/logEntry';
 import { LogActivity } from '../../model/logActivity';
-import { Food } from '../../model/food';
 import { FoodSearchable } from '../../model/foodSearchable';
-import { Observable } from 'rxjs/Observable';
-import { forkJoin } from 'rxjs/observable/forkJoin';
 import { DatePipe } from '@angular/common';
 
 @Component({
@@ -20,12 +17,11 @@ import { DatePipe } from '@angular/common';
 })
 export class LogComponent implements OnInit {
 
-	@ViewChild('breakfast') private breakfastEref;
-	@ViewChild('lunch') private lunchEref;
-	@ViewChild('dinner') private dinnerEref;
-	@ViewChild('snacks') private snacksEref;
-	@ViewChild('activities') private activitiesEref;
-	@ViewChild('toast') private toastEref;
+	@ViewChild('breakfast',  {static: false}) private breakfastEref;
+	@ViewChild('lunch',  {static: false}) private lunchEref;
+	@ViewChild('dinner',  {static: false}) private dinnerEref;
+	@ViewChild('snacks',  {static: false}) private snacksEref;
+	@ViewChild('activities',  {static: false})  private activitiesEref;
 
 	public modalIsVisible = false;
 	public isLogMealOpen: boolean;
@@ -221,8 +217,7 @@ export class LogComponent implements OnInit {
 			this.lunchOpen = this.lunchEref.logMealEref.nativeElement.contains(event.target);
 			this.dinnerOpen = this.dinnerEref.logMealEref.nativeElement.contains(event.target);
 			this.snacksOpen = this.snacksEref.logMealEref.nativeElement.contains(event.target);
-			this.activitiesOpen = this.activitiesEref.logMealEref.nativeElement.contains(event.target);
-
+			this.activitiesOpen = this.activitiesEref.logActivityEref.nativeElement.contains(event.target);
 		}
 	}
 }

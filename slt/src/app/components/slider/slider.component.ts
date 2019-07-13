@@ -1,5 +1,7 @@
-import { Component, OnInit, OnChanges, Inject, ViewChild,
-ElementRef, Input, Output, EventEmitter, SimpleChanges } from '@angular/core';
+import {
+	Component, OnInit, OnChanges, ViewChild,
+	ElementRef, Input, Output, EventEmitter, SimpleChanges
+} from '@angular/core';
 
 @Component({
 	selector: 'slider',
@@ -7,12 +9,12 @@ ElementRef, Input, Output, EventEmitter, SimpleChanges } from '@angular/core';
 })
 export class SliderComponent implements OnInit, OnChanges {
 
-	@ViewChild('slider') private sliderElement: ElementRef;
-	@ViewChild('sliderHandle') private handleElement: ElementRef;
-	@ViewChild('trackFill') private trackElement: ElementRef;
-	@ViewChild('lowerMark') private lowerMarkElement: ElementRef;
-	@ViewChild('baseMark') private baseMarkElement: ElementRef;
-	@ViewChild('upperMark') private upperMarkElement: ElementRef;
+	@ViewChild('slider', { static: false }) private sliderElement: ElementRef;
+	@ViewChild('sliderHandle', { static: false }) private handleElement: ElementRef;
+	@ViewChild('trackFill', { static: false }) private trackElement: ElementRef;
+	@ViewChild('lowerMark', { static: false }) private lowerMarkElement: ElementRef;
+	@ViewChild('baseMark', { static: false }) private baseMarkElement: ElementRef;
+	@ViewChild('upperMark', { static: false }) private upperMarkElement: ElementRef;
 
 	@Input() value;
 	@Input() upperBound;
@@ -40,6 +42,10 @@ export class SliderComponent implements OnInit, OnChanges {
 	}
 
 	ngOnInit() {
+
+	}
+
+	ngAfterViewInit() {
 		this.slider = this.sliderElement.nativeElement;
 		this.sliderHandle = this.handleElement.nativeElement;
 		this.track = this.trackElement.nativeElement;
@@ -61,7 +67,9 @@ export class SliderComponent implements OnInit, OnChanges {
 
 	ngOnChanges(changes: SimpleChanges) {
 		this.value = changes.value.currentValue;
-		this.initHandle();
+		if (this.slider != undefined) {
+			this.initHandle();
+		}
 	}
 
 	private initHandle() {

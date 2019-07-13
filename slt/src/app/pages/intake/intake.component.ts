@@ -17,7 +17,7 @@ import * as moment from 'moment';
 })
 export class IntakeComponent implements OnInit {
 
-	@ViewChild('breakfast') private breakfastEref;
+	@ViewChild('breakfast',  {static: false}) private breakfastEref;
 
 	// Step 1
 	public name: string;

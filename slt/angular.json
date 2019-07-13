@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "carmenscholte": {
+    "macrolog-webapp": {
       "root": "",
       "sourceRoot": "src",
       "projectType": "application",
@@ -71,22 +71,22 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "carmenscholte:build",
+            "browserTarget": "macrolog-webapp:build",
             "port": 4200
           },
           "configurations": {
             "production": {
-              "browserTarget": "carmenscholte:build:production"
+              "browserTarget": "macrolog-webapp:build:production"
             },
 						"acceptance": {
-							"browserTarget": "carmenscholte:build:acceptance"
+							"browserTarget": "macrolog-webapp:build:acceptance"
 						}
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "carmenscholte:build"
+            "browserTarget": "macrolog-webapp:build"
           }
         },
         "test": {
@@ -126,5 +126,5 @@
       }
     }
   },
-  "defaultProject": "carmenscholte"
+  "defaultProject": "macrolog-webapp"
 }
