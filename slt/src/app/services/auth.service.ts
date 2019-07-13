@@ -41,7 +41,7 @@ export class AuthenticationService {
 	}
 
 	public resetPassword(email: string) {
-		return this.http.post(this.macrologBackendUrl + '/resetPassword', { username: '', password: '', email: email });
+		return this.http.post(this.macrologBackendUrl + '/resetPassword', { email: email });
 	}
 
 }
