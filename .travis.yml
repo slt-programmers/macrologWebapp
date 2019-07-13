@@ -7,7 +7,7 @@ node_js:
 before_script:
 
 script:
-- cd csl
+- cd slt
 - npm install
 - ng test
 - sonar-scanner -Dsonar.projectKey=slt-programmers_macrologWebapp
