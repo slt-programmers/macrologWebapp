@@ -11,7 +11,7 @@ import { ToastService } from '../../services/toast.service';
 })
 export class LogActivityComponent implements OnInit, OnChanges {
 
-	@ViewChild('logActivity',  {static: false}) private logActivityEref: ElementRef;
+	@ViewChild('logActivity', { static: false }) private logActivityEref: ElementRef;
 
 	@Input() logActivities: LogActivity[];
 	@Input() date: Date;
@@ -20,7 +20,7 @@ export class LogActivityComponent implements OnInit, OnChanges {
 	@Output() dataChanged: EventEmitter<boolean> = new EventEmitter<boolean>();
 
 	public editable: boolean;
-  public newActivityName: string;
+	public newActivityName: string;
 
 	public addActivityCallBack: Function;
 
@@ -52,11 +52,10 @@ export class LogActivityComponent implements OnInit, OnChanges {
 	}
 
 	public addActivity() {
-    if (this.newActivityName.length > 0) {
-		  console.log('add Activity' + this.newActivityName)
-      this.logActivities.push( { id : null, day: this.date,name: this.newActivityName, calories: 0});
-    }
-    this.newActivityName = null;
+		if (this.newActivityName.length > 0) {
+			this.logActivities.push({ id: null, day: this.date, name: this.newActivityName, calories: 0 });
+		}
+		this.newActivityName = null;
 	}
 
 	public deleteLogActivity(logActivity: LogActivity) {

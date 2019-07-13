@@ -17,20 +17,20 @@ export class AddFoodModalComponent implements OnInit {
 	public title = 'Add food';
 	public name = '';
 	public unitName = 'gram';
-	public unitGrams: number = 100.00;
+	public unitGrams = 100.00;
 	public protein: number;
 	public fat: number;
 	public carbs: number;
 	public portions = [];
 
 	constructor(private foodService: FoodService,
-							private sbs: ScrollBehaviourService) {
+		private scrollBehaviourService: ScrollBehaviourService) {
 	}
 
 	ngOnInit() {
-		this.sbs.preventScrolling(true);
+		this.scrollBehaviourService.preventScrolling(true);
 		if (this.food) {
-			this.title  = 'Edit food';
+			this.title = 'Edit food';
 			this.name = this.food.name;
 			this.protein = this.food.protein;
 			this.fat = this.food.fat;
@@ -64,7 +64,7 @@ export class AddFoodModalComponent implements OnInit {
 	}
 
 	public closeModal() {
-		this.sbs.preventScrolling(false);
+		this.scrollBehaviourService.preventScrolling(false);
 		this.close.emit(true);
 	}
 

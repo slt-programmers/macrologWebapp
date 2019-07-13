@@ -2,7 +2,7 @@ dist: trusty
 sudo: false
 language: node_js
 node_js:
-- '10.4.1'
+- '11.9.0'
 
 before_script:
 
