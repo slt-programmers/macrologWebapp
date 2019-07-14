@@ -77,7 +77,8 @@ $menuHeight: 150px;
 
 .content {
   @media(min-width: $lg) {
-    top: 50px;
+    top: 0;
+    padding-top: 150px;
     left: $menuWidth;
   }
   position: fixed;

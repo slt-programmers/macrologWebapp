@@ -15,9 +15,10 @@ $cloud: #f8f8f8;
 $ghost: #fbfbfb;
 $white: #ffffff;
 
-$primary: rgb(52, 77, 216);
-$primaryDark: #1b2ebe;
-$secondary: rgb(25, 152, 255);
+$primary: #3F51B5;
+$primaryDark: #283593;
+$secondary: #2196F3;
+
 $warning: map-get($macrolog-webapp-warn, default);
 
 $transparent: #ffffffff;
