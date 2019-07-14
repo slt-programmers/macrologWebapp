@@ -1,6 +1,7 @@
 @import "../../../css/public.scss";
 
 $menuWidth: 200px;
+$menuHeight: 150px;
 
 .login-page {
   position: fixed;
@@ -12,34 +13,61 @@ $menuWidth: 200px;
 }
 
 .menu {
+  @media (min-width: $lg) {
+    background-image: $whiteVerticalGradient;
+    width: $menuWidth;
+    height: 100%;
+  }
+  background-image: $whiteHorizontalGradient;
   position: fixed;
   top: 0;
   bottom: 0;
-  width: $menuWidth;
-  background-image: linear-gradient(to right, rgba(255, 0, 0, 0), rgba(255, 255, 255, 0.05));
+  width: 100%;
+  height: $menuHeight;
 
   &__logo {
-    @include center;
-    margin-top: 72px;
+    @media(min-width: $lg) {
+      @include center;
+      margin-top: 72px;
+      display: block;
+      transform: none;
+    }
+    display: inline-block;
+    margin-top: 24px;
+    margin-left: 24px;
     color: white;
     font-size: 96px;
     font-weight: 900;
 
     p {
       line-height: 1;
+      cursor: default;
     }
   }
+
   &__title {
-    @include center;
-    margin-bottom: 64px;
+    @media(min-width: $lg) {
+      @include center;
+      margin-bottom: 64px;
+      display: block;
+    }
+    display: inline-block;
     font-size: 16px;
     color: $white;
+    cursor: default;
   }
 
   &__item {
-    @include center;
+    @media(min-width: $lg) {
+      @include center;
+      float: none;
+      margin-top: 0;
+      width: 100px;
+    }
+    float: right;
+    margin-top: 24px;
     font-size: 16px;
-    width: 100px;
+    width: 72px;
     text-align: start;
     color: white;
     margin-bottom: 24px;
@@ -48,30 +76,38 @@ $menuWidth: 200px;
 }
 
 .content {
+  @media(min-width: $lg) {
+    top: 50px;
+    left: $menuWidth;
+  }
   position: fixed;
-  top: 0;
+  top: $menuHeight;
   bottom: 0;
   right: 0;
-  left: $menuWidth;
+  left: 0;
+  padding-top: 50px;
   color: white;
-  padding-top: 160px;
   overflow-y: scroll;
   overflow-x: hidden;
 
   &__forms {
     @include center;
+    margin-bottom: 72px;
   }
 
   &__form {
+    @media (min-width: $md) {
+      margin: 0 45px 45px 45px;
+      width: 300px;
+    }
     border: 1px solid $whiteTransparent;
     border-radius: 15px;
     text-align: left;
     vertical-align: top;
-    width: 300px;
     display: inline-block;
+    width: 230px;
     padding: 30px;
-    margin: 0 45px 45px 45px;
-    
+    margin: 0 10px 45px 10px;
 
     &__title {
       text-align: center;
@@ -99,12 +135,12 @@ $menuWidth: 200px;
 
   &__about {
     @include center;
-    width: 800px;
+    max-width: 800px;
+    padding: 0 10px 32px 10px;
 
     &__title {
-        font-size: 24px;
-        font-weight: 900;
+      font-size: 24px;
+      font-weight: 900;
     }
-
   }
 }
