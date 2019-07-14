@@ -15,9 +15,9 @@ $cloud: #f8f8f8;
 $ghost: #fbfbfb;
 $white: #ffffff;
 
-$primary: #3F51B5;
-$primaryDark: #283593;
-$secondary: #2196F3;
+$primary: rgb(52, 77, 216);
+$primaryDark: #1b2ebe;
+$secondary: rgb(25, 152, 255);
 $warning: map-get($macrolog-webapp-warn, default);
 
 $transparent: #ffffffff;
@@ -25,6 +25,7 @@ $whiteTransparent: rgba(255, 255, 255, 0.5);
 
 // Gradients
 $backgroundGradient: linear-gradient(to bottom, $primary, $secondary);
+$whiteVerticalGradient: linear-gradient(to right, rgba(255, 0, 0, 0), rgba(255, 255, 255, 0.05));
 
 // Distances
 $gutter: 30px;

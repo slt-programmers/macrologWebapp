@@ -9,8 +9,8 @@ import { trigger, transition, style, animate } from '@angular/animations';
 	animations: [
 		trigger('enterLeaveTrigger', [
 			transition(':enter', [
-				style({ opacity: 0 }),
-				animate('0.25s', style({ opacity: 1 })),
+				style({ opacity: 0, marginTop: '15px'  }),
+				animate('0.25s', style({ opacity: 1, marginTop: '0' })),
 			]),
 		]),
 	],

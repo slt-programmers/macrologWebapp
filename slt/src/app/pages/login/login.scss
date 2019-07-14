@@ -16,7 +16,7 @@ $menuWidth: 200px;
   top: 0;
   bottom: 0;
   width: $menuWidth;
-  background-image: linear-gradient(to right, rgba(255, 0, 0, 0), rgba(255, 255, 255, 0.03));
+  background-image: linear-gradient(to right, rgba(255, 0, 0, 0), rgba(255, 255, 255, 0.05));
 
   &__logo {
     @include center;
