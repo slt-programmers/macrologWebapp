@@ -54,7 +54,7 @@
             required>
         </div>
 
-        <button mat-icon-button color="primary" (click)="removePortion(i)">
+        <button mat-icon-button color="primary" (click)="removePortion(i)" *ngIf="isNewPortion(port)">
           <mat-icon>remove</mat-icon>
         </button>
       </div>

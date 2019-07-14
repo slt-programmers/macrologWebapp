@@ -43,6 +43,7 @@ export class FoodComponent implements OnInit {
 				this.allFoodFromDB = data;
 				this.percentageFood = this.calculatePercentages();
 				this.searchableFood = this.allFoodFromDB;
+				this.getPagedFood(1);
 			},
 			error => console.log(error)
 		);
@@ -67,7 +68,7 @@ export class FoodComponent implements OnInit {
 		this.searchableFood = foodMatch;
 	}
 
-	public openModal(food) {
+	public openModal(food: Food) {
 		this.selectedFood = null;
 		if (food !== null && (food.id === undefined || food.id === null)) {
 			for (const searchableFood of this.allFoodFromDB) {
@@ -78,6 +79,7 @@ export class FoodComponent implements OnInit {
 		} else {
 			this.selectedFood = food;
 		}
+
 		this.modalIsVisible = true;
 	}
 
@@ -102,7 +104,6 @@ export class FoodComponent implements OnInit {
 
 	public sortBy(header: string): void {
 		this.setReversed(header);
-
 		const sortedArray = this.searchableFood;
 		sortedArray.sort((a: Food, b: Food) => {
 			if (a[header] < b[header]) {

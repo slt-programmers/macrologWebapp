@@ -37,7 +37,8 @@ export class AddFoodModalComponent implements OnInit {
 			this.carbs = this.food.carbs;
 
 			if (this.food.portions) {
-				this.portions = this.food.portions;
+				// To make a deep copy of the portions array 
+				this.portions = JSON.parse(JSON.stringify(this.food.portions));
 			} else {
 				this.portions = [];
 			}
@@ -66,6 +67,13 @@ export class AddFoodModalComponent implements OnInit {
 	public closeModal() {
 		this.scrollBehaviourService.preventScrolling(false);
 		this.close.emit(true);
+	}
+
+	public isNewPortion(portion: Portion) {
+		if (portion.id !== null && portion.id !== undefined && portion.id !== 0) {
+			return false;
+		}
+		return true;
 	}
 
 	public newPortion() {
