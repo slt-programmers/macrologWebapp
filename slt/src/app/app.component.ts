@@ -9,10 +9,10 @@ import { HealthcheckService } from './services/healthcheck.service';
 })
 export class AppComponent implements OnInit, AfterViewInit {
 
-	@ViewChild('navbar',  {static: false}) private navbarElement;
-	@ViewChild('navbarBackdrop',  {static: false}) private backdropElement: ElementRef;
-	@ViewChild('usermenu',  {static: false}) private userMenuElement: ElementRef;
-	@ViewChild('usermenuBackdrop',  {static: false}) private usermenubackdropElement: ElementRef;
+	@ViewChild('navbar', { static: false }) private navbarElement;
+	@ViewChild('navbarBackdrop', { static: false }) private backdropElement: ElementRef;
+	@ViewChild('usermenu', { static: false }) private userMenuElement: ElementRef;
+	@ViewChild('usermenuBackdrop', { static: false }) private usermenubackdropElement: ElementRef;
 
 	public title: string;
 
@@ -29,17 +29,14 @@ export class AppComponent implements OnInit, AfterViewInit {
 	public currentRoute;
 
 	constructor(public router: Router,
-							private renderer: Renderer2,
-							private healthcheckService: HealthcheckService,
-							private sbs: ScrollBehaviourService) {
-		console.log('Doing healthcheck...');
+		private renderer: Renderer2,
+		private healthcheckService: HealthcheckService,
+		private sbs: ScrollBehaviourService) {
 		this.healthcheckService.checkState().subscribe(result => {
-			console.log('Healthcheck succeeded');
 			this.asleep = !result;
 		}, error => {
 			console.log(error);
 			if (error.status === 403) {
-				console.log('Healthcheck succeeded but logged out');
 				this.asleep = !error;
 			}
 		});

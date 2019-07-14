@@ -12,7 +12,7 @@ import * as moment from 'moment';
 export class UserPersonalComponent {
 
 	private originalResult;
-	
+
 	public name;
 	public birthday;
 	public gender;
@@ -36,7 +36,9 @@ export class UserPersonalComponent {
 
 				this.newWeight = this.weight;
 			},
-			error => { console.log(error); }
+			error => {
+				console.log(error);
+			}
 		);
 	}
 

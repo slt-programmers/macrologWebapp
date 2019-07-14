@@ -20,10 +20,9 @@ export class MealsComponent implements OnInit {
 	}
 
 	public getAllMeals() {
-		console.log('getting all meals');
 		this.mealService.getAllMeals().subscribe(
-			data => { this.allMeals = data;
-				console.log(data);
+			data => {
+				this.allMeals = data;
 			},
 			error => console.log(error)
 		);

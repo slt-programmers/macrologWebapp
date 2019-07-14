@@ -9,10 +9,10 @@ import { environment } from '../../environments/environment';
 export class ActivityService {
 
 	macrologBackendUrl = '//' + environment.backend + '/activities';
-  activities = new Array();
+	activities = new Array();
 
 	constructor(private http: HttpClient,
-							private toastService: ToastService) {
+		private toastService: ToastService) {
 	}
 
 	public getAllActivities() {
@@ -22,34 +22,33 @@ export class ActivityService {
 		return this.http.get<any[]>(this.macrologBackendUrl + '/day/' + date);
 	}
 
-
 	public storeLogActivities(storeActivityRequest: StoreActivityRequest[], callBack: Function) {
-		const headers = {'Content-Type': 'application/json',
+		const headers = {
+			'Content-Type': 'application/json',
 			'Access-Control-Allow-Origin': environment.origin
 		};
-    console.log(storeActivityRequest);
 
 		const options = { headers: headers };
- 		return this.http.post<StoreActivityRequest[]>(this.macrologBackendUrl + '/', storeActivityRequest, options).subscribe(data => {
-				this.toastService.setMessage('Your activities have been saved!');
-				callBack();
-			},
+		return this.http.post<StoreActivityRequest[]>(this.macrologBackendUrl + '/', storeActivityRequest, options).subscribe(data => {
+			this.toastService.setMessage('Your activities have been saved!');
+			callBack();
+		},
 			error => {
 				this.toastService.setMessage('Your activities could not be saved!');
 				console.log(error);
 			});
 	}
 
-  public deleteLogActivity(logActivity: LogActivity) {
-		const headers = {'Content-Type': 'application/json',
+	public deleteLogActivity(logActivity: LogActivity) {
+		const headers = {
+			'Content-Type': 'application/json',
 			'Access-Control-Allow-Origin': environment.origin
 		};
 
 		const options = { headers: headers };
 
 		return this.http.delete<number>(this.macrologBackendUrl + '/' + logActivity.id, options).subscribe(data => {
-				console.log('activity deleted');
-			},
+		},
 			error => {
 				this.toastService.setMessage('Your activity could not be deleted!');
 				console.log(error);

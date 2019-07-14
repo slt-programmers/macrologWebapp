@@ -9,7 +9,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatInputModule } from '@angular/material';
 import { MatFormFieldModule } from '@angular/material';
 import { MatButtonModule } from '@angular/material';
-import {MatIconModule} from '@angular/material/icon';
+import { MatIconModule } from '@angular/material/icon';
 
 import { AppComponent } from './app.component';
 import { FoodService } from './services/food.service';
@@ -112,8 +112,8 @@ const appRoutes: Routes = [
 		HttpClientModule,
 		RouterModule.forRoot(appRoutes),
 		BrowserAnimationsModule,
-		MatInputModule, 
-		MatFormFieldModule, 
+		MatInputModule,
+		MatFormFieldModule,
 		MatButtonModule,
 		MatIconModule
 	],

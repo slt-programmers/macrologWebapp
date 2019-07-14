@@ -41,23 +41,17 @@ export class MakeMealModalComponent implements OnInit {
 			ingredient.portionId = ingredient.portion.id;
 		}
 		this.ingredients.push(ingredient);
-		console.log(this.ingredients);
 	}
 
 	removeIngredient(index) {
 		this.ingredients.splice(index, 1);
-		console.log(this.ingredients);
 	}
 
 	calculateMultiplier(event, ingredient) {
-		console.log(event.target.value);
 		if (ingredient.portion === undefined) {
 			ingredient.multiplier = (event.target.value / this.unitGrams);
-			console.log(ingredient.multiplier);
-			console.log(this.ingredients);
 		} else {
 			ingredient.multiplier = event.target.value;
-			console.log(this.ingredients);
 		}
 	}
 
@@ -78,7 +72,6 @@ export class MakeMealModalComponent implements OnInit {
 	}
 
 	public saveMeal() {
-		console.log(this.mealName);
 		const meal = new Meal(this.mealName);
 		meal.ingredients = this.ingredients;
 		const self = this;

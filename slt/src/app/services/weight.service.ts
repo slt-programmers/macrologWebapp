@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { StoreActivityRequest } from '../model/storeActivityRequest';
 import { ToastService } from './toast.service';
-import { LogActivity } from '../model/logActivity';
 import { LogWeight } from '../model/logWeight';
 import { environment } from '../../environments/environment';
 
@@ -10,10 +8,10 @@ import { environment } from '../../environments/environment';
 export class WeightService {
 
 	macrologBackendUrl = '//' + environment.backend + '/weight';
-  activities = new Array();
+	activities = new Array();
 
 	constructor(private http: HttpClient,
-							private toastService: ToastService) {
+		private toastService: ToastService) {
 	}
 
 	public getAllWeights() {
@@ -23,34 +21,34 @@ export class WeightService {
 		return this.http.get<any[]>(this.macrologBackendUrl + '/day/' + date);
 	}
 
-
 	public storeWeight(logWeight: LogWeight, callBack: Function) {
-		const headers = {'Content-Type': 'application/json',
+		const headers = {
+			'Content-Type': 'application/json',
 			'Access-Control-Allow-Origin': environment.origin
 		};
-    console.log(logWeight);
 
 		const options = { headers: headers };
- 		return this.http.post<LogWeight>(this.macrologBackendUrl + '/', logWeight, options).subscribe(data => {
-				this.toastService.setMessage('Your weight has been saved!');
-				callBack();
-			},
+		return this.http.post<LogWeight>(this.macrologBackendUrl + '/', logWeight, options).subscribe(data => {
+			this.toastService.setMessage('Your weight has been saved!');
+			callBack();
+		},
 			error => {
 				this.toastService.setMessage('Your weight could not be saved!');
 				console.log(error);
 			});
 	}
 
-  public deleteWeight(logWeight: LogWeight, callBack: Function) {
-		const headers = {'Content-Type': 'application/json',
+	public deleteWeight(logWeight: LogWeight, callBack: Function) {
+		const headers = {
+			'Content-Type': 'application/json',
 			'Access-Control-Allow-Origin': environment.origin
 		};
 
 		const options = { headers: headers };
 
-		return this.http.delete<number>(this.macrologBackendUrl + '/' + logWeight.id, options).subscribe(data => {
-				console.log('weight deleted');
-        callBack();
+		return this.http.delete<number>(this.macrologBackendUrl + '/' + logWeight.id, options).subscribe(
+			data => {
+				callBack();
 			},
 			error => {
 				this.toastService.setMessage('Your weight measurement could not be deleted!');

@@ -17,24 +17,18 @@ constructor(private authenticationService: AuthenticationService, private router
 					return result;
 				}),
 				catchError(err => {
-					console.log('Error interceptor negative', err);
+					console.log(err);
 					if (err.status === 403) {
-						console.log(err.status);
 						this.authenticationService.logout();
 						this.router.navigateByUrl('/login');
 						return throwError(err);
 					} else if (err.status === 401) {
-						console.log(err.status);
 						return throwError(err);
 					} else if (err.status === 404) {
-						console.log(err.status);
 						return throwError(err);
 					} else if (err.status === 0) {
-						console.log(err.status);
 						return throwError(err);
 					} else {
-						console.log('Else in interceptor, WHY?');
-						console.log(err);
 						return of(new HttpResponse({body: err}));
 					}
 			})

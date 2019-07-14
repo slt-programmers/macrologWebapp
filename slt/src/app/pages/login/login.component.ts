@@ -5,17 +5,14 @@ import { ToastService } from '../../services/toast.service';
 import { trigger, transition, style, animate } from '@angular/animations';
 
 @Component({
-	templateUrl: 'login.component.html', 
+	templateUrl: 'login.component.html',
 	animations: [
 		trigger('enterLeaveTrigger', [
 			transition(':enter', [
-			  style({ opacity: 0 }),
-			  animate('0.25s', style({ opacity: 1 })),
+				style({ opacity: 0 }),
+				animate('0.25s', style({ opacity: 1 })),
 			]),
-			// transition(':leave', [
-			//   animate('5s', style({ opacity: 0 }))
-			// ])
-		  ]),
+		]),
 	],
 	styleUrls: ['./login.scss']
 })
@@ -42,7 +39,7 @@ export class LoginComponent implements OnInit {
 		private route: ActivatedRoute,
 		private router: Router,
 		private authService: AuthenticationService,
-		private toastService: ToastService) {}
+		private toastService: ToastService) { }
 
 	ngOnInit() {
 		// reset login status
@@ -59,17 +56,17 @@ export class LoginComponent implements OnInit {
 	public login() {
 		this.error = '';
 		this.authService.login(this.usernameOrEmail, this.password)
-				.subscribe(
-						data => {
-							this.router.navigate([this.returnUrl]);
-						},
-						error => {
-								console.log(error);
-								if (error.status === 401) {
-									this.error = 'Password invalid';
-								} else if (error.status === 404) {
-									this.error = 'Username or email not found';
-								}
+			.subscribe(
+				data => {
+					this.router.navigate([this.returnUrl]);
+				},
+				error => {
+					console.log(error);
+					if (error.status === 401) {
+						this.error = 'Password invalid';
+					} else if (error.status === 404) {
+						this.error = 'Username or email not found';
+					}
 				});
 	}
 
@@ -85,7 +82,7 @@ export class LoginComponent implements OnInit {
 							}, error => {
 								console.log(error);
 								this.signUpError = error;
-						});
+							});
 					this.newUsername = '';
 					this.newPassword = '';
 					this.newEmail = '';

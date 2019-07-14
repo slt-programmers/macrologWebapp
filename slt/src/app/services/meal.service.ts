@@ -4,7 +4,6 @@ import { ToastService } from './toast.service';
 import { Meal } from '../model/meal';
 import { environment } from '../../environments/environment';
 
-
 @Injectable()
 export class MealService {
 
@@ -28,7 +27,6 @@ export class MealService {
 		return this.http.post<Meal>(this.macrologBackendUrl + '/', meal, options).subscribe(
 			data => {
 				this.toastService.setMessage('Your meal have been saved!');
-				console.log('saved');
 				callBack();
 			},
 			error => {

@@ -1,9 +1,7 @@
-import { Component, OnInit, OnChanges, SimpleChanges, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserService } from '../../services/user.service';
 import { Gender } from '../../model/gender';
-import { Observable } from 'rxjs/Observable';
-import { forkJoin } from 'rxjs/observable/forkJoin';
 import { ToastService } from '../../services/toast.service';
 
 @Component({
@@ -28,12 +26,11 @@ export class UserComponent implements OnInit {
 	public newWeight: number;
 
 	constructor(private userService: UserService,
-							private toastService: ToastService,
-							public router: Router) {
+		private toastService: ToastService,
+		public router: Router) {
 	}
 
 	ngOnInit() {
-		console.log('Init settings');
 		this.userService.getAllSettings().subscribe(
 			result => {
 				this.name = this.getKeyFromResultlist(result, 'name');
@@ -59,9 +56,9 @@ export class UserComponent implements OnInit {
 
 	private getKeyFromResultlist(userSettingsDto: any, key: string) {
 
-    if (userSettingsDto[key]) {
-       return userSettingsDto[key];
-    }
+		if (userSettingsDto[key]) {
+			return userSettingsDto[key];
+		}
 		return '';
 	}
 
