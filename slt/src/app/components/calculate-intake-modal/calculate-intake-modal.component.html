@@ -47,21 +47,21 @@
             <div class="form-field">
               <label class="form-field__label">Protein</label>
               <div class="form-field__element">
-                <input class="form-field__input" (change)="calcCaloriesManual()" [(ngModel)]="proteinManual" type="number">
+                <input class="input form-field__input" (change)="calcCaloriesManual()" [(ngModel)]="proteinManual" type="number">
               </div>
             </div>
 
             <div class="form-field">
               <label class="form-field__label">Fat</label>
               <div class="form-field__element">
-                <input class="form-field__input" (change)="calcCaloriesManual()" [(ngModel)]="fatManual" type="number">
+                <input class="input form-field__input" (change)="calcCaloriesManual()" [(ngModel)]="fatManual" type="number">
               </div>
             </div>
 
             <div class="form-field">
               <label class="form-field__label">Carbs</label>
               <div class="form-field__element">
-                <input class="form-field__input" (change)="calcCaloriesManual()" [(ngModel)]="carbsManual" type="number">
+                <input class="input form-field__input" (change)="calcCaloriesManual()" [(ngModel)]="carbsManual" type="number">
               </div>
             </div>
           </div>
@@ -69,8 +69,8 @@
       </div>
     </div>
 
-    <div class="button-wrapper">
-      <button class="button button--secondary" (click)="saveIntake()">Save</button>
+    <div class="blue-theme button-wrapper">
+      <button mat-stroked-button color="primary" (click)="saveIntake()">Save</button>
     </div>
   </div>
 </div>

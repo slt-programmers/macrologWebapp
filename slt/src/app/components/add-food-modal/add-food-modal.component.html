@@ -1,9 +1,9 @@
-<div class="modal">
+<div class="blue-theme modal">
   <div class="modal__header">
     <h3 class="modal__header__title">{{title}}</h3>
 
-    <button class="button button--icon button--primary" (click)="closeModal()">
-      <i class="fas fa-times"></i>
+    <button mat-icon-button color="primary" (click)="closeModal()">
+      <mat-icon>close</mat-icon>
     </button>
   </div>
 
@@ -12,33 +12,30 @@
       <div class="form-field">
         <label class="form-field__label">Food</label>
         <div class="form-field__element">
-          <input class="" [(ngModel)]="name" #foodField name="name"
-                 placeholder="e.g. 'Pasta', 'Apple'" required>
+          <input class="input" [(ngModel)]="name" #foodField name="name" placeholder="e.g. 'Pasta', 'Apple'" required>
         </div>
       </div>
 
       <div class="form-field">
         <label class="form-field__label">Protein</label>
         <div class="form-field__element">
-          <input class="" #proteinField [(ngModel)]="protein"
-                 value="protein"
-                 name="protein" type="number" placeholder="0.0" step="0.1" required>
+          <input class="input" #proteinField [(ngModel)]="protein" value="protein" name="protein" type="number"
+            placeholder="0.0" step="0.1" required>
         </div>
       </div>
 
       <div class="form-field">
         <label class="form-field__label">Fat</label>
         <div class="form-field__element">
-          <input class="" #fatField [(ngModel)]="fat"
-                 name="fat" type="number" placeholder="0.0" step="0.1" required>
+          <input class="input" #fatField [(ngModel)]="fat" name="fat" type="number" placeholder="0.0" step="0.1" required>
         </div>
       </div>
 
       <div class="form-field">
         <label class="form-field__label">Carbs</label>
         <div class="form-field__element">
-          <input class="" #carbsField [(ngModel)]="carbs"
-                 name="carbs" type="number" placeholder="0.0" step="0.1" required>
+          <input class="input" #carbsField [(ngModel)]="carbs" name="carbs" type="number" placeholder="0.0" step="0.1"
+            required>
         </div>
       </div>
 
@@ -47,32 +44,30 @@
       <div class="modal__portions" *ngFor="let port of portions; index as i">
         <div class="form-field">
           <label class="form-field__label">Description</label>
-          <input class="" [(ngModel)]="port.description"
-                 name="portionDesc_{{i}}" type="text"
-                 placeholder="e.g. 'Breakfast', 'Plate'" required>
+          <input class="input" [(ngModel)]="port.description" name="portionDesc_{{i}}" type="text"
+            placeholder="e.g. 'Breakfast', 'Plate'" required>
         </div>
 
         <div class="form-field">
           <label class="form-field__label">Grams</label>
-          <input class="" [(ngModel)]="port.grams" placeholder="0,0"
-                 name="portionGrams_{{i}}" type="number" step="1" required>
+          <input class="input" [(ngModel)]="port.grams" placeholder="0,0" name="portionGrams_{{i}}" type="number" step="1"
+            required>
         </div>
 
-        <button class="button button--transparent" (click)="removePortion(i)">
-          <i class="fas fa-minus"></i>
+        <button mat-icon-button color="primary" (click)="removePortion(i)">
+          <mat-icon>remove</mat-icon>
         </button>
       </div>
 
       <div class="button-wrapper button-wrapper--left">
-        <button class="button button--transparent" (click)="newPortion()">
-          <i class="fas fa-plus"></i>
+        <button mat-icon-button color="primary" (click)="newPortion()">
+          <mat-icon>add</mat-icon>
         </button>
       </div>
     </form>
 
-    <div class="button-wrapper">
-      <button type="button" class="button button--primary" (click)="saveFood()"
-              [disabled]="saveFoodForm.invalid">Save
+    <div class="blue-theme button-wrapper">
+      <button mat-stroked-button color="primary" type="button" (click)="saveFood()" [disabled]="saveFoodForm.invalid">Save
       </button>
     </div>
   </div>

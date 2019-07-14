@@ -10,7 +10,6 @@
 	border-radius: 2px;
 	color: $ghost;
 	display: flex;
-	padding: 5px ($gutter/3);
 
 	&__selected-day {
 		@media(min-width: $md) {
@@ -18,10 +17,6 @@
 		}
 		font-size: 14px;
 		margin: 0 10px;
-	}
-
-	&__icon {
-  	color: $ghost;
 	}
 }
 
@@ -39,7 +34,7 @@
 	background-color: $white;
 	padding: 10px;
 	position: absolute;
-	top: 30px;
+	top: 45px;
 	right: calc(50% - 160px);
 	width: 300px;
 	z-index: 2;

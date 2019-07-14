@@ -1,104 +1,115 @@
-<div class="graph">
-
-	<div *ngIf="loading" #svgcontainer class="graph--loading" >
+<div class="graph blue-theme">
+	<div *ngIf="loading" #svgcontainer class="graph--loading">
 		<svg width="58" height="58" viewBox="0 0 38 38" xmlns="http://www.w3.org/2000/svg">
-		<defs>
-			<linearGradient x1="8.042%" y1="0%" x2="65.682%" y2="23.865%" id="a">
-				<stop stop-color="#222" stop-opacity="0" offset="0%"/>
-				<stop stop-color="#222" stop-opacity=".631" offset="63.146%"/>
-				<stop stop-color="#222" offset="100%"/>
-			</linearGradient>
-		</defs>
-		<g fill="none" fill-rule="evenodd">
-			<g transform="translate(1 1)">
-				<path d="M36 18c0-9.94-8.06-18-18-18" id="Oval-2" stroke="url(#a)" stroke-width="2">
-					<animateTransform
-						attributeName="transform"
-						type="rotate"
-						from="0 18 18"
-						to="360 18 18"
-						dur="0.9s"
-						repeatCount="indefinite" />
-				</path>
-				<circle fill="#222" cx="36" cy="18" r="1">
-					<animateTransform
-						attributeName="transform"
-						type="rotate"
-						from="0 18 18"
-						to="360 18 18"
-						dur="0.9s"
-						repeatCount="indefinite" />
-				</circle>
+			<defs>
+				<linearGradient x1="8.042%" y1="0%" x2="65.682%" y2="23.865%" id="a">
+					<stop stop-color="#222" stop-opacity="0" offset="0%" />
+					<stop stop-color="#222" stop-opacity=".631" offset="63.146%" />
+					<stop stop-color="#222" offset="100%" />
+				</linearGradient>
+			</defs>
+			<g fill="none" fill-rule="evenodd">
+				<g transform="translate(1 1)">
+					<path d="M36 18c0-9.94-8.06-18-18-18" id="Oval-2" stroke="url(#a)" stroke-width="2">
+						<animateTransform attributeName="transform" type="rotate" from="0 18 18" to="360 18 18"
+							dur="0.9s" repeatCount="indefinite" />
+					</path>
+					<circle fill="#222" cx="36" cy="18" r="1">
+						<animateTransform attributeName="transform" type="rotate" from="0 18 18" to="360 18 18"
+							dur="0.9s" repeatCount="indefinite" />
+					</circle>
+				</g>
 			</g>
-		</g>
 		</svg>
 	</div>
 
-  <div  #svgcontainer *ngIf="!loading" class="graph__svglist">
+	<div #svgcontainer *ngIf="!loading" class="graph__svglist">
 		<div class="graph__controls">
-			<button [disabled]="loading" class="button button--transparent" (click)="monthBack()">
-				<i class="fas fa-arrow-left"></i>
+			<button mat-icon-button color="primary" [disabled]="loading" (click)="monthBack()">
+				<mat-icon>chevron_left</mat-icon>
 			</button>
-			<div class="graph__datelabel">{{dateFrom | date:'dd MMMM yyyy'}} - {{dateTo | date:'dd MMMM yyyy'}}</div>
-			<button [disabled]="loading" class="button button--transparent" (click)="monthForward()">
-				<i class="fas fa-arrow-right"></i>
-			</button>
-		</div>`
 
+			<div class="graph__datelabel">{{dateFrom | date:'dd MMMM yyyy'}} - {{dateTo | date:'dd MMMM yyyy'}}</div>
+
+			<button mat-icon-button color="primary" [disabled]="loading" (click)="monthForward()">
+				<mat-icon>chevron_right</mat-icon>
+			</button>
+		</div>
 
 		<div class="graph__image">
-			 <div class="graph__svgs">
-		   	 <svg [attr.height]="getSVGHeight()" [attr.width]="getSVGWidth()"  class="graph__svg" xmlns="http://www.w3.org/2000/svg">
-				<g *ngFor="let d of logBars; let i = index" (mouseover)="showMacros(d)">
-					<text [attr.x]="marginLeft +  (barWidth* i)" [attr.y]="getSVGHeight() - graphLegenda + 15 " [attr.fill]="d.c">
-						<tspan [attr.width]="barWidth">{{d.day | date:'dd'}} </tspan>
-					</text>
+			<div class="graph__svgs">
+				<svg [attr.height]="getSVGHeight()" [attr.width]="getSVGWidth()" class="graph__svg"
+					xmlns="http://www.w3.org/2000/svg">
+					<g *ngFor="let d of logBars; let i = index" (mouseover)="showMacros(d)">
+						<text [attr.x]="marginLeft +  (barWidth* i)" [attr.y]="getSVGHeight() - graphLegenda + 15 "
+							[attr.fill]="d.c">
+							<tspan [attr.width]="barWidth">{{d.day | date:'dd'}} </tspan>
+						</text>
 
-					<rect [attr.x]="marginLeft + i*barWidth" [attr.width]="barWidth" [attr.y]="getYPosProtein(d)" [attr.height]="getHeightProtein(d)" [attr.fill]="'#5bd086'"  style="stroke:black;stroke-width:1;opacity:0.5" />
-					<rect [attr.x]="marginLeft + i*barWidth" [attr.width]="barWidth" [attr.y]="getYPosFat(d)" [attr.height]="getHeightFat(d)" [attr.fill]="'#f7ed70'"  style="stroke:black;stroke-width:1;opacity:0.5"/>
-					<rect [attr.x]="marginLeft + i*barWidth" [attr.width]="barWidth" [attr.y]="getYPosCarbs(d)" [attr.height]="getHeightCarbs(d)" [attr.fill]="'#fb8353'"  style="stroke:black;stroke-width:1;opacity:0.5"/>
+						<rect [attr.x]="marginLeft + i*barWidth" [attr.width]="barWidth" [attr.y]="getYPosProtein(d)"
+							[attr.height]="getHeightProtein(d)" [attr.fill]="'#5bd086'"
+							style="stroke:black;stroke-width:1;opacity:0.5" />
+						<rect [attr.x]="marginLeft + i*barWidth" [attr.width]="barWidth" [attr.y]="getYPosFat(d)"
+							[attr.height]="getHeightFat(d)" [attr.fill]="'#f7ed70'"
+							style="stroke:black;stroke-width:1;opacity:0.5" />
+						<rect [attr.x]="marginLeft + i*barWidth" [attr.width]="barWidth" [attr.y]="getYPosCarbs(d)"
+							[attr.height]="getHeightCarbs(d)" [attr.fill]="'#fb8353'"
+							style="stroke:black;stroke-width:1;opacity:0.5" />
 
-					<text x="0" [attr.y]="getGoalProteinPos()-2" fill="grey">P {{getGoalProtein() | number:'1.1-1'}}</text>
-					<line x1="0" [attr.y1]="getGoalProteinPos()" [attr.x2]="marginLeft + logBars.length * barWidth" [attr.y2]="getGoalProteinPos()" style="stroke:grey;stroke-width:1;stroke-dasharray:5.5" />
+						<text x="0" [attr.y]="getGoalProteinPos()-2" fill="grey">P
+							{{getGoalProtein() | number:'1.1-1'}}</text>
+						<line x1="0" [attr.y1]="getGoalProteinPos()" [attr.x2]="marginLeft + logBars.length * barWidth"
+							[attr.y2]="getGoalProteinPos()" style="stroke:grey;stroke-width:1;stroke-dasharray:5.5" />
 
-					<text x="0" [attr.y]="getGoalFatPos()-2" fill="grey">F {{getGoalFat() | number:'1.1-1'}}</text>
-					<line x1="0" [attr.y1]="getGoalFatPos()" [attr.x2]="marginLeft + logBars.length * barWidth" [attr.y2]="getGoalFatPos()" style="stroke:grey;stroke-width:1;stroke-dasharray:5.5" />
+						<text x="0" [attr.y]="getGoalFatPos()-2" fill="grey">F {{getGoalFat() | number:'1.1-1'}}</text>
+						<line x1="0" [attr.y1]="getGoalFatPos()" [attr.x2]="marginLeft + logBars.length * barWidth"
+							[attr.y2]="getGoalFatPos()" style="stroke:grey;stroke-width:1;stroke-dasharray:5.5" />
 
-					<text x="0" [attr.y]="getGoalCarbsPos()-2" fill="grey">C {{getGoalCarbs() | number:'1.1-1'}}</text>
-					<line x1="0" [attr.y1]="getGoalCarbsPos()" [attr.x2]="marginLeft +  logBars.length * barWidth" [attr.y2]="getGoalCarbsPos()" style="stroke:grey;stroke-width:1;stroke-dasharray:5.5" />
-				</g>
-			</svg>
-				 <svg [attr.height]="getSVGHeightCalories()" [attr.width]="getSVGWidth()"  class="graph__svg" xmlns="http://www.w3.org/2000/svg">
-					 <g *ngFor="let d of logBars; let i = index" (mouseover)="showMacros(d)">
-						 <text [attr.x]="marginLeft +  (barWidth* i)" [attr.y]="getSVGHeightCalories() - graphLegenda + 15 " [attr.fill]="d.c">
-							 <tspan [attr.width]="barWidth">{{d.day | date:'dd'}} </tspan>
-						 </text>
+						<text x="0" [attr.y]="getGoalCarbsPos()-2" fill="grey">C
+							{{getGoalCarbs() | number:'1.1-1'}}</text>
+						<line x1="0" [attr.y1]="getGoalCarbsPos()" [attr.x2]="marginLeft +  logBars.length * barWidth"
+							[attr.y2]="getGoalCarbsPos()" style="stroke:grey;stroke-width:1;stroke-dasharray:5.5" />
+					</g>
+				</svg>
+				<svg [attr.height]="getSVGHeightCalories()" [attr.width]="getSVGWidth()" class="graph__svg"
+					xmlns="http://www.w3.org/2000/svg">
+					<g *ngFor="let d of logBars; let i = index" (mouseover)="showMacros(d)">
+						<text [attr.x]="marginLeft +  (barWidth* i)"
+							[attr.y]="getSVGHeightCalories() - graphLegenda + 15 " [attr.fill]="d.c">
+							<tspan [attr.width]="barWidth">{{d.day | date:'dd'}} </tspan>
+						</text>
 
-						 <rect [attr.x]="marginLeft + i*barWidth" [attr.width]="barWidth" [attr.y]="getYPosCalories(d)" [attr.height]="getHeightCalories(d)" [attr.fill]="'#0DEEF0'"  style="stroke:black;stroke-width:1;opacity:0.5"/>
-					 </g>
+						<rect [attr.x]="marginLeft + i*barWidth" [attr.width]="barWidth" [attr.y]="getYPosCalories(d)"
+							[attr.height]="getHeightCalories(d)" [attr.fill]="'#0DEEF0'"
+							style="stroke:black;stroke-width:1;opacity:0.5" />
+					</g>
 
-						 <text x="0" [attr.y]="getGoalCaloriesPos()-2" fill="grey">P {{getGoalCalories() | number:'1.1-1'}}</text>
-						 <line x1="0" [attr.y1]="getGoalCaloriesPos()" [attr.x2]="marginLeft + logBars.length * barWidth" [attr.y2]="getGoalCaloriesPos()" style="stroke:grey;stroke-width:1;stroke-dasharray:5.5" />
-				 </svg>
-			 </div>
+					<text x="0" [attr.y]="getGoalCaloriesPos()-2" fill="grey">P
+						{{getGoalCalories() | number:'1.1-1'}}</text>
 
-	  	<div class="graph__options">
-        <div>
-					Options:
+					<line x1="0" [attr.y1]="getGoalCaloriesPos()" [attr.x2]="marginLeft + logBars.length * barWidth"
+						[attr.y2]="getGoalCaloriesPos()" style="stroke:grey;stroke-width:1;stroke-dasharray:5.5" />
+				</svg>
+			</div>
+
+			<div class="graph__options">
+				<p>Options </p>
+
+				<div class="graph__option">
+					<input class="input" id=splittedOption type="checkbox" (change)="calculateZoom()"
+						[(ngModel)]="splitted">
+
+					<label> Split bars</label>
 				</div>
-				<label>
-					<input id=splittedOption type="checkbox" (change)="calculateZoom()" [(ngModel)]="splitted">
-					Split bars
-				</label>
 
-		    <label>
-					<input id=percentageOption type="checkbox" (change)="calculateZoom()" [(ngModel)]="percentages">
-					Show percentages
-				</label>
+				<div class="graph__option">
+					<input class="input" id=percentageOption type="checkbox" (change)="calculateZoom()"
+						[(ngModel)]="percentages">
+
+					<label>Show percentages</label>
+				</div>
+			</div>
 		</div>
-  	</div>
-
-
 	</div>
 
 

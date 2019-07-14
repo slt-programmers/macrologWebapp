@@ -6,7 +6,7 @@
   <p class="paragraph">Please wait while we wake them up...</p>
 
   <div class="svg-wrapper">
-		<img src="../assets/hamster-wheel.svg" alt="hamster-wheel">
+    <img src="../assets/hamster-wheel.svg" alt="hamster-wheel">
   </div>
 
 </div>
@@ -16,32 +16,27 @@
     <div class="header-item header-item--title">
       <div class="header-item__text">Macrolog</div>
     </div>
-    <div class="header-item header-item--mobile-hidden"
-         [ngClass]="{'header-item--active' : router.url === '/log'}"
-         routerLink="/log">
+    <div class="header-item header-item--mobile-hidden" [ngClass]="{'header-item--active' : router.url === '/log'}"
+      routerLink="/log">
       <div class="header-item__text">Diary</div>
     </div>
-    <div class="header-item header-item--mobile-hidden"
-         [ngClass]="{'header-item--active' : router.url === '/food'}"
-         routerLink="/food">
+    <div class="header-item header-item--mobile-hidden" [ngClass]="{'header-item--active' : router.url === '/food'}"
+      routerLink="/food">
       <div class="header-item__text">Food</div>
     </div>
-    <div class="header-item header-item--mobile-hidden"
-         [ngClass]="{'header-item--active' : router.url === '/meals'}"
-         routerLink="/meals">
+    <div class="header-item header-item--mobile-hidden" [ngClass]="{'header-item--active' : router.url === '/meals'}"
+      routerLink="/meals">
       <div class="header-item__text">Meals</div>
     </div>
-		<div class="header-item header-item--mobile-hidden"
-				 [ngClass]="{'header-item--active' : router.url === '/graphs'}"
-				 routerLink="/graphs">
-			<div class="header-item__text">Graphs</div>
-		</div>
-	</div>
+    <div class="header-item header-item--mobile-hidden" [ngClass]="{'header-item--active' : router.url === '/graphs'}"
+      routerLink="/graphs">
+      <div class="header-item__text">Graphs</div>
+    </div>
+  </div>
 
   <div class="header__section header__section--right" *ngIf="loggedIn()">
     <div class="header-item header-item--menu header-item--mobile-hidden"
-         [ngClass]="{'header-item--active' : router.url === '/user'}"
-         (click)="openUserMenu()">
+      [ngClass]="{'header-item--active' : router.url === '/user'}" (click)="openUserMenu()">
       <i class="icon--large fas fa-user-circle"></i>
     </div>
 
@@ -55,7 +50,7 @@
 
 <div #usermenu class="usermenu-wrapper" (click)="closeUserMenu()">
   <div class="usermenu">
-    <div class="usermenu__item usermenu__item--top">{{getUsername()}} <i class="fas fa-arrow-up"></i></div>
+    <div class="usermenu__item usermenu__item--top">{{getUsername()}}</div>
     <div *ngIf="loggedIn()" class="usermenu__item" (click)="setTitle(profileTitle)" routerLink="/user">My Profile</div>
     <div *ngIf="loggedIn()" class="usermenu__item" routerLink="/login">Logout</div>
   </div>
@@ -68,16 +63,13 @@
       <div></div>
       <i class="fas fa-arrow-right"></i>
     </div>
-    <div class="nav__item" routerLink="/log"
-         (click)="closeNav(logTitle)">
+    <div class="nav__item" routerLink="/log" (click)="closeNav(logTitle)">
       <div class="nav__item__text">Diary</div>
     </div>
-    <div class="nav__item" routerLink="/food"
-         (click)="closeNav(foodTitle)">
+    <div class="nav__item" routerLink="/food" (click)="closeNav(foodTitle)">
       <div class="nav__item__text">Food</div>
     </div>
-    <div class="nav__item" routerLink="/meals"
-         (click)="closeNav(mealsTitle)">
+    <div class="nav__item" routerLink="/meals" (click)="closeNav(mealsTitle)">
       <div class="nav__item__text">Meals</div>
     </div>
     <!--<div class="nav__item" routerLink="/graphs"-->
@@ -85,15 +77,13 @@
     <!--<div>Grahphs</div>-->
     <!--</div>-->
 
-    <div class="nav__item" routerLink="/user"
-         (click)="closeNav(settingsTitle)">
+    <div class="nav__item" routerLink="/user" (click)="closeNav(settingsTitle)">
       <div class="nav__item__text">Profile</div>
       <i class="fas fa-user-circle"></i>
 
     </div>
 
-    <div class="nav__item" routerLink="/login"
-         (click)="closeNav('')">
+    <div class="nav__item" routerLink="/login" (click)="closeNav('')">
       <div class="nav__item__text">Logout</div>
       <i class="fas fa-sign-out-alt"></i>
     </div>

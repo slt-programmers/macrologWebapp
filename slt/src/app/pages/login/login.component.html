@@ -38,7 +38,7 @@
           <a class="content__form__link" (click)="toggleForgotPwModal(true)">Forgot password?</a>
         </form>
 
-        <button class="content__form__button" mat-stroked-button color="primary" [disabled]="loginForm.invalid"
+        <button mat-stroked-button color="primary" class="content__form__button" [disabled]="loginForm.invalid"
           (click)="login()">Log in
         </button>
       </div>
@@ -105,7 +105,7 @@
     <div class="modal__header">
       <h3 class="modal__header__title">Forgot your password?</h3>
 
-      <button class="icon" mat-icon-button aria-label="Close" (click)="toggleForgotPwModal(false)">
+      <button mat-icon-button aria-label="Close" (click)="toggleForgotPwModal(false)">
         <mat-icon>close</mat-icon>
       </button>
     </div>

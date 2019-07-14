@@ -1,22 +1,21 @@
-<div class="container container--first">
-
+<div class="blue-theme container container--first">
   <div class="tile">
     <div class="search-bar">
       <label class="search-bar__label">Search</label>
-      <input class="search-bar__input"
+      <input class="input search-bar__input"
              [(ngModel)]="searchInput"
              (input)="findFoodMatch()">
-      <button class="button button--primary" (click)="clearSearch()">Clear</button>
+      <button mat-stroked-button color="primary" (click)="clearSearch()">Clear</button>
     </div>
 
     <div class="settings">
       <label class="settings__label">Display in:</label>
       <div class="radio-wrapper">
-        <input type="radio" [(ngModel)]="displayMode" value="grams"
+        <input class="input" type="radio" [(ngModel)]="displayMode" value="grams"
                (input)="changeDisplay('grams')"
                [ngClass]="{'checked': displayMode === 'grams'}">
         <span class="radio-label">Grams</span>
-        <input type="radio" [(ngModel)]="displayMode" value="percentage"
+        <input class="input" type="radio" [(ngModel)]="displayMode" value="percentage"
                (input)="changeDisplay('percentage')"
                [ngClass]="{'checked': displayMode === 'percentage'}">
         <span class="radio-label">Percentage</span>
@@ -69,10 +68,10 @@
 </div>
 
 
-<div class="button-wrapper--floating-action">
-  <button class="button--floating-action button button--primary" (click)="openModal(null)">
-    <i class="fas fa-plus"></i>
-  </button>
+<div class="blue-theme button-wrapper--floating-action">
+  <button mat-fab color="primary" (click)="openModal(null)">
+      <mat-icon>add</mat-icon>
+    </button>
 </div>
 
 <div class="modal-wrapper" *ngIf="modalIsVisible">

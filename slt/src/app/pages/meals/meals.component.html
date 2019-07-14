@@ -38,10 +38,10 @@
     </div>
   </div>
 
-  <div class="button-wrapper--floating-action">
-    <button class="button--floating-action button button--primary" (click)="openModal()">
-      <i class="fas fa-plus"></i>
-    </button>
+  <div class="blue-theme button-wrapper--floating-action">
+      <button mat-fab color="primary" (click)="openModal()">
+          <mat-icon>add</mat-icon>
+        </button>
   </div>
 
   <div class="modal-wrapper" *ngIf="modalIsVisible">

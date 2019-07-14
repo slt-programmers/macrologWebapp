@@ -1,17 +1,21 @@
 <div class="container container--first">
 
   <div class="subnav">
-		<a class="subnav__item" [ngClass]="{'subnav__item--active': router.url === '/user/personal'}" [routerLink]="['./personal']">Personal</a>
-    <a class="subnav__item" [ngClass]="{'subnav__item--active': router.url === '/user/foodintake'}" [routerLink]="['./foodintake']">Food Intake</a>
-		<a class="subnav__item" [ngClass]="{'subnav__item--active': router.url === '/user/weighttracker'}" [routerLink]="['./weighttracker']">Weight Tracker</a>
-    <a class="subnav__item" [ngClass]="{'subnav__item--active': router.url === '/user/account'}" [routerLink]="['./account']">Account</a>
+    <a class="subnav__item" [ngClass]="{'subnav__item--active': router.url === '/user/personal'}"
+      [routerLink]="['./personal']">Personal</a>
+    <a class="subnav__item" [ngClass]="{'subnav__item--active': router.url === '/user/foodintake'}"
+      [routerLink]="['./foodintake']">Food Intake</a>
+    <a class="subnav__item" [ngClass]="{'subnav__item--active': router.url === '/user/weighttracker'}"
+      [routerLink]="['./weighttracker']">Weight Tracker</a>
+    <a class="subnav__item" [ngClass]="{'subnav__item--active': router.url === '/user/account'}"
+      [routerLink]="['./account']">Account</a>
   </div>
 
   <router-outlet></router-outlet>
 
 </div>
 
-<div class="container" *ngIf="false">
+<div class="blue-theme container" *ngIf="false">
   <h3>Track weight</h3>
 
   <p>See your weight progression on the <a href="/graphs">graphs</a> page</p>
@@ -26,12 +30,12 @@
   <div class="form-field">
     <label class="form-field__label">Weight</label>
     <div class="form-field__element">
-      <input [(ngModel)]="newWeight" type="number" step="0.1">
+      <input class="input" [(ngModel)]="newWeight" type="number" step="0.1">
     </div>
   </div>
 
   <div class="button-wrapper">
-    <button class="button button--primary" (click)="saveNewWeight()">Save</button>
+    <button mat-stroked-button color="primary" (click)="saveNewWeight()">Save</button>
   </div>
 </div>
 
@@ -39,8 +43,8 @@
   <h3>Options</h3>
 
   <div class="button-wrapper">
-    <button class="button button--primary" (click)="exportData()">Export data</button>
+    <button mat-stroked-button color="primary" (click)="exportData()">Export data</button>
 
-    <button class="button button--primary" (change)="importData($event)" type="file">Import data</button>
+    <button mat-stroked-button color="primary" (change)="importData($event)" type="file">Import data</button>
   </div>
 </div>

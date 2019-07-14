@@ -1,116 +1,115 @@
 form {
-	display: flex;
-	flex-direction: column;
-	margin-bottom: ($gutter/2);
+  display: flex;
+  flex-direction: column;
+  margin-bottom: ($gutter/2);
 }
 
 // form-field (default) (vertical on mobile, horizontal on big screen)
 // form-field vertical (on big and small screen)
 // form-field horizontal (on big and small screen)
 
-
 .form-field {
-	@media (min-width: $md) {
-		flex-direction: row;
-		align-items: center;
-	}
-
-	display: flex;
-	flex-direction: column;
-	margin-bottom: 10px;
-	justify-content: space-between;
-
-	&--vertical {
-		flex-direction: column;
-		align-items: flex-start;
-
-		.form-field__label {
-			margin-bottom: 5px;
-		}
-	}
-
-	&--horizontal {
-		flex-direction: row;
-	}
-
-	&--slider {
-		@include media-break($lg) {
-			flex-direction: row;
-		}
-		flex-direction: column;
-	}
-
-	&__label {
-		@media (min-width: $md) {
-			flex-basis: 40%;
-			margin-bottom: 0;
-
-    	&--small {
-    		flex-basis: auto;
-    		flex-grow: 0;
-    	}
-
-    	&--slider {
-    		flex-basis: auto;
-      	flex-grow: 1;
-      	margin-top: 15px;
-   			align-self: start;
-    	}
-		}
-
-   	margin-right: ($gutter/3);
-		margin-bottom: ($gutter/6);
-	}
-
-	&__input {
-		margin-bottom: 5px;
-		flex-basis: 60%;
-
-		&:last-child {
-			margin-bottom: 0;
-		}
-	}
-
-	&__element {
-		flex-grow: 1;
-
-		&--column {
-			@media (min-width: $lg) {
-				align-items: flex-start;
-				flex-direction: column;
-				margin-bottom: 0;
-				width: auto;
-			}
-			align-items: center;
-			flex-direction: row;
-			margin-right: 10px;
-			margin-bottom: 10px;
-			width: 100%;
-		}
-
-		&--end {
-			@media (min-width: $md) {
-				align-self: flex-end;
-    	}
-		}
-	}
-
-	&__text {
-   	font-weight: 500;
-   	min-width: 30px;
+  @media (min-width: $md) {
+    flex-direction: row;
+    align-items: center;
   }
 
-	&__slider {
-		@include media-break($lg) {
-				flex-basis: 100%;
-      	flex-shrink: 1;
-		}
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+  justify-content: space-between;
 
-		width: 100%;
-	}
+  &--vertical {
+    flex-direction: column;
+    align-items: flex-start;
 
-	&__disclaimer {
-		color: $primary;
-		font-size: 14px;
-	}
+    .form-field__label {
+      margin-bottom: 5px;
+    }
+  }
+
+  &--horizontal {
+    flex-direction: row;
+  }
+
+  &--slider {
+    @include media-break($lg) {
+      flex-direction: row;
+    }
+    flex-direction: column;
+  }
+
+  &__label {
+    @media (min-width: $md) {
+      flex-basis: 40%;
+      margin-bottom: 0;
+
+      &--small {
+        flex-basis: auto;
+        flex-grow: 0;
+      }
+
+      &--slider {
+        flex-basis: auto;
+        flex-grow: 1;
+        margin-top: 15px;
+        align-self: start;
+      }
+    }
+
+    margin-right: ($gutter/3);
+    margin-bottom: ($gutter/6);
+  }
+
+  &__input {
+    margin-bottom: 5px;
+    flex-basis: 60%;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  &__element {
+    flex-grow: 1;
+
+    &--column {
+      @media (min-width: $lg) {
+        align-items: flex-start;
+        flex-direction: column;
+        margin-bottom: 0;
+        width: auto;
+      }
+      align-items: center;
+      flex-direction: row;
+      margin-right: 10px;
+      margin-bottom: 10px;
+      width: 100%;
+    }
+
+    &--end {
+      @media (min-width: $md) {
+        align-self: flex-end;
+      }
+    }
+  }
+
+  &__text {
+    font-weight: 500;
+    min-width: 30px;
+  }
+
+  &__slider {
+    @include media-break($lg) {
+      flex-basis: 100%;
+      flex-shrink: 1;
+    }
+
+    width: 100%;
+  }
+
+  &__disclaimer {
+    color: $primary;
+    font-size: 14px;
+  }
 }

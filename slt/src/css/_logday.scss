@@ -1,88 +1,84 @@
 .logday {
-	@media(min-width: $md) {
-		font-size: 16px;
-	}
+  @media (min-width: $md) {
+    font-size: 16px;
+  }
 
-	@include elevation(1);
-	background-color: $white;
-	display: flex;
-	flex-direction: column;
-	font-size: 14px;
+  @include elevation(1);
+  background-color: $white;
+  display: flex;
+  flex-direction: column;
+  font-size: 14px;
 
-	&__date {
-		align-items: center;
-		border-bottom: 1px solid $cloud;
-		display: flex;
-		flex-direction: row;
-		padding: ($gutter/2);
-		justify-content: center;
-	}
+  &__date {
+    align-items: center;
+    border-bottom: 1px solid $cloud;
+    display: flex;
+    flex-direction: row;
+    padding: ($gutter/2);
+    justify-content: center;
+  }
 
-	&__header {
-		border-bottom: 1px solid $cloud;
-		display: flex;
-		font-weight: 600;
-		padding: 10px;
+  &__header {
+    border-bottom: 1px solid $cloud;
+    display: flex;
+    font-weight: 600;
+    padding: 10px;
 
-		&__macro {
-			&:first-child {
-				display: none;
-			}
+    &__macro {
+      &:first-child {
+        display: none;
+      }
 
-			@media(min-width: $md) {
-				flex-basis: 15%;
+      @media (min-width: $md) {
+        flex-basis: 15%;
 
-				&:first-child {
-					display: flex;
-      		padding-left: 5px;
-      		flex-basis: 40%;
-   			}
-			}
+        &:first-child {
+          display: flex;
+          flex-basis: 40%;
+        }
+      }
 
-			text-align: center;
-			flex-basis: 25%;
+      text-align: center;
+      flex-basis: 25%;
+    }
+  }
 
-		}
-	}
+  &__total {
+    display: flex;
+    flex-wrap: wrap;
+    font-weight: 600;
+    padding: 15px;
 
-	&__total {
-		display: flex;
-		flex-wrap: wrap;
-		font-weight: 600;
-		padding: ($gutter/3);
-
-		&__title {
-			@media(min-width: $md) {
-				flex-basis: 38%;
-			}
-			flex-basis: 100%;
-			font-weight: bold;
-			padding-right: 10px;
-			margin-bottom: 5px;
-		}
-	}
+    &__title {
+      @media (min-width: $md) {
+        flex-basis: 40%;
+      }
+      flex-basis: 100%;
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+  }
 }
 
 .total {
-	&__macro {
-		@media(min-width: $md) {
-			flex-basis: 10%;
+  &__macro {
+    @media (min-width: $md) {
+      flex-basis: 10%;
 
-    	&--first {
-    		flex-basis: 20%;
-    	}
-		}
+      &--first {
+        flex-basis: 20%;
+      }
+    }
 
-		flex-basis: 25%;
-   	text-align: center;
+    flex-basis: 25%;
+    text-align: center;
+  }
 
-	}
-
-	&__calories {
-		@media(min-width: $md) {
-			flex-basis: 20%;
-		}
-		flex-basis: 25%;
-		text-align: end;
-	}
+  &__calories {
+    @media (min-width: $md) {
+      flex-basis: 20%;
+    }
+    flex-basis: 25%;
+    text-align: end;
+  }
 }

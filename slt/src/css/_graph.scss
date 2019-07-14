@@ -1,75 +1,69 @@
-$proteincolor: '#5bd086';
-$fatcolor: '#f7ed70';
-$carbscolor: '#fb8353';
+$proteincolor: "#5bd086";
+$fatcolor: "#f7ed70";
+$carbscolor: "#fb8353";
 
-.graph  {
+.graph {
   display: flex;
-	flex-direction: row;
-
-	height:80%;
-	width:100%;
+  flex-direction: row;
+  height: 80%;
+  width: 100%;
   position: absolute;
-  justify-content:center;
-	align-items:stretch;
+  justify-content: center;
+  align-items: stretch;
 
   &--loading {
-     display: flex;
-  	 flex-direction: row;
-     justify-content: center;
-     padding-top:250px;
-     width:100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    padding-top: 250px;
+    width: 100%;
   }
 
   &__image {
-      flex-basis: 70%;
-      display: flex;
-      flex-direction: row;
-
+    flex-basis: 70%;
+    display: flex;
+    flex-direction: row;
   }
 
-  &__svglist{
-     display:flex;
-     flex-direction:column;
-     flex-basis: 60%;
+  &__svglist {
+    display: flex;
+    flex-direction: column;
+    flex-basis: 60%;
   }
 
-  &__svg {
-    horizontal-alignment:center;
-  }
-  &__options{
+  &__options {
+    display: block;
+    width: 250px;
 
-    padding-left:5px;
-    padding-top:15px;
-    display:flex;
-    flex-direction:column;
-    justify-content:flex-start;
+    label {
+      display: inline-block;
+    }
 
-		label {
-			display: flex;
-			align-items: baseline; /* Baseline centering */
-		}
-		input[type=checkbox] {
-		  width:10px;
-      flex: none;
-      margin-right: 5px;
+    input {
+      display: inline-block;
+      width: auto;
+      height: auto;
     }
   }
+
+  &__option {
+    display: block;
+    margin-bottom: 10px;
+  }
+
   &__controls {
-       display: flex;
-    	 flex-direction: row;
-       justify-content: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
 
-       button[disabled] {
-          background-color:$ghost;
-          color:$grey;
-       }
+    button[disabled] {
+      background-color: $ghost;
+      color: $grey;
     }
-    &__datelabel{
-         font-weight:bold;
-          padding: 15px 0;
-      }
+  }
 
-
+  &__datelabel {
+    font-weight: bold;
+    padding: 10px 0;
+  }
 }
-
-

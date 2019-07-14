@@ -196,7 +196,7 @@ export class IntakeComponent implements OnInit {
 	private documentClick(event) {
 		if (this.breakfastEref &&
 			!event.target.classList.contains('autocomplete__option') &&
-			!event.target.classList.contains('fa-trash') &&
+			!event.target.classList.contains('trash') &&
 			!event.target.classList.contains('button--transparent')) {
 			this.breakfastOpen = this.breakfastEref.logMealEref.nativeElement.contains(event.target);
 		}
