@@ -1,138 +1,129 @@
-<div class="container">
-  <div class="grid">
-    <div class="card">
-      <h3>Log in</h3>
-
-      <form #loginForm="ngForm">
-        <div class="form-field form-field--vertical">
-          <label class="form-field__label">Username or email</label>
-          <input class="form-field__input" type="text" #usernameField
-                 [(ngModel)]="usernameOrEmail"
-                 name="usernameOrEmail" required/>
-        </div>
-
-        <div class="form-field form-field--vertical">
-          <label class="form-field__label">Password</label>
-
-          <input class="form-field__input" type="password" #passwordField
-                 [(ngModel)]="password"
-                 (keyup.enter)="login()"
-                 name="password" required/>
-        </div>
-        <p *ngIf="error" class="signal">{{error}}</p>
-
-        <a class="primary" (click)="toggleForgotPwModal(true)">Forgot password?</a>
-      </form>
-
-      <div class="button-wrapper">
-        <button class="button button--primary"
-                [disabled]="loginForm.invalid"
-                (click)="login()">Log in
-        </button>
-      </div>
+<div class="login-page">
+  <div class="menu">
+    <div class="menu__logo">
+      <p>M</p>
     </div>
 
-    <div class="card">
-      <h3>Register</h3>
+    <div class="menu__title">
+      <p>Macrolog</p>
+    </div>
 
-      <form #signUpForm="ngForm">
-        <div class="form-field form-field--vertical">
-          <label class="form-field__label">Username</label>
+    <div class="menu__item">
+      <p (click)="toggleLogin(true)">Log in</p>
+    </div>
 
-          <input class="form-field__input" type="text" #usernameField
-                 [(ngModel)]="newUsername"
-                 name="newUsername" required/>
-        </div>
+    <div class="menu__item">
+      <p (click)="toggleLogin(false)">About</p>
+    </div>
+  </div>
 
-        <div class="form-field form-field--vertical">
-          <label class="form-field__label">Password</label>
+  <div class="content">
+    <div @enterLeaveTrigger *ngIf="showContentLogin" class="content__forms">
+      <div class="content__form content__form--login">
+        <h3 class="content__form__title">Log in</h3>
 
-          <input class="form-field__input" type="password" #passwordField
-                 [(ngModel)]="newPassword"
-                 name="newPassword" required/>
-        </div>
+        <form #loginForm="ngForm">
+          <mat-form-field>
+            <input matInput placeholder="Username or email" type="text" #usernameField [(ngModel)]="usernameOrEmail"
+              name="usernameOrEmail" required />
+          </mat-form-field>
 
-        <div class="form-field form-field--vertical">
-          <label class="form-field__label">Email</label>
+          <mat-form-field>
+            <input matInput placeholder="Password" type="password" #passwordField [(ngModel)]="password"
+              (keyup.enter)="login()" name="password" required />
+          </mat-form-field>
 
-          <input class="form-field__input" type="email" #emailField
-                 [(ngModel)]="newEmail"
-                 (keyup.enter)="signUp()"
-                 name="newEmail" required/>
-          <label class="form-field__disclaimer">
+          <p class="content__form__error" *ngIf="error">{{error}}</p>
+
+          <a class="content__form__link" (click)="toggleForgotPwModal(true)">Forgot password?</a>
+        </form>
+
+        <button class="content__form__button" mat-stroked-button color="primary" [disabled]="loginForm.invalid"
+          (click)="login()">Log in
+        </button>
+      </div>
+
+      <div class="content__form content__form--register">
+        <h3 class="content__form__title">Register</h3>
+
+        <form #signUpForm="ngForm">
+          <mat-form-field>
+            <input matInput placeholder="Username" type="text" #usernameField [(ngModel)]="newUsername"
+              name="newUsername" required />
+          </mat-form-field>
+
+          <mat-form-field>
+            <input matInput placeholder="Password" type="password" #passwordField [(ngModel)]="newPassword"
+              name="newPassword" required />
+          </mat-form-field>
+
+          <mat-form-field>
+            <input matInput placeholder="Email" type="email" #emailField [(ngModel)]="newEmail" (keyup.enter)="signUp()"
+              name="newEmail" required />
+          </mat-form-field>
+
+          <label class="content__form__label">
             We hate spam as much as you do. We will send you a confirmation
             email and will not use your email address
             for anything else besides password retrieval.
           </label>
-        </div>
 
-        <p *ngIf="signUpError" class="signal">{{signUpError}}</p>
-      </form>
+          <p class="content__form__error" *ngIf="signUpError">{{signUpError}}</p>
+        </form>
 
-      <div class="button-wrapper">
-        <button class="button button--primary"
-                [disabled]="signUpForm.invalid"
-                (click)="signUp()">Register
+        <button class="content__form__button" mat-stroked-button color="primary" [disabled]="signUpForm.invalid"
+          (click)="signUp()">Register
         </button>
       </div>
     </div>
-  </div>
 
+    <div @enterLeaveTrigger *ngIf="!showContentLogin" class="content__about">
+      <h3 class="content__about__title">About Macrolog</h3>
+
+      <p class="content__about__paragraph">Macrolog was developed by two software engineers who wanted to get in shape.
+        After having used several food tracking applications we got a little tired of
+        adds and payed functions that, in our opinion, should be free. So for laughs
+        and learning we decided to take it upon ourselves to build a better app.
+      </p>
+
+      <p class="content__about__paragraph">Macrolog heavily focusses on counting macronutrients instead of counting
+        calories. We believe that knowing what your food is made up of and eating
+        the right proportions is ultimately healthier and more effective in accomplishing
+        your physical goals than tracking just calories. Now, the concept of the "right"
+        proportions is somewhat debatable, and what works for one person may not work for
+        another. We won't pretend to know much about dieting so during the intake a few
+        calculations and suggestions based on mainstream theory will be done, which you
+        are entirely free to ignore.</p>
+
+      <p class="content__about__paragraph">In the end, we just want to help you measure.</p>
+    </div>
+  </div>
 </div>
 
-<div class="modal-wrapper" *ngIf="showForgotPwModal">
-  <div class="modal">
+<div @enterLeaveTrigger class="modal-wrapper" *ngIf="showForgotPwModal">
+  <div class="modal blue-theme">
     <div class="modal__header">
       <h3 class="modal__header__title">Forgot your password?</h3>
 
-      <button class="button button--icon button--primary" (click)="toggleForgotPwModal(false)">
-        <i class="fas fa-times"></i>
+      <button class="icon" mat-icon-button aria-label="Close" (click)="toggleForgotPwModal(false)">
+        <mat-icon>close</mat-icon>
       </button>
     </div>
 
     <div class="modal__content">
-      <p>Please enter your email so we can send your password</p>
-      <form #forgotForm="ngForm">
+      <p>Please enter your email so we can send a link to reset your password</p>
 
-        <div class="form-field form-field--vertical">
-          <label class="form-field__label">Email</label>
-          <input class="form-field__input" type="email" #forgotEmailField
-                 [(ngModel)]="forgotEmail"
-                 name="forgotEmail" required/>
-        </div>
+      <form #forgotForm="ngForm">
+        <mat-form-field>
+          <input matInput placeholder="Email" type="email" #forgotEmailField [(ngModel)]="forgotEmail"
+            name="forgotEmail" />
+        </mat-form-field>
       </form>
 
-      <p *ngIf="forgotError" class="signal">{{forgotError}}</p>
+      <p class="content__form__error" *ngIf="forgotError">{{forgotError}}</p>
 
-      <div class="button-wrapper">
-        <button class="button button--primary"
-                [disabled]="forgotForm.invalid"
-                (click)="resetPassword()">Send
-        </button>
-      </div>
-
+      <button mat-stroked-button color="primary" [disabled]="forgotForm.invalid" (click)="resetPassword()">Send
+      </button>
     </div>
-  </div>
-</div>
-
-<div class="container">
-
-  <div class="tile">
-    <h3>About Macrolog</h3>
-
-    <p>Macrolog was developed by two software engineers who wanted to get in shape.
-      After having used several food tracking applications we got a little tired of
-      adds and payed functions that, in our opinion, should be free. So for laughs
-      and learning we decided to take it upon ourselves to build a better app.
-    </p>
-    <p>Macrolog heavily focusses on counting macronutrients instead of counting
-      calories. We believe that knowing what your food is made up of and eating
-      the right proportions is ultimately healthier and more effective in accomplishing
-      your physical goals than tracking just calories. Now, the concept of the "right"
-      proportions is somewhat debatable, and what works for one person may not work for
-      another. We won't pretend to know much about dieting so during the intake a few
-      calculations and suggestions based on mainstream theory will be done, which you
-      are entirely free to ignore.</p>
-    <p>In the end, we just want to help you measure.</p>
   </div>
 </div>

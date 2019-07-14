@@ -1,15 +1,30 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { first } from 'rxjs/operators';
 import { AuthenticationService } from '../../services/auth.service';
 import { ToastService } from '../../services/toast.service';
+import { trigger, transition, style, animate } from '@angular/animations';
 
 @Component({
-	templateUrl: 'login.component.html'
+	templateUrl: 'login.component.html', 
+	animations: [
+		trigger('enterLeaveTrigger', [
+			transition(':enter', [
+			  style({ opacity: 0 }),
+			  animate('0.25s', style({ opacity: 1 })),
+			]),
+			// transition(':leave', [
+			//   animate('5s', style({ opacity: 0 }))
+			// ])
+		  ]),
+	],
+	styleUrls: ['./login.scss']
 })
 export class LoginComponent implements OnInit {
 
 	private returnUrl: string;
+
+	public showContentLogin = true;
+
 	public error = '';
 	public signUpError = '';
 	public usernameOrEmail: string;
@@ -35,6 +50,10 @@ export class LoginComponent implements OnInit {
 
 		// get return url from route parameters or default to '/'
 		this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+	}
+
+	public toggleLogin(showContentLogin: boolean) {
+		this.showContentLogin = showContentLogin;
 	}
 
 	public login() {
@@ -96,7 +115,7 @@ export class LoginComponent implements OnInit {
 				this.toastService.setMessage('We have send an email with your password!');
 				this.toggleForgotPwModal(false);
 			}, error => {
-				this.forgotError = 'The email you entered did not match the email registered with your username';
+				this.forgotError = 'The email adress was not found';
 			});
 	}
 }

@@ -7,9 +7,12 @@
           <span>Calories: {{getTotal("calories")  | number:'1.0-0'}}/<strong>{{goalCal}}</strong></span>
         </div>
         <div class="intake-goal__macros">
-          <span class="intake-goal__macro">Protein: {{getTotal("protein") | number:'1.1-1'}}/<strong>{{userGoals[0]}}</strong></span>
-          <span class="intake-goal__macro">Fat: {{getTotal("fat") | number:'1.1-1'}}/<strong>{{userGoals[1]}}</strong></span>
-          <span class="intake-goal__macro">Carbs: {{getTotal("carbs") | number:'1.1-1'}}/<strong>{{userGoals[2]}}</strong></span>
+          <span class="intake-goal__macro">Protein:
+            {{getTotal("protein") | number:'1.1-1'}}/<strong>{{userGoals[0]}}</strong></span>
+          <span class="intake-goal__macro">Fat:
+            {{getTotal("fat") | number:'1.1-1'}}/<strong>{{userGoals[1]}}</strong></span>
+          <span class="intake-goal__macro">Carbs:
+            {{getTotal("carbs") | number:'1.1-1'}}/<strong>{{userGoals[2]}}</strong></span>
         </div>
       </div>
       <div class="intake-goal__graph">
@@ -41,11 +44,16 @@
       <span class="logday__header__macro"></span>
     </div>
 
-    <log-meal #breakfast [open]="breakfastOpen" [searchables]="foodAndPortions" [date]="displayDate" [meal]="'Breakfast'" [logEntries]="breakfastLogs" (dataChanged)="refresh()"></log-meal>
-    <log-meal #lunch [open]="lunchOpen" [searchables]="foodAndPortions" [date]="displayDate" [meal]="'Lunch'" [logEntries]="lunchLogs" (dataChanged)="refresh()"></log-meal>
-    <log-meal #dinner [open]="dinnerOpen" [searchables]="foodAndPortions" [date]="displayDate" [meal]="'Dinner'" [logEntries]="dinnerLogs" (dataChanged)="refresh()"></log-meal>
-    <log-meal #snacks [open]="snacksOpen" [searchables]="foodAndPortions" [date]="displayDate" [meal]="'Snacks'" [logEntries]="snacksLogs" (dataChanged)="refresh()"></log-meal>
-    <log-activity #activities [open]="activitiesOpen" [date]="displayDate" [logActivities]="activitiesLogs" (dataChanged)="refresh()"></log-activity>
+    <log-meal #breakfast [open]="breakfastOpen" [searchables]="foodAndPortions" [date]="displayDate"
+      [meal]="'Breakfast'" [logEntries]="breakfastLogs" (dataChanged)="refresh()"></log-meal>
+    <log-meal #lunch [open]="lunchOpen" [searchables]="foodAndPortions" [date]="displayDate" [meal]="'Lunch'"
+      [logEntries]="lunchLogs" (dataChanged)="refresh()"></log-meal>
+    <log-meal #dinner [open]="dinnerOpen" [searchables]="foodAndPortions" [date]="displayDate" [meal]="'Dinner'"
+      [logEntries]="dinnerLogs" (dataChanged)="refresh()"></log-meal>
+    <log-meal #snacks [open]="snacksOpen" [searchables]="foodAndPortions" [date]="displayDate" [meal]="'Snacks'"
+      [logEntries]="snacksLogs" (dataChanged)="refresh()"></log-meal>
+    <log-activity #activities [open]="activitiesOpen" [date]="displayDate" [logActivities]="activitiesLogs"
+      (dataChanged)="refresh()"></log-activity>
 
     <div class="logday__total">
       <span class="logday__total__title">Daily total</span>
@@ -56,9 +64,9 @@
     </div>
   </div>
 
-  <div class="button-wrapper--floating-action">
-    <button class="button--floating-action button button--primary" (click)="openModal()">
-      <i class="fas fa-plus"></i>
+  <div class="blue-theme button-wrapper--floating-action">
+    <button mat-fab color="primary" (click)="openModal()">
+      <mat-icon>add</mat-icon>
     </button>
   </div>
 

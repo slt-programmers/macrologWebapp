@@ -1,71 +1,71 @@
 .modal-wrapper {
-	background-color: transparentize(black, 0.6);
-	height: 100%;
-	left: 0;
-	overflow: scroll;
-	overflow-x: hidden;
-	position: fixed;
-	top: 0;
-	width: 100%;
-	z-index: 20;
+  background-color: transparentize(white, 0.75);
+  height: 100%;
+  left: 0;
+  overflow: scroll;
+  overflow-x: hidden;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 20;
 }
 
 .modal {
-	@media(min-width: $md) {
-		width: 80%;
-	}
-	margin: 8% auto;
-	max-width: 1000px;
-	width: 95%;
+  @media (min-width: $md) {
+    width: 80%;
+  }
+  margin: 8% auto;
+  max-width: 700px;
+  width: 95%;
 
-	&__header {
-		@media(min-width: $md) {
-			border-radius: ($gutter/2) ($gutter/2) 0 0;
-			padding: 0 $gutter;
-		}
-		align-items: center;
-		background-color: $primary;
-		border-radius: 5px 5px 0 0;
-		color: $white;
-		display: flex;
-		height: 52px;
-		justify-content: space-between;
-		padding: 0 ($gutter/2);
+  &__header {
+    @media (min-width: $md) {
+      border-radius: 15px 15px 0 0;
+      padding: 10px 15px 0 30px;
+    }
+    align-items: center;
+    background-color: $white;
+    border-radius: 5px 5px 0 0;
+    color: $primary;
+    display: flex;
+    height: 52px;
+    justify-content: space-between;
+    padding: 0 15px;
 
-		&__title {
-			font-weight: normal;
-			margin: 0;
-		}
-	}
+    &__title {
+      font-weight: normal;
+      margin: 0;
+    }
+  }
 
-	&__content {
-		@media(min-width: $md) {
-			border-radius: 0 0 ($gutter/2) ($gutter/2);
-	  	padding: $gutter;
-		}
-		background-color: $ghost;
-		border-radius: 0 0 5px 5px;
-  	padding: ($gutter/2);
-	}
+  &__content {
+    @media (min-width: $md) {
+      border-radius: 0 0 15px 15px;
+      padding: $gutter;
+    }
+    background-color: $white;
+    border-radius: 0 0 5px 5px;
+    padding: 15px;
+  }
 
-	&__label {
-		display: block;
-		padding-top: 10px;
-		margin-bottom: 10px;
-	}
+  &__label {
+    display: block;
+    padding-top: 10px;
+    margin-bottom: 10px;
+  }
 
-	&__button-wrapper {
-		display: flex;
-		justify-content: flex-end;
-		padding-top: 15px;
+  &__button-wrapper {
+    display: flex;
+    justify-content: flex-end;
+    padding-top: 15px;
 
-		.button {
-			margin-left: ($gutter/2);
-		}
-	}
+    .button {
+      margin-left: 15px;
+    }
+  }
 }
 
 // utility
 .overlay-active {
-		overflow: hidden;
+  overflow: hidden;
 }

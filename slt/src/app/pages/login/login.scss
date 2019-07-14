@@ -1,0 +1,110 @@
+@import "../../../css/public.scss";
+
+$menuWidth: 200px;
+
+.login-page {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-image: $backgroundGradient;
+}
+
+.menu {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  width: $menuWidth;
+  background-image: linear-gradient(to right, rgba(255, 0, 0, 0), rgba(255, 255, 255, 0.03));
+
+  &__logo {
+    @include center;
+    margin-top: 72px;
+    color: white;
+    font-size: 96px;
+    font-weight: 900;
+
+    p {
+      line-height: 1;
+    }
+  }
+  &__title {
+    @include center;
+    margin-bottom: 64px;
+    font-size: 16px;
+    color: $white;
+  }
+
+  &__item {
+    @include center;
+    font-size: 16px;
+    width: 100px;
+    text-align: start;
+    color: white;
+    margin-bottom: 24px;
+    cursor: pointer;
+  }
+}
+
+.content {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: $menuWidth;
+  color: white;
+  padding-top: 160px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+
+  &__forms {
+    @include center;
+  }
+
+  &__form {
+    border: 1px solid $whiteTransparent;
+    border-radius: 15px;
+    text-align: left;
+    vertical-align: top;
+    width: 300px;
+    display: inline-block;
+    padding: 30px;
+    margin: 0 45px 45px 45px;
+    
+
+    &__title {
+      text-align: center;
+      font-weight: 900;
+    }
+
+    &__link {
+      color: white;
+      font-size: 14px;
+    }
+
+    &__error {
+      color: $warning;
+      font-size: 14px;
+    }
+
+    &__label {
+      font-size: 14px;
+    }
+
+    &__button {
+      margin-top: 24px;
+    }
+  }
+
+  &__about {
+    @include center;
+    width: 800px;
+
+    &__title {
+        font-size: 24px;
+        font-weight: 900;
+    }
+
+  }
+}

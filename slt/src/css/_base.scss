@@ -1,27 +1,9 @@
-.section {
-	display: flex;
-	flex-direction: column;
-
-	&--left {
-		margin-right: $gutter;
-		flex-basis: 60%;
-	}
-
-	&--right {
-		flex-basis: 40%;
-	}
-}
-
 .primary {
 	color: $primary;
 }
 
 .secondary {
 	color: $secondary;
-}
-
-.signal {
- color: $signal;
 }
 
 .title-wrapper {
@@ -31,7 +13,6 @@
 	&--center {
 		justify-content: center;
 	}
-
 }
 
 .strong {
@@ -43,11 +24,11 @@
 		color: $secondary;
 	}
 
-	&--signal {
-		color: $signal;
+	&--warning {
+		color: $warning;
 	}
 }
 
 .svg-wrapper {
-	width: 50px;
+	width: 100px;
 }

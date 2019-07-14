@@ -1,42 +1,43 @@
 html {
-	width: 100%;
-	box-sizing: border-box;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 body {
   background-color: $ghost;
   box-sizing: border-box;
   color: $coal;
-  font-family: 'Roboto', sans-serif;
+  font-family: "Assistant", sans-serif;
   font-weight: 300;
   height: 100%;
-	margin: 0;
-	min-height: -webkit-fill-available;
-	padding: 0;
-	position: relative;
-	width: 100%;
+  margin: 0;
+  min-height: -webkit-fill-available;
+  padding: 0;
+  position: relative;
+  width: 100%;
 }
 
-h1, h2, h3 {
-	font-weight: 500;
-	margin-bottom: 15px;
-	margin-top: 0;
+h1,
+h2,
+h3 {
+  font-weight: 500;
+  margin-bottom: 15px;
+  margin-top: 0;
 }
 
 p {
-	line-height: 1.5;
-	margin-bottom: 15px;
-	margin-top: 0;
+  line-height: 1.5;
+  margin-bottom: 15px;
+  margin-top: 0;
 }
 
 a {
-	text-decoration: none;
+  text-decoration: none;
 }
 
 a:hover {
-	cursor: pointer;
+  cursor: pointer;
 }
-
 
 table {
   border-collapse: collapse;

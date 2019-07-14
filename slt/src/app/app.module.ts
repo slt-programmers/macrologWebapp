@@ -6,6 +6,11 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RouterModule, Routes } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+import { MatInputModule } from '@angular/material';
+import { MatFormFieldModule } from '@angular/material';
+import { MatButtonModule } from '@angular/material';
+import {MatIconModule} from '@angular/material/icon';
+
 import { AppComponent } from './app.component';
 import { FoodService } from './services/food.service';
 import { ToastService } from './services/toast.service';
@@ -47,27 +52,27 @@ import { ScrollBehaviourService } from './services/scroll-behaviour.service';
 import { HealthcheckService } from './services/healthcheck.service';
 
 const appRoutes: Routes = [
-	{path: 'login', component: LoginComponent },
-	{path: 'log', component: LogComponent, canActivate: [AuthGuardService]},
+	{ path: 'login', component: LoginComponent },
+	{ path: 'log', component: LogComponent, canActivate: [AuthGuardService] },
 	{
 		path: 'user',
 		component: UserComponent,
 		canActivate: [AuthGuardService],
 		children: [
-			{path: '', redirectTo: 'personal', pathMatch: 'full'},
-      {path: 'personal', component: UserPersonalComponent},
-			{path: 'foodintake', component: UserIntakeComponent},
-      {path: 'weighttracker', component: UserWeightTrackerComponent},
-      {path: 'graphs', component: GraphsComponent},
-			{path: 'account', component: UserAccountComponent}
+			{ path: '', redirectTo: 'personal', pathMatch: 'full' },
+			{ path: 'personal', component: UserPersonalComponent },
+			{ path: 'foodintake', component: UserIntakeComponent },
+			{ path: 'weighttracker', component: UserWeightTrackerComponent },
+			{ path: 'graphs', component: GraphsComponent },
+			{ path: 'account', component: UserAccountComponent }
 		]
 	},
-	{path: 'intake', component: IntakeComponent, canActivate: [AuthGuardService]},
-	{path: 'food', component: FoodComponent, canActivate: [AuthGuardService]},
-	{path: 'meals', component: MealsComponent, canActivate: [AuthGuardService]},
-  {path: 'graphs', component: GraphsComponent, canActivate: [AuthGuardService]},
-	{path: '', redirectTo: '/log', pathMatch: 'full', canActivate: [AuthGuardService]},
-	{path: '**', redirectTo: '/log', pathMatch: 'full', canActivate: [AuthGuardService]}
+	{ path: 'intake', component: IntakeComponent, canActivate: [AuthGuardService] },
+	{ path: 'food', component: FoodComponent, canActivate: [AuthGuardService] },
+	{ path: 'meals', component: MealsComponent, canActivate: [AuthGuardService] },
+	{ path: 'graphs', component: GraphsComponent, canActivate: [AuthGuardService] },
+	{ path: '', redirectTo: '/log', pathMatch: 'full', canActivate: [AuthGuardService] },
+	{ path: '**', redirectTo: '/log', pathMatch: 'full', canActivate: [AuthGuardService] }
 ];
 
 @NgModule({
@@ -75,13 +80,13 @@ const appRoutes: Routes = [
 		AppComponent,
 		LogComponent,
 		LogMealComponent,
-    LogActivityComponent,
+		LogActivityComponent,
 		FoodComponent,
 		UserComponent,
 		UserIntakeComponent,
 		UserPersonalComponent,
 		UserAccountComponent,
-    UserWeightTrackerComponent,
+		UserWeightTrackerComponent,
 		SliderComponent,
 		BargraphComponent,
 		AddFoodModalComponent,
@@ -91,7 +96,7 @@ const appRoutes: Routes = [
 		DatepickerComponent,
 		ToastComponent,
 		ToastDirective,
-    DateValidator,
+		DateValidator,
 		LoginComponent,
 		PagerComponent,
 		MakeMealModalComponent,
@@ -106,16 +111,20 @@ const appRoutes: Routes = [
 		FormsModule,
 		HttpClientModule,
 		RouterModule.forRoot(appRoutes),
-		BrowserAnimationsModule
+		BrowserAnimationsModule,
+		MatInputModule, 
+		MatFormFieldModule, 
+		MatButtonModule,
+		MatIconModule
 	],
 	providers: [
-    ActivityService,
+		ActivityService,
 		FoodService,
 		LogService,
 		UserService,
 		ToastService,
 		MealService,
-    WeightService,
+		WeightService,
 		AuthGuardService,
 		ScrollBehaviourService,
 		HealthcheckService,
