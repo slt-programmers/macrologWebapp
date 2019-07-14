@@ -23,7 +23,8 @@ export class AppComponent implements OnInit, AfterViewInit {
 	private usermenubackdrop;
 
 	public userTitle = 'Settings';
-	public profileTitle = 'My profile';
+	public profileTitle = 'Profile';
+	public adminTitle = 'Administration panel'
 	public changePasswordTitle = 'Reset password';
 
 	public currentRoute;
@@ -92,6 +93,11 @@ export class AppComponent implements OnInit, AfterViewInit {
 
 	public loggedIn(): boolean {
 		return localStorage.getItem('currentUser') !== null;
+	}
+
+	public isAdmin(): boolean {
+		const currentUser =  JSON.parse(localStorage.getItem('currentUser'));
+		return (currentUser.user === 'CarmenDev' || currentUser.user === 'arjantienkamp@gmail.com');
 	}
 
 	public openUserMenu() {

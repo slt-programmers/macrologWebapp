@@ -10,6 +10,7 @@ import { MatInputModule } from '@angular/material';
 import { MatFormFieldModule } from '@angular/material';
 import { MatButtonModule } from '@angular/material';
 import { MatIconModule } from '@angular/material/icon';
+import {MatTableModule} from '@angular/material/table';
 
 import { AppComponent } from './app.component';
 import { FoodService } from './services/food.service';
@@ -50,6 +51,8 @@ import { StepperComponent } from './components/stepper/stepper.component';
 import { AuthGuardService } from './services/auth-guard.service';
 import { ScrollBehaviourService } from './services/scroll-behaviour.service';
 import { HealthcheckService } from './services/healthcheck.service';
+import { AdminService } from './services/admin.service';
+import { AdminComponent } from './pages/admin/admin.component';
 
 const appRoutes: Routes = [
 	{ path: 'login', component: LoginComponent },
@@ -67,6 +70,7 @@ const appRoutes: Routes = [
 			{ path: 'account', component: UserAccountComponent }
 		]
 	},
+	{ path: 'admin', component: AdminComponent, canActivate: [AuthGuardService] }, 
 	{ path: 'intake', component: IntakeComponent, canActivate: [AuthGuardService] },
 	{ path: 'food', component: FoodComponent, canActivate: [AuthGuardService] },
 	{ path: 'meals', component: MealsComponent, canActivate: [AuthGuardService] },
@@ -77,6 +81,7 @@ const appRoutes: Routes = [
 
 @NgModule({
 	declarations: [
+		AdminComponent,
 		AppComponent,
 		LogComponent,
 		LogMealComponent,
@@ -115,9 +120,11 @@ const appRoutes: Routes = [
 		MatInputModule,
 		MatFormFieldModule,
 		MatButtonModule,
-		MatIconModule
+		MatIconModule,
+		MatTableModule
 	],
 	providers: [
+		AdminService,
 		ActivityService,
 		FoodService,
 		LogService,

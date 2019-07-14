@@ -1,0 +1,10 @@
+@import "../../../css/public.scss";
+
+.users {
+    width: 100%;
+    @include elevation(4);
+}
+
+.cell--center {
+    @include center;
+}

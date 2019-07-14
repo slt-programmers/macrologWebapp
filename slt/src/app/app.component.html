@@ -51,7 +51,11 @@
 <div #usermenu class="usermenu-wrapper" (click)="closeUserMenu()">
   <div class="usermenu">
     <div class="usermenu__item usermenu__item--top">{{getUsername()}}</div>
-    <div *ngIf="loggedIn()" class="usermenu__item" (click)="setTitle(profileTitle)" routerLink="/user">My Profile</div>
+
+    <div *ngIf="loggedIn()" class="usermenu__item" (click)="setTitle(profileTitle)" routerLink="/user">Profile</div>
+
+    <div *ngIf="loggedIn() && isAdmin()" class="usermenu__item" (click)="setTitle(adminTitle)" routerLink="/admin">Admin panel</div>
+    
     <div *ngIf="loggedIn()" class="usermenu__item" routerLink="/login">Logout</div>
   </div>
 </div>
