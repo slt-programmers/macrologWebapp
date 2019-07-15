@@ -10,7 +10,7 @@ import { MatInputModule } from '@angular/material';
 import { MatFormFieldModule } from '@angular/material';
 import { MatButtonModule } from '@angular/material';
 import { MatIconModule } from '@angular/material/icon';
-import {MatTableModule} from '@angular/material/table';
+import { MatTableModule } from '@angular/material/table';
 
 import { AppComponent } from './app.component';
 import { FoodService } from './services/food.service';
@@ -18,7 +18,7 @@ import { ToastService } from './services/toast.service';
 import { ToastDirective } from './directives/toast.directive';
 import { DateValidator } from './directives/date.directive';
 import { ToastComponent } from './components/toast/toast.component';
-import { LogComponent } from './pages/log/log.component';
+import { DiaryComponent } from './pages/diary/diary.component';
 import { LogMealComponent } from './components/log-meal/log-meal.component';
 import { LogActivityComponent } from './components/log-activity/log-activity.component';
 import { FoodComponent } from './pages/food/food.component';
@@ -56,7 +56,7 @@ import { AdminComponent } from './pages/admin/admin.component';
 
 const appRoutes: Routes = [
 	{ path: 'login', component: LoginComponent },
-	{ path: 'log', component: LogComponent, canActivate: [AuthGuardService] },
+	{ path: 'log', component: DiaryComponent, canActivate: [AuthGuardService] },
 	{
 		path: 'user',
 		component: UserComponent,
@@ -70,7 +70,7 @@ const appRoutes: Routes = [
 			{ path: 'account', component: UserAccountComponent }
 		]
 	},
-	{ path: 'admin', component: AdminComponent, canActivate: [AuthGuardService] }, 
+	{ path: 'admin', component: AdminComponent, canActivate: [AuthGuardService] },
 	{ path: 'intake', component: IntakeComponent, canActivate: [AuthGuardService] },
 	{ path: 'food', component: FoodComponent, canActivate: [AuthGuardService] },
 	{ path: 'meals', component: MealsComponent, canActivate: [AuthGuardService] },
@@ -83,7 +83,7 @@ const appRoutes: Routes = [
 	declarations: [
 		AdminComponent,
 		AppComponent,
-		LogComponent,
+		DiaryComponent,
 		LogMealComponent,
 		LogActivityComponent,
 		FoodComponent,

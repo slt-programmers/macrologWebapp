@@ -54,7 +54,7 @@
 
     <div *ngIf="loggedIn()" class="usermenu__item" (click)="setTitle(profileTitle)" routerLink="/user">Profile</div>
 
-    <div *ngIf="loggedIn() && isAdmin()" class="usermenu__item" (click)="setTitle(adminTitle)" routerLink="/admin">Admin panel</div>
+    <div *ngIf="loggedIn() && isAdmin() && false" class="usermenu__item" (click)="setTitle(adminTitle)" routerLink="/admin">Admin panel</div>
     
     <div *ngIf="loggedIn()" class="usermenu__item" routerLink="/login">Logout</div>
   </div>

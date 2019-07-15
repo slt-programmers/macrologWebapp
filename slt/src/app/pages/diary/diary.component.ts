@@ -11,11 +11,11 @@ import { FoodSearchable } from '../../model/foodSearchable';
 import { DatePipe } from '@angular/common';
 
 @Component({
-	selector: 'log-page',
-	templateUrl: './log.component.html',
+	selector: 'diary-page',
+	templateUrl: './diary.component.html',
 	host: { '(document: click)': 'documentClick($event)' }
 })
-export class LogComponent implements OnInit {
+export class DiaryComponent implements OnInit {
 
 	@ViewChild('breakfast',  {static: false}) private breakfastEref;
 	@ViewChild('lunch',  {static: false}) private lunchEref;

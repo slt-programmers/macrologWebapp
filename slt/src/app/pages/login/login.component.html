@@ -9,11 +9,11 @@
     </div>
 
     <div class="menu__item">
-      <p (click)="toggleLogin(true)">Log in</p>
+      <p id="login" (click)="toggleLogin(true)">Log in</p>
     </div>
 
     <div class="menu__item">
-      <p (click)="toggleLogin(false)">About</p>
+      <p id="about" (click)="toggleLogin(false)">About</p>
     </div>
   </div>
 
@@ -33,12 +33,12 @@
               (keyup.enter)="login()" name="password" required />
           </mat-form-field>
 
-          <p class="content__form__error" *ngIf="error">{{error}}</p>
+          <p class="content__form__error" *ngIf="loginError">{{loginError}}</p>
 
           <a class="content__form__link" (click)="toggleForgotPwModal(true)">Forgot password?</a>
         </form>
 
-        <button mat-stroked-button color="primary" class="content__form__button" [disabled]="loginForm.invalid"
+        <button id="loginBtn" mat-stroked-button color="primary" class="content__form__button" [disabled]="loginForm.invalid"
           (click)="login()">Log in
         </button>
       </div>

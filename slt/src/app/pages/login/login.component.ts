@@ -9,7 +9,7 @@ import { trigger, transition, style, animate } from '@angular/animations';
 	animations: [
 		trigger('enterLeaveTrigger', [
 			transition(':enter', [
-				style({ opacity: 0, marginTop: '15px'  }),
+				style({ opacity: 0, marginTop: '15px' }),
 				animate('0.3s', style({ opacity: 1, marginTop: '0' })),
 			]),
 		]),
@@ -20,9 +20,7 @@ export class LoginComponent implements OnInit {
 
 	private returnUrl: string;
 
-	public showContentLogin = true;
-
-	public error = '';
+	public loginError = '';
 	public signUpError = '';
 	public usernameOrEmail: string;
 	public password: string;
@@ -33,7 +31,9 @@ export class LoginComponent implements OnInit {
 
 	public forgotEmail: string;
 	public forgotError: string;
+
 	public showForgotPwModal = false;
+	public showContentLogin = true;
 
 	constructor(
 		private route: ActivatedRoute,
@@ -42,10 +42,7 @@ export class LoginComponent implements OnInit {
 		private toastService: ToastService) { }
 
 	ngOnInit() {
-		// reset login status
 		this.authService.logout();
-
-		// get return url from route parameters or default to '/'
 		this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
 	}
 
@@ -54,19 +51,16 @@ export class LoginComponent implements OnInit {
 	}
 
 	public login() {
-		this.error = '';
+		this.loginError = '';
 		this.authService.login(this.usernameOrEmail, this.password)
 			.subscribe(
-				data => {
+				res => {
+					console.log('success');
 					this.router.navigate([this.returnUrl]);
 				},
-				error => {
-					console.log(error);
-					if (error.status === 401) {
-						this.error = 'Password invalid';
-					} else if (error.status === 404) {
-						this.error = 'Username or email not found';
-					}
+				err => {
+					console.log(err);
+					this.loginError = 'Username or password incorrect';
 				});
 	}
 
@@ -74,7 +68,7 @@ export class LoginComponent implements OnInit {
 		this.signUpError = '';
 		this.authService.signUp(this.newUsername, this.newPassword, this.newEmail)
 			.subscribe(
-				data => {
+				res => {
 					this.authService.login(this.newUsername, this.newPassword)
 						.subscribe(
 							() => {
@@ -86,17 +80,17 @@ export class LoginComponent implements OnInit {
 					this.newUsername = '';
 					this.newPassword = '';
 					this.newEmail = '';
-				}, error => {
-					if (error.status === 401) {
-						if (error.error === 'Username already in use') {
+				}, err => {
+					if (err.status === 401) {
+						if (err.error === 'Username already in use') {
 							this.signUpError = 'Username is already in use.';
-						} else if (error.error === 'Email already in use') {
+						} else if (err.error === 'Email already in use') {
 							this.signUpError = 'Email is already in use. Use \"Forgot password\" to retrieve a new password.';
 						} else {
 							this.signUpError = 'Unknown error during signup.';
 						}
 					} else {
-						this.signUpError = error.message;
+						this.signUpError = err.message;
 					}
 				});
 	}
@@ -108,11 +102,12 @@ export class LoginComponent implements OnInit {
 	public resetPassword() {
 		this.forgotError = '';
 		this.authService.resetPassword(this.forgotEmail)
-			.subscribe(data => {
-				this.toastService.setMessage('We have send an email with your password!');
-				this.toggleForgotPwModal(false);
-			}, error => {
-				this.forgotError = 'The email adress was not found';
-			});
+			.subscribe(
+				res => {
+					this.toastService.setMessage('We have send an email with your password!');
+					this.toggleForgotPwModal(false);
+				}, err => {
+					this.forgotError = 'The email adress was not found';
+				});
 	}
 }
