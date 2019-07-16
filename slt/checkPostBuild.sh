@@ -7,5 +7,6 @@ echo "------------------------------"
 echo "On environment $NODE_ENV"
 
 if [[ $NODE_ENV == "acceptance" ]]; then
-  ng build -aot --prod --configuration="acceptance"
+  echo ng build --aot --prod --configuration="acceptance"
+  ng build --aot --prod --configuration="acceptance"
 fi
