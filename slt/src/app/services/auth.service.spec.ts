@@ -36,7 +36,7 @@ describe('AuthService', () => {
         const mockResponse = { name: 'user', token: 'token' };
         const service = TestBed.get(AuthenticationService);
         service.login('username', 'password').subscribe(
-            res => {
+            () => {
                 let result = JSON.parse(localStorage.getItem('currentUser'));
                 expect(result.user).toEqual('user')
                 expect(result.token).toEqual('token')
@@ -53,7 +53,7 @@ describe('AuthService', () => {
         const mockResponse = { somethingElse: 'test' };
         const service = TestBed.get(AuthenticationService);
         service.login('username', 'password').subscribe(
-            res => {
+            () => {
                 let result = localStorage.getItem('currentUser');
                 expect(result).toEqual(null);
             }

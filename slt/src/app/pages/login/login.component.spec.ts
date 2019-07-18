@@ -9,7 +9,7 @@ import { HttpClient, HttpHandler } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { By } from '@angular/platform-browser';
 import { Router } from '@angular/router';
-import { of, throwError, Observable } from 'rxjs';
+import { of, throwError } from 'rxjs';
 
 describe('LoginComponent', () => {
 	let component: LoginComponent;
@@ -93,7 +93,7 @@ describe('LoginComponent', () => {
 	it('should register new user', fakeAsync(() => {
 		let registerSpy = spyOn(authService, 'register').and.returnValue(of({}));
 		let loginSpy = spyOn(authService, 'login').and.returnValue(of(undefined));
-		let routerSpy = spyOn(router, 'navigate');
+		spyOn(router, 'navigate');
 		component.newUsername = 'username';
 		component.newEmail = 'email@email.com';
 		component.newPassword = 'password';
