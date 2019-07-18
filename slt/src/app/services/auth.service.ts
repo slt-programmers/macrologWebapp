@@ -36,7 +36,7 @@ export class AuthenticationService {
 		});
 	}
 
-	public signUp(username: string, password: string, email: string) {
+	public register(username: string, password: string, email: string) {
 		return this.http.post(this.macrologBackendUrl + '/signup', { username: username, password: password, email: email });
 	}
 

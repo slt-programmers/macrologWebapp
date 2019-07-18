@@ -21,7 +21,7 @@ export class LoginComponent implements OnInit {
 	private returnUrl: string;
 
 	public loginError = '';
-	public signUpError = '';
+	public registerError = '';
 	public usernameOrEmail: string;
 	public password: string;
 
@@ -54,8 +54,7 @@ export class LoginComponent implements OnInit {
 		this.loginError = '';
 		this.authService.login(this.usernameOrEmail, this.password)
 			.subscribe(
-				res => {
-					console.log('success');
+				() => {
 					this.router.navigate([this.returnUrl]);
 				},
 				err => {
@@ -64,18 +63,18 @@ export class LoginComponent implements OnInit {
 				});
 	}
 
-	public signUp() {
-		this.signUpError = '';
-		this.authService.signUp(this.newUsername, this.newPassword, this.newEmail)
+	public register() {
+		this.registerError = '';
+		this.authService.register(this.newUsername, this.newEmail, this.newPassword)
 			.subscribe(
 				res => {
 					this.authService.login(this.newUsername, this.newPassword)
 						.subscribe(
 							() => {
 								this.router.navigate(['/intake']);
-							}, error => {
-								console.log(error);
-								this.signUpError = error;
+							}, err => {
+								console.log(err);
+								this.registerError = 'Error on login after registration.';
 							});
 					this.newUsername = '';
 					this.newPassword = '';
@@ -83,14 +82,14 @@ export class LoginComponent implements OnInit {
 				}, err => {
 					if (err.status === 401) {
 						if (err.error === 'Username already in use') {
-							this.signUpError = 'Username is already in use.';
+							this.registerError = 'Username is already in use.';
 						} else if (err.error === 'Email already in use') {
-							this.signUpError = 'Email is already in use. Use \"Forgot password\" to retrieve a new password.';
+							this.registerError = 'Email is already in use. Use \"Forgot password\" to retrieve a new password.';
 						} else {
-							this.signUpError = 'Unknown error during signup.';
+							this.registerError = 'Unknown error during registration.';
 						}
 					} else {
-						this.signUpError = err.message;
+						this.registerError = 'Unknown error during registration.';
 					}
 				});
 	}
