@@ -61,12 +61,12 @@ export class AutocompleteFoodComponent implements OnInit, OnChanges {
 				if (event.key === 'ArrowDown') {
 					event.preventDefault();
 					const activeElement = document.activeElement;
-					let nextSibling = activeElement.nextSibling;
-					for (;;) {
-						if (nextSibling && nextSibling.nodeName !== 'div') {
-							nextSibling = nextSibling.nextSibling;
-						} else if (nextSibling) {
-							this.renderer.invokeElementMethod(nextSibling, 'focus');
+					let current = activeElement.nextSibling;
+					while (true) {
+						if (current && current.nodeName !== 'div') {
+							current = current.nextSibling;
+						} else if (current) {
+							this.renderer.invokeElementMethod(current, 'focus');
 							break;
 						} else {
 							break;
@@ -75,12 +75,12 @@ export class AutocompleteFoodComponent implements OnInit, OnChanges {
 				} else if (event.key === 'ArrowUp') {
 					event.preventDefault();
 					const activeElement = document.activeElement;
-					let previousSibling = activeElement.previousSibling;
-					for (;;) {
-						if (previousSibling && previousSibling.nodeName !== 'div') {
-							previousSibling = previousSibling.previousSibling;
-						} else if (previousSibling) {
-							this.renderer.invokeElementMethod(previousSibling, 'focus');
+					let current = activeElement.previousSibling;
+					while (true) {
+						if (current && current.nodeName !== 'div') {
+							current = current.previousSibling;
+						} else if (current) {
+							this.renderer.invokeElementMethod(current, 'focus');
 							break;
 						} else {
 							break;
