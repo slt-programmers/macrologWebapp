@@ -24,8 +24,7 @@ describe('LoginComponent', () => {
 			providers: [AuthenticationService, ToastService, HttpClient, HttpHandler],
 			imports: [FormsModule, BrowserAnimationsModule, RouterTestingModule.withRoutes([])],
 			schemas: [NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA]
-		})
-			.compileComponents();
+		}).compileComponents();
 	}));
 
 	beforeEach(() => {
@@ -37,7 +36,7 @@ describe('LoginComponent', () => {
 		fixture.detectChanges();
 	});
 
-	it('should create', () => {
+	it('should create component', () => {
 		expect(component).toBeTruthy();
 	});
 
@@ -117,7 +116,7 @@ describe('LoginComponent', () => {
 
 		// register but failed login
 		registerSpy.and.returnValue(of({}));
-		loginSpy.and.returnValue(throwError({status: 404}));
+		loginSpy.and.returnValue(throwError({ status: 404 }));
 		component.newUsername = 'username';
 		component.newEmail = 'email@email.com';
 		component.newPassword = 'password';
@@ -137,28 +136,28 @@ describe('LoginComponent', () => {
 		component.newUsername = 'username';
 		component.newEmail = 'email@email.com';
 		component.newPassword = 'password';
-		registerSpy.and.returnValue(throwError({status: 401, error: 'Username already in use'}));
+		registerSpy.and.returnValue(throwError({ status: 401, error: 'Username already in use' }));
 		registerButton.nativeElement.click();
 		tick()
 		fixture.detectChanges();
 		expect(component.registerError).toEqual('Username is already in use.');
 
 		// email in use
-		registerSpy.and.returnValue(throwError({status: 401, error: 'Email already in use'}));
+		registerSpy.and.returnValue(throwError({ status: 401, error: 'Email already in use' }));
 		registerButton.nativeElement.click();
 		tick()
 		fixture.detectChanges();
 		expect(component.registerError).toEqual('Email is already in use. Use \"Forgot password\" to retrieve a new password.');
 
 		// other error 401 
-		registerSpy.and.returnValue(throwError({status: 401, error: 'Error'}));
+		registerSpy.and.returnValue(throwError({ status: 401, error: 'Error' }));
 		registerButton.nativeElement.click();
 		tick()
 		fixture.detectChanges();
 		expect(component.registerError).toEqual('Unknown error during registration.');
 
 		// other error 
-		registerSpy.and.returnValue(throwError({status: 404}));
+		registerSpy.and.returnValue(throwError({ status: 404 }));
 		registerButton.nativeElement.click();
 		tick()
 		fixture.detectChanges();
@@ -197,10 +196,10 @@ describe('LoginComponent', () => {
 		expect(toastService.setMessage).toHaveBeenCalled();
 		expect(component.showForgotPwModal).toBeFalsy();
 
-		resetSpy.and.returnValue(throwError({status: 404}))
+		resetSpy.and.returnValue(throwError({ status: 404 }))
 		forgotLink.nativeElement.click();
 		fixture.detectChanges();
-		resetBtn = fixture.debugElement.query(By.css('#resetBtn')); 
+		resetBtn = fixture.debugElement.query(By.css('#resetBtn'));
 		// the button was gone when the model was closed
 		resetBtn.nativeElement.click()
 		tick();

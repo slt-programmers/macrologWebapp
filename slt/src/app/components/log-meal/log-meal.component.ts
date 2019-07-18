@@ -6,7 +6,7 @@ import { DatePipe } from '@angular/common';
 import { LogEntry } from '../../model/logEntry';
 import { StoreLogRequest } from '../../model/storeLogRequest';
 import { FoodService } from '../../services/food.service';
-import { LogService } from '../../services/log.service';
+import { DiaryService } from '../../services/diary.service';
 import { FoodSearchable } from '../../model/foodSearchable';
 import { ToastService } from '../../services/toast.service';
 
@@ -35,7 +35,7 @@ export class LogMealComponent implements OnInit, OnChanges {
 	private pipe: DatePipe;
 
 	constructor(private foodService: FoodService,
-		private logService: LogService,
+		private logService: DiaryService,
 		private renderer: Renderer,
 		private toastService: ToastService) {
 		this.editable = false;

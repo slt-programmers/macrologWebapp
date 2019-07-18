@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { LogService } from '../../services/log.service';
+import { DiaryService } from '../../services/diary.service';
 import { ActivityService } from '../../services/activity.service';
 import { UserService } from '../../services/user.service';
 import { FoodService } from '../../services/food.service';
@@ -50,7 +50,7 @@ export class DiaryComponent implements OnInit {
 	constructor(private foodService: FoodService,
 							private userService: UserService,
 							private http: HttpClient,
-							private logService: LogService,
+							private logService: DiaryService,
               private activityService: ActivityService,
 							private mealService: MealService) {
 		this.displayDate = new Date();

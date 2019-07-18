@@ -8,8 +8,7 @@ import { environment } from '../../environments/environment';
 @Injectable()
 export class ActivityService {
 
-	macrologBackendUrl = '//' + environment.backend + '/activities';
-	activities = new Array();
+	private macrologBackendUrl = '//' + environment.backend + '/activities';
 
 	constructor(private http: HttpClient,
 		private toastService: ToastService) {
@@ -18,7 +17,7 @@ export class ActivityService {
 	public getAllActivities() {
 		return this.http.get<LogActivity[]>(this.macrologBackendUrl, { responseType: 'json' });
 	}
-	public getDayActivities(date) {
+	public getDayActivities(date: Date) {
 		return this.http.get<any[]>(this.macrologBackendUrl + '/day/' + date);
 	}
 
@@ -27,14 +26,13 @@ export class ActivityService {
 			'Content-Type': 'application/json',
 			'Access-Control-Allow-Origin': environment.origin
 		};
-
 		const options = { headers: headers };
-		return this.http.post<StoreActivityRequest[]>(this.macrologBackendUrl + '/', storeActivityRequest, options).subscribe(data => {
-			this.toastService.setMessage('Your activities have been saved!');
-			callBack();
-		},
+		return this.http.post<StoreActivityRequest[]>(this.macrologBackendUrl + '/', storeActivityRequest, options).subscribe(
+			() => {
+				this.toastService.setMessage('Your activities have been saved!');
+				callBack();
+			},
 			error => {
-				this.toastService.setMessage('Your activities could not be saved!');
 				console.log(error);
 			});
 	}
@@ -44,13 +42,11 @@ export class ActivityService {
 			'Content-Type': 'application/json',
 			'Access-Control-Allow-Origin': environment.origin
 		};
-
 		const options = { headers: headers };
-
-		return this.http.delete<number>(this.macrologBackendUrl + '/' + logActivity.id, options).subscribe(data => {
-		},
+		return this.http.delete<number>(this.macrologBackendUrl + '/' + logActivity.id, options).subscribe(
+			() => {
+			},
 			error => {
-				this.toastService.setMessage('Your activity could not be deleted!');
 				console.log(error);
 			});
 	}

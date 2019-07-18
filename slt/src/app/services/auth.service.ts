@@ -8,7 +8,7 @@ export class AuthenticationService {
 
 	macrologBackendUrl = '//' + environment.backend + '/api';
 
-	constructor(private http: HttpClient) {}
+	constructor(private http: HttpClient) { }
 
 	public isAuthenticated(): boolean {
 		const user = localStorage.getItem('currentUser');
@@ -17,17 +17,16 @@ export class AuthenticationService {
 
 	public login(usernameOrEmail: string, password: string) {
 		return this.http.post<any>(this.macrologBackendUrl + '/authenticate', { username: usernameOrEmail, password: password })
-				.pipe(map((res: any) => {
-					if (res && res.token) {
-						localStorage.setItem('currentUser', JSON.stringify({ 'user': res.name, 'token': res.token }));
-					}
-				})
-		);
+			.pipe(map((res) => {
+				if (res && res.token) {
+					localStorage.setItem('currentUser', JSON.stringify({ 'user': res.name, 'token': res.token }));
+				}
+			}));
 	}
 
 	public changePassword(oldPassword: string, newPassword: string, confirmPassword: string) {
 		return this.http.post<any>(this.macrologBackendUrl + '/changePassword',
-				{ oldPassword: oldPassword, newPassword: newPassword, confirmPassword: confirmPassword});
+			{ oldPassword: oldPassword, newPassword: newPassword, confirmPassword: confirmPassword });
 	}
 
 	public logout() {

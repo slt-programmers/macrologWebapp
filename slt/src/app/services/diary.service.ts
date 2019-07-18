@@ -7,7 +7,7 @@ import { environment } from '../../environments/environment';
 
 
 @Injectable()
-export class LogService {
+export class DiaryService {
 
 	macrologBackendUrl = '//' + environment.backend + '/logs';
 

@@ -6,9 +6,10 @@ import { ToastService } from './toast.service';
 @Injectable()
 export class AdminService {
 
-    private macrologBackendUrl = '//' + environment.backend + '/admin';
+	private macrologBackendUrl = '//' + environment.backend + '/admin';
 
-	constructor(private http: HttpClient, private toastService: ToastService) {}
+	constructor(private http: HttpClient,
+		private toastService: ToastService) { }
 
 	public getAllUsers() {
 		return this.http.get(this.macrologBackendUrl, { responseType: 'json' });
@@ -19,13 +20,11 @@ export class AdminService {
 			'Content-Type': 'application/json',
 			'Access-Control-Allow-Origin': environment.origin
 		};
-
 		const options = { headers: headers };
-
 		this.http.delete<number>(this.macrologBackendUrl + '/' + user.id, options).subscribe(
-            data => {
-                this.toastService.setMessage('User account successfully deleted');
-		    },
+			() => {
+				this.toastService.setMessage('User account successfully deleted');
+			},
 			error => {
 				this.toastService.setMessage('User account could not be deleted');
 				console.log(error);

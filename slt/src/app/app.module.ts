@@ -22,7 +22,7 @@ import { DiaryComponent } from './pages/diary/diary.component';
 import { LogMealComponent } from './components/log-meal/log-meal.component';
 import { LogActivityComponent } from './components/log-activity/log-activity.component';
 import { FoodComponent } from './pages/food/food.component';
-import { LogService } from './services/log.service';
+import { DiaryService } from './services/diary.service';
 import { UserComponent } from './pages/user/user.component';
 import { UserIntakeComponent } from './pages/user/subpages/user.intake.component';
 import { UserPersonalComponent } from './pages/user/subpages/user.personal.component';
@@ -127,7 +127,7 @@ const appRoutes: Routes = [
 		AdminService,
 		ActivityService,
 		FoodService,
-		LogService,
+		DiaryService,
 		UserService,
 		ToastService,
 		MealService,

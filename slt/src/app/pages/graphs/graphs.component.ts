@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { AfterContentInit } from '@angular/core';
 import { ViewChild, ElementRef } from '@angular/core';
-import { LogService } from '../../services/log.service';
+import { DiaryService } from '../../services/diary.service';
 import { UserService } from '../../services/user.service';
 import * as moment from 'moment';
 
@@ -13,7 +13,7 @@ export class GraphsComponent implements AfterContentInit {
 
   @ViewChild('svgcontainer', { static: false }) dataContainer: ElementRef;
 
-  constructor(private logService: LogService,
+  constructor(private logService: DiaryService,
     private userService: UserService) { }
 
   private barWidth = 20;
