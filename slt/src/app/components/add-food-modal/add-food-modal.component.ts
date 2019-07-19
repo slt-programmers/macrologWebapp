@@ -37,7 +37,7 @@ export class AddFoodModalComponent implements OnInit {
 			this.carbs = this.food.carbs;
 
 			if (this.food.portions) {
-				// To make a deep copy of the portions array 
+				// To make a deep copy of the portions array
 				this.portions = JSON.parse(JSON.stringify(this.food.portions));
 			} else {
 				this.portions = [];
