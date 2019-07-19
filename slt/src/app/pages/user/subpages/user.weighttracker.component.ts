@@ -31,7 +31,7 @@ export class UserWeightTrackerComponent {
     this.weightService.getAllWeights().subscribe(
       data => {
         this.trackedWeights = data;
-        this.trackedWeights = this.trackedWeights.sort((a, b) => {
+        this.trackedWeights.sort((a, b) => {
           const date1 = moment(a.day, 'YYYY-M-D', true);
           const date2 = moment(b.day, 'YYYY-M-D', true);
           return this.compare(date1, date2);
