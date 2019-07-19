@@ -257,9 +257,11 @@ export class GraphsComponent implements AfterContentInit {
 
   getGoal(macro: string) {
     let index = -1;
-    switch(macro) {
+    switch (macro) {
       case 'protein': index = 0;
+        break;
       case 'fat': index = 1;
+        break;
       case 'carbs': index = 2;
     }
     if (this.percentages) {

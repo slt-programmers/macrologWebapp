@@ -94,7 +94,7 @@ export class LogMealComponent implements OnInit, OnChanges {
 		this.logService.getDayLogs(copyFrom).subscribe(
 			data => {
 				const tmpData = data;
-				let filtered = tmpData.filter(
+				const filtered = tmpData.filter(
 					entry => entry.meal === this.meal.toUpperCase()
 				);
 				for (const copiedEntry of filtered) {
