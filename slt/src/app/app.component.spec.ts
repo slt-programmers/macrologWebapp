@@ -176,4 +176,8 @@ describe('AppComponent', () => {
     expect(scrollBehaviourService.preventScrolling).toHaveBeenCalledWith(false);
     expect(component.title).toEqual('');
   }));
+
+  it('shoudl break the build', () => {
+    expect(false).toBeTruthy();
+  });
 });
