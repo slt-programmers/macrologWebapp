@@ -10,12 +10,12 @@ export class AdminComponent implements OnInit {
 
   public allUsers = [
     { name: 'CarmenDev', email: 'c.scholte.lubberink@gmail.com', id: 1 },
-    { name: 'Arjan', email: 'c.scholte.lubberink@gmail.com', id: 2},
-    { name: 'Testtest', email: 'test@mailinator.com', id: 3}
-  ]
+    { name: 'Arjan', email: 'c.scholte.lubberink@gmail.com', id: 2 },
+    { name: 'Testtest', email: 'test@mailinator.com', id: 3 }
+  ];
   public displayedColumns: string[] = ['id', 'name', 'email', 'delete'];
 
-  
+
   constructor(private adminService: AdminService) { }
 
   ngOnInit() {

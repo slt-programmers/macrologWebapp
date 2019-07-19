@@ -24,7 +24,7 @@ export class AppComponent implements OnInit, AfterViewInit {
 
 	public userTitle = 'Settings';
 	public profileTitle = 'Profile';
-	public adminTitle = 'Administration panel'
+	public adminTitle = 'Administration panel';
 	public changePasswordTitle = 'Reset password';
 
 	public currentRoute;
