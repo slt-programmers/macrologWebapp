@@ -8,7 +8,7 @@ export class ScrollBehaviourService {
 	constructor() { }
 
 	public preventScrolling(toggle: boolean) {
-		if (toggle) {
+		if (toggle && this.renderer) {
 			this.renderer.addClass(document.body, 'overlay-active');
 		} else {
 			this.renderer.removeClass(document.body, 'overlay-active');

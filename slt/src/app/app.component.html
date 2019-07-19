@@ -1,4 +1,4 @@
-<div class="loading-overlay" *ngIf="stillSleeping()">
+<div id="loadingOverlay" class="loading-overlay" *ngIf="stillSleeping()">
   <h1>Macrolog</h1>
 
   <p class="paragraph">The hamsters in the treadmill powering this app are still asleep.</p>
@@ -11,7 +11,7 @@
 
 </div>
 
-<div class="header" *ngIf="loggedIn()">
+<div id="header" class="header" *ngIf="loggedIn()">
   <div class="header__section header__section--left">
     <div class="header-item header-item--title">
       <div class="header-item__text">Macrolog</div>
@@ -34,45 +34,47 @@
     </div>
   </div>
 
-  <div class="header__section header__section--right" *ngIf="loggedIn()">
-    <div class="header-item header-item--menu header-item--mobile-hidden"
+  <div class="header__section header__section--right">
+    <div id="usermenuCircle" class="header-item header-item--menu header-item--mobile-hidden"
       [ngClass]="{'header-item--active' : router.url === '/user'}" (click)="openUserMenu()">
       <i class="icon--large fas fa-user-circle"></i>
     </div>
 
-    <div class="header-item header-item--mobile" (click)="openNav()">
+    <div id="hamburger" class="header-item header-item--mobile" (click)="openNav()">
       <i class="fas fa-bars"></i>
     </div>
   </div>
 </div>
 
-<div #usermenuBackdrop class="usermenu-backdrop" (click)="closeUserMenu()"></div>
-
+<div id="userBackdrop" #usermenuBackdrop class="usermenu-backdrop" (click)="closeUserMenu()"></div>
 <div #usermenu class="usermenu-wrapper" (click)="closeUserMenu()">
-  <div class="usermenu">
+  <div id="usermenu" class="usermenu" *ngIf="loggedIn()">
     <div class="usermenu__item usermenu__item--top">{{getUsername()}}</div>
 
-    <div *ngIf="loggedIn()" class="usermenu__item" (click)="setTitle(profileTitle)" routerLink="/user">Profile</div>
+    <div id="usermenuProfileItem" class="usermenu__item" (click)="setTitle(profileTitle)" routerLink="/user">Profile</div>
 
-    <div *ngIf="loggedIn() && isAdmin() && false" class="usermenu__item" (click)="setTitle(adminTitle)" routerLink="/admin">Admin panel</div>
+    <div *ngIf="isAdmin() && false" class="usermenu__item" (click)="setTitle(adminTitle)" routerLink="/admin">Admin panel</div>
     
-    <div *ngIf="loggedIn()" class="usermenu__item" routerLink="/login">Logout</div>
+    <div class="usermenu__item" routerLink="/login">Logout</div>
   </div>
 </div>
 
-<div #navbarBackdrop class="nav-backdrop" (click)="closeNav(title)"></div>
+<div id="navBackdrop" #navbarBackdrop class="nav-backdrop" (click)="closeNav(title)"></div>
 <div #navbar class="nav-wrapper" (click)="closeNav(title)">
-  <div *ngIf="loggedIn()" class="nav">
+  <div id="nav" *ngIf="loggedIn()" class="nav">
     <div class="nav__item nav__item--top">
       <div></div>
       <i class="fas fa-arrow-right"></i>
     </div>
+
     <div class="nav__item" routerLink="/log" (click)="closeNav(logTitle)">
       <div class="nav__item__text">Diary</div>
     </div>
+
     <div class="nav__item" routerLink="/food" (click)="closeNav(foodTitle)">
       <div class="nav__item__text">Food</div>
     </div>
+    
     <div class="nav__item" routerLink="/meals" (click)="closeNav(mealsTitle)">
       <div class="nav__item__text">Meals</div>
     </div>
@@ -92,4 +94,4 @@
 
 <router-outlet></router-outlet>
 
-<toast-component></toast-component>
+<!-- <toast-component></toast-component> -->

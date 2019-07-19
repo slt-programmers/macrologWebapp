@@ -9,16 +9,16 @@ import { HealthcheckService } from './services/healthcheck.service';
 })
 export class AppComponent implements OnInit, AfterViewInit {
 
-	@ViewChild('navbar', { static: false }) private navbarElement;
-	@ViewChild('navbarBackdrop', { static: false }) private backdropElement: ElementRef;
-	@ViewChild('usermenu', { static: false }) private userMenuElement: ElementRef;
-	@ViewChild('usermenuBackdrop', { static: false }) private usermenubackdropElement: ElementRef;
+	@ViewChild('navbar', { static: false }) public navbarElement;
+	@ViewChild('navbarBackdrop', { static: false }) public backdropElement: ElementRef;
+	@ViewChild('usermenu', { static: false }) public userMenuElement: ElementRef;
+	@ViewChild('usermenuBackdrop', { static: false }) public usermenubackdropElement: ElementRef;
 
-	public title: string;
+	public title = '';
 
 	private asleep = true;
 	private navbar;
-	private backdrop;
+	private navbarBackdrop;
 	private usermenu;
 	private usermenubackdrop;
 
@@ -30,26 +30,25 @@ export class AppComponent implements OnInit, AfterViewInit {
 	public currentRoute;
 
 	constructor(public router: Router,
-		private renderer: Renderer2,
 		private healthcheckService: HealthcheckService,
-		private sbs: ScrollBehaviourService) {
+		private sbs: ScrollBehaviourService,
+		private renderer: Renderer2) {
+	}
+
+	ngOnInit() {
 		this.healthcheckService.checkState().subscribe(result => {
 			this.asleep = !result;
 		}, error => {
-			console.log(error);
 			if (error.status === 403) {
 				this.asleep = !error;
 			}
 		});
-		sbs.renderer = renderer;
-	}
-
-	ngOnInit() {
+		this.sbs.renderer = this.renderer;
 	}
 
 	ngAfterViewInit() {
 		this.navbar = this.navbarElement.nativeElement;
-		this.backdrop = this.backdropElement.nativeElement;
+		this.navbarBackdrop = this.backdropElement.nativeElement;
 		this.usermenu = this.userMenuElement.nativeElement;
 		this.usermenubackdrop = this.usermenubackdropElement.nativeElement;
 	}
@@ -58,21 +57,19 @@ export class AppComponent implements OnInit, AfterViewInit {
 		return this.asleep;
 	}
 
-	// Navigation
 	public openNav() {
 		this.navbar.style.marginRight = '0';
-		this.backdrop.style.display = 'block';
-		this.backdrop.style.backgroundColor = 'rgba(0,0,0, 0.4)';
+		this.navbarBackdrop.style.display = 'block';
+		this.navbarBackdrop.style.backgroundColor = 'rgba(0,0,0, 0.4)';
 		this.sbs.preventScrolling(true);
 	}
 
 	public closeNav(tabTitle: string) {
 		this.setTitle(tabTitle);
 		const width = this.navbar.clientWidth;
-
 		this.navbar.style.marginRight = '-' + width + 'px';
-		this.backdrop.style.display = 'none';
-		this.backdrop.style.backgroundColor = 'transparent';
+		this.navbarBackdrop.style.display = 'none';
+		this.navbarBackdrop.style.backgroundColor = 'transparent';
 		this.sbs.preventScrolling(false);
 	}
 
@@ -96,8 +93,8 @@ export class AppComponent implements OnInit, AfterViewInit {
 	}
 
 	public isAdmin(): boolean {
-		const currentUser =  JSON.parse(localStorage.getItem('currentUser'));
-		return (currentUser.user === 'CarmenDev' || currentUser.user === 'arjantienkamp@gmail.com');
+		const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+		return (currentUser && (currentUser.user === 'CarmenDev' || currentUser.user === 'arjantienkamp@gmail.com'));
 	}
 
 	public openUserMenu() {
