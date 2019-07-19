@@ -57,16 +57,17 @@
 							style="stroke:black;stroke-width:1;opacity:0.5" />
 
 						<text x="0" [attr.y]="getGoalProteinPos()-2" fill="grey">P
-							{{getGoalProtein() | number:'1.1-1'}}</text>
+							{{getGoal('protein') | number:'1.1-1'}}</text>
 						<line x1="0" [attr.y1]="getGoalProteinPos()" [attr.x2]="marginLeft + logBars.length * barWidth"
 							[attr.y2]="getGoalProteinPos()" style="stroke:grey;stroke-width:1;stroke-dasharray:5.5" />
 
-						<text x="0" [attr.y]="getGoalFatPos()-2" fill="grey">F {{getGoalFat() | number:'1.1-1'}}</text>
+						<text x="0" [attr.y]="getGoalFatPos()-2" fill="grey">F 
+							{{getGoal('fat') | number:'1.1-1'}}</text>
 						<line x1="0" [attr.y1]="getGoalFatPos()" [attr.x2]="marginLeft + logBars.length * barWidth"
 							[attr.y2]="getGoalFatPos()" style="stroke:grey;stroke-width:1;stroke-dasharray:5.5" />
 
 						<text x="0" [attr.y]="getGoalCarbsPos()-2" fill="grey">C
-							{{getGoalCarbs() | number:'1.1-1'}}</text>
+							{{getGoal('carbs') | number:'1.1-1'}}</text>
 						<line x1="0" [attr.y1]="getGoalCarbsPos()" [attr.x2]="marginLeft +  logBars.length * barWidth"
 							[attr.y2]="getGoalCarbsPos()" style="stroke:grey;stroke-width:1;stroke-dasharray:5.5" />
 					</g>

@@ -92,25 +92,21 @@ export class UserWeightTrackerComponent {
     w.editable = true;
   }
 
+  private closeCallBack(action: string) {
+    this.getAllWeights();
+    this.openWeight = null;
+    this.toastService.setMessage('Your weight measurement has been ' + action);
+  }
+
   public deleteWeight(w) {
-    const closeCallBack = () => {
-      this.getAllWeights();
-      this.openWeight = null;
-      this.toastService.setMessage('Your weight measurement has been deleted!');
-    };
-    this.weightService.deleteWeight(w, closeCallBack);
+    this.weightService.deleteWeight(w, () => this.closeCallBack('deleted!'));
   }
 
   public saveWeight(w) {
-    const closeCallBack = () => {
-      this.getAllWeights();
-      this.openWeight = null;
-      this.toastService.setMessage('Your weight measurement has been updated!');
-    };
     const date = moment(w.dayString, 'D-M-YYYY', true);
     w.day = this.pipe.transform(date, 'yyyy-MM-dd');
     w.weight = w.weightString;
-    this.weightService.storeWeight(w, closeCallBack);
+    this.weightService.storeWeight(w, () => this.closeCallBack('updated!'));
   }
 
   private documentClick(event) {

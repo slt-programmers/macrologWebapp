@@ -1,11 +1,9 @@
 import {
-	Component, OnInit, OnChanges, ViewChild,
-	Renderer, ElementRef, Input, Output, EventEmitter
+	Component, OnInit, OnChanges, ViewChild, ElementRef, Input, Output, EventEmitter
 } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { LogEntry } from '../../model/logEntry';
 import { StoreLogRequest } from '../../model/storeLogRequest';
-import { FoodService } from '../../services/food.service';
 import { DiaryService } from '../../services/diary.service';
 import { FoodSearchable } from '../../model/foodSearchable';
 import { ToastService } from '../../services/toast.service';
@@ -34,9 +32,7 @@ export class LogMealComponent implements OnInit, OnChanges {
 
 	private pipe: DatePipe;
 
-	constructor(private foodService: FoodService,
-		private logService: DiaryService,
-		private renderer: Renderer,
+	constructor(private logService: DiaryService,
 		private toastService: ToastService) {
 		this.editable = false;
 		this.pipe = new DatePipe('en-US');
@@ -98,8 +94,7 @@ export class LogMealComponent implements OnInit, OnChanges {
 		this.logService.getDayLogs(copyFrom).subscribe(
 			data => {
 				const tmpData = data;
-				let filtered = new Array();
-				filtered = tmpData.filter(
+				let filtered = tmpData.filter(
 					entry => entry.meal === this.meal.toUpperCase()
 				);
 				for (const copiedEntry of filtered) {
@@ -182,7 +177,7 @@ export class LogMealComponent implements OnInit, OnChanges {
 	public getSelected(logEntryPortion, portion) {
 		if (!logEntryPortion) { // geen portion geselecteerd, dus select default
 			return 'selected';
-		} if (logEntryPortion && portion && logEntryPortion.id === portion.id) { // portion geselecteerd. is dit het?
+		} else if (logEntryPortion && portion && logEntryPortion.id === portion.id) { // portion geselecteerd. is dit het?
 			return 'selected';
 		} else {
 			return '';

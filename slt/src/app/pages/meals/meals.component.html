@@ -21,8 +21,6 @@
       <div class="meal-card">
         <h3 class="meal-card__title">{{meal.name}}</h3>
 
-        <piechart class="meal-card__pie" [mealId]="meal.id" [macros]="getTotal(meal)"></piechart>
-
         <div class="grid__tile__ingredients" *ngFor="let ingredient of meal.ingredients">
           <div class="grid__tile__text grid__tile__text--ingredient">{{ingredient.food.name}}</div>
 

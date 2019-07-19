@@ -152,173 +152,154 @@ export class GraphsComponent implements AfterContentInit {
   getYPosProtein(logEntry) {
     return this.getSVGHeight() - this.graphLegenda - this.getHeightProtein(logEntry);
   }
-}
 
-getYPosCalories(logEntry) {
-  return this.getSVGHeightCalories() - this.graphLegenda - this.getHeightCalories(logEntry);
-}
-
-getHeightCalories(logEntry) {
-  if (!logEntry || !logEntry.macro) {
-    return 0;
+  getYPosCalories(logEntry) {
+    return this.getSVGHeightCalories() - this.graphLegenda - this.getHeightCalories(logEntry);
   }
-  return logEntry.macro.calories * this.zoomXCalories;
-}
 
-getHeightProtein(logEntry) {
-  if (!logEntry || !logEntry.macro) {
-    return 0;
+  getHeightCalories(logEntry) {
+    if (!logEntry || !logEntry.macro) {
+      return 0;
+    }
+    return logEntry.macro.calories * this.zoomXCalories;
   }
-  if (this.percentages) {
-    const total = logEntry.macro.protein + logEntry.macro.fat + logEntry.macro.carbs;
-    const percentage = logEntry.macro.protein * 100 / total;
-    return percentage * this.zoomX;
-  } else {
-    return logEntry.macro.protein * this.zoomX;
-  }
-}
 
-getYPosFat(logEntry) {
-  if (this.splitted) {
+  getHeightProtein(logEntry) {
+    if (!logEntry || !logEntry.macro) {
+      return 0;
+    }
     if (this.percentages) {
-      return this.getSVGHeight() - this.graphLegenda - (this.splitOffset + this.maxProteinPerc * this.zoomX + this.getHeightFat(logEntry));
+      const total = logEntry.macro.protein + logEntry.macro.fat + logEntry.macro.carbs;
+      const percentage = logEntry.macro.protein * 100 / total;
+      return percentage * this.zoomX;
     } else {
-      return this.getSVGHeight() - this.graphLegenda - (this.splitOffset + this.maxProtein * this.zoomX + this.getHeightFat(logEntry));
+      return logEntry.macro.protein * this.zoomX;
     }
+  }
 
-  } else {
-    return this.getSVGHeight() - this.graphLegenda - (this.getHeightProtein(logEntry) + this.getHeightFat(logEntry));
-  }
-}
-getHeightFat(logEntry) {
-  if (!logEntry || !logEntry.macro) {
-    return 0;
-  }
-  if (this.percentages) {
-    const total = logEntry.macro.protein + logEntry.macro.fat + logEntry.macro.carbs;
-    const percentage = logEntry.macro.fat * 100 / total;
-    return percentage * this.zoomX;
-  } else {
-    return logEntry.macro.fat * this.zoomX;
-  }
-}
+  getYPosFat(logEntry) {
+    if (this.splitted) {
+      if (this.percentages) {
+        return this.getSVGHeight() - this.graphLegenda - (this.splitOffset + this.maxProteinPerc * this.zoomX + this.getHeightFat(logEntry));
+      } else {
+        return this.getSVGHeight() - this.graphLegenda - (this.splitOffset + this.maxProtein * this.zoomX + this.getHeightFat(logEntry));
+      }
 
-getYPosCarbs(logEntry) {
-  if (this.splitted) {
+    } else {
+      return this.getSVGHeight() - this.graphLegenda - (this.getHeightProtein(logEntry) + this.getHeightFat(logEntry));
+    }
+  }
+  getHeightFat(logEntry) {
+    if (!logEntry || !logEntry.macro) {
+      return 0;
+    }
     if (this.percentages) {
-      const maxUsed = this.maxProteinPerc + this.maxFatPerc;
-      return this.getSVGHeight() - this.graphLegenda - (this.splitOffset * 2 + maxUsed * this.zoomX + this.getHeightCarbs(logEntry));
+      const total = logEntry.macro.protein + logEntry.macro.fat + logEntry.macro.carbs;
+      const percentage = logEntry.macro.fat * 100 / total;
+      return percentage * this.zoomX;
     } else {
-      return this.getSVGHeight() - this.graphLegenda - (this.splitOffset * 2 + this.maxProtein * this.zoomX + this.maxFat * this.zoomX + this.getHeightCarbs(logEntry));
+      return logEntry.macro.fat * this.zoomX;
     }
-  } else {
-    return this.getSVGHeight() - this.graphLegenda - (this.getHeightProtein(logEntry) + this.getHeightFat(logEntry) + this.getHeightCarbs(logEntry));
-  }
-}
-
-getHeightCarbs(logEntry) {
-  if (!logEntry || !logEntry.macro) {
-    return 0;
-  }
-  if (this.percentages) {
-    const total = logEntry.macro.protein + logEntry.macro.fat + logEntry.macro.carbs;
-    const percentage = logEntry.macro.carbs * 100 / total;
-    return percentage * this.zoomX;
-  } else {
-    return logEntry.macro.carbs * this.zoomX;
-  }
-}
-
-getGoalProteinPos() {
-  if (this.percentages) {
-    return this.getYPosProtein(null) - this.getGoalProtein() * this.zoomX;
-  } else {
-    return this.getYPosProtein(null) - this.getGoalProtein() * this.zoomX;
-  }
-}
-
-getGoalFatPos() {
-  if (this.splitted) {
-    return this.getYPosFat(null) - this.getGoalFat() * this.zoomX;
-  } else {
-    return this.getYPosFat(null) - (this.getGoalFat() * this.zoomX + this.getGoalProtein() * this.zoomX);
-  }
-}
-
-getGoalCarbsPos() {
-  if (this.splitted) {
-    return this.getYPosCarbs(null) - this.getGoalCarbs() * this.zoomX;
-  } else {
-    return this.getYPosCarbs(null) - (this.getGoalProtein() * this.zoomX + this.getGoalFat() * this.zoomX + this.getGoalCarbs() * this.zoomX);
-  }
-}
-
-getGoalCaloriesPos() {
-  return this.getYPosCalories(null) - (this.getGoalCalories() * this.zoomXCalories);
-}
-getGoalCalories() {
-  return this.goalCal;
-}
-
-getGoalProtein() {
-  if (this.percentages) {
-    const total = this.userGoals[0] + this.userGoals[1] + this.userGoals[2];
-    const percentage = this.userGoals[0] * 100 / total;
-    return percentage;
-  } else {
-    return this.userGoals[0];
-  }
-}
-
-getGoalFat() {
-  if (this.percentages) {
-    const total = this.userGoals[0] + this.userGoals[1] + this.userGoals[2];
-    const percentage = this.userGoals[1] * 100 / total;
-    return percentage;
-  } else {
-    return this.userGoals[1];
-  }
-}
-
-getGoalCarbs() {
-  if (this.percentages) {
-    const total = this.userGoals[0] + this.userGoals[1] + this.userGoals[2];
-    const percentage = this.userGoals[2] * 100 / total;
-    return percentage;
-  } else {
-    return this.userGoals[2];
-  }
-}
-
-calculateZoom() {
-  if (!this.getSVGHeight()) {
-    this.zoomX = 0;
-    this.zoomXCalories = 0;
-    return;
   }
 
-  if (this.percentages) {
+  getYPosCarbs(logEntry) {
     if (this.splitted) {
-      this.zoomX = (this.getSVGHeight() - 40) / (this.maxProteinPerc + this.maxFatPerc + this.maxCarbsPerc);
+      if (this.percentages) {
+        const maxUsed = this.maxProteinPerc + this.maxFatPerc;
+        return this.getSVGHeight() - this.graphLegenda - (this.splitOffset * 2 + maxUsed * this.zoomX + this.getHeightCarbs(logEntry));
+      } else {
+        return this.getSVGHeight() - this.graphLegenda - (this.splitOffset * 2 + this.maxProtein * this.zoomX + this.maxFat * this.zoomX + this.getHeightCarbs(logEntry));
+      }
     } else {
-      this.zoomX = (this.getSVGHeight() - 40) / 100;
-    }
-  } else {
-    if (this.splitted) {
-      this.zoomX = (this.getSVGHeight() - 40) / (this.maxProtein + this.maxFat + this.maxCarbs);
-    } else {
-      this.zoomX = (this.getSVGHeight() - 40) / this.maxTotal;
+      return this.getSVGHeight() - this.graphLegenda - (this.getHeightProtein(logEntry) + this.getHeightFat(logEntry) + this.getHeightCarbs(logEntry));
     }
   }
-  this.zoomXCalories = (this.getSVGHeightCalories() - 40) / this.maxCalories;
-}
+
+  getHeightCarbs(logEntry) {
+    if (!logEntry || !logEntry.macro) {
+      return 0;
+    }
+    if (this.percentages) {
+      const total = logEntry.macro.protein + logEntry.macro.fat + logEntry.macro.carbs;
+      const percentage = logEntry.macro.carbs * 100 / total;
+      return percentage * this.zoomX;
+    } else {
+      return logEntry.macro.carbs * this.zoomX;
+    }
+  }
+
+  getGoalProteinPos() {
+    return this.getYPosProtein(null) - this.getGoal('protein') * this.zoomX;
+  }
+
+  getGoalFatPos() {
+    if (this.splitted) {
+      return this.getYPosFat(null) - this.getGoal('fat') * this.zoomX;
+    } else {
+      return this.getYPosFat(null) - (this.getGoal('fat') * this.zoomX + this.getGoal('protein') * this.zoomX);
+    }
+  }
+
+  getGoalCarbsPos() {
+    if (this.splitted) {
+      return this.getYPosCarbs(null) - this.getGoal('carbs') * this.zoomX;
+    } else {
+      return this.getYPosCarbs(null) - (this.getGoal('protein') * this.zoomX + this.getGoal('fat') * this.zoomX + this.getGoal('carbs') * this.zoomX);
+    }
+  }
+
+  getGoalCaloriesPos() {
+    return this.getYPosCalories(null) - (this.getGoalCalories() * this.zoomXCalories);
+  }
+  getGoalCalories() {
+    return this.goalCal;
+  }
+
+  getGoal(macro: string) {
+    let index = -1;
+    switch(macro) {
+      case 'protein': index = 0;
+      case 'fat': index = 1;
+      case 'carbs': index = 2;
+    }
+    if (this.percentages) {
+      const total = this.userGoals[0] + this.userGoals[1] + this.userGoals[2];
+      const percentage = this.userGoals[index] * 100 / total;
+      return percentage;
+    } else {
+      return this.userGoals[index];
+    }
+  }
+
+  calculateZoom() {
+    if (!this.getSVGHeight()) {
+      this.zoomX = 0;
+      this.zoomXCalories = 0;
+      return;
+    }
+
+    if (this.percentages) {
+      if (this.splitted) {
+        this.zoomX = (this.getSVGHeight() - 40) / (this.maxProteinPerc + this.maxFatPerc + this.maxCarbsPerc);
+      } else {
+        this.zoomX = (this.getSVGHeight() - 40) / 100;
+      }
+    } else {
+      if (this.splitted) {
+        this.zoomX = (this.getSVGHeight() - 40) / (this.maxProtein + this.maxFat + this.maxCarbs);
+      } else {
+        this.zoomX = (this.getSVGHeight() - 40) / this.maxTotal;
+      }
+    }
+    this.zoomXCalories = (this.getSVGHeightCalories() - 40) / this.maxCalories;
+  }
 
   public showMacros(logEntry) {
-  if (logEntry.macro) {
-    this.infoMacro = logEntry;
-  } else {
-    this.infoMacro = null;
+    if (logEntry.macro) {
+      this.infoMacro = logEntry;
+    } else {
+      this.infoMacro = null;
+    }
   }
-}
 
 }
