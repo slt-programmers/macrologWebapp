@@ -177,7 +177,4 @@ describe('AppComponent', () => {
     expect(component.title).toEqual('');
   }));
 
-  it('shoudl break the build', () => {
-    expect(false).toBeTruthy();
-  });
 });
