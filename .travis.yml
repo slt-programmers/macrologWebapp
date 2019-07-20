@@ -24,7 +24,9 @@ jobs:
   - stage: "unit test and scan"
     if: branch = master
     script: ng test
-  - script: sonar-scanner -Dsonar.projectKey=slt-programmers_macrologWebapp
+  - stage: "unit test and scan"
+    if: branch = master
+    script: sonar-scanner -Dsonar.projectKey=slt-programmers_macrologWebapp
   - stage: "integration test"
     if: branch = release
     script: ng test
