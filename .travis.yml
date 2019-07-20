@@ -4,13 +4,12 @@ language: node_js
 node_js:
 - '11.9.0'
 
-before_script:
-
 script:
 - cd slt
 - npm install
 - ng test
-- sonar-scanner -Dsonar.projectKey=slt-programmers_macrologWebapp
+- if: branch = master
+  sonar-scanner -Dsonar.projectKey=slt-programmers_macrologWebapp
 
 addons:
   sonarcloud:
