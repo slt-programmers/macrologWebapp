@@ -10,7 +10,7 @@ branches:
     - release
 
 stages:
-- test and scan
+- "test and scan"
 
 install: 
 - cd slt
@@ -20,7 +20,7 @@ jobs:
   allow_failures: 
   - script: sonar-scanner -Dsonar.projectKey=slt-programmers_macrologWebapp
   include: 
-  - stage: test and scan
+  - stage: "test and scan"
     script: ng test
     script: sonar-scanner -Dsonar.projectKey=slt-programmers_macrologWebapp
 
