@@ -9,10 +9,6 @@ branches:
     - master
     - release
 
-script:
-- cd slt
-- npm install
-
 stages:
 - test
 - scan
@@ -22,8 +18,12 @@ jobs:
   - script: sonar-scanner -Dsonar.projectKey=slt-programmers_macrologWebapp
   include: 
   - stage: test
+    script: cd slt
+    script: npm install
     script: ng test
   - stage: scan
+    script: cd slt
+    script: npm install
     script: sonar-scanner -Dsonar.projectKey=slt-programmers_macrologWebapp
 
 addons:
