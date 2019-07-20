@@ -22,7 +22,7 @@ jobs:
   include: 
   - stage: "test and scan"
     script: ng test
-    script: sonar-scanner -Dsonar.projectKey=slt-programmers_macrologWebapp
+  - script: sonar-scanner -Dsonar.projectKey=slt-programmers_macrologWebapp
 
 
 addons:
