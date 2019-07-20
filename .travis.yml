@@ -8,8 +8,7 @@ script:
 - cd slt
 - npm install
 - ng test
-- if: branch = master
-  sonar-scanner -Dsonar.projectKey=slt-programmers_macrologWebapp
+- sonar-scanner -Dsonar.projectKey=slt-programmers_macrologWebapp
 
 addons:
   sonarcloud:
