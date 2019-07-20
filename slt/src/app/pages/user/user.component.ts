@@ -39,7 +39,6 @@ export class UserComponent implements OnInit {
 				this.height = parseInt(this.getKeyFromResultlist(result, 'height'), 10) || undefined;
 				this.weight = parseInt(this.getKeyFromResultlist(result, 'currentWeight'), 10) || undefined;
 				this.activity = parseFloat(this.getKeyFromResultlist(result, 'activity')) || 1.2;
-
 				this.newWeight = this.weight;
 			},
 			error => { console.log(error); }
