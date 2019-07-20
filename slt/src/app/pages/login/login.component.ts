@@ -71,7 +71,7 @@ export class LoginComponent implements OnInit {
 					this.authService.login(this.newUsername, this.newPassword)
 						.subscribe(
 							() => {
-								this.router.navigate(['/intake']);
+								this.router.navigate(['/onboarding']);
 							}, err => {
 								console.log(err);
 								this.registerError = 'Error on login after registration.';

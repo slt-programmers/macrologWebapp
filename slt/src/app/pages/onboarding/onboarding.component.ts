@@ -10,11 +10,11 @@ import { Router } from '@angular/router';
 import * as moment from 'moment';
 
 @Component({
-	selector: 'app-intake',
-	templateUrl: './intake.component.html',
+	selector: 'app-onboarding',
+	templateUrl: './onboarding.component.html',
 	host: { '(document: click)': 'documentClick($event)' }
 })
-export class IntakeComponent implements OnInit {
+export class OnboardingComponent implements OnInit {
 
 	@ViewChild('breakfast', { static: false }) private breakfastEref;
 
