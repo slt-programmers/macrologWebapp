@@ -4,6 +4,11 @@ language: node_js
 node_js:
 - '11.9.0'
 
+branches:
+  only:
+    - master
+    - release
+
 script:
 - cd slt
 - npm install
