@@ -8,6 +8,9 @@ branches:
   only:
     - master
     - release
+    
+allow_failures: 
+- script: sonar-scanner -Dsonar.projectKey=slt-programmers_macrologWebapp
 
 script:
 - cd slt
