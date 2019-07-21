@@ -35,15 +35,17 @@
         </div>
 
         <div class="meal__edit-ingredient__measurement">
-          <select (change)="portionChange(logEntry, $event.target)">
-            <!-- 100 grams -->
-            <option>{{unitName}}</option>
+          <div class="meal__edit-ingredient__measurement__input">
+            <select (change)="portionChange(logEntry, $event.target)">
+              <!-- 100 grams -->
+              <option>{{unitName}}</option>
 
-            <!-- portion amount -->
-            <option *ngFor="let portion of getAvailablePortions(logEntry)" value="{{portion.description}}">
-              {{portion.description}}
-            </option>
-          </select>
+              <!-- portion amount -->
+              <option *ngFor="let portion of getAvailablePortions(logEntry)" value="{{portion.description}}">
+                {{portion.description}}
+              </option>
+            </select>
+          </div>
         </div>
 
         <div class="meal__edit-ingredient__amount">
