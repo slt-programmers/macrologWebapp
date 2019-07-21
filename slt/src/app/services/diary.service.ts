@@ -34,10 +34,11 @@ export class DiaryService {
 		};
 
 		const options = { headers: headers };
-		return this.http.post<StoreLogRequest[]>(this.macrologBackendUrl + '/', storeLogEntryRequest, options).subscribe(data => {
-			this.toastService.setMessage('Your meals have been saved!');
-			callBack();
-		},
+		return this.http.post<StoreLogRequest[]>(this.macrologBackendUrl + '/', storeLogEntryRequest, options).subscribe(
+			data => {
+				this.toastService.setMessage('Your meals have been saved!');
+				callBack();
+			},
 			error => {
 				this.toastService.setMessage('Your meals could not be saved!');
 				console.log(error);
@@ -52,7 +53,7 @@ export class DiaryService {
 
 		const options = { headers: headers };
 		return this.http.delete<number>(this.macrologBackendUrl + '/' + logEntry.id, options).subscribe(
-			data => {},
+			data => { },
 			error => {
 				this.toastService.setMessage('Your entry has not been deleted!');
 				console.log(error);

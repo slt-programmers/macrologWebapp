@@ -1,5 +1,4 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { DiaryService } from '../../services/diary.service';
 import { ActivityService } from '../../services/activity.service';
 import { UserService } from '../../services/user.service';
@@ -9,6 +8,8 @@ import { LogEntry } from '../../model/logEntry';
 import { LogActivity } from '../../model/logActivity';
 import { FoodSearchable } from '../../model/foodSearchable';
 import { DatePipe } from '@angular/common';
+import { Dish } from '@app/model/dish';
+import { Food } from '@app/model/food';
 
 @Component({
 	selector: 'diary-page',
@@ -17,19 +18,19 @@ import { DatePipe } from '@angular/common';
 })
 export class DiaryComponent implements OnInit {
 
-	@ViewChild('breakfast',  {static: false}) private breakfastEref;
-	@ViewChild('lunch',  {static: false}) private lunchEref;
-	@ViewChild('dinner',  {static: false}) private dinnerEref;
-	@ViewChild('snacks',  {static: false}) private snacksEref;
-	@ViewChild('activities',  {static: false})  private activitiesEref;
+	@ViewChild('breakfast', { static: false }) private breakfastEref;
+	@ViewChild('lunch', { static: false }) private lunchEref;
+	@ViewChild('dinner', { static: false }) private dinnerEref;
+	@ViewChild('snacks', { static: false }) private snacksEref;
+	@ViewChild('activities', { static: false }) private activitiesEref;
 
 	public modalIsVisible = false;
 	public isLogMealOpen: boolean;
-	public allLogs;
-	public food;
-	public meals;
-	public foodAndPortions;
-	public displayDate;
+	public allLogs: LogEntry[];
+	public food: Food[];
+	public meals: Dish[];
+	public searchableFood: FoodSearchable[];
+	public displayDate: Date;
 	private pipe: DatePipe;
 
 	public breakfastLogs = new Array<LogEntry>();
@@ -42,17 +43,16 @@ export class DiaryComponent implements OnInit {
 	public lunchOpen = false;
 	public dinnerOpen = false;
 	public snacksOpen = false;
-  public activitiesOpen = false;
+	public activitiesOpen = false;
 
 	public userGoals;
 	public goalCal;
 
 	constructor(private foodService: FoodService,
-							private userService: UserService,
-							private http: HttpClient,
-							private logService: DiaryService,
-              private activityService: ActivityService,
-							private mealService: MealService) {
+		private userService: UserService,
+		private logService: DiaryService,
+		private activityService: ActivityService,
+		private mealService: MealService) {
 		this.displayDate = new Date();
 		this.pipe = new DatePipe('en-US');
 	}
@@ -90,7 +90,7 @@ export class DiaryComponent implements OnInit {
 		this.lunchOpen = false;
 		this.dinnerOpen = false;
 		this.snacksOpen = false;
-    this.activitiesOpen = false;
+		this.activitiesOpen = false;
 		this.getUserGoals(this.pipe.transform(this.displayDate, 'yyyy-MM-dd'));
 		this.getLogEntries(this.pipe.transform(this.displayDate, 'yyyy-MM-dd'));
 	}
@@ -99,13 +99,12 @@ export class DiaryComponent implements OnInit {
 		this.modalIsVisible = true;
 	}
 
-	public closeModal(event) {
+	public closeModal() {
 		this.modalIsVisible = false;
 		this.getAllFood();
 	}
 
-	private getUserGoals(date) {
-
+	private getUserGoals(date: string) {
 		this.userService.getUserGoalStats(date).subscribe(
 			data => {
 				if (data[0] === null) {
@@ -125,22 +124,22 @@ export class DiaryComponent implements OnInit {
 				this.food = data;
 				this.getAllMeals();
 			},
-			error => console.log(error)
 		);
 	}
+
 	private getAllMeals() {
 		this.mealService.getAllMeals().subscribe(
 			data => {
 				this.meals = data;
 				this.getFoodSearchableList();
 			},
-			error => console.log(error)
 		);
 	}
 
-	private getLogEntries(date) {
+	private getLogEntries(date: string) {
 		this.logService.getDayLogs(date).subscribe(
 			data => {
+				console.log(data);
 				this.allLogs = data;
 				this.breakfastLogs = new Array();
 				this.breakfastLogs = this.allLogs.filter(
@@ -159,45 +158,41 @@ export class DiaryComponent implements OnInit {
 					entry => entry.meal === 'SNACKS'
 				);
 			},
-			error => { console.log(error);
+			error => {
+				console.log(error);
 				this.allLogs = new Array();
 				this.breakfastLogs = new Array();
 				this.lunchLogs = new Array();
 				this.dinnerLogs = new Array();
 				this.snacksLogs = new Array();
-        this.activitiesLogs = new Array();
+				this.activitiesLogs = new Array();
 			}
 		);
-    this.activityService.getDayActivities(date).subscribe(
+
+		this.activityService.getDayActivities(date).subscribe(
 			data => {
-        this.activitiesLogs = data;
+				this.activitiesLogs = data;
 			},
-			error => { console.log(error);
-        this.activitiesLogs = new Array();
+			error => {
+				console.log(error);
+				this.activitiesLogs = new Array();
 			}
 		);
 
 	}
 
-	// Maakt een lijst met daarin food en food + alle mogelijke portions
 	private getFoodSearchableList() {
-		const foodList = new Array();
+		const searchables: Array<FoodSearchable> = [];
 
 		for (const item of this.food) {
-			const matchZonderPortion = new FoodSearchable(item, undefined);
-			foodList.push(matchZonderPortion);
-
-			if (item.portions) {
-				for (const portion of item.portions) {
-					foodList.push(new FoodSearchable(item, portion));
-				}
-			}
+			const searchable = new FoodSearchable(item);
+			searchables.push(searchable);
 		}
 		for (const meal of this.meals) {
-			foodList.push(new FoodSearchable(meal, undefined));
+			searchables.push(new FoodSearchable(undefined, meal));
 		}
 
-		this.foodAndPortions = foodList;
+		this.searchableFood = searchables;
 	}
 
 	private setGoalCal() {
@@ -210,8 +205,8 @@ export class DiaryComponent implements OnInit {
 
 	private documentClick(event) {
 		if (!event.target.classList.contains('autocomplete__option') &&
-				!event.target.classList.contains('trash') &&
-				!event.target.classList.contains('button--delete')) {
+			!event.target.classList.contains('trash') &&
+			!event.target.classList.contains('button--delete')) {
 
 			this.breakfastOpen = this.breakfastEref.logMealEref.nativeElement.contains(event.target);
 			this.lunchOpen = this.lunchEref.logMealEref.nativeElement.contains(event.target);

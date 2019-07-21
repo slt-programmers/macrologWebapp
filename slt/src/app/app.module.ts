@@ -37,7 +37,7 @@ import { MealsComponent } from './pages/meals/meals.component';
 import { GraphsComponent } from './pages/graphs/graphs.component';
 import { DatepickerComponent } from './components/datepicker/datepicker.component';
 import { PagerComponent } from './components/pager/pager.component';
-import { MakeMealModalComponent } from './components/make-meal-modal/make-meal-modal.component';
+import { MakeDishModalComponent } from './components/make-dish-modal/make-dish-modal.component';
 import { AutocompleteFoodComponent } from './components/autocomplete-food/autocomplete-food.component';
 import { LoginComponent } from './pages/login/login.component';
 import { JwtInterceptor } from './interceptors/jwt.interceptor';
@@ -104,7 +104,7 @@ const appRoutes: Routes = [
 		DateValidator,
 		LoginComponent,
 		PagerComponent,
-		MakeMealModalComponent,
+		MakeDishModalComponent,
 		AutocompleteFoodComponent,
 		PiechartComponent,
 		OnboardingComponent,

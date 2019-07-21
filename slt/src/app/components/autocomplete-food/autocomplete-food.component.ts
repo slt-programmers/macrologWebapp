@@ -1,6 +1,5 @@
-import { Component, Input, OnInit, OnChanges, ViewChild, ElementRef, Renderer } from '@angular/core';
+import { Component, Input, ViewChild, ElementRef, Renderer } from '@angular/core';
 import { FoodSearchable } from '../../model/foodSearchable';
-import { FoodService } from '../../services/food.service';
 import { Food } from '../../model/food';
 
 @Component({
@@ -8,31 +7,25 @@ import { Food } from '../../model/food';
 	selector: 'autocomplete-food',
 	host: { '(document: click)': 'closeAutoComplete($event)' }
 })
-export class AutocompleteFoodComponent implements OnInit, OnChanges {
+export class AutocompleteFoodComponent {
 
-	@ViewChild('newIngredient',  {static: false}) private newIngredientEref: ElementRef;
-	@ViewChild('autoComplete',  {static: false}) private autoCompleteEref: ElementRef;
+	@ViewChild('newIngredient', { static: false }) private newIngredientEref: ElementRef;
+	@ViewChild('autoComplete', { static: false }) private autoCompleteEref: ElementRef;
 
 	@Input() placeholder = '';
 	@Input() selectFn: Function;
-	@Input() food: FoodSearchable[];
+	@Input() searchables: FoodSearchable[];
 
 	public foodMatch = new Array();
 	public foodName: string;
-	public foodAndPortions;
 	public showAutoComplete: boolean;
 
-	constructor(private foodService: FoodService, private renderer: Renderer) {}
+	constructor(private renderer: Renderer) { }
 
-	ngOnInit() {
-	}
-
-	ngOnChanges() {}
-
-	public findFoodMatch(event) {
+	public findFoodMatch(event: any) {
 		this.foodMatch = new Array<Food>();
 		if (event.data !== null) {
-			for (const item of this.food) {
+			for (const item of this.searchables) {
 				const matchFoodName = item.food.name.toLowerCase().indexOf(this.foodName.toLowerCase()) >= 0;
 				if (matchFoodName) {
 					this.foodMatch.push(item);
@@ -41,7 +34,7 @@ export class AutocompleteFoodComponent implements OnInit, OnChanges {
 		}
 	}
 
-	public onKeyDown(event) {
+	public onKeyDown(event: any) {
 		const autoCompleteInputSelected = document.activeElement.classList.contains('autocomplete__input');
 		const autoCompleteOptionSelected = document.activeElement.classList.contains('autocomplete__option');
 		const nodelist = this.autoCompleteEref.nativeElement.childNodes;
@@ -91,20 +84,18 @@ export class AutocompleteFoodComponent implements OnInit, OnChanges {
 		}
 	}
 
-	public matchDescription(foodSearchable) {
-		if (foodSearchable.portion) {
-			return foodSearchable.food.name + ' (' + foodSearchable.portion.description + ')';
-		} else if (foodSearchable.food.ingredients) {
-			return foodSearchable.food.name + ' (Meal)';
-		} else {
-			return foodSearchable.food.name + ' (100 gram)';
+	public matchDescription(foodSearchable: FoodSearchable) {
+		if (foodSearchable.dish) {
+			return foodSearchable.dish.name;
 		}
+		return foodSearchable.food.name;
 	}
 
-	public closeAutoComplete(event) {
+	public closeAutoComplete(event: any) {
 		// Event vuurt 4x door 4 log-meal-components
 		if (this.newIngredientEref && !this.newIngredientEref.nativeElement.contains(event.target)) {
 			this.showAutoComplete = false;
+			this.foodMatch = [];
 		}
 	}
 }

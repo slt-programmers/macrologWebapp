@@ -1,4 +1,4 @@
-import {Portion} from './portion';
+import { Portion } from './portion';
 
 export class Food {
 
@@ -6,9 +6,9 @@ export class Food {
 	public portions: Portion[];
 
 	constructor(public name: string,
-							public protein: number,
-							public fat: number,
-							public carbs: number) {
+		public protein: number,
+		public fat: number,
+		public carbs: number) {
 
 	}
 }

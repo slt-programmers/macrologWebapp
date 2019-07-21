@@ -1,7 +1,7 @@
-import {Ingredient} from './ingredient';
-import {Macro} from './macro';
+import { Ingredient } from './ingredient';
+import { Macro } from './macro';
 
-export class Meal {
+export class Dish {
 
 	public id: number;
 	public title: string;

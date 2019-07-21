@@ -63,8 +63,8 @@ export class OnboardingComponent implements OnInit {
 		portion.description = 'piece';
 		item.portions.push(portion);
 
-		const searchable = new FoodSearchable(item, portion);
-		const searchable2 = new FoodSearchable(item, undefined);
+		const searchable = new FoodSearchable(item);
+		const searchable2 = new FoodSearchable(item);
 		this.foodSearchables.push(searchable);
 		this.foodSearchables.push(searchable2);
 	}
@@ -101,8 +101,8 @@ export class OnboardingComponent implements OnInit {
 	}
 
 	calcTDEE(): void {
-		let bmr;
-		let age;
+		let bmr: number;
+		let age: number;
 		const birthdayDate = moment(this.birthday, 'D-M-YYYY', true);
 		if (birthdayDate.isValid()) {
 			age = moment().diff(birthdayDate, 'years');

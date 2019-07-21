@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Meal } from '../../model/meal';
+import { Dish } from '../../model/dish';
 import { MealService } from '../../services/meal.service';
 
 @Component({
@@ -8,7 +8,7 @@ import { MealService } from '../../services/meal.service';
 })
 export class MealsComponent implements OnInit {
 
-	public allMeals: Meal[];
+	public allMeals: Dish[];
 	public modalIsVisible = false;
 	public unitName = 'gram';
 	public unitGrams = 100.00;
@@ -37,7 +37,7 @@ export class MealsComponent implements OnInit {
 		this.getAllMeals();
 	}
 
-	public getTotal(meal: Meal, macro: string) {
+	public getTotal(meal: Dish, macro: string) {
 		const macros = {
 			protein: 0,
 			fat: 0,

@@ -3,6 +3,7 @@
          (input)="findFoodMatch($event)"
          [(ngModel)]="foodName"
          (focus)="showAutoComplete = true">
+         
   <div #autoComplete class="autocomplete" *ngIf="showAutoComplete">
     <ng-container *ngFor="let match of foodMatch">
       <div class="autocomplete__option"

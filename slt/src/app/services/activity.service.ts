@@ -17,7 +17,7 @@ export class ActivityService {
 	public getAllActivities() {
 		return this.http.get<LogActivity[]>(this.macrologBackendUrl, { responseType: 'json' });
 	}
-	public getDayActivities(date: Date) {
+	public getDayActivities(date: string) {
 		return this.http.get<any[]>(this.macrologBackendUrl + '/day/' + date);
 	}
 
