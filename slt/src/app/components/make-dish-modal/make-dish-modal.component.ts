@@ -111,7 +111,7 @@ export class MakeDishModalComponent implements OnInit {
 		}
 	}
 
-	public saveMeal() {
+	public saveDish() {
 		const dish = new Dish(this.dishName);
 		dish.ingredients = this.ingredients;
 		const self = this;
