@@ -15,7 +15,7 @@ describe('AdminComponent', () => {
   let toastService: ToastService;
 
   const allUsers = [
-    { userName: 'CarmenDev', email: 'c.scholte.lubberink@gmail.com', id: 1, admin: true, token: '' },
+    { userName: 'CarmenDev', email: 'c.scholte.lubberink@gmail.com', id: 1, admin: false, token: '' },
     { userName: 'Arjan', email: 'c.scholte.lubberink@gmail.com', id: 2, admin: true, token: '' },
     { userName: 'Testtest', email: 'test@mailinator.com', id: 3, admin: false, token: '' }
   ];
@@ -43,11 +43,28 @@ describe('AdminComponent', () => {
   });
 
   it('should init admin component', fakeAsync(() => {
-    spyOn(adminService, 'getAllUsers').and.returnValue(of(allUsers))
+    const adminSpy = spyOn(adminService, 'getAllUsers').and.returnValue(of(allUsers))
     component.ngOnInit();
     tick();
     fixture.detectChanges();
     expect(component.allUsers[0].userName).toEqual('CarmenDev');
+    
+    component.allUsers = undefined;
+    adminSpy.and.returnValue(throwError({status: 500}));
+    component.ngOnInit();
+    tick();
+    fixture.detectChanges();
+    expect(component.allUsers).toEqual(undefined);
+  }));
+
+  it('should open and close delete user modal', fakeAsync(() => {
+    const userAccount = new UserAccount();
+    userAccount.id = 123;
+    userAccount.userName = 'Test'
+    component.openModalWithUser(userAccount);
+    expect(component.isModalVisible).toBeTruthy();
+    component.closeModal();
+    expect(component.isModalVisible).toBeFalsy();
   }));
 
   it('should delete user', fakeAsync(() => {
@@ -55,7 +72,9 @@ describe('AdminComponent', () => {
     spyOn(toastService, 'setMessage');
     const userAccount = new UserAccount();
     userAccount.id = 123;
-    component.deleteUser(userAccount);
+    component.selectedUser = userAccount;
+
+    component.deleteUser();
     expect(adminService.deleteUser).toHaveBeenCalledWith(userAccount);
     tick();
     fixture.detectChanges();
@@ -65,9 +84,11 @@ describe('AdminComponent', () => {
   it('should not delete user', fakeAsync(() => {
     spyOn(toastService, 'setMessage');
     spyOn(adminService, 'deleteUser').and.returnValue(throwError({status: 401}));
-    const userAccount = { userName: 'user', id: 123 }
+    const userAccount = new UserAccount();
+    userAccount.id = 123;
+    component.selectedUser = userAccount;
 
-    component.deleteUser(userAccount);
+    component.deleteUser();
     expect(adminService.deleteUser).toHaveBeenCalledWith(userAccount);
     tick();
     fixture.detectChanges();
