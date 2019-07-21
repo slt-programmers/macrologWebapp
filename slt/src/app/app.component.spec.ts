@@ -7,7 +7,6 @@ import { HealthcheckService } from './services/healthcheck.service';
 import { of, throwError } from 'rxjs';
 import { By } from '@angular/platform-browser';
 import { Router } from '@angular/router';
-import { UserComponent } from './pages/user/user.component';
 
 describe('AppComponent', () => {
   let component: AppComponent;
@@ -119,7 +118,7 @@ describe('AppComponent', () => {
   it('should get username', () => {
     let result = component.getUsername();
     expect(result).toEqual('Guest');
-    localStorage.setItem('currentUser', '{"user":"Test"}');
+    localStorage.setItem('currentUser', '{"userName": "Test"}');
     result = component.getUsername();
     expect(result).toEqual('Test');
   });
@@ -149,8 +148,9 @@ describe('AppComponent', () => {
   it('should determine if admin', () => {
     let result = component.isAdmin();
     expect(result).toBeFalsy();
-    localStorage.setItem('currentUser', '{"user": "CarmenDev"}');
+    localStorage.setItem('currentUser', '{"user": "Carmen", "admin": "true"}');
     result = component.isAdmin();
+    expect(result).toBeTruthy();
   })
 
   it('should open usermenu', fakeAsync(() => {

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { environment } from '../../environments/environment';
+import { UserAccount } from '@app/model/userAccount';
 
 @Injectable({ providedIn: 'root' })
 export class AuthenticationService {
@@ -17,9 +18,9 @@ export class AuthenticationService {
 
 	public login(usernameOrEmail: string, password: string) {
 		return this.http.post<any>(this.macrologBackendUrl + '/authenticate', { username: usernameOrEmail, password: password })
-			.pipe(map((res) => {
+			.pipe(map((res: UserAccount) => {
 				if (res && res.token) {
-					localStorage.setItem('currentUser', JSON.stringify({ 'user': res.name, 'token': res.token }));
+					localStorage.setItem('currentUser', JSON.stringify(res));
 				}
 			}));
 	}
@@ -35,8 +36,8 @@ export class AuthenticationService {
 		});
 	}
 
-	public register(username: string, password: string, email: string) {
-		return this.http.post(this.macrologBackendUrl + '/signup', { username: username, password: password, email: email });
+	public register(username: string, email: string, password: string) {
+		return this.http.post(this.macrologBackendUrl + '/signup', { username: username, email: email, password: password });
 	}
 
 	public resetPassword(email: string) {

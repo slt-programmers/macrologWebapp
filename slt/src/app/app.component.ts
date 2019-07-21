@@ -84,7 +84,7 @@ export class AppComponent implements OnInit, AfterViewInit {
 			return 'Guest';
 		} else {
 			const currentUser = JSON.parse(localStorage.getItem('currentUser'));
-			return currentUser.user;
+			return currentUser.userName;
 		}
 	}
 
@@ -94,7 +94,7 @@ export class AppComponent implements OnInit, AfterViewInit {
 
 	public isAdmin(): boolean {
 		const currentUser = JSON.parse(localStorage.getItem('currentUser'));
-		return (currentUser && (currentUser.user === 'CarmenDev' || currentUser.user === 'arjantienkamp@gmail.com'));
+		return (currentUser && currentUser.admin);
 	}
 
 	public openUserMenu() {

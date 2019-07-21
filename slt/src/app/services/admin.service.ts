@@ -1,34 +1,26 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
-import { ToastService } from './toast.service';
+import { UserAccount } from '@app/model/userAccount';
 
 @Injectable()
 export class AdminService {
 
 	private macrologBackendUrl = '//' + environment.backend + '/admin';
 
-	constructor(private http: HttpClient,
-		private toastService: ToastService) { }
+	constructor(private http: HttpClient) { }
 
 	public getAllUsers() {
-		return this.http.get(this.macrologBackendUrl, { responseType: 'json' });
+		return this.http.get<UserAccount[]>(this.macrologBackendUrl + '/getAllUsers', { responseType: 'json' });
 	}
 
-	public deleteUser(user) {
+	public deleteUser(user: UserAccount) {
 		const headers = {
 			'Content-Type': 'application/json',
 			'Access-Control-Allow-Origin': environment.origin
 		};
-		const options = { headers: headers };
-		this.http.delete<number>(this.macrologBackendUrl + '/' + user.id, options).subscribe(
-			() => {
-				this.toastService.setMessage('User account successfully deleted');
-			},
-			error => {
-				this.toastService.setMessage('User account could not be deleted');
-				console.log(error);
-			});
+		const options = { headers: headers, params: { userId: user.id.toString() } };
+		return this.http.post(this.macrologBackendUrl + '/deleteAccount', null, options);
 	}
 
 }

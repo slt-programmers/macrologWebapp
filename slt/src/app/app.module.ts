@@ -46,7 +46,7 @@ import { MealService } from './services/meal.service';
 import { ActivityService } from './services/activity.service';
 import { WeightService } from './services/weight.service';
 import { PiechartComponent } from './components/piechart/piechart.component';
-import { IntakeComponent } from './pages/intake/intake.component';
+import { OnboardingComponent } from './pages/onboarding/onboarding.component';
 import { StepperComponent } from './components/stepper/stepper.component';
 import { AuthGuardService } from './services/auth-guard.service';
 import { ScrollBehaviourService } from './services/scroll-behaviour.service';
@@ -71,7 +71,7 @@ const appRoutes: Routes = [
 		]
 	},
 	{ path: 'admin', component: AdminComponent, canActivate: [AuthGuardService] },
-	{ path: 'intake', component: IntakeComponent, canActivate: [AuthGuardService] },
+	{ path: 'onboarding', component: OnboardingComponent, canActivate: [AuthGuardService] },
 	{ path: 'food', component: FoodComponent, canActivate: [AuthGuardService] },
 	{ path: 'meals', component: MealsComponent, canActivate: [AuthGuardService] },
 	{ path: 'graphs', component: GraphsComponent, canActivate: [AuthGuardService] },
@@ -107,8 +107,8 @@ const appRoutes: Routes = [
 		MakeMealModalComponent,
 		AutocompleteFoodComponent,
 		PiechartComponent,
-		IntakeComponent,
-		StepperComponent,
+		OnboardingComponent,
+		StepperComponent
 	],
 	imports: [
 		BrowserModule,

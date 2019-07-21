@@ -53,7 +53,7 @@
 
     <div id="usermenuProfileItem" class="usermenu__item" (click)="setTitle(profileTitle)" routerLink="/user">Profile</div>
 
-    <div *ngIf="isAdmin() && false" class="usermenu__item" (click)="setTitle(adminTitle)" routerLink="/admin">Admin panel</div>
+    <div *ngIf="isAdmin()" class="usermenu__item" (click)="setTitle(adminTitle)" routerLink="/admin">Admin panel</div>
     
     <div class="usermenu__item" routerLink="/login">Logout</div>
   </div>

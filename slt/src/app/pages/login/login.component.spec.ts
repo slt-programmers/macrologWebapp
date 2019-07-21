@@ -112,7 +112,7 @@ describe('LoginComponent', () => {
 		expect(component.newPassword).toEqual('');
 		tick();
 		fixture.detectChanges();
-		expect(router.navigate).toHaveBeenCalledWith(['/intake']);
+		expect(router.navigate).toHaveBeenCalledWith(['/onboarding']);
 
 		// register but failed login
 		registerSpy.and.returnValue(of({}));

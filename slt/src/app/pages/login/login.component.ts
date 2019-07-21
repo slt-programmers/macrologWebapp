@@ -26,8 +26,8 @@ export class LoginComponent implements OnInit {
 	public password: string;
 
 	public newUsername: string;
-	public newPassword: string;
 	public newEmail: string;
+	public newPassword: string;
 
 	public forgotEmail: string;
 	public forgotError: string;
@@ -71,14 +71,14 @@ export class LoginComponent implements OnInit {
 					this.authService.login(this.newUsername, this.newPassword)
 						.subscribe(
 							() => {
-								this.router.navigate(['/intake']);
+								this.router.navigate(['/onboarding']);
 							}, err => {
 								console.log(err);
 								this.registerError = 'Error on login after registration.';
 							});
 					this.newUsername = '';
-					this.newPassword = '';
 					this.newEmail = '';
+					this.newPassword = '';
 				}, err => {
 					if (err.status === 401) {
 						if (err.error === 'Username already in use') {
