@@ -108,7 +108,7 @@ const appRoutes: Routes = [
 		AutocompleteFoodComponent,
 		PiechartComponent,
 		OnboardingComponent,
-		StepperComponent,
+		StepperComponent
 	],
 	imports: [
 		BrowserModule,

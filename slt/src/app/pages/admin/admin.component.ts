@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AdminService } from '@app/services/admin.service';
+import { UserAccount } from '@app/model/userAccount';
+import { ToastService } from '@app/services/toast.service';
 
 @Component({
   selector: 'app-admin',
@@ -8,20 +10,21 @@ import { AdminService } from '@app/services/admin.service';
 })
 export class AdminComponent implements OnInit {
 
-  public allUsers = [
-    { name: 'CarmenDev', email: 'c.scholte.lubberink@gmail.com', id: 1 },
-    { name: 'Arjan', email: 'c.scholte.lubberink@gmail.com', id: 2 },
-    { name: 'Testtest', email: 'test@mailinator.com', id: 3 }
-  ];
+  public allUsers: UserAccount[];
+
   public displayedColumns: string[] = ['id', 'name', 'email', 'delete'];
 
-
-  constructor(private adminService: AdminService) { }
+  constructor(private adminService: AdminService,
+    private toastService: ToastService) { }
 
   ngOnInit() {
+    this.getAllUsers();
+  }
+
+  private getAllUsers() {
     this.adminService.getAllUsers().subscribe(
       res => {
-        // this.allUsers = res;
+        this.allUsers = res;
       },
       err => {
         console.log(err);
@@ -30,7 +33,14 @@ export class AdminComponent implements OnInit {
   }
 
   public deleteUser(user) {
-    this.adminService.deleteUser(user);
+    this.adminService.deleteUser(user).subscribe(
+      res => {
+        this.toastService.setMessage('User account successfully deleted');
+        this.getAllUsers();
+      },
+      err => {
+        this.toastService.setMessage('User account could not be deleted');
+      });
   }
 
 }

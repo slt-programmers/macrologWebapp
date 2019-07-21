@@ -2,9 +2,13 @@
 
 .users {
     width: 100%;
-    @include elevation(4);
 }
 
-.cell--center {
-    @include center;
+.mat-header-cell {
+    border-bottom-color: $smoke;
 }
+
+.mat-cell {
+    border-bottom-color: $smoke;
+}
+
