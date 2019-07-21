@@ -11,8 +11,11 @@ import { ToastService } from '@app/services/toast.service';
 export class AdminComponent implements OnInit {
 
   public allUsers: UserAccount[];
-
+  public isModalVisible = false;
+  public userName: string;
   public displayedColumns: string[] = ['id', 'name', 'email', 'delete'];
+
+  public selectedUser: UserAccount;
 
   constructor(private adminService: AdminService,
     private toastService: ToastService) { }
@@ -32,15 +35,27 @@ export class AdminComponent implements OnInit {
     );
   }
 
-  public deleteUser(user) {
-    this.adminService.deleteUser(user).subscribe(
+  public closeModal() {
+    this.isModalVisible = false;
+  }
+
+  public openModalWithUser(user: UserAccount) {
+    this.selectedUser = user;
+    this.isModalVisible = true;
+  }
+
+  public deleteUser() {
+    this.adminService.deleteUser(this.selectedUser).subscribe(
       res => {
         this.toastService.setMessage('User account successfully deleted');
         this.getAllUsers();
       },
       err => {
         this.toastService.setMessage('User account could not be deleted');
+      },
+      () => {
+        this.selectedUser = undefined;
+        this.closeModal();
       });
   }
-
 }

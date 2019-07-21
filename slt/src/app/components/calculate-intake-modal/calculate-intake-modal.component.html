@@ -1,8 +1,10 @@
 <div class="modal">
-  <div class="modal__header">
+  <div class="modal__header blue-theme">
     <h3 class="modal__header__title">Set your daily intake</h3>
 
-    <i class="fas fa-times" (click)="closeModal()"></i>
+    <button mat-icon-button color="primary" (click)="closeModal()">
+      <mat-icon>close</mat-icon>
+    </button>
   </div>
 
   <div class="modal__content">
@@ -12,11 +14,9 @@
 
     <div class="tabs">
       <div class="tabs-header">
-        <div class="tab" (click)="showCaloriesTab()"
-             [ngClass]="{'tab--active': showCalories}">Adjust calories
+        <div class="tab" (click)="showCaloriesTab()" [ngClass]="{'tab--active': showCalories}">Adjust calories
         </div>
-        <div class="tab" (click)="showMacrosTab()"
-             [ngClass]="{'tab--active': showMacros}">Adjust macro's
+        <div class="tab" (click)="showMacrosTab()" [ngClass]="{'tab--active': showMacros}">Adjust macro's
         </div>
       </div>
 
@@ -26,8 +26,8 @@
           <div class="form-field">
             <div class="form-field__label form-field__label--small">Calories</div>
             <div class="form-field__element">
-              <slider [value]="calories" (valueChange)="changeCalories($event)"
-                      [upperBound]="3000" [lowerBound]="1200" [markers]="markers"></slider>
+              <slider [value]="calories" (valueChange)="changeCalories($event)" [upperBound]="3000" [lowerBound]="1200"
+                [markers]="markers"></slider>
 
             </div>
           </div>
@@ -47,21 +47,24 @@
             <div class="form-field">
               <label class="form-field__label">Protein</label>
               <div class="form-field__element">
-                <input class="input form-field__input" (change)="calcCaloriesManual()" [(ngModel)]="proteinManual" type="number">
+                <input class="input form-field__input" (change)="calcCaloriesManual()" [(ngModel)]="proteinManual"
+                  type="number">
               </div>
             </div>
 
             <div class="form-field">
               <label class="form-field__label">Fat</label>
               <div class="form-field__element">
-                <input class="input form-field__input" (change)="calcCaloriesManual()" [(ngModel)]="fatManual" type="number">
+                <input class="input form-field__input" (change)="calcCaloriesManual()" [(ngModel)]="fatManual"
+                  type="number">
               </div>
             </div>
 
             <div class="form-field">
               <label class="form-field__label">Carbs</label>
               <div class="form-field__element">
-                <input class="input form-field__input" (change)="calcCaloriesManual()" [(ngModel)]="carbsManual" type="number">
+                <input class="input form-field__input" (change)="calcCaloriesManual()" [(ngModel)]="carbsManual"
+                  type="number">
               </div>
             </div>
           </div>
