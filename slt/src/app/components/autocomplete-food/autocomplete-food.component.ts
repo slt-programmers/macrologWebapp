@@ -1,4 +1,4 @@
-import { Component, Input, ViewChild, ElementRef, Renderer } from '@angular/core';
+import { Component, Input, ViewChild, ElementRef } from '@angular/core';
 import { FoodSearchable } from '../../model/foodSearchable';
 import { Food } from '../../model/food';
 
@@ -20,14 +20,20 @@ export class AutocompleteFoodComponent {
 	public foodName: string;
 	public showAutoComplete: boolean;
 
-	constructor(private renderer: Renderer) { }
+	constructor() { }
 
 	public findFoodMatch(event: any) {
 		this.foodMatch = new Array<Food>();
 		if (event.data !== null) {
 			for (const item of this.searchables) {
-				const matchFoodName = item.food.name.toLowerCase().indexOf(this.foodName.toLowerCase()) >= 0;
-				if (matchFoodName) {
+				let matchFoodName = false;
+				let matchDishName = false;
+				if (item.food) {
+					matchFoodName = item.food.name.toLowerCase().indexOf(this.foodName.toLowerCase()) >= 0;
+				} else if (item.dish) {
+					matchDishName = item.dish.name.toLowerCase().indexOf(this.foodName.toLowerCase()) >= 0;
+				}
+				if (matchFoodName || matchDishName) {
 					this.foodMatch.push(item);
 				}
 			}
@@ -37,56 +43,67 @@ export class AutocompleteFoodComponent {
 	public onKeyDown(event: any) {
 		const autoCompleteInputSelected = document.activeElement.classList.contains('autocomplete__input');
 		const autoCompleteOptionSelected = document.activeElement.classList.contains('autocomplete__option');
-		const nodelist = this.autoCompleteEref.nativeElement.childNodes;
-
-		if (this.autoCompleteEref) {
+		if (this.autoCompleteEref && (event.key === 'ArrowDown' || event.key === 'ArrowUp')) {
+			const nodelist = this.autoCompleteEref.nativeElement.childNodes;
 			if (autoCompleteInputSelected) {
-				if (event.key === 'ArrowDown') {
-					event.preventDefault();
-					for (let index = 0; index < nodelist.length; index++) {
-						if (nodelist[index].localName === 'div') {
-							this.renderer.invokeElementMethod(nodelist[index], 'focus');
-							break;
-						}
-					}
-				}
+				this.handleInputKeydown(event, nodelist)
 			} else if (autoCompleteOptionSelected) {
 				if (event.key === 'ArrowDown') {
-					event.preventDefault();
-					const activeElement = document.activeElement;
-					let current = activeElement.nextSibling;
-					while (true) {
-						if (current && current.nodeName !== 'div') {
-							current = current.nextSibling;
-						} else if (current) {
-							this.renderer.invokeElementMethod(current, 'focus');
-							break;
-						} else {
-							break;
-						}
-					}
+					this.handleOptionKeydown(event)
 				} else if (event.key === 'ArrowUp') {
-					event.preventDefault();
-					const activeElement = document.activeElement;
-					let current = activeElement.previousSibling;
-					while (true) {
-						if (current && current.nodeName !== 'div') {
-							current = current.previousSibling;
-						} else if (current) {
-							this.renderer.invokeElementMethod(current, 'focus');
-							break;
-						} else {
-							break;
-						}
-					}
+					this.handleOptionKeyup(event)
 				}
 			}
 		}
 	}
 
-	public matchDescription(foodSearchable: FoodSearchable) {
+	handleInputKeydown(event: any, nodelist: any) {
+		if (event.key === 'ArrowDown') {
+			event.preventDefault();
+			for (let index = 0; index < nodelist.length; index++) {
+				if (nodelist[index].localName === 'div') {
+					nodelist[index].focus()
+					break;
+				}
+			}
+		}
+	}
+
+	handleOptionKeydown(event: any) {
+		event.preventDefault();
+		const activeElement = document.activeElement;
+		let current = activeElement.nextSibling;
+		while (true) {
+			if (current && current.nodeName !== 'DIV') {
+				current = current.nextSibling;
+			} else if (current) {
+				(current as HTMLElement).focus();
+				break;
+			} else {
+				break;
+			}
+		}
+	}
+
+	handleOptionKeyup(event: any) {
+		event.preventDefault();
+		const activeElement = document.activeElement;
+		let current = activeElement.previousSibling;
+		while (true) {
+			if (current && current.nodeName !== 'DIV') {
+				current = current.previousSibling;
+			} else if (current) {
+				(current as HTMLElement).focus();
+				break;
+			} else {
+				break;
+			}
+		}
+	}
+
+	public getDescription(foodSearchable: FoodSearchable) {
 		if (foodSearchable.dish) {
-			return foodSearchable.dish.name;
+			return foodSearchable.dish.name + ' (dish)'
 		}
 		return foodSearchable.food.name;
 	}
