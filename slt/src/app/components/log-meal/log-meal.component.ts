@@ -25,6 +25,9 @@ export class LogMealComponent implements OnInit, OnChanges {
 
 	public editable: boolean;
 	public addLogEntryCallBack: Function;
+	public closeCallBack = () => {
+		this.dataChanged.emit(true);
+	};
 
 	public unitGrams = 100.00;
 	public unitName = 'grams';
@@ -80,7 +83,7 @@ export class LogMealComponent implements OnInit, OnChanges {
 	public isGramsSelected(logEntry: LogEntry) {
 		if (logEntry.id === undefined) {
 			return 'selected';
-		} else if (logEntry.portion === undefined){
+		} else if (logEntry.portion === undefined) {
 			return 'selected';
 		} else {
 			return '';
@@ -99,7 +102,6 @@ export class LogMealComponent implements OnInit, OnChanges {
 		const prevDay = new Date(this.date.getTime());
 		prevDay.setDate(prevDay.getDate() - 1);
 		const copyFrom = this.pipe.transform(prevDay, 'yyyy-MM-dd');
-		this.toastService.setMessage(this.meal + ' has been copied from ' + copyFrom);
 
 		for (const oldEntry of this.logEntries) {
 			this.diaryService.deleteLogEntry(oldEntry);
@@ -108,11 +110,11 @@ export class LogMealComponent implements OnInit, OnChanges {
 
 		this.diaryService.getLogsForDay(copyFrom).subscribe(
 			data => {
-				const tmpData = data;
-				const filtered = tmpData.filter(
+				const yesterdaysEntries = data;
+				const filteredEntries = yesterdaysEntries.filter(
 					entry => entry.meal === this.meal.toUpperCase()
 				);
-				for (const copiedEntry of filtered) {
+				for (const copiedEntry of filteredEntries) {
 					const logEntry = new LogEntry();
 					logEntry.meal = copiedEntry.meal;
 					logEntry.food = copiedEntry.food;
@@ -125,9 +127,15 @@ export class LogMealComponent implements OnInit, OnChanges {
 					this.logEntries.push(logEntry);
 					this.updateCalculatedMacros(logEntry);
 				}
+				this.toastService.setMessage(this.meal + ' has been copied from ' + copyFrom);
+			}, 
+			err => {
+				this.toastService.setMessage(this.meal + ' of ' + copyFrom + '  could not be copied');
 			}
 		);
 	}
+
+
 
 	public amountChange(logEntry: LogEntry) {
 		this.updateCalculatedMacros(logEntry);
@@ -142,12 +150,12 @@ export class LogMealComponent implements OnInit, OnChanges {
 		return undefined;
 	}
 
-	public portionChange(logEntry: LogEntry, eventTarget) {
-		if (eventTarget.value === this.unitName) {
+	public portionChange(logEntry: LogEntry, event: any) {
+		if (event.target.value === this.unitName) {
 			logEntry.portion = undefined;
 		} else {
 			for (const portion of logEntry.food.portions) {
-				if (portion.description === eventTarget.value) {
+				if (portion.description === event.target.value) {
 					logEntry.portion = portion;
 					break;
 				}
@@ -157,7 +165,7 @@ export class LogMealComponent implements OnInit, OnChanges {
 		this.updateCalculatedMacros(logEntry);
 	}
 
-	private updateCalculatedMacros(logEntry: LogEntry) {
+	updateCalculatedMacros(logEntry: LogEntry) {
 		const protein = this.calculateProtein(logEntry);
 		const carbs = this.calculateCarbs(logEntry);
 		const fat = this.calculateFat(logEntry);
@@ -175,7 +183,6 @@ export class LogMealComponent implements OnInit, OnChanges {
 			this.updateCalculatedMacros(logEntry);
 			logEntry.day = this.date;
 			this.logEntries.push(logEntry);
-			console.log(this.logEntries);
 		} else if (dish !== undefined) {
 			// TODO: dish functions
 		}
@@ -228,9 +235,6 @@ export class LogMealComponent implements OnInit, OnChanges {
 			newRequest.meal = this.meal.toUpperCase();
 			allEntries.push(newRequest);
 		}
-		const closeCallBack = () => {
-			this.dataChanged.emit(true);
-		};
-		this.diaryService.storeLogEntries(allEntries, closeCallBack);
+		this.diaryService.storeLogEntries(allEntries, this.closeCallBack);
 	}
 }

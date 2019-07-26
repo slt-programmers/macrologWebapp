@@ -9,10 +9,12 @@ import { LogEntry } from "@app/model/logEntry";
 import { Portion } from "@app/model/portion";
 import { Food } from "@app/model/food";
 import { FoodSearchable } from "@app/model/foodSearchable";
+import { StoreLogRequest } from "@app/model/storeLogRequest";
 
 describe('LogMealComponent', () => {
     let component: LogMealComponent;
     let fixture: ComponentFixture<LogMealComponent>;
+    let diaryService: DiaryService;
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
@@ -26,6 +28,7 @@ describe('LogMealComponent', () => {
     beforeEach(() => {
         fixture = TestBed.createComponent(LogMealComponent);
         component = fixture.componentInstance;
+        diaryService = TestBed.get(DiaryService);
         fixture.detectChanges();
     });
 
@@ -222,5 +225,80 @@ describe('LogMealComponent', () => {
         result = component.getAvailablePortions(logEntry);
         expect(result).toEqual(undefined);
     });
+
+    it('should change portion on logentry', () => {
+        spyOn(component, 'updateCalculatedMacros');
+        let event = { target: { value: 'grams' } };
+        let logEntry = new LogEntry();
+        let food = new Food('name', 1, 2, 3);
+        let portionOne = new Portion();
+        portionOne.description = 'portionOne';
+        let portionTwo = new Portion();
+        portionTwo.description = 'portionTwo';
+        food.portions = [portionOne, portionTwo];
+        logEntry.food = food;
+        let portion = new Portion();
+        portion.description = 'stuk';
+        logEntry.portion = portion;
+
+        component.portionChange(logEntry, event);
+        expect(logEntry.portion).toEqual(undefined);
+        expect(component.updateCalculatedMacros).toHaveBeenCalled();
+
+        event = { target: { value: 'portionTwo' } };
+        component.portionChange(logEntry, event);
+        expect(logEntry.portion).toEqual(portionTwo);
+    });
+
+    it('should add new logentry', () => {
+        spyOn(component, 'updateCalculatedMacros');
+        let searchable = new FoodSearchable(new Food('name', 1, 2, 3));
+        component.logEntries = [];
+        component.meal = 'lunch';
+        let date = new Date();
+        component.date = date;
+
+        component.addLogEntry(searchable);
+        expect(component.updateCalculatedMacros).toHaveBeenCalled();
+        let result = new LogEntry();
+        result.meal = 'LUNCH';
+        result.day = date;
+        result.food = new Food('name', 1, 2, 3);
+        expect(component.logEntries).toEqual([result]);
+    });
+
+    it('should save and close', () => {
+        spyOn(component, 'close');
+        spyOn(diaryService, 'storeLogEntries');
+        let logEntry = new LogEntry();
+        logEntry.id = 1;
+        let food = new Food('name', 1, 2, 3);
+        food.id = 123;
+        logEntry.food = food;
+        logEntry.multiplier = 5;
+        logEntry.day = new Date(2019, 0, 1);
+        component.meal = 'LUNCH';
+        component.logEntries = [logEntry];
+
+        let resultReuqest = new StoreLogRequest();
+        resultReuqest.id = 1;
+        resultReuqest.foodId = 123;
+        resultReuqest.multiplier = 5;
+        resultReuqest.day = '2019-01-01';
+        resultReuqest.meal = 'LUNCH';
+
+        let allEntries = [resultReuqest];
+        let callback = () => {
+        };
+        component.closeCallBack = callback;
+        component.saveAndClose();
+        expect(component.close).toHaveBeenCalled();
+        expect(diaryService.storeLogEntries).toHaveBeenCalledWith(allEntries, callback);
+    });
+
+    it('should copy from previous day', () => {
+
+    });
+
 
 });
