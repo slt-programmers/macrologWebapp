@@ -50,12 +50,13 @@
 
         <div class="meal__edit-ingredient__amount">
           <div class="meal__edit-ingredient__amount__input">
-            <input class="input portioninput" type="number" step="0.1" *ngIf="logEntry.portion"
+            <input id="portionAmountInput" class="input portioninput" type="number" step="0.1" *ngIf="logEntry.portion"
               (keyup)="amountChange(logEntry)" [value]="getAmountValue(logEntry)"
               (input)="setLogEntryMultiplier($event, logEntry)">
 
-            <input class="input" type="number" step="1" *ngIf="!logEntry.portion" (keyup)="amountChange(logEntry)"
-              [value]="getAmountValue(logEntry)" (input)="setLogEntryMultiplier($event, logEntry)">
+            <input id="gramsAmountInput" class="input" type="number" step="1" *ngIf="!logEntry.portion" 
+              (keyup)="amountChange(logEntry)" [value]="getAmountValue(logEntry)" 
+              (input)="setLogEntryMultiplier($event, logEntry)">
           </div>
         </div>
 

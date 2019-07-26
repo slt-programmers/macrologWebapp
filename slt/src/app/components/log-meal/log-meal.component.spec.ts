@@ -5,6 +5,10 @@ import { DiaryService } from "@app/services/diary.service";
 import { ToastService } from "@app/services/toast.service";
 import { HttpClientTestingModule } from "@angular/common/http/testing";
 import { By } from "@angular/platform-browser";
+import { LogEntry } from "@app/model/logEntry";
+import { Portion } from "@app/model/portion";
+import { Food } from "@app/model/food";
+import { FoodSearchable } from "@app/model/foodSearchable";
 
 describe('LogMealComponent', () => {
     let component: LogMealComponent;
@@ -66,5 +70,157 @@ describe('LogMealComponent', () => {
         closeButton.nativeElement.click();
         fixture.detectChanges();
         expect(component.editable).toBeFalsy();
-    })
+    });
+
+    it('should call setmultiplier when input changes', () => {
+        spyOn(component, 'setLogEntryMultiplier');
+        let logEntry = new LogEntry();
+        logEntry.id = 1;
+        let food = new Food('name', 1, 2, 3);
+        let portion = new Portion();
+        portion.description = 'desc';
+        let macros = { protein: 1, fat: 2, carbs: 3 };
+        logEntry.food = food;
+        logEntry.portion = portion;
+        logEntry.macrosCalculated = macros;
+        component.logEntries = [logEntry];
+
+        spyOn(component, 'getAvailablePortions').and.returnValue([portion]);
+
+        component.meal = 'lunch';
+        component.editable = true;
+        fixture.detectChanges();
+        const inputAmount = fixture.debugElement.query(By.css('#portionAmountInput'));
+        inputAmount.nativeElement.value = '2';
+        inputAmount.nativeElement.dispatchEvent(new Event('input'));
+        fixture.detectChanges();
+        expect(component.setLogEntryMultiplier).toHaveBeenCalled();
+    });
+
+    it('should set the multiplier on logentry', () => {
+        let logEntry = new LogEntry();
+        logEntry.multiplier = 5;
+        let portion = new Portion();
+        portion.description = 'desc';
+        logEntry.portion = portion;
+
+        let event = { target: { value: 5. }, data: '.' };
+        let result = component.setLogEntryMultiplier(event, logEntry);
+        expect(result).toEqual(5);
+        event = { target: { value: 5.6 }, data: '6' };
+        result = component.setLogEntryMultiplier(event, logEntry);
+        expect(result).toEqual(5.6);
+        logEntry.portion = undefined;
+        event = { target: { value: 150 }, data: '0' };
+        result = component.setLogEntryMultiplier(event, logEntry);
+        expect(result).toEqual(1.5);
+    });
+
+    it('should get amount value from logentry', () => {
+        let logEntry = new LogEntry();
+        logEntry.multiplier = 5;
+
+        let result = component.getAmountValue(logEntry);
+        expect(result).toEqual(500);
+        logEntry.portion = new Portion();
+        result = component.getAmountValue(logEntry);
+        expect(result).toEqual(5);
+    });
+
+    it('should call amount change on keyup', () => {
+        spyOn(component, 'amountChange');
+        let logEntry = new LogEntry();
+        logEntry.id = 1;
+        let food = new Food('name', 1, 2, 3);
+        let portion = new Portion();
+        portion.description = 'desc';
+        let macros = { protein: 1, fat: 2, carbs: 3 };
+        logEntry.food = food;
+        logEntry.portion = portion;
+        logEntry.macrosCalculated = macros;
+        component.logEntries = [logEntry];
+
+        spyOn(component, 'getAvailablePortions').and.returnValue([portion]);
+
+        component.meal = 'lunch';
+        component.editable = true;
+        fixture.detectChanges();
+        const inputAmount = fixture.debugElement.query(By.css('#portionAmountInput'));
+        inputAmount.nativeElement.dispatchEvent(new KeyboardEvent('keyup'));
+        fixture.detectChanges();
+        expect(component.amountChange).toHaveBeenCalled();
+    });
+
+    it('should update macros calculated on logentry', () => {
+        let logEntry = new LogEntry();
+        logEntry.multiplier = 3;
+        let food = new Food('name', 1, 2, 3);
+        let portion = new Portion();
+        portion.description = 'desc';
+        portion.macros = { protein: 2, fat: 4, carbs: 6, calories: 8 };
+        let macros = { protein: 0, fat: 0, carbs: 0, calories: 0 };
+        logEntry.food = food;
+        logEntry.portion = portion;
+        logEntry.macrosCalculated = macros;
+
+        component.amountChange(logEntry);
+        let result = { protein: 6, fat: 12, carbs: 18, calories: 204 };
+        expect(logEntry.macrosCalculated).toEqual(result);
+
+        logEntry.portion = undefined;
+        component.amountChange(logEntry);
+        result = { protein: 3, fat: 6, carbs: 9, calories: 102 };
+        expect(logEntry.macrosCalculated).toEqual(result);
+    });
+
+    it('should return whether grams is selected', () => {
+        let logEntry = new LogEntry();
+        let result = component.isGramsSelected(logEntry);
+        expect(result).toEqual('selected');
+
+        logEntry.id = 1;
+        result = component.isGramsSelected(logEntry);
+        expect(result).toEqual('selected');
+
+        logEntry.portion = new Portion();
+        result = component.isGramsSelected(logEntry);
+        expect(result).toEqual('');
+    });
+
+    it('should return whether unit is selected', () => {
+        let portion = new Portion();
+        portion.description = 'desc';
+        let logEntry = new LogEntry();
+        logEntry.portion = portion;
+        let result = component.isUnitSelected(logEntry, portion);
+        expect(result).toEqual('selected');
+
+        logEntry.portion = undefined;
+        result = component.isUnitSelected(logEntry, portion);
+        expect(result).toEqual('');
+    });
+
+    it('should get available portions', () => {
+        let food = new Food('name', 1, 2, 3);
+        food.id = 5;
+        let portionOne = new Portion();
+        portionOne.description = 'portionOne';
+        let portionTwo = new Portion();
+        portionTwo.description = 'portionTwo';
+        food.portions = [portionOne, portionTwo];
+        let searchables = [new FoodSearchable(food)];
+        component.searchables = searchables;
+
+        let logEntry = new LogEntry();
+        logEntry.food = food;
+        let result = component.getAvailablePortions(logEntry);
+        expect(result).toEqual([portionOne, portionTwo]);
+
+        let newFood = new Food('name', 1, 2, 3);
+        newFood.id = 6;
+        logEntry.food = newFood;
+        result = component.getAvailablePortions(logEntry);
+        expect(result).toEqual(undefined);
+    });
+
 });

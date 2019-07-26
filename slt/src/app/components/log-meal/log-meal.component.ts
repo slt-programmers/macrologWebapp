@@ -66,7 +66,6 @@ export class LogMealComponent implements OnInit, OnChanges {
 		} else {
 			logEntry.multiplier = event.target.value;
 		}
-
 		return logEntry.multiplier;
 	}
 
