@@ -19,7 +19,7 @@ export class DiaryService {
 		return this.http.get(this.macrologBackendUrl, { responseType: 'json' });
 	}
 
-	public getDayLogs(date) {
+	public getLogsForDay(date: string) {
 		return this.http.get<any[]>(this.macrologBackendUrl + '/day/' + date);
 	}
 

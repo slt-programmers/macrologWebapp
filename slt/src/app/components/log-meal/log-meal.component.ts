@@ -1,10 +1,11 @@
-import { Component, OnInit, OnChanges, ViewChild, ElementRef, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, OnChanges, ViewChild, ElementRef, Input, Output, EventEmitter, SimpleChanges } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { LogEntry } from '../../model/logEntry';
 import { StoreLogRequest } from '../../model/storeLogRequest';
 import { DiaryService } from '../../services/diary.service';
 import { FoodSearchable } from '../../model/foodSearchable';
 import { ToastService } from '../../services/toast.service';
+import { Portion } from '@app/model/portion';
 
 @Component({
 	selector: 'log-meal',
@@ -30,7 +31,7 @@ export class LogMealComponent implements OnInit, OnChanges {
 
 	private pipe: DatePipe;
 
-	constructor(private logService: DiaryService,
+	constructor(private diaryService: DiaryService,
 		private toastService: ToastService) {
 		this.editable = false;
 		this.pipe = new DatePipe('en-US');
@@ -40,7 +41,7 @@ export class LogMealComponent implements OnInit, OnChanges {
 		this.addLogEntryCallBack = this.addLogEntry.bind(this);
 	}
 
-	ngOnChanges(changes: any) {
+	ngOnChanges(changes: SimpleChanges) {
 		if (changes['date'] && this.editable) {
 			this.saveAndClose();
 		} else if (changes['open'] && !changes['open'].firstChange) {
@@ -77,6 +78,24 @@ export class LogMealComponent implements OnInit, OnChanges {
 		}
 	}
 
+	public isGramsSelected(logEntry: LogEntry) {
+		if (logEntry.id === undefined) {
+			return 'selected';
+		} else if (logEntry.portion === undefined){
+			return 'selected';
+		} else {
+			return '';
+		}
+	}
+
+	public isUnitSelected(logEntry: LogEntry, portion: Portion) {
+		if (logEntry.portion !== undefined && logEntry.portion.description === portion.description) {
+			return 'selected'
+		} else {
+			return '';
+		}
+	}
+
 	public copyPrevious() {
 		const prevDay = new Date(this.date.getTime());
 		prevDay.setDate(prevDay.getDate() - 1);
@@ -84,11 +103,11 @@ export class LogMealComponent implements OnInit, OnChanges {
 		this.toastService.setMessage(this.meal + ' has been copied from ' + copyFrom);
 
 		for (const oldEntry of this.logEntries) {
-			this.logService.deleteLogEntry(oldEntry);
+			this.diaryService.deleteLogEntry(oldEntry);
 			this.updateCalculatedMacros(oldEntry);
 		}
 
-		this.logService.getDayLogs(copyFrom).subscribe(
+		this.diaryService.getLogsForDay(copyFrom).subscribe(
 			data => {
 				const tmpData = data;
 				const filtered = tmpData.filter(
@@ -192,7 +211,7 @@ export class LogMealComponent implements OnInit, OnChanges {
 		if (index !== -1) {
 			this.logEntries.splice(index, 1);
 		}
-		this.logService.deleteLogEntry(logEntry);
+		this.diaryService.deleteLogEntry(logEntry);
 	}
 
 	public saveAndClose() {
@@ -213,6 +232,6 @@ export class LogMealComponent implements OnInit, OnChanges {
 		const closeCallBack = () => {
 			this.dataChanged.emit(true);
 		};
-		this.logService.storeLogEntries(allEntries, closeCallBack);
+		this.diaryService.storeLogEntries(allEntries, closeCallBack);
 	}
 }

@@ -137,7 +137,7 @@ export class DiaryComponent implements OnInit {
 	}
 
 	private getLogEntries(date: string) {
-		this.logService.getDayLogs(date).subscribe(
+		this.logService.getLogsForDay(date).subscribe(
 			data => {
 				console.log(data);
 				this.allLogs = data;

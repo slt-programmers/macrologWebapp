@@ -38,10 +38,10 @@
           <div class="meal__edit-ingredient__measurement__input">
             <select (change)="portionChange(logEntry, $event.target)">
               <!-- 100 grams -->
-              <option>{{unitName}}</option>
+              <option selected="{{isGramsSelected(logEntry)}}">{{unitName}}</option>
 
               <!-- portion amount -->
-              <option *ngFor="let portion of getAvailablePortions(logEntry)" value="{{portion.description}}">
+              <option selected="{{isUnitSelected(logEntry, portion)}}" *ngFor="let portion of getAvailablePortions(logEntry)" value="{{portion.description}}">
                 {{portion.description}}
               </option>
             </select>
@@ -62,15 +62,19 @@
         <div class="meal__edit-ingredient__macro">
           {{logEntry.macrosCalculated.protein | number:'1.1-1'}}
         </div>
+        
         <div class="meal__edit-ingredient__macro">
           {{logEntry.macrosCalculated.fat | number:'1.1-1'}}
         </div>
+
         <div class="meal__edit-ingredient__macro">
           {{logEntry.macrosCalculated.carbs | number:'1.1-1'}}
         </div>
+
         <div class="meal__edit-ingredient__calories">
           {{logEntry.macrosCalculated.calories | number:'1.0-0'}} kcal
         </div>
+
         <div class="blue-theme meal__edit-ingredient__delete">
           <button mat-icon-button color="primary" (click)="deleteLogEntry(logEntry)">
             <mat-icon class="trash">delete</mat-icon>
@@ -84,7 +88,7 @@
         </autocomplete-food>
 
         <div class="blue-theme meal__new-ingredient__close">
-          <button mat-icon-button color="primary" (click)="close()">
+          <button id="closeBtn" mat-icon-button color="primary" (click)="close()">
             <mat-icon>check</mat-icon>
           </button>
         </div>
