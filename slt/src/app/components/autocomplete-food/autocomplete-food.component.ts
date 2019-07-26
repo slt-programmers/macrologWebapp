@@ -46,12 +46,12 @@ export class AutocompleteFoodComponent {
 		if (this.autoCompleteEref && (event.key === 'ArrowDown' || event.key === 'ArrowUp')) {
 			const nodelist = this.autoCompleteEref.nativeElement.childNodes;
 			if (autoCompleteInputSelected) {
-				this.handleInputKeydown(event, nodelist)
+				this.handleInputKeydown(event, nodelist);
 			} else if (autoCompleteOptionSelected) {
 				if (event.key === 'ArrowDown') {
-					this.handleOptionKeydown(event)
+					this.handleOptionKeydown(event);
 				} else if (event.key === 'ArrowUp') {
-					this.handleOptionKeyup(event)
+					this.handleOptionKeyup(event);
 				}
 			}
 		}
@@ -62,7 +62,7 @@ export class AutocompleteFoodComponent {
 			event.preventDefault();
 			for (let index = 0; index < nodelist.length; index++) {
 				if (nodelist[index].localName === 'div') {
-					nodelist[index].focus()
+					nodelist[index].focus();
 					break;
 				}
 			}
@@ -103,7 +103,7 @@ export class AutocompleteFoodComponent {
 
 	public getDescription(foodSearchable: FoodSearchable) {
 		if (foodSearchable.dish) {
-			return foodSearchable.dish.name + ' (dish)'
+			return foodSearchable.dish.name + ' (dish)';
 		}
 		return foodSearchable.food.name;
 	}

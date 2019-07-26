@@ -3,6 +3,7 @@ import { UserService } from '../../services/user.service';
 import { Gender } from '../../model/gender';
 import { Observable } from 'rxjs/Observable';
 import { forkJoin } from 'rxjs/observable/forkJoin';
+import { calculateTDEE } from '@app/util/functions';
 
 @Component({
 	selector: 'calculate-intake-modal',
@@ -101,12 +102,7 @@ export class CalculateIntakeModalComponent implements OnInit {
 	}
 
 	private calcTDEE(): void {
-		let bmr;
-		if (this.gender === 'MALE') {
-			bmr = 66.5 + (13.7 * this.weight) + (5 * this.height) - (6.76 * this.age);
-		} else {
-			bmr = 655.0 + (9.56 * this.weight) + (1.8 * this.height) - (4.68 * this.age);
-		}
+		const bmr = calculateTDEE(this.gender, this.weight, this.height, this.age);
 		this.tdee = bmr * this.activity;
 	}
 

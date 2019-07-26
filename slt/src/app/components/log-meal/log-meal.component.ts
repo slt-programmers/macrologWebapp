@@ -25,14 +25,13 @@ export class LogMealComponent implements OnInit, OnChanges {
 
 	public editable: boolean;
 	public addLogEntryCallBack: Function;
-	public closeCallBack = () => {
-		this.dataChanged.emit(true);
-	};
-
 	public unitGrams = 100.00;
 	public unitName = 'grams';
-
 	private pipe: DatePipe;
+
+	public closeCallBack = () => {
+		this.dataChanged.emit(true);
+	}
 
 	constructor(private diaryService: DiaryService,
 		private toastService: ToastService) {
@@ -92,7 +91,7 @@ export class LogMealComponent implements OnInit, OnChanges {
 
 	public isUnitSelected(logEntry: LogEntry, portion: Portion) {
 		if (logEntry.portion !== undefined && logEntry.portion.description === portion.description) {
-			return 'selected'
+			return 'selected';
 		} else {
 			return '';
 		}
@@ -128,14 +127,12 @@ export class LogMealComponent implements OnInit, OnChanges {
 					this.updateCalculatedMacros(logEntry);
 				}
 				this.toastService.setMessage(this.meal + ' has been copied from ' + copyFrom);
-			}, 
+			},
 			err => {
 				this.toastService.setMessage(this.meal + ' of ' + copyFrom + '  could not be copied');
 			}
 		);
 	}
-
-
 
 	public amountChange(logEntry: LogEntry) {
 		this.updateCalculatedMacros(logEntry);

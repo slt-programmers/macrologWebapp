@@ -8,6 +8,7 @@ import { FoodSearchable } from '../../model/foodSearchable';
 import { forkJoin } from 'rxjs/observable/forkJoin';
 import { Router } from '@angular/router';
 import * as moment from 'moment';
+import { calculateTDEE } from '@app/util/functions';
 
 @Component({
 	selector: 'app-onboarding',
@@ -101,18 +102,12 @@ export class OnboardingComponent implements OnInit {
 	}
 
 	calcTDEE(): void {
-		let bmr: number;
 		let age: number;
 		const birthdayDate = moment(this.birthday, 'D-M-YYYY', true);
 		if (birthdayDate.isValid()) {
 			age = moment().diff(birthdayDate, 'years');
 		}
-		console.log(age);
-		if (this.gender === 'MALE') {
-			bmr = 66.5 + (13.7 * this.weight) + (5 * this.height) - (6.76 * age);
-		} else {
-			bmr = 655.0 + (9.56 * this.weight) + (1.8 * this.height) - (4.68 * age);
-		}
+		const bmr = calculateTDEE(this.gender, this.weight, this.height, age);
 		this.tdee = bmr * this.activity;
 	}
 
