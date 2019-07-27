@@ -1,0 +1,157 @@
+@import "../css/public.scss";
+
+$menuWidth: 200px;
+
+.menu {
+  @media (min-width: $lg) {
+    background: $whiteVerticalGradient;
+    width: $menuWidth;
+    bottom: 0;
+  }
+  background: $whiteHorizontalGradient;
+  top: 0;
+  left: 0;
+  color: $white;
+  position: fixed;
+  width: 100%;
+  z-index: 4;
+
+  &__logo {
+    @media (min-width: $lg) {
+      @include center;
+      margin-top: 72px;
+      font-size: 96px;
+      margin-left: 0;
+      display: block;
+    }
+    display: inline-block;
+    margin-top: 12px;
+    margin-left: 12px;
+    color: white;
+    font-size: 72px;
+    font-weight: 900;
+
+    &__text {
+      line-height: 1;
+      cursor: default;
+    }
+  }
+
+  &__title {
+    @media (min-width: $lg) {
+      @include center;
+      margin-bottom: 64px;
+      display: block;
+    }
+    display: inline-block;
+    font-size: 16px;
+    color: $white;
+    cursor: default;
+  }
+
+  &__menu-items {
+    @media (min-width: $lg) {
+      float: none;
+      display: block;
+      margin: 0;
+      position: static;
+    }
+    margin: 0 0 24px 0;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+  }
+
+  &__menu-item {
+    @media (min-width: $lg) {
+      display: block;
+      margin: 0 auto 20px auto;
+      padding: 0;
+      width: 100px;
+    }
+    color: white;
+    cursor: pointer;
+    display: none;
+    font-size: 16px;
+
+    &--mobile {
+      @media (min-width: $lg) {
+        display: none;
+      }
+      display: block;
+      float: right;
+      padding: 24px;
+    }
+  }
+}
+
+.nav-backdrop {
+  height: 100%;
+  width: 100%;
+  position: fixed;
+  display: none;
+  transition: background-color 1s;
+  z-index: 20;
+}
+
+.nav-wrapper {
+  @media (min-width: $lg) {
+    display: none;
+  }
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  right: 0;
+  position: fixed;
+  top: 0;
+  margin-right: -$md;
+  transition: 0.3s;
+  z-index: 20;
+}
+
+.nav {
+  @include elevation(4);
+  background-color: $ghost;
+  height: 100%;
+  min-width: 150px;
+
+  &__item {
+    align-items: center;
+    border-bottom: 1px solid $smoke;
+    cursor: pointer;
+    display: flex;
+    height: 52px;
+    justify-content: space-between;
+    padding: 0 ($gutter/2);
+
+    &__text {
+      padding-right: ($gutter/2);
+    }
+
+    &:hover {
+      background-color: $smoke;
+    }
+
+    &:focus {
+      outline: none;
+    }
+
+    &--top {
+      background-color: $primary;
+      color: $white;
+
+      &:hover {
+        background-color: $primary;
+      }
+    }
+  }
+}
+
+.content {
+  @media (min-width: $lg) {
+    margin-left: $menuWidth;
+    margin-top: 0;
+  }
+
+  margin-top: 150px;
+}
