@@ -1,12 +1,11 @@
-import {
-	Component, OnInit, OnChanges, ViewChild, ElementRef, Input, Output, EventEmitter
-} from '@angular/core';
+import { Component, OnInit, OnChanges, ViewChild, ElementRef, Input, Output, EventEmitter, SimpleChanges } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { LogEntry } from '../../model/logEntry';
 import { StoreLogRequest } from '../../model/storeLogRequest';
 import { DiaryService } from '../../services/diary.service';
 import { FoodSearchable } from '../../model/foodSearchable';
 import { ToastService } from '../../services/toast.service';
+import { Portion } from '@app/model/portion';
 
 @Component({
 	selector: 'log-meal',
@@ -26,13 +25,15 @@ export class LogMealComponent implements OnInit, OnChanges {
 
 	public editable: boolean;
 	public addLogEntryCallBack: Function;
-
-	public unitGrams: 100.00;
-	public unitName: 'gram';
-
+	public unitGrams = 100.00;
+	public unitName = 'grams';
 	private pipe: DatePipe;
 
-	constructor(private logService: DiaryService,
+	public closeCallBack = () => {
+		this.dataChanged.emit(true);
+	}
+
+	constructor(private diaryService: DiaryService,
 		private toastService: ToastService) {
 		this.editable = false;
 		this.pipe = new DatePipe('en-US');
@@ -42,7 +43,7 @@ export class LogMealComponent implements OnInit, OnChanges {
 		this.addLogEntryCallBack = this.addLogEntry.bind(this);
 	}
 
-	ngOnChanges(changes) {
+	ngOnChanges(changes: SimpleChanges) {
 		if (changes['date'] && this.editable) {
 			this.saveAndClose();
 		} else if (changes['open'] && !changes['open'].firstChange) {
@@ -58,25 +59,41 @@ export class LogMealComponent implements OnInit, OnChanges {
 		this.editable = false;
 	}
 
-	public setMultiplier(event, logEntry) {
+	public setLogEntryMultiplier(event: any, logEntry: LogEntry) {
 		if (event.data === '.') {
 			return logEntry.multiplier;
 		}
-
 		if (!logEntry.portion) {
 			logEntry.multiplier = (event.target.value / this.unitGrams);
 		} else {
 			logEntry.multiplier = event.target.value;
 		}
-
 		return logEntry.multiplier;
 	}
 
-	public getValue(logEntry) {
-		if (!logEntry.portion) {
-			return Math.round(logEntry.multiplier * this.unitGrams);
+	public getAmountValue(logEntry: LogEntry) {
+		if (logEntry.portion === undefined) {
+			return (logEntry.multiplier * this.unitGrams);
 		} else {
 			return logEntry.multiplier;
+		}
+	}
+
+	public isGramsSelected(logEntry: LogEntry) {
+		if (logEntry.id === undefined) {
+			return 'selected';
+		} else if (logEntry.portion === undefined) {
+			return 'selected';
+		} else {
+			return '';
+		}
+	}
+
+	public isUnitSelected(logEntry: LogEntry, portion: Portion) {
+		if (logEntry.portion !== undefined && logEntry.portion.description === portion.description) {
+			return 'selected';
+		} else {
+			return '';
 		}
 	}
 
@@ -84,20 +101,19 @@ export class LogMealComponent implements OnInit, OnChanges {
 		const prevDay = new Date(this.date.getTime());
 		prevDay.setDate(prevDay.getDate() - 1);
 		const copyFrom = this.pipe.transform(prevDay, 'yyyy-MM-dd');
-		this.toastService.setMessage(this.meal + ' has been copied from ' + copyFrom);
 
 		for (const oldEntry of this.logEntries) {
-			this.logService.deleteLogEntry(oldEntry);
+			this.diaryService.deleteLogEntry(oldEntry);
 			this.updateCalculatedMacros(oldEntry);
 		}
 
-		this.logService.getDayLogs(copyFrom).subscribe(
+		this.diaryService.getLogsForDay(copyFrom).subscribe(
 			data => {
-				const tmpData = data;
-				const filtered = tmpData.filter(
+				const yesterdaysEntries = data;
+				const filteredEntries = yesterdaysEntries.filter(
 					entry => entry.meal === this.meal.toUpperCase()
 				);
-				for (const copiedEntry of filtered) {
+				for (const copiedEntry of filteredEntries) {
 					const logEntry = new LogEntry();
 					logEntry.meal = copiedEntry.meal;
 					logEntry.food = copiedEntry.food;
@@ -110,17 +126,20 @@ export class LogMealComponent implements OnInit, OnChanges {
 					this.logEntries.push(logEntry);
 					this.updateCalculatedMacros(logEntry);
 				}
+				this.toastService.setMessage(this.meal + ' has been copied from ' + copyFrom);
+			},
+			err => {
+				this.toastService.setMessage(this.meal + ' of ' + copyFrom + '  could not be copied');
 			}
 		);
 	}
 
-	public amountChange(logEntry) {
+	public amountChange(logEntry: LogEntry) {
 		this.updateCalculatedMacros(logEntry);
 	}
 
-	private getAvailablePortions(logEntry) {
+	public getAvailablePortions(logEntry: LogEntry) {
 		for (const item of this.searchables) {
-			// in foodSearchable zitten dubbele entries en ook zonder portions
 			if (item.food.id === logEntry.food.id) {
 				return item.food.portions;
 			}
@@ -128,17 +147,22 @@ export class LogMealComponent implements OnInit, OnChanges {
 		return undefined;
 	}
 
-	private getSpecificPortion(logEntry, portionDescription) {
-		const availablePortions = this.getAvailablePortions(logEntry);
-		for (const portion of availablePortions) {
-			if (portion.description === portionDescription) {
-				return portion;
+	public portionChange(logEntry: LogEntry, event: any) {
+		if (event.target.value === this.unitName) {
+			logEntry.portion = undefined;
+		} else {
+			for (const portion of logEntry.food.portions) {
+				if (portion.description === event.target.value) {
+					logEntry.portion = portion;
+					break;
+				}
 			}
 		}
-		return undefined;
+		logEntry.multiplier = 1;
+		this.updateCalculatedMacros(logEntry);
 	}
 
-	private updateCalculatedMacros(logEntry) {
+	updateCalculatedMacros(logEntry: LogEntry) {
 		const protein = this.calculateProtein(logEntry);
 		const carbs = this.calculateCarbs(logEntry);
 		const fat = this.calculateFat(logEntry);
@@ -146,82 +170,30 @@ export class LogMealComponent implements OnInit, OnChanges {
 		logEntry.macrosCalculated = { protein: protein, fat: fat, carbs: carbs, calories: calories };
 	}
 
-	public portionChange(logEntry, eventTarget) {
-		let oldValue = logEntry.portion;
-		if (oldValue) { // indien geen portion gebruikt
-			oldValue = oldValue.description;
-		} else {
-			oldValue = 'defaultUnit';
-		}
-		const newValue = eventTarget.value;
-
-		if (oldValue === 'defaultUnit' && newValue !== 'defaultUnit') {
-			// van default naar een portie.
-			// Dit gaan we niet omrekenen, maar de gebruiker moet de oude waarde blijven zien.
-			logEntry.portion = this.getSpecificPortion(logEntry, newValue);
-			logEntry.multiplier = logEntry.multiplier * this.unitGrams;
-		} else if (newValue === 'defaultUnit') {
-			// van een portie naar default. Dit gaan we omrekenen.
-			const oldPortion = this.getSpecificPortion(logEntry, oldValue);
-			logEntry.portion = undefined;
-			const oldAmount = logEntry.multiplier * oldPortion.grams;
-			logEntry.multiplier = oldAmount / this.unitGrams;
-		} else {
-			// wisselen tussen porties. Eerst naar default unit en dan naar nieuwe unit.
-			// TODO :)
-		}
-		// set de macros calculated! dan kun je dat terug emitten en hoeft daar het niet nogmaals uitgerekend te worden
-		this.updateCalculatedMacros(logEntry);
-	}
-
-	public getSelected(logEntryPortion, portion) {
-		if (!logEntryPortion) { // geen portion geselecteerd, dus select default
-			return 'selected';
-		} else if (logEntryPortion && portion && logEntryPortion.id === portion.id) { // portion geselecteerd. is dit het?
-			return 'selected';
-		} else {
-			return '';
-		}
-	}
-
-	public addLogEntry(foodSearchable) {
-		if (foodSearchable.food.ingredients) {
-			for (const ingredient of foodSearchable.food.ingredients) {
-				const logEntry = new LogEntry();
-				logEntry.meal = this.meal.toUpperCase();
-				logEntry.food = ingredient.food;
-				if (ingredient.portion) {
-					logEntry.portion = ingredient.portion;
-				}
-				logEntry.multiplier = ingredient.multiplier;
-				this.updateCalculatedMacros(logEntry);
-				logEntry.day = this.date;
-				this.logEntries.push(logEntry);
-			}
-		} else {
+	public addLogEntry(foodSearchable: FoodSearchable) {
+		const food = foodSearchable.food;
+		const dish = foodSearchable.dish;
+		if (food !== undefined) {
 			const logEntry = new LogEntry();
 			logEntry.meal = this.meal.toUpperCase();
-			logEntry.food = foodSearchable.food;
-			if (foodSearchable.portion) {
-				logEntry.portion = foodSearchable.portion;
-			}
-			logEntry.multiplier = 1;
-
+			logEntry.food = food;
 			this.updateCalculatedMacros(logEntry);
 			logEntry.day = this.date;
 			this.logEntries.push(logEntry);
+		} else if (dish !== undefined) {
+			// TODO: dish functions
 		}
 	}
 
-	private calculateProtein(logEntry) {
-		if (logEntry.portion) {
+	private calculateProtein(logEntry: LogEntry) {
+		if (logEntry.portion !== undefined) {
 			return (logEntry.multiplier * logEntry.portion.macros.protein);
 		} else {
 			return (logEntry.multiplier * logEntry.food.protein);
 		}
 	}
 
-	private calculateFat(logEntry) {
+	private calculateFat(logEntry: LogEntry) {
 		if (logEntry.portion) {
 			return (logEntry.multiplier * logEntry.portion.macros.fat);
 		} else {
@@ -229,7 +201,7 @@ export class LogMealComponent implements OnInit, OnChanges {
 		}
 	}
 
-	private calculateCarbs(logEntry) {
+	private calculateCarbs(logEntry: LogEntry) {
 		if (logEntry.portion) {
 			return (logEntry.multiplier * logEntry.portion.macros.carbs);
 		} else {
@@ -242,7 +214,7 @@ export class LogMealComponent implements OnInit, OnChanges {
 		if (index !== -1) {
 			this.logEntries.splice(index, 1);
 		}
-		this.logService.deleteLogEntry(logEntry);
+		this.diaryService.deleteLogEntry(logEntry);
 	}
 
 	public saveAndClose() {
@@ -260,9 +232,6 @@ export class LogMealComponent implements OnInit, OnChanges {
 			newRequest.meal = this.meal.toUpperCase();
 			allEntries.push(newRequest);
 		}
-		const closeCallBack = () => {
-			this.dataChanged.emit(true);
-		};
-		this.logService.storeLogEntries(allEntries, closeCallBack);
+		this.diaryService.storeLogEntries(allEntries, this.closeCallBack);
 	}
 }

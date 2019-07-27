@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ToastService } from './toast.service';
-import { Meal } from '../model/meal';
+import { Dish } from '../model/dish';
 import { environment } from '../../environments/environment';
 
 @Injectable()
@@ -14,17 +14,17 @@ export class MealService {
 	}
 
 	public getAllMeals() {
-		return this.http.get<Meal[]>(this.macrologBackendUrl, { responseType: 'json' });
+		return this.http.get<Dish[]>(this.macrologBackendUrl, { responseType: 'json' });
 	}
 
-	public insertMeal(meal: Meal, callBack: Function) {
+	public insertMeal(meal: Dish, callBack: Function) {
 		const headers = {
 			'Content-Type': 'application/json',
 			'Access-Control-Allow-Origin': environment.origin
 		};
 
 		const options = { headers: headers };
-		return this.http.post<Meal>(this.macrologBackendUrl + '/', meal, options).subscribe(
+		return this.http.post<Dish>(this.macrologBackendUrl + '/', meal, options).subscribe(
 			data => {
 				this.toastService.setMessage('Your meal have been saved!');
 				callBack();
@@ -34,7 +34,7 @@ export class MealService {
 			});
 	}
 
-	public deleteMeal(meal: Meal) {
+	public deleteMeal(meal: Dish) {
 		const headers = {
 			'Content-Type': 'application/json',
 			'Access-Control-Allow-Origin': environment.origin

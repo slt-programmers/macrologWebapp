@@ -1,15 +1,16 @@
-<div class="autocomplete-wrapper" #newIngredient (keydown)="onKeyDown($event)">
-  <input class="input autocomplete__input" placeholder="{{placeholder}}"
+<div id="autoWrapper" class="autocomplete-wrapper" #newIngredient (keydown)="onKeyDown($event)">
+  <input id="autoInput" class="input autocomplete__input" placeholder="{{placeholder}}"
          (input)="findFoodMatch($event)"
          [(ngModel)]="foodName"
          (focus)="showAutoComplete = true">
-  <div #autoComplete class="autocomplete" *ngIf="showAutoComplete">
-    <ng-container *ngFor="let match of foodMatch">
-      <div class="autocomplete__option"
+         
+  <div id="autoDropdown" #autoComplete class="autocomplete" *ngIf="showAutoComplete">
+    <ng-container *ngFor="let match of foodMatch; index as idx">
+      <div id="autoOption" ngClass="option-{{idx}}" class="autocomplete__option"
            (click)="selectFn(match); foodName = ''; showAutoComplete = false"
            (keypress)="selectFn(match); foodName = ''; showAutoComplete = false"
-           tabindex="0">
-        {{matchDescription(match)}}
+           tabindex="{{idx}}">
+        {{getDescription(match)}}
       </div>
     </ng-container>
   </div>

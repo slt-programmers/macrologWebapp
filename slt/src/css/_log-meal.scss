@@ -30,9 +30,9 @@
   }
 
   &__ingredient {
-	@media(min-width: $md) {
-		flex-wrap: nowrap;
-	}
+    @media (min-width: $md) {
+      flex-wrap: nowrap;
+    }
     flex-direction: row;
     display: flex;
     margin-bottom: 5px;
@@ -76,9 +76,9 @@
   }
 
   &__edit-ingredient {
-	@media(min-width: $md) {
-		flex-wrap: nowrap;
-	}
+    @media (min-width: $md) {
+      flex-wrap: nowrap;
+    }
     align-items: center;
     display: flex;
     flex-direction: row;
@@ -99,18 +99,17 @@
       align-self: stretch;
       flex-basis: 20%;
       text-align: end;
-
-      &__input {
-        padding-right: 5px;
-      }
     }
 
     &__measurement {
       @media (min-width: $md) {
         flex-basis: 15%;
       }
-
       flex-basis: 30%;
+
+      &__input {
+        padding-right: 5px;
+      }
     }
 
     &__macro {

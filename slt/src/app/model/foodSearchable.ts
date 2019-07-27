@@ -1,10 +1,13 @@
-import {Portion} from './portion';
-import {Food} from './food';
+import { Food } from './food';
+import { Dish } from './dish';
 
 export class FoodSearchable {
 
-// food kan ook een meal zijn :/
-constructor(public food: Food, public portion: Portion) {
+	public food: Food = undefined;
+	public dish: Dish = undefined;
 
+	constructor(food?: Food, dish?: Dish) {
+		this.food = food;
+		this.dish = dish;
 	}
 }
