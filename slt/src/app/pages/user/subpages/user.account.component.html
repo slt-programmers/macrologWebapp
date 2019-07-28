@@ -1,34 +1,31 @@
 <div>
-  <div class="tile">
+  <h3>Update password</h3>
 
-    <h3>Update password</h3>
-
-    <form #updateForm="ngForm">
-      <div class="form-field">
-        <label class="form-field__label">Old password</label>
-        <input class="input form-field__input" type="password" [(ngModel)]="oldPassword" name="oldPassword" required />
-      </div>
-
-      <div class="form-field">
-        <label class="form-field__label">New password</label>
-
-        <input class="input form-field__input" type="password" [(ngModel)]="newPassword" name="newPassword" required />
-      </div>
-
-      <div class="form-field">
-        <label class="form-field__label">Confirm new password</label>
-
-        <input class="input form-field__input" type="password" [(ngModel)]="confirmPassword" name="confirmPassword"
-          required />
-      </div>
-
-      <p *ngIf="message">{{message}}</p>
-    </form>
-
-    <div class="blue-theme button-wrapper">
-      <button mat-stroked-button color="primary" [disabled]="updateForm.invalid" (click)="changePassword()">Change
-        password
-      </button>
+  <form #updateForm="ngForm">
+    <div class="form-field">
+      <label class="form-field__label">Old password</label>
+      <input class="input form-field__input" type="password" [(ngModel)]="oldPassword" name="oldPassword" required />
     </div>
+
+    <div class="form-field">
+      <label class="form-field__label">New password</label>
+
+      <input class="input form-field__input" type="password" [(ngModel)]="newPassword" name="newPassword" required />
+    </div>
+
+    <div class="form-field">
+      <label class="form-field__label">Confirm new password</label>
+
+      <input class="input form-field__input" type="password" [(ngModel)]="confirmPassword" name="confirmPassword"
+        required />
+    </div>
+
+    <p *ngIf="message">{{message}}</p>
+  </form>
+
+  <div class="blue-theme button-wrapper">
+    <button mat-stroked-button color="primary" [disabled]="updateForm.invalid" (click)="changePassword()">Change
+      password
+    </button>
   </div>
 </div>

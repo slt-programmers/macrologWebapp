@@ -39,42 +39,43 @@
     </div>
   </div>
 
-  <div class="menu__menu-item menu__menu-item menu__menu-item--mobile" (click)="openNav()">
+  <div class="menu__menu-item menu__menu-item menu__menu-item--mobile" (click)="openMenu()">
     <i class="fas fa-bars"></i>
   </div>
 </div>
 
-<div id="navBackdrop" #navbarBackdrop class="nav-backdrop" (click)="closeNav(title)"></div>
-<div #navbar class="nav-wrapper" (click)="closeNav(title)">
-  <div id="nav" *ngIf="loggedIn()" class="nav">
-    <div class="nav__item nav__item--top">
-      <div></div>
-      <i class="fas fa-arrow-right"></i>
-    </div>
+<div #smallMenu [@openClose]="smallMenuOpen ? 'open' : 'closed'" class="small-menu">
+  <div matRipple [matRippleColor]="white" class="small-menu__item small-menu__item--back" (click)="closeMenu(title)">
+    <i class="fas fa-arrow-right"></i>
+  </div>
 
-    <div class="nav__item" routerLink="/log" (click)="closeNav(logTitle)">
-      <div class="nav__item__text">Diary</div>
-    </div>
+  <div matRipple [matRippleColor]="white" class="small-menu__item" routerLink="/log" (click)="closeMenu(logTitle)">
+    <div class="">Diary</div>
+  </div>
 
-    <div class="nav__item" routerLink="/food" (click)="closeNav(foodTitle)">
-      <div class="nav__item__text">Food</div>
-    </div>
+  <div matRipple [matRippleColor]="white" class="small-menu__item" routerLink="/food" (click)="closeMenu(foodTitle)">
+    <div class="">Food</div>
+  </div>
 
-    <div class="nav__item" routerLink="/meals" (click)="closeNav(mealsTitle)">
-      <div class="nav__item__text">Meals</div>
-    </div>
+  <div matRipple [matRippleColor]="white" class="small-menu__item" routerLink="/meals" (click)="closeMenu(mealsTitle)">
+    <div class="">Meals</div>
+  </div>
 
-    <div class="nav__item" routerLink="/user" (click)="closeNav(settingsTitle)">
-      <div class="nav__item__text">Profile</div>
+  <div matRipple [matRippleColor]="white" class="small-menu__item" routerLink="/graphs" (click)="closeMenu(graphsTitle)">
+    <div class="">Graphs</div>
+  </div>
 
-      <i class="fas fa-user-circle"></i>
-    </div>
+  <div matRipple [matRippleColor]="white" class="small-menu__item" routerLink="/user" (click)="closeMenu(settingsTitle)">
+    <div class="">Profile</div>
+  </div>
 
-    <div class="nav__item" routerLink="/login" (click)="closeNav('')">
-      <div class="nav__item__text">Logout</div>
-      
-      <i class="fas fa-sign-out-alt"></i>
-    </div>
+  <div matRipple [matRippleColor]="white" class="small-menu__item" routerLink="/admin" (click)="closeMenu(adminTitle)">
+    <div class="">AdminPanel</div>
+  </div>
+
+  <div matRipple [matRippleColor]="white" class="small-menu__item" routerLink="/login" (click)="closeMenu('')">
+    <div class="small-menu__inline-text">Log out</div>
+    <i class="fas fa-sign-out-alt"></i>
   </div>
 </div>
 

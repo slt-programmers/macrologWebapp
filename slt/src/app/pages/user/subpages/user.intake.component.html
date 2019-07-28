@@ -1,23 +1,21 @@
 <div>
-  <div class="tile">
-    <div class="form-field form-field--horizontal">
-      <label class="form-field__label">Protein</label>
-      <span class="form-field__text">{{goalProtein ? goalProtein + ' gram' : ''}}</span>
-    </div>
+  <div class="form-field form-field--horizontal">
+    <label class="form-field__label">Protein</label>
+    <span class="form-field__text">{{goalProtein ? goalProtein + ' gram' : ''}}</span>
+  </div>
 
-    <div class="form-field form-field--horizontal">
-      <label class="form-field__label">Fat</label>
-      <span class="form-field__text">{{goalFat ? goalFat + ' gram' : ''}}</span>
-    </div>
+  <div class="form-field form-field--horizontal">
+    <label class="form-field__label">Fat</label>
+    <span class="form-field__text">{{goalFat ? goalFat + ' gram' : ''}}</span>
+  </div>
 
-    <div class="form-field form-field--horizontal">
-      <label class="form-field__label">Carbs</label>
-      <span class="form-field__text">{{goalCarbs ? goalCarbs + ' gram' : ''}}</span>
-    </div>
+  <div class="form-field form-field--horizontal">
+    <label class="form-field__label">Carbs</label>
+    <span class="form-field__text">{{goalCarbs ? goalCarbs + ' gram' : ''}}</span>
+  </div>
 
-    <div class="blue-theme button-wrapper">
-      <button mat-stroked-button color="primary" (click)="openCalcModal()">Adjust intake</button>
-    </div>
+  <div class="blue-theme button-wrapper">
+    <button mat-stroked-button color="primary" (click)="openCalcModal()">Adjust intake</button>
   </div>
 </div>
 

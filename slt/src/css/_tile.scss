@@ -1,18 +1,10 @@
 .tile {
+  @include media-break($md) {
+    padding: 30px;
+  }
 
-	@include media-break($md) {
-		padding: 0 $gutter $gutter $gutter;
-
-		&--first {
-			padding-top: $gutter;
-		}
-
-	}
-
-	padding: 0 ($gutter/2) ($gutter/2) ($gutter/2);
-
-	&--first {
-		padding-top: ($gutter/2);
-	}
+  @include elevation(4);
+  background-color: $ghost;
+  padding: 15px;
 
 }

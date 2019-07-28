@@ -11,8 +11,6 @@ import * as moment from 'moment';
 })
 export class GraphsComponent implements AfterContentInit {
 
-  @ViewChild('svgcontainer', { static: false }) dataContainer: ElementRef;
-
   constructor(private logService: DiaryService,
     private userService: UserService) { }
 
@@ -82,7 +80,7 @@ export class GraphsComponent implements AfterContentInit {
       data => {
         this.allLogs = data;
         this.matchLogs();
-        this.clientHeight = this.dataContainer.nativeElement.clientHeight * 0.8;
+        this.clientHeight = 500;
         this.calculateZoom();
         this.loading = false;
       },

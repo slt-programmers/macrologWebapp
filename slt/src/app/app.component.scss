@@ -3,9 +3,13 @@
 $menuWidth: 200px;
 
 .menu {
+  @media(min-width: $md) {
+    height: 100px;
+  }
   @media (min-width: $lg) {
     background: $whiteVerticalGradient;
     width: $menuWidth;
+    height: 100%;
     bottom: 0;
   }
   background: $whiteHorizontalGradient;
@@ -14,9 +18,13 @@ $menuWidth: 200px;
   color: $white;
   position: fixed;
   width: 100%;
+  height: 75px;
   z-index: 4;
 
   &__logo {
+    @media (min-width: $md) {
+      font-size: 72px;
+    }
     @media (min-width: $lg) {
       @include center;
       margin-top: 72px;
@@ -28,7 +36,7 @@ $menuWidth: 200px;
     margin-top: 12px;
     margin-left: 12px;
     color: white;
-    font-size: 72px;
+    font-size: 48px;
     font-weight: 900;
 
     &__text {
@@ -38,13 +46,16 @@ $menuWidth: 200px;
   }
 
   &__title {
+    @media (min-width: $md) {
+      display: inline-block;
+    }
     @media (min-width: $lg) {
       @include center;
       margin-bottom: 64px;
       display: block;
     }
-    display: inline-block;
     font-size: 16px;
+    display: none;
     color: $white;
     cursor: default;
   }
@@ -66,6 +77,7 @@ $menuWidth: 200px;
     @media (min-width: $lg) {
       display: block;
       margin: 0 auto 20px auto;
+      text-align: center;
       padding: 0;
       width: 100px;
     }
@@ -79,79 +91,64 @@ $menuWidth: 200px;
         display: none;
       }
       display: block;
-      float: right;
-      padding: 24px;
+      position: absolute;
+      width: 20px;
+      margin-top: auto;
+      padding: 20px;
+      top: 0;
+      bottom: 0;
+      text-align: center;
+      right: 0;
+      margin-bottom: auto;
+      height: 20px;
     }
   }
 }
 
-.nav-backdrop {
-  height: 100%;
-  width: 100%;
-  position: fixed;
-  display: none;
-  transition: background-color 1s;
-  z-index: 20;
-}
+.small-menu {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: auto;
+    background: $backgroundGradient;
+    z-index: 4;
+    margin-right: -250px;
 
-.nav-wrapper {
-  @media (min-width: $lg) {
-    display: none;
-  }
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  right: 0;
-  position: fixed;
-  top: 0;
-  margin-right: -$md;
-  transition: 0.3s;
-  z-index: 20;
-}
+    &__item {
+      position: relative;
+      color: white;
+      padding: 15px;
+      background: $whiteHorizontalGradient;
+      text-align: center; 
+      width: 220px;
 
-.nav {
-  @include elevation(4);
-  background-color: $ghost;
-  height: 100%;
-  min-width: 150px;
-
-  &__item {
-    align-items: center;
-    border-bottom: 1px solid $smoke;
-    cursor: pointer;
-    display: flex;
-    height: 52px;
-    justify-content: space-between;
-    padding: 0 ($gutter/2);
-
-    &__text {
-      padding-right: ($gutter/2);
+      &--back {
+        text-align: end;
+      }   
     }
+     &__inline-text {
+       display: inline;
+     }
 
-    &:hover {
-      background-color: $smoke;
-    }
-
-    &:focus {
-      outline: none;
-    }
-
-    &--top {
-      background-color: $primary;
-      color: $white;
-
-      &:hover {
-        background-color: $primary;
-      }
-    }
-  }
+     .fas {
+       margin-left: 10px;
+     }
 }
 
 .content {
+  @media (min-width: $md) {
+    top: 100px;
+  }
   @media (min-width: $lg) {
     margin-left: $menuWidth;
     margin-top: 0;
+    top: 0;
   }
-
-  margin-top: 150px;
+  margin-top: 15px;
+  position: absolute;
+  overflow-y: scroll;
+  top: 75px;
+  left: 0;
+  right: 0;
+  bottom: 0;
 }

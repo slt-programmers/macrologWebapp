@@ -11,6 +11,8 @@ import { MatFormFieldModule } from '@angular/material';
 import { MatButtonModule } from '@angular/material';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTableModule } from '@angular/material/table';
+import { MatRippleModule } from '@angular/material/core';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 import { AppComponent } from './app.component';
 import { FoodService } from './services/food.service';
@@ -121,7 +123,9 @@ const appRoutes: Routes = [
 		MatFormFieldModule,
 		MatButtonModule,
 		MatIconModule,
-		MatTableModule
+		MatTableModule,
+		MatRippleModule,
+		MatProgressSpinnerModule
 	],
 	providers: [
 		AdminService,
