@@ -1,0 +1,28 @@
+.box {
+	@include elevation(2);
+	height: fit-content;
+	margin: ($gutter/2);
+	padding: $gutter;
+	display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+  &__logo {
+    flex-basis: content;
+  }
+
+  &__info {
+    flex-basis: 90%;
+  }
+
+  &__connection {
+    flex-basis: 140px;
+    text-align: center;
+    font-weight: bold;
+
+    &__profilepic {
+      border-radius: 50%;
+      height:90px;
+    }
+  }
+}

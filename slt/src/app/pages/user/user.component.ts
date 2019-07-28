@@ -45,14 +45,6 @@ export class UserComponent implements OnInit {
 		);
 	}
 
-	public saveNewWeight(): void {
-		this.userService.saveWeight(this.weighingDate, this.newWeight).
-			subscribe(
-				data => this.toastService.setMessage('Your new weight is saved'),
-				error => console.error(error)
-			);
-	}
-
 	private getKeyFromResultlist(userSettingsDto: any, key: string) {
 
 		if (userSettingsDto[key]) {
