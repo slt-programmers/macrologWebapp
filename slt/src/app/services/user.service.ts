@@ -31,7 +31,7 @@ export class UserService {
 	}
 
   public getSyncSettings(key:string){
-		return this.http.get(this.macrologBackendUrl + '/connectivity/' + key, {  responseType: 'json' });
+		return this.http.get<any>(this.macrologBackendUrl + '/connectivity/' + key, {  responseType: 'json' });
   }
 
 	public storeSyncSettings(syncWith:string, code: string) {
@@ -55,7 +55,7 @@ export class UserService {
 	}
 
 	public getUserInfo(key: string, date: string) {
-		return this.http.get(this.macrologBackendUrl + '/' + key, { params: { date: date }, responseType: 'json' });
+		return this.http.get<any>(this.macrologBackendUrl + '/' + key, { params: { date: date }, responseType: 'json' });
 	}
 
 	public getAllSettings() {

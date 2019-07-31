@@ -6,11 +6,13 @@
 		<div class="box__info" *ngIf="!isConnected()">
 			<h4>Get your activities from Strava automatically added to Macrolog!</h4>
 			<p>No need to manually add activities when they already have been registered in Strava!</p>
-
+		  <p class="strong--warning" *ngIf="syncError">Unable to proceed with connecting to Strava.
+				{{syncError}}</p>
 		</div>
 		<div class="box__info" *ngIf="isConnected()">
-			<h4>You have connected Strava to Macrolog!</h4>
+			<div class="box__info--title">You have connected Strava to Macrolog!</div>
 			<p>The activities from Strava will be automatically added to Macrolog.</p>
+			<div class="box__info--count">Number of activities synced with Strava: {{connected.numberActivitiesSynced}}</div>
 		</div>
 
 		<div class="box__connection" *ngIf="!isConnected()">

@@ -9,10 +9,23 @@
 
   &__logo {
     flex-basis: content;
+    padding-top:30px;
   }
 
   &__info {
+
     flex-basis: 90%;
+    padding-left:30px;
+
+    &--title{
+       font-weight:bold;
+       padding-bottom: 20px;
+    }
+
+    &--count{
+       font-style:italic;
+       padding-top: 20px;
+    }
   }
 
   &__connection {

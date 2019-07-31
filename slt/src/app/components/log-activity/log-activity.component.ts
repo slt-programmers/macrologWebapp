@@ -16,19 +16,23 @@ export class LogActivityComponent implements OnInit, OnChanges {
 	@Input() logActivities: LogActivity[];
 	@Input() date: Date;
 	@Input() open: boolean;
+  @Input() syncAvailable : boolean;
 
 	@Output() dataChanged: EventEmitter<boolean> = new EventEmitter<boolean>();
+	@Output() forced: EventEmitter<boolean> = new EventEmitter<boolean>();
 
 	public editable: boolean;
 	public newActivityName: string;
 
 	public addActivityCallBack: Function;
+  public syncing = false;
 
 	private pipe: DatePipe;
 
 	constructor(private activityService: ActivityService) {
 		this.editable = false;
 		this.pipe = new DatePipe('en-US');
+    console.log(localStorage.getItem('currentUser'));
 	}
 
 	ngOnInit() {
@@ -47,13 +51,25 @@ export class LogActivityComponent implements OnInit, OnChanges {
 		}
 	}
 
+  public showSync(){
+     return this.syncAvailable && !this.syncing;
+  }
+
+  public forceSync(){
+     console.log('forcesync');
+     this.syncing=true;
+     this.forced.emit(true);
+     this.syncing=false;
+
+  }
+
 	public close() {
 		this.editable = false;
 	}
 
 	public addActivity() {
 		if (this.newActivityName.length > 0) {
-			this.logActivities.push({ id: null, day: this.date, name: this.newActivityName, calories: 0 });
+			this.logActivities.push({ id: null, day: this.date, name: this.newActivityName, calories: 0  });
 		}
 		this.newActivityName = null;
 	}
@@ -76,6 +92,8 @@ export class LogActivityComponent implements OnInit, OnChanges {
 			newRequest.id = logActivity.id;
 			newRequest.name = logActivity.name;
 			newRequest.calories = logActivity.calories;
+      newRequest.syncedId = logActivity.syncedId;
+      newRequest.syncedWith = logActivity.syncedWith;
 			newRequest.day = this.pipe.transform(logActivity.day, 'yyyy-MM-dd');
 			allEntries.push(newRequest);
 		}

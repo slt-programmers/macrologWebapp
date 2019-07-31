@@ -1,8 +1,8 @@
-import { Component } from '@angular/core';
-import { UserService } from '../../../services/user.service';
-import { ToastService } from '../../../services/toast.service';
-import { ActivatedRoute } from "@angular/router";
-import { Location } from '@angular/common'
+import{Component}from'@angular/core';
+import {UserService }from '../../../services/user.service';
+import {ToastService}from '../../../services/toast.service';
+import {ActivatedRoute}from "@angular/router";
+import {Location} from '@angular/common'
 
 @Component({
   selector: 'user-connectivity',
@@ -16,6 +16,7 @@ export class UserConnectivityComponent {
   public error;
   public connected;
   public clientId;
+  public syncError;
   public stravaConnectUrl;
 
   constructor(
@@ -28,7 +29,7 @@ export class UserConnectivityComponent {
 
   private setStravaUrl(){
     let stravaUrl= "http://www.strava.com/oauth/authorize?approval_prompt=force&scope=activity:read_all&response_type=code&state=STRAVACONNECT";
-    let redirectUrl = window.location.origin + this.loc.path();
+    let redirectUrl = window.location.origin + '/user/connectivity';
     this.stravaConnectUrl= stravaUrl + "&client_id="+this.clientId + "&redirect_uri=" + redirectUrl;
   }
   public isConnected(){
@@ -56,6 +57,7 @@ export class UserConnectivityComponent {
   private syncSettings(){
      this.userService.getSyncSettings('STRAVA').subscribe(
 			result => {
+         this.syncError = null;
          this.connected = result;
          this.clientId = result.syncedApplicationId;
          this.setStravaUrl();
@@ -68,18 +70,21 @@ export class UserConnectivityComponent {
   private checkRegistrationResponse(){
      if (!this.code) { // only if not done before
           this.route.queryParamMap.subscribe(queryParams => {
-
-          console.log('this' + this.code);
           console.log('response' + queryParams.get("code"));
 
           this.code = queryParams.get("code");
           this.state = queryParams.get("state");
           this.scope = queryParams.get("scope");
           this.error = queryParams.get("error");
+
           console.log(queryParams);
           if (this.code) {
               console.log('register backend');
-              this.storeConnection();
+							if (this.scope != 'read,activity:read_all') {
+								 this.syncError = 'Please give access to view your activitities in order to allow Macrolog to read your Strava activities'
+							} else {
+                 this.storeConnection();
+              }
            }
 
        })

@@ -45,6 +45,7 @@ export class DiaryComponent implements OnInit {
 	public snacksOpen = false;
 	public activitiesOpen = false;
 
+  public activititiesSync = false;
 	public userGoals;
 	public goalCal;
 
@@ -58,6 +59,7 @@ export class DiaryComponent implements OnInit {
 	}
 
 	ngOnInit() {
+    this.getSyncSettings();
 		this.getUserGoals(this.pipe.transform(this.displayDate, 'yyyy-MM-dd'));
 		this.getAllFood();
 		this.getLogEntries(this.pipe.transform(this.displayDate, 'yyyy-MM-dd'));
@@ -65,6 +67,18 @@ export class DiaryComponent implements OnInit {
 
 	public refresh() {
 		this.getLogEntries(this.pipe.transform(this.displayDate, 'yyyy-MM-dd'));
+	}
+
+	public forceSync() {
+		this.activityService.getDayActivitiesForced(this.pipe.transform(this.displayDate, 'yyyy-MM-dd')).subscribe(
+			data => {
+				this.activitiesLogs = data;
+			},
+			error => {
+				console.log(error);
+				this.activitiesLogs = new Array();
+			}
+		);
 	}
 
 	public getTotal(macro) {
@@ -116,6 +130,15 @@ export class DiaryComponent implements OnInit {
 			},
 			error => console.log(error)
 		);
+	}
+
+	private getSyncSettings() {
+		 this.userService.getSyncSettings('STRAVA').subscribe(
+			result => {
+         if (result.syncedAccountId){
+             this.activititiesSync = true; // TODO --> GET THIS TO ACTIVITIES PAGE TO ENABLE SYNC BUTTON
+         }
+		  });
 	}
 
 	private getAllFood() {
@@ -206,7 +229,9 @@ export class DiaryComponent implements OnInit {
 	private documentClick(event) {
 		if (!event.target.classList.contains('autocomplete__option') &&
 			!event.target.classList.contains('trash') &&
-			!event.target.classList.contains('button--delete')) {
+			!event.target.classList.contains('button--delete') &&
+			!event.target.classList.contains('activity__name--sync') &&
+			!event.target.classList.contains('activity__title--sync')) {
 
 			this.breakfastOpen = this.breakfastEref.logMealEref.nativeElement.contains(event.target);
 			this.lunchOpen = this.lunchEref.logMealEref.nativeElement.contains(event.target);

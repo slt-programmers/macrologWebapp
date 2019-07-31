@@ -52,8 +52,8 @@
       [logEntries]="dinnerLogs" (dataChanged)="refresh()"></log-meal>
     <log-meal #snacks [open]="snacksOpen" [searchables]="searchableFood" [date]="displayDate" [meal]="'Snacks'"
       [logEntries]="snacksLogs" (dataChanged)="refresh()"></log-meal>
-    <log-activity #activities [open]="activitiesOpen" [date]="displayDate" [logActivities]="activitiesLogs"
-      (dataChanged)="refresh()"></log-activity>
+    <log-activity #activities [open]="activitiesOpen" [date]="displayDate" [logActivities]="activitiesLogs" [syncAvailable]="activititiesSync"
+      (dataChanged)="refresh()" (forced)="forceSync()"></log-activity>
 
     <div class="logday__total">
       <span class="logday__total__title">Daily total</span>
