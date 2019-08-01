@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { forkJoin } from 'rxjs/observable/forkJoin';
 import { environment } from '../../environments/environment';
+import { UserSettings } from '@app/model/userSettings';
 
 @Injectable()
 export class UserService {
@@ -24,18 +25,18 @@ export class UserService {
 
 	public getUserGoalStats(date: string) {
 		return forkJoin(
-			this.getUserSetting('goalProtein', date),
-			this.getUserSetting('goalFat', date),
-			this.getUserSetting('goalCarbs', date)
+			this.getSetting('goalProtein', date),
+			this.getSetting('goalFat', date),
+			this.getSetting('goalCarbs', date)
 		);
 	}
 
-	public getUserSetting(key: string, date: string) {
+	public getSetting(key: string, date: string) {
 		return this.http.get(this.macrologBackendUrl + '/' + key, { params: { date: date }, responseType: 'json' });
 	}
 
-	public getAllSettings() {
-		return this.http.get(this.macrologBackendUrl + '/user');
+	public getUserSettings() {
+		return this.http.get<UserSettings>(this.macrologBackendUrl + '/user');
 	}
 
 	// public getExport() {

@@ -4,6 +4,7 @@ import { UserService } from '../../../services/user.service';
 import { Gender } from '../../../model/gender';
 import { ToastService } from '../../../services/toast.service';
 import * as moment from 'moment';
+import { UserSettings } from '@app/model/userSettings';
 
 @Component({
 	selector: 'user-personal',
@@ -11,29 +12,27 @@ import * as moment from 'moment';
 })
 export class UserPersonalComponent {
 
-	private originalResult;
+	private originalResult: UserSettings;
 
-	public name;
-	public birthday;
-	public gender;
-	public height;
-	public weight;
-	public activity;
-
-	public newWeight;
+	public name: string;
+	public birthday: string;
+	public gender: Gender;
+	public height: number;
+	public weight: number;
+	public activity: number;
+	public newWeight: number;
 
 	constructor(private userService: UserService,
 		private toastService: ToastService) {
-		this.userService.getAllSettings().subscribe(
+		this.userService.getUserSettings().subscribe(
 			result => {
 				this.originalResult = result;
-				this.name = this.getKeyFromResultlist(result, 'name');
-				this.birthday = moment(this.getKeyFromResultlist(result, 'birthday'), 'YYYY-M-D', true).format('DD-MM-YYYY');
-				this.gender = this.getKeyFromResultlist(result, 'gender') || Gender.Male;
-				this.height = parseInt(this.getKeyFromResultlist(result, 'height'), 10) || undefined;
-				this.weight = parseFloat(this.getKeyFromResultlist(result, 'currentWeight')) || undefined;
-				this.activity = parseFloat(this.getKeyFromResultlist(result, 'activity')) || 1.2;
-
+				this.name = result.name;
+				this.birthday = moment(result.birthday, 'YYYY-M-D', true).format('DD-MM-YYYY');
+				this.gender = result.gender || Gender.Male;
+				this.height = result.height;
+				this.weight = result.currentWeight;
+				this.activity = result.activity;
 				this.newWeight = this.weight;
 			},
 			error => {
@@ -58,12 +57,12 @@ export class UserPersonalComponent {
 
 	public isInputUnchanged(): boolean {
 		if (this.originalResult !== undefined) {
-			if (this.name === this.getKeyFromResultlist(this.originalResult, 'name')
-				&& this.birthday === this.getKeyFromResultlist(this.originalResult, 'birthday')
-				&& this.gender === this.getKeyFromResultlist(this.originalResult, 'gender')
-				&& this.height === parseInt(this.getKeyFromResultlist(this.originalResult, 'height'), 10)
-				&& this.weight === parseInt(this.getKeyFromResultlist(this.originalResult, 'currentWeight'), 10)
-				&& this.activity.toString() === this.getKeyFromResultlist(this.originalResult, 'activity')
+			if (this.name === this.originalResult.name
+				&& this.birthday === this.originalResult.birthday
+				&& this.gender === this.originalResult.gender
+				&& this.height === this.originalResult.height
+				&& this.weight === this.originalResult.currentWeight
+				&& this.activity === this.originalResult.activity
 			) {
 				return true;
 			}
@@ -71,9 +70,4 @@ export class UserPersonalComponent {
 		return false;
 	}
 
-	private getKeyFromResultlist(userSettingsDto: any, key: string) {
-		if (userSettingsDto[key]) {
-			return userSettingsDto[key];
-		} return '';
-	}
 }
