@@ -113,9 +113,9 @@ export class CalculateIntakeModalComponent implements OnInit {
 	public saveIntake() {
 		if (this.showMacros) {
 			forkJoin(
-				this.userService.addUserInfo('goalProtein', Math.round(this.proteinManual).toString()),
-				this.userService.addUserInfo('goalFat', Math.round(this.fatManual).toString()),
-				this.userService.addUserInfo('goalCarbs', Math.round(this.carbsManual).toString())
+				this.userService.addUserSetting('goalProtein', Math.round(this.proteinManual).toString()),
+				this.userService.addUserSetting('goalFat', Math.round(this.fatManual).toString()),
+				this.userService.addUserSetting('goalCarbs', Math.round(this.carbsManual).toString())
 			).subscribe(
 					data => {
 						this.goalProtein = Math.round(this.proteinManual).toString();
@@ -127,9 +127,9 @@ export class CalculateIntakeModalComponent implements OnInit {
 			);
 		} else {
 			forkJoin(
-				this.userService.addUserInfo('goalProtein', Math.round(this.protein).toString()),
-				this.userService.addUserInfo('goalFat', Math.round(this.fat).toString()),
-				this.userService.addUserInfo('goalCarbs', Math.round(this.carbs).toString())
+				this.userService.addUserSetting('goalProtein', Math.round(this.protein).toString()),
+				this.userService.addUserSetting('goalFat', Math.round(this.fat).toString()),
+				this.userService.addUserSetting('goalCarbs', Math.round(this.carbs).toString())
 			).subscribe(
 					data => {
 						this.goalProtein = Math.round(this.protein).toString();

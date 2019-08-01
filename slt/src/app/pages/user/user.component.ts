@@ -17,7 +17,6 @@ export class UserComponent implements OnInit {
 	public weight: number;
 	public activity: number;
 
-
 	public goalProtein: string;
 	public goalFat: string;
 	public goalCarbs: string;
@@ -45,16 +44,7 @@ export class UserComponent implements OnInit {
 		);
 	}
 
-	public saveNewWeight(): void {
-		this.userService.saveWeight(this.weighingDate, this.newWeight).
-			subscribe(
-				data => this.toastService.setMessage('Your new weight is saved'),
-				error => console.error(error)
-			);
-	}
-
 	private getKeyFromResultlist(userSettingsDto: any, key: string) {
-
 		if (userSettingsDto[key]) {
 			return userSettingsDto[key];
 		}
@@ -62,20 +52,19 @@ export class UserComponent implements OnInit {
 	}
 
 	// DEVTOOLS
-	public exportData() {
-		this.userService.getExport().subscribe(
-			data => this.downloadFile(data),
-			error => console.log(error)
-		);
-	}
+	// public exportData() {
+	// 	this.userService.getExport().subscribe(
+	// 		data => this.downloadFile(data),
+	// 		error => console.log(error)
+	// 	);
+	// }
 
-	public importData(event) {
+	// public importData(event) {
+	// }
 
-	}
-
-	public downloadFile(data) {
-		const blob = new Blob([JSON.stringify(data)], { type: 'text/json' });
-		const url = window.URL.createObjectURL(blob);
-		window.open(url);
-	}
+	// public downloadFile(data) {
+	// 	const blob = new Blob([JSON.stringify(data)], { type: 'text/json' });
+	// 	const url = window.URL.createObjectURL(blob);
+	// 	window.open(url);
+	// }
 }
