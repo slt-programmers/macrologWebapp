@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { WeightService } from '../../../services/weight.service';
-import { LogWeight } from '../../../model/logWeight';
+import { Weight } from '../../../model/weight';
 import { ToastService } from '../../../services/toast.service';
 import * as moment from 'moment';
+import { DataPoint } from '@app/components/linegraph/linegraph.component';
 
 @Component({
   selector: 'user-weighttracker',
@@ -12,11 +13,14 @@ import * as moment from 'moment';
 })
 export class UserWeightTrackerComponent {
 
-  public trackedWeights = new Array<LogWeight>();
+  public trackedWeights = new Array<Weight>();
   public measurementDate: string;
   public weight;
   public remark: string;
   public openWeight;
+
+  // test
+  public dataset;
 
   private pipe: DatePipe;
 
@@ -36,6 +40,7 @@ export class UserWeightTrackerComponent {
           const date2 = moment(b.day, 'YYYY-M-D', true);
           return this.compare(date1, date2);
         });
+        this.getWeightDataset();
       },
       error => console.log(error)
     );
@@ -55,9 +60,24 @@ export class UserWeightTrackerComponent {
     }
   }
 
+  private getWeightDataset() {
+    let dataSetLength = this.trackedWeights.length;
+    if (dataSetLength > 15) {
+      dataSetLength = 15;
+    }
+    const dataset = []
+    for (let i = 0; i < dataSetLength; i++) {
+      const daynumber = new Date(this.trackedWeights[i].day).getDate();
+      const datapoint = new DataPoint(daynumber, this.trackedWeights[i].weight);
+      dataset.push(datapoint);
+    }
+    this.dataset = dataset;
+    this.dataset.reverse();
+  }
+
   public saveNewWeight(formUsed): void {
 
-    const newRequest = new LogWeight();
+    const newRequest = new Weight();
     newRequest.weight = this.weight;
     const date = moment(this.measurementDate, 'D-M-YYYY', true);
     newRequest.day = this.pipe.transform(date, 'yyyy-MM-dd');

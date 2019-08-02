@@ -53,6 +53,7 @@ import { ScrollBehaviourService } from './services/scroll-behaviour.service';
 import { HealthcheckService } from './services/healthcheck.service';
 import { AdminService } from './services/admin.service';
 import { AdminComponent } from './pages/admin/admin.component';
+import { LinegraphComponent } from './components/linegraph/linegraph.component';
 
 const appRoutes: Routes = [
 	{ path: 'login', component: LoginComponent },
@@ -108,7 +109,8 @@ const appRoutes: Routes = [
 		AutocompleteFoodComponent,
 		PiechartComponent,
 		OnboardingComponent,
-		StepperComponent
+		StepperComponent,
+		LinegraphComponent
 	],
 	imports: [
 		BrowserModule,

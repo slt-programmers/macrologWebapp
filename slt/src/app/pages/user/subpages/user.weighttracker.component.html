@@ -1,6 +1,9 @@
 <div>
-	<div class="tile">
+	<div style="width: 100%; height: 500px">
+		<linegraph [dataset]="dataset" [yAxisStep]="0.5"></linegraph>
+	</div>
 
+	<div class="tile">
 		<form #weightForm="ngForm">
 			<div class="form-field">
 				<label class="form-field__label">Measurement date</label>
