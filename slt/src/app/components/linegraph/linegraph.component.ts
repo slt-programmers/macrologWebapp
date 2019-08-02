@@ -19,8 +19,8 @@ export class LinegraphComponent implements AfterViewInit, OnChanges {
   public yAxisPoints: number[];
   public xAxisPoints: number[];
   public svgPath: string;
-
-  private yAxisHeight: number;
+  public yAxisHeight: number;
+  
   private xAxisWidth: number;
   private xAxisPointWidth: number;
 
