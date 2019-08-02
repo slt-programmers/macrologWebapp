@@ -44,9 +44,7 @@ export class LinegraphComponent implements AfterViewInit, OnChanges {
       this.graphPoints = this.convertDatasetToPoints();
 
       this.xAxisPointWidth = this.xAxisWidth / this.dataset.length;
-
       let yStartPosition = this.determineYStartPosition();
-
       let xStartPosition = this.determineXStartPosition();
       
       this.svgPath = "M" + xStartPosition + " " + yStartPosition;
@@ -57,12 +55,33 @@ export class LinegraphComponent implements AfterViewInit, OnChanges {
       for (let i = 0; i < this.graphPoints.length; i++) {
         const graphPoint = this.graphPoints[i];
         if (graphPoint.height !== 0) {
-          xPosition = (this.xAxisPointWidth * i) + xStartOffset;
-          this.svgPath += " L" + xPosition + " " + (this.yAxisHeight - graphPoint.height);
+          if (xPosition == 0) {
+            xPosition = (this.xAxisPointWidth * i) + xStartOffset;
+            this.svgPath += " L" + xPosition + " " + (this.yAxisHeight - graphPoint.height);
+          } else {
+            xPosition = (this.xAxisPointWidth * i) + xStartOffset;
+            let previousXPosition = (this.xAxisPointWidth * i) + xStartOffset - this.xAxisPointWidth;
+            let x1 = previousXPosition + 20;
+
+            let previousYPosition: number;
+            let j = i - 1;
+            while(true) {
+              if (this.graphPoints[j].height !== 0) {
+                previousYPosition = this.yAxisHeight - this.graphPoints[j].height;
+                break;
+              }
+              j--;
+            }
+            
+            let y1 = previousYPosition;
+
+            let x2 = xPosition - 20;
+            let y2 = this.yAxisHeight - graphPoint.height;
+            this.svgPath += " C" + x1 + " " + y1 + " " + x2 + " " + y2 + " " + xPosition + " " + (this.yAxisHeight - graphPoint.height);
+          }
         }
       }
       this.svgPath += " L" + xPosition + " " + this.yAxisHeight +
-
         " L" + xStartPosition + " " + this.yAxisHeight + "  Z";
     }
   }
