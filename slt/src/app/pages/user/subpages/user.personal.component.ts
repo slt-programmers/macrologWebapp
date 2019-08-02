@@ -47,7 +47,7 @@ export class UserPersonalComponent {
 			this.userService.addUserSetting('birthday', this.birthday.toString()),
 			this.userService.addUserSetting('gender', this.gender.toString()),
 			this.userService.addUserSetting('height', this.height.toString()),
-			this.userService.addUserSetting('currentWeight', this.weight.toString()),
+			this.userService.addUserSetting('weight', this.weight.toString()),
 			this.userService.addUserSetting('activity', this.activity.toString())
 		).subscribe(
 			data => this.toastService.setMessage('Your data is saved!'),

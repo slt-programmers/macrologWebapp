@@ -121,7 +121,7 @@ export class OnboardingComponent implements OnInit {
 		this.carbs = (this.calories - (this.protein * 4.0) - (this.fat * 9.0)) / 4.0;
 	}
 
-	changeCalories(event) {
+	changeCalories(event: any) {
 		this.calories = event;
 		this.calcCarbs();
 	}
@@ -153,7 +153,7 @@ export class OnboardingComponent implements OnInit {
 			this.userService.addUserSetting('weight', this.weight.toString()),
 			this.userService.addUserSetting('activity', this.activity.toString())
 		).subscribe(
-			data => this.nextStep(),
+			() => this.nextStep(),
 			error => console.error(error)
 		);
 	}
@@ -165,7 +165,7 @@ export class OnboardingComponent implements OnInit {
 				this.userService.addUserSetting('goalFat', Math.round(this.fatManual).toString()),
 				this.userService.addUserSetting('goalCarbs', Math.round(this.carbsManual).toString())
 			).subscribe(
-				data => {
+				() => {
 					this.nextStep();
 				},
 				error => console.error(error)
@@ -176,7 +176,7 @@ export class OnboardingComponent implements OnInit {
 				this.userService.addUserSetting('goalFat', Math.round(this.fat).toString()),
 				this.userService.addUserSetting('goalCarbs', Math.round(this.carbs).toString())
 			).subscribe(
-				data => {
+				() => {
 					this.nextStep();
 				},
 				error => console.error(error)
@@ -187,7 +187,7 @@ export class OnboardingComponent implements OnInit {
 	dummy() {
 	}
 
-	private documentClick(event) {
+	private documentClick(event: any) {
 		if (this.breakfastEref &&
 			!event.target.classList.contains('autocomplete__option') &&
 			!event.target.classList.contains('trash') &&
