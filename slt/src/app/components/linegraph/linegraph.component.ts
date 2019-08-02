@@ -1,6 +1,4 @@
 import { Component, Input, ViewChild, ElementRef, AfterViewInit, SimpleChanges, OnChanges } from '@angular/core';
-import { SSL_OP_SSLEAY_080_CLIENT_DH_BUG } from 'constants';
-import { tickStep } from 'd3';
 
 @Component({
   selector: 'linegraph',
