@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { WeightService } from '../../../services/weight.service';
 import { Weight } from '../../../model/weight';
@@ -63,7 +63,13 @@ export class UserWeightTrackerComponent {
 
   private getWeightDataset() {
     const dataset = [];
-    const numberOfValues = 30; // get the last month
+    let numberOfValues = 14; 
+    if (window.innerWidth > 480)  {
+      numberOfValues = 21;
+    } 
+    if (window.innerWidth > 768) {
+      numberOfValues = 30;
+    }
     for (let i = 0; i < numberOfValues; i++) {
       const day = new Date();
       day.setDate(day.getDate() - i);
