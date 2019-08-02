@@ -19,8 +19,8 @@ export class LinegraphComponent implements AfterViewInit, OnChanges {
   public yAxisPoints: number[];
   public xAxisPoints: number[];
   public svgPath: string;
-  public yAxisHeight: number;
-  
+  public yAxisHeight = 0;
+
   private xAxisWidth: number;
   private xAxisPointWidth: number;
 
@@ -42,45 +42,45 @@ export class LinegraphComponent implements AfterViewInit, OnChanges {
       this.graphPoints = this.convertDatasetToPoints();
 
       this.xAxisPointWidth = this.xAxisWidth / this.dataset.length;
-      let yStartPosition = this.determineYStartPosition();
-      let xStartPosition = this.determineXStartPosition();
-      
-      this.svgPath = "M" + xStartPosition + " " + yStartPosition;
+      const yStartPosition = this.determineYStartPosition();
+      const xStartPosition = this.determineXStartPosition();
+
+      this.svgPath = 'M' + xStartPosition + ' ' + yStartPosition;
 
       let xPosition = 0;
-      let xStartOffset = this.xAxisPointWidth / 2; // first data point
+      const xStartOffset = this.xAxisPointWidth / 2; // first data point
 
       for (let i = 0; i < this.graphPoints.length; i++) {
         const graphPoint = this.graphPoints[i];
         if (graphPoint.height !== 0) {
-          if (xPosition == 0) {
+          if (xPosition === 0) {
             xPosition = (this.xAxisPointWidth * i) + xStartOffset;
-            this.svgPath += " L" + xPosition + " " + (this.yAxisHeight - graphPoint.height);
+            this.svgPath += ' L' + xPosition + ' ' + (this.yAxisHeight - graphPoint.height);
           } else {
             xPosition = (this.xAxisPointWidth * i) + xStartOffset;
-            let previousXPosition = (this.xAxisPointWidth * i) + xStartOffset - this.xAxisPointWidth;
-            let x1 = previousXPosition + 20;
+            const previousXPosition = (this.xAxisPointWidth * i) + xStartOffset - this.xAxisPointWidth;
+            const x1 = previousXPosition + 20;
 
             let previousYPosition: number;
             let j = i - 1;
-            while(true) {
+            while (true) {
               if (this.graphPoints[j].height !== 0) {
                 previousYPosition = this.yAxisHeight - this.graphPoints[j].height;
                 break;
               }
               j--;
             }
-            
-            let y1 = previousYPosition;
 
-            let x2 = xPosition - 20;
-            let y2 = this.yAxisHeight - graphPoint.height;
-            this.svgPath += " C" + x1 + " " + y1 + " " + x2 + " " + y2 + " " + xPosition + " " + (this.yAxisHeight - graphPoint.height);
+            const y1 = previousYPosition;
+
+            const x2 = xPosition - 20;
+            const y2 = this.yAxisHeight - graphPoint.height;
+            this.svgPath += ' C' + x1 + ' ' + y1 + ' ' + x2 + ' ' + y2 + ' ' + xPosition + ' ' + (this.yAxisHeight - graphPoint.height);
           }
         }
       }
-      this.svgPath += " L" + xPosition + " " + this.yAxisHeight +
-        " L" + xStartPosition + " " + this.yAxisHeight + "  Z";
+      this.svgPath += ' L' + xPosition + ' ' + this.yAxisHeight +
+        ' L' + xStartPosition + ' ' + this.yAxisHeight + '  Z';
     }
   }
 
@@ -92,7 +92,6 @@ export class LinegraphComponent implements AfterViewInit, OnChanges {
       const dataPoint = this.graphPoints[i];
       if (dataPoint.height !== 0) {
         return (this.xAxisPointWidth * i) + this.xAxisPointWidth / 2;
-
       }
     }
     return 0;
@@ -110,7 +109,7 @@ export class LinegraphComponent implements AfterViewInit, OnChanges {
 
   private determineYAxisPoints() {
     const yAxisPoints = [];
-    const yValues = []
+    const yValues = [];
     for (let i = 0; i < this.dataset.length; i++) {
       if (this.dataset[i].y !== undefined) {
         yValues.push(this.dataset[i].y);
@@ -137,7 +136,7 @@ export class LinegraphComponent implements AfterViewInit, OnChanges {
   private determineXAsixPoints() {
     const xAxisPoints = [];
     for (let i = 0; i < this.dataset.length; i++) {
-      xAxisPoints.push(this.dataset[i].x)
+      xAxisPoints.push(this.dataset[i].x);
     }
     return xAxisPoints;
   }

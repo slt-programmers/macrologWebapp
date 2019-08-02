@@ -1,4 +1,4 @@
-import { Component, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { WeightService } from '../../../services/weight.service';
 import { Weight } from '../../../model/weight';
@@ -63,10 +63,10 @@ export class UserWeightTrackerComponent {
 
   private getWeightDataset() {
     const dataset = [];
-    let numberOfValues = 14; 
-    if (window.innerWidth > 480)  {
+    let numberOfValues = 14;
+    if (window.innerWidth > 480) {
       numberOfValues = 21;
-    } 
+    }
     if (window.innerWidth > 768) {
       numberOfValues = 30;
     }
@@ -81,9 +81,9 @@ export class UserWeightTrackerComponent {
     }
     this.dataset = dataset;
     this.dataset.reverse();
-    let day = new Date();
-    day.setDate(day.getDate() - (numberOfValues - 1));
-    this.hasOffgridValue = this.hasOffgridWeight(day);
+    const dayBeforeGraph = new Date();
+    dayBeforeGraph.setDate(dayBeforeGraph.getDate() - (numberOfValues - 1));
+    this.hasOffgridValue = this.hasOffgridWeight(dayBeforeGraph);
   }
 
   private getWeightValueForDay(date: Date, numberOfValues: number) {
@@ -101,9 +101,7 @@ export class UserWeightTrackerComponent {
     if (firstMeasureDay > day) {
       return false;
     }
-    else {
-      return true;
-    }
+    return true;
   }
 
   public saveNewWeight(formUsed): void {
