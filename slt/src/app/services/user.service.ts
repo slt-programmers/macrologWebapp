@@ -2,47 +2,45 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { forkJoin } from 'rxjs/observable/forkJoin';
 import { environment } from '../../environments/environment';
+import { UserSettings } from '@app/model/userSettings';
 
 @Injectable()
 export class UserService {
 
-	macrologBackendUrl = '//' + environment.backend + '/settings';
+	private macrologBackendUrl = '//' + environment.backend + '/settings';
 
 	constructor(private http: HttpClient) {
 	}
 
-	public addUserInfo(key: string, value: string) {
+	public addUserSetting(key: string, value: string) {
 		const headers = {
 			'Content-Type': 'application/json',
 			'Access-Control-Allow-Origin': environment.origin
 		};
 
-		const userInfo = { name: key, value: value };
+		const setting = { name: key, value: value };
 		const options = { headers: headers };
-		return this.http.put(this.macrologBackendUrl + '/', userInfo, options);
+		return this.http.put(this.macrologBackendUrl + '/', setting, options);
 	}
 
-	public getUserGoalStats(date) {
+	public getUserGoalStats(date: string) {
 		return forkJoin(
-			this.getUserInfo('goalProtein', date),
-			this.getUserInfo('goalFat', date),
-			this.getUserInfo('goalCarbs', date)
+			this.getSetting('goalProtein', date),
+			this.getSetting('goalFat', date),
+			this.getSetting('goalCarbs', date)
 		);
 	}
 
-	public getUserInfo(key: string, date: string) {
+	public getSetting(key: string, date: string) {
 		return this.http.get(this.macrologBackendUrl + '/' + key, { params: { date: date }, responseType: 'json' });
 	}
 
-	public getAllSettings() {
-		return this.http.get(this.macrologBackendUrl + '/user');
+	public getUserSettings() {
+		return this.http.get<UserSettings>(this.macrologBackendUrl + '/user');
 	}
 
-	public getExport() {
-		return this.http.get('//' + environment.backend + '/export');
-	}
+	// public getExport() {
+	// 	return this.http.get('//' + environment.backend + '/export');
+	// }
 
-	public saveWeight(date, weight) {
-		return this.http.get(this.macrologBackendUrl + '/weight', { params: { weight: weight, date: date }, responseType: 'json' });
-	}
 }

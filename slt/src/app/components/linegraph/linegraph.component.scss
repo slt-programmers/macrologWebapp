@@ -1,0 +1,108 @@
+@import "../../../css/public.scss";
+
+@include media-break($md) {
+    $yAxisWidth: 50px;
+    $xAxisHeight: 50px;
+}
+
+$yAxisWidth: 30px;
+$xAxisHeight: 30px;
+
+.linegraph {
+    height: 100%; 
+    width: 100%;
+
+    .background {
+        height: 100%; 
+        width: 100%;
+    }
+
+    .axes {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+    }
+
+    .y-axis-wrapper {
+        display: flex;
+        flex-grow: 1;
+    }
+
+    .y-axis {
+        width: $yAxisWidth;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        border-right: 1px solid $silver;
+    }
+
+    .y-axis-point {
+        text-align: end;
+        color: $iron;
+        font-size: 12px;
+        padding-right: 4px;
+    }
+
+    .graph-content {
+        position: relative;
+        display: flex;
+        flex-direction: row;
+        flex-grow: 1;
+        justify-content: space-around;
+        align-self: flex-end;
+        height: 100%;
+    }
+
+    .graph-canvas {
+        position: absolute;
+        height: 100%;
+        width: 100%;
+    }
+
+    .graph-point {
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+        align-self: flex-end;
+    }
+
+    .graph-point-text {
+        position: absolute;
+        color: $iron;
+        font-size: 12px;
+        text-align: center;
+        align-self: center;
+    }
+
+    .x-axis-wrapper {
+        display: flex;
+    }
+
+    .x-axis-dummy-point {
+        display: flex;
+        width: $yAxisWidth;
+        height: $xAxisHeight;
+    }
+
+    .x-axis {
+        display: flex;
+        flex-grow: 1;
+        height: $xAxisHeight;
+        border-top: 1px solid $silver;
+        justify-content: space-around;
+    }
+
+    .x-axis-point {
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+    }
+
+    .x-axis-point-text {
+        position: absolute;
+        color: $iron;
+        font-size: 12px;
+        align-self: center;
+    }
+
+}

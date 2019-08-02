@@ -45,8 +45,8 @@ export class DiaryComponent implements OnInit {
 	public snacksOpen = false;
 	public activitiesOpen = false;
 
-	public userGoals;
-	public goalCal;
+	public intakeGoals;
+	public goalCal: number;
 
 	constructor(private foodService: FoodService,
 		private userService: UserService,
@@ -84,7 +84,7 @@ export class DiaryComponent implements OnInit {
 		return total;
 	}
 
-	public getDifferentDay(event) {
+	public getDifferentDay(event: any) {
 		this.displayDate = event;
 		this.breakfastOpen = false;
 		this.lunchOpen = false;
@@ -108,9 +108,9 @@ export class DiaryComponent implements OnInit {
 		this.userService.getUserGoalStats(date).subscribe(
 			data => {
 				if (data[0] === null) {
-					this.userGoals = null;
+					this.intakeGoals = null;
 				} else {
-					this.userGoals = data;
+					this.intakeGoals = data;
 				}
 				this.setGoalCal();
 			},
@@ -196,14 +196,14 @@ export class DiaryComponent implements OnInit {
 	}
 
 	private setGoalCal() {
-		if (this.userGoals) {
-			this.goalCal = (this.userGoals[0] * 4)
-				+ (this.userGoals[1] * 9)
-				+ (this.userGoals[2] * 4);
+		if (this.intakeGoals) {
+			this.goalCal = (this.intakeGoals[0] * 4)
+				+ (this.intakeGoals[1] * 9)
+				+ (this.intakeGoals[2] * 4);
 		}
 	}
 
-	private documentClick(event) {
+	private documentClick(event: any) {
 		if (!event.target.classList.contains('autocomplete__option') &&
 			!event.target.classList.contains('trash') &&
 			!event.target.classList.contains('button--delete')) {

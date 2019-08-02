@@ -1,22 +1,27 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { WeightService } from '../../../services/weight.service';
-import { LogWeight } from '../../../model/logWeight';
+import { Weight } from '../../../model/weight';
 import { ToastService } from '../../../services/toast.service';
 import * as moment from 'moment';
+import { DataPoint } from '@app/components/linegraph/linegraph.component';
 
 @Component({
   selector: 'user-weighttracker',
   templateUrl: './user.weighttracker.component.html',
+  styleUrls: ['./user.weighttracker.component.scss'],
   host: { '(document: click)': 'documentClick($event)' }
 })
 export class UserWeightTrackerComponent {
 
-  public trackedWeights = new Array<LogWeight>();
+  public trackedWeights = new Array<Weight>();
   public measurementDate: string;
   public weight;
   public remark: string;
   public openWeight;
+
+  public dataset: DataPoint[];
+  public hasOffgridValue: boolean;
 
   private pipe: DatePipe;
 
@@ -36,6 +41,7 @@ export class UserWeightTrackerComponent {
           const date2 = moment(b.day, 'YYYY-M-D', true);
           return this.compare(date1, date2);
         });
+        this.getWeightDataset();
       },
       error => console.log(error)
     );
@@ -55,9 +61,53 @@ export class UserWeightTrackerComponent {
     }
   }
 
-  public saveNewWeight(formUsed): void {
+  private getWeightDataset() {
+    const dataset = [];
+    let numberOfValues = 14; 
+    if (window.innerWidth > 480)  {
+      numberOfValues = 21;
+    } 
+    if (window.innerWidth > 768) {
+      numberOfValues = 30;
+    }
+    for (let i = 0; i < numberOfValues; i++) {
+      const day = new Date();
+      day.setDate(day.getDate() - i);
 
-    const newRequest = new LogWeight();
+      const daynumber = day.getDate();
+      const weightValue = this.getWeightValueForDay(day, numberOfValues);
+      const datapoint = new DataPoint(daynumber, weightValue);
+      dataset.push(datapoint);
+    }
+    this.dataset = dataset;
+    this.dataset.reverse();
+    let day = new Date();
+    day.setDate(day.getDate() - (numberOfValues - 1));
+    this.hasOffgridValue = this.hasOffgridWeight(day);
+  }
+
+  private getWeightValueForDay(date: Date, numberOfValues: number) {
+    for (let i = 0; i < numberOfValues; i++) {
+      const weight = this.trackedWeights[i];
+      if (weight && weight.day === this.pipe.transform(date, 'yyyy-MM-dd')) {
+        return weight.weight;
+      }
+    }
+    return undefined;
+  }
+
+  private hasOffgridWeight(day: Date): boolean {
+    const firstMeasureDay = new Date(this.trackedWeights[this.trackedWeights.length - 1].day);
+    if (firstMeasureDay > day) {
+      return false;
+    }
+    else {
+      return true;
+    }
+  }
+
+  public saveNewWeight(formUsed): void {
+    const newRequest = new Weight();
     newRequest.weight = this.weight;
     const date = moment(this.measurementDate, 'D-M-YYYY', true);
     newRequest.day = this.pipe.transform(date, 'yyyy-MM-dd');
