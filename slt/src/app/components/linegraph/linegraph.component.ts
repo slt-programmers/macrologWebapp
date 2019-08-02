@@ -8,9 +8,10 @@ import { Component, Input, ViewChild, ElementRef, AfterViewInit, SimpleChanges, 
 export class LinegraphComponent implements AfterViewInit, OnChanges {
 
   @ViewChild('yAxis', { static: false }) public yAxisElement: ElementRef;
-  
+
   @Input() dataset;
   @Input() yAxisStep;
+  @Input() xAxisStep;
 
   public graphPoints: GraphPoint[];
   public yAxisPoints: number[];
@@ -29,7 +30,8 @@ export class LinegraphComponent implements AfterViewInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-		if (changes['dataset'] && this.dataset !== undefined) {
+    if (changes['dataset'] && this.dataset !== undefined) {
+      console.log(this.dataset);
       this.yAxisPoints = this.determineYAxisPoints();
       this.xAxisPoints = this.determineXAsixPoints();
       this.graphPoints = this.convertDatasetToPoints();
@@ -40,29 +42,24 @@ export class LinegraphComponent implements AfterViewInit, OnChanges {
     const yAxisPoints = [];
     const yValues = []
     for (let i = 0; i < this.dataset.length; i++) {
-      yValues.push(this.dataset[i].y);
+      if (this.dataset[i].y !== undefined) {
+        yValues.push(this.dataset[i].y);
+      }
     }
     yValues.sort();
+
     const highest = yValues[yValues.length - 1];
-    console.log(highest);
     const lowest = yValues[0];
-    console.log(lowest);
     const difference = highest - lowest;
-    console.log(difference)
-
-    console.log(this.yAxisStep);
-    let leftover = lowest % this.yAxisStep;
-    console.log(leftover);
-
+    const leftover = lowest % this.yAxisStep;
 
     yAxisPoints.push(lowest - leftover);
-    let yValuesToAdd = Math.round(difference / this.yAxisStep) + 1;
+    const yValuesToAdd = Math.round(difference / this.yAxisStep) + 1;
     for (let j = 0; j < yValuesToAdd; j++) {
       let value = yAxisPoints[j];
       value += this.yAxisStep;
       yAxisPoints.push(value);
     }
-    console.log(yAxisPoints);
     yAxisPoints.reverse();
     return yAxisPoints;
   }
@@ -81,10 +78,14 @@ export class LinegraphComponent implements AfterViewInit, OnChanges {
     for (const dataPoint of this.dataset) {
       const lowestYValue = this.yAxisPoints[this.yAxisPoints.length - 1];
       const differenceHighestLowestYValue = this.yAxisPoints[0] - lowestYValue;
-      const height = (dataPoint.y - lowestYValue) * (this.yAxisHeight / differenceHighestLowestYValue);
+      let height = 0;
+      if (dataPoint.y !== undefined) {
+        height = (dataPoint.y - lowestYValue) * (this.yAxisHeight / differenceHighestLowestYValue);
+      }
       const graphPoint = new GraphPoint(dataPoint.y, height);
       graphPoints.push(graphPoint);
     }
+    console.log(graphPoints);
     return graphPoints;
   }
 }
@@ -94,7 +95,7 @@ export class DataPoint {
   public y: number;
 
   constructor(x: number, y: number) {
-    this.x = x; 
+    this.x = x;
     this.y = y;
   }
 }

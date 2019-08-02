@@ -9,9 +9,11 @@
                 </div>
 
                 <div class="graph-content">
-                    <div class="graph-point" *ngFor="let graphPoint of graphPoints" [style.height.px]="graphPoint.height">
-                        {{graphPoint.value}}
-                        
+                    <div class="graph-point" *ngFor="let graphPoint of graphPoints"
+                        [style.height.px]="graphPoint.height">
+                        <div class="graph-point-text">
+                            {{graphPoint.value}}
+                        </div>
                     </div>
                 </div>
             </div>
@@ -21,7 +23,9 @@
 
                 <div #xAxis class="x-axis">
                     <div class="x-axis-point" *ngFor="let xPoint of xAxisPoints">
-                        {{xPoint}}
+                        <div class="x-axis-point-text">
+                            {{xPoint}}
+                        </div>
                     </div>
                 </div>
             </div>

@@ -62,21 +62,34 @@ export class UserWeightTrackerComponent {
 
   private getWeightDataset() {
     let dataSetLength = this.trackedWeights.length;
-    if (dataSetLength > 15) {
-      dataSetLength = 15;
+    if (dataSetLength > 20) {
+      dataSetLength = 20;
     }
-    const dataset = []
+    const dataset = [];
     for (let i = 0; i < dataSetLength; i++) {
-      const daynumber = new Date(this.trackedWeights[i].day).getDate();
-      const datapoint = new DataPoint(daynumber, this.trackedWeights[i].weight);
+      const day = new Date();
+      day.setDate(day.getDate() - i);
+
+      const daynumber = day.getDate();
+      const weightValue = this.getWeightValueForDay(day);
+      const datapoint = new DataPoint(daynumber, weightValue);
       dataset.push(datapoint);
     }
     this.dataset = dataset;
     this.dataset.reverse();
   }
 
-  public saveNewWeight(formUsed): void {
+  private getWeightValueForDay(date: Date) {
+    for (let i = 0; i < 20; i++) {
+      const weight = this.trackedWeights[i];
+      if (weight.day === this.pipe.transform(date, 'yyyy-MM-dd')) {
+        return weight.weight;
+      }
+    }
+    return undefined;
+  }
 
+  public saveNewWeight(formUsed): void {
     const newRequest = new Weight();
     newRequest.weight = this.weight;
     const date = moment(this.measurementDate, 'D-M-YYYY', true);

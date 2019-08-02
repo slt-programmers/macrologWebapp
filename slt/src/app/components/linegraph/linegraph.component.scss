@@ -47,9 +47,18 @@ $xAxisHeight: 50px;
     }
 
     .graph-point {
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+        align-self: flex-end;
+    }
+
+    .graph-point-text {
+        position: absolute;
         color: $iron;
         font-size: 12px;
-        align-self: flex-end;
+        text-align: center;
+        align-self: center;
     }
 
     .x-axis-wrapper {
@@ -72,8 +81,15 @@ $xAxisHeight: 50px;
 
     .x-axis-point {
         display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+    }
+
+    .x-axis-point-text {
+        position: absolute;
         color: $iron;
         font-size: 12px;
+        align-self: center;
     }
 
 }
