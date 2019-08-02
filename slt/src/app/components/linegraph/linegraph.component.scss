@@ -39,11 +39,19 @@ $xAxisHeight: 50px;
     }
 
     .graph-content {
+        position: relative;
         display: flex;
         flex-direction: row;
         flex-grow: 1;
         justify-content: space-around;
         align-self: flex-end;
+        height: 100%;
+    }
+
+    .graph-canvas {
+        position: absolute;
+        height: 100%;
+        width: 100%;
     }
 
     .graph-point {

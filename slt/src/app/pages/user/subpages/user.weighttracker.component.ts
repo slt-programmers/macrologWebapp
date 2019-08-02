@@ -19,8 +19,8 @@ export class UserWeightTrackerComponent {
   public remark: string;
   public openWeight;
 
-  // test
-  public dataset;
+  public dataset: DataPoint[];
+  public hasOffgridValue: boolean;
 
   private pipe: DatePipe;
 
@@ -61,32 +61,42 @@ export class UserWeightTrackerComponent {
   }
 
   private getWeightDataset() {
-    let dataSetLength = this.trackedWeights.length;
-    if (dataSetLength > 20) {
-      dataSetLength = 20;
-    }
     const dataset = [];
-    for (let i = 0; i < dataSetLength; i++) {
+    const numberOfValues = 31; // get the last month
+    for (let i = 0; i < numberOfValues; i++) {
       const day = new Date();
       day.setDate(day.getDate() - i);
 
       const daynumber = day.getDate();
-      const weightValue = this.getWeightValueForDay(day);
+      const weightValue = this.getWeightValueForDay(day, numberOfValues);
       const datapoint = new DataPoint(daynumber, weightValue);
       dataset.push(datapoint);
     }
     this.dataset = dataset;
     this.dataset.reverse();
+    let day = new Date();
+    day.setDate(day.getDate() - (numberOfValues - 1));
+    this.hasOffgridValue = this.hasOffgridWeight(day, numberOfValues - 1);
   }
 
-  private getWeightValueForDay(date: Date) {
-    for (let i = 0; i < 20; i++) {
+  private getWeightValueForDay(date: Date, numberOfValues: number) {
+    for (let i = 0; i < numberOfValues; i++) {
       const weight = this.trackedWeights[i];
-      if (weight.day === this.pipe.transform(date, 'yyyy-MM-dd')) {
+      if (weight && weight.day === this.pipe.transform(date, 'yyyy-MM-dd')) {
         return weight.weight;
       }
     }
     return undefined;
+  }
+
+  private hasOffgridWeight(day: Date, startLooking: number): boolean {
+    const firstMeasureDay = new Date(this.trackedWeights[this.trackedWeights.length -1].day);
+    if (firstMeasureDay > day) {
+      return false;
+    }
+    else {
+      return true;
+    }
   }
 
   public saveNewWeight(formUsed): void {

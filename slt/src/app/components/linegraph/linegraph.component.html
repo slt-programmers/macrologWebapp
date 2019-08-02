@@ -9,6 +9,12 @@
                 </div>
 
                 <div class="graph-content">
+                    <svg #canvas class="graph-canvas">
+                        <path [attr.d]="svgPath" fill="cornflowerblue"
+                        fill-opacity="0.3" stroke="cornflowerblue"
+                        stroke-width="2"></path>
+                    </svg>
+
                     <div class="graph-point" *ngFor="let graphPoint of graphPoints"
                         [style.height.px]="graphPoint.height">
                         <div class="graph-point-text">
