@@ -1,0 +1,14 @@
+@import "../../../../css/public.scss";
+
+.weightgraph-wrapper {
+  @include media-break($md) {
+    padding: 0;
+  }
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.weightgraph {
+  width: 100%; 
+  height: 500px;
+}

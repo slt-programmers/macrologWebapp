@@ -1,7 +1,12 @@
 @import "../../../css/public.scss";
 
-$yAxisWidth: 50px;
-$xAxisHeight: 50px;
+@include media-break($md) {
+    $yAxisWidth: 50px;
+    $xAxisHeight: 50px;
+}
+
+$yAxisWidth: 30px;
+$xAxisHeight: 30px;
 
 .linegraph {
     height: 100%; 

@@ -9,6 +9,7 @@ import { DataPoint } from '@app/components/linegraph/linegraph.component';
 @Component({
   selector: 'user-weighttracker',
   templateUrl: './user.weighttracker.component.html',
+  styleUrls: ['./user.weighttracker.component.scss'],
   host: { '(document: click)': 'documentClick($event)' }
 })
 export class UserWeightTrackerComponent {
@@ -62,7 +63,7 @@ export class UserWeightTrackerComponent {
 
   private getWeightDataset() {
     const dataset = [];
-    const numberOfValues = 31; // get the last month
+    const numberOfValues = 30; // get the last month
     for (let i = 0; i < numberOfValues; i++) {
       const day = new Date();
       day.setDate(day.getDate() - i);
@@ -76,7 +77,7 @@ export class UserWeightTrackerComponent {
     this.dataset.reverse();
     let day = new Date();
     day.setDate(day.getDate() - (numberOfValues - 1));
-    this.hasOffgridValue = this.hasOffgridWeight(day, numberOfValues - 1);
+    this.hasOffgridValue = this.hasOffgridWeight(day);
   }
 
   private getWeightValueForDay(date: Date, numberOfValues: number) {
@@ -89,8 +90,8 @@ export class UserWeightTrackerComponent {
     return undefined;
   }
 
-  private hasOffgridWeight(day: Date, startLooking: number): boolean {
-    const firstMeasureDay = new Date(this.trackedWeights[this.trackedWeights.length -1].day);
+  private hasOffgridWeight(day: Date): boolean {
+    const firstMeasureDay = new Date(this.trackedWeights[this.trackedWeights.length - 1].day);
     if (firstMeasureDay > day) {
       return false;
     }
