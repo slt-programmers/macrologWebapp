@@ -19,6 +19,7 @@ export class LinegraphComponent implements AfterViewInit, OnChanges {
   public yAxisPoints: number[];
   public xAxisPoints: number[];
   public svgPath: string;
+  public trendPath: string;
 
   private yAxisHeight: number;
   private xAxisWidth: number;
@@ -47,7 +48,57 @@ export class LinegraphComponent implements AfterViewInit, OnChanges {
   }
 
   private calculateTrend() {
+    const valueset = [];
+    const convertedDataset = [];
+    for (let i = 1; i <= this.dataset.length; i++) {
+      const newPoint = this.dataset[i - 1];
+      newPoint.x = i;
+      convertedDataset.push(newPoint);
+    }
 
+    for (const point of convertedDataset) {
+      if (point.y !== undefined) {
+        valueset.push(point);
+      }
+    }
+    let sumOfXTimesY = 0;
+    let sumOfXValues = 0;
+    let sumOfYValues = 0;
+    let sumOfXSquared = 0;
+    for (const point of valueset) {
+      sumOfXTimesY += (point.x * point.y);
+      sumOfXValues += point.x;
+      sumOfYValues += point.y;
+      sumOfXSquared += (point.x * point.x);
+    }
+
+    const a = valueset.length * sumOfXTimesY;
+    const b = sumOfXValues * sumOfYValues;
+    const c = valueset.length * sumOfXSquared;
+    const d = sumOfXValues * sumOfXValues;
+    const slope = (a - b) / (c - d);
+
+    const e = sumOfYValues;
+    const f = slope * sumOfXValues;
+    const intercept = (e - f) / valueset.length
+
+    // y = slope * x + intercept
+    let yStart = intercept;
+    let yEnd = slope * (this.dataset.length - 0.5) + intercept
+
+    let lowest = this.yAxisPoints[this.yAxisPoints.length - 1]
+    let difference = this.yAxisPoints[0] - lowest;
+    yStart = yStart - lowest;
+    yStart = yStart * (this.yAxisHeight / difference);
+    yStart = this.yAxisHeight - yStart;
+
+    yEnd = yEnd - lowest;
+    yEnd = yEnd * (this.yAxisHeight / difference);
+    yEnd = this.yAxisHeight - yEnd;
+
+    this.trendPath = "M0 " + yStart + " L" + (this.xAxisWidth - (this.xAxisPointWidth / 2)) + " " + yEnd + 
+    " L" + (this.xAxisWidth - (this.xAxisPointWidth / 2)) + " " + this.yAxisHeight + 
+    " L0 " + this.yAxisHeight + " Z";
   }
 
   private calculateGraph() {
@@ -70,7 +121,6 @@ export class LinegraphComponent implements AfterViewInit, OnChanges {
           xPosition = (this.xAxisPointWidth * i) + xStartOffset;
           const previousXPosition = (this.xAxisPointWidth * i) + xStartOffset - this.xAxisPointWidth;
           const x1 = previousXPosition + 20;
-
           let previousYPosition: number;
           let j = i - 1;
           while (true) {
