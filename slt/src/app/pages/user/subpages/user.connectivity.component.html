@@ -1,7 +1,7 @@
 <div>
 	<div class="box">
 		<div class="box__logo">
-			<img src="../assets/api_logo_pwrdBy_strava_stack_light.png"/>
+			<img alt="powered by Strava" src="../assets/api_logo_pwrdBy_strava_stack_light.png"/>
 		</div>
 		<div class="box__info" *ngIf="!isConnected()">
 			<h4>Get your activities from Strava automatically added to Macrolog!</h4>
@@ -17,12 +17,12 @@
 
 		<div class="box__connection" *ngIf="!isConnected()">
   		<a href="{{stravaConnectUrl}}">
-				<img src="../assets/btn_strava_connectwith_light.png"/>
+				<img alt="connect to Strava"src="../assets/btn_strava_connectwith_light.png"/>
 			</a>
 
 		</div>
 		<div class="box__connection" *ngIf="isConnected()">
-      <img class="box__connection__profilepic" src="{{connected.image}}"/>
+      <img alt="strava profile picture" class="box__connection__profilepic" src="{{connected.image}}"/>
 			<p><a target="_blank" href="https://www.strava.com/athletes/{{connected.syncedAccountId}}">{{connected.name}}</a></p>
 			<div class="blue-theme button-wrapper">
   			<button mat-stroked-button color="primary" (click)="disconnect('STRAVA')">Disconnect</button>
