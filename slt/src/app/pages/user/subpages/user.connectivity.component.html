@@ -16,17 +16,14 @@
 		</div>
 
 		<div class="box__connection" *ngIf="!isConnected()">
-			<!--<A href="http://www.strava.com/oauth/authorize?client_id=37498&response_type=code&redirect_uri=http://localhost:4200/user/connectivity&state=STRAVEC&approval_prompt=force&scope=activity:read_all">-->
-  		<A href="{{stravaConnectUrl}}">
+  		<a href="{{stravaConnectUrl}}">
 				<img src="../assets/btn_strava_connectwith_light.png"/>
-				<!--<img src="../assets/btn_strava_connectwith_orange.png"/>-->
-			</A>
-			<!--http://www.strava.com/oauth/authorize?client_id=[REPLACE_WITH_YOUR_CLIENT_ID]&response_type=code&redirect_uri=http://localhost/exchange_token&approval_prompt=force&scope=read-->
+			</a>
 
 		</div>
 		<div class="box__connection" *ngIf="isConnected()">
       <img class="box__connection__profilepic" src="{{connected.image}}"/>
-			<p><A href="https://www.strava.com/athletes/{{connected.syncedAccountId}}">{{connected.name}}</A></p>
+			<p><a target="_blank" href="https://www.strava.com/athletes/{{connected.syncedAccountId}}">{{connected.name}}</a></p>
 			<div class="blue-theme button-wrapper">
   			<button mat-stroked-button color="primary" (click)="disconnect('STRAVA')">Disconnect</button>
 			</div>

@@ -32,7 +32,6 @@ export class LogActivityComponent implements OnInit, OnChanges {
 	constructor(private activityService: ActivityService) {
 		this.editable = false;
 		this.pipe = new DatePipe('en-US');
-    console.log(localStorage.getItem('currentUser'));
 	}
 
 	ngOnInit() {
@@ -56,7 +55,6 @@ export class LogActivityComponent implements OnInit, OnChanges {
   }
 
   public forceSync(){
-     console.log('forcesync');
      this.syncing=true;
      this.forced.emit(true);
      this.syncing=false;

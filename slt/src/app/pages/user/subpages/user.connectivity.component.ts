@@ -26,6 +26,9 @@ export class UserConnectivityComponent {
     private toastService: ToastService) {
     this.init();
   }
+  public init() {
+     this.syncSettings();
+  }
 
   private setStravaUrl(){
     let stravaUrl= "http://www.strava.com/oauth/authorize?approval_prompt=force&scope=activity:read_all&response_type=code&state=STRAVACONNECT";
@@ -35,18 +38,11 @@ export class UserConnectivityComponent {
   public isConnected(){
      return this.connected && this.connected.syncedAccountId;
   }
-  public storeConnection(){
- 	   this.userService.storeSyncSettings('STRAVA',this.code).subscribe(result =>
-         { console.log(result);
-           this.connected=result;
-         });
-  }
 
   public disconnect(){
  	   this.userService.disConnectSyncSettings('STRAVA').subscribe(result =>
-         { console.log(result);
-           console.log('disConnect');
-           this.syncSettings();
+         {
+            this.syncSettings();
          });
   }
 
@@ -70,16 +66,14 @@ export class UserConnectivityComponent {
   private checkRegistrationResponse(){
      if (!this.code) { // only if not done before
           this.route.queryParamMap.subscribe(queryParams => {
-          console.log('response' + queryParams.get("code"));
 
           this.code = queryParams.get("code");
           this.state = queryParams.get("state");
           this.scope = queryParams.get("scope");
           this.error = queryParams.get("error");
 
-          console.log(queryParams);
           if (this.code) {
-              console.log('register backend');
+
 							if (this.scope != 'read,activity:read_all') {
 								 this.syncError = 'Please give access to view your activitities in order to allow Macrolog to read your Strava activities'
 							} else {
@@ -91,8 +85,13 @@ export class UserConnectivityComponent {
      }
   }
 
-  public init() {
-     this.syncSettings();
+  public storeConnection(){
+ 	   this.userService.storeSyncSettings('STRAVA',this.code).subscribe(result =>
+         {
+           this.connected=result;
+         });
   }
+
+
 
 }

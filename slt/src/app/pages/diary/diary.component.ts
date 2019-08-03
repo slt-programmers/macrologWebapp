@@ -1,15 +1,15 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { DiaryService } from '../../services/diary.service';
-import { ActivityService } from '../../services/activity.service';
-import { UserService } from '../../services/user.service';
-import { FoodService } from '../../services/food.service';
-import { MealService } from '../../services/meal.service';
-import { LogEntry } from '../../model/logEntry';
-import { LogActivity } from '../../model/logActivity';
-import { FoodSearchable } from '../../model/foodSearchable';
-import { DatePipe } from '@angular/common';
-import { Dish } from '@app/model/dish';
-import { Food } from '@app/model/food';
+import{Component, OnInit, ViewChild}from '@angular/core';
+import {DiaryService}from '../../services/diary.service';
+import {ActivityService}from '../../services/activity.service';
+import {UserService}from '../../services/user.service';
+import {FoodService}from '../../services/food.service';
+import {MealService}from '../../services/meal.service';
+import {LogEntry}from '../../model/logEntry';
+import {LogActivity}from '../../model/logActivity';
+import {FoodSearchable}from '../../model/foodSearchable';
+import {DatePipe }from '@angular/common';
+import {Dish}from '@app/model/dish';
+import {Food}from '@app/model/food';
 
 @Component({
 	selector: 'diary-page',
@@ -45,7 +45,7 @@ export class DiaryComponent implements OnInit {
 	public snacksOpen = false;
 	public activitiesOpen = false;
 
-    public activititiesSync = false;
+  public activititiesSync = false;
 	public intakeGoals;
 	public goalCal: number;
 
@@ -162,7 +162,6 @@ export class DiaryComponent implements OnInit {
 	private getLogEntries(date: string) {
 		this.logService.getLogsForDay(date).subscribe(
 			data => {
-				console.log(data);
 				this.allLogs = data;
 				this.breakfastLogs = new Array();
 				this.breakfastLogs = this.allLogs.filter(
