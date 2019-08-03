@@ -10,6 +10,9 @@
       <a class="subnav__item" [ngClass]="{'subnav__item--active': router.url === '/user/weighttracker'}"
         [routerLink]="['./weighttracker']">Weight Tracker</a>
 
+      <a class="subnav__item" [ngClass]="{'subnav__item--active': router.url.startsWith('/user/conne')}"
+        [routerLink]="['./connectivity']">Connectivity</a>
+
       <a class="subnav__item" [ngClass]="{'subnav__item--active': router.url === '/user/account'}"
         [routerLink]="['./account']">Account</a>
     </div>

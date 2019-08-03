@@ -1,15 +1,15 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { DiaryService } from '../../services/diary.service';
-import { ActivityService } from '../../services/activity.service';
-import { UserService } from '../../services/user.service';
-import { FoodService } from '../../services/food.service';
-import { MealService } from '../../services/meal.service';
-import { LogEntry } from '../../model/logEntry';
-import { LogActivity } from '../../model/logActivity';
-import { FoodSearchable } from '../../model/foodSearchable';
-import { DatePipe } from '@angular/common';
-import { Dish } from '@app/model/dish';
-import { Food } from '@app/model/food';
+import{Component, OnInit, ViewChild}from '@angular/core';
+import {DiaryService}from '../../services/diary.service';
+import {ActivityService}from '../../services/activity.service';
+import {UserService}from '../../services/user.service';
+import {FoodService}from '../../services/food.service';
+import {MealService}from '../../services/meal.service';
+import {LogEntry}from '../../model/logEntry';
+import {LogActivity}from '../../model/logActivity';
+import {FoodSearchable}from '../../model/foodSearchable';
+import {DatePipe }from '@angular/common';
+import {Dish}from '@app/model/dish';
+import {Food}from '@app/model/food';
 
 @Component({
 	selector: 'diary-page',
@@ -45,6 +45,7 @@ export class DiaryComponent implements OnInit {
 	public snacksOpen = false;
 	public activitiesOpen = false;
 
+  public activititiesSync = false;
 	public intakeGoals;
 	public goalCal: number;
 
@@ -58,6 +59,7 @@ export class DiaryComponent implements OnInit {
 	}
 
 	ngOnInit() {
+    this.getSyncSettings();
 		this.getUserGoals(this.pipe.transform(this.displayDate, 'yyyy-MM-dd'));
 		this.getAllFood();
 		this.getLogEntries(this.pipe.transform(this.displayDate, 'yyyy-MM-dd'));
@@ -65,6 +67,18 @@ export class DiaryComponent implements OnInit {
 
 	public refresh() {
 		this.getLogEntries(this.pipe.transform(this.displayDate, 'yyyy-MM-dd'));
+	}
+
+	public forceSync() {
+		this.activityService.getDayActivitiesForced(this.pipe.transform(this.displayDate, 'yyyy-MM-dd')).subscribe(
+			data => {
+				this.activitiesLogs = data;
+			},
+			error => {
+				console.log(error);
+				this.activitiesLogs = new Array();
+			}
+		);
 	}
 
 	public getTotal(macro) {
@@ -118,6 +132,15 @@ export class DiaryComponent implements OnInit {
 		);
 	}
 
+	private getSyncSettings() {
+		 this.userService.getSyncSettings('STRAVA').subscribe(
+			result => {
+         if (result.syncedAccountId){
+             this.activititiesSync = true; // TODO --> GET THIS TO ACTIVITIES PAGE TO ENABLE SYNC BUTTON
+         }
+		  });
+	}
+
 	private getAllFood() {
 		this.foodService.getAllFood().subscribe(
 			data => {
@@ -139,7 +162,6 @@ export class DiaryComponent implements OnInit {
 	private getLogEntries(date: string) {
 		this.logService.getLogsForDay(date).subscribe(
 			data => {
-				console.log(data);
 				this.allLogs = data;
 				this.breakfastLogs = new Array();
 				this.breakfastLogs = this.allLogs.filter(
@@ -206,7 +228,9 @@ export class DiaryComponent implements OnInit {
 	private documentClick(event: any) {
 		if (!event.target.classList.contains('autocomplete__option') &&
 			!event.target.classList.contains('trash') &&
-			!event.target.classList.contains('button--delete')) {
+			!event.target.classList.contains('button--delete') &&
+			!event.target.classList.contains('activity__name--sync') &&
+			!event.target.classList.contains('activity__title--sync')) {
 
 			this.breakfastOpen = this.breakfastEref.logMealEref.nativeElement.contains(event.target);
 			this.lunchOpen = this.lunchEref.logMealEref.nativeElement.contains(event.target);
