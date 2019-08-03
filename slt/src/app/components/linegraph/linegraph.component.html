@@ -1,0 +1,40 @@
+<div #linegraph class="linegraph">
+    <div class="background">
+        <div class="axes">
+            <div class="y-axis-wrapper">
+                <div #yAxis class="y-axis" [style.height.px]="yAxisHeight">
+                    <div class="y-axis-point" *ngFor="let yPoint of yAxisPoints">
+                        {{yPoint}}
+                    </div>
+                </div>
+
+                <div class="graph-content">
+                    <svg #canvas class="graph-canvas">
+                        <path [attr.d]="svgPath" fill="cornflowerblue"
+                        fill-opacity="0.3" stroke="cornflowerblue"
+                        stroke-width="2"></path>
+                    </svg>
+
+                    <div class="graph-point" *ngFor="let graphPoint of graphPoints"
+                        [style.height.px]="graphPoint.height">
+                        <div class="graph-point-text">
+                            {{graphPoint.value}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="x-axis-wrapper">
+                <div class="x-axis-dummy-point"></div>
+
+                <div #xAxis class="x-axis">
+                    <div class="x-axis-point" *ngFor="let xPoint of xAxisPoints">
+                        <div class="x-axis-point-text">
+                            {{xPoint}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

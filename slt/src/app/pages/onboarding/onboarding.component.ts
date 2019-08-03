@@ -121,7 +121,7 @@ export class OnboardingComponent implements OnInit {
 		this.carbs = (this.calories - (this.protein * 4.0) - (this.fat * 9.0)) / 4.0;
 	}
 
-	changeCalories(event) {
+	changeCalories(event: any) {
 		this.calories = event;
 		this.calcCarbs();
 	}
@@ -146,14 +146,14 @@ export class OnboardingComponent implements OnInit {
 
 	public saveUserSettings(): void {
 		forkJoin(
-			this.userService.addUserInfo('name', this.name),
-			this.userService.addUserInfo('birthday', this.birthday.toString()),
-			this.userService.addUserInfo('gender', this.gender.toString()),
-			this.userService.addUserInfo('height', this.height.toString()),
-			this.userService.addUserInfo('weight', this.weight.toString()),
-			this.userService.addUserInfo('activity', this.activity.toString())
+			this.userService.addUserSetting('name', this.name),
+			this.userService.addUserSetting('birthday', this.birthday.toString()),
+			this.userService.addUserSetting('gender', this.gender.toString()),
+			this.userService.addUserSetting('height', this.height.toString()),
+			this.userService.addUserSetting('weight', this.weight.toString()),
+			this.userService.addUserSetting('activity', this.activity.toString())
 		).subscribe(
-			data => this.nextStep(),
+			() => this.nextStep(),
 			error => console.error(error)
 		);
 	}
@@ -161,22 +161,22 @@ export class OnboardingComponent implements OnInit {
 	public saveIntake() {
 		if (this.showMacros) {
 			forkJoin(
-				this.userService.addUserInfo('goalProtein', Math.round(this.proteinManual).toString()),
-				this.userService.addUserInfo('goalFat', Math.round(this.fatManual).toString()),
-				this.userService.addUserInfo('goalCarbs', Math.round(this.carbsManual).toString())
+				this.userService.addUserSetting('goalProtein', Math.round(this.proteinManual).toString()),
+				this.userService.addUserSetting('goalFat', Math.round(this.fatManual).toString()),
+				this.userService.addUserSetting('goalCarbs', Math.round(this.carbsManual).toString())
 			).subscribe(
-				data => {
+				() => {
 					this.nextStep();
 				},
 				error => console.error(error)
 			);
 		} else {
 			forkJoin(
-				this.userService.addUserInfo('goalProtein', Math.round(this.protein).toString()),
-				this.userService.addUserInfo('goalFat', Math.round(this.fat).toString()),
-				this.userService.addUserInfo('goalCarbs', Math.round(this.carbs).toString())
+				this.userService.addUserSetting('goalProtein', Math.round(this.protein).toString()),
+				this.userService.addUserSetting('goalFat', Math.round(this.fat).toString()),
+				this.userService.addUserSetting('goalCarbs', Math.round(this.carbs).toString())
 			).subscribe(
-				data => {
+				() => {
 					this.nextStep();
 				},
 				error => console.error(error)
@@ -187,7 +187,7 @@ export class OnboardingComponent implements OnInit {
 	dummy() {
 	}
 
-	private documentClick(event) {
+	private documentClick(event: any) {
 		if (this.breakfastEref &&
 			!event.target.classList.contains('autocomplete__option') &&
 			!event.target.classList.contains('trash') &&
