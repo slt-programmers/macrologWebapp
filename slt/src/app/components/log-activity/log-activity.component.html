@@ -1,10 +1,13 @@
 <div #logActivity class="log-activity" [ngClass]="{'log-activity--grow': editable}">
 	<div class="activity" *ngIf="!editable">
-		<span class="activity__title">Activities</span>
+		<span class="activity__title">Activities <i *ngIf="showSync()" (click)="forceSync()" title="Synchronize with external sources." class="fa fa-sync-alt activity__title--sync"> </i>
+		</span>
 
 		<div class="activity__display">
 			<div *ngFor="let logActivity of logActivities" class="activity__line">
-				<span class="activity__name">{{logActivity.name}}</span>
+				<span class="activity__name">{{logActivity.name}}
+					<A class="activity__name--sync" *ngIf="logActivity.syncedWith == 'STRAVA'" target="_blank" href="https://www.strava.com/activities/{{logActivity.syncedId}}">(View on Strava)</A>
+				</span>
 				<span class="activity__calories">{{logActivity.calories| number:'1.0-0'}} kcal</span>
 			</div>
 		</div>

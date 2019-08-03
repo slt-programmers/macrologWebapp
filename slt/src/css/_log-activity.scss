@@ -22,6 +22,11 @@
     flex-basis: 20%;
     font-weight: bold;
     margin-bottom: 5px;
+
+    &--sync{
+       margin-left:5px;
+       cursor: pointer;
+    }
   }
 
   &__line {
@@ -43,6 +48,11 @@
     }
 
     flex-basis: 60%;
+
+    &--sync {
+       font-style:italic;
+       padding-left:5px;
+    }
   }
   &__calories {
     @media (min-width: $md) {
@@ -72,7 +82,7 @@
       }
       flex-basis: 75%;
 	}
-	
+
     &__filler {
       @media (min-width: $md) {
         flex-basis: 55%;
@@ -86,7 +96,7 @@
       flex-basis: 25%;
       text-align: end;
 	}
-	
+
     &__delete {
       @media (min-width: $md) {
         flex-basis: 5%;
