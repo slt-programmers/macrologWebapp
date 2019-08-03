@@ -1,4 +1,4 @@
-import { Component, Input, ViewChild, ElementRef, AfterViewInit, SimpleChanges, OnChanges, ChangeDetectorRef } from '@angular/core';
+import { Component, Input, ViewChild, ElementRef, AfterViewInit, SimpleChanges, OnChanges } from '@angular/core';
 
 @Component({
   selector: 'linegraph',
@@ -24,7 +24,7 @@ export class LinegraphComponent implements AfterViewInit, OnChanges {
   private xAxisWidth: number;
   private xAxisPointWidth: number;
 
-  constructor(private cd: ChangeDetectorRef) {
+  constructor() {
   }
 
   ngAfterViewInit() {
@@ -47,7 +47,7 @@ export class LinegraphComponent implements AfterViewInit, OnChanges {
   }
 
   private calculateTrend() {
-    
+
   }
 
   private calculateGraph() {
