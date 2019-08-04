@@ -7,10 +7,10 @@ import * as moment from 'moment';
 import { UserSettings } from '@app/model/userSettings';
 
 @Component({
-	selector: 'user-personal',
-	templateUrl: './user.personal.component.html'
+	selector: 'personal',
+	templateUrl: './personal.component.html'
 })
-export class UserPersonalComponent {
+export class PersonalComponent {
 
 	private originalResult: UserSettings;
 

@@ -3,11 +3,11 @@ import { UserService } from '../../../services/user.service';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
-   selector: 'user-connectivity',
-   templateUrl: './user.connectivity.component.html',
-   styleUrls: ['./user.connectivity.component.scss']
+   selector: 'connectivity',
+   templateUrl: './connectivity.component.html',
+   styleUrls: ['./connectivity.component.scss']
 })
-export class UserConnectivityComponent {
+export class ConnectivityComponent {
 
    public syncError: string;
    public stravaConnectUrl: string;

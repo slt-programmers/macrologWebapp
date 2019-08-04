@@ -127,9 +127,6 @@ $menuWidth: 200px;
 }
 
 .content {
-  @media(min-width: $md) {
-    margin-top: 15px;
-  }
   @media (min-width: $lg) {
     margin-left: $menuWidth;
     top: 0;
