@@ -39,41 +39,41 @@
     </div>
   </div>
 
-  <div class="menu__menu-item menu__menu-item menu__menu-item--mobile" (click)="openMenu()">
-    <i class="fas fa-bars"></i>
+  <div class="menu__hamburger" (click)="openMenu()">
+    <i class="menu__hamburger__icon fas fa-bars"></i>
   </div>
 </div>
 
 <div #smallMenu [@openClose]="smallMenuOpen ? 'open' : 'closed'" class="small-menu">
-  <div matRipple [matRippleColor]="white" class="small-menu__item small-menu__item--back" (click)="closeMenu(title)">
+  <div matRipple class="small-menu__item small-menu__item--back" (click)="closeMenu(title)">
     <i class="fas fa-arrow-right"></i>
   </div>
 
-  <div matRipple [matRippleColor]="white" class="small-menu__item" routerLink="/log" (click)="closeMenu(logTitle)">
+  <div matRipple class="small-menu__item" routerLink="/log" (click)="closeMenu(diaryTitle)">
     <div class="">Diary</div>
   </div>
 
-  <div matRipple [matRippleColor]="white" class="small-menu__item" routerLink="/food" (click)="closeMenu(foodTitle)">
+  <div matRipple class="small-menu__item" routerLink="/food" (click)="closeMenu(foodTitle)">
     <div class="">Food</div>
   </div>
 
-  <div matRipple [matRippleColor]="white" class="small-menu__item" routerLink="/meals" (click)="closeMenu(mealsTitle)">
+  <div matRipple class="small-menu__item" routerLink="/meals" (click)="closeMenu(dishTitle)">
     <div class="">Meals</div>
   </div>
 
-  <div matRipple [matRippleColor]="white" class="small-menu__item" routerLink="/graphs" (click)="closeMenu(graphsTitle)">
+  <div matRipple class="small-menu__item" routerLink="/graphs" (click)="closeMenu(graphsTitle)">
     <div class="">Graphs</div>
   </div>
 
-  <div matRipple [matRippleColor]="white" class="small-menu__item" routerLink="/user" (click)="closeMenu(settingsTitle)">
+  <div matRipple class="small-menu__item" routerLink="/user" (click)="closeMenu(profileTitle)">
     <div class="">Profile</div>
   </div>
 
-  <div matRipple [matRippleColor]="white" class="small-menu__item" routerLink="/admin" (click)="closeMenu(adminTitle)">
+  <div matRipple class="small-menu__item" routerLink="/admin" (click)="closeMenu(adminTitle)">
     <div class="">AdminPanel</div>
   </div>
 
-  <div matRipple [matRippleColor]="white" class="small-menu__item" routerLink="/login" (click)="closeMenu('')">
+  <div matRipple class="small-menu__item" routerLink="/login" (click)="closeMenu('')">
     <div class="small-menu__inline-text">Log out</div>
     <i class="fas fa-sign-out-alt"></i>
   </div>

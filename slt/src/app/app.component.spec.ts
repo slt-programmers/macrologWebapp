@@ -68,15 +68,6 @@ describe('AppComponent', () => {
     expect(result).toBeTruthy();
   }));
 
-  it('should initiate views after init', fakeAsync(() => {
-    expect(component.navbarElement).toEqual(undefined);
-    component.ngOnInit();
-    tick();
-    fixture.detectChanges();
-    component.ngAfterViewInit();
-    expect(component.navbarElement).not.toEqual(undefined);
-  }));
-
   it('should open navigation', fakeAsync(() => {
     spyOn(scrollBehaviourService, 'preventScrolling');
     localStorage.setItem('currentUser', '{"user": "Test"}')

@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef, Renderer2, AfterViewInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, Renderer2 } from '@angular/core';
 import { Router } from '@angular/router';
 import { ScrollBehaviourService } from './services/scroll-behaviour.service';
 import { HealthcheckService } from './services/healthcheck.service';
@@ -29,20 +29,22 @@ import { trigger, transition, style, animate, state, keyframes } from '@angular/
 		]),
 	]
 })
-export class AppComponent implements OnInit, AfterViewInit {
+export class AppComponent implements OnInit {
 
 	@ViewChild('smallMenu', { static: false }) public smallMenuElement: ElementRef;
 
 	public title = '';
-	public smallMenuOpen = false;
-
-	private asleep = true;
-	private smallMenu;
-
-	public userTitle = 'Settings';
+	public diaryTitle = 'Diary';
+	public foodTitle = 'Food';
+	public dishTitle = 'Dishes';
 	public profileTitle = 'Profile';
 	public adminTitle = 'Administration panel';
 	public changePasswordTitle = 'Reset password';
+
+	public rippleColor = 'white';
+	public smallMenuOpen = false;
+
+	private asleep = true;
 
 	public currentRoute;
 
@@ -61,10 +63,6 @@ export class AppComponent implements OnInit, AfterViewInit {
 			}
 		});
 		this.sbs.renderer = this.renderer;
-	}
-
-	ngAfterViewInit() {
-		this.smallMenu = this.smallMenuElement.nativeElement;
 	}
 
 	public stillSleeping(): boolean {
@@ -107,5 +105,4 @@ export class AppComponent implements OnInit, AfterViewInit {
 		const currentUser = JSON.parse(localStorage.getItem('currentUser'));
 		return (currentUser && currentUser.admin);
 	}
-
 }

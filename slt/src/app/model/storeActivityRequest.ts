@@ -5,8 +5,8 @@ export class StoreActivityRequest {
 	public calories: number;
 	public day: string;
 	public syncedWith?: string;
-  public syncedId? :number;
+	public syncedId?: number;
 
-	constructor () {
+	constructor() {
 	}
 }
