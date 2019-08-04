@@ -1,21 +1,25 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import { AfterContentInit } from '@angular/core';
-import { ViewChild, ElementRef } from '@angular/core';
 import { DiaryService } from '../../services/diary.service';
 import { UserService } from '../../services/user.service';
 import * as moment from 'moment';
 
 @Component({
-  selector: 'app-graphs',
-  templateUrl: './graphs.component.html'
+  selector: 'graphs',
+  templateUrl: './analytics.component.html',
+  styleUrls: ['./analytics.component.scss']
 })
-export class GraphsComponent implements AfterContentInit {
+export class GraphsComponent implements AfterViewInit, AfterContentInit {
+
+  @ViewChild('macroSvg', { static: false }) public macroSvgElement: ElementRef;
+  @ViewChild('calorieSvg', { static: false }) public calorieSvgElement: ElementRef;
 
   constructor(private logService: DiaryService,
     private userService: UserService) { }
 
+  public macroSvgHeight = 500; //TODO get from viewchild
+  public calorieSvgHeight = 250;
   private barWidth = 20;
-  private radius = 30;
   private marginLeft = 70;
 
   private graphLegenda = 20;
@@ -38,9 +42,6 @@ export class GraphsComponent implements AfterContentInit {
   private maxFatPerc = 0;
   private maxCarbsPerc = 0;
 
-  private clientWidth = 0;
-  private clientHeight = 0;
-
   private userGoals;
   private goalCal;
 
@@ -53,6 +54,11 @@ export class GraphsComponent implements AfterContentInit {
   private dateFrom;
   private dateTo;
 
+  ngAfterViewInit() {
+    // this.macroSvgHeight = this.macroSvgElement.nativeElement.clientHeight;
+    // this.calorieSvgHeight = this.calorieSvgElement.nativeElement.clientWidth;
+  }
+
   ngAfterContentInit() {
     this.dateFrom = moment().subtract(1, 'months');
     this.dateTo = moment();
@@ -62,13 +68,6 @@ export class GraphsComponent implements AfterContentInit {
 
   getSVGWidth() {
     return this.marginLeft + 33 * this.barWidth;
-  }
-  getSVGHeight() {
-    return this.clientHeight * 0.66;
-  }
-
-  getSVGHeightCalories() {
-    return this.clientHeight * 0.33;
   }
 
   getData() {
@@ -80,7 +79,6 @@ export class GraphsComponent implements AfterContentInit {
       data => {
         this.allLogs = data;
         this.matchLogs();
-        this.clientHeight = 500;
         this.calculateZoom();
         this.loading = false;
       },
@@ -148,11 +146,11 @@ export class GraphsComponent implements AfterContentInit {
   }
 
   getYPosProtein(logEntry) {
-    return this.getSVGHeight() - this.graphLegenda - this.getHeightProtein(logEntry);
+    return this.macroSvgHeight - this.graphLegenda - this.getHeightProtein(logEntry);
   }
 
   getYPosCalories(logEntry) {
-    return this.getSVGHeightCalories() - this.graphLegenda - this.getHeightCalories(logEntry);
+    return this.calorieSvgHeight - this.graphLegenda - this.getHeightCalories(logEntry);
   }
 
   getHeightCalories(logEntry) {
@@ -178,13 +176,12 @@ export class GraphsComponent implements AfterContentInit {
   getYPosFat(logEntry) {
     if (this.splitted) {
       if (this.percentages) {
-        return this.getSVGHeight() - this.graphLegenda - (this.splitOffset + this.maxProteinPerc * this.zoomX + this.getHeightFat(logEntry));
+        return this.macroSvgHeight - this.graphLegenda - (this.splitOffset + this.maxProteinPerc * this.zoomX + this.getHeightFat(logEntry));
       } else {
-        return this.getSVGHeight() - this.graphLegenda - (this.splitOffset + this.maxProtein * this.zoomX + this.getHeightFat(logEntry));
+        return this.macroSvgHeight - this.graphLegenda - (this.splitOffset + this.maxProtein * this.zoomX + this.getHeightFat(logEntry));
       }
-
     } else {
-      return this.getSVGHeight() - this.graphLegenda - (this.getHeightProtein(logEntry) + this.getHeightFat(logEntry));
+      return this.macroSvgHeight - this.graphLegenda - (this.getHeightProtein(logEntry) + this.getHeightFat(logEntry));
     }
   }
   getHeightFat(logEntry) {
@@ -204,12 +201,12 @@ export class GraphsComponent implements AfterContentInit {
     if (this.splitted) {
       if (this.percentages) {
         const maxUsed = this.maxProteinPerc + this.maxFatPerc;
-        return this.getSVGHeight() - this.graphLegenda - (this.splitOffset * 2 + maxUsed * this.zoomX + this.getHeightCarbs(logEntry));
+        return this.macroSvgHeight - this.graphLegenda - (this.splitOffset * 2 + maxUsed * this.zoomX + this.getHeightCarbs(logEntry));
       } else {
-        return this.getSVGHeight() - this.graphLegenda - (this.splitOffset * 2 + this.maxProtein * this.zoomX + this.maxFat * this.zoomX + this.getHeightCarbs(logEntry));
+        return this.macroSvgHeight - this.graphLegenda - (this.splitOffset * 2 + this.maxProtein * this.zoomX + this.maxFat * this.zoomX + this.getHeightCarbs(logEntry));
       }
     } else {
-      return this.getSVGHeight() - this.graphLegenda - (this.getHeightProtein(logEntry) + this.getHeightFat(logEntry) + this.getHeightCarbs(logEntry));
+      return this.macroSvgHeight - this.graphLegenda - (this.getHeightProtein(logEntry) + this.getHeightFat(logEntry) + this.getHeightCarbs(logEntry));
     }
   }
 
@@ -272,7 +269,7 @@ export class GraphsComponent implements AfterContentInit {
   }
 
   calculateZoom() {
-    if (!this.getSVGHeight()) {
+    if (!this.macroSvgHeight) {
       this.zoomX = 0;
       this.zoomXCalories = 0;
       return;
@@ -280,18 +277,18 @@ export class GraphsComponent implements AfterContentInit {
 
     if (this.percentages) {
       if (this.splitted) {
-        this.zoomX = (this.getSVGHeight() - 40) / (this.maxProteinPerc + this.maxFatPerc + this.maxCarbsPerc);
+        this.zoomX = (this.macroSvgHeight - 40) / (this.maxProteinPerc + this.maxFatPerc + this.maxCarbsPerc);
       } else {
-        this.zoomX = (this.getSVGHeight() - 40) / 100;
+        this.zoomX = (this.macroSvgHeight - 40) / 100;
       }
     } else {
       if (this.splitted) {
-        this.zoomX = (this.getSVGHeight() - 40) / (this.maxProtein + this.maxFat + this.maxCarbs);
+        this.zoomX = (this.macroSvgHeight - 40) / (this.maxProtein + this.maxFat + this.maxCarbs);
       } else {
-        this.zoomX = (this.getSVGHeight() - 40) / this.maxTotal;
+        this.zoomX = (this.macroSvgHeight - 40) / this.maxTotal;
       }
     }
-    this.zoomXCalories = (this.getSVGHeightCalories() - 40) / this.maxCalories;
+    this.zoomXCalories = (this.calorieSvgHeight - 40) / this.maxCalories;
   }
 
   public showMacros(logEntry) {
