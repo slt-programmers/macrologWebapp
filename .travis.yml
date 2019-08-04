@@ -4,11 +4,6 @@ language: node_js
 node_js:
 - '11.9.0'
 
-branches:
-  only:
-    - master
-    - release
-
 stages:
 - "unit test and scan"
 - "integration test"
@@ -22,7 +17,7 @@ jobs:
   - script: sonar-scanner -Dsonar.projectKey=slt-programmers_macrologWebapp
   include: 
   - stage: "unit test and scan"
-    if: branch = master
+    if: branch != release
     script: ng test
     after_script: sonar-scanner -Dsonar.projectKey=slt-programmers_macrologWebapp
   - stage: "integration test"

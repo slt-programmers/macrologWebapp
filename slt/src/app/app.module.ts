@@ -28,6 +28,7 @@ import { UserIntakeComponent } from './pages/user/subpages/user.intake.component
 import { UserPersonalComponent } from './pages/user/subpages/user.personal.component';
 import { UserAccountComponent } from './pages/user/subpages/user.account.component';
 import { UserWeightTrackerComponent } from './pages/user/subpages/user.weighttracker.component';
+import { UserConnectivityComponent } from './pages/user/subpages/user.connectivity.component';
 import { UserService } from './services/user.service';
 import { SliderComponent } from './components/slider/slider.component';
 import { BargraphComponent } from './components/bargraph/bargraph.component';
@@ -53,6 +54,7 @@ import { ScrollBehaviourService } from './services/scroll-behaviour.service';
 import { HealthcheckService } from './services/healthcheck.service';
 import { AdminService } from './services/admin.service';
 import { AdminComponent } from './pages/admin/admin.component';
+import { LinegraphComponent } from './components/linegraph/linegraph.component';
 
 const appRoutes: Routes = [
 	{ path: 'login', component: LoginComponent },
@@ -66,7 +68,7 @@ const appRoutes: Routes = [
 			{ path: 'personal', component: UserPersonalComponent },
 			{ path: 'foodintake', component: UserIntakeComponent },
 			{ path: 'weighttracker', component: UserWeightTrackerComponent },
-			{ path: 'graphs', component: GraphsComponent },
+      { path: 'connectivity', component: UserConnectivityComponent },
 			{ path: 'account', component: UserAccountComponent }
 		]
 	},
@@ -92,6 +94,7 @@ const appRoutes: Routes = [
 		UserPersonalComponent,
 		UserAccountComponent,
 		UserWeightTrackerComponent,
+    UserConnectivityComponent,
 		SliderComponent,
 		BargraphComponent,
 		AddFoodModalComponent,
@@ -108,7 +111,8 @@ const appRoutes: Routes = [
 		AutocompleteFoodComponent,
 		PiechartComponent,
 		OnboardingComponent,
-		StepperComponent
+		StepperComponent,
+		LinegraphComponent
 	],
 	imports: [
 		BrowserModule,

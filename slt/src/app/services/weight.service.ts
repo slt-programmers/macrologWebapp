@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ToastService } from './toast.service';
-import { LogWeight } from '../model/logWeight';
+import { Weight } from '../model/weight';
 import { environment } from '../../environments/environment';
 
 @Injectable()
@@ -15,20 +15,20 @@ export class WeightService {
 	}
 
 	public getAllWeights() {
-		return this.http.get<LogWeight[]>(this.macrologBackendUrl, { responseType: 'json' });
+		return this.http.get<Weight[]>(this.macrologBackendUrl, { responseType: 'json' });
 	}
 	public getDayActivities(date) {
 		return this.http.get<any[]>(this.macrologBackendUrl + '/day/' + date);
 	}
 
-	public storeWeight(logWeight: LogWeight, callBack: Function) {
+	public storeWeight(logWeight: Weight, callBack: Function) {
 		const headers = {
 			'Content-Type': 'application/json',
 			'Access-Control-Allow-Origin': environment.origin
 		};
 
 		const options = { headers: headers };
-		return this.http.post<LogWeight>(this.macrologBackendUrl + '/', logWeight, options).subscribe(data => {
+		return this.http.post<Weight>(this.macrologBackendUrl + '/', logWeight, options).subscribe(data => {
 			this.toastService.setMessage('Your weight has been saved!');
 			callBack();
 		},
@@ -38,7 +38,7 @@ export class WeightService {
 			});
 	}
 
-	public deleteWeight(logWeight: LogWeight, callBack: Function) {
+	public deleteWeight(logWeight: Weight, callBack: Function) {
 		const headers = {
 			'Content-Type': 'application/json',
 			'Access-Control-Allow-Origin': environment.origin

@@ -35,6 +35,34 @@ export class UserService {
 		return this.http.get(this.macrologBackendUrl + '/' + key, { params: { date: date }, responseType: 'json' });
 	}
 
+  public getSyncSettings(key:string){
+		return this.http.get<any>(this.macrologBackendUrl + '/connectivity/' + key, {  responseType: 'json' });
+  }
+
+	public storeSyncSettings(syncWith:string, code: string) {
+		const headers = {
+			'Content-Type': 'application/json',
+			'Access-Control-Allow-Origin': environment.origin
+		};
+
+		const userInfo = { name: 'code', value: code};
+		const options = { headers: headers };
+		return this.http.post(this.macrologBackendUrl + '/connectivity/' +syncWith, userInfo, options);
+	}
+	public disConnectSyncSettings(syncWith:string) {
+		const headers = {
+			'Content-Type': 'application/json',
+			'Access-Control-Allow-Origin': environment.origin
+		};
+
+		const options = { headers: headers };
+		return this.http.delete(this.macrologBackendUrl + '/connectivity/' +syncWith, options);
+	}
+
+	public getUserInfo(key: string, date: string) {
+		return this.http.get<any>(this.macrologBackendUrl + '/' + key, { params: { date: date }, responseType: 'json' });
+	}
+
 	public getUserSettings() {
 		return this.http.get<UserSettings>(this.macrologBackendUrl + '/user');
 	}
