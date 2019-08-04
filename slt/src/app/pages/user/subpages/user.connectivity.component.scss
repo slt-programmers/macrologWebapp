@@ -1,0 +1,41 @@
+@import "../../../../css/public.scss";
+
+.connectivity {
+  @media (min-width: $xl) {
+    flex-direction: row;
+  }
+  display: flex;
+  flex-direction: column;
+
+  &__logo {
+    &__image {
+      width: 150px;
+    }
+  }
+
+  &__info {
+    flex-direction: column;
+    display: flex;
+    flex-grow: 1;
+    justify-content: space-around;
+    padding: 15px;
+
+    &__text {
+      &--bold {
+        font-weight: 900;
+      }
+    }
+  }
+
+  &__connection {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+    &__profile-pic {
+      border-radius: 50%;
+      height: 90px;
+    }
+  }
+}

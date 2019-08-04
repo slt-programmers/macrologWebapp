@@ -4,7 +4,8 @@ import { ActivatedRoute } from '@angular/router';
 
 @Component({
    selector: 'user-connectivity',
-   templateUrl: './user.connectivity.component.html'
+   templateUrl: './user.connectivity.component.html',
+   styleUrls: ['./user.connectivity.component.scss']
 })
 export class UserConnectivityComponent {
 

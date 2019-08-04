@@ -37,6 +37,7 @@ export class AppComponent implements OnInit {
 	public diaryTitle = 'Diary';
 	public foodTitle = 'Food';
 	public dishTitle = 'Dishes';
+	public graphsTitle = 'Graphs';
 	public profileTitle = 'Profile';
 	public adminTitle = 'Administration panel';
 	public changePasswordTitle = 'Reset password';

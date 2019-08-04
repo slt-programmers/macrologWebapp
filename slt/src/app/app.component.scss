@@ -96,8 +96,10 @@ $menuWidth: 200px;
 }
 
 .small-menu {
+  @include elevation(4);
   position: fixed;
   top: 0;
+  bottom: 0;
   right: 0;
   width: auto;
   background: $backgroundGradient;
@@ -108,7 +110,6 @@ $menuWidth: 200px;
     position: relative;
     color: white;
     padding: 15px;
-    background: $whiteHorizontalGradient;
     text-align: center;
     width: 220px;
 
