@@ -3,13 +3,11 @@
   width: 100%;
 }
 
-
-
 .button-wrapper {
 	&--floating-action {
 		bottom: 20px;
 		position: fixed;
 		right: 20px;
-		z-index: 16;
+		z-index: 2;
 	}
 }

@@ -3,10 +3,10 @@ import { AuthenticationService } from '../../../services/auth.service';
 import { ToastService } from '../../../services/toast.service';
 
 @Component({
-	selector: 'user-account',
-	templateUrl: './user.account.component.html'
+	selector: 'account',
+	templateUrl: './account.component.html'
 })
-export class UserAccountComponent {
+export class AccountComponent {
 
 	public message = '';
 	public oldPassword: string;

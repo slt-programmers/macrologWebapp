@@ -1,17 +1,18 @@
 .container {
-	@include media-break($md) {
-		padding: 0 $gutter;
-	}
+  @include media-break($md) {
+    padding: 0 30px;
+  }
 
-	margin: 0 auto $gutter auto;
-	max-width: 1200px;
+  margin: 0 auto 30px auto;
+  max-width: 1200px;
 
-	&--first {
-		margin-top: $gutter;
-	}
+  &--first {
+    @include media-break($lg) {
+      margin-top: 60px;
+    }
+  }
 
-	&--last {
-		margin-bottom: ($gutter * 3);
-	}
-
+  &--last {
+    margin-bottom: 90px;
+  }
 }

@@ -42,3 +42,7 @@ a:hover {
 table {
   border-collapse: collapse;
 }
+
+*:focus {
+  outline: none;
+}

@@ -1,31 +1,51 @@
-import { Component, OnInit, ViewChild, ElementRef, Renderer2, AfterViewInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, Renderer2 } from '@angular/core';
 import { Router } from '@angular/router';
 import { ScrollBehaviourService } from './services/scroll-behaviour.service';
 import { HealthcheckService } from './services/healthcheck.service';
+import { trigger, transition, style, animate, state, keyframes } from '@angular/animations';
 
 @Component({
 	selector: 'app-root',
-	templateUrl: './app.component.html'
+	templateUrl: './app.component.html',
+	styleUrls: ['./app.component.scss'],
+	animations: [
+		trigger('openClose', [
+			state('open', style({
+				marginRight: '0'
+			})),
+			state('closed', style({
+				marginRight: '-250px'
+			})),
+			transition('open => closed', [
+				animate('0.6s', keyframes([
+					style({ marginRight: '0', offset: 0 }),
+					style({ marginRight: '0', offset: 0.5 }),
+					style({ marginRight: '-250px', offset: 1 }),
+				]))
+			]),
+			transition('closed => open', [
+				animate('0.3s', style({ marginRight: 0 }))
+			]),
+		]),
+	]
 })
-export class AppComponent implements OnInit, AfterViewInit {
+export class AppComponent implements OnInit {
 
-	@ViewChild('navbar', { static: false }) public navbarElement;
-	@ViewChild('navbarBackdrop', { static: false }) public backdropElement: ElementRef;
-	@ViewChild('usermenu', { static: false }) public userMenuElement: ElementRef;
-	@ViewChild('usermenuBackdrop', { static: false }) public usermenubackdropElement: ElementRef;
+	@ViewChild('smallMenu', { static: false }) public smallMenuElement: ElementRef;
 
 	public title = '';
-
-	private asleep = true;
-	private navbar;
-	private navbarBackdrop;
-	private usermenu;
-	private usermenubackdrop;
-
-	public userTitle = 'Settings';
+	public diaryTitle = 'Diary';
+	public foodTitle = 'Food';
+	public dishTitle = 'Dishes';
+	public graphsTitle = 'Graphs';
 	public profileTitle = 'Profile';
 	public adminTitle = 'Administration panel';
 	public changePasswordTitle = 'Reset password';
+
+	public rippleColor = 'white';
+	public smallMenuOpen = false;
+
+	private asleep = true;
 
 	public currentRoute;
 
@@ -46,30 +66,20 @@ export class AppComponent implements OnInit, AfterViewInit {
 		this.sbs.renderer = this.renderer;
 	}
 
-	ngAfterViewInit() {
-		this.navbar = this.navbarElement.nativeElement;
-		this.navbarBackdrop = this.backdropElement.nativeElement;
-		this.usermenu = this.userMenuElement.nativeElement;
-		this.usermenubackdrop = this.usermenubackdropElement.nativeElement;
-	}
-
 	public stillSleeping(): boolean {
 		return this.asleep;
 	}
 
-	public openNav() {
-		this.navbar.style.marginRight = '0';
-		this.navbarBackdrop.style.display = 'block';
-		this.navbarBackdrop.style.backgroundColor = 'rgba(0,0,0, 0.4)';
-		this.sbs.preventScrolling(true);
+	public openMenu() {
+		this.smallMenuOpen = !this.smallMenuOpen;
+		if (this.smallMenuOpen) {
+			this.sbs.preventScrolling(true);
+		}
 	}
 
-	public closeNav(tabTitle: string) {
+	public closeMenu(tabTitle: string) {
 		this.setTitle(tabTitle);
-		const width = this.navbar.clientWidth;
-		this.navbar.style.marginRight = '-' + width + 'px';
-		this.navbarBackdrop.style.display = 'none';
-		this.navbarBackdrop.style.backgroundColor = 'transparent';
+		this.smallMenuOpen = false;
 		this.sbs.preventScrolling(false);
 	}
 
@@ -95,18 +105,5 @@ export class AppComponent implements OnInit, AfterViewInit {
 	public isAdmin(): boolean {
 		const currentUser = JSON.parse(localStorage.getItem('currentUser'));
 		return (currentUser && currentUser.admin);
-	}
-
-	public openUserMenu() {
-		this.usermenu.style.marginTop = '0';
-		this.usermenubackdrop.style.display = 'block';
-		this.sbs.preventScrolling(true);
-	}
-
-	public closeUserMenu() {
-		this.usermenu.style.marginTop = '-300px';
-		this.usermenubackdrop.style.display = 'none';
-		this.usermenubackdrop.style.backgroundColor = 'transparent';
-		this.sbs.preventScrolling(false);
 	}
 }

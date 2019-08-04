@@ -5,36 +5,34 @@
 		</div>
 	</div>
 
-	<div class="tile">
-		<form #weightForm="ngForm">
-			<div class="form-field">
-				<label class="form-field__label">Measurement date</label>
-				<div class="form-field__element">
-					<input required class="input" validDate placeholder="DD-MM-YYYY" name="birthday"
-						[(ngModel)]="measurementDate">
-				</div>
+	<form #weightForm="ngForm">
+		<div class="form-field">
+			<label class="form-field__label">Measurement date</label>
+			<div class="form-field__element">
+				<input required class="input" validDate placeholder="DD-MM-YYYY" name="birthday" [(ngModel)]="measurementDate">
 			</div>
+		</div>
 
-			<div class="form-field">
-				<label class="form-field__label">Weight (kg)</label>
-				<div class="form-field__element">
-					<input required class="input" name="weight" type="number" [(ngModel)]="weight" step="0.1">
-				</div>
+		<div class="form-field">
+			<label class="form-field__label">Weight (kg)</label>
+			<div class="form-field__element">
+				<input required class="input" name="weight" type="number" [(ngModel)]="weight" step="0.1">
 			</div>
+		</div>
 
-			<div class="form-field">
-				<label class="form-field__label">Remark</label>
-				<div class="form-field__element">
-					<input class="input" name="remark" type="text" [(ngModel)]="remark">
-				</div>
+		<div class="form-field">
+			<label class="form-field__label">Remark</label>
+			<div class="form-field__element">
+				<input class="input" name="remark" type="text" [(ngModel)]="remark">
 			</div>
+		</div>
 
-			<div class="blue-theme button-wrapper">
-				<button mat-stroked-button color="primary" (click)="saveNewWeight(weightForm)"
-					[disabled]="weightForm.invalid">Save</button>
-			</div>
-		</form>
-	</div>
+		<div class="blue-theme button-wrapper">
+			<button mat-stroked-button color="primary" (click)="saveNewWeight(weightForm)"
+				[disabled]="weightForm.invalid">Save</button>
+		</div>
+
+	</form>
 
 	<div>
 		<div class="table">
@@ -58,14 +56,17 @@
 					<input required class="input editweight__day-input" validDate placeholder="DD-MM-YYYY"
 						[(ngModel)]="logWeight.dayString">
 				</div>
+
 				<div class="editweight__remark">
 					<input required class="input editweight__remark-input" name="remark" type="text"
 						[(ngModel)]="logWeight.remark">
 				</div>
+
 				<div class="editweight__weight">
 					<input class="input editweight__weight-input" name="weight" type="number" [(ngModel)]="logWeight.weightString"
 						step="0.1">
 				</div>
+
 				<div class="blue-theme editweight__close">
 					<button mat-icon-button color="primary" (click)="saveWeight(logWeight)">
 						<mat-icon>check</mat-icon>
@@ -80,4 +81,3 @@
 			</div>
 		</div>
 	</div>
-</div>

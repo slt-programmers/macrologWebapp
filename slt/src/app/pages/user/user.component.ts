@@ -1,12 +1,10 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { UserService } from '../../services/user.service';
-import { Gender } from '../../model/gender';
-import { ToastService } from '../../services/toast.service';
 
 @Component({
 	selector: 'user-page',
-	templateUrl: './user.component.html'
+	templateUrl: './user.component.html',
+	styleUrls:['./user.component.scss']
 })
 export class UserComponent {
 

@@ -11,6 +11,8 @@ import { MatFormFieldModule } from '@angular/material';
 import { MatButtonModule } from '@angular/material';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTableModule } from '@angular/material/table';
+import { MatRippleModule } from '@angular/material/core';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 import { AppComponent } from './app.component';
 import { FoodService } from './services/food.service';
@@ -24,11 +26,11 @@ import { LogActivityComponent } from './components/log-activity/log-activity.com
 import { FoodComponent } from './pages/food/food.component';
 import { DiaryService } from './services/diary.service';
 import { UserComponent } from './pages/user/user.component';
-import { UserIntakeComponent } from './pages/user/subpages/user.intake.component';
-import { UserPersonalComponent } from './pages/user/subpages/user.personal.component';
-import { UserAccountComponent } from './pages/user/subpages/user.account.component';
-import { UserWeightTrackerComponent } from './pages/user/subpages/user.weighttracker.component';
-import { UserConnectivityComponent } from './pages/user/subpages/user.connectivity.component';
+import { IntakeComponent } from './pages/user/intake/intake.component';
+import { PersonalComponent } from './pages/user/personal/personal.component';
+import { AccountComponent } from './pages/user/account/account.component';
+import { WeightTrackerComponent } from './pages/user/weighttracker/weighttracker.component';
+import { ConnectivityComponent } from './pages/user/connectivity/connectivity.component';
 import { UserService } from './services/user.service';
 import { SliderComponent } from './components/slider/slider.component';
 import { BargraphComponent } from './components/bargraph/bargraph.component';
@@ -65,11 +67,11 @@ const appRoutes: Routes = [
 		canActivate: [AuthGuardService],
 		children: [
 			{ path: '', redirectTo: 'personal', pathMatch: 'full' },
-			{ path: 'personal', component: UserPersonalComponent },
-			{ path: 'foodintake', component: UserIntakeComponent },
-			{ path: 'weighttracker', component: UserWeightTrackerComponent },
-      { path: 'connectivity', component: UserConnectivityComponent },
-			{ path: 'account', component: UserAccountComponent }
+			{ path: 'personal', component: PersonalComponent },
+			{ path: 'foodintake', component: IntakeComponent },
+			{ path: 'weighttracker', component: WeightTrackerComponent },
+      { path: 'connectivity', component: ConnectivityComponent },
+			{ path: 'account', component: AccountComponent }
 		]
 	},
 	{ path: 'admin', component: AdminComponent, canActivate: [AuthGuardService] },
@@ -90,11 +92,11 @@ const appRoutes: Routes = [
 		LogActivityComponent,
 		FoodComponent,
 		UserComponent,
-		UserIntakeComponent,
-		UserPersonalComponent,
-		UserAccountComponent,
-		UserWeightTrackerComponent,
-    UserConnectivityComponent,
+		IntakeComponent,
+		PersonalComponent,
+		AccountComponent,
+		WeightTrackerComponent,
+    ConnectivityComponent,
 		SliderComponent,
 		BargraphComponent,
 		AddFoodModalComponent,
@@ -125,7 +127,9 @@ const appRoutes: Routes = [
 		MatFormFieldModule,
 		MatButtonModule,
 		MatIconModule,
-		MatTableModule
+		MatTableModule,
+		MatRippleModule,
+		MatProgressSpinnerModule
 	],
 	providers: [
 		AdminService,
