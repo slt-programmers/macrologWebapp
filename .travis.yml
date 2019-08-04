@@ -4,11 +4,6 @@ language: node_js
 node_js:
 - '11.9.0'
 
-#branches:
-#  only:
-#    - master
-#    - release
-
 stages:
 - "unit test and scan"
 - "integration test"
