@@ -69,17 +69,22 @@ describe('AppComponent', () => {
     expect(result).toBeTruthy();
   }));
 
-  it('should get username', () => {
-    let result = component.getUsername();
-    expect(result).toEqual('Guest');
-    localStorage.setItem('currentUser', '{"userName": "Test"}');
-    result = component.getUsername();
-    expect(result).toEqual('Test');
+  it('should open menu', () => {
+    spyOn(scrollBehaviourService, 'preventScrolling')
+    component.smallMenuOpen = false;
+    component.openMenu();
+    expect(component.smallMenuOpen).toBeTruthy();
+
+    component.openMenu();
+    expect(component.smallMenuOpen).toBeFalsy();
   });
 
-  it('should check if logged in', fakeAsync(() => {
-
-  }));
+  it('should close menu', () => {
+    spyOn(scrollBehaviourService, 'preventScrolling')
+    component.smallMenuOpen= true;
+    component.closeMenu();
+    expect(component.smallMenuOpen).toBeFalsy();
+  })
 
   it('should determine if admin', () => {
     let result = component.isAdmin();

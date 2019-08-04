@@ -31,23 +31,10 @@ import { trigger, transition, style, animate, state, keyframes } from '@angular/
 })
 export class AppComponent implements OnInit {
 
-	@ViewChild('smallMenu', { static: false }) public smallMenuElement: ElementRef;
-
-	public title = '';
-	public diaryTitle = 'Diary';
-	public foodTitle = 'Food';
-	public dishTitle = 'Dishes';
-	public graphsTitle = 'Graphs';
-	public profileTitle = 'Profile';
-	public adminTitle = 'Administration panel';
-	public changePasswordTitle = 'Reset password';
-
 	public rippleColor = 'white';
 	public smallMenuOpen = false;
 
 	private asleep = true;
-
-	public currentRoute;
 
 	constructor(public router: Router,
 		private healthcheckService: HealthcheckService,
@@ -77,25 +64,9 @@ export class AppComponent implements OnInit {
 		}
 	}
 
-	public closeMenu(tabTitle: string) {
-		this.setTitle(tabTitle);
+	public closeMenu() {
 		this.smallMenuOpen = false;
 		this.sbs.preventScrolling(false);
-	}
-
-	public setTitle(tabTitle: string) {
-		if (tabTitle) {
-			this.title = tabTitle;
-		}
-	}
-
-	public getUsername() {
-		if (localStorage.getItem('currentUser') === null) {
-			return 'Guest';
-		} else {
-			const currentUser = JSON.parse(localStorage.getItem('currentUser'));
-			return currentUser.userName;
-		}
 	}
 
 	public loggedIn(): boolean {
