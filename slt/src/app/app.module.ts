@@ -21,7 +21,7 @@ import { ToastDirective } from './directives/toast.directive';
 import { DateValidator } from './directives/date.directive';
 import { ToastComponent } from './components/toast/toast.component';
 import { DiaryComponent } from './pages/diary/diary.component';
-import { LogDishComponent } from './components/log-dish/log-dish.component';
+import { LogMealComponent } from './components/log-meal/log-meal.component';
 import { LogActivityComponent } from './components/log-activity/log-activity.component';
 import { FoodComponent } from './pages/food/food.component';
 import { DiaryService } from './services/diary.service';
@@ -88,7 +88,7 @@ const appRoutes: Routes = [
 		AdminComponent,
 		AppComponent,
 		DiaryComponent,
-		LogDishComponent,
+		LogMealComponent,
 		LogActivityComponent,
 		FoodComponent,
 		UserComponent,

@@ -203,7 +203,7 @@
   <div class="tile" #step4 *ngIf="currentStep === 4">
     <h3>Filling your diary</h3>
 
-    <p>Clicking on a dish will enable you to add food to it. Try adding an apple.</p>
+    <p>Clicking on a meal will enable you to add food to it. Try adding an apple.</p>
     <div class="logday">
       <div class="logday__header">
         <span class="logday__header__macro"></span>
@@ -211,8 +211,8 @@
         <span class="logday__header__macro">Fat</span>
         <span class="logday__header__macro">Carbs</span>
       </div>
-      <log-dish #breakfast [open]="breakfastOpen" [searchables]="foodSearchables" [date]="displayDate"
-        [dish]="'Breakfast'" [logEntries]="[]" (dataChanged)="dummy()"></log-dish>
+      <log-meal #breakfast [open]="breakfastOpen" [searchables]="foodSearchables" [date]="displayDate"
+        [meal]="'Breakfast'" [logEntries]="[]" (dataChanged)="dummy()"></log-meal>
     </div>
 
     <p></p>

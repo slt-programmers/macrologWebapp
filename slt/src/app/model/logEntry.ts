@@ -4,7 +4,7 @@ import { Portion } from './portion';
 export class LogEntry {
 
 	public id: number;
-	public dish: string;
+	public meal: string;
 	public food: Food;
 	public portion: Portion;
 	public multiplier = 1;

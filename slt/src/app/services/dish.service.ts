@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ToastService } from './toast.service';
 import { Dish } from '../model/dish';
+import { StoreDishRequest } from '../model/storeDishRequest';
 import { environment } from '../../environments/environment';
 
 @Injectable()
@@ -17,14 +18,14 @@ export class DishService {
 		return this.http.get<Dish[]>(this.macrologBackendUrl, { responseType: 'json' });
 	}
 
-	public insertDish(dish: Dish, callBack: Function) {
+	public insertDish(storeDishRequest: StoreDishRequest, callBack: Function) {
 		const headers = {
 			'Content-Type': 'application/json',
 			'Access-Control-Allow-Origin': environment.origin
 		};
 
 		const options = { headers: headers };
-		return this.http.post<Dish>(this.macrologBackendUrl + '/', dish, options).subscribe(
+		return this.http.post<StoreDishRequest>(this.macrologBackendUrl + '/', storeDishRequest, options).subscribe(
 			data => {
 				this.toastService.setMessage('Your dish have been saved!');
 				callBack();

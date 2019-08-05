@@ -5,7 +5,7 @@ export class StoreLogRequest {
 	public portionId: number;
 	public multiplier: number;
 	public day: string;
-	public dish: string;
+	public meal: string;
 
 	constructor () {
 	}

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Dish } from '../../model/dish';
+import { StoreDishRequest } from '../../model/storeDishRequest';
 import { DishService } from '../../services/dish.service';
 
 @Component({

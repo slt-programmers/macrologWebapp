@@ -44,14 +44,14 @@
       <span class="logday__header__macro"></span>
     </div>
 
-    <log-dish #breakfast [open]="breakfastOpen" [searchables]="searchableFood" [date]="displayDate"
-      [dish]="'Breakfast'" [logEntries]="breakfastLogs" (dataChanged)="refresh()"></log-dish>
-    <log-dish #lunch [open]="lunchOpen" [searchables]="searchableFood" [date]="displayDate" [dish]="'Lunch'"
-      [logEntries]="lunchLogs" (dataChanged)="refresh()"></log-dish>
-    <log-dish #dinner [open]="dinnerOpen" [searchables]="searchableFood" [date]="displayDate" [dish]="'Dinner'"
-      [logEntries]="dinnerLogs" (dataChanged)="refresh()"></log-dish>
-    <log-dish #snacks [open]="snacksOpen" [searchables]="searchableFood" [date]="displayDate" [dish]="'Snacks'"
-      [logEntries]="snacksLogs" (dataChanged)="refresh()"></log-dish>
+    <log-meal #breakfast [open]="breakfastOpen" [searchables]="searchableFood" [date]="displayDate"
+      [meal]="'Breakfast'" [logEntries]="breakfastLogs" (dataChanged)="refresh()"></log-meal>
+    <log-meal #lunch [open]="lunchOpen" [searchables]="searchableFood" [date]="displayDate" [meal]="'Lunch'"
+      [logEntries]="lunchLogs" (dataChanged)="refresh()"></log-meal>
+    <log-meal #dinner [open]="dinnerOpen" [searchables]="searchableFood" [date]="displayDate" [meal]="'Dinner'"
+      [logEntries]="dinnerLogs" (dataChanged)="refresh()"></log-meal>
+    <log-meal #snacks [open]="snacksOpen" [searchables]="searchableFood" [date]="displayDate" [meal]="'Snacks'"
+      [logEntries]="snacksLogs" (dataChanged)="refresh()"></log-meal>
     <log-activity #activities [open]="activitiesOpen" [date]="displayDate" [logActivities]="activitiesLogs" [syncAvailable]="activititiesSync"
       (dataChanged)="refresh()" (forced)="forceSync()"></log-activity>
 

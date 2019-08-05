@@ -165,19 +165,19 @@ export class DiaryComponent implements OnInit {
 				this.allLogs = data;
 				this.breakfastLogs = new Array();
 				this.breakfastLogs = this.allLogs.filter(
-					entry => entry.dish === 'BREAKFAST'
+					entry => entry.meal === 'BREAKFAST'
 				);
 				this.lunchLogs = new Array();
 				this.lunchLogs = this.allLogs.filter(
-					entry => entry.dish === 'LUNCH'
+					entry => entry.meal === 'LUNCH'
 				);
 				this.dinnerLogs = new Array();
 				this.dinnerLogs = this.allLogs.filter(
-					entry => entry.dish === 'DINNER'
+					entry => entry.meal === 'DINNER'
 				);
 				this.snacksLogs = new Array();
 				this.snacksLogs = this.allLogs.filter(
-					entry => entry.dish === 'SNACKS'
+					entry => entry.meal === 'SNACKS'
 				);
 			},
 			error => {
