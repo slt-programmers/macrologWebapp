@@ -21,7 +21,7 @@ export class ActivityService {
 		return this.http.get<any[]>(this.macrologBackendUrl + '/day/' + date);
 	}
 	public getDayActivitiesForced(date: string) {
-		return this.http.get<any[]>(this.macrologBackendUrl + '/day/' + date +"?forceSync=true");
+		return this.http.get<any[]>(this.macrologBackendUrl + '/day/' + date + '?forceSync=true');
 	}
 	public storeLogActivities(storeActivityRequest: StoreActivityRequest[], callBack: Function) {
 		const headers = {

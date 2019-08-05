@@ -15,15 +15,11 @@ export class DiaryService {
 		private toastService: ToastService) {
 	}
 
-	public getAllLogs() {
-		return this.http.get(this.macrologBackendUrl, { responseType: 'json' });
-	}
-
 	public getLogsForDay(date: string) {
-		return this.http.get<any[]>(this.macrologBackendUrl + '/day/' + date);
+		return this.http.get<LogEntry[]>(this.macrologBackendUrl + '/day/' + date);
 	}
 
-	public getMacros(dateFrom, dateTo) {
+	public getMacros(dateFrom: string, dateTo: string) {
 		return this.http.get<any[]>(this.macrologBackendUrl + '/macros', { params: { from: dateFrom, to: dateTo }, responseType: 'json' });
 	}
 
@@ -35,7 +31,7 @@ export class DiaryService {
 
 		const options = { headers: headers };
 		return this.http.post<StoreLogRequest[]>(this.macrologBackendUrl + '/', storeLogEntryRequest, options).subscribe(
-			data => {
+			() => {
 				this.toastService.setMessage('Your meals have been saved!');
 				callBack();
 			},
@@ -53,7 +49,7 @@ export class DiaryService {
 
 		const options = { headers: headers };
 		return this.http.delete<number>(this.macrologBackendUrl + '/' + logEntry.id, options).subscribe(
-			data => { },
+			() => { },
 			error => {
 				this.toastService.setMessage('Your entry has not been deleted!');
 				console.log(error);

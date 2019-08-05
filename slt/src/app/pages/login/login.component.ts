@@ -14,7 +14,7 @@ import { trigger, transition, style, animate } from '@angular/animations';
 			]),
 		]),
 	],
-	styleUrls: ['./login.scss']
+	styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
 

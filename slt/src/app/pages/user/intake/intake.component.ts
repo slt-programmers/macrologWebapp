@@ -4,10 +4,10 @@ import { Gender } from '../../../model/gender';
 import * as moment from 'moment';
 
 @Component({
-	selector: 'user-intake',
-	templateUrl: './user.intake.component.html'
+	selector: 'intake',
+	templateUrl: './intake.component.html'
 })
-export class UserIntakeComponent {
+export class IntakeComponent {
 
 	public goalProtein: number;
 	public goalFat: number;

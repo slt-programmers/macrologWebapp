@@ -57,14 +57,14 @@ $xAxisHeight: 30px;
     position: absolute;
     height: 100%;
     width: 100%;
-    z-index: -1;
+    z-index: 0;
   }
 
   .graph-trend {
     position: absolute;
     height: 100%;
     width: 100%;
-    z-index: -2;
+    z-index: 0;
   }
 
   .graph-point {
@@ -72,6 +72,7 @@ $xAxisHeight: 30px;
     flex-direction: column;
     flex-grow: 1;
     align-self: flex-end;
+    z-index: 1;
 
     &__text {
       display: flex;
@@ -81,7 +82,6 @@ $xAxisHeight: 30px;
       font-weight: bold;
       text-align: center;
       align-self: center;
-      display: flex;
       flex-direction: column;
       align-items: center;
       transition: 0.2s;

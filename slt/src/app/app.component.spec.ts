@@ -7,6 +7,7 @@ import { HealthcheckService } from './services/healthcheck.service';
 import { of, throwError } from 'rxjs';
 import { By } from '@angular/platform-browser';
 import { Router } from '@angular/router';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 describe('AppComponent', () => {
   let component: AppComponent;
@@ -17,7 +18,7 @@ describe('AppComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [RouterTestingModule.withRoutes([{ path: 'user', redirectTo: '' }])],
+      imports: [RouterTestingModule.withRoutes([{ path: 'user', redirectTo: '' }]), BrowserAnimationsModule],
       declarations: [AppComponent],
       providers: [HealthcheckService, HttpClient, HttpHandler, ScrollBehaviourService],
     }).compileComponents();
@@ -68,82 +69,22 @@ describe('AppComponent', () => {
     expect(result).toBeTruthy();
   }));
 
-  it('should initiate views after init', fakeAsync(() => {
-    expect(component.navbarElement).toEqual(undefined);
-    component.ngOnInit();
-    tick();
-    fixture.detectChanges();
-    component.ngAfterViewInit();
-    expect(component.navbarElement).not.toEqual(undefined);
-  }));
+  it('should open menu', () => {
+    spyOn(scrollBehaviourService, 'preventScrolling')
+    component.smallMenuOpen = false;
+    component.openMenu();
+    expect(component.smallMenuOpen).toBeTruthy();
 
-  it('should open navigation', fakeAsync(() => {
-    spyOn(scrollBehaviourService, 'preventScrolling');
-    localStorage.setItem('currentUser', '{"user": "Test"}')
-    component.ngOnInit();
-    tick();
-    fixture.detectChanges();
-    component.ngAfterViewInit();
-    const hamburgerMenu = fixture.debugElement.query(By.css('#hamburger'));
-    hamburgerMenu.nativeElement.click()
-    expect(scrollBehaviourService.preventScrolling).toHaveBeenCalledWith(true);
-  }));
-
-  it('should close navigation', fakeAsync(() => {
-    spyOn(scrollBehaviourService, 'preventScrolling');
-    component.ngOnInit();
-    tick();
-    fixture.detectChanges();
-    component.ngAfterViewInit();
-    const navBackdrop = fixture.debugElement.query(By.css('#navBackdrop'));
-    navBackdrop.nativeElement.click()
-    expect(scrollBehaviourService.preventScrolling).toHaveBeenCalledWith(false);
-    expect(component.title).toEqual('');
-  }));
-
-  it('should set title', fakeAsync(() => {
-    spyOn(router, 'navigate');
-    localStorage.setItem('currentUser', '{"user": "Test"}')
-    component.ngOnInit();
-    tick();
-    fixture.detectChanges();
-    component.ngAfterViewInit();
-    const menuItem = fixture.debugElement.query(By.css('#usermenuProfileItem'));
-    menuItem.nativeElement.click()
-    expect(component.title).toEqual('Profile');
-    component.setTitle(undefined);
-    expect(component.title).toEqual('Profile');
-  }));
-
-  it('should get username', () => {
-    let result = component.getUsername();
-    expect(result).toEqual('Guest');
-    localStorage.setItem('currentUser', '{"userName": "Test"}');
-    result = component.getUsername();
-    expect(result).toEqual('Test');
+    component.openMenu();
+    expect(component.smallMenuOpen).toBeFalsy();
   });
 
-  it('should check if logged in', fakeAsync(() => {
-    let header = fixture.debugElement.query(By.css('#header'));
-    let usermenu = fixture.debugElement.query(By.css('#usermenu'));
-    let nav = fixture.debugElement.query(By.css('#nav'));
-    expect(header).toEqual(null);
-    expect(usermenu).toEqual(null);
-    expect(nav).toEqual(null);
-
-    localStorage.setItem('currentUser', '{"user": "Test"}')
-    component.ngOnInit();
-    tick();
-    fixture.detectChanges();
-    component.ngAfterViewInit();
-    header = fixture.debugElement.query(By.css('#header'));
-    usermenu = fixture.debugElement.query(By.css('#usermenu'));
-    nav = fixture.debugElement.query(By.css('#nav'));
-
-    expect(header).not.toEqual(null);
-    expect(usermenu).not.toEqual(null);
-    expect(nav).not.toEqual(null);
-  }));
+  it('should close menu', () => {
+    spyOn(scrollBehaviourService, 'preventScrolling')
+    component.smallMenuOpen= true;
+    component.closeMenu();
+    expect(component.smallMenuOpen).toBeFalsy();
+  })
 
   it('should determine if admin', () => {
     let result = component.isAdmin();
@@ -151,30 +92,6 @@ describe('AppComponent', () => {
     localStorage.setItem('currentUser', '{"user": "Carmen", "admin": "true"}');
     result = component.isAdmin();
     expect(result).toBeTruthy();
-  })
-
-  it('should open usermenu', fakeAsync(() => {
-    spyOn(scrollBehaviourService, 'preventScrolling');
-    localStorage.setItem('currentUser', '{"user": "Test"}')
-    component.ngOnInit();
-    tick();
-    fixture.detectChanges();
-    component.ngAfterViewInit();
-    const usermenu = fixture.debugElement.query(By.css('#usermenuCircle'));
-    usermenu.nativeElement.click()
-    expect(scrollBehaviourService.preventScrolling).toHaveBeenCalledWith(true);
-  }));
-
-  it('should close navigation', fakeAsync(() => {
-    spyOn(scrollBehaviourService, 'preventScrolling');
-    component.ngOnInit();
-    tick();
-    fixture.detectChanges();
-    component.ngAfterViewInit();
-    const userBackdrop = fixture.debugElement.query(By.css('#userBackdrop'));
-    userBackdrop.nativeElement.click()
-    expect(scrollBehaviourService.preventScrolling).toHaveBeenCalledWith(false);
-    expect(component.title).toEqual('');
-  }));
+  });
 
 });

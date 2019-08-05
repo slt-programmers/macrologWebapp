@@ -1,15 +1,15 @@
-import{Component, OnInit, ViewChild}from '@angular/core';
-import {DiaryService}from '../../services/diary.service';
-import {ActivityService}from '../../services/activity.service';
-import {UserService}from '../../services/user.service';
-import {FoodService}from '../../services/food.service';
-import {MealService}from '../../services/meal.service';
-import {LogEntry}from '../../model/logEntry';
-import {LogActivity}from '../../model/logActivity';
-import {FoodSearchable}from '../../model/foodSearchable';
-import {DatePipe }from '@angular/common';
-import {Dish}from '@app/model/dish';
-import {Food}from '@app/model/food';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { DiaryService } from '../../services/diary.service';
+import { ActivityService } from '../../services/activity.service';
+import { UserService } from '../../services/user.service';
+import { FoodService } from '../../services/food.service';
+import { MealService } from '../../services/meal.service';
+import { LogEntry } from '../../model/logEntry';
+import { LogActivity } from '../../model/logActivity';
+import { FoodSearchable } from '../../model/foodSearchable';
+import { DatePipe } from '@angular/common';
+import { Dish } from '@app/model/dish';
+import { Food } from '@app/model/food';
 
 @Component({
 	selector: 'diary-page',
@@ -45,7 +45,7 @@ export class DiaryComponent implements OnInit {
 	public snacksOpen = false;
 	public activitiesOpen = false;
 
-  public activititiesSync = false;
+	public activititiesSync = false;
 	public intakeGoals;
 	public goalCal: number;
 
@@ -59,7 +59,7 @@ export class DiaryComponent implements OnInit {
 	}
 
 	ngOnInit() {
-    this.getSyncSettings();
+		this.getSyncSettings();
 		this.getUserGoals(this.pipe.transform(this.displayDate, 'yyyy-MM-dd'));
 		this.getAllFood();
 		this.getLogEntries(this.pipe.transform(this.displayDate, 'yyyy-MM-dd'));
@@ -133,12 +133,12 @@ export class DiaryComponent implements OnInit {
 	}
 
 	private getSyncSettings() {
-		 this.userService.getSyncSettings('STRAVA').subscribe(
+		this.userService.getSyncSettings('STRAVA').subscribe(
 			result => {
-         if (result.syncedAccountId){
-             this.activititiesSync = true; // TODO --> GET THIS TO ACTIVITIES PAGE TO ENABLE SYNC BUTTON
-         }
-		  });
+				if (result.syncedAccountId) {
+					this.activititiesSync = true; // TODO --> GET THIS TO ACTIVITIES PAGE TO ENABLE SYNC BUTTON
+				}
+			});
 	}
 
 	private getAllFood() {

@@ -7,12 +7,12 @@ import * as moment from 'moment';
 import { DataPoint } from '@app/components/linegraph/linegraph.component';
 
 @Component({
-  selector: 'user-weighttracker',
-  templateUrl: './user.weighttracker.component.html',
-  styleUrls: ['./user.weighttracker.component.scss'],
+  selector: 'weighttracker',
+  templateUrl: './weighttracker.component.html',
+  styleUrls: ['./weighttracker.component.scss'],
   host: { '(document: click)': 'documentClick($event)' }
 })
-export class UserWeightTrackerComponent {
+export class WeightTrackerComponent {
 
   public trackedWeights = new Array<Weight>();
   public measurementDate: string;

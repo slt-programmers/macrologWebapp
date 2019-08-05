@@ -13,7 +13,7 @@ export class LinegraphComponent implements AfterViewInit, OnChanges {
   @Input() dataset: DataPoint[];
   @Input() yAxisStep: number;
   @Input() xAxisStep: number;
-  @Input() hasOffgridValue: DataPoint;
+  @Input() hasOffgridValue: boolean;
 
   public graphPoints: GraphPoint[];
   public yAxisPoints: number[];
@@ -21,11 +21,22 @@ export class LinegraphComponent implements AfterViewInit, OnChanges {
   public svgPath: string;
   public trendPath: string;
 
-  private yAxisHeight: number;
+  yAxisHeight: number;
   private xAxisWidth: number;
   private xAxisPointWidth: number;
 
   constructor() {
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes['dataset'] && this.dataset !== undefined) {
+      this.yAxisPoints = this.determineYAxisPoints();
+      this.xAxisPoints = this.determineXAxisPoints();
+      this.graphPoints = this.convertDatasetToPoints();
+
+      this.calculateGraph();
+      this.calculateTrend();
+    }
   }
 
   ngAfterViewInit() {
@@ -36,72 +47,7 @@ export class LinegraphComponent implements AfterViewInit, OnChanges {
     }
   }
 
-  ngOnChanges(changes: SimpleChanges) {
-    if (changes['dataset'] && this.dataset !== undefined) {
-      this.yAxisPoints = this.determineYAxisPoints();
-      this.xAxisPoints = this.determineXAsixPoints();
-      this.graphPoints = this.convertDatasetToPoints();
-
-      this.calculateGraph();
-      this.calculateTrend();
-    }
-  }
-
-  private calculateTrend() {
-    const valueset = [];
-    const convertedDataset = [];
-    for (let i = 1; i <= this.dataset.length; i++) {
-      const newPoint = this.dataset[i - 1];
-      newPoint.x = i;
-      convertedDataset.push(newPoint);
-    }
-
-    for (const point of convertedDataset) {
-      if (point.y !== undefined) {
-        valueset.push(point);
-      }
-    }
-    let sumOfXTimesY = 0;
-    let sumOfXValues = 0;
-    let sumOfYValues = 0;
-    let sumOfXSquared = 0;
-    for (const point of valueset) {
-      sumOfXTimesY += (point.x * point.y);
-      sumOfXValues += point.x;
-      sumOfYValues += point.y;
-      sumOfXSquared += (point.x * point.x);
-    }
-
-    const a = valueset.length * sumOfXTimesY;
-    const b = sumOfXValues * sumOfYValues;
-    const c = valueset.length * sumOfXSquared;
-    const d = sumOfXValues * sumOfXValues;
-    const slope = (a - b) / (c - d);
-
-    const e = sumOfYValues;
-    const f = slope * sumOfXValues;
-    const intercept = (e - f) / valueset.length
-
-    // y = slope * x + intercept
-    let yStart = intercept;
-    let yEnd = slope * (this.dataset.length - 0.5) + intercept
-
-    let lowest = this.yAxisPoints[this.yAxisPoints.length - 1]
-    let difference = this.yAxisPoints[0] - lowest;
-    yStart = yStart - lowest;
-    yStart = yStart * (this.yAxisHeight / difference);
-    yStart = this.yAxisHeight - yStart;
-
-    yEnd = yEnd - lowest;
-    yEnd = yEnd * (this.yAxisHeight / difference);
-    yEnd = this.yAxisHeight - yEnd;
-
-    this.trendPath = "M0 " + yStart + " L" + (this.xAxisWidth - (this.xAxisPointWidth / 2)) + " " + yEnd + 
-    " L" + (this.xAxisWidth - (this.xAxisPointWidth / 2)) + " " + this.yAxisHeight + 
-    " L0 " + this.yAxisHeight + " Z";
-  }
-
-  private calculateGraph() {
+  calculateGraph() {
     this.xAxisPointWidth = this.xAxisWidth / this.dataset.length;
     const yStartPosition = this.determineYStartPosition();
     const xStartPosition = this.determineXStartPosition();
@@ -140,7 +86,61 @@ export class LinegraphComponent implements AfterViewInit, OnChanges {
       }
     }
     this.svgPath += ' L' + xPosition + ' ' + this.yAxisHeight +
-      ' L' + xStartPosition + ' ' + this.yAxisHeight + '  Z';
+      ' L' + xStartPosition + ' ' + this.yAxisHeight + ' Z';
+  }
+
+  calculateTrend() {
+    const valueset = [];
+    const convertedDataset = [];
+    for (let i = 1; i <= this.dataset.length; i++) {
+      const newPoint = this.dataset[i - 1];
+      newPoint.x = i;
+      convertedDataset.push(newPoint);
+    }
+
+    for (const point of convertedDataset) {
+      if (point.y !== undefined) {
+        valueset.push(point);
+      }
+    }
+    let sumOfXTimesY = 0;
+    let sumOfXValues = 0;
+    let sumOfYValues = 0;
+    let sumOfXSquared = 0;
+    for (const point of valueset) {
+      sumOfXTimesY += (point.x * point.y);
+      sumOfXValues += point.x;
+      sumOfYValues += point.y;
+      sumOfXSquared += (point.x * point.x);
+    }
+
+    const a = valueset.length * sumOfXTimesY;
+    const b = sumOfXValues * sumOfYValues;
+    const c = valueset.length * sumOfXSquared;
+    const d = sumOfXValues * sumOfXValues;
+    const slope = (a - b) / (c - d);
+
+    const e = sumOfYValues;
+    const f = slope * sumOfXValues;
+    const intercept = (e - f) / valueset.length;
+
+    // y = slope * x + intercept
+    let yStart = intercept;
+    let yEnd = slope * (this.dataset.length - 0.5) + intercept;
+
+    const lowest = this.yAxisPoints[this.yAxisPoints.length - 1];
+    const difference = this.yAxisPoints[0] - lowest;
+    yStart = yStart - lowest;
+    yStart = yStart * (this.yAxisHeight / difference);
+    yStart = this.yAxisHeight - yStart;
+
+    yEnd = yEnd - lowest;
+    yEnd = yEnd * (this.yAxisHeight / difference);
+    yEnd = this.yAxisHeight - yEnd;
+
+    this.trendPath = 'M0 ' + yStart + ' L' + (this.xAxisWidth - (this.xAxisPointWidth / 2)) + ' ' + yEnd +
+      ' L' + (this.xAxisWidth - (this.xAxisPointWidth / 2)) + ' ' + this.yAxisHeight +
+      ' L0 ' + this.yAxisHeight + ' Z';
   }
 
   private determineXStartPosition(): number {
@@ -166,7 +166,7 @@ export class LinegraphComponent implements AfterViewInit, OnChanges {
     return 0;
   }
 
-  private determineYAxisPoints() {
+  determineYAxisPoints() {
     const yAxisPoints = [];
     const yValues = [];
     for (let i = 0; i < this.dataset.length; i++) {
@@ -192,7 +192,7 @@ export class LinegraphComponent implements AfterViewInit, OnChanges {
     return yAxisPoints;
   }
 
-  private determineXAsixPoints() {
+  determineXAxisPoints() {
     const xAxisPoints = [];
     for (let i = 0; i < this.dataset.length; i++) {
       xAxisPoints.push(this.dataset[i].x);
@@ -200,7 +200,7 @@ export class LinegraphComponent implements AfterViewInit, OnChanges {
     return xAxisPoints;
   }
 
-  private convertDatasetToPoints() {
+  convertDatasetToPoints() {
     const graphPoints = [];
     for (const dataPoint of this.dataset) {
       const lowestYValue = this.yAxisPoints[this.yAxisPoints.length - 1];

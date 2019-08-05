@@ -147,9 +147,11 @@ $macrolog-blue-theme: (
 @include mat-input-theme($macrolog-white-theme);
 @include mat-form-field-theme($macrolog-white-theme);
 @include mat-button-theme($macrolog-white-theme);
+@include mat-progress-spinner-theme($macrolog-white-theme);
 
 .blue-theme {
   @include mat-form-field-theme($macrolog-blue-theme);
   @include mat-input-theme($macrolog-blue-theme);
   @include mat-button-theme($macrolog-blue-theme);
+  @include mat-progress-spinner-theme($macrolog-blue-theme);
 }
