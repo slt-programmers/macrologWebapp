@@ -1,28 +1,28 @@
 import { Component, OnInit } from '@angular/core';
 import { Dish } from '../../model/dish';
-import { MealService } from '../../services/meal.service';
+import { DishService } from '../../services/dish.service';
 
 @Component({
-	selector: 'app-meals',
-	templateUrl: './meals.component.html'
+	selector: 'app-dishes',
+	templateUrl: './dishes.component.html'
 })
-export class MealsComponent implements OnInit {
+export class DishesComponent implements OnInit {
 
-	public allMeals: Dish[];
+	public allDishes: Dish[];
 	public modalIsVisible = false;
 	public unitName = 'gram';
 	public unitGrams = 100.00;
 
-	constructor(private mealService: MealService) { }
+	constructor(private dishService: DishService) { }
 
 	ngOnInit() {
-		this.getAllMeals();
+		this.getAllDishes();
 	}
 
-	public getAllMeals() {
-		this.mealService.getAllMeals().subscribe(
+	public getAllDishes() {
+		this.dishService.getAllDishes().subscribe(
 			data => {
-				this.allMeals = data;
+				this.allDishes = data;
 			},
 			error => console.log(error)
 		);
@@ -34,17 +34,17 @@ export class MealsComponent implements OnInit {
 
 	closeModal(event) {
 		this.modalIsVisible = !event;
-		this.getAllMeals();
+		this.getAllDishes();
 	}
 
-	public getTotal(meal: Dish, macro: string) {
+	public getTotal(dish: Dish, macro: string) {
 		const macros = {
 			protein: 0,
 			fat: 0,
 			carbs: 0
 		};
 
-		for (const ingredient of meal.ingredients) {
+		for (const ingredient of dish.ingredients) {
 			if (ingredient.portion === undefined) {
 				macros.protein += (ingredient.food.protein * ingredient.multiplier);
 				macros.fat += (ingredient.food.fat * ingredient.multiplier);

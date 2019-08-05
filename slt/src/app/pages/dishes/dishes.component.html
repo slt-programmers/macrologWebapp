@@ -2,26 +2,26 @@
   <div class="tile">
     <div class="form-field form-field--horizontal">
       <label class="form-field__label">Protein</label>
-      <div class="meal-card__legenda meal-card__legenda--protein"></div>
+      <div class="dish-card__legenda dish-card__legenda--protein"></div>
     </div>
 
     <div class="form-field form-field--horizontal">
       <label class="form-field__label">Fat</label>
-      <div class="meal-card__legenda meal-card__legenda--fat"></div>
+      <div class="dish-card__legenda dish-card__legenda--fat"></div>
     </div>
 
     <div class="form-field form-field--horizontal">
       <label class="form-field__label">Carbs</label>
-      <div class="meal-card__legenda meal-card__legenda--carbs"></div>
+      <div class="dish-card__legenda dish-card__legenda--carbs"></div>
     </div>
   </div>
 
   <div class="grid">
-    <div class="card" *ngFor="let meal of allMeals">
-      <div class="meal-card">
-        <h3 class="meal-card__title">{{meal.name}}</h3>
+    <div class="card" *ngFor="let dish of allDishes">
+      <div class="dish-card">
+        <h3 class="dish-card__title">{{dish.name}}</h3>
 
-        <div class="grid__tile__ingredients" *ngFor="let ingredient of meal.ingredients">
+        <div class="grid__tile__ingredients" *ngFor="let ingredient of dish.ingredients">
           <div class="grid__tile__text grid__tile__text--ingredient">{{ingredient.food.name}}</div>
 
           <div class="grid__tile__text grid__tile__text--amount" *ngIf="!ingredient.portion">

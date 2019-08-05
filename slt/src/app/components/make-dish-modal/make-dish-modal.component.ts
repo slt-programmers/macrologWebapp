@@ -3,7 +3,7 @@ import { Dish } from '../../model/dish';
 import { Ingredient } from '../../model/ingredient';
 import { FoodSearchable } from '../../model/foodSearchable';
 import { FoodService } from '../../services/food.service';
-import { MealService } from '../../services/meal.service';
+import { DishService } from '../../services/dish.service';
 import { Food } from '@app/model/food';
 
 @Component({
@@ -25,7 +25,7 @@ export class MakeDishModalComponent implements OnInit {
 	private unitGrams = 100.00;
 
 	constructor(private foodService: FoodService,
-		private mealService: MealService) {
+		private dishService: DishService) {
 	}
 
 	ngOnInit() {
@@ -118,7 +118,7 @@ export class MakeDishModalComponent implements OnInit {
 		const closeCallBack = () => {
 			self.closeModal();
 		};
-		this.mealService.insertMeal(dish, closeCallBack);
+		this.dishService.insertDish(dish, closeCallBack);
 	}
 
 	public closeModal() {

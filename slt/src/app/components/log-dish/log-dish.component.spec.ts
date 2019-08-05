@@ -1,4 +1,4 @@
-import { LogMealComponent } from "./log-meal.component";
+import { LogDishComponent } from "./log-dish.component";
 import { async, TestBed, ComponentFixture } from "@angular/core/testing";
 import { NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA, SimpleChange } from "@angular/core";
 import { DiaryService } from "@app/services/diary.service";
@@ -11,14 +11,14 @@ import { Food } from "@app/model/food";
 import { FoodSearchable } from "@app/model/foodSearchable";
 import { StoreLogRequest } from "@app/model/storeLogRequest";
 
-describe('LogMealComponent', () => {
-    let component: LogMealComponent;
-    let fixture: ComponentFixture<LogMealComponent>;
+describe('LogDishComponent', () => {
+    let component: LogDishComponent;
+    let fixture: ComponentFixture<LogDishComponent>;
     let diaryService: DiaryService;
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            declarations: [LogMealComponent],
+            declarations: [LogDishComponent],
             providers: [DiaryService, ToastService],
             imports: [HttpClientTestingModule],
             schemas: [NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA]
@@ -26,17 +26,17 @@ describe('LogMealComponent', () => {
     }));
 
     beforeEach(() => {
-        fixture = TestBed.createComponent(LogMealComponent);
+        fixture = TestBed.createComponent(LogDishComponent);
         component = fixture.componentInstance;
         diaryService = TestBed.get(DiaryService);
         fixture.detectChanges();
     });
 
-    it('should create log-meal component', () => {
+    it('should create log-dish component', () => {
         expect(component).toBeTruthy();
     });
 
-    it('should init log-meal component', () => {
+    it('should init log-dish component', () => {
         component.ngOnInit();
         expect(component.addLogEntryCallBack).not.toEqual(undefined);
     });
@@ -65,8 +65,8 @@ describe('LogMealComponent', () => {
         expect(component.editable).toBeTruthy();
     })
 
-    it('should close the editable log-meal', () => {
-        component.meal = 'lunch';
+    it('should close the editable log-dish', () => {
+        component.dish = 'lunch';
         component.editable = true;
         fixture.detectChanges();
         const closeButton = fixture.debugElement.query(By.css('#closeBtn'));
@@ -90,7 +90,7 @@ describe('LogMealComponent', () => {
 
         spyOn(component, 'getAvailablePortions').and.returnValue([portion]);
 
-        component.meal = 'lunch';
+        component.dish = 'lunch';
         component.editable = true;
         fixture.detectChanges();
         const inputAmount = fixture.debugElement.query(By.css('#portionAmountInput'));
@@ -145,7 +145,7 @@ describe('LogMealComponent', () => {
 
         spyOn(component, 'getAvailablePortions').and.returnValue([portion]);
 
-        component.meal = 'lunch';
+        component.dish = 'lunch';
         component.editable = true;
         fixture.detectChanges();
         const inputAmount = fixture.debugElement.query(By.css('#portionAmountInput'));
@@ -254,14 +254,14 @@ describe('LogMealComponent', () => {
         spyOn(component, 'updateCalculatedMacros');
         let searchable = new FoodSearchable(new Food('name', 1, 2, 3));
         component.logEntries = [];
-        component.meal = 'lunch';
+        component.dish = 'lunch';
         let date = new Date();
         component.date = date;
 
         component.addLogEntry(searchable);
         expect(component.updateCalculatedMacros).toHaveBeenCalled();
         let result = new LogEntry();
-        result.meal = 'LUNCH';
+        result.dish = 'LUNCH';
         result.day = date;
         result.food = new Food('name', 1, 2, 3);
         expect(component.logEntries).toEqual([result]);
@@ -277,7 +277,7 @@ describe('LogMealComponent', () => {
         logEntry.food = food;
         logEntry.multiplier = 5;
         logEntry.day = new Date(2019, 0, 1);
-        component.meal = 'LUNCH';
+        component.dish = 'LUNCH';
         component.logEntries = [logEntry];
 
         let resultReuqest = new StoreLogRequest();
@@ -285,7 +285,7 @@ describe('LogMealComponent', () => {
         resultReuqest.foodId = 123;
         resultReuqest.multiplier = 5;
         resultReuqest.day = '2019-01-01';
-        resultReuqest.meal = 'LUNCH';
+        resultReuqest.dish = 'LUNCH';
 
         let allEntries = [resultReuqest];
         let callback = () => {

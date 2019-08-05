@@ -8,15 +8,15 @@ import { ToastService } from '../../services/toast.service';
 import { Portion } from '@app/model/portion';
 
 @Component({
-	selector: 'log-meal',
-	templateUrl: './log-meal.component.html'
+	selector: 'log-dish',
+	templateUrl: './log-dish.component.html'
 })
-export class LogMealComponent implements OnInit, OnChanges {
+export class LogDishComponent implements OnInit, OnChanges {
 
 	@ViewChild('logMeal', { static: false }) private logMealEref: ElementRef;
 
 	@Input() searchables: FoodSearchable[];
-	@Input() meal: string;
+	@Input() dish: string;
 	@Input() logEntries: LogEntry[];
 	@Input() date: Date;
 	@Input() open: boolean;
@@ -111,11 +111,11 @@ export class LogMealComponent implements OnInit, OnChanges {
 			data => {
 				const yesterdaysEntries = data;
 				const filteredEntries = yesterdaysEntries.filter(
-					entry => entry.meal === this.meal.toUpperCase()
+					entry => entry.dish === this.dish.toUpperCase()
 				);
 				for (const copiedEntry of filteredEntries) {
 					const logEntry = new LogEntry();
-					logEntry.meal = copiedEntry.meal;
+					logEntry.dish = copiedEntry.dish;
 					logEntry.food = copiedEntry.food;
 					if (copiedEntry.portion) {
 						logEntry.portion = copiedEntry.portion;
@@ -126,10 +126,10 @@ export class LogMealComponent implements OnInit, OnChanges {
 					this.logEntries.push(logEntry);
 					this.updateCalculatedMacros(logEntry);
 				}
-				this.toastService.setMessage(this.meal + ' has been copied from ' + copyFrom);
+				this.toastService.setMessage(this.dish + ' has been copied from ' + copyFrom);
 			},
 			err => {
-				this.toastService.setMessage(this.meal + ' of ' + copyFrom + '  could not be copied');
+				this.toastService.setMessage(this.dish + ' of ' + copyFrom + '  could not be copied');
 			}
 		);
 	}
@@ -175,7 +175,7 @@ export class LogMealComponent implements OnInit, OnChanges {
 		const dish = foodSearchable.dish;
 		if (food !== undefined) {
 			const logEntry = new LogEntry();
-			logEntry.meal = this.meal.toUpperCase();
+			logEntry.dish = this.dish.toUpperCase();
 			logEntry.food = food;
 			this.updateCalculatedMacros(logEntry);
 			logEntry.day = this.date;
@@ -229,7 +229,7 @@ export class LogMealComponent implements OnInit, OnChanges {
 			}
 			newRequest.multiplier = logEntry.multiplier;
 			newRequest.day = this.pipe.transform(logEntry.day, 'yyyy-MM-dd');
-			newRequest.meal = this.meal.toUpperCase();
+			newRequest.dish = this.dish.toUpperCase();
 			allEntries.push(newRequest);
 		}
 		this.diaryService.storeLogEntries(allEntries, this.closeCallBack);

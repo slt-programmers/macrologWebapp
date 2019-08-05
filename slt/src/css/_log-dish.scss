@@ -1,4 +1,4 @@
-.log-meal {
+.log-dish {
   &--grow {
     @media (min-width: $md) {
       @include elevation(2);
@@ -9,7 +9,7 @@
   }
 }
 
-.meal {
+.dish {
   @media (min-width: $md) {
     padding: ($gutter/2);
   }

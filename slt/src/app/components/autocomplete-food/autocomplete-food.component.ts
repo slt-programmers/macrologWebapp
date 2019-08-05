@@ -109,7 +109,7 @@ export class AutocompleteFoodComponent {
 	}
 
 	public closeAutoComplete(event: any) {
-		// Event vuurt 4x door 4 log-meal-components
+		// Event vuurt 4x door 4 log-dish-components
 		if (this.newIngredientEref && !this.newIngredientEref.nativeElement.contains(event.target)) {
 			this.showAutoComplete = false;
 			this.foodMatch = [];

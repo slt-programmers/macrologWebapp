@@ -5,28 +5,28 @@ import { Dish } from '../model/dish';
 import { environment } from '../../environments/environment';
 
 @Injectable()
-export class MealService {
+export class DishService {
 
-	private macrologBackendUrl = '//' + environment.backend + '/meals';
+	private macrologBackendUrl = '//' + environment.backend + '/dishes';
 
 	constructor(private http: HttpClient,
 		private toastService: ToastService) {
 	}
 
-	public getAllMeals() {
+	public getAllDishes() {
 		return this.http.get<Dish[]>(this.macrologBackendUrl, { responseType: 'json' });
 	}
 
-	public insertMeal(meal: Dish, callBack: Function) {
+	public insertDish(dish: Dish, callBack: Function) {
 		const headers = {
 			'Content-Type': 'application/json',
 			'Access-Control-Allow-Origin': environment.origin
 		};
 
 		const options = { headers: headers };
-		return this.http.post<Dish>(this.macrologBackendUrl + '/', meal, options).subscribe(
+		return this.http.post<Dish>(this.macrologBackendUrl + '/', dish, options).subscribe(
 			data => {
-				this.toastService.setMessage('Your meal have been saved!');
+				this.toastService.setMessage('Your dish have been saved!');
 				callBack();
 			},
 			error => {
@@ -34,14 +34,14 @@ export class MealService {
 			});
 	}
 
-	public deleteMeal(meal: Dish) {
+	public deleteDish(dish: Dish) {
 		const headers = {
 			'Content-Type': 'application/json',
 			'Access-Control-Allow-Origin': environment.origin
 		};
 
 		const options = { headers: headers };
-		return this.http.delete<number>(this.macrologBackendUrl + '/' + meal.id, options).subscribe(
+		return this.http.delete<number>(this.macrologBackendUrl + '/' + dish.id, options).subscribe(
 			data => {
 			},
 			error => {

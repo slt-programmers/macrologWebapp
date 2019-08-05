@@ -1,0 +1,99 @@
+<div #logDish class="log-dish" [ngClass]="{'log-dish--grow': editable}">
+  <div class="dish" *ngIf="!editable">
+    <span class="dish__title">{{dish}}</span>
+
+    <div class="dish__display">
+      <div *ngFor="let logEntry of logEntries" class="dish__ingredient">
+        <span class="dish__ingredient__name">{{logEntry.food.name}}</span>
+
+        <span class="dish__ingredient__amount" *ngIf="logEntry.portion">{{logEntry.multiplier | number:'1.0-2'}}
+          {{logEntry.portion.description}}</span>
+
+        <span class="dish__ingredient__amount"
+          *ngIf="!logEntry.portion">{{unitGrams * logEntry.multiplier | number:'1.0-2'}} {{unitName}}</span>
+
+        <span class="dish__ingredient__macro">{{logEntry.macrosCalculated.protein | number:'1.1-1'}}</span>
+
+        <span class="dish__ingredient__macro">{{logEntry.macrosCalculated.fat | number:'1.1-1'}}</span>
+
+        <span class="dish__ingredient__macro">{{logEntry.macrosCalculated.carbs | number:'1.1-1'}}</span>
+
+        <span class="dish__ingredient__calories">{{logEntry.macrosCalculated.calories | number:'1.0-0'}} kcal</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="dish" *ngIf="editable">
+    <span class="dish__title">{{dish}}<i class="dish__icon fas fa-file-import"
+        title="Copy {{dish.toLowerCase()}} from previous day" (click)="copyPrevious()"></i>
+    </span>
+
+    <div class="dish__editable">
+      <div *ngFor="let logEntry of logEntries" class="dish__edit-ingredient">
+        <div class="dish__edit-ingredient__name">
+          {{logEntry.food.name}}
+        </div>
+
+        <div class="dish__edit-ingredient__measurement">
+          <div class="dish__edit-ingredient__measurement__input">
+            <select (change)="portionChange(logEntry, $event)">
+              <!-- 100 grams -->
+              <option selected="{{isGramsSelected(logEntry)}}">{{unitName}}</option>
+
+              <!-- portion amount -->
+              <option selected="{{isUnitSelected(logEntry, portion)}}" *ngFor="let portion of getAvailablePortions(logEntry)" value="{{portion.description}}">
+                {{portion.description}}
+              </option>
+            </select>
+          </div>
+        </div>
+
+        <div class="dish__edit-ingredient__amount">
+          <div class="dish__edit-ingredient__amount__input">
+            <input id="portionAmountInput" class="input portioninput" type="number" step="0.1" *ngIf="logEntry.portion"
+              (keyup)="amountChange(logEntry)" [value]="getAmountValue(logEntry)"
+              (input)="setLogEntryMultiplier($event, logEntry)">
+
+            <input id="gramsAmountInput" class="input" type="number" step="1" *ngIf="!logEntry.portion"
+              (keyup)="amountChange(logEntry)" [value]="getAmountValue(logEntry)"
+              (input)="setLogEntryMultiplier($event, logEntry)">
+          </div>
+        </div>
+
+        <div class="dish__edit-ingredient__macro">
+          {{logEntry.macrosCalculated.protein | number:'1.1-1'}}
+        </div>
+
+        <div class="dish__edit-ingredient__macro">
+          {{logEntry.macrosCalculated.fat | number:'1.1-1'}}
+        </div>
+
+        <div class="dish__edit-ingredient__macro">
+          {{logEntry.macrosCalculated.carbs | number:'1.1-1'}}
+        </div>
+
+        <div class="dish__edit-ingredient__calories">
+          {{logEntry.macrosCalculated.calories | number:'1.0-0'}} kcal
+        </div>
+
+        <div class="blue-theme dish__edit-ingredient__delete">
+          <button mat-icon-button color="primary" (click)="deleteLogEntry(logEntry)">
+            <mat-icon class="trash">delete</mat-icon>
+          </button>
+        </div>
+      </div>
+
+      <div class="dish__new-ingredient">
+        <autocomplete-food class="dish__new-ingredient__name" [searchables]="searchables"
+          [placeholder]="'What did you have for ' + dish.toLowerCase() + '?'" [selectFn]="addLogEntryCallBack">
+        </autocomplete-food>
+
+        <div class="blue-theme dish__new-ingredient__close">
+          <button id="closeBtn" mat-icon-button color="primary" (click)="close()">
+            <mat-icon>check</mat-icon>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
