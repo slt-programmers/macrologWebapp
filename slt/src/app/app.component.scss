@@ -19,6 +19,7 @@ $menuWidth: 200px;
     height: 100%;
     bottom: 0;
   }
+  @include elevation(4);
   background-image: $whiteHorizontalGradient;
   position: fixed;
   top: 0;
@@ -150,6 +151,7 @@ $menuWidth: 200px;
 
 .content {
   @media (min-width: $lg) {
+    height: 100%;
     margin-left: $menuWidth;
     top: 0;
   }
