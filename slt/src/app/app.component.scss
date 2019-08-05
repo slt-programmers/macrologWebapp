@@ -2,9 +2,14 @@
 
 $menuHeight: 50px;
 $menuWidth: 200px;
+
 .svg-wrapper {
+  @media(min-width: $lg) {
+    display: block;
+  }
   width: 105%;
   position: absolute;
+  display: none;
 }
 
 .menu {

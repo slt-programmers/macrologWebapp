@@ -17,7 +17,7 @@ import { trigger, transition, style, animate, state, keyframes } from '@angular/
 				marginLeft: '0'
 			})), 
 			transition('* <=> *', [
-				animate('5s 0s ease-in')
+				animate('5s 0s ease-in-out')
 			])
 		]),
 		trigger('moveDelay', [
@@ -28,7 +28,7 @@ import { trigger, transition, style, animate, state, keyframes } from '@angular/
 				marginRight: '0'
 			})), 
 			transition('* <=> *', [
-				animate('4s 1s ease-in')
+				animate('4s 0s ease-in-out')
 			])
 		]),
 		trigger('openClose', [
@@ -46,7 +46,7 @@ import { trigger, transition, style, animate, state, keyframes } from '@angular/
 				]))
 			]),
 			transition('closed => open', [
-				animate('0.2s 0s ease-in', style({ marginRight: 0 }))
+				animate('0.2s 0s ease-out', style({ marginRight: 0 }))
 			]),
 		]),
 	]
