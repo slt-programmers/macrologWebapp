@@ -23,6 +23,7 @@ $warning: map-get($macrolog-webapp-warn, default);
 
 $transparent: #ffffffff;
 $whiteTransparent: rgba(255, 255, 255, 0.5);
+$whiteTransparentLight: rgba(255, 255, 255, 0.1);
 
 // Gradients
 $backgroundGradient: linear-gradient(to bottom, $primary, $secondary);

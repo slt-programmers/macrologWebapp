@@ -9,11 +9,11 @@
     </div>
 
     <div class="menu__item">
-      <p class="menu__item__text" id="login" (click)="toggleLogin(true)">Log in</p>
+      <div matRipple [ngClass]="{'menu__item__text--active': showContentLogin}" class="menu__item__text" id="login" (click)="toggleLogin(true)">Log in</div>
     </div>
 
     <div class="menu__item">
-      <p class="menu__item__text" id="about" (click)="toggleLogin(false)">About</p>
+      <div matRipple [ngClass]="{'menu__item__text--active': !showContentLogin}" class="menu__item__text" id="about" (click)="toggleLogin(false)">About</div>
     </div>
   </div>
 

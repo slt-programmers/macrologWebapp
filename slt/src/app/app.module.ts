@@ -12,7 +12,7 @@ import { MatButtonModule } from '@angular/material';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTableModule } from '@angular/material/table';
 import { MatRippleModule } from '@angular/material/core';
-import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 import { AppComponent } from './app.component';
 import { FoodService } from './services/food.service';
@@ -37,7 +37,7 @@ import { BargraphComponent } from './components/bargraph/bargraph.component';
 import { AddFoodModalComponent } from './components/add-food-modal/add-food-modal.component';
 import { CalculateIntakeModalComponent } from './components/calculate-intake-modal/calculate-intake-modal.component';
 import { DishesComponent } from './pages/dishes/dishes.component';
-import { GraphsComponent } from './pages/graphs/graphs.component';
+import { GraphsComponent } from './pages/graphs/analytics.component';
 import { DatepickerComponent } from './components/datepicker/datepicker.component';
 import { PagerComponent } from './components/pager/pager.component';
 import { MakeDishModalComponent } from './components/make-dish-modal/make-dish-modal.component';
@@ -70,7 +70,7 @@ const appRoutes: Routes = [
 			{ path: 'personal', component: PersonalComponent },
 			{ path: 'foodintake', component: IntakeComponent },
 			{ path: 'weighttracker', component: WeightTrackerComponent },
-      { path: 'connectivity', component: ConnectivityComponent },
+			{ path: 'connectivity', component: ConnectivityComponent },
 			{ path: 'account', component: AccountComponent }
 		]
 	},
@@ -96,7 +96,7 @@ const appRoutes: Routes = [
 		PersonalComponent,
 		AccountComponent,
 		WeightTrackerComponent,
-    ConnectivityComponent,
+		ConnectivityComponent,
 		SliderComponent,
 		BargraphComponent,
 		AddFoodModalComponent,

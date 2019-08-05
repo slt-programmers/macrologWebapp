@@ -21,6 +21,11 @@
   }
 }
 
+input[type="checkbox"] {
+  width: auto;
+  height: auto;
+}
+
 input[type="number"] {
   -moz-appearance: textfield;
 }

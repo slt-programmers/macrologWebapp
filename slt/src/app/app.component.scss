@@ -3,6 +3,15 @@
 $menuHeight: 50px;
 $menuWidth: 200px;
 
+// .svg-wrapper {
+//   @media(min-width: $lg) {
+//     display: block;
+//   }
+//   width: 105%;
+//   position: absolute;
+//   display: none;
+// }
+
 .menu {
   @media (min-width: $lg) {
     background: $whiteVerticalGradient;
@@ -29,12 +38,12 @@ $menuWidth: 200px;
     color: white;
     display: inline-block;
     font-size: 32px;
-    font-weight: 900;
+    font-weight: 600;
     margin-left: 12px;
     margin-right: 12px;
 
     &__text {
-      line-height: 1;
+      //line-height: 1;
       cursor: default;
     }
   }
@@ -54,31 +63,39 @@ $menuWidth: 200px;
     display: none;
   }
 
-  &__menu-items {
+  &__items {
     @media (min-width: $lg) {
       float: none;
       display: block;
       margin: 0;
       position: static;
     }
+    display: inline-block;
     margin: 0 0 24px 0;
     position: absolute;
     bottom: 0;
     right: 0;
   }
 
-  &__menu-item {
+  &__item {
     @media (min-width: $lg) {
       display: block;
-      margin: 0 auto 20px auto;
+      margin: 0 auto 0 auto;
       text-align: center;
       padding: 0;
-      width: 100px;
     }
     color: white;
     cursor: pointer;
     display: none;
     font-size: 16px;
+
+    &--active {
+      background-color: $whiteTransparentLight;
+    }
+
+    &__text {
+      padding: 15px 0;
+    }
   }
 
   &__hamburger {
@@ -114,6 +131,10 @@ $menuWidth: 200px;
     text-align: center;
     width: 220px;
 
+    &--active {
+      background-color: $whiteTransparentLight;
+    }
+    
     &--back {
       text-align: end;
     }
@@ -137,5 +158,4 @@ $menuWidth: 200px;
   top: $menuHeight;
   left: 0;
   right: 0;
-  bottom: 0;
 }
