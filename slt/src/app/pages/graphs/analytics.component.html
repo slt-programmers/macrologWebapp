@@ -22,57 +22,59 @@
 			<div *ngIf="!loading" class="graph__svg-container">
 				<svg #macroSvg [attr.width]="getSVGWidth()" class="graph__svg graph__svg--macros">
 					<g *ngFor="let d of logBars; let i = index" (mouseover)="showMacros(d)">
-						<text [attr.x]="marginLeft +  (barWidth * i)" [attr.y]="macroSvgHeight - graphLegenda + 15"
+						<text [attr.x]="marginLeft + (barWidth * i) + 4" [attr.y]="macroSvgHeight - graphLegenda + 15"
 							[attr.fill]="d.c">
-							<tspan [attr.width]="barWidth">{{d.day | date:'dd'}} </tspan>
+							<tspan fill="#666666" style="font-size: 12px;" [attr.width]="barWidth">{{d.day | date:'dd'}}</tspan>
 						</text>
 
-						<rect [attr.x]="marginLeft + i*barWidth" [attr.width]="barWidth" [attr.y]="getYPosProtein(d)"
-							[attr.height]="getHeightProtein(d)" 
+						<rect [attr.x]="marginLeft + i * barWidth" [attr.width]="barWidth" [attr.y]="getYPosProtein(d)"
+							[attr.height]="getHeightProtein(d)"
 							style="fill: rgba(218, 29, 143, 0.3); stroke: rgb(218, 29, 143); stroke-width: 1" />
 
-						<rect [attr.x]="marginLeft + i*barWidth" [attr.width]="barWidth" [attr.y]="getYPosFat(d)"
-							[attr.height]="getHeightFat(d)" 
+						<rect [attr.x]="marginLeft + i * barWidth" [attr.width]="barWidth" [attr.y]="getYPosFat(d)"
+							[attr.height]="getHeightFat(d)"
 							style="fill: rgba(144, 238, 144, 0.3); stroke: lightgreen; stroke-width: 1" />
 
-						<rect [attr.x]="marginLeft + i*barWidth" [attr.width]="barWidth" [attr.y]="getYPosCarbs(d)"
-							[attr.height]="getHeightCarbs(d)" 
+						<rect [attr.x]="marginLeft + i * barWidth" [attr.width]="barWidth" [attr.y]="getYPosCarbs(d)"
+							[attr.height]="getHeightCarbs(d)"
 							style="fill: rgba(100, 149, 236, 0.3); stroke: cornflowerblue; stroke-width: 1" />
-
-						<text x="0" [attr.y]="getGoalProteinPos()-2" style="color:#666666">P
+					</g>
+					
+					<g>
+						<text x="0" [attr.y]="getGoalProteinPos()-2" fill="#666666">P
 							{{getGoal('protein') | number:'1.1-1'}}</text>
 						<line x1="0" [attr.y1]="getGoalProteinPos()" [attr.x2]="marginLeft + logBars.length * barWidth"
-							[attr.y2]="getGoalProteinPos()" style="stroke:#666666; stroke-width: 1" />
+							[attr.y2]="getGoalProteinPos()" style="stroke:#999999; stroke-width: 1" />
 
 						<text x="0" [attr.y]="getGoalFatPos()-2" fill="#666666">F
 							{{getGoal('fat') | number:'1.1-1'}}</text>
 						<line x1="0" [attr.y1]="getGoalFatPos()" [attr.x2]="marginLeft + logBars.length * barWidth"
-							[attr.y2]="getGoalFatPos()" style="stroke:#666666; stroke-width: 1" />
+							[attr.y2]="getGoalFatPos()" style="stroke:#999999; stroke-width: 1" />
 
 						<text x="0" [attr.y]="getGoalCarbsPos()-2" fill="#666666">C
 							{{getGoal('carbs') | number:'1.1-1'}}</text>
 						<line x1="0" [attr.y1]="getGoalCarbsPos()" [attr.x2]="marginLeft + logBars.length * barWidth"
-							[attr.y2]="getGoalCarbsPos()" style="stroke:#666666; stroke-width: 1" />
+							[attr.y2]="getGoalCarbsPos()" style="stroke:#999999; stroke-width: 1" />
 					</g>
 				</svg>
 
 				<svg #calorieSvg [attr.width]="getSVGWidth()" class="graph__svg graph__svg--calories">
 					<g *ngFor="let d of logBars; let i = index" (mouseover)="showMacros(d)">
-						<text [attr.x]="marginLeft +  (barWidth* i)" [attr.y]="calorieSvgHeight - graphLegenda + 15 "
+						<text [attr.x]="marginLeft + (barWidth * i) + 4" [attr.y]="calorieSvgHeight - graphLegenda + 15"
 							[attr.fill]="d.c">
-							<tspan [attr.width]="barWidth">{{d.day | date:'dd'}} </tspan>
+							<tspan fill="#666666" style="font-size: 12px" [attr.width]="barWidth">{{d.day | date:'dd'}} </tspan>
 						</text>
 
-						<rect [attr.x]="marginLeft + i*barWidth" [attr.width]="barWidth" [attr.y]="getYPosCalories(d)"
+						<rect [attr.x]="marginLeft + i * barWidth" [attr.width]="barWidth" [attr.y]="getYPosCalories(d)"
 							[attr.height]="getHeightCalories(d)"
 							style="fill: rgba(0, 197, 255, 0.3); stroke:rgb(0, 197, 255); stroke-width: 1" />
 					</g>
 
 					<text x="0" [attr.y]="getGoalCaloriesPos()-2" fill="#666666">Kcal
-						{{getGoalCalories() | number:'1.1-1'}}</text>
+						{{getGoalCalories() | number:'1.0'}}</text>
 
 					<line x1="0" [attr.y1]="getGoalCaloriesPos()" [attr.x2]="marginLeft + logBars.length * barWidth"
-						[attr.y2]="getGoalCaloriesPos()" style="stroke:#666666; stroke-width: 1" />
+						[attr.y2]="getGoalCaloriesPos()" style="stroke:#999999; stroke-width: 1" />
 				</svg>
 			</div>
 
