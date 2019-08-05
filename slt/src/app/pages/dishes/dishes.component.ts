@@ -5,7 +5,8 @@ import { DishService } from '../../services/dish.service';
 
 @Component({
 	selector: 'app-dishes',
-	templateUrl: './dishes.component.html'
+	templateUrl: './dishes.component.html',
+  styleUrls: ['./dishes.component.scss']
 })
 export class DishesComponent implements OnInit {
 

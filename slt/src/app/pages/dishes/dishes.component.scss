@@ -1,0 +1,79 @@
+@import "../../../css/public.scss";
+
+.dish-grid{
+	display: flex;
+	width: 100%;
+	flex-wrap: wrap;
+	justify-content: center;
+	align-items: stretch;
+
+}
+.dish-card {
+	@include elevation(3);
+	margin: ($gutter/2);
+	padding: ($gutter/2);
+	width: 275px;
+	background-color: $mist;
+  border-radius: 15px;
+  border: outset $primary 5px;
+}
+
+
+.dish-content {
+	display: flex;
+	flex-direction: column;
+
+  .tooltip {
+    position: relative;
+    display: inline-block;
+  }
+
+  .tooltip .tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: $primary;
+    color: #fff;
+    text-align: center;
+    padding: 5px 0;
+    border-radius: 6px;
+
+    /* Position the tooltip text - see examples below! */
+    position: absolute;
+  	@include elevation(3);
+    z-index: 1;
+    top: -5px;
+    left: 105%;
+  }
+  .tooltip:hover .tooltiptext {
+    visibility: visible;
+  }
+
+
+	&__title {
+		align-self: center;
+		font-weight: bold;
+	}
+  &__pie {
+      align-self: center;
+      width:100px;
+      margin-bottom:20px;
+  }
+
+	&__legenda {
+		border-radius: 90%;
+		width: 24px;
+		height: 24px;
+
+		&--protein {
+			background-color: #5bd086;
+		}
+
+		&--fat {
+			background-color: #f7ed70;
+		}
+
+		&--carbs {
+			background-color: #fb8353;
+		}
+	}
+}
