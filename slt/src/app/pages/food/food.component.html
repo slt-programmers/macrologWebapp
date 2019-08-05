@@ -23,7 +23,11 @@
       </div>
     </div>
 
-    <div class="food-table">
+    <div class="spinner-wrapper" *ngIf="isLoading">
+      <mat-spinner [diameter]="50"></mat-spinner>
+    </div>
+
+    <div *ngIf="!isLoading" class="food-table">
       <div class="table-header">
         <div class="table-header__name" (click)="sortBy('name')">Name </div>
         <div class="table-header__amount" *ngIf="displayMode==='grams'">Amount </div>
