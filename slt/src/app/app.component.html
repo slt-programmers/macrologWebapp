@@ -49,27 +49,27 @@
     <i class="fas fa-arrow-right"></i>
   </div>
 
-  <div matRipple class="small-menu__item" routerLink="/log" (click)="closeMenu()">
+  <div matRipple [ngClass]="{'small-menu__item--active' : router.url === '/log'}" class="small-menu__item" routerLink="/log" (click)="closeMenu()">
     <div class="">Diary</div>
   </div>
 
-  <div matRipple class="small-menu__item" routerLink="/food" (click)="closeMenu()">
+  <div matRipple [ngClass]="{'small-menu__item--active' : router.url === '/food'}" class="small-menu__item" routerLink="/food" (click)="closeMenu()">
     <div class="">Food</div>
   </div>
 
-  <!-- <div matRipple class="small-menu__item" routerLink="/meals" (click)="closeMenu()">
+  <!-- <div matRipple [ngClass]="{'small-menu__item--active' : router.url === '/meals'}" class="small-menu__item" routerLink="/meals" (click)="closeMenu()">
     <div class="">Meals</div>
   </div> -->
 
-  <div matRipple class="small-menu__item" routerLink="/graphs" (click)="closeMenu()">
+  <div matRipple [ngClass]="{'small-menu__item--active' : router.url === '/graphs'}" class="small-menu__item" routerLink="/graphs" (click)="closeMenu()">
     <div class="">Graphs</div>
   </div>
 
-  <div matRipple class="small-menu__item" routerLink="/user" (click)="closeMenu()">
+  <div matRipple [ngClass]="{'small-menu__item--active' : router.url === '/user'}" class="small-menu__item" routerLink="/user" (click)="closeMenu()">
     <div class="">Profile</div>
   </div>
 
-  <div matRipple class="small-menu__item" routerLink="/admin" (click)="closeMenu()">
+  <div matRipple [ngClass]="{'small-menu__item--active' : router.url === '/admin'}" class="small-menu__item" routerLink="/admin" (click)="closeMenu()">
     <div class="">AdminPanel</div>
   </div>
 

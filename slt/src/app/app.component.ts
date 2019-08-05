@@ -17,14 +17,14 @@ import { trigger, transition, style, animate, state, keyframes } from '@angular/
 				marginRight: '-250px'
 			})),
 			transition('open => closed', [
-				animate('0.6s', keyframes([
+				animate('0.5s', keyframes([
 					style({ marginRight: '0', offset: 0 }),
-					style({ marginRight: '0', offset: 0.5 }),
+					style({ marginRight: '0', offset: 0.6 }),
 					style({ marginRight: '-250px', offset: 1 }),
 				]))
 			]),
 			transition('closed => open', [
-				animate('0.3s', style({ marginRight: 0 }))
+				animate('0.2s', style({ marginRight: 0 }))
 			]),
 		]),
 	]

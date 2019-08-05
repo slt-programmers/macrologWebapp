@@ -1,6 +1,7 @@
 .logday {
   @media (min-width: $md) {
     font-size: 16px;
+    border-radius: 4px;
   }
 
   @include elevation(1);
@@ -8,7 +9,6 @@
   display: flex;
   flex-direction: column;
   font-size: 14px;
-  border-radius: 4px;
 
   &__date {
     align-items: center;

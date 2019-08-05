@@ -34,7 +34,7 @@ $menuWidth: 200px;
     margin-right: 12px;
 
     &__text {
-      line-height: 1;
+      //line-height: 1;
       cursor: default;
     }
   }
@@ -54,13 +54,14 @@ $menuWidth: 200px;
     display: none;
   }
 
-  &__menu-items {
+  &__items {
     @media (min-width: $lg) {
       float: none;
       display: block;
       margin: 0;
       position: static;
     }
+    display: inline-block;
     margin: 0 0 24px 0;
     position: absolute;
     bottom: 0;
@@ -121,6 +122,10 @@ $menuWidth: 200px;
     text-align: center;
     width: 220px;
 
+    &--active {
+      background-color: $whiteTransparentLight;
+    }
+    
     &--back {
       text-align: end;
     }
