@@ -17,9 +17,9 @@
       </div>
       <div class="intake-goal__graph">
         <div #bargraph class="bargraph-wrapper">
-          <bargraph [percentage]="getTotal('protein')/intakeGoals[0]*100" [title]="'P'"></bargraph>
-          <bargraph [percentage]="getTotal('fat')/intakeGoals[1]*100" [title]="'F'"></bargraph>
-          <bargraph [percentage]="getTotal('carbs')/intakeGoals[2]*100" [title]="'C'"></bargraph>
+          <goal-progressbar [percentage]="getTotal('protein')/intakeGoals[0]*100" [title]="'P'"></goal-progressbar>
+          <goal-progressbar [percentage]="getTotal('fat')/intakeGoals[1]*100" [title]="'F'"></goal-progressbar>
+          <goal-progressbar [percentage]="getTotal('carbs')/intakeGoals[2]*100" [title]="'C'"></goal-progressbar>
         </div>
       </div>
     </div>

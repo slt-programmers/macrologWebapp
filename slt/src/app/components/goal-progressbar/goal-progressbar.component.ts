@@ -1,23 +1,20 @@
-import { Component, OnInit, OnChanges, ViewChild, SimpleChanges, ElementRef, Input, AfterViewInit } from '@angular/core';
+import { Component, OnChanges, ViewChild, ElementRef, Input, AfterViewInit } from '@angular/core';
 
 @Component({
-	selector: 'bargraph',
-	templateUrl: './bargraph.component.html'
+	selector: 'goal-progressbar',
+	templateUrl: './goal-progressbar.component.html',
+	styleUrls: ['./goal-progressbar.component.scss']
 })
-export class BargraphComponent implements OnInit, OnChanges, AfterViewInit {
+export class GoalProgressbarComponent implements OnChanges, AfterViewInit {
 
 	@ViewChild('trackFill', { static: false }) private trackFillElement: ElementRef;
 
 	@Input() percentage: number;
 	@Input() title: string;
 
-	public trackFill;
+	public trackFill: HTMLElement;
 
 	constructor() { }
-
-	ngOnInit() {
-
-	}
 
 	ngOnChanges() {
 		this.onChange();

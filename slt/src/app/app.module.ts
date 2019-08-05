@@ -33,7 +33,7 @@ import { WeightTrackerComponent } from './pages/user/weighttracker/weighttracker
 import { ConnectivityComponent } from './pages/user/connectivity/connectivity.component';
 import { UserService } from './services/user.service';
 import { SliderComponent } from './components/slider/slider.component';
-import { BargraphComponent } from './components/bargraph/bargraph.component';
+import { GoalProgressbarComponent } from './components/goal-progressbar/goal-progressbar.component';
 import { AddFoodModalComponent } from './components/add-food-modal/add-food-modal.component';
 import { CalculateIntakeModalComponent } from './components/calculate-intake-modal/calculate-intake-modal.component';
 import { MealsComponent } from './pages/meals/meals.component';
@@ -98,7 +98,7 @@ const appRoutes: Routes = [
 		WeightTrackerComponent,
 		ConnectivityComponent,
 		SliderComponent,
-		BargraphComponent,
+		GoalProgressbarComponent,
 		AddFoodModalComponent,
 		CalculateIntakeModalComponent,
 		MealsComponent,
