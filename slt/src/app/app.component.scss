@@ -29,7 +29,7 @@ $menuWidth: 200px;
     color: white;
     display: inline-block;
     font-size: 32px;
-    font-weight: 900;
+    font-weight: 600;
     margin-left: 12px;
     margin-right: 12px;
 
@@ -67,18 +67,25 @@ $menuWidth: 200px;
     right: 0;
   }
 
-  &__menu-item {
+  &__item {
     @media (min-width: $lg) {
       display: block;
-      margin: 0 auto 20px auto;
+      margin: 0 auto 0 auto;
       text-align: center;
       padding: 0;
-      width: 100px;
     }
     color: white;
     cursor: pointer;
     display: none;
     font-size: 16px;
+
+    &--active {
+      background-color: $whiteTransparentLight;
+    }
+
+    &__text {
+      padding: 15px 0;
+    }
   }
 
   &__hamburger {
