@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Dish } from '../../model/dish';
+import { Ingredient } from '../../model/ingredient';
 import { StoreDishRequest } from '../../model/storeDishRequest';
 import { DishService } from '../../services/dish.service';
 
@@ -12,8 +12,6 @@ export class DishesComponent implements OnInit {
 
 	public allDishes: Dish[];
 	public modalIsVisible = false;
-	public unitName = 'gram';
-	public unitGrams = 100.00;
 
 	constructor(private dishService: DishService) { }
 
@@ -39,24 +37,25 @@ export class DishesComponent implements OnInit {
 		this.getAllDishes();
 	}
 
-	public getTotal(dish: Dish, macro: string) {
-		const macros = {
-			protein: 0,
-			fat: 0,
-			carbs: 0
-		};
+  public getPortion(ingredient:Ingredient, portionId:long) {
+     console.log(ingredient);
+     for (const portion of ingredient.food.portions) {
+       if (portion.id == portionId) {
+          return portion;
+       }
+     }
+     console.log("Unknown portion");
+  }
+  public getIngredientDescription(ingredient: Ingredient) {
+     if (ingredient.portionId){
+        let usedPortion=  this.getPortion(ingredient, ingredient.portionId);
+        return ingredient.multiplier + " " + usedPortion.description;
+     } else {
+        return ingredient.multiplier * 100  + " gram";
+     }
+  }
 
-		for (const ingredient of dish.ingredients) {
-			if (ingredient.portion === undefined) {
-				macros.protein += (ingredient.food.protein * ingredient.multiplier);
-				macros.fat += (ingredient.food.fat * ingredient.multiplier);
-				macros.carbs += (ingredient.food.carbs * ingredient.multiplier);
-			} else {
-				macros.protein += (ingredient.portion.macros.protein * ingredient.multiplier);
-				macros.fat += (ingredient.portion.macros.fat * ingredient.multiplier);
-				macros.carbs += (ingredient.portion.macros.carbs * ingredient.multiplier);
-			}
-		}
-		return macros;
+	public getTotal(dish: Dish) {
+		return dish.macrosCalculated;
 	}
 }

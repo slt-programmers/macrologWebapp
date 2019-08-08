@@ -28,18 +28,15 @@
 						</text>
 
 						<rect [attr.x]="marginLeft + i * barWidth" [attr.width]="barWidth" [attr.y]="getYPosProtein(d)"
-							[attr.height]="getHeightProtein(d)"
-							style="fill: rgba(218, 29, 143, 0.3); stroke: rgb(218, 29, 143); stroke-width: 1" />
+							[attr.height]="getHeightProtein(d)" class="graph__svg--proteinbar"/>
 
 						<rect [attr.x]="marginLeft + i * barWidth" [attr.width]="barWidth" [attr.y]="getYPosFat(d)"
-							[attr.height]="getHeightFat(d)"
-							style="fill: rgba(144, 238, 144, 0.3); stroke: lightgreen; stroke-width: 1" />
+							[attr.height]="getHeightFat(d)"  class="graph__svg--fatbar"/>
 
 						<rect [attr.x]="marginLeft + i * barWidth" [attr.width]="barWidth" [attr.y]="getYPosCarbs(d)"
-							[attr.height]="getHeightCarbs(d)"
-							style="fill: rgba(100, 149, 236, 0.3); stroke: cornflowerblue; stroke-width: 1" />
+							[attr.height]="getHeightCarbs(d)"  class="graph__svg--carbbar"/>
 					</g>
-					
+
 					<g>
 						<text x="0" [attr.y]="getGoalProteinPos()-2" fill="#666666">P
 							{{getGoal('protein') | number:'1.1-1'}}</text>

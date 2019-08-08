@@ -1,0 +1,23 @@
+@import '../../../css/public.scss';
+
+.piechart {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+
+  &__pie {
+
+     &--protein {
+        width:200px;
+        color:red;
+     }
+     &--fat {
+        color:blue;
+        background-color:gold;
+        fill:red;
+     }
+     &--carbs {
+        background-color:yellow;
+     }
+  }
+}

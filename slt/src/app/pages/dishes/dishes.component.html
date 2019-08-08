@@ -18,31 +18,23 @@
 
   <div class="dish-grid">
     <div class="dish-card" *ngFor="let dish of allDishes">
-      <div class="dish-content">
+      <div class="dish-content" onmouseover="">
         <h3 class="dish-content__title">{{dish.name}}</h3>
 
 				<div class="dish-content__pie tooltip">
-					<span class="tooltiptext">
-						 Protein = {{getTotal(dish).protein | number:'1.1-1'}}<Br/>
-						 Fat = {{getTotal(dish).fat | number:'1.1-1'}}<Br/>
-						 Carbs = {{getTotal(dish).carbs | number:'1.1-1'}}
-
-
- 					</span>
+					<!--<span class="tooltiptext">-->
+						 <!--Protein = {{getTotal(dish).protein | number:'1.1-1'}}<Br/>-->
+						 <!--Fat = {{getTotal(dish).fat | number:'1.1-1'}}<Br/>-->
+						 <!--Carbs = {{getTotal(dish).carbs | number:'1.1-1'}}<Br/>-->
+						 <!--Calories = {{getTotal(dish).calories | number:'1.1-1'}}<Br/>-->
+ 					<!--</span>-->
 				  <piechart class="" [mealId]="dish.id" [macros]="getTotal(dish)"></piechart>
 				</div>
-
-				<div class="grid__tile__ingredients" *ngFor="let ingredient of dish.ingredients">
-          <div class="grid__tile__text grid__tile__text--ingredient">{{ingredient.food.name}}</div>
-
-          <div class="grid__tile__text grid__tile__text--amount" *ngIf="!ingredient.portion">
-            {{unitGrams * ingredient.multiplier}} {{unitName}}
-          </div>
-
-          <div class="grid__tile__text grid__tile__text--amount" *ngIf="ingredient.portion">
-            {{ingredient.multiplier}} {{ingredient.portion.description}}
-          </div>
-        </div>
+				<div class="dish-content__ingredientlist">
+					<div class="fish-content__ingredient" *ngFor="let ingredient of dish.ingredients">
+						<li>{{getIngredientDescription(ingredient)}} {{ingredient.food.name}}</li>
+					</div>
+				</div>
       </div>
     </div>
   </div>

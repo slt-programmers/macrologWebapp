@@ -9,20 +9,26 @@
 
 }
 .dish-card {
-	@include elevation(3);
+
+	@include elevation(2);
 	margin: ($gutter/2);
 	padding: ($gutter/2);
 	width: 275px;
 	background-color: $mist;
   border-radius: 15px;
-  border: outset $primary 5px;
+
+  &:hover{
+  	@include elevation(5);
+  }
+
+/*  border: outset $primary 5px;*/
 }
 
 
 .dish-content {
 	display: flex;
 	flex-direction: column;
-
+/*
   .tooltip {
     position: relative;
     display: inline-block;
@@ -37,7 +43,6 @@
     padding: 5px 0;
     border-radius: 6px;
 
-    /* Position the tooltip text - see examples below! */
     position: absolute;
   	@include elevation(3);
     z-index: 1;
@@ -47,8 +52,7 @@
   .tooltip:hover .tooltiptext {
     visibility: visible;
   }
-
-
+*/
 	&__title {
 		align-self: center;
 		font-weight: bold;
@@ -59,21 +63,8 @@
       margin-bottom:20px;
   }
 
-	&__legenda {
-		border-radius: 90%;
-		width: 24px;
-		height: 24px;
+  &__ingredientlist {
+      margin-left:20px;
+  }
 
-		&--protein {
-			background-color: #5bd086;
-		}
-
-		&--fat {
-			background-color: #f7ed70;
-		}
-
-		&--carbs {
-			background-color: #fb8353;
-		}
-	}
 }
