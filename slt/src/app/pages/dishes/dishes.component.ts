@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Ingredient } from '../../model/ingredient';
+import { Dish } from '../../model/dish';
 import { StoreDishRequest } from '../../model/storeDishRequest';
 import { DishService } from '../../services/dish.service';
 
@@ -37,7 +38,7 @@ export class DishesComponent implements OnInit {
 		this.getAllDishes();
 	}
 
-  public getPortion(ingredient:Ingredient, portionId:long) {
+  public getPortion(ingredient:Ingredient, portionId: number) {
      console.log(ingredient);
      for (const portion of ingredient.food.portions) {
        if (portion.id == portionId) {
