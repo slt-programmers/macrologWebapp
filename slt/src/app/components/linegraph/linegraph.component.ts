@@ -59,7 +59,7 @@ export class LinegraphComponent implements AfterViewInit, OnChanges {
 
     for (let i = 0; i < this.graphPoints.length; i++) {
       const graphPoint = this.graphPoints[i];
-      if (graphPoint.height !== 0) {
+      if (graphPoint.height !== undefined) {
         if (xPosition === 0) {
           xPosition = (this.xAxisPointWidth * i) + xStartOffset;
           this.svgPath += ' L' + xPosition + ' ' + (this.yAxisHeight - graphPoint.height);
@@ -69,8 +69,8 @@ export class LinegraphComponent implements AfterViewInit, OnChanges {
           const x1 = previousXPosition + 20;
           let previousYPosition: number;
           let j = i - 1;
-          while (true) {
-            if (this.graphPoints[j].height !== 0) {
+          while (j >= 0) {
+            if (this.graphPoints[j].height !== undefined) {
               previousYPosition = this.yAxisHeight - this.graphPoints[j].height;
               break;
             }
@@ -81,6 +81,7 @@ export class LinegraphComponent implements AfterViewInit, OnChanges {
 
           const x2 = xPosition - 20;
           const y2 = this.yAxisHeight - graphPoint.height;
+
           this.svgPath += ' C' + x1 + ' ' + y1 + ' ' + x2 + ' ' + y2 + ' ' + xPosition + ' ' + (this.yAxisHeight - graphPoint.height);
         }
       }
@@ -149,7 +150,7 @@ export class LinegraphComponent implements AfterViewInit, OnChanges {
     }
     for (let i = 0; i < this.graphPoints.length; i++) {
       const dataPoint = this.graphPoints[i];
-      if (dataPoint.height !== 0) {
+      if (dataPoint.height !== undefined) {
         return (this.xAxisPointWidth * i) + this.xAxisPointWidth / 2;
       }
     }
@@ -159,7 +160,7 @@ export class LinegraphComponent implements AfterViewInit, OnChanges {
   private determineYStartPosition(): number {
     for (let j = 0; j < this.graphPoints.length; j++) {
       const dataPoint = this.graphPoints[j];
-      if (dataPoint.height !== 0) {
+      if (dataPoint.height !== undefined) {
         return this.yAxisHeight - dataPoint.height;
       }
     }
@@ -205,7 +206,7 @@ export class LinegraphComponent implements AfterViewInit, OnChanges {
     for (const dataPoint of this.dataset) {
       const lowestYValue = this.yAxisPoints[this.yAxisPoints.length - 1];
       const differenceHighestLowestYValue = this.yAxisPoints[0] - lowestYValue;
-      let height = 0;
+      let height = undefined;
       if (dataPoint.y !== undefined) {
         height = (dataPoint.y - lowestYValue) * (this.yAxisHeight / differenceHighestLowestYValue);
       }
