@@ -43,10 +43,10 @@ describe('DiaryService', () => {
     }));
 
     it('should get macros', fakeAsync(() => {
-        const mockResponse = [{name: 'macro'}];
-        service.getMacros('2019-01-01', '2019-01-02').subscribe(
+        const mockResponse = [{macro: 'macro'}];
+        service.getMacrosPerDay('2019-01-01', '2019-01-02').subscribe(
             res => {
-                expect(res[0].name).toEqual('macro');
+                expect(res[0].macro).toEqual('macro');
              }
         );
         const request = http.expectOne(service.macrologBackendUrl + '/macros?from=2019-01-01&to=2019-01-02');
