@@ -4,6 +4,7 @@ import { StoreLogRequest } from '../model/storeLogRequest';
 import { LogEntry } from '../model/logEntry';
 import { ToastService } from './toast.service';
 import { environment } from '../../environments/environment';
+import { MacrosPerDay } from '@app/model/macrosPerDay';
 
 
 @Injectable()
@@ -19,8 +20,8 @@ export class DiaryService {
 		return this.http.get<LogEntry[]>(this.macrologBackendUrl + '/day/' + date);
 	}
 
-	public getMacros(dateFrom: string, dateTo: string) {
-		return this.http.get<any[]>(this.macrologBackendUrl + '/macros', { params: { from: dateFrom, to: dateTo }, responseType: 'json' });
+	public getMacrosPerDay(dateFrom: string, dateTo: string) {
+		return this.http.get<MacrosPerDay[]>(this.macrologBackendUrl + '/macros', { params: { from: dateFrom, to: dateTo }, responseType: 'json' });
 	}
 
 	public storeLogEntries(storeLogEntryRequest: StoreLogRequest[], callBack: Function) {

@@ -16,7 +16,7 @@
 
 		<p class="connectivity__info__text">The activities from Strava will be automatically added to Macrolog.</p>
 
-		<p class="connectivity__info__text">Number of activities synced with Strava: {{connected.numberActivitiesSynced}}</p>
+		<p class="connectivity__info__text">Number of activities synced with Strava: {{connection.numberActivitiesSynced}}</p>
 	</div>
 
 	<div class="connectivity__connection" *ngIf="!isConnected()">
@@ -26,10 +26,10 @@
 	</div>
 
 	<div class="connectivity__connection" *ngIf="isConnected()">
-		<img alt="strava profile picture" class="connectivity__connection__profile-pic" src="{{connected.image}}" />
+		<img alt="strava profile picture" class="connectivity__connection__profile-pic" src="{{connection.image}}" />
 
 		<p>
-			<a target="_blank" href="https://www.strava.com/athletes/{{connected.syncedAccountId}}">{{connected.name}}</a>
+			<a target="_blank" href="https://www.strava.com/athletes/{{connection.syncedAccountId}}">{{connection.name}}</a>
 		</p>
 
 		<div class="blue-theme button-wrapper">

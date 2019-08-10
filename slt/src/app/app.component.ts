@@ -9,6 +9,28 @@ import { trigger, transition, style, animate, state, keyframes } from '@angular/
 	templateUrl: './app.component.html',
 	styleUrls: ['./app.component.scss'],
 	animations: [
+		trigger('move', [
+			state('forth', style({
+				marginLeft: '-75px'
+			})),
+			state('back', style({
+				marginLeft: '0'
+			})), 
+			transition('* <=> *', [
+				animate('5s 0s ease-in-out')
+			])
+		]),
+		trigger('moveDelay', [
+			state('forth', style({
+				marginRight: '-75px'
+			})),
+			state('back', style({
+				marginRight: '0'
+			})), 
+			transition('* <=> *', [
+				animate('4s 0s ease-in-out')
+			])
+		]),
 		trigger('openClose', [
 			state('open', style({
 				marginRight: '0'
@@ -17,21 +39,22 @@ import { trigger, transition, style, animate, state, keyframes } from '@angular/
 				marginRight: '-250px'
 			})),
 			transition('open => closed', [
-				animate('0.6s', keyframes([
+				animate('0.5s ease', keyframes([
 					style({ marginRight: '0', offset: 0 }),
-					style({ marginRight: '0', offset: 0.5 }),
+					style({ marginRight: '0', offset: 0.6 }),
 					style({ marginRight: '-250px', offset: 1 }),
 				]))
 			]),
 			transition('closed => open', [
-				animate('0.3s', style({ marginRight: 0 }))
+				animate('0.2s 0s ease-out', style({ marginRight: 0 }))
 			]),
 		]),
 	]
 })
 export class AppComponent implements OnInit {
 
-	public rippleColor = 'white';
+	public moveState = 'forth';
+	public moveDelayState = 'forth';
 	public smallMenuOpen = false;
 
 	private asleep = true;
@@ -51,6 +74,14 @@ export class AppComponent implements OnInit {
 			}
 		});
 		this.sbs.renderer = this.renderer;
+	}
+
+	public onMove(event: any) {
+		this.moveState = this.moveState === 'forth' ? 'back' : 'forth';
+	}
+
+	public onMoveDelay(event: any) {
+		this.moveDelayState = this.moveDelayState === 'forth' ? 'back' : 'forth';
 	}
 
 	public stillSleeping(): boolean {

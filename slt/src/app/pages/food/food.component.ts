@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FoodService } from '../../services/food.service';
-import { Food} from '../../model/food';
+import { Food } from '../../model/food';
 
 @Component({
 	selector: 'app-food',
-	templateUrl: './food.component.html'
+	templateUrl: './food.component.html',
+	styleUrls: ['./food.component.scss']
 })
 export class FoodComponent implements OnInit {
 
@@ -20,6 +21,7 @@ export class FoodComponent implements OnInit {
 	// Displayed on one page
 	public displayedFood = new Array();
 
+	public isLoading = true;
 	public modalIsVisible = false;
 	public currentPage = 1;
 	public itemsPerPage = 15;
@@ -44,8 +46,12 @@ export class FoodComponent implements OnInit {
 				this.percentageFood = this.calculatePercentages();
 				this.searchableFood = this.allFoodFromDB;
 				this.getPagedFood(1);
+				this.isLoading = false;
 			},
-			error => console.log(error)
+			error => {
+				console.log(error)
+				this.isLoading = false;
+			}
 		);
 	}
 
@@ -83,7 +89,7 @@ export class FoodComponent implements OnInit {
 		this.modalIsVisible = true;
 	}
 
-	public closeModal(event) {
+	public closeModal(event: any) {
 		this.loadAllFood();
 		this.modalIsVisible = false;
 	}
@@ -146,10 +152,11 @@ export class FoodComponent implements OnInit {
 			const newFat = food.fat / total * 100;
 			const newCarbs = food.carbs / total * 100;
 
-			const newFood = { name: food.name,
-					protein: newProtein,
-					fat: newFat,
-					carbs: newCarbs
+			const newFood = {
+				name: food.name,
+				protein: newProtein,
+				fat: newFat,
+				carbs: newCarbs
 			};
 
 			percentageFood.push(newFood);

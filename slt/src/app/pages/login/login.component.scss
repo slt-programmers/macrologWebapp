@@ -38,7 +38,7 @@ $menuHeight: 50px;
     color: white;
     float: left;
     font-size: 32px;
-    font-weight: 900;
+    font-weight: 600;
     margin-top: 8px;
     margin-left: 12px;
     margin-right: 12px;
@@ -65,10 +65,10 @@ $menuHeight: 50px;
 
   &__item {
     @media(min-width: $lg) {
-      @include center;
       float: none;
       margin-top: 0;
-      width: 100px;
+      text-align: center;
+      width: 100%;
     }
     float: right;
     font-size: 16px;
@@ -81,8 +81,13 @@ $menuHeight: 50px;
     &__text {
       @media(min-width: $lg) {
         display: block;
+        padding: 15px 0;
       }
       display: inline;
+
+      &--active {
+        background-color: $whiteTransparentLight;
+      }
     }
   }
 }
@@ -125,7 +130,6 @@ $menuHeight: 50px;
 
     &__title {
       text-align: center;
-      font-weight: 900;
     }
 
     &__link {
@@ -154,7 +158,7 @@ $menuHeight: 50px;
 
     &__title {
       font-size: 24px;
-      font-weight: 900;
+      font-weight: 700;
     }
   }
 }
