@@ -1,2 +1,27 @@
 @import "../../../css/public.scss";
 
+.recipe {
+  display: flex;
+  flex-direction: column;
+
+  &__ingredient {
+			display: flex;
+			flex-direction: row;
+			justify-content:flex-end;
+
+			&__name {
+			   flex-basis:20;
+			}
+			&__amount {
+			   flex-basis:20%;
+			}
+			&__portion {
+			   flex-basis:20%;
+			}
+			&__remove {
+			   flex-basis:5%;
+			}
+  }
+
+
+}

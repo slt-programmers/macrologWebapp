@@ -18,9 +18,14 @@
       <div class="recipe">
         <div class="recipe__ingredient" *ngFor="let ingr of ingredients; index as i">
           <div class="form-field">
-            <div class="form-field__text">{{ingr.food.name}}</div>
 
-            <div class="form-field__select">
+
+						<div class="form-field__input  recipe__ingredient__amount">
+							<input class="input" name="ingrAmount" type="number" [value]="getValue(ingr)"
+										 (input)="calculateMultiplier($event, ingr)" step="{{getStep(ingr)}}" min="0">
+						</div>
+
+            <div class="form-field__select"  recipe__ingredient__portion>
                 <select (change)="portionChange(ingr, $event.target)">
                     <!-- 100 grams -->
                     <option>{{unitName}}</option>
@@ -31,13 +36,10 @@
                     </option>
                   </select>
             </div>
+						<div class="form-field__text recipe__ingredient__name">{{ingr.food.name}}</div>
 
-            <div class="form-field__input">
-                <input class="input" name="ingrAmount" type="number" [value]="getValue(ingr)"
-                  (input)="calculateMultiplier($event, ingr)" step="{{getStep(ingr)}}" min="0">
-              </div>
 
-            <div class="form-field__button blue-theme">
+						<div class="form-field__button blue-theme  recipe__ingredient__remove">
               <button mat-icon-button color="primary" (click)="removeIngredient(i)">
                 <mat-icon>remove</mat-icon>
               </button>

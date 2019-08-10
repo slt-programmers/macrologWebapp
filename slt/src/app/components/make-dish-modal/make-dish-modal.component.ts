@@ -8,7 +8,8 @@ import { Food } from '@app/model/food';
 
 @Component({
 	selector: 'make-dish-modal',
-	templateUrl: './make-dish-modal.component.html'
+	templateUrl: './make-dish-modal.component.html',
+  styleUrls: ['./make-dish-modal.component.scss']
 })
 export class MakeDishModalComponent implements OnInit {
 
@@ -87,6 +88,8 @@ export class MakeDishModalComponent implements OnInit {
 	public removeIngredient(index: number) {
 		this.ingredients.splice(index, 1);
 	}
+
+
 
 	public calculateMultiplier(event: any, ingredient: Ingredient) {
 		if (ingredient.portion === undefined) {
