@@ -61,7 +61,7 @@ export class GraphsComponent implements OnInit, AfterViewInit {
   ngOnInit() {
     this.dateTo = new Date();
     this.dateFrom = new Date();
-    this.dateFrom.setMonth(this.dateTo.getMonth() - 1);
+    this.dateFrom.setMonth(this.dateFrom.getMonth() - 1);
     this.getLogData();
   }
 
@@ -81,7 +81,6 @@ export class GraphsComponent implements OnInit, AfterViewInit {
     this.logService.getMacrosPerDay(moment(this.dateFrom).format('YYYY-MM-DD'), moment(this.dateTo).format('YYYY-MM-DD')).subscribe(
       data => {
         this.allMacros = data;
-        console.log(this.allMacros);
         this.getGoals();
       },
       error => {
@@ -114,23 +113,23 @@ export class GraphsComponent implements OnInit, AfterViewInit {
   }
 
   filterMacrosForMonth() {
-    const pointerDate = this.dateFrom;
+    const pointerDate = new Date(this.dateFrom);
 
     while (pointerDate < this.dateTo) {
-      const macrosForMonth = this.allMacros.filter(macrosPerDay => moment(macrosPerDay.day).format('YYYY-MM-DD') === moment(pointerDate).format('YYYY-MM-DD'))[0];
-      if (macrosForMonth) {
-        const total = macrosForMonth.macro.protein + macrosForMonth.macro.fat + macrosForMonth.macro.carbs;
-        this.maxProtein = Math.max(this.maxProtein, macrosForMonth.macro.protein);
-        this.maxFat = Math.max(this.maxFat, macrosForMonth.macro.fat);
-        this.maxCarbs = Math.max(this.maxCarbs, macrosForMonth.macro.carbs);
-        this.maxTotal = Math.max(this.maxTotal, macrosForMonth.macro.protein + macrosForMonth.macro.fat + macrosForMonth.macro.carbs);
-        this.maxCalories = Math.max(this.maxCalories, macrosForMonth.macro.calories);
+      const macrosForPointerDate = this.allMacros.filter(macrosPerDay => moment(macrosPerDay.day).format('YYYY-MM-DD') === moment(pointerDate).format('YYYY-MM-DD'))[0];
+      if (macrosForPointerDate) {
+        const total = macrosForPointerDate.macro.protein + macrosForPointerDate.macro.fat + macrosForPointerDate.macro.carbs;
+        this.maxProtein = Math.max(this.maxProtein, macrosForPointerDate.macro.protein);
+        this.maxFat = Math.max(this.maxFat, macrosForPointerDate.macro.fat);
+        this.maxCarbs = Math.max(this.maxCarbs, macrosForPointerDate.macro.carbs);
+        this.maxTotal = Math.max(this.maxTotal, macrosForPointerDate.macro.protein + macrosForPointerDate.macro.fat + macrosForPointerDate.macro.carbs);
+        this.maxCalories = Math.max(this.maxCalories, macrosForPointerDate.macro.calories);
 
-        this.maxProteinPerc = Math.max(this.maxProteinPerc, macrosForMonth.macro.protein * 100 / total);
-        this.maxFatPerc = Math.max(this.maxFatPerc, macrosForMonth.macro.fat * 100 / total);
-        this.maxCarbsPerc = Math.max(this.maxCarbsPerc, macrosForMonth.macro.carbs * 100 / total);
+        this.maxProteinPerc = Math.max(this.maxProteinPerc, macrosForPointerDate.macro.protein * 100 / total);
+        this.maxFatPerc = Math.max(this.maxFatPerc, macrosForPointerDate.macro.fat * 100 / total);
+        this.maxCarbsPerc = Math.max(this.maxCarbsPerc, macrosForPointerDate.macro.carbs * 100 / total);
 
-        this.macroBars.push(macrosForMonth);
+        this.macroBars.push(macrosForPointerDate);
       } else {
         const newDate = new Date(pointerDate);
         this.macroBars.push(new MacrosPerDay(newDate));
@@ -140,13 +139,13 @@ export class GraphsComponent implements OnInit, AfterViewInit {
   }
 
   monthBack() {
-    this.dateTo = this.dateFrom;
+    this.dateTo = new Date(this.dateFrom);
     this.dateFrom.setMonth(this.dateFrom.getMonth() - 1);
     this.getLogData();
 
   }
   monthForward() {
-    this.dateFrom = this.dateTo;
+    this.dateFrom = new Date(this.dateTo);
     this.dateTo.setMonth(this.dateTo.getMonth() + 1);
     this.getLogData();
   }
@@ -231,10 +230,6 @@ export class GraphsComponent implements OnInit, AfterViewInit {
   }
 
   getGoalProteinPos(): number {
-    console.log('GetGoalProteinPos: ');
-    console.log(this.getYPosProtein(null));
-    console.log(this.getGoal('protein'));
-    console.log(this.zoomX);
     return this.getYPosProtein(null) - this.getGoal('protein') * this.zoomX;
   }
 
@@ -247,7 +242,6 @@ export class GraphsComponent implements OnInit, AfterViewInit {
   }
 
   getGoalCarbsPos(): number {
-    console.log(this.getGoal('carbs'));
     if (this.splitted) {
       return this.getYPosCarbs(null) - this.getGoal('carbs') * this.zoomX;
     } else {
@@ -301,8 +295,6 @@ export class GraphsComponent implements OnInit, AfterViewInit {
         this.zoomX = (this.macroSvgHeight - 40) / this.maxTotal;
       }
     }
-    console.log('ZoomX: ');
-    console.log(this.zoomX);
     this.zoomXCalories = (this.calorieSvgHeight - 40) / this.maxCalories;
   }
 
