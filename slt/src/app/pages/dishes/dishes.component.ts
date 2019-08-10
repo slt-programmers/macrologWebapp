@@ -12,6 +12,7 @@ import { DishService } from '../../services/dish.service';
 export class DishesComponent implements OnInit {
 
 	public allDishes: Dish[];
+  public selectedDish;
 	public modalIsVisible = false;
 
 	constructor(private dishService: DishService) { }
@@ -29,7 +30,8 @@ export class DishesComponent implements OnInit {
 		);
 	}
 
-	openModal() {
+	openModal(dish:Dish) {
+    this.selectedDish = dish;
 		this.modalIsVisible = true;
 	}
 
@@ -39,7 +41,7 @@ export class DishesComponent implements OnInit {
 	}
 
   public getPortion(ingredient:Ingredient, portionId: number) {
-     console.log(ingredient);
+
      for (const portion of ingredient.food.portions) {
        if (portion.id == portionId) {
           return portion;

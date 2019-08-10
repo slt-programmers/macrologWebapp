@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, Input,EventEmitter } from '@angular/core';
 import { Dish } from '../../model/dish';
 import { Ingredient } from '../../model/ingredient';
 import { FoodSearchable } from '../../model/foodSearchable';
@@ -11,6 +11,8 @@ import { Food } from '@app/model/food';
 	templateUrl: './make-dish-modal.component.html'
 })
 export class MakeDishModalComponent implements OnInit {
+
+	@Input() selectedDish:Dish;
 
 	@Output() close: EventEmitter<boolean> = new EventEmitter<boolean>();
 
@@ -29,6 +31,7 @@ export class MakeDishModalComponent implements OnInit {
 	}
 
 	ngOnInit() {
+    this.loadDishFromInput();
 		this.getAllFood();
 		this.addIngredientCallBack = this.addIngredient.bind(this);
 	}
@@ -111,8 +114,27 @@ export class MakeDishModalComponent implements OnInit {
 		}
 	}
 
+  private loadDishFromInput() {
+     if (this.selectedDish) {
+         this.modalTitle = "Edit a dish";
+         this.dishName = this.selectedDish.name;
+         this.ingredients = this.selectedDish.ingredients;
+
+         for (const ingredient of this.ingredients) {
+           for (const portion of ingredient.food.portions) {
+             if (portion.id == ingredient.portionId) {
+                ingredient.portion = portion;
+             }
+           }
+         }
+     }
+  }
+
 	public saveDish() {
 		const dish = new Dish(this.dishName);
+    if (this.selectedDish){
+      dish.id = this.selectedDish.id;
+    }
 		dish.ingredients = this.ingredients;
 		const self = this;
 		const closeCallBack = () => {

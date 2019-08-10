@@ -24,12 +24,12 @@
                 <select (change)="portionChange(ingr, $event.target)">
                     <!-- 100 grams -->
                     <option>{{unitName}}</option>
-        
+
                     <!-- portion amount -->
-                    <option *ngFor="let portion of getAvailablePortions(ingr)" value="{{portion.description}}">
+                    <option *ngFor="let portion of getAvailablePortions(ingr)" value="{{portion.description}}" [selected]="portion.id == ingr.portionId">
                       {{portion.description}}
                     </option>
-                  </select> 
+                  </select>
             </div>
 
             <div class="form-field__input">

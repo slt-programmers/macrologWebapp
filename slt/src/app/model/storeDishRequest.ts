@@ -3,7 +3,7 @@ import {Ingredient} from './ingredient';
 export class StoreDishRequest {
 
 	public id: number;
-  public title: string;
+  public name: string;
   public ingredients: Ingredient[];
 
 	constructor () {
