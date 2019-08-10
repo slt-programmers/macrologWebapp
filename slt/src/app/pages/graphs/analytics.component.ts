@@ -1,21 +1,25 @@
-import { Component, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
+import { Component, ViewChild, ElementRef, AfterViewInit, OnInit } from '@angular/core';
 import { AfterContentInit } from '@angular/core';
 import { DiaryService } from '../../services/diary.service';
 import { UserService } from '../../services/user.service';
 import * as moment from 'moment';
+import { LogEntry } from '@app/model/logEntry';
+import { MacrosPerDay } from '@app/model/macrosPerDay';
 
 @Component({
   selector: 'graphs',
   templateUrl: './analytics.component.html',
   styleUrls: ['./analytics.component.scss']
 })
-export class GraphsComponent implements AfterViewInit, AfterContentInit {
+export class GraphsComponent implements OnInit, AfterViewInit {
 
   @ViewChild('macroSvg', { static: false }) public macroSvgElement: ElementRef;
   @ViewChild('calorieSvg', { static: false }) public calorieSvgElement: ElementRef;
 
-  constructor(private logService: DiaryService,
-    private userService: UserService) { }
+  constructor(
+    private logService: DiaryService,
+    private userService: UserService) {
+  }
 
   public macroSvgHeight = 500; //TODO get from viewchild
   public calorieSvgHeight = 250;
@@ -43,191 +47,193 @@ export class GraphsComponent implements AfterViewInit, AfterContentInit {
   private maxCarbsPerc = 0;
 
   private userGoals;
-  private goalCal;
+  private goalCalories = 0;
 
   public loading = true;
-  private allLogs = new Array();
+  private allMacros: MacrosPerDay[] = [];
   private infoMacro = null;
 
-  private logBars = new Array();
+  private macroBars: MacrosPerDay[] = [];
 
-  private dateFrom;
-  private dateTo;
+  private dateFrom: Date;
+  private dateTo: Date;
+
+  ngOnInit() {
+    this.dateTo = new Date();
+    this.dateFrom = new Date();
+    this.dateFrom.setMonth(this.dateFrom.getMonth() - 1);
+    this.getLogData();
+  }
 
   ngAfterViewInit() {
     // this.macroSvgHeight = this.macroSvgElement.nativeElement.clientHeight;
     // this.calorieSvgHeight = this.calorieSvgElement.nativeElement.clientWidth;
   }
 
-  ngAfterContentInit() {
-    this.dateFrom = moment().subtract(1, 'months');
-    this.dateTo = moment();
-    this.getData();
-    this.getGoals();
-  }
-
   getSVGWidth() {
     return this.marginLeft + 33 * this.barWidth;
   }
 
-  getData() {
+  getLogData() {
     this.loading = true;
-    this.getGoals();
-    this.logBars = new Array();
-    this.allLogs = new Array();
-    this.logService.getMacros(this.dateFrom.format('YYYY-MM-DD'), this.dateTo.format('YYYY-MM-DD')).subscribe(
+    this.allMacros = [];
+    this.macroBars = [];
+    this.logService.getMacrosPerDay(moment(this.dateFrom).format('YYYY-MM-DD'), moment(this.dateTo).format('YYYY-MM-DD')).subscribe(
       data => {
-        this.allLogs = data;
-        this.matchLogs();
-        this.calculateZoom();
-        this.loading = false;
+        this.allMacros = data;
+        this.getGoals();
       },
       error => {
         console.log(error);
-        this.allLogs = new Array();
+        this.allMacros = [];
       });
   }
 
   getGoals() {
-    this.userService.getUserGoalStats(this.dateFrom.format('YYYY-MM-DD')).subscribe(
+    this.userService.getUserGoalStats(moment(this.dateFrom).format('YYYY-MM-DD')).subscribe(
       data => {
         if (data[0] === null) {
           this.userGoals = null;
         } else {
           this.userGoals = data;
         }
-        this.setGoalCal();
+        this.setGoalCalories();
+        this.filterMacrosForMonth();
+        this.calculateZoom();
+        this.loading = false;
       },
       error => console.log(error)
     );
   }
 
-  private setGoalCal() {
+  private setGoalCalories() {
     if (this.userGoals) {
-      this.goalCal = (this.userGoals[0] * 4) + (this.userGoals[1] * 9) + (this.userGoals[2] * 4);
+      this.goalCalories = (this.userGoals[0] * 4) + (this.userGoals[1] * 9) + (this.userGoals[2] * 4);
     }
   }
 
-  matchLogs() {
-    const pointerDate = this.dateFrom.clone();
-    while (pointerDate.isBefore(this.dateTo)) {
-      const filtered = this.allLogs.filter(i => i.day === pointerDate.format('YYYY-MM-DD'))[0];
-      if (filtered) {
-        const total = filtered.macro.protein + filtered.macro.fat + filtered.macro.carbs;
+  filterMacrosForMonth() {
+    const pointerDate = new Date(this.dateFrom);
 
-        this.maxProtein = Math.max(this.maxProtein, filtered.macro.protein);
-        this.maxFat = Math.max(this.maxFat, filtered.macro.fat);
-        this.maxCarbs = Math.max(this.maxCarbs, filtered.macro.carbs);
-        this.maxTotal = Math.max(this.maxTotal, filtered.macro.protein + filtered.macro.fat + filtered.macro.carbs);
-        this.maxCalories = Math.max(this.maxCalories, filtered.macro.calories);
+    while (pointerDate < this.dateTo) {
+      const macrosForPointerDate = this.allMacros.filter(macrosPerDay => moment(macrosPerDay.day).format('YYYY-MM-DD') === moment(pointerDate).format('YYYY-MM-DD'))[0];
+      if (macrosForPointerDate) {
+        const total = macrosForPointerDate.macro.protein + macrosForPointerDate.macro.fat + macrosForPointerDate.macro.carbs;
+        this.maxProtein = Math.max(this.maxProtein, macrosForPointerDate.macro.protein);
+        this.maxFat = Math.max(this.maxFat, macrosForPointerDate.macro.fat);
+        this.maxCarbs = Math.max(this.maxCarbs, macrosForPointerDate.macro.carbs);
+        this.maxTotal = Math.max(this.maxTotal, macrosForPointerDate.macro.protein + macrosForPointerDate.macro.fat + macrosForPointerDate.macro.carbs);
+        this.maxCalories = Math.max(this.maxCalories, macrosForPointerDate.macro.calories);
 
-        this.maxProteinPerc = Math.max(this.maxProteinPerc, filtered.macro.protein * 100 / total);
-        this.maxFatPerc = Math.max(this.maxFatPerc, filtered.macro.fat * 100 / total);
-        this.maxCarbsPerc = Math.max(this.maxCarbsPerc, filtered.macro.carbs * 100 / total);
+        this.maxProteinPerc = Math.max(this.maxProteinPerc, macrosForPointerDate.macro.protein * 100 / total);
+        this.maxFatPerc = Math.max(this.maxFatPerc, macrosForPointerDate.macro.fat * 100 / total);
+        this.maxCarbsPerc = Math.max(this.maxCarbsPerc, macrosForPointerDate.macro.carbs * 100 / total);
 
-        this.logBars.push(filtered);
+        this.macroBars.push(macrosForPointerDate);
       } else {
-        this.logBars.push({ 'day': pointerDate.format('YYYY-MM-DD') });
+        const newDate = new Date(pointerDate);
+        this.macroBars.push(new MacrosPerDay(newDate));
       }
-      pointerDate.add(1, 'day');
+      pointerDate.setDate(pointerDate.getDate() + 1);
     }
   }
 
   monthBack() {
-    this.dateTo = this.dateFrom.clone();
-    this.dateFrom = this.dateFrom.clone().subtract(1, 'months');
-    this.getData();
+    this.dateTo = new Date(this.dateFrom);
+    this.dateFrom.setMonth(this.dateFrom.getMonth() - 1);
+    this.getLogData();
 
   }
   monthForward() {
-    this.dateFrom = this.dateTo.clone();
-    this.dateTo = this.dateTo.clone().add(1, 'months');
-    this.getData();
+    this.dateFrom = new Date(this.dateTo);
+    this.dateTo.setMonth(this.dateTo.getMonth() + 1);
+    this.getLogData();
   }
 
-  getYPosProtein(logEntry) {
-    return this.macroSvgHeight - this.graphLegenda - this.getHeightProtein(logEntry);
+  getYPosProtein(macrosPerDay: MacrosPerDay): number {
+    return this.macroSvgHeight - this.graphLegenda - this.getHeightProtein(macrosPerDay);
   }
 
-  getYPosCalories(logEntry) {
-    return this.calorieSvgHeight - this.graphLegenda - this.getHeightCalories(logEntry);
-  }
-
-  getHeightCalories(logEntry) {
-    if (!logEntry || !logEntry.macro) {
-      return 0;
-    }
-    return logEntry.macro.calories * this.zoomXCalories;
-  }
-
-  getHeightProtein(logEntry) {
-    if (!logEntry || !logEntry.macro) {
+  getHeightProtein(macrosPerDay: MacrosPerDay): number {
+    if (!macrosPerDay || !macrosPerDay.macro || !macrosPerDay.macro.protein) {
       return 0;
     }
     if (this.percentages) {
-      const total = logEntry.macro.protein + logEntry.macro.fat + logEntry.macro.carbs;
-      const percentage = logEntry.macro.protein * 100 / total;
+      const total = macrosPerDay.macro.protein + macrosPerDay.macro.fat + macrosPerDay.macro.carbs;
+      const percentage = macrosPerDay.macro.protein * 100 / total;
       return percentage * this.zoomX;
     } else {
-      return logEntry.macro.protein * this.zoomX;
+      return macrosPerDay.macro.protein * this.zoomX;
     }
   }
 
-  getYPosFat(logEntry) {
+  getYPosCalories(macrosPerDay: MacrosPerDay): number {
+    return this.calorieSvgHeight - this.graphLegenda - this.getHeightCalories(macrosPerDay);
+  }
+
+  getHeightCalories(macrosPerDay: MacrosPerDay): number {
+    if (!macrosPerDay || !macrosPerDay.macro || !macrosPerDay.macro.calories) {
+      return 0;
+    }
+    return macrosPerDay.macro.calories * this.zoomXCalories;
+  }
+
+  getYPosFat(macrosPerDay: MacrosPerDay): number {
     if (this.splitted) {
       if (this.percentages) {
-        return this.macroSvgHeight - this.graphLegenda - (this.splitOffset + this.maxProteinPerc * this.zoomX + this.getHeightFat(logEntry));
+        return this.macroSvgHeight - this.graphLegenda - (this.splitOffset + this.maxProteinPerc * this.zoomX + this.getHeightFat(macrosPerDay));
       } else {
-        return this.macroSvgHeight - this.graphLegenda - (this.splitOffset + this.maxProtein * this.zoomX + this.getHeightFat(logEntry));
+        return this.macroSvgHeight - this.graphLegenda - (this.splitOffset + this.maxProtein * this.zoomX + this.getHeightFat(macrosPerDay));
       }
     } else {
-      return this.macroSvgHeight - this.graphLegenda - (this.getHeightProtein(logEntry) + this.getHeightFat(logEntry));
-    }
-  }
-  getHeightFat(logEntry) {
-    if (!logEntry || !logEntry.macro) {
-      return 0;
-    }
-    if (this.percentages) {
-      const total = logEntry.macro.protein + logEntry.macro.fat + logEntry.macro.carbs;
-      const percentage = logEntry.macro.fat * 100 / total;
-      return percentage * this.zoomX;
-    } else {
-      return logEntry.macro.fat * this.zoomX;
+      return this.macroSvgHeight - this.graphLegenda - (this.getHeightProtein(macrosPerDay) + this.getHeightFat(macrosPerDay));
     }
   }
 
-  getYPosCarbs(logEntry) {
+  getHeightFat(macrosPerDay: MacrosPerDay): number {
+    if (!macrosPerDay || !macrosPerDay.macro || !macrosPerDay.macro.fat) {
+      return 0;
+    }
+    if (this.percentages) {
+      const total = macrosPerDay.macro.protein + macrosPerDay.macro.fat + macrosPerDay.macro.carbs;
+      const percentage = macrosPerDay.macro.fat * 100 / total;
+      return percentage * this.zoomX;
+    } else {
+      return macrosPerDay.macro.fat * this.zoomX;
+    }
+  }
+
+  getYPosCarbs(macrosPerDay: MacrosPerDay): number {
     if (this.splitted) {
       if (this.percentages) {
         const maxUsed = this.maxProteinPerc + this.maxFatPerc;
-        return this.macroSvgHeight - this.graphLegenda - (this.splitOffset * 2 + maxUsed * this.zoomX + this.getHeightCarbs(logEntry));
+        return this.macroSvgHeight - this.graphLegenda - (this.splitOffset * 2 + maxUsed * this.zoomX + this.getHeightCarbs(macrosPerDay));
       } else {
-        return this.macroSvgHeight - this.graphLegenda - (this.splitOffset * 2 + this.maxProtein * this.zoomX + this.maxFat * this.zoomX + this.getHeightCarbs(logEntry));
+        return this.macroSvgHeight - this.graphLegenda - (this.splitOffset * 2 + this.maxProtein * this.zoomX + this.maxFat * this.zoomX + this.getHeightCarbs(macrosPerDay));
       }
     } else {
-      return this.macroSvgHeight - this.graphLegenda - (this.getHeightProtein(logEntry) + this.getHeightFat(logEntry) + this.getHeightCarbs(logEntry));
+      return this.macroSvgHeight - this.graphLegenda - (this.getHeightProtein(macrosPerDay) + this.getHeightFat(macrosPerDay) + this.getHeightCarbs(macrosPerDay));
     }
   }
 
-  getHeightCarbs(logEntry) {
-    if (!logEntry || !logEntry.macro) {
+  getHeightCarbs(macrosPerDay: MacrosPerDay): number {
+    if (!macrosPerDay || !macrosPerDay.macro || !macrosPerDay.macro.carbs) {
       return 0;
     }
     if (this.percentages) {
-      const total = logEntry.macro.protein + logEntry.macro.fat + logEntry.macro.carbs;
-      const percentage = logEntry.macro.carbs * 100 / total;
+      const total = macrosPerDay.macro.protein + macrosPerDay.macro.fat + macrosPerDay.macro.carbs;
+      const percentage = macrosPerDay.macro.carbs * 100 / total;
       return percentage * this.zoomX;
     } else {
-      return logEntry.macro.carbs * this.zoomX;
+      return macrosPerDay.macro.carbs * this.zoomX;
     }
   }
 
-  getGoalProteinPos() {
+  getGoalProteinPos(): number {
     return this.getYPosProtein(null) - this.getGoal('protein') * this.zoomX;
   }
 
-  getGoalFatPos() {
+  getGoalFatPos(): number {
     if (this.splitted) {
       return this.getYPosFat(null) - this.getGoal('fat') * this.zoomX;
     } else {
@@ -235,7 +241,7 @@ export class GraphsComponent implements AfterViewInit, AfterContentInit {
     }
   }
 
-  getGoalCarbsPos() {
+  getGoalCarbsPos(): number {
     if (this.splitted) {
       return this.getYPosCarbs(null) - this.getGoal('carbs') * this.zoomX;
     } else {
@@ -243,11 +249,12 @@ export class GraphsComponent implements AfterViewInit, AfterContentInit {
     }
   }
 
-  getGoalCaloriesPos() {
+  getGoalCaloriesPos(): number {
     return this.getYPosCalories(null) - (this.getGoalCalories() * this.zoomXCalories);
   }
+
   getGoalCalories() {
-    return this.goalCal;
+    return this.goalCalories;
   }
 
   getGoal(macro: string) {
@@ -291,9 +298,9 @@ export class GraphsComponent implements AfterViewInit, AfterContentInit {
     this.zoomXCalories = (this.calorieSvgHeight - 40) / this.maxCalories;
   }
 
-  public showMacros(logEntry) {
-    if (logEntry.macro) {
-      this.infoMacro = logEntry;
+  public showMacros(macrosPerDay: MacrosPerDay) {
+    if (macrosPerDay.macro) {
+      this.infoMacro = macrosPerDay;
     } else {
       this.infoMacro = null;
     }
