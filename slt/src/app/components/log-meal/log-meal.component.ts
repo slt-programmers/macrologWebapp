@@ -72,28 +72,26 @@ export class LogMealComponent implements OnInit, OnChanges {
 	}
 
 	public getAmountValue(logEntry: LogEntry) {
-		if (logEntry.portion === undefined) {
-			return (logEntry.multiplier * this.unitGrams);
-		} else {
-			return logEntry.multiplier;
-		}
+      if (logEntry.portion){
+        return logEntry.multiplier;
+      } else {
+         return logEntry.multiplier * 100;
+      }
 	}
 
 	public isGramsSelected(logEntry: LogEntry) {
-		if (logEntry.id === undefined) {
-			return 'selected';
-		} else if (logEntry.portion === undefined) {
-			return 'selected';
+		if (logEntry.id === undefined && logEntry.portion === undefined) {
+			return true;
 		} else {
-			return '';
+			return false
 		}
 	}
 
 	public isUnitSelected(logEntry: LogEntry, portion: Portion) {
 		if (logEntry.portion !== undefined && logEntry.portion.description === portion.description) {
-			return 'selected';
+			return true;
 		} else {
-			return '';
+			return false;
 		}
 	}
 
@@ -150,15 +148,18 @@ export class LogMealComponent implements OnInit, OnChanges {
 	public portionChange(logEntry: LogEntry, event: any) {
 		if (event.target.value === this.unitName) {
 			logEntry.portion = undefined;
+      logEntry.multiplier = logEntry.multiplier / 100;
 		} else {
 			for (const portion of logEntry.food.portions) {
 				if (portion.description === event.target.value) {
+          if (logEntry.portion === undefined){
+              logEntry.multiplier = logEntry.multiplier * 100;
+          }
 					logEntry.portion = portion;
 					break;
 				}
 			}
 		}
-		logEntry.multiplier = 1;
 		this.updateCalculatedMacros(logEntry);
 	}
 
@@ -171,16 +172,39 @@ export class LogMealComponent implements OnInit, OnChanges {
 	}
 
 	public addLogEntry(foodSearchable: FoodSearchable) {
+    console.log(foodSearchable);
 		const food = foodSearchable.food;
 		const dish = foodSearchable.dish;
 		if (food !== undefined) {
 			const logEntry = new LogEntry();
 			logEntry.meal = this.meal.toUpperCase();
 			logEntry.food = food;
+      if (food.portions) {
+         logEntry.portion = food.portions[0];
+         logEntry.multiplier = 1; // 1 * 1st selected portion
+      } else {
+         logEntry.multiplier = 1; // 1* 100 grams
+      }
 			this.updateCalculatedMacros(logEntry);
 			logEntry.day = this.date;
 			this.logEntries.push(logEntry);
 		} else if (dish !== undefined) {
+			for (const ingredient of dish.ingredients) {
+  	 		const logEntry = new LogEntry();
+ 		   	logEntry.meal = this.meal.toUpperCase();
+        logEntry.food = ingredient.food;
+        if (ingredient.portionId) {
+           for (const portion of ingredient.food.portions) {
+              if (portion.id == ingredient.portionId) {
+                logEntry.portion = portion;
+                break;
+              }
+           }
+        }
+        this.updateCalculatedMacros(logEntry);
+   			logEntry.day = this.date;
+ 			  this.logEntries.push(logEntry);
+      }
 			// TODO: meal functions
 		}
 	}

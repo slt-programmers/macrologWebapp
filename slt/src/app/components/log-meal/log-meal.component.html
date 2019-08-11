@@ -34,31 +34,33 @@
           {{logEntry.food.name}}
         </div>
 
+				<div class="meal__edit-ingredient__amount">
+					<div class="meal__edit-ingredient__amount__input">
+						<input id="portionAmountInput" class="input" type="number" step="0.1" *ngIf="logEntry.portion"
+									 (keyup)="amountChange(logEntry)" [value]="getAmountValue(logEntry)"
+									 (input)="setLogEntryMultiplier($event, logEntry)">
+
+						<input id="gramsAmountInput" class="input" type="number" step="1" *ngIf="!logEntry.portion"
+									 (keyup)="amountChange(logEntry)" [value]="getAmountValue(logEntry)"
+									 (input)="setLogEntryMultiplier($event, logEntry)">
+					</div>
+				</div>
+
         <div class="meal__edit-ingredient__measurement">
           <div class="meal__edit-ingredient__measurement__input">
             <select (change)="portionChange(logEntry, $event)">
               <!-- 100 grams -->
-              <option selected="{{isGramsSelected(logEntry)}}">{{unitName}}</option>
+              <option [selected]="isGramsSelected(logEntry)">{{unitName}}</option>
 
               <!-- portion amount -->
-              <option selected="{{isUnitSelected(logEntry, portion)}}" *ngFor="let portion of getAvailablePortions(logEntry)" value="{{portion.description}}">
+              <option [selected]="isUnitSelected(logEntry, portion)" *ngFor="let portion of getAvailablePortions(logEntry)" value="{{portion.description}}">
                 {{portion.description}}
               </option>
             </select>
           </div>
         </div>
 
-        <div class="meal__edit-ingredient__amount">
-          <div class="meal__edit-ingredient__amount__input">
-            <input id="portionAmountInput" class="input portioninput" type="number" step="0.1" *ngIf="logEntry.portion"
-              (keyup)="amountChange(logEntry)" [value]="getAmountValue(logEntry)"
-              (input)="setLogEntryMultiplier($event, logEntry)">
 
-            <input id="gramsAmountInput" class="input" type="number" step="1" *ngIf="!logEntry.portion"
-              (keyup)="amountChange(logEntry)" [value]="getAmountValue(logEntry)"
-              (input)="setLogEntryMultiplier($event, logEntry)">
-          </div>
-        </div>
 
         <div class="meal__edit-ingredient__macro">
           {{logEntry.macrosCalculated.protein | number:'1.1-1'}}

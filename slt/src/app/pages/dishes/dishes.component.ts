@@ -25,6 +25,7 @@ export class DishesComponent implements OnInit {
 		this.dishService.getAllDishes().subscribe(
 			data => {
 				this.allDishes = data;
+        this.allDishes.sort((a,b) => a.name.localeCompare(b.name));
 			},
 			error => console.log(error)
 		);
