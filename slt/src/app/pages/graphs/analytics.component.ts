@@ -5,6 +5,9 @@ import { UserService } from '../../services/user.service';
 import * as moment from 'moment';
 import { LogEntry } from '@app/model/logEntry';
 import { MacrosPerDay } from '@app/model/macrosPerDay';
+import { DataPoint } from '@app/components/linegraph/linegraph.component';
+import { Macros } from '@app/model/macro';
+import { tickStep } from 'd3';
 
 @Component({
   selector: 'graphs',
@@ -58,6 +61,16 @@ export class GraphsComponent implements OnInit, AfterViewInit {
   private dateFrom: Date;
   private dateTo: Date;
 
+  public calorieDataset: DataPoint[];
+  public carbsDataset: DataPoint[];
+  public fatDataset: DataPoint[];
+  public proteinDataset: DataPoint[];
+
+  public proteinMarker: number;
+  public fatMarker: number;
+  public carbsMarker: number;
+
+
   ngOnInit() {
     this.dateTo = new Date();
     this.dateFrom = new Date();
@@ -100,16 +113,121 @@ export class GraphsComponent implements OnInit, AfterViewInit {
         this.setGoalCalories();
         this.filterMacrosForMonth();
         this.calculateZoom();
+
+        // TEST
+        this.getDatasets();
+        //
+
         this.loading = false;
       },
       error => console.log(error)
     );
   }
 
+  public getDatasets() {
+    const calorieDataset = [];
+    const carbsDataset = []
+    const fatDataset = []
+    const proteinDataset = []
+    // let numberOfValues = 14;
+    // if (window.innerWidth > 480) {
+    //   numberOfValues = 21;
+    // }
+    // if (window.innerWidth > 768) {
+    //   numberOfValues = 30;
+    // }
+    const numberOfValues = (this.dateTo.getTime() - this.dateFrom.getTime()) / 1000 / 60 / 60 / 24;
+    for (let i = 0; i < numberOfValues; i++) {
+      const day = new Date();
+      day.setDate(day.getDate() - i);
+
+      const daynumber = day.getDate();
+      const caloriesDataPoint = new DataPoint(daynumber, this.getMacroForDay(day, numberOfValues, 'calories'));
+      const carbsDataPoint = new DataPoint(daynumber, this.getMacroForDay(day, numberOfValues, 'carbs'));
+      const fatDataPoint = new DataPoint(daynumber, this.getMacroForDay(day, numberOfValues, 'fat'));
+      const proteinDataPoint = new DataPoint(daynumber, this.getMacroForDay(day, numberOfValues, 'protein'));
+
+      calorieDataset.push(caloriesDataPoint);
+      carbsDataset.push(carbsDataPoint)
+      fatDataset.push(fatDataPoint)
+      proteinDataset.push(proteinDataPoint)
+    }
+    this.calorieDataset = calorieDataset;
+    this.calorieDataset.reverse();
+    this.carbsDataset = carbsDataset;
+    this.carbsDataset.reverse();
+    this.fatDataset = fatDataset;
+    this.fatDataset.reverse();
+    this.proteinDataset = proteinDataset;
+    this.proteinDataset.reverse();
+
+    this.proteinMarker = this.userGoals[0];
+    this.fatMarker = this.userGoals[1];
+    this.carbsMarker = this.userGoals[2];
+  }
+
+  private getMacroForDay(date: Date, numberOfValues: number, macro: string) {
+    for (let i = 0; i < numberOfValues; i++) {
+      const macrosPerDay = this.allMacros[i];
+      if (macrosPerDay && moment(macrosPerDay.day).format('YYYY-MM-DD') === moment(date).format('YYYY-MM-DD')) {
+        return Math.round(macrosPerDay.macro[macro]);
+      }
+    }
+    return undefined;
+  }
+
   private setGoalCalories() {
     if (this.userGoals) {
       this.goalCalories = (this.userGoals[0] * 4) + (this.userGoals[1] * 9) + (this.userGoals[2] * 4);
     }
+  }
+
+  public switchSplitted() {
+
+  }
+
+  public switchPercentages() {
+    if (this.percentages) {
+      this.getPercentageDatasets();
+    } else {
+      this.getDatasets();
+    }
+  }
+
+  getPercentageDatasets() {
+    const newProtein = [];
+    const newFat = [];
+    const newCarbs = []
+    const prcGoalEnergyFromProtein = (this.userGoals[0] * 4) / this.goalCalories * 100;
+    const prcGoalEnergyFromFat = (this.userGoals[1] * 9) / this.goalCalories * 100;
+    const prcGoalEnergyFromCarbs = (this.userGoals[2] * 4) / this.goalCalories * 100;
+    const proteinConversionFactor = this.userGoals[0] / prcGoalEnergyFromProtein;
+    const fatConversionFactor = this.userGoals[1] / prcGoalEnergyFromFat;
+    const carbsConversionFactor = this.userGoals[2] / prcGoalEnergyFromCarbs;
+    for (let i = 0; i < this.proteinDataset.length; i++) {
+      const proteinDataPoint = new DataPoint(this.proteinDataset[i].x, Math.round(this.proteinDataset[i].y / proteinConversionFactor));
+      const fatDataPoint = new DataPoint(this.fatDataset[i].x, Math.round(this.fatDataset[i].y / fatConversionFactor));
+      const carbsDataPoint = new DataPoint(this.carbsDataset[i].x, Math.round(this.carbsDataset[i].y / carbsConversionFactor));
+      if (!proteinDataPoint.y) {
+        proteinDataPoint.y = 0;
+      }
+      if (!fatDataPoint.y) {
+        fatDataPoint.y = 0;
+      }
+      if (!carbsDataPoint.y) {
+        carbsDataPoint.y = 0;
+      }
+      newProtein.push(proteinDataPoint);
+      newFat.push(fatDataPoint);
+      newCarbs.push(carbsDataPoint);
+    }
+    this.proteinDataset = newProtein;
+    this.fatDataset = newFat;
+    this.carbsDataset = newCarbs;
+
+    this.proteinMarker = Math.round(prcGoalEnergyFromProtein);
+    this.fatMarker = Math.round(prcGoalEnergyFromFat);
+    this.carbsMarker = Math.round(prcGoalEnergyFromCarbs);
   }
 
   filterMacrosForMonth() {

@@ -57,6 +57,7 @@ import { HealthcheckService } from './services/healthcheck.service';
 import { AdminService } from './services/admin.service';
 import { AdminComponent } from './pages/admin/admin.component';
 import { LinegraphComponent } from './components/linegraph/linegraph.component';
+import { BargraphComponent } from './components/bargraph/bargraph.component';
 
 const appRoutes: Routes = [
 	{ path: 'login', component: LoginComponent },
@@ -114,7 +115,8 @@ const appRoutes: Routes = [
 		PiechartComponent,
 		OnboardingComponent,
 		StepperComponent,
-		LinegraphComponent
+		LinegraphComponent,
+		BargraphComponent
 	],
 	imports: [
 		BrowserModule,

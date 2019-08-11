@@ -1,0 +1,39 @@
+<div class="bargraph">
+    <div class="background">
+        <div class="axes">
+            <div class="y-axis-wrapper">
+                <div #yAxis class="y-axis">
+                    <div class="y-axis-point" *ngFor="let yPoint of yAxisPoints">
+                        {{yPoint}}
+                    </div>
+                </div>
+
+                <div class="graph-content">
+                    <ng-container *ngFor="let marker of markers; index as index">
+                        <div class="graph-marker" [style.height.px]="markerHeights[index]">
+                            <div class="graph-marker__text">{{marker}}</div>
+                        </div>
+                    </ng-container>
+                    <div class="graph-point" [style.border-color]="color" [style.background-color]="colorFill"
+                        *ngFor="let graphPoint of graphPoints" [style.height.px]="graphPoint.height">
+                        <div class="graph-point__text">
+                            {{graphPoint.value}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="x-axis-wrapper">
+                <div class="x-axis-dummy-point"></div>
+
+                <div #xAxis class="x-axis">
+                    <div class="x-axis-point" *ngFor="let xPoint of xAxisPoints">
+                        <div class="x-axis-point-text">
+                            {{xPoint}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
