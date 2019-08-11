@@ -11,14 +11,14 @@ export class BargraphComponent implements OnInit, OnChanges, AfterViewInit {
   @ViewChild('yAxis', { static: false }) public yAxisElement: ElementRef;
   @ViewChild('xAxis', { static: false }) public xAxisElement: ElementRef;
 
-  @Input() dataset: DataPoint[];
+  @Input() datasets: DataPoint[][];
   @Input() yAxisStep: number;
   @Input() xAxisStep: number;
-  @Input() markers: number[];
-  @Input() color: string;
-  @Input() colorFill: string;
+  @Input() markers: number[] = [];
+  @Input() colors: string[] = [];
+  @Input() fillColors: string[] = [];
 
-  public graphPoints: GraphPoint[];
+  public graphPoints: GraphPoint[][];
   public yAxisPoints: number[];
   public xAxisPoints: number[];
 
@@ -28,19 +28,18 @@ export class BargraphComponent implements OnInit, OnChanges, AfterViewInit {
 
   constructor() { }
 
-  ngOnInit() {
-  }
+  ngOnInit() { }
 
   ngAfterViewInit() {
     this.yAxisHeight = this.yAxisElement.nativeElement.clientHeight;
     this.xAxisWidth = this.xAxisElement.nativeElement.clientWidth;
-    if (this.dataset !== undefined) {
+    if (this.datasets !== undefined) {
       this.graphPoints = this.convertDatasetToPoints();
     }
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    if (changes['dataset'] && this.dataset !== undefined) {
+    if (changes['datasets'] && this.datasets !== undefined) {
       this.yAxisPoints = this.determineYAxisPoints();
       this.xAxisPoints = this.determineXAxisPoints();
       this.graphPoints = this.convertDatasetToPoints();
@@ -50,13 +49,17 @@ export class BargraphComponent implements OnInit, OnChanges, AfterViewInit {
   determineYAxisPoints() {
     const yAxisPoints = [];
     const yValues = [];
-    for (let i = 0; i < this.dataset.length; i++) {
-      if (this.dataset[i].y !== undefined) {
-        yValues.push(this.dataset[i].y);
+    for (let i = 0; i < this.datasets[0].length; i++) {
+      let yValue = 0;
+      for (let j = 0; j < this.datasets.length; j++) {
+        if (this.datasets[j][i].y) {
+          yValue += this.datasets[j][i].y;
+        }
       }
+      yValues.push(yValue);
     }
-    yValues.sort();
 
+    yValues.sort((a, b) => { return a - b; });
     let highest = yValues[yValues.length - 1];
     for (let marker of this.markers) {
       if (marker > highest) {
@@ -79,27 +82,37 @@ export class BargraphComponent implements OnInit, OnChanges, AfterViewInit {
 
   determineXAxisPoints() {
     const xAxisPoints = [];
-    for (let i = 0; i < this.dataset.length; i++) {
-      xAxisPoints.push(this.dataset[i].x);
+    for (let i = 0; i < this.datasets[0].length; i++) {
+      xAxisPoints.push(this.datasets[0][i].x);
     }
     return xAxisPoints;
   }
 
-  convertDatasetToPoints() {
+  convertDatasetToPoints(): GraphPoint[][] {
     const graphPoints = [];
     const differenceHighestLowestYValue = this.yAxisPoints[0];
-    for (const dataPoint of this.dataset) {
-      let height = undefined;
-      if (dataPoint.y !== undefined) {
-        height = (dataPoint.y) * (this.yAxisHeight / differenceHighestLowestYValue);
+    for (let i = 0; i < this.datasets.length; i++) {
+      const graphPointSet = []
+      for (let dataPoint of this.datasets[i]) {
+        let height = undefined;
+        if (dataPoint.y !== undefined) {
+          height = (dataPoint.y) * (this.yAxisHeight / differenceHighestLowestYValue);
+        }
+        const graphPoint = new GraphPoint(dataPoint.y, height);
+        graphPointSet.push(graphPoint);
       }
-      const graphPoint = new GraphPoint(dataPoint.y, height);
-      graphPoints.push(graphPoint);
+      graphPoints.push(graphPointSet);
     }
     this.markerHeights = [];
-    for (let marker of this.markers) {
-      this.markerHeights.push(marker * (this.yAxisHeight / differenceHighestLowestYValue));
+
+    for (let i = 0; i < this.markers.length; i++) {
+      let markerValue = 0;
+      for (let j = 0; j <= i; j++) {
+        markerValue += this.markers[j];
+      }
+      this.markerHeights.push(markerValue * (this.yAxisHeight / differenceHighestLowestYValue));
     }
+
     return graphPoints;
   }
 }

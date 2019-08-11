@@ -31,7 +31,7 @@ export class GraphsComponent implements OnInit, AfterViewInit {
 
   private graphLegenda = 20;
 
-  private splitted = true;
+  private splitted = false;
   private percentages = false;
 
   private zoomX = 1;

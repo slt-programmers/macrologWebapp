@@ -27,6 +27,9 @@
   &__bargraph {
     height: 350px;
     width: 100%;
+    &--stacked {
+      height: 500px;
+    }
     &--protein {
       height: 200px;
     }

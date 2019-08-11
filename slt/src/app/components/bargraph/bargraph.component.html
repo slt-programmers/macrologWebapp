@@ -10,16 +10,20 @@
 
                 <div class="graph-content">
                     <ng-container *ngFor="let marker of markers; index as index">
-                        <div class="graph-marker" [style.height.px]="markerHeights[index]">
-                            <div class="graph-marker__text">{{marker}}</div>
+                        <div class="graph-marker" [style.height.px]="markerHeights[index]" 
+                        [style.border-top-color]="colors[index]">
+                            <div [style.color]="colors[index]" class="graph-marker__text">{{marker}}</div>
                         </div>
                     </ng-container>
-                    <div class="graph-point" [style.border-color]="color" [style.background-color]="colorFill"
-                        *ngFor="let graphPoint of graphPoints" [style.height.px]="graphPoint.height">
-                        <div class="graph-point__text">
-                            {{graphPoint.value}}
+
+                    <ng-container *ngIf="graphPoints !== undefined && graphPoints[0] !== undefined">
+                        <div class="graph-points-lane" *ngFor="let graphPoint of graphPoints[0]; index as pointIndex">
+                            <div class="graph-point" *ngFor="let set of graphPoints; index as setIndex"
+                                [style.border-color]="colors[setIndex]" [style.background-color]="fillColors[setIndex]"
+                                [style.height.px]="graphPoints[setIndex][pointIndex].height">
+                            </div>
                         </div>
-                    </div>
+                    </ng-container>
                 </div>
             </div>
 
