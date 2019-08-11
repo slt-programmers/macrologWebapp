@@ -1,5 +1,4 @@
 import { Ingredient } from './ingredient';
-import { Macro } from './macro';
 
 export class Dish {
 

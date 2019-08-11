@@ -3,7 +3,7 @@ import { UserService } from '../../services/user.service';
 import { Gender } from '../../model/gender';
 import { Food } from '../../model/food';
 import { Portion } from '../../model/portion';
-import { Macro } from '../../model/macro';
+import { Macros } from '../../model/macro';
 import { FoodSearchable } from '../../model/foodSearchable';
 import { forkJoin } from 'rxjs/observable/forkJoin';
 import { Router } from '@angular/router';
@@ -55,7 +55,7 @@ export class OnboardingComponent implements OnInit {
 		const item = new Food('Apple', 0.4, 0.0, 12);
 		item.portions = [];
 		const portion = new Portion();
-		const macros = new Macro();
+		const macros = new Macros();
 		macros.protein = 0.8;
 		macros.fat = 0.0;
 		macros.carbs = 24;
