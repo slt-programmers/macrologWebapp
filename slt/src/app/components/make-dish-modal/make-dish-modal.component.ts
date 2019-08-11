@@ -1,16 +1,19 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, Input,EventEmitter } from '@angular/core';
 import { Dish } from '../../model/dish';
 import { Ingredient } from '../../model/ingredient';
 import { FoodSearchable } from '../../model/foodSearchable';
 import { FoodService } from '../../services/food.service';
-import { MealService } from '../../services/meal.service';
+import { DishService } from '../../services/dish.service';
 import { Food } from '@app/model/food';
 
 @Component({
 	selector: 'make-dish-modal',
-	templateUrl: './make-dish-modal.component.html'
+	templateUrl: './make-dish-modal.component.html',
+  styleUrls: ['./make-dish-modal.component.scss']
 })
 export class MakeDishModalComponent implements OnInit {
+
+	@Input() selectedDish:Dish;
 
 	@Output() close: EventEmitter<boolean> = new EventEmitter<boolean>();
 
@@ -25,10 +28,11 @@ export class MakeDishModalComponent implements OnInit {
 	private unitGrams = 100.00;
 
 	constructor(private foodService: FoodService,
-		private mealService: MealService) {
+		private dishService: DishService) {
 	}
 
 	ngOnInit() {
+    this.loadDishFromInput();
 		this.getAllFood();
 		this.addIngredientCallBack = this.addIngredient.bind(this);
 	}
@@ -85,6 +89,8 @@ export class MakeDishModalComponent implements OnInit {
 		this.ingredients.splice(index, 1);
 	}
 
+
+
 	public calculateMultiplier(event: any, ingredient: Ingredient) {
 		if (ingredient.portion === undefined) {
 			ingredient.multiplier = (event.target.value / this.unitGrams);
@@ -111,14 +117,33 @@ export class MakeDishModalComponent implements OnInit {
 		}
 	}
 
+  private loadDishFromInput() {
+     if (this.selectedDish) {
+         this.modalTitle = "Edit a dish";
+         this.dishName = this.selectedDish.name;
+         this.ingredients = this.selectedDish.ingredients;
+
+         for (const ingredient of this.ingredients) {
+           for (const portion of ingredient.food.portions) {
+             if (portion.id == ingredient.portionId) {
+                ingredient.portion = portion;
+             }
+           }
+         }
+     }
+  }
+
 	public saveDish() {
 		const dish = new Dish(this.dishName);
+    if (this.selectedDish){
+      dish.id = this.selectedDish.id;
+    }
 		dish.ingredients = this.ingredients;
 		const self = this;
 		const closeCallBack = () => {
 			self.closeModal();
 		};
-		this.mealService.insertMeal(dish, closeCallBack);
+		this.dishService.insertDish(dish, closeCallBack);
 	}
 
 	public closeModal() {

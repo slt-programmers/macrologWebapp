@@ -2,7 +2,9 @@ import { Component, OnInit, Input, ViewChild, ElementRef, AfterViewInit } from '
 
 @Component({
 	templateUrl: './piechart.component.html',
-	selector: 'piechart'
+	selector: 'piechart',
+  styleUrls: ['./piechart.component.scss']
+
 })
 export class PiechartComponent implements OnInit, AfterViewInit {
 
@@ -54,12 +56,13 @@ export class PiechartComponent implements OnInit, AfterViewInit {
 		this.svgEl = this.piechartRef.nativeElement;
 		const slices = [
 			{ percent: this.proteinPercent, color: '#5bd086' },
-			{ percent: this.fatPercent, color: '#f7ed70' },
-			{ percent: this.carbsPercent, color: '#fb8353' },
+			{ percent: this.fatPercent, color: '#f7ed70'},
+			{ percent: this.carbsPercent, color: '#fb8353'}
 		];
 
 		slices.forEach(slice => {
 			// destructuring assignment sets the two variables at once
+
 			const [startX, startY] = this.getCoordinatesForPercent(this.cumulativePercent);
 
 			// each slice starts where the last slice ended, so keep a cumulative percent
@@ -81,8 +84,9 @@ export class PiechartComponent implements OnInit, AfterViewInit {
 			const pathEl = document.createElementNS('http://www.w3.org/2000/svg', 'path');
 			pathEl.setAttribute('d', pathData);
 			pathEl.setAttribute('fill', slice.color);
+      pathEl.setAttribute("width","300px")
 			this.svgEl.appendChild(pathEl);
-		});
+	});
 	}
 
 }
