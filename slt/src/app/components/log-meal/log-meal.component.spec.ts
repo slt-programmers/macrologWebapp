@@ -179,15 +179,15 @@ describe('LogMealComponent', () => {
     it('should return whether grams is selected', () => {
         let logEntry = new LogEntry();
         let result = component.isGramsSelected(logEntry);
-        expect(result).toEqual('selected');
+        expect(result).toEqual(true);
 
         logEntry.id = 1;
         result = component.isGramsSelected(logEntry);
-        expect(result).toEqual('selected');
+        expect(result).toEqual(true);
 
         logEntry.portion = new Portion();
         result = component.isGramsSelected(logEntry);
-        expect(result).toEqual('');
+        expect(result).toEqual(false);
     });
 
     it('should return whether unit is selected', () => {
@@ -196,11 +196,11 @@ describe('LogMealComponent', () => {
         let logEntry = new LogEntry();
         logEntry.portion = portion;
         let result = component.isUnitSelected(logEntry, portion);
-        expect(result).toEqual('selected');
+        expect(result).toEqual(true);
 
         logEntry.portion = undefined;
         result = component.isUnitSelected(logEntry, portion);
-        expect(result).toEqual('');
+        expect(result).toEqual(false);
     });
 
     it('should get available portions', () => {

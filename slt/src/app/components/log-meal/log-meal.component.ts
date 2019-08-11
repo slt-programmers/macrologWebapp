@@ -80,7 +80,7 @@ export class LogMealComponent implements OnInit, OnChanges {
 	}
 
 	public isGramsSelected(logEntry: LogEntry) {
-		if (logEntry.id === undefined && logEntry.portion === undefined) {
+		if (logEntry.portion === undefined) {
 			return true;
 		} else {
 			return false
