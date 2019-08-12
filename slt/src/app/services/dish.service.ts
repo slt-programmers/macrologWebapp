@@ -35,7 +35,7 @@ export class DishService {
 			});
 	}
 
-	public deleteDish(dish: Dish) {
+	public deleteDish(dish: Dish, callBack: Function) {
 		const headers = {
 			'Content-Type': 'application/json',
 			'Access-Control-Allow-Origin': environment.origin
@@ -44,6 +44,8 @@ export class DishService {
 		const options = { headers: headers };
 		return this.http.delete<number>(this.macrologBackendUrl + '/' + dish.id, options).subscribe(
 			data => {
+				this.toastService.setMessage('Your dish have been deleted!');
+				callBack();
 			},
 			error => {
 				console.log(error);

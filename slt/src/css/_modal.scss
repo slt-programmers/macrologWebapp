@@ -1,5 +1,5 @@
 .modal-wrapper {
-  background-color: transparentize($primary, 0.10);
+  background: $blackHorizontalGradient;
   height: 100%;
   left: 0;
   overflow: scroll;
@@ -24,7 +24,7 @@
       padding: 10px 15px 0 30px;
     }
     align-items: center;
-    background-color: $primary;
+    background-color: $secondary;
     border-radius: 5px 5px 0 0;
     color: $cloud;
     display: flex;

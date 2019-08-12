@@ -36,6 +36,7 @@ $menuWidth: 200px;
       margin-top: 72px;
       margin-left: 0;
     }
+    cursor: pointer;
     color: white;
     display: inline-block;
     font-size: 32px;
@@ -45,7 +46,6 @@ $menuWidth: 200px;
 
     &__text {
       //line-height: 1;
-      cursor: default;
     }
   }
 
@@ -135,7 +135,7 @@ $menuWidth: 200px;
     &--active {
       background-color: $whiteTransparentLight;
     }
-    
+
     &--back {
       text-align: end;
     }

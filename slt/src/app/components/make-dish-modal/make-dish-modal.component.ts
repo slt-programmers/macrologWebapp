@@ -89,8 +89,6 @@ export class MakeDishModalComponent implements OnInit {
 		this.ingredients.splice(index, 1);
 	}
 
-
-
 	public calculateMultiplier(event: any, ingredient: Ingredient) {
 		if (ingredient.portion === undefined) {
 			ingredient.multiplier = (event.target.value / this.unitGrams);
@@ -144,6 +142,14 @@ export class MakeDishModalComponent implements OnInit {
 			self.closeModal();
 		};
 		this.dishService.insertDish(dish, closeCallBack);
+	}
+
+	public deleteDish() {
+		const self = this;
+		const closeCallBack = () => {
+			self.closeModal();
+		};
+		this.dishService.deleteDish(this.selectedDish, closeCallBack);
 	}
 
 	public closeModal() {

@@ -10,7 +10,7 @@ import { DishService } from '../../services/dish.service';
 })
 export class DishesComponent implements OnInit {
 
-	public allDishes: Dish[];
+	public allDishes: Dish[] = [];
 	public selectedDish: Dish;
 	public modalIsVisible = false;
 

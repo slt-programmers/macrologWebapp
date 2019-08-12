@@ -1,48 +1,34 @@
-<div class="container container--first container--last">
-  <!--<div class="tile">-->
-    <!--<div class="form-field form-field&#45;&#45;horizontal">-->
-      <!--<label class="form-field__label">Protein</label>-->
-      <!--<div class="dish-card__legenda dish-card__legenda&#45;&#45;protein"></div>-->
-    <!--</div>-->
+<div class="blue-theme container container--first container--last">
+  <div class="dish-grid dish-grid--empty" *ngIf="allDishes.length === 0">
+    <p>You havent created any dishes yet!</p>
+  </div>
 
-    <!--<div class="form-field form-field&#45;&#45;horizontal">-->
-      <!--<label class="form-field__label">Fat</label>-->
-      <!--<div class="dish-card__legenda dish-card__legenda&#45;&#45;fat"></div>-->
-    <!--</div>-->
+  <div class="dish-grid" *ngIf="allDishes.length !== 0">
+    <div class="dish-card" *ngFor="let dish of allDishes" (click)="openModal(dish)">
+      <div class="dish-content" onmouseover="">
+        <div class="dish-content__title">{{dish.name}}</div>
 
-    <!--<div class="form-field form-field&#45;&#45;horizontal">-->
-      <!--<label class="form-field__label">Carbs</label>-->
-      <!--<div class="dish-card__legenda dish-card__legenda&#45;&#45;carbs"></div>-->
-    <!--</div>-->
-  <!--</div>-->
+        <div class="dish-content__pie">
+          <piechart class="" [mealId]="dish.id" [macros]="getTotal(dish)"></piechart>
+        </div>
 
-  <div class="dish-grid">
-    <div class="dish-card" *ngFor="let dish of allDishes">
-      <div class="dish-content" (click)="openModal(dish)" onmouseover="">
-        <h3 class="dish-content__title">{{dish.name}}</h3>
+        <div class="dish-content__ingredientlist">
+          <div class="dish-content__ingredient" *ngFor="let ingredient of dish.ingredients">
+            <i class="fas fa-chevron-right dish-content__ingredient__bullet"></i>
 
-				<div class="dish-content__pie tooltip">
-					<!--<span class="tooltiptext">-->
-						 <!--Protein = {{getTotal(dish).protein | number:'1.1-1'}}<Br/>-->
-						 <!--Fat = {{getTotal(dish).fat | number:'1.1-1'}}<Br/>-->
-						 <!--Carbs = {{getTotal(dish).carbs | number:'1.1-1'}}<Br/>-->
-						 <!--Calories = {{getTotal(dish).calories | number:'1.1-1'}}<Br/>-->
- 					<!--</span>-->
-				  <piechart class="" [mealId]="dish.id" [macros]="getTotal(dish)"></piechart>
-				</div>
-				<div class="dish-content__ingredientlist">
-					<div class="fish-content__ingredient" *ngFor="let ingredient of dish.ingredients">
-						<li>{{getIngredientDescription(ingredient)}} {{ingredient.food.name}}</li>
-					</div>
-				</div>
+            <div class="dish-content__ingredient__name">{{getIngredientDescription(ingredient)}}
+              {{ingredient.food.name}}
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 
   <div class="blue-theme button-wrapper--floating-action">
-      <button mat-fab color="primary" (click)="openModal(null)">
-          <mat-icon>add</mat-icon>
-        </button>
+    <button mat-fab color="primary" (click)="openModal(null)">
+      <mat-icon>add</mat-icon>
+    </button>
   </div>
 
   <div class="modal-wrapper" *ngIf="modalIsVisible">
