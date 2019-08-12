@@ -9,7 +9,7 @@ import { Macros } from '@app/model/macro';
 })
 export class PiechartComponent implements OnInit, AfterViewInit {
 
-	@ViewChild('thisOne', { static: false }) piechartRef: ElementRef;
+	@ViewChild('pieChart', { static: false }) piechartRef: ElementRef;
 
 	@Input() mealId: number;
 	@Input() macros: Macros;
@@ -58,12 +58,12 @@ export class PiechartComponent implements OnInit, AfterViewInit {
 		this.cumulativePercent = 0;
 		this.svgEl = this.piechartRef.nativeElement;
 		const slices = [
-			{ percent: this.proteinPercent - 0.005, color: 'rgba(100, 149, 236, 0.3)' },
-			{ percent: 0.005, color: 'white' },
-			{ percent: this.fatPercent - 0.005, color: 'rgba(60, 221, 234, 0.3)' },
-			{ percent: 0.005, color: 'white' },
-			{ percent: this.carbsPercent - 0.005, color: 'rgba(144, 238, 144, 0.3)' },
-			{ percent: 0.005, color: 'white' }
+			{ percent: this.proteinPercent - 0.007, color: 'rgba(100, 149, 236, 0.5)' },
+			{ percent: 0.007, color: 'white' },
+			{ percent: this.fatPercent - 0.007, color: 'rgba(60, 221, 234, 0.5)' },
+			{ percent: 0.007, color: 'white' },
+			{ percent: this.carbsPercent - 0.007, color: 'rgba(144, 238, 144, 0.5)' },
+			{ percent: 0.007, color: 'white' }
 		];
 
 		slices.forEach(slice => {

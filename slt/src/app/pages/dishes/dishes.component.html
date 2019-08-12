@@ -5,18 +5,18 @@
 
   <div class="dish-grid" *ngIf="allDishes.length !== 0">
     <div class="dish-card" *ngFor="let dish of allDishes" (click)="openModal(dish)">
-      <div class="dish-content" onmouseover="">
-        <div class="dish-content__title">{{dish.name}}</div>
+      <div class="dish-card__title">{{dish.name}}</div>
 
-        <div class="dish-content__pie">
-          <piechart class="" [mealId]="dish.id" [macros]="getTotal(dish)"></piechart>
+      <div class="dish-card__content">
+        <div class="dish-card__content__pie-chart">
+          <piechart [mealId]="dish.id" [macros]="getTotal(dish)"></piechart>
         </div>
 
-        <div class="dish-content__ingredientlist">
-          <div class="dish-content__ingredient" *ngFor="let ingredient of dish.ingredients">
-            <i class="fas fa-chevron-right dish-content__ingredient__bullet"></i>
+        <div class="dish-card__content__ingredient-list">
+          <div class="dish-card__content__ingredient" *ngFor="let ingredient of dish.ingredients">
+            <i class="fas fa-chevron-right dish-card__content__ingredient__bullet"></i>
 
-            <div class="dish-content__ingredient__name">{{getIngredientDescription(ingredient)}}
+            <div class="dish-card__content__ingredient__name">{{getIngredientDescription(ingredient)}}
               {{ingredient.food.name}}
             </div>
           </div>

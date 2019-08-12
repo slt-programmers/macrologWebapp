@@ -20,40 +20,49 @@
   width: 275px;
   background-color: $white;
   border-radius: 15px;
-
-  &:hover {
-    @include elevation(5);
-  }
-}
-
-.dish-content {
   display: flex;
   flex-direction: column;
 
+  &:hover {
+    @include elevation(10);
+  }
+
   &__title {
     align-self: center;
-    font-weight: 24px;
+    font-weight: bold;
+    font-size: 20px;
+    color: $primary;
+    margin-bottom: 16px;
   }
 
-  &__pie {
-    align-self: center;
-    margin-bottom: 20px;
-  }
-
-  &__ingredientlist {
-    margin-left: 20px;
-  }
-
-  &__ingredient {
+  &__content {
     display: flex;
-    flex-direction: row;
-    font-size: 10px;
+    flex-direction: column;
 
-    &__bullet {
-      color: $primary;
-      font-size: 8pt;
-      margin-top: 4px;
-      margin-right: 5px;
+    &__pie-chart {
+      align-self: center;
+      margin-bottom: 20px;
+    }
+  
+    &__ingredient-list {
+      margin-left: 20px;
+    }
+  
+    &__ingredient {
+      display: flex;
+      flex-direction: row;
+      margin-bottom: 4px;
+  
+      &__bullet {
+        color: $primary;
+        font-size: 8pt;
+        margin-top: 6px;
+        margin-right: 8px;
+      }
+
+      &__name {
+        font-size: 16px;
+      }
     }
   }
 }

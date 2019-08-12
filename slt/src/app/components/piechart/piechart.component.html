@@ -1,26 +1,38 @@
-<div class="piechart">
-	<div class="donutChart">
-		<svg class="svgpie" #thisOne viewBox="-1 -1 2 2"
-				 style="transform: rotate(-90deg);width:100%;">
+<div class="donut-chart-wrapper">
+	<div class="donut-chart">
+		<svg #pieChart viewBox="-1 -1 2 2" style="transform: rotate(-90deg); width:100%;">
 		</svg>
-		<div class="donutChartCenter">
-			<div class="donutChartCenter__number">{{centerText}}</div>
-			<div class="donutChartCenter__unit">kcal</div>
+
+		<div class="donut-chart__center">
+			<div class="donut-chart__center__number">{{centerText}}</div>
+
+			<div class="donut-chart__center__unit">kcal</div>
 		</div>
 	</div>
-	<div class="piechart__legend">
-		<div class="piechart__legend__line">
-			<div class="piechart__legend__line--protein"></div>
-			<div class="piechart__legend__line--number">{{protein  | number : '1.0-0'}} gr</div>
-			<div class="piechart__legend__line--unit">Protein</div>
+
+	<div class="legend">
+		<div class="legend__line">
+			<div class="legend__line__indicator legend__line__indicator--protein"></div>
+
+			<div class="legend__line__number">{{protein  | number : '1.0-0'}} gr</div>
+
+			<div class="legend__line__unit">Protein</div>
 		</div>
-		<div class="piechart__legend__line">
-			<div class="piechart__legend__line--fat"></div><div class="piechart__legend__line--number">{{fat  | number : '1.0-0'}} gr</div>
-			<div class="piechart__legend__line--unit">Fat</div>
+
+		<div class="legend__line">
+			<div class="legend__line__indicator legend__line__indicator--fat"></div>
+
+			<div class="legend__line__number">{{fat  | number : '1.0-0'}} gr</div>
+
+			<div class="legend__line__unit">Fat</div>
 		</div>
-		<div class="piechart__legend__line">
-			<div class="piechart__legend__line--carbs"></div><div class="piechart__legend__line--number">{{carbs  | number : '1.0-0'}} gr</div>
-			<div class="piechart__legend__line--unit">Carbs</div>
+
+		<div class="legend__line">
+			<div class="legend__line__indicator legend__line__indicator--carbs"></div>
+
+			<div class="legend__line__number">{{carbs  | number : '1.0-0'}} gr</div>
+
+			<div class="legend__line__unit">Carbs</div>
 		</div>
 	</div>
 </div>
