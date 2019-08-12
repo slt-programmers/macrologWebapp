@@ -41,6 +41,7 @@ $xAxisHeight: 30px;
     color: $iron;
     font-size: 12px;
     padding-right: 4px;
+    flex-grow: 1;
   }
 
   .graph-content {
@@ -55,19 +56,28 @@ $xAxisHeight: 30px;
 
   .graph-marker {
     position: absolute;
-    border-top: 1px solid rgb(0, 197, 255);;
+    border-top: 1px solid rgb(0, 197, 255);
     display: flex;
     flex-direction: column;
     align-self: flex-end;
     width: 100%;
     z-index: 2;
 
+    &--narrow {
+      width: $yAxisWidth;
+    }
+
     &__text {
       display: flex;
       align-self: flex-end;
-      color: $silver;
+      color: $iron;
       margin-top: -20px;
     }
+  }
+
+  .graph-marker-numbers {
+    display: flex;
+    width: $yAxisWidth;
   }
 
   .graph-points-lane {
@@ -82,6 +92,10 @@ $xAxisHeight: 30px;
   .graph-point {
     background-color: rgba(0, 197, 255, 0.3);
     border: 1px solid rgb(0, 197, 255);
+
+    &--empty {
+      border: 0px;
+    }
   }
 
   .x-axis-wrapper {

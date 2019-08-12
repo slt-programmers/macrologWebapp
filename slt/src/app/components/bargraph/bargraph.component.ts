@@ -62,7 +62,7 @@ export class BargraphComponent implements OnChanges, AfterViewInit {
       yValues.push(yValue);
     }
 
-    yValues.sort((a, b) => { return a - b; });
+    yValues.sort((a, b) => a - b);
     const highest = this.determineHighestYValue(yValues);
 
     const lowest = 0;
@@ -70,7 +70,7 @@ export class BargraphComponent implements OnChanges, AfterViewInit {
 
     yAxisPoints.push(lowest);
     let yValuesToAdd = Math.round(difference / this.yAxisStep);
-    if (yValuesToAdd === 1) {
+    if (yValuesToAdd === 1 || yValuesToAdd === 2) {
       yValuesToAdd += 1;
     }
 
@@ -80,13 +80,14 @@ export class BargraphComponent implements OnChanges, AfterViewInit {
       yAxisPoints.push(value);
     }
     yAxisPoints.reverse();
+    yAxisPoints.pop();
     return yAxisPoints;
   }
 
   private determineHighestYValue(yValues: number[]): number {
     let highest = yValues[yValues.length - 1];
     let markersTotal = 0;
-    for (let marker of this.markers) {
+    for (const marker of this.markers) {
       markersTotal += marker;
     }
     if (markersTotal > highest) {
@@ -107,9 +108,9 @@ export class BargraphComponent implements OnChanges, AfterViewInit {
     const graphPoints = [];
     const differenceHighestLowestYValue = this.yAxisPoints[0];
     for (let i = 0; i < this.datasets.length; i++) {
-      const graphPointSet = []
-      for (let dataPoint of this.datasets[i]) {
-        let height = undefined;
+      const graphPointSet = [];
+      for (const dataPoint of this.datasets[i]) {
+        let height: number;
         if (dataPoint.y !== undefined) {
           height = (dataPoint.y) * (this.yAxisHeight / differenceHighestLowestYValue);
         }

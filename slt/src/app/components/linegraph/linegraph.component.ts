@@ -206,7 +206,7 @@ export class LinegraphComponent implements AfterViewInit, OnChanges {
     for (const dataPoint of this.dataset) {
       const lowestYValue = this.yAxisPoints[this.yAxisPoints.length - 1];
       const differenceHighestLowestYValue = this.yAxisPoints[0] - lowestYValue;
-      let height = undefined;
+      let height: number;
       if (dataPoint.y !== undefined) {
         height = (dataPoint.y - lowestYValue) * (this.yAxisHeight / differenceHighestLowestYValue);
       }

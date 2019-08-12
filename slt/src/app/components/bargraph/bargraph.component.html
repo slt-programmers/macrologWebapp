@@ -10,9 +10,8 @@
 
                 <div class="graph-content">
                     <ng-container *ngFor="let marker of markers; index as index">
-                        <div class="graph-marker" [style.height.px]="markerHeights[index]" 
-                        [style.border-top-color]="colors[index]">
-                            <div class="graph-marker__text">{{marker}}</div>
+                        <div class="graph-marker" [style.height.px]="markerHeights[index]"
+                            [style.border-top-color]="colors[index]">
                         </div>
                     </ng-container>
 
@@ -20,8 +19,18 @@
                         <div class="graph-points-lane" *ngFor="let graphPoint of graphPoints[0]; index as pointIndex">
                             <div class="graph-point" *ngFor="let set of graphPoints; index as setIndex"
                                 [style.border-color]="colors[setIndex]" [style.background-color]="fillColors[setIndex]"
-                                [style.height.px]="graphPoints[setIndex][pointIndex].height">
+                                [style.height.px]="graphPoints[setIndex][pointIndex].height"
+                                [ngClass]="{'graph-point--empty': !graphPoints[setIndex][pointIndex].height}">
                             </div>
+                        </div>
+                    </ng-container>
+                </div>
+
+                <div class="graph-marker-numbers">
+                    <ng-container *ngFor="let marker of markers; index as index">
+                        <div class="graph-marker graph-marker--narrow" [style.height.px]="markerHeights[index]"
+                            [style.border-top-color]="colors[index]">
+                            <div class="graph-marker__text">{{marker}}</div>
                         </div>
                     </ng-container>
                 </div>
@@ -37,6 +46,8 @@
                         </div>
                     </div>
                 </div>
+
+                <div class="x-axis-dummy-point"></div>
             </div>
         </div>
     </div>

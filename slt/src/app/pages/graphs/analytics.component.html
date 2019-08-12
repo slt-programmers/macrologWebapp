@@ -66,10 +66,14 @@
 				</div>
 
 				<div class="graph__bargraph-container" *ngIf="measurementOption === 'ratio'">
-						<bargraph [colors]="['rgb(100, 149, 236)', 'rgb(60, 221, 234)', 'rgb(144, 238, 144)']"
+					<div class="graph__bargraph-label">
+						{{ratioGraphLabel}}
+					</div>
+					
+					<bargraph [colors]="['rgb(100, 149, 236)', 'rgb(60, 221, 234)', 'rgb(144, 238, 144)']"
 						[fillColors]="['rgba(100, 149, 236, 0.3)', 'rgba(60, 221, 234, 0.3)', 'rgba(144, 238, 144, 0.3)']"
-						[markers]="ratioMarkers" [datasets]="[proteinRatioDataset, fatRatioDataset, carbsRatioDataset]" [xAxisStep]="1"
-						[yAxisStep]="10" class="graph__bargraph graph__bargraph--stacked">
+						[markers]="ratioMarkers" [datasets]="[proteinRatioDataset, fatRatioDataset, carbsRatioDataset]"
+						[xAxisStep]="1" [yAxisStep]="10" class="graph__bargraph graph__bargraph--stacked">
 					</bargraph>
 				</div>
 			</div>

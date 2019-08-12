@@ -37,9 +37,10 @@ export class GraphsComponent implements OnInit {
   public yAxisStep = 20;
 
   public graphLabel = 'Total calories per day grouped by macronutrient';
-  public proteinGraphLabel = 'Protein';
-  public fatGraphLabel = 'Fat';
-  public carbsGraphLabel = 'Carbs'
+  public ratioGraphLabel = 'Ratio calories per day grouped by macronutrient';
+  public proteinGraphLabel = 'Total calories from protein per day';
+  public fatGraphLabel = 'Total calories from fat per day';
+  public carbsGraphLabel = 'Total calories from carbs per day';
 
   public proteinDataset: DataPoint[];
   public fatDataset: DataPoint[];
@@ -77,23 +78,24 @@ export class GraphsComponent implements OnInit {
   public switchMeasurement() {
     if (this.measurement === 'grams') {
       this.getDatasetsForType('grams');
-      this.graphLabel = 'Total grams per day grouped by macronutrient'
+      this.graphLabel = 'Total grams per day grouped by macronutrient';
+      this.ratioGraphLabel = 'Ratio grams per day grouped by macronutrient';
+      this.proteinGraphLabel = 'Total grams of protein per day';
+      this.fatGraphLabel = 'Total grams of fat per day';
+      this.carbsGraphLabel = 'Total grams of carbs per day';
       this.markers = [this.proteinMarker, this.fatMarker, this.carbsMarker];
     } else {
       this.getDatasetsForType('calories');
-      this.graphLabel = 'Total calories per day grouped by macronutrient'
+      this.graphLabel = 'Total calories per day grouped by macronutrient';
+      this.ratioGraphLabel = 'Ratio calories per day grouped by macronutrient';
+      this.proteinGraphLabel = 'Total calories from protein per day';
+      this.fatGraphLabel = 'Total calories from fat per day';
+      this.carbsGraphLabel = 'Total calories from carbs per day';
       this.markers = [this.goalCalories];
     }
   }
 
   public switchOption() {
-    if (this.measurementOption === 'total') {
-
-    } else if (this.measurementOption === 'splitted') {
-
-    } else {
-
-    }
     this.ref.detectChanges();
   }
 
