@@ -69,7 +69,11 @@ export class BargraphComponent implements OnChanges, AfterViewInit {
     const difference = highest - lowest;
 
     yAxisPoints.push(lowest);
-    const yValuesToAdd = Math.round(difference / this.yAxisStep) + 1;
+    let yValuesToAdd = Math.round(difference / this.yAxisStep);
+    if (yValuesToAdd === 1) {
+      yValuesToAdd += 1;
+    }
+
     for (let j = 0; j < yValuesToAdd; j++) {
       let value = yAxisPoints[j];
       value += this.yAxisStep;
@@ -114,7 +118,6 @@ export class BargraphComponent implements OnChanges, AfterViewInit {
       }
       graphPoints.push(graphPointSet);
     }
-   
     this.calculateMarkerHeights(differenceHighestLowestYValue);
     return graphPoints;
   }
@@ -126,7 +129,7 @@ export class BargraphComponent implements OnChanges, AfterViewInit {
       for (let j = 0; j <= i; j++) {
         markerValue += this.markers[j];
       }
-      this.markerHeights.push(markerValue * (this.yAxisHeight / differenceHighestLowestYValue));
+      this.markerHeights.push((markerValue * (this.yAxisHeight / differenceHighestLowestYValue)) + (2 * i) + 1); // border correction
     }
   }
 }
