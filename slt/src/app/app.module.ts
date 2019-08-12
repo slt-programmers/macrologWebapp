@@ -15,6 +15,7 @@ import { MatRippleModule } from '@angular/material/core';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 import { AppComponent } from './app.component';
+import { AboutComponent} from './pages/about/about.component';
 import { FoodService } from './services/food.service';
 import { ToastService } from './services/toast.service';
 import { ToastDirective } from './directives/toast.directive';
@@ -79,12 +80,14 @@ const appRoutes: Routes = [
 	{ path: 'food', component: FoodComponent, canActivate: [AuthGuardService] },
 	{ path: 'dishes', component: DishesComponent, canActivate: [AuthGuardService] },
 	{ path: 'graphs', component: GraphsComponent, canActivate: [AuthGuardService] },
+  { path: 'about', component: AboutComponent, canActivate: [AuthGuardService]},
 	{ path: '', redirectTo: '/log', pathMatch: 'full', canActivate: [AuthGuardService] },
 	{ path: '**', redirectTo: '/log', pathMatch: 'full', canActivate: [AuthGuardService] }
 ];
 
 @NgModule({
 	declarations: [
+    AboutComponent,
 		AdminComponent,
 		AppComponent,
 		DiaryComponent,

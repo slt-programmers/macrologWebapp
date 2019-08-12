@@ -15,9 +15,10 @@ export class PiechartComponent implements OnInit, AfterViewInit {
 
 	public idstring = 'pie' + this.mealId;
 
-	private protein;
-	private fat;
-	private carbs;
+	public protein;
+	public fat;
+	public carbs;
+  public centerText;
 
 	private total: number;
 	private proteinPercent: number;
@@ -35,6 +36,7 @@ export class PiechartComponent implements OnInit, AfterViewInit {
 		this.carbs = this.macros.carbs;
 
 		this.total = this.protein + this.fat + this.carbs;
+    this.centerText= Math.round( this.protein*4 + this.fat*9 + this.carbs*4);
 
 		this.proteinPercent = this.protein / this.total;
 		this.fatPercent = this.fat / this.total;
@@ -55,9 +57,12 @@ export class PiechartComponent implements OnInit, AfterViewInit {
 		this.cumulativePercent = 0;
 		this.svgEl = this.piechartRef.nativeElement;
 		const slices = [
-			{ percent: this.proteinPercent, color: '#5bd086' },
-			{ percent: this.fatPercent, color: '#f7ed70'},
-			{ percent: this.carbsPercent, color: '#fb8353'}
+			{ percent: this.proteinPercent - 0.005, color: 'rgba(100, 149, 236, 0.3)' },
+			{ percent: 0.005, color: 'white' },
+			{ percent: this.fatPercent - 0.005, color: 'rgba(60, 221, 234, 0.3)'},
+			{ percent: 0.005, color: 'white' },
+			{ percent: this.carbsPercent - 0.005, color: 'rgba(144, 238, 144, 0.3)'},
+			{ percent: 0.005, color: 'white' }
 		];
 
 		slices.forEach(slice => {
@@ -84,7 +89,6 @@ export class PiechartComponent implements OnInit, AfterViewInit {
 			const pathEl = document.createElementNS('http://www.w3.org/2000/svg', 'path');
 			pathEl.setAttribute('d', pathData);
 			pathEl.setAttribute('fill', slice.color);
-      pathEl.setAttribute("width","300px")
 			this.svgEl.appendChild(pathEl);
 	});
 	}

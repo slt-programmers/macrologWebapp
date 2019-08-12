@@ -14,57 +14,43 @@
 	margin: ($gutter/2);
 	padding: ($gutter/2);
 	width: 275px;
-	background-color: $mist;
+	background-color: $white;
   border-radius: 15px;
 
   &:hover{
   	@include elevation(5);
   }
 
-/*  border: outset $primary 5px;*/
 }
 
 
 .dish-content {
 	display: flex;
 	flex-direction: column;
-/*
-  .tooltip {
-    position: relative;
-    display: inline-block;
-  }
 
-  .tooltip .tooltiptext {
-    visibility: hidden;
-    width: 120px;
-    background-color: $primary;
-    color: #fff;
-    text-align: center;
-    padding: 5px 0;
-    border-radius: 6px;
-
-    position: absolute;
-  	@include elevation(3);
-    z-index: 1;
-    top: -5px;
-    left: 105%;
-  }
-  .tooltip:hover .tooltiptext {
-    visibility: visible;
-  }
-*/
 	&__title {
 		align-self: center;
-		font-weight: bold;
+		font-weight: 24px;
 	}
   &__pie {
       align-self: center;
-      width:100px;
       margin-bottom:20px;
+  }
+
+  &__ingredient {
+     display:flex;
+     flex-direction: row;
+     font-size:10pt;
   }
 
   &__ingredientlist {
       margin-left:20px;
+  }
+  &--bullet {
+     color:$primary;
+     font-size:8pt;
+     margin-top:4px;
+     margin-right:5px;
   }
 
 }

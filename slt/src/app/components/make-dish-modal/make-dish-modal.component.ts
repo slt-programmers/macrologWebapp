@@ -146,6 +146,14 @@ export class MakeDishModalComponent implements OnInit {
 		this.dishService.insertDish(dish, closeCallBack);
 	}
 
+  public deleteDish(){
+    const self = this;
+		const closeCallBack = () => {
+			self.closeModal();
+		};
+		this.dishService.deleteDish(this.selectedDish, closeCallBack);
+  }
+
 	public closeModal() {
 		this.close.emit(true);
 	}

@@ -2,7 +2,7 @@
   <div class="modal__header">
     <h3 class="modal__header__title">{{modalTitle}}</h3>
 
-    <button mat-icon-button color="primary" (click)="closeModal()">
+    <button mat-icon-button color="secondary" (click)="closeModal()">
       <mat-icon>close</mat-icon>
     </button>
   </div>
@@ -52,7 +52,7 @@
       </div>
 
       <div class="blue-theme modal__button-wrapper">
-				<button mat-stroked-button type="button" (click)="closeModal()">Cancel</button>
+				<button mat-stroked-button type="button"  (click)="deleteDish()">Delete</button>
         <button mat-stroked-button type="button" [disabled]="makeDishForm.invalid" (click)="saveDish()">Save</button>
       </div>
     </form>

@@ -1,6 +1,26 @@
 <div class="piechart">
-  <svg #thisOne viewBox="-1 -1 2 2"
-       style="transform: rotate(-0.25turn);width:100%">
-    <path d="M 1 0 A 1 1 0 0 1 0.8 0.59 L 0 0"></path>
-  </svg>
+	<div class="donutChart">
+		<svg class="svgpie" #thisOne viewBox="-1 -1 2 2"
+				 style="transform: rotate(-90deg);width:100%;">
+		</svg>
+		<div class="donutChartCenter">
+			<div class="donutChartCenter__number">{{centerText}}</div>
+			<div class="donutChartCenter__unit">kcal</div>
+		</div>
+	</div>
+	<div class="piechart__legend">
+		<div class="piechart__legend__line">
+			<div class="piechart__legend__line--protein"></div>
+			<div class="piechart__legend__line--number">{{protein  | number : '1.0-0'}} gr</div>
+			<div class="piechart__legend__line--unit">Protein</div>
+		</div>
+		<div class="piechart__legend__line">
+			<div class="piechart__legend__line--fat"></div><div class="piechart__legend__line--number">{{fat  | number : '1.0-0'}} gr</div>
+			<div class="piechart__legend__line--unit">Fat</div>
+		</div>
+		<div class="piechart__legend__line">
+			<div class="piechart__legend__line--carbs"></div><div class="piechart__legend__line--number">{{carbs  | number : '1.0-0'}} gr</div>
+			<div class="piechart__legend__line--unit">Carbs</div>
+		</div>
+	</div>
 </div>
