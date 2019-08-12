@@ -36,7 +36,7 @@ import { SliderComponent } from './components/slider/slider.component';
 import { GoalProgressbarComponent } from './components/goal-progressbar/goal-progressbar.component';
 import { AddFoodModalComponent } from './components/add-food-modal/add-food-modal.component';
 import { CalculateIntakeModalComponent } from './components/calculate-intake-modal/calculate-intake-modal.component';
-import { MealsComponent } from './pages/meals/meals.component';
+import { DishesComponent } from './pages/dishes/dishes.component';
 import { GraphsComponent } from './pages/graphs/analytics.component';
 import { DatepickerComponent } from './components/datepicker/datepicker.component';
 import { PagerComponent } from './components/pager/pager.component';
@@ -45,7 +45,7 @@ import { AutocompleteFoodComponent } from './components/autocomplete-food/autoco
 import { LoginComponent } from './pages/login/login.component';
 import { JwtInterceptor } from './interceptors/jwt.interceptor';
 import { ErrorInterceptor } from './interceptors/error.interceptor';
-import { MealService } from './services/meal.service';
+import { DishService } from './services/dish.service';
 import { ActivityService } from './services/activity.service';
 import { WeightService } from './services/weight.service';
 import { PiechartComponent } from './components/piechart/piechart.component';
@@ -78,7 +78,7 @@ const appRoutes: Routes = [
 	{ path: 'admin', component: AdminComponent, canActivate: [AuthGuardService] },
 	{ path: 'onboarding', component: OnboardingComponent, canActivate: [AuthGuardService] },
 	{ path: 'food', component: FoodComponent, canActivate: [AuthGuardService] },
-	{ path: 'meals', component: MealsComponent, canActivate: [AuthGuardService] },
+	{ path: 'dishes', component: DishesComponent, canActivate: [AuthGuardService] },
 	{ path: 'graphs', component: GraphsComponent, canActivate: [AuthGuardService] },
 	{ path: '', redirectTo: '/log', pathMatch: 'full', canActivate: [AuthGuardService] },
 	{ path: '**', redirectTo: '/log', pathMatch: 'full', canActivate: [AuthGuardService] }
@@ -102,7 +102,7 @@ const appRoutes: Routes = [
 		GoalProgressbarComponent,
 		AddFoodModalComponent,
 		CalculateIntakeModalComponent,
-		MealsComponent,
+		DishesComponent,
 		GraphsComponent,
 		DatepickerComponent,
 		ToastComponent,
@@ -140,7 +140,7 @@ const appRoutes: Routes = [
 		DiaryService,
 		UserService,
 		ToastService,
-		MealService,
+		DishService,
 		WeightService,
 		AuthGuardService,
 		ScrollBehaviourService,

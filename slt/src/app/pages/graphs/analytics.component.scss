@@ -2,7 +2,7 @@
 
 .graph {
   display: flex;
-  flex-direction: row; 
+  flex-direction: row;
   flex-wrap: wrap;
 
   &__spinner-wrapper {
@@ -61,6 +61,24 @@
   &__svg {
     &--macros {
       height: 500px;
+    }
+
+    &--proteinbar{
+			fill: $protein-strong;
+			stroke: $protein;
+			stroke-width: 1;
+    }
+
+    &--fatbar{
+			fill: $fat-strong;
+			stroke: $fat;
+			stroke-width: 1;
+    }
+
+    &--carbbar{
+			fill: $carbs-strong;
+			stroke: $carbs;
+			stroke-width: 1;
     }
 
     &--calories {
