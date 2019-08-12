@@ -1,4 +1,4 @@
-@import '../../../css/public.scss';
+@import "../../../css/public.scss";
 
 .graph {
   display: flex;
@@ -16,6 +16,19 @@
     flex-direction: row;
     align-items: center;
     justify-content: center;
+    width: 100%;
+  }
+
+  &__graphs-container {
+    @media (min-width: $lg) {
+      width: auto;
+      margin: 15px;
+    }
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    align-items: center;
+    margin-top: 30px;
     width: 100%;
   }
 
@@ -46,62 +59,27 @@
     }
   }
 
-  &__svg-container {
-    @media(min-width: $lg) {
-      width: auto;
-    }
-    display: flex;
-    flex-direction: column;
-    flex-grow: 1;
-    align-items: center;
-    margin-top: 30px;
-    width: 100%;
-  }
-
-  &__svg {
-    &--macros {
-      height: 500px;
-    }
-
-    &--proteinbar{
-			fill: $protein-strong;
-			stroke: $protein;
-			stroke-width: 1;
-    }
-
-    &--fatbar{
-			fill: $fat-strong;
-			stroke: $fat;
-			stroke-width: 1;
-    }
-
-    &--carbbar{
-			fill: $carbs-strong;
-			stroke: $carbs;
-			stroke-width: 1;
-    }
-
-    &--calories {
-      height: 250px;
-    }
-  }
-
   &__options {
+    @media (min-width: $lg) {
+      margin: 30px;
+    }
     display: flex;
     flex-direction: column;
     margin-top: 30px;
 
     &__option {
-      display:flex;
-      flex-direction: row;
-      justify-content: center;
+      display: flex;
+      flex-direction: column;
       margin-bottom: 15px;
 
       &__label {
-        width: 150px;
-        margin-left: 10px;
+        font-weight: 600;
+        margin-bottom: 10px;
+      }
+
+      &__radio {
+        margin-bottom: 5px;
       }
     }
   }
-
 }

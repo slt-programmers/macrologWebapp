@@ -19,75 +19,75 @@
 				</button>
 			</div>
 
-			<div *ngIf="!loading" class="graph__svg-container">
-				<div class="graph__bargraph-container" *ngIf="!splitted">
+			<div *ngIf="!loading" class="graph__graphs-container">
+				<div class="graph__bargraph-container" *ngIf="measurementOption === 'total'">
 					<div class="graph__bargraph-label">
-						Total grams per day grouped by macronutrient
+						{{graphLabel}}
 					</div>
 
-					<bargraph [height]="500" [colors]="['rgb(100, 149, 236)', 'rgb(60, 221, 234)', 'rgb(144, 238, 144)']"
+					<bargraph [colors]="['rgb(100, 149, 236)', 'rgb(60, 221, 234)', 'rgb(144, 238, 144)']"
 						[fillColors]="['rgba(100, 149, 236, 0.3)', 'rgba(60, 221, 234, 0.3)', 'rgba(144, 238, 144, 0.3)']"
-						[markers]="[proteinMarker, fatMarker, carbsMarker]" [datasets]="[proteinDataset, fatDataset, carbsDataset]"
-						[xAxisStep]="1" [yAxisStep]="20" class="graph__bargraph graph__bargraph--stacked">
+						[markers]="markers" [datasets]="[proteinDataset, fatDataset, carbsDataset]" [xAxisStep]="1"
+						[yAxisStep]="yAxisStep" class="graph__bargraph graph__bargraph--stacked">
 					</bargraph>
 				</div>
 
-				<div class="graph__bargraph-container" *ngIf="splitted">
+				<div class="graph__bargraph-container" *ngIf="measurementOption === 'splitted'">
 					<div class="graph__bargraph-label">
-						Total grams of protein per day
+						{{proteinGraphLabel}}
 					</div>
 
-					<bargraph [height]="250" [colors]="['rgb(100, 149, 236)']" [fillColors]="['rgba(100, 149, 236, 0.3)']"
-						[markers]="[proteinMarker]" [datasets]="[proteinDataset]" [xAxisStep]="1" [yAxisStep]="20"
+					<bargraph [colors]="['rgb(100, 149, 236)']" [fillColors]="['rgba(100, 149, 236, 0.3)']"
+						[markers]="[proteinMarker]" [datasets]="[proteinDataset]" [xAxisStep]="1" [yAxisStep]="yAxisStep"
 						class="graph__bargraph graph__bargraph--protein">
 					</bargraph>
 				</div>
 
-				<div class="graph__bargraph-container" *ngIf="splitted">
+				<div class="graph__bargraph-container" *ngIf="measurementOption === 'splitted'">
 					<div class="graph__bargraph-label">
-						Total grams of fat per day
+						{{fatGraphLabel}}
 					</div>
 
-					<bargraph [height]="250" [colors]="['rgb(60, 221, 234)']" [fillColors]="['rgba(60, 221, 234, 0.3)']" [markers]="[fatMarker]"
-						[datasets]="[fatDataset]" [xAxisStep]="1" [yAxisStep]="20" class="graph__bargraph graph__bargraph--fat">
+					<bargraph [colors]="['rgb(60, 221, 234)']" [fillColors]="['rgba(60, 221, 234, 0.3)']" [markers]="[fatMarker]"
+						[datasets]="[fatDataset]" [xAxisStep]="1" [yAxisStep]="yAxisStep"
+						class="graph__bargraph graph__bargraph--fat">
 					</bargraph>
 				</div>
 
-				<div class="graph__bargraph-container" *ngIf="splitted">
+				<div class="graph__bargraph-container" *ngIf="measurementOption === 'splitted'">
 					<div class="graph__bargraph-label">
-						Total grams of carbs per day
+						{{carbsGraphLabel}}
 					</div>
 
-					<bargraph [height]="250" [colors]="['rgb(144, 238, 144)']" [fillColors]="['rgba(144, 238, 144, 0.3)']"
-						[markers]="[carbsMarker]" [datasets]="[carbsDataset]" [xAxisStep]="1" [yAxisStep]="20"
+					<bargraph [colors]="['rgb(144, 238, 144)']" [fillColors]="['rgba(144, 238, 144, 0.3)']"
+						[markers]="[carbsMarker]" [datasets]="[carbsDataset]" [xAxisStep]="1" [yAxisStep]="yAxisStep"
 						class="graph__bargraph graph__bargraph--carbs">
 					</bargraph>
 				</div>
 
-				<div class="graph__bargraph-container">
-					<div class="graph__bargraph-label">
-						Total calories per day
-					</div>
+				<div class="graph__bargraph-container" *ngIf="measurementOption === 'ratio'">
 
-					<bargraph [height]="350" [markers]="[goalCalories]" [datasets]="[calorieDataset]" [xAxisStep]="1" [yAxisStep]="200"
-						class="graph__bargraph graph__bargraph--calories">
-					</bargraph>
 				</div>
 			</div>
 
-			<div *ngIf="!loading" class="graph__options">
-				<div class="graph__options__option">
-					<input class="input" id=splittedOption type="checkbox" (change)="switchSplitted()" [(ngModel)]="splitted">
+			<div class="graph__options blue-theme">
+				<div class="graph__options__option__label">Measurement</div>
 
-					<label class="graph__options__option__label">Split bars</label>
-				</div>
+				<mat-radio-group [disabled]="loading" class="graph__options__option" aria-label="Measurement"
+					(change)="switchMeasurement()" [(ngModel)]="measurement">
+					<mat-radio-button class="graph__options__option__radio" value="calories">Calories</mat-radio-button>
+					<mat-radio-button class="graph__options__option__radio" value="grams">Grams</mat-radio-button>
+				</mat-radio-group>
 
-				<div class="graph__options__option">
-					<input class="input" id=percentageOption type="checkbox" (change)="switchPercentages()"
-						[(ngModel)]="percentages">
+				<div class="graph__options__option__label">Option</div>
 
-					<label class="graph__options__option__label">Show percentages</label>
-				</div>
+				<mat-radio-group [disabled]="loading" class="graph__options__option" aria-label="Options"
+					(change)="switchOption()" [(ngModel)]="measurementOption">
+					<mat-radio-button class="graph__options__option__radio" value="total">Total</mat-radio-button>
+					<mat-radio-button class="graph__options__option__radio" value="splitted">Splitted</mat-radio-button>
+					<mat-radio-button [disabled]="true" class="graph__options__option__radio" value="ratio">Ratio
+					</mat-radio-button>
+				</mat-radio-group>
 			</div>
 		</div>
 	</div>

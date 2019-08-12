@@ -7,6 +7,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { MatInputModule } from '@angular/material';
+import { MatRadioModule } from '@angular/material/radio';
 import { MatFormFieldModule } from '@angular/material';
 import { MatButtonModule } from '@angular/material';
 import { MatIconModule } from '@angular/material/icon';
@@ -126,6 +127,7 @@ const appRoutes: Routes = [
 		RouterModule.forRoot(appRoutes),
 		BrowserAnimationsModule,
 		MatInputModule,
+		MatRadioModule,
 		MatFormFieldModule,
 		MatButtonModule,
 		MatIconModule,

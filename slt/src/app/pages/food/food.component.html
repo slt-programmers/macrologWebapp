@@ -4,24 +4,17 @@
       <label class="search-bar__label">Search</label>
 
       <input class="input search-bar__input" [(ngModel)]="searchInput" (input)="findFoodMatch()">
-      
+
       <button mat-stroked-button color="primary" (click)="clearSearch()">Clear</button>
     </div>
 
     <div class="settings">
       <label class="settings__label">Display in:</label>
 
-      <div class="radio-wrapper">
-        <input class="input" type="radio" [(ngModel)]="displayMode" value="grams" (input)="changeDisplay('grams')"
-          [ngClass]="{'checked': displayMode === 'grams'}">
-
-        <span class="radio-label">Grams</span>
-
-        <input class="input" type="radio" [(ngModel)]="displayMode" value="percentage"
-          (input)="changeDisplay('percentage')" [ngClass]="{'checked': displayMode === 'percentage'}">
-
-        <span class="radio-label">Percentage</span>
-      </div>
+      <mat-radio-group class="settings__radios" aria-label="display mode" [(ngModel)]="displayMode">
+        <mat-radio-button class="settings__radios__option" value="grams">Grams</mat-radio-button>
+        <mat-radio-button class="settings__radios__option" value="percentage">Percentage</mat-radio-button>
+      </mat-radio-group>
     </div>
 
     <div class="spinner-wrapper" *ngIf="isLoading">

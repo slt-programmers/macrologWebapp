@@ -17,7 +17,6 @@ export class BargraphComponent implements OnChanges, AfterViewInit {
   @Input() markers: number[] = [];
   @Input() colors: string[] = [];
   @Input() fillColors: string[] = [];
-  @Input() height: number = 0;
 
   public graphPoints: GraphPoint[][];
   public yAxisPoints: number[];

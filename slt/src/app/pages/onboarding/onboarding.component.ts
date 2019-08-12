@@ -13,6 +13,7 @@ import { calculateTDEE } from '@app/util/functions';
 @Component({
 	selector: 'app-onboarding',
 	templateUrl: './onboarding.component.html',
+	styleUrls: ['./onboarding.component.scss'],
 	host: { '(document: click)': 'documentClick($event)' }
 })
 export class OnboardingComponent implements OnInit {

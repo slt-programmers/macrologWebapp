@@ -8,6 +8,7 @@ import { UserSettings } from '@app/model/userSettings';
 
 @Component({
 	selector: 'personal',
+	styleUrls: ['./personal.component.scss'],
 	templateUrl: './personal.component.html'
 })
 export class PersonalComponent {
