@@ -56,7 +56,7 @@ export class GraphsComponent implements OnInit {
   public markers = [];
   public ratioMarkers = [];
 
-  private numberOfValues: number = 30;
+  private numberOfValues = 30;
   // Types of graphs:
   // Grams
   //    Total grams per day grouped by macros -- done
@@ -209,8 +209,8 @@ export class GraphsComponent implements OnInit {
     const totalGoals = this.userGoals[0] + this.userGoals[1] + this.userGoals[2];
 
     if (type === 'calories') {
-      this.proteinMarker = this.userGoals[0] * 4
-      this.fatMarker = this.userGoals[1] * 9
+      this.proteinMarker = this.userGoals[0] * 4;
+      this.fatMarker = this.userGoals[1] * 9;
       this.carbsMarker = this.userGoals[2] * 4;
       this.markers = [this.goalCalories];
 

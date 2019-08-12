@@ -14,10 +14,6 @@ export class ActivityService {
 		private toastService: ToastService) {
 	}
 
-	// public getAllActivities() {
-	// 	return this.http.get<LogActivity[]>(this.macrologBackendUrl, { responseType: 'json' });
-	// }
-	
 	public getDayActivities(date: string) {
 		return this.http.get<LogActivity[]>(this.macrologBackendUrl + '/day/' + date);
 	}

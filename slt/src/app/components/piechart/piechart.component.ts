@@ -1,23 +1,24 @@
 import { Component, OnInit, Input, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
+import { Macros } from '@app/model/macro';
 
 @Component({
 	templateUrl: './piechart.component.html',
 	selector: 'piechart',
-  styleUrls: ['./piechart.component.scss']
+	styleUrls: ['./piechart.component.scss']
 
 })
 export class PiechartComponent implements OnInit, AfterViewInit {
 
-	@ViewChild('thisOne' ,  {static: false}) piechartRef: ElementRef;
+	@ViewChild('thisOne', { static: false }) piechartRef: ElementRef;
 
-	@Input() mealId;
-	@Input() macros;
+	@Input() mealId: number;
+	@Input() macros: Macros;
 
 	public idstring = 'pie' + this.mealId;
 
-	private protein;
-	private fat;
-	private carbs;
+	private protein: number;
+	private fat: number;
+	private carbs: number;
 
 	private total: number;
 	private proteinPercent: number;
@@ -56,8 +57,8 @@ export class PiechartComponent implements OnInit, AfterViewInit {
 		this.svgEl = this.piechartRef.nativeElement;
 		const slices = [
 			{ percent: this.proteinPercent, color: '#5bd086' },
-			{ percent: this.fatPercent, color: '#f7ed70'},
-			{ percent: this.carbsPercent, color: '#fb8353'}
+			{ percent: this.fatPercent, color: '#f7ed70' },
+			{ percent: this.carbsPercent, color: '#fb8353' }
 		];
 
 		slices.forEach(slice => {
@@ -84,9 +85,9 @@ export class PiechartComponent implements OnInit, AfterViewInit {
 			const pathEl = document.createElementNS('http://www.w3.org/2000/svg', 'path');
 			pathEl.setAttribute('d', pathData);
 			pathEl.setAttribute('fill', slice.color);
-      pathEl.setAttribute("width","300px")
+			pathEl.setAttribute('width', '300px');
 			this.svgEl.appendChild(pathEl);
-	});
+		});
 	}
 
 }

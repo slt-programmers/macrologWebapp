@@ -51,7 +51,7 @@ export class DishesComponent implements OnInit {
 
 	public getIngredientDescription(ingredient: Ingredient): string {
 		if (ingredient.portionId) {
-			let usedPortion = this.getPortion(ingredient, ingredient.portionId);
+			const usedPortion = this.getPortion(ingredient, ingredient.portionId);
 			return ingredient.multiplier + ' ' + usedPortion.description;
 		} else {
 			return ingredient.multiplier * 100 + ' gram';

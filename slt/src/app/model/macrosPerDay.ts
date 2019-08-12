@@ -10,7 +10,7 @@ export class MacrosPerDay {
     if (macros) {
       this.macro = macros;
     } else {
-      let newMacros = new Macros();
+      const newMacros = new Macros();
       newMacros.protein = protein;
       newMacros.fat = fat;
       newMacros.carbs = carbs;
