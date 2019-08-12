@@ -21,7 +21,12 @@
 
   &__bargraph-container {
     display: flex;
+    flex-direction: column;
     width: 100%;
+  }
+
+  &__bargraph-label {
+    margin-bottom: 16px;
   }
 
   &__bargraph {

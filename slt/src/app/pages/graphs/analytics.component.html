@@ -21,43 +21,63 @@
 
 			<div *ngIf="!loading" class="graph__svg-container">
 				<div class="graph__bargraph-container" *ngIf="!splitted">
-					<bargraph [colors]="['rgb(100, 149, 236)', 'rgb(60, 221, 234)', 'rgb(144, 238, 144)']"
+					<div class="graph__bargraph-label">
+						Total grams per day grouped by macronutrient
+					</div>
+
+					<bargraph [height]="500" [colors]="['rgb(100, 149, 236)', 'rgb(60, 221, 234)', 'rgb(144, 238, 144)']"
 						[fillColors]="['rgba(100, 149, 236, 0.3)', 'rgba(60, 221, 234, 0.3)', 'rgba(144, 238, 144, 0.3)']"
 						[markers]="[proteinMarker, fatMarker, carbsMarker]" [datasets]="[proteinDataset, fatDataset, carbsDataset]"
 						[xAxisStep]="1" [yAxisStep]="20" class="graph__bargraph graph__bargraph--stacked">
 					</bargraph>
 				</div>
 
-				<div class="graph__bargraph-container" *ngIf="splitted">
-					<bargraph [colors]="['rgb(100, 149, 236)']" [fillColors]="['rgba(100, 149, 236, 0.3)']"
+				<!-- <div class="graph__bargraph-container" *ngIf="splitted">
+					<div class="graph__bargraph-label">
+						Total grams of protein per day
+					</div>
+
+					<bargraph [height]="250" [colors]="['rgb(100, 149, 236)']" [fillColors]="['rgba(100, 149, 236, 0.3)']"
 						[markers]="[proteinMarker]" [datasets]="[proteinDataset]" [xAxisStep]="1" [yAxisStep]="20"
 						class="graph__bargraph graph__bargraph--protein">
 					</bargraph>
 				</div>
 
 				<div class="graph__bargraph-container" *ngIf="splitted">
-					<bargraph [colors]="['rgb(60, 221, 234)']" [fillColors]="['rgba(60, 221, 234, 0.3)']" [markers]="[fatMarker]"
+					<div class="graph__bargraph-label">
+						Total grams of fat per day
+					</div>
+
+					<bargraph [height]="250" [colors]="['rgb(60, 221, 234)']" [fillColors]="['rgba(60, 221, 234, 0.3)']" [markers]="[fatMarker]"
 						[datasets]="[fatDataset]" [xAxisStep]="1" [yAxisStep]="20" class="graph__bargraph graph__bargraph--fat">
 					</bargraph>
 				</div>
 
 				<div class="graph__bargraph-container" *ngIf="splitted">
-					<bargraph [colors]="['rgb(144, 238, 144)']" [fillColors]="['rgba(144, 238, 144, 0.3)']"
+					<div class="graph__bargraph-label">
+						Total grams of carbs per day
+					</div>
+
+					<bargraph [height]="250" [colors]="['rgb(144, 238, 144)']" [fillColors]="['rgba(144, 238, 144, 0.3)']"
 						[markers]="[carbsMarker]" [datasets]="[carbsDataset]" [xAxisStep]="1" [yAxisStep]="20"
 						class="graph__bargraph graph__bargraph--carbs">
 					</bargraph>
 				</div>
 
 				<div class="graph__bargraph-container">
-					<bargraph [markers]="[goalCalories]" [datasets]="[calorieDataset]" [xAxisStep]="1" [yAxisStep]="200"
+					<div class="graph__bargraph-label">
+						Total calories per day
+					</div>
+
+					<bargraph [height]="350" [markers]="[goalCalories]" [datasets]="[calorieDataset]" [xAxisStep]="1" [yAxisStep]="200"
 						class="graph__bargraph graph__bargraph--calories">
 					</bargraph>
-				</div>
+				</div> -->
 			</div>
 
 			<div *ngIf="!loading" class="graph__options">
 				<div class="graph__options__option">
-					<input class="input" id=splittedOption type="checkbox" (change)="calculateZoom();" [(ngModel)]="splitted">
+					<input class="input" id=splittedOption type="checkbox" (change)="switchSplitted()" [(ngModel)]="splitted">
 
 					<label class="graph__options__option__label">Split bars</label>
 				</div>

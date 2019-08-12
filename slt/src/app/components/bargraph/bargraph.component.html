@@ -12,7 +12,7 @@
                     <ng-container *ngFor="let marker of markers; index as index">
                         <div class="graph-marker" [style.height.px]="markerHeights[index]" 
                         [style.border-top-color]="colors[index]">
-                            <div [style.color]="colors[index]" class="graph-marker__text">{{marker}}</div>
+                            <div class="graph-marker__text">{{marker}}</div>
                         </div>
                     </ng-container>
 
