@@ -64,14 +64,7 @@ export class BargraphComponent implements OnChanges, AfterViewInit {
     }
 
     yValues.sort((a, b) => { return a - b; });
-    let highest = yValues[yValues.length - 1];
-    let markersTotal = 0;
-    for (let marker of this.markers) {
-      markersTotal += marker;
-    }
-    if (markersTotal > highest) {
-      highest = markersTotal;
-    }
+    const highest = this.determineHighestYValue(yValues);
 
     const lowest = 0;
     const difference = highest - lowest;
@@ -85,6 +78,18 @@ export class BargraphComponent implements OnChanges, AfterViewInit {
     }
     yAxisPoints.reverse();
     return yAxisPoints;
+  }
+
+  private determineHighestYValue(yValues: number[]): number {
+    let highest = yValues[yValues.length - 1];
+    let markersTotal = 0;
+    for (let marker of this.markers) {
+      markersTotal += marker;
+    }
+    if (markersTotal > highest) {
+      highest = markersTotal;
+    }
+    return highest;
   }
 
   private determineXAxisPoints(): number[] {

@@ -1,4 +1,4 @@
-import { Component, ViewChild, ElementRef, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { DiaryService } from '../../services/diary.service';
 import { UserService } from '../../services/user.service';
 import * as moment from 'moment';
@@ -38,6 +38,16 @@ export class GraphsComponent implements OnInit {
   public proteinMarker: number;
   public fatMarker: number;
   public carbsMarker: number;
+
+  // Types of graphs:
+  // Grams
+  //    Total grams per day grouped by macros -- done
+  //    Splitted total grams per day per macro -- done
+  //    Percentage/ratio gramps per marco per day
+  // Energy (calories)
+  //    Total calories per day grouped by macros 
+  //    Splitted total calories per day per macro 
+  //    Percentage/ratio calories per macro per day (streched bars)
 
   ngOnInit() {
     this.dateTo = new Date();
@@ -140,7 +150,6 @@ export class GraphsComponent implements OnInit {
     this.proteinMarker = this.userGoals[0];
     this.fatMarker = this.userGoals[1];
     this.carbsMarker = this.userGoals[2];
-    console.log(this.proteinDataset);
   }
 
   private setGoalCalories() {
@@ -194,5 +203,4 @@ export class GraphsComponent implements OnInit {
     this.fatMarker = Math.round(prcGoalEnergyFromFat);
     this.carbsMarker = Math.round(prcGoalEnergyFromCarbs);
   }
-
 }
