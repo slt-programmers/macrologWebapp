@@ -1,3 +1,11 @@
+@import "../../../css/public.scss";
+
+.intake-stacks{
+	display: flex;
+	flex-direction: row;
+	justify-content: space-evenly;
+
+}
 .intake-goal-wrapper {
 	@media(min-width: $md) {
 		margin-bottom: ($gutter/2);

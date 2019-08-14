@@ -50,6 +50,7 @@ import { DishService } from './services/dish.service';
 import { ActivityService } from './services/activity.service';
 import { WeightService } from './services/weight.service';
 import { PiechartComponent } from './components/piechart/piechart.component';
+import { StackDonutComponent } from './components/stackdonut/stackdonut.component';
 import { OnboardingComponent } from './pages/onboarding/onboarding.component';
 import { StepperComponent } from './components/stepper/stepper.component';
 import { AuthGuardService } from './services/auth-guard.service';
@@ -115,6 +116,7 @@ const appRoutes: Routes = [
 		MakeDishModalComponent,
 		AutocompleteFoodComponent,
 		PiechartComponent,
+    StackDonutComponent,
 		OnboardingComponent,
 		StepperComponent,
 		LinegraphComponent
