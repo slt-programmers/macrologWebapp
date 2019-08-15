@@ -7,6 +7,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { MatInputModule } from '@angular/material';
+import { MatRadioModule } from '@angular/material/radio';
 import { MatFormFieldModule } from '@angular/material';
 import { MatButtonModule } from '@angular/material';
 import { MatIconModule } from '@angular/material/icon';
@@ -34,7 +35,7 @@ import { WeightTrackerComponent } from './pages/user/weighttracker/weighttracker
 import { ConnectivityComponent } from './pages/user/connectivity/connectivity.component';
 import { UserService } from './services/user.service';
 import { SliderComponent } from './components/slider/slider.component';
-import { BargraphComponent } from './components/bargraph/bargraph.component';
+import { GoalProgressbarComponent } from './components/goal-progressbar/goal-progressbar.component';
 import { AddFoodModalComponent } from './components/add-food-modal/add-food-modal.component';
 import { CalculateIntakeModalComponent } from './components/calculate-intake-modal/calculate-intake-modal.component';
 import { DishesComponent } from './pages/dishes/dishes.component';
@@ -59,6 +60,7 @@ import { HealthcheckService } from './services/healthcheck.service';
 import { AdminService } from './services/admin.service';
 import { AdminComponent } from './pages/admin/admin.component';
 import { LinegraphComponent } from './components/linegraph/linegraph.component';
+import { BargraphComponent } from './components/bargraph/bargraph.component';
 
 const appRoutes: Routes = [
 	{ path: 'login', component: LoginComponent },
@@ -102,7 +104,7 @@ const appRoutes: Routes = [
 		WeightTrackerComponent,
 		ConnectivityComponent,
 		SliderComponent,
-		BargraphComponent,
+		GoalProgressbarComponent,
 		AddFoodModalComponent,
 		CalculateIntakeModalComponent,
 		DishesComponent,
@@ -119,7 +121,8 @@ const appRoutes: Routes = [
     StackDonutComponent,
 		OnboardingComponent,
 		StepperComponent,
-		LinegraphComponent
+		LinegraphComponent,
+		BargraphComponent
 	],
 	imports: [
 		BrowserModule,
@@ -129,6 +132,7 @@ const appRoutes: Routes = [
 		RouterModule.forRoot(appRoutes),
 		BrowserAnimationsModule,
 		MatInputModule,
+		MatRadioModule,
 		MatFormFieldModule,
 		MatButtonModule,
 		MatIconModule,

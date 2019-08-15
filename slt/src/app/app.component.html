@@ -9,6 +9,18 @@
     </svg>
 </div> -->
 
+<div id="loadingOverlay" class="loading-overlay" *ngIf="stillSleeping()">
+  <h1>Macrolog</h1>
+
+  <p class="paragraph">The hamsters in the treadmill powering this app are still asleep.</p>
+
+  <p class="paragraph">Please wait while we wake them up...</p>
+
+  <div class="svg-wrapper">
+    <img src="../assets/hamster-wheel.svg" alt="hamster-wheel">
+  </div>
+</div>
+
 <div class="menu" *ngIf="loggedIn()">
   <div class="menu__logo"  routerLink="/about">
     <p class="menu__logo__text">M</p>
@@ -94,14 +106,4 @@
   <router-outlet></router-outlet>
 </div>
 
-<div id="loadingOverlay" class="loading-overlay" *ngIf="stillSleeping()">
-  <h1>Macrolog</h1>
 
-  <p class="paragraph">The hamsters in the treadmill powering this app are still asleep.</p>
-
-  <p class="paragraph">Please wait while we wake them up...</p>
-
-  <div class="svg-wrapper">
-    <img src="../assets/hamster-wheel.svg" alt="hamster-wheel">
-  </div>
-</div>

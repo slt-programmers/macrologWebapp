@@ -11,9 +11,8 @@ body {
   font-weight: 300;
   height: 100%;
   margin: 0;
-  min-height: -webkit-fill-available;
   padding: 0;
-  position: relative;
+  position: static;
   overflow-x: hidden;
   width: 100%;
 }

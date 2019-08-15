@@ -1,29 +1,34 @@
 <div class="blue-theme container container--first container--last">
-	<div *ngIf="allDishes.length==0">
-		<p>You havent created any dishes yet!</p>
-	</div>
-  <div class="dish-grid">
-    <div class="dish-card" *ngFor="let dish of allDishes"  (click)="openModal(dish)">
-      <div class="dish-content" onmouseover="">
-        <h3 class="dish-content__title">{{dish.name}}</h3>
-				<div class="dish-content__pie">
-				  <piechart class="" [mealId]="dish.id" [macros]="getTotal(dish)"></piechart>
-				</div>
-				<div class="dish-content__ingredientlist">
-					<div class="dish-content__ingredient" *ngFor="let ingredient of dish.ingredients">
-							 <i class="fas fa-chevron-right dish-content--bullet"></i>
-						<div class="dish-content__ingredient--name">{{getIngredientDescription(ingredient)}} {{ingredient.food.name}}
-						</div>
-					</div>
-				</div>
+  <div class="dish-grid dish-grid--empty" *ngIf="allDishes.length === 0">
+    <p>You havent created any dishes yet!</p>
+  </div>
+
+  <div class="dish-grid" *ngIf="allDishes.length !== 0">
+    <div class="dish-card" *ngFor="let dish of allDishes" (click)="openModal(dish)">
+      <div class="dish-card__title">{{dish.name}}</div>
+
+      <div class="dish-card__content">
+        <div class="dish-card__content__pie-chart">
+          <piechart [mealId]="dish.id" [macros]="getTotal(dish)"></piechart>
+        </div>
+
+        <div class="dish-card__content__ingredient-list">
+          <div class="dish-card__content__ingredient" *ngFor="let ingredient of dish.ingredients">
+            <i class="fas fa-chevron-right dish-card__content__ingredient__bullet"></i>
+
+            <div class="dish-card__content__ingredient__name">{{getIngredientDescription(ingredient)}}
+              {{ingredient.food.name}}
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 
   <div class="blue-theme button-wrapper--floating-action">
-      <button mat-fab color="primary" (click)="openModal(null)">
-          <mat-icon>add</mat-icon>
-        </button>
+    <button mat-fab color="primary" (click)="openModal(null)">
+      <mat-icon>add</mat-icon>
+    </button>
   </div>
 
   <div class="modal-wrapper" *ngIf="modalIsVisible">

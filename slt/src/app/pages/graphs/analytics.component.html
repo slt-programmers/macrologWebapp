@@ -19,77 +19,83 @@
 				</button>
 			</div>
 
-			<div *ngIf="!loading" class="graph__svg-container">
-				<svg #macroSvg [attr.width]="getSVGWidth()" class="graph__svg graph__svg--macros">
-					<g *ngFor="let bar of macroBars; let i = index" (mouseover)="showMacros(bar)">
-						<text [attr.x]="marginLeft + (barWidth * i) + 4" [attr.y]="macroSvgHeight - graphLegenda + 15"
-							[attr.fill]="bar.c">
-							<tspan fill="#666666" style="font-size: 12px;" [attr.width]="barWidth">{{bar.day | date:'dd'}}</tspan>
-						</text>
+			<div *ngIf="!loading" class="graph__graphs-container">
+				<div class="graph__bargraph-container" *ngIf="measurementOption === 'total'">
+					<div class="graph__bargraph-label">
+						{{graphLabel}}
+					</div>
 
-						<rect [attr.x]="marginLeft + i * barWidth" [attr.width]="barWidth" [attr.y]="getYPosProtein(bar)"
-							[attr.height]="getHeightProtein(bar)"
-							style="fill: rgba(218, 29, 143, 0.3); stroke: rgb(218, 29, 143); stroke-width: 1" />
+					<bargraph [colors]="['rgb(100, 149, 236)', 'rgb(60, 221, 234)', 'rgb(144, 238, 144)']"
+						[fillColors]="['rgba(100, 149, 236, 0.3)', 'rgba(60, 221, 234, 0.3)', 'rgba(144, 238, 144, 0.3)']"
+						[markers]="markers" [datasets]="[proteinDataset, fatDataset, carbsDataset]" [xAxisStep]="1"
+						[yAxisStep]="yAxisStep" class="graph__bargraph graph__bargraph--stacked">
+					</bargraph>
+				</div>
 
-						<rect [attr.x]="marginLeft + i * barWidth" [attr.width]="barWidth" [attr.y]="getYPosFat(bar)"
-							[attr.height]="getHeightFat(bar)"
-							style="fill: rgba(144, 238, 144, 0.3); stroke: lightgreen; stroke-width: 1" />
+				<div class="graph__bargraph-container" *ngIf="measurementOption === 'splitted'">
+					<div class="graph__bargraph-label">
+						{{proteinGraphLabel}}
+					</div>
 
-						<rect [attr.x]="marginLeft + i * barWidth" [attr.width]="barWidth" [attr.y]="getYPosCarbs(bar)"
-							[attr.height]="getHeightCarbs(bar)"
-							style="fill: rgba(100, 149, 236, 0.3); stroke: cornflowerblue; stroke-width: 1" />
-					</g>
+					<bargraph [colors]="['rgb(100, 149, 236)']" [fillColors]="['rgba(100, 149, 236, 0.3)']"
+						[markers]="[proteinMarker]" [datasets]="[proteinDataset]" [xAxisStep]="1" [yAxisStep]="yAxisStep"
+						class="graph__bargraph graph__bargraph--protein">
+					</bargraph>
+				</div>
 
-					<g>
-						<text x="0" [attr.y]="getGoalProteinPos() - 4" fill="#666666">P
-							{{getGoal('protein') | number:'1.1-1'}}</text>
-						<line x1="0" [attr.y1]="getGoalProteinPos()" [attr.x2]="marginLeft + macroBars.length * barWidth"
-							[attr.y2]="getGoalProteinPos()" style="stroke:#999999; stroke-width: 1" />
+				<div class="graph__bargraph-container" *ngIf="measurementOption === 'splitted'">
+					<div class="graph__bargraph-label">
+						{{fatGraphLabel}}
+					</div>
 
-						<text x="0" [attr.y]="getGoalFatPos() - 4" fill="#666666">F
-							{{getGoal('fat') | number:'1.1-1'}}</text>
-						<line x1="0" [attr.y1]="getGoalFatPos()" [attr.x2]="marginLeft + macroBars.length * barWidth"
-							[attr.y2]="getGoalFatPos()" style="stroke:#999999; stroke-width: 1" />
+					<bargraph [colors]="['rgb(60, 221, 234)']" [fillColors]="['rgba(60, 221, 234, 0.3)']" [markers]="[fatMarker]"
+						[datasets]="[fatDataset]" [xAxisStep]="1" [yAxisStep]="yAxisStep"
+						class="graph__bargraph graph__bargraph--fat">
+					</bargraph>
+				</div>
 
-						<text x="0" [attr.y]="getGoalCarbsPos() - 4" fill="#666666">C
-							{{getGoal('carbs') | number:'1.1-1'}}</text>
-						<line x1="0" [attr.y1]="getGoalCarbsPos()" [attr.x2]="marginLeft + macroBars.length * barWidth"
-							[attr.y2]="getGoalCarbsPos()" style="stroke:#999999; stroke-width: 1" />
-					</g>
-				</svg>
+				<div class="graph__bargraph-container" *ngIf="measurementOption === 'splitted'">
+					<div class="graph__bargraph-label">
+						{{carbsGraphLabel}}
+					</div>
 
-				<svg #calorieSvg [attr.width]="getSVGWidth()" class="graph__svg graph__svg--calories">
-					<g *ngFor="let bar of macroBars; let i = index" (mouseover)="showMacros(bar)">
-						<text [attr.x]="marginLeft + (barWidth * i) + 4" [attr.y]="calorieSvgHeight - graphLegenda + 15"
-							[attr.fill]="bar.c">
-							<tspan fill="#666666" style="font-size: 12px" [attr.width]="barWidth">{{bar.day | date:'dd'}} </tspan>
-						</text>
+					<bargraph [colors]="['rgb(144, 238, 144)']" [fillColors]="['rgba(144, 238, 144, 0.3)']"
+						[markers]="[carbsMarker]" [datasets]="[carbsDataset]" [xAxisStep]="1" [yAxisStep]="yAxisStep"
+						class="graph__bargraph graph__bargraph--carbs">
+					</bargraph>
+				</div>
 
-						<rect [attr.x]="marginLeft + i * barWidth" [attr.width]="barWidth" [attr.y]="getYPosCalories(bar)"
-							[attr.height]="getHeightCalories(bar)"
-							style="fill: rgba(0, 197, 255, 0.3); stroke:rgb(0, 197, 255); stroke-width: 1" />
-					</g>
-
-					<text x="0" [attr.y]="getGoalCaloriesPos() - 4" fill="#666666">Kcal
-						{{getGoalCalories() | number:'1.0'}}</text>
-
-					<line x1="0" [attr.y1]="getGoalCaloriesPos()" [attr.x2]="marginLeft + macroBars.length * barWidth"
-						[attr.y2]="getGoalCaloriesPos()" style="stroke:#999999; stroke-width: 1" />
-				</svg>
+				<div class="graph__bargraph-container" *ngIf="measurementOption === 'ratio'">
+					<div class="graph__bargraph-label">
+						{{ratioGraphLabel}}
+					</div>
+					
+					<bargraph [colors]="['rgb(100, 149, 236)', 'rgb(60, 221, 234)', 'rgb(144, 238, 144)']"
+						[fillColors]="['rgba(100, 149, 236, 0.3)', 'rgba(60, 221, 234, 0.3)', 'rgba(144, 238, 144, 0.3)']"
+						[markers]="ratioMarkers" [datasets]="[proteinRatioDataset, fatRatioDataset, carbsRatioDataset]"
+						[xAxisStep]="1" [yAxisStep]="10" class="graph__bargraph graph__bargraph--stacked">
+					</bargraph>
+				</div>
 			</div>
 
-			<div *ngIf="!loading" class="graph__options">
-				<div class="graph__options__option">
-					<input class="input" id=splittedOption type="checkbox" (change)="calculateZoom()" [(ngModel)]="splitted">
+			<div class="graph__options blue-theme">
+				<div class="graph__options__option__label">Measurement</div>
 
-					<label class="graph__options__option__label"> Split bars</label>
-				</div>
+				<mat-radio-group [disabled]="loading" class="graph__options__option" aria-label="Measurement"
+					(change)="switchMeasurement()" [(ngModel)]="measurement">
+					<mat-radio-button class="graph__options__option__radio" value="calories">Calories</mat-radio-button>
+					<mat-radio-button class="graph__options__option__radio" value="grams">Grams</mat-radio-button>
+				</mat-radio-group>
 
-				<div class="graph__options__option">
-					<input class="input" id=percentageOption type="checkbox" (change)="calculateZoom()" [(ngModel)]="percentages">
+				<div class="graph__options__option__label">Option</div>
 
-					<label class="graph__options__option__label">Show percentages</label>
-				</div>
+				<mat-radio-group [disabled]="loading" class="graph__options__option" aria-label="Options"
+					(change)="switchOption()" [(ngModel)]="measurementOption">
+					<mat-radio-button class="graph__options__option__radio" value="total">Total</mat-radio-button>
+					<mat-radio-button class="graph__options__option__radio" value="splitted">Splitted</mat-radio-button>
+					<mat-radio-button class="graph__options__option__radio" value="ratio">Ratio
+					</mat-radio-button>
+				</mat-radio-group>
 			</div>
 		</div>
 	</div>
