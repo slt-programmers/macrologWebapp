@@ -172,7 +172,6 @@ export class LogMealComponent implements OnInit, OnChanges {
 	}
 
 	public addLogEntry(foodSearchable: FoodSearchable) {
-		console.log(foodSearchable);
 		const food = foodSearchable.food;
 		const dish = foodSearchable.dish;
 		if (food !== undefined) {
@@ -205,7 +204,6 @@ export class LogMealComponent implements OnInit, OnChanges {
 				logEntry.day = this.date;
 				this.logEntries.push(logEntry);
 			}
-			// TODO: meal functions
 		}
 	}
 

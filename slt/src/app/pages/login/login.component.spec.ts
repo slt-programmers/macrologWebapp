@@ -136,27 +136,21 @@ describe('LoginComponent', () => {
 		component.newUsername = 'username';
 		component.newEmail = 'email@email.com';
 		component.newPassword = 'password';
-		registerSpy.and.returnValue(throwError({ status: 401, error: 'Username already in use' }));
+		registerSpy.and.returnValue(throwError({ status: 401, error: 'Username or email already in use' }));
 		registerButton.nativeElement.click();
 		tick()
 		fixture.detectChanges();
-		expect(component.registerError).toEqual('Username is already in use.');
+		expect(component.registerError).toEqual('Username or email is already in use. Please try a different username or use \"Forgot password\" to retrieve a new password.');
 
-		// email in use
-		registerSpy.and.returnValue(throwError({ status: 401, error: 'Email already in use' }));
-		registerButton.nativeElement.click();
-		tick()
-		fixture.detectChanges();
-		expect(component.registerError).toEqual('Email is already in use. Use \"Forgot password\" to retrieve a new password.');
 
-		// other error 401 
+		// other error 401
 		registerSpy.and.returnValue(throwError({ status: 401, error: 'Error' }));
 		registerButton.nativeElement.click();
 		tick()
 		fixture.detectChanges();
 		expect(component.registerError).toEqual('Unknown error during registration.');
 
-		// other error 
+		// other error
 		registerSpy.and.returnValue(throwError({ status: 404 }));
 		registerButton.nativeElement.click();
 		tick()
