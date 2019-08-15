@@ -10,16 +10,16 @@
 
   &__svg circle {
     stroke-dashoffset: 0;
-    stroke: $secondary;
+    stroke: #edeef936;
     stroke-width: 1em;
   }
 
  &__svg .innerCircle{
     transition: stroke-dashoffset 0.5s linear;
-    stroke: $primary;
+    stroke: $white;
  }
  &__svg .outerCircle{
-   stroke:$primaryDark;
+   stroke:$white;
    transition: stroke-dashoffset 0.2s linear;
    z-index:-1;
  }
@@ -32,15 +32,16 @@
   border-radius: 100%;
   z-index:1;
   margin-left: -80px;
+  color:$white;
 
   &__percentages{
-    height: 100px;
+    height: 95px;
     width: 160px;
     margin-top: -90px;
-    line-height: 160px;
-    font-size:2em;
+    line-height: 165px;
+    font-size:1.4em;
   }
   &__subtext{
-    font-size:12pt;
+    font-size:1.0em;
   }
 }

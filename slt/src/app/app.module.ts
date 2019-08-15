@@ -36,6 +36,7 @@ import { ConnectivityComponent } from './pages/user/connectivity/connectivity.co
 import { UserService } from './services/user.service';
 import { SliderComponent } from './components/slider/slider.component';
 import { GoalProgressbarComponent } from './components/goal-progressbar/goal-progressbar.component';
+import { CalorieProgressbarComponent } from './components/calorie-progressbar/calorie-progressbar.component';
 import { AddFoodModalComponent } from './components/add-food-modal/add-food-modal.component';
 import { CalculateIntakeModalComponent } from './components/calculate-intake-modal/calculate-intake-modal.component';
 import { DishesComponent } from './pages/dishes/dishes.component';
@@ -105,6 +106,7 @@ const appRoutes: Routes = [
 		ConnectivityComponent,
 		SliderComponent,
 		GoalProgressbarComponent,
+    CalorieProgressbarComponent,
 		AddFoodModalComponent,
 		CalculateIntakeModalComponent,
 		DishesComponent,

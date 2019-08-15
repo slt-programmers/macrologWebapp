@@ -9,18 +9,14 @@
 .intake-goal-wrapper {
 	@media(min-width: $md) {
 		margin-bottom: ($gutter/2);
-//		margin-top: 15px;
 		border-radius: 4px;
 	}
 	@media(min-width: $lg) {
 		margin-top: 0;
 	}
 
-	@include elevation(1);
-	background-color: $white;
 	display: flex;
 	flex-direction: column;
-//	padding: ($gutter/2);
 }
 
 .intake-goal {

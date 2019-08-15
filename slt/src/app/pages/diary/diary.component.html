@@ -1,31 +1,20 @@
 <div class="container container--first container--last">
 
   <div class="intake-goal-wrapper" *ngIf="intakeGoals">
-    <!--<div class="intake-goal">-->
-      <!--<div class="intake-goal__numbers">-->
-        <!--<div class="intake-goal__calories">-->
-          <!--<span>Calories: {{getTotal("calories")  | number:'1.0-0'}}/<strong>{{goalCal}}</strong></span>-->
-        <!--</div>-->
-        <!--<div class="intake-goal__macros">-->
-          <!--<span class="intake-goal__macro">Protein:-->
-            <!--{{getTotal("protein") | number:'1.1-1'}}/<strong>{{intakeGoals[0]}}</strong></span>-->
-          <!--<span class="intake-goal__macro">Fat:-->
-            <!--{{getTotal("fat") | number:'1.1-1'}}/<strong>{{intakeGoals[1]}}</strong></span>-->
-          <!--<span class="intake-goal__macro">Carbs:-->
-            <!--{{getTotal("carbs") | number:'1.1-1'}}/<strong>{{intakeGoals[2]}}</strong></span>-->
-        <!--</div>-->
-      <!--</div>-->
 			<div class="intake-stacks">
           <div class="stackdonut-wrapper">
-						 <stackdonut [goal]="intakeGoals[0]" [text]="'Protein'" [achieved]="getTotal('protein')"></stackdonut>
+						 <stackdonut [goal]="intakeGoals[0]" [circleRadius]="60" [text]="'Protein'" [achieved]="getTotal('protein')"></stackdonut>
 					</div>
 				<div class="stackdonut-wrapper">
-					<stackdonut [goal]="intakeGoals[1]" [text]="'Fat'" [achieved]="getTotal('fat')"></stackdonut>
+					<stackdonut [goal]="intakeGoals[1]" [circleRadius]="60" [text]="'Fat'" [achieved]="getTotal('fat')"></stackdonut>
 				</div>
 				<div class="stackdonut-wrapper">
-					<stackdonut [goal]="intakeGoals[2]" [text]="'Carbs'" [achieved]="getTotal('carbs')"></stackdonut>
+					<stackdonut [goal]="intakeGoals[2]" [circleRadius]="60" [text]="'Carbs'" [achieved]="getTotal('carbs')"></stackdonut>
 				</div>
 			</div>
+		<div class="intake-calories logday">
+          <calorie-progressbar [goal]="goalCal" [achieved]="getTotal('calories')" [text]="'Calories'"></calorie-progressbar>
+		</div>
   </div>
 
   <div class="intake-goal-wrapper" *ngIf="!intakeGoals">

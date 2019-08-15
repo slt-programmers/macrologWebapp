@@ -8,15 +8,27 @@ import { Component, OnInit, OnChanges, Renderer2, Input, ViewChild, ElementRef, 
 export class StackDonutComponent implements AfterViewInit, OnChanges {
 
 	@ViewChild('innerCircle' ,  {static: false}) innerCircle: ElementRef;
+	@ViewChild('innerBackgroundCircle' ,  {static: false}) innerBackgroundCircle: ElementRef;
 	@ViewChild('outerCircle' ,  {static: false}) outerCircle: ElementRef;
 
 	@Input() goal:number;
 	@Input() achieved:number;
   @Input() text;
 
+  @Input() circleRadius = 80;
+
 	constructor(private renderer: Renderer2) {}
 
   ngAfterViewInit() {
+    this.renderer.setAttribute(this.innerCircle.nativeElement,'stroke-dasharray',''+this.getCircleLength(this.circleRadius));
+    this.renderer.setAttribute(this.innerCircle.nativeElement,'r',''+this.circleRadius);
+
+    this.renderer.setAttribute(this.innerBackgroundCircle.nativeElement,'stroke-dasharray',''+(this.getCircleLength(this.circleRadius)));
+    this.renderer.setAttribute(this.innerBackgroundCircle.nativeElement,'r',''+(this.circleRadius));
+
+    this.renderer.setAttribute(this.outerCircle.nativeElement,'stroke-dasharray',''+this.getCircleLength(this.circleRadius + 17));
+    this.renderer.setAttribute(this.outerCircle.nativeElement,'r',(this.circleRadius + 17) +'');
+
     this.drawProgressCircle(0,0);
 	}
 	ngOnChanges(changes: SimpleChanges) {
@@ -37,8 +49,11 @@ export class StackDonutComponent implements AfterViewInit, OnChanges {
         valOuter = Math.min(val - 100, 100);
       }
 
+      console.log(this.text + ' - ' + valInner + '('+ radiusInner+ ')- ' + valOuter + '('+ radiusOuter+ ') ');
+
   		const cInner = Math.PI*(radiusInner*2);
 			let pctInner = ((100-valInner)/100)*cInner;
+      console.log(this.text + ' - ' + pctInner );
 
   		const cOuter = Math.PI*(radiusOuter*2);
 			let pctOuter = ((100-valOuter)/100)*cOuter;
@@ -67,5 +82,9 @@ export class StackDonutComponent implements AfterViewInit, OnChanges {
 
       this.renderer.setStyle(this.innerCircle.nativeElement,'strokeDashoffset',pctInner);
     }
+  }
+
+  getCircleLength(radius:number) {
+     return 2* radius * Math.PI;
   }
 }
