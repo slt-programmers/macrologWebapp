@@ -1,4 +1,4 @@
-<div class="blue-theme container container--first">
+<div class="blue-theme container container--first container--last">
   <div class="tile">
     <div class="search-bar">
       <label class="search-bar__label">Search</label>
@@ -83,8 +83,10 @@
       </div>
     </div>
 
-    <pager [itemsInTotal]="searchableFood.length" [currentPage]="currentPage" (pageChange)="getPagedFood($event)"
-      [itemsPerPage]="itemsPerPage"></pager>
+    <mat-paginator [length]="searchableFood.length" [pageSize]="itemsPerPage" [pageSizeOptions]="[15]"
+      (page)="getPagedFood($event)">
+    </mat-paginator>
+
   </div>
 </div>
 

@@ -14,9 +14,10 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatTableModule } from '@angular/material/table';
 import { MatRippleModule } from '@angular/material/core';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 import { AppComponent } from './app.component';
-import { AboutComponent} from './pages/about/about.component';
+import { AboutComponent } from './pages/about/about.component';
 import { FoodService } from './services/food.service';
 import { ToastService } from './services/toast.service';
 import { ToastDirective } from './directives/toast.directive';
@@ -41,7 +42,6 @@ import { CalculateIntakeModalComponent } from './components/calculate-intake-mod
 import { DishesComponent } from './pages/dishes/dishes.component';
 import { GraphsComponent } from './pages/graphs/analytics.component';
 import { DatepickerComponent } from './components/datepicker/datepicker.component';
-import { PagerComponent } from './components/pager/pager.component';
 import { MakeDishModalComponent } from './components/make-dish-modal/make-dish-modal.component';
 import { AutocompleteFoodComponent } from './components/autocomplete-food/autocomplete-food.component';
 import { LoginComponent } from './pages/login/login.component';
@@ -83,15 +83,15 @@ const appRoutes: Routes = [
 	{ path: 'food', component: FoodComponent, canActivate: [AuthGuardService] },
 	{ path: 'dishes', component: DishesComponent, canActivate: [AuthGuardService] },
 	{ path: 'graphs', component: GraphsComponent, canActivate: [AuthGuardService] },
-  { path: 'about', component: AboutComponent, canActivate: [AuthGuardService]},
-  { path: 'brand', component: BrandComponent, canActivate: [AuthGuardService]},
+	{ path: 'about', component: AboutComponent, canActivate: [AuthGuardService] },
+	{ path: 'brand', component: BrandComponent, canActivate: [AuthGuardService] },
 	{ path: '', redirectTo: '/log', pathMatch: 'full', canActivate: [AuthGuardService] },
 	{ path: '**', redirectTo: '/log', pathMatch: 'full', canActivate: [AuthGuardService] }
 ];
 
 @NgModule({
 	declarations: [
-    AboutComponent,
+		AboutComponent,
 		AdminComponent,
 		AppComponent,
 		DiaryComponent,
@@ -115,7 +115,6 @@ const appRoutes: Routes = [
 		ToastDirective,
 		DateValidator,
 		LoginComponent,
-		PagerComponent,
 		MakeDishModalComponent,
 		AutocompleteFoodComponent,
 		PiechartComponent,
@@ -139,7 +138,8 @@ const appRoutes: Routes = [
 		MatIconModule,
 		MatTableModule,
 		MatRippleModule,
-		MatProgressSpinnerModule
+		MatProgressSpinnerModule,
+		MatPaginatorModule
 	],
 	providers: [
 		AdminService,

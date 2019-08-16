@@ -45,7 +45,7 @@ export class FoodComponent implements OnInit {
 				this.allFoodFromDB = data;
 				this.percentageFood = this.calculatePercentages();
 				this.searchableFood = this.allFoodFromDB;
-				this.getPagedFood(1);
+				this.getPagedFood({pageIndex: 0});
 				this.isLoading = false;
 			},
 			error => {
@@ -55,11 +55,14 @@ export class FoodComponent implements OnInit {
 		);
 	}
 
-	public getPagedFood(page: number): void {
-		this.currentPage = page;
+	public getPagedFood(page: any): void {
+		console.log('in get paged food');
+		console.log(page);
+		this.currentPage = page.pageIndex + 1;
+		console.log(this.currentPage)
 		this.displayedFood = this.searchableFood.slice(
-			(page * this.itemsPerPage) - this.itemsPerPage,
-			((page + 1) * this.itemsPerPage) - this.itemsPerPage);
+			((page.pageIndex + 1) * this.itemsPerPage) - this.itemsPerPage,
+			((page.pageIndex + 2) * this.itemsPerPage) - this.itemsPerPage);
 	}
 
 	public findFoodMatch(): void {

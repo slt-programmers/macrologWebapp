@@ -20,7 +20,7 @@ $menuWidth: 200px;
     bottom: 0;
   }
   @include elevation(4);
-  background-image: $whiteHorizontalGradient;
+  background-color: $primary;
   position: fixed;
   top: 0;
   bottom: 0;
