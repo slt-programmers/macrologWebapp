@@ -66,9 +66,7 @@ export class OnboardingComponent implements OnInit {
 		item.portions.push(portion);
 
 		const searchable = new FoodSearchable(item);
-		const searchable2 = new FoodSearchable(item);
 		this.foodSearchables.push(searchable);
-		this.foodSearchables.push(searchable2);
 	}
 
 	ngOnInit() {
