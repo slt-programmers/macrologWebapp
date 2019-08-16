@@ -8,3 +8,58 @@
     margin-right: 15px;
   }
 }
+
+.stepper-wrapper {
+	display: flex;
+	justify-content: center;
+}
+
+.stepper {
+	display: flex;
+	margin-bottom: $gutter;
+}
+
+.step-wrapper {
+	display: flex;
+	align-items: center;
+}
+
+.step {
+	@include media-break($lg) {
+		padding: 5px;
+		width: $gutter;
+    height: $gutter;
+	}
+
+	display: flex;
+	border-radius: 50%;
+	background-color: white;
+	color: $primary;
+	padding: 3px;
+	width: ($gutter/2);
+  height: ($gutter/2);
+	justify-content: center;
+	align-items: center;
+	font-weight: bold;
+
+	&--current {
+		background-color: $secondary;
+    color: white;
+	}
+}
+
+.step-arrow {
+	@include media-break($lg) {
+		width: 100px;
+	}
+
+	display: flex;
+	background-color: $smoke;
+	height: 3px;
+	width: 30px;
+	margin: 10px;
+
+	&--last {
+		display: none;
+	}
+}

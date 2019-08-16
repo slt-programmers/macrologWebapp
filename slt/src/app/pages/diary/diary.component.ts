@@ -14,7 +14,7 @@ import { Food } from '@app/model/food';
 @Component({
 	selector: 'diary-page',
 	templateUrl: './diary.component.html',
-  styleUrls: ['./diary.component.scss'],
+	styleUrls: ['./diary.component.scss'],
 	host: { '(document: click)': 'documentClick($event)' }
 })
 export class DiaryComponent implements OnInit {
