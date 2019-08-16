@@ -1,26 +1,28 @@
 @import './variables';
 
 .button-wrapper {
-	&--floating-action {
-		bottom: 20px;
-		position: fixed;
-		right: 20px;
-		z-index: 2;
-	}
-}
+  display: flex;
+  justify-content: flex-end;
 
+  &--floating-action {
+    bottom: 20px;
+    position: fixed;
+    right: 20px;
+    z-index: 2;
+  }
+}
 
 button.mat-button {
-	border-radius: 50px;
+  border-radius: 50px;
 }
 button.mat-raised-button {
-	border-radius: 50px;
-	background: $blueLightblueHorizontalGradient;
+  border-radius: 50px;
+  background: $blueLightblueHorizontalGradient;
 }
 button.mat-stroked-button {
-		border-radius: 50px;
+  border-radius: 50px;
 }
 
 .wide {
-	width: 100%;
+  width: 100%;
 }
