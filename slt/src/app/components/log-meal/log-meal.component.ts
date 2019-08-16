@@ -192,6 +192,7 @@ export class LogMealComponent implements OnInit, OnChanges {
 				const logEntry = new LogEntry();
 				logEntry.meal = this.meal.toUpperCase();
 				logEntry.food = ingredient.food;
+        logEntry.multiplier = ingredient.multiplier;
 				if (ingredient.portionId) {
 					for (const portion of ingredient.food.portions) {
 						if (portion.id === ingredient.portionId) {
