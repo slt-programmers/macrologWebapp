@@ -51,9 +51,9 @@
       </div>
 
       <div class="blue-theme modal__button-wrapper">
-        <button mat-stroked-button type="button" *ngIf="selectedDish" (click)="deleteDish()">Delete</button>
+        <button mat-stroked-button color="primary" type="button" *ngIf="selectedDish" (click)="deleteDish()">Delete</button>
 
-        <button mat-stroked-button type="button" [disabled]="makeDishForm.invalid" (click)="saveDish()">Save</button>
+        <button mat-stroked-button color="primary" type="button" [disabled]="makeDishForm.invalid" (click)="saveDish()">Save</button>
       </div>
     </form>
   </div>

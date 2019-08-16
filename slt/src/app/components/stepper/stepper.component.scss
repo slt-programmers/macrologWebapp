@@ -1,7 +1,4 @@
-.stepper-wrapper {
-	display: flex;
-	justify-content: center;
-}
+@import '../../../css/public.scss';
 
 .stepper {
 	display: flex;
@@ -22,8 +19,8 @@
 
 	display: flex;
 	border-radius: 50%;
-	background-color: $primary;
-	color: $white;
+	background-color: white;
+	color: $primary;
 	padding: 3px;
 	width: ($gutter/2);
   height: ($gutter/2);
@@ -33,6 +30,7 @@
 
 	&--current {
 		background-color: $secondary;
+    color: white;
 	}
 }
 
