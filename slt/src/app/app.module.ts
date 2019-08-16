@@ -60,6 +60,7 @@ import { AdminService } from './services/admin.service';
 import { AdminComponent } from './pages/admin/admin.component';
 import { LinegraphComponent } from './components/linegraph/linegraph.component';
 import { BargraphComponent } from './components/bargraph/bargraph.component';
+import { BrandComponent } from './pages/brand/brand.component';
 
 const appRoutes: Routes = [
 	{ path: 'login', component: LoginComponent },
@@ -83,6 +84,7 @@ const appRoutes: Routes = [
 	{ path: 'dishes', component: DishesComponent, canActivate: [AuthGuardService] },
 	{ path: 'graphs', component: GraphsComponent, canActivate: [AuthGuardService] },
   { path: 'about', component: AboutComponent, canActivate: [AuthGuardService]},
+  { path: 'brand', component: BrandComponent, canActivate: [AuthGuardService]},
 	{ path: '', redirectTo: '/log', pathMatch: 'full', canActivate: [AuthGuardService] },
 	{ path: '**', redirectTo: '/log', pathMatch: 'full', canActivate: [AuthGuardService] }
 ];
@@ -120,7 +122,8 @@ const appRoutes: Routes = [
 		OnboardingComponent,
 		StepperComponent,
 		LinegraphComponent,
-		BargraphComponent
+		BargraphComponent,
+		BrandComponent
 	],
 	imports: [
 		BrowserModule,

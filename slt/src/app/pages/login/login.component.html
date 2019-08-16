@@ -42,7 +42,7 @@
           <a id="forgotLink" class="content__form__link" (click)="toggleForgotPwModal(true)">Forgot password?</a>
         </form>
 
-        <button id="loginBtn" mat-stroked-button color="primary" class="content__form__button"
+        <button id="loginBtn" mat-stroked-button color="primary" class="content__form__button wide"
           [disabled]="loginForm.invalid" (click)="login()">Log in
         </button>
       </div>
@@ -75,7 +75,7 @@
           <p class="content__form__error" *ngIf="registerError">{{registerError}}</p>
         </form>
 
-        <button id="registerBtn" class="content__form__button" mat-stroked-button color="primary"
+        <button id="registerBtn" class="content__form__button wide" mat-stroked-button color="primary"
           [disabled]="registerForm.invalid" (click)="register()">Register
         </button>
       </div>

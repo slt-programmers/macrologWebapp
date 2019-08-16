@@ -1,7 +1,4 @@
-.mat-stroked-button {
-  border-radius: 36px;
-  width: 100%;
-}
+@import './variables';
 
 .button-wrapper {
 	&--floating-action {
@@ -10,4 +7,20 @@
 		right: 20px;
 		z-index: 2;
 	}
+}
+
+
+button.mat-button {
+	border-radius: 50px;
+}
+button.mat-raised-button {
+	border-radius: 50px;
+	background: $blueLightblueHorizontalGradient;
+}
+button.mat-stroked-button {
+		border-radius: 50px;
+}
+
+.wide {
+	width: 100%;
 }
