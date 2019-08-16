@@ -10,15 +10,21 @@
     right: 20px;
     z-index: 2;
   }
+
+  &--space-between {
+    justify-content: space-between;
+  }
 }
 
 button.mat-button {
   border-radius: 50px;
 }
+
 button.mat-raised-button {
   border-radius: 50px;
   background: $blueLightblueHorizontalGradient;
 }
+
 button.mat-stroked-button {
   border-radius: 50px;
 }
