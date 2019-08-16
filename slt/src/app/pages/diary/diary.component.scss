@@ -1,74 +1,36 @@
 @import "../../../css/public.scss";
 
-.intake-stacks{
-	display: flex;
-	flex-direction: row;
-	justify-content: space-evenly;
-
-}
-.intake-goal-wrapper {
-	@media(min-width: $md) {
-		margin-bottom: ($gutter/2);
-		border-radius: 4px;
-	}
-	@media(min-width: $lg) {
-		margin-top: 0;
-	}
-
-	display: flex;
-	flex-direction: column;
-}
-
 .intake-goal {
-	display: flex;
-	flex-direction: row;
-	justify-content: space-between;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
 
-	&__numbers {
-		@media(min-width: $md) {
-			display: flex;
-    	flex-direction: column;
-    	justify-content: space-between;
-		}
-
-		@media(min-width: $lg) {
-			flex-grow: 1;
-		}
-
-		display: none;
+	&--calories {
+		flex-direction: column;
+		align-items: center;
 	}
 
-	&__graph {
-		flex-grow: 3;
-	}
-
-	&__calories {
-		@media(min-width: $lg) {
-			display: flex;
-			font-size: 24px;
-      margin-bottom: $gutter;
-		}
-  	display: none;
-  }
-
-  &__macros {
-    @media(min-width: $md) {
-
-    }
-  	display: flex;
-  	flex-direction: column;
-  	height: 100%;
-  	justify-content: space-around;
-  }
-
-  &__macro {
-    @media(min-width: $lg) {
-      margin-bottom: 5px;
-    }
-  }
-
-	&--placeholder {
+	&__text {
+		font-size: 20px;
 		font-weight: 400;
+		margin-bottom: 0;
 	}
 
+	&__subtext {
+		font-size: 16px;
+	}
 }
+
+.intake-goal-wrapper {
+  @media (min-width: $md) {
+    margin-bottom: ($gutter/2);
+    border-radius: 4px;
+  }
+  @media (min-width: $lg) {
+    margin-top: 0;
+  }
+
+  display: flex;
+  flex-direction: column;
+}
+

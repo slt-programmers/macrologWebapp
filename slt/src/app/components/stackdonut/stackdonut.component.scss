@@ -1,47 +1,49 @@
-@import '../../../css/public.scss';
+@import "../../../css/public.scss";
 
 .stackdonut {
-  text-align:center;
+  text-align: center;
   display: block;
   height: 200px;
   width: 200px;
   border-radius: 100%;
   position: relative;
 
-  &__svg circle {
+  &__center {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    border-radius: 100%;
+    z-index: 1;
+    margin-left: -80px;
+    color: $white;
+
+    &__text {
+      height: 95px;
+      width: 160px;
+      margin-top: -90px;
+      line-height: 165px;
+      font-size: 18px;
+    }
+
+    &__subtext {
+      font-size: 14px;
+    }
+  }
+
+  &__circle {
     stroke-dashoffset: 0;
-    stroke: #edeef936;
-    stroke-width: 1em;
-  }
+    stroke: $whiteTransparent;
+    stroke-width: 8px;
 
- &__svg .innerCircle{
-    transition: stroke-dashoffset 0.5s linear;
-    stroke: $white;
- }
- &__svg .outerCircle{
-   stroke:$white;
-   transition: stroke-dashoffset 0.2s linear;
-   z-index:-1;
- }
-}
+    &--inner {
+      transition: stroke-dashoffset 0.5s linear;
+      stroke: $white;
+    }
 
-.center-text{
-  position:absolute;
-  left: 50%;
-  top: 50%;
-  border-radius: 100%;
-  z-index:1;
-  margin-left: -80px;
-  color:$white;
-
-  &__percentages{
-    height: 95px;
-    width: 160px;
-    margin-top: -90px;
-    line-height: 165px;
-    font-size:1.4em;
-  }
-  &__subtext{
-    font-size:1.0em;
+    &--outer {
+      stroke: $white;
+      transition: stroke-dashoffset 0.2s linear;
+      z-index: -1;
+    }
   }
 }
