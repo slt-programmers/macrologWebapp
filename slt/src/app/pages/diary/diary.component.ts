@@ -3,7 +3,7 @@ import { DiaryService } from '../../services/diary.service';
 import { ActivityService } from '../../services/activity.service';
 import { UserService } from '../../services/user.service';
 import { FoodService } from '../../services/food.service';
-import { MealService } from '../../services/meal.service';
+import { DishService } from '../../services/dish.service';
 import { LogEntry } from '../../model/logEntry';
 import { LogActivity } from '../../model/logActivity';
 import { FoodSearchable } from '../../model/foodSearchable';
@@ -14,6 +14,7 @@ import { Food } from '@app/model/food';
 @Component({
 	selector: 'diary-page',
 	templateUrl: './diary.component.html',
+	styleUrls: ['./diary.component.scss'],
 	host: { '(document: click)': 'documentClick($event)' }
 })
 export class DiaryComponent implements OnInit {
@@ -28,7 +29,7 @@ export class DiaryComponent implements OnInit {
 	public isLogMealOpen: boolean;
 	public allLogs: LogEntry[];
 	public food: Food[];
-	public meals: Dish[];
+	public dishes: Dish[];
 	public searchableFood: FoodSearchable[];
 	public displayDate: Date;
 	private pipe: DatePipe;
@@ -53,7 +54,7 @@ export class DiaryComponent implements OnInit {
 		private userService: UserService,
 		private logService: DiaryService,
 		private activityService: ActivityService,
-		private mealService: MealService) {
+		private dishService: DishService) {
 		this.displayDate = new Date();
 		this.pipe = new DatePipe('en-US');
 	}
@@ -145,15 +146,15 @@ export class DiaryComponent implements OnInit {
 		this.foodService.getAllFood().subscribe(
 			data => {
 				this.food = data;
-				this.getAllMeals();
+				this.getAllDishes();
 			},
 		);
 	}
 
-	private getAllMeals() {
-		this.mealService.getAllMeals().subscribe(
+	private getAllDishes() {
+		this.dishService.getAllDishes().subscribe(
 			data => {
-				this.meals = data;
+				this.dishes = data;
 				this.getFoodSearchableList();
 			},
 		);
@@ -210,8 +211,8 @@ export class DiaryComponent implements OnInit {
 			const searchable = new FoodSearchable(item);
 			searchables.push(searchable);
 		}
-		for (const meal of this.meals) {
-			searchables.push(new FoodSearchable(undefined, meal));
+		for (const dish of this.dishes) {
+			searchables.push(new FoodSearchable(undefined, dish));
 		}
 
 		this.searchableFood = searchables;

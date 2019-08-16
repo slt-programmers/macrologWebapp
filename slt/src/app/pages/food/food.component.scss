@@ -4,3 +4,15 @@
   display: flex;
   justify-content: center;
 }
+
+.settings {
+  display: flex;
+
+  &__radios {
+    display: flex;
+
+    &__option {
+      margin-right: 15px;
+    }
+  }
+}

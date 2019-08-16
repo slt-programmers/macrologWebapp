@@ -2,31 +2,32 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ToastService } from './toast.service';
 import { Dish } from '../model/dish';
+import { StoreDishRequest } from '../model/storeDishRequest';
 import { environment } from '../../environments/environment';
 
 @Injectable()
-export class MealService {
+export class DishService {
 
-	private macrologBackendUrl = '//' + environment.backend + '/meals';
+	private macrologBackendUrl = '//' + environment.backend + '/dishes';
 
 	constructor(private http: HttpClient,
 		private toastService: ToastService) {
 	}
 
-	public getAllMeals() {
+	public getAllDishes() {
 		return this.http.get<Dish[]>(this.macrologBackendUrl, { responseType: 'json' });
 	}
 
-	public insertMeal(meal: Dish, callBack: Function) {
+	public insertDish(storeDishRequest: StoreDishRequest, callBack: Function) {
 		const headers = {
 			'Content-Type': 'application/json',
 			'Access-Control-Allow-Origin': environment.origin
 		};
 
 		const options = { headers: headers };
-		return this.http.post<Dish>(this.macrologBackendUrl + '/', meal, options).subscribe(
+		return this.http.post<StoreDishRequest>(this.macrologBackendUrl + '/', storeDishRequest, options).subscribe(
 			data => {
-				this.toastService.setMessage('Your meal have been saved!');
+				this.toastService.setMessage('Your dish have been saved!');
 				callBack();
 			},
 			error => {
@@ -34,15 +35,17 @@ export class MealService {
 			});
 	}
 
-	public deleteMeal(meal: Dish) {
+	public deleteDish(dish: Dish, callBack: Function) {
 		const headers = {
 			'Content-Type': 'application/json',
 			'Access-Control-Allow-Origin': environment.origin
 		};
 
 		const options = { headers: headers };
-		return this.http.delete<number>(this.macrologBackendUrl + '/' + meal.id, options).subscribe(
+		return this.http.delete<number>(this.macrologBackendUrl + '/' + dish.id, options).subscribe(
 			data => {
+				this.toastService.setMessage('Your dish have been deleted!');
+				callBack();
 			},
 			error => {
 				console.log(error);

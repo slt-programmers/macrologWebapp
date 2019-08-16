@@ -15,7 +15,7 @@ import { trigger, transition, style, animate, state, keyframes } from '@angular/
 			})),
 			state('back', style({
 				marginLeft: '0'
-			})), 
+			})),
 			transition('* <=> *', [
 				animate('5s 0s ease-in-out')
 			])
@@ -26,7 +26,7 @@ import { trigger, transition, style, animate, state, keyframes } from '@angular/
 			})),
 			state('back', style({
 				marginRight: '0'
-			})), 
+			})),
 			transition('* <=> *', [
 				animate('4s 0s ease-in-out')
 			])

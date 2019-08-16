@@ -1,28 +1,32 @@
 import { Component, OnInit, Input, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
+import { Macros } from '@app/model/macro';
 
 @Component({
 	templateUrl: './piechart.component.html',
-	selector: 'piechart'
+	selector: 'piechart',
+	styleUrls: ['./piechart.component.scss']
+
 })
 export class PiechartComponent implements OnInit, AfterViewInit {
 
-	@ViewChild('thisOne' ,  {static: false}) piechartRef: ElementRef;
+	@ViewChild('pieChart', { static: false }) piechartRef: ElementRef;
 
-	@Input() mealId;
-	@Input() macros;
+	@Input() mealId: number;
+	@Input() macros: Macros;
 
 	public idstring = 'pie' + this.mealId;
 
-	private protein;
-	private fat;
-	private carbs;
+	public protein: number;
+	public fat: number;
+	public carbs: number;
+	public centerText: string;
 
 	private total: number;
 	private proteinPercent: number;
 	private fatPercent: number;
 	private carbsPercent: number;
 
-	public svgEl;
+	public svgEl: Element;
 	public cumulativePercent = 0;
 
 	constructor() { }
@@ -33,6 +37,7 @@ export class PiechartComponent implements OnInit, AfterViewInit {
 		this.carbs = this.macros.carbs;
 
 		this.total = this.protein + this.fat + this.carbs;
+		this.centerText = Math.round(this.protein * 4 + this.fat * 9 + this.carbs * 4) + '';
 
 		this.proteinPercent = this.protein / this.total;
 		this.fatPercent = this.fat / this.total;
@@ -53,13 +58,17 @@ export class PiechartComponent implements OnInit, AfterViewInit {
 		this.cumulativePercent = 0;
 		this.svgEl = this.piechartRef.nativeElement;
 		const slices = [
-			{ percent: this.proteinPercent, color: '#5bd086' },
-			{ percent: this.fatPercent, color: '#f7ed70' },
-			{ percent: this.carbsPercent, color: '#fb8353' },
+			{ percent: this.proteinPercent - 0.007, color: 'rgba(100, 149, 236, 0.5)' },
+			{ percent: 0.007, color: 'white' },
+			{ percent: this.fatPercent - 0.007, color: 'rgba(60, 221, 234, 0.5)' },
+			{ percent: 0.007, color: 'white' },
+			{ percent: this.carbsPercent - 0.007, color: 'rgba(144, 238, 144, 0.5)' },
+			{ percent: 0.007, color: 'white' }
 		];
 
 		slices.forEach(slice => {
 			// destructuring assignment sets the two variables at once
+
 			const [startX, startY] = this.getCoordinatesForPercent(this.cumulativePercent);
 
 			// each slice starts where the last slice ended, so keep a cumulative percent

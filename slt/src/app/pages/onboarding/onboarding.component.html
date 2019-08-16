@@ -27,16 +27,10 @@
 
       <div class="form-field">
         <label class="form-field__label">Gender</label>
-        <div class="form-field__input">
-          <div class="radio-wrapper">
-            <input class="input" type="radio" name="gender" [(ngModel)]="gender" value="MALE"
-              [ngClass]="{'checked fas fa-check': gender === 'MALE' }">
-            <span class="radio-label">Male</span>
-            <input class="input" type="radio" name="gender" [(ngModel)]="gender" value="FEMALE"
-              [ngClass]="{'checked fas fa-check': gender === 'FEMALE' }">
-            <span class="radio-label">Female</span>
-          </div>
-        </div>
+        <mat-radio-group class="radios" aria-label="gender" name="gender" [(ngModel)]="gender">
+          <mat-radio-button class="radios__option" value="MALE">Male</mat-radio-button>
+          <mat-radio-button class="radios__option" value="FEMALE">Female</mat-radio-button>
+        </mat-radio-group>
       </div>
 
       <div class="form-field">

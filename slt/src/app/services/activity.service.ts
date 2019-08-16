@@ -14,15 +14,14 @@ export class ActivityService {
 		private toastService: ToastService) {
 	}
 
-	public getAllActivities() {
-		return this.http.get<LogActivity[]>(this.macrologBackendUrl, { responseType: 'json' });
-	}
 	public getDayActivities(date: string) {
-		return this.http.get<any[]>(this.macrologBackendUrl + '/day/' + date);
+		return this.http.get<LogActivity[]>(this.macrologBackendUrl + '/day/' + date);
 	}
+
 	public getDayActivitiesForced(date: string) {
-		return this.http.get<any[]>(this.macrologBackendUrl + '/day/' + date + '?forceSync=true');
+		return this.http.get<LogActivity[]>(this.macrologBackendUrl + '/day/' + date + '?forceSync=true');
 	}
+
 	public storeLogActivities(storeActivityRequest: StoreActivityRequest[], callBack: Function) {
 		const headers = {
 			'Content-Type': 'application/json',
@@ -52,5 +51,4 @@ export class ActivityService {
 				console.log(error);
 			});
 	}
-
 }

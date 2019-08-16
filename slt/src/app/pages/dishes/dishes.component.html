@@ -1,0 +1,39 @@
+<div class="blue-theme container container--first container--last">
+  <div class="dish-grid dish-grid--empty" *ngIf="allDishes.length === 0">
+    <p>You havent created any dishes yet!</p>
+  </div>
+
+  <div class="dish-grid" *ngIf="allDishes.length !== 0">
+    <div class="dish-card" *ngFor="let dish of allDishes" (click)="openModal(dish)">
+      <div class="dish-card__title">{{dish.name}}</div>
+
+      <div class="dish-card__content">
+        <div class="dish-card__content__pie-chart">
+          <piechart [mealId]="dish.id" [macros]="getTotal(dish)"></piechart>
+        </div>
+
+        <div class="dish-card__content__ingredient-list">
+          <div class="dish-card__content__ingredient" *ngFor="let ingredient of dish.ingredients">
+            <i class="fas fa-chevron-right dish-card__content__ingredient__bullet"></i>
+
+            <div class="dish-card__content__ingredient__name">{{getIngredientDescription(ingredient)}}
+              {{ingredient.food.name}}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="blue-theme button-wrapper--floating-action">
+    <button mat-fab color="primary" (click)="openModal(null)">
+      <mat-icon>add</mat-icon>
+    </button>
+  </div>
+
+  <div class="modal-wrapper" *ngIf="modalIsVisible">
+    <make-dish-modal [selectedDish]="selectedDish" (close)="closeModal($event)"></make-dish-modal>
+  </div>
+</div>
+
+<toast-component></toast-component>

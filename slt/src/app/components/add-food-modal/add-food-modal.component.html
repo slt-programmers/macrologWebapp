@@ -2,7 +2,7 @@
   <div class="modal__header">
     <h3 class="modal__header__title">{{title}}</h3>
 
-    <button mat-icon-button color="primary" (click)="closeModal()">
+    <button mat-icon-button (click)="closeModal()">
       <mat-icon>close</mat-icon>
     </button>
   </div>
@@ -64,12 +64,12 @@
           <mat-icon>add</mat-icon>
         </button>
       </div>
-    </form>
 
-    <div class="blue-theme button-wrapper">
-      <button mat-stroked-button color="primary" type="button" (click)="saveFood()" [disabled]="saveFoodForm.invalid">Save
-      </button>
+    <div class="blue-theme modal__button-wrapper">
+			<button mat-stroked-button color="primary" type="button" (click)="closeModal()">Cancel</button>
+      <button mat-stroked-button color="primary" type="button" (click)="saveFood()" [disabled]="saveFoodForm.invalid">Save</button>
     </div>
+		</form>
   </div>
 
 </div>

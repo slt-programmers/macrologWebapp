@@ -86,7 +86,9 @@ describe('LinegraphComponent', () => {
     component.svgPath = '';
 
     component.calculateGraph();
-    expect(component.svgPath).toEqual('M92.5 108.88888888888889 L92.5 108.88888888888889 C112.5 108.88888888888889 257.5 140 277.5 140 C297.5 140 442.5 77.77777777777777 462.5 77.77777777777777 C482.5 77.77777777777777 627.5 15.555555555555557 647.5 15.555555555555557 L647.5 140 L92.5 140 Z');
+ const numberCurves = component.svgPath.split('C').length -1;
+    expect(numberCurves).toEqual(3);
+
   });
 
   it('should calculate trend', () => {
@@ -102,8 +104,9 @@ describe('LinegraphComponent', () => {
     component.trendPath = '';
 
     component.calculateTrend();
-    expect(component.svgPath).toEqual( 'M92.5 77.77777777777777 L92.5 77.77777777777777 C112.5 77.77777777777777 257.5 100 277.5 100 C297.5 100 442.5 55.55555555555556 462.5 55.55555555555556 C482.5 55.55555555555556 627.5 11.111111111111114 647.5 11.111111111111114 L647.5 100 L92.5 100 Z');
-                                   
+    const numberCurves = component.trendPath.split('C').length -1;
+    expect(numberCurves).toEqual(0);
+
   });
 
 });
