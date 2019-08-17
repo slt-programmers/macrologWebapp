@@ -37,6 +37,7 @@ import { ConnectivityComponent } from './pages/user/connectivity/connectivity.co
 import { UserService } from './services/user.service';
 import { SliderComponent } from './components/slider/slider.component';
 import { GoalProgressbarComponent } from './components/goal-progressbar/goal-progressbar.component';
+import { CalorieProgressbarComponent } from './components/calorie-progressbar/calorie-progressbar.component';
 import { AddFoodModalComponent } from './components/add-food-modal/add-food-modal.component';
 import { CalculateIntakeModalComponent } from './components/calculate-intake-modal/calculate-intake-modal.component';
 import { DishesComponent } from './pages/dishes/dishes.component';
@@ -51,6 +52,7 @@ import { DishService } from './services/dish.service';
 import { ActivityService } from './services/activity.service';
 import { WeightService } from './services/weight.service';
 import { PiechartComponent } from './components/piechart/piechart.component';
+import { StackDonutComponent } from './components/stackdonut/stackdonut.component';
 import { OnboardingComponent } from './pages/onboarding/onboarding.component';
 import { StepperComponent } from './components/stepper/stepper.component';
 import { AuthGuardService } from './services/auth-guard.service';
@@ -106,6 +108,7 @@ const appRoutes: Routes = [
 		ConnectivityComponent,
 		SliderComponent,
 		GoalProgressbarComponent,
+    CalorieProgressbarComponent,
 		AddFoodModalComponent,
 		CalculateIntakeModalComponent,
 		DishesComponent,
@@ -118,6 +121,7 @@ const appRoutes: Routes = [
 		MakeDishModalComponent,
 		AutocompleteFoodComponent,
 		PiechartComponent,
+    StackDonutComponent,
 		OnboardingComponent,
 		StepperComponent,
 		LinegraphComponent,

@@ -119,16 +119,17 @@ export class WeightTrackerComponent {
 
     this.weightService.storeWeight(newRequest, closeCallBack);
   }
-  public editWeight(w) {
+
+  public editWeight(weight) {
     if (this.openWeight) {
-      if (this.openWeight.id === w.id) {
-        w.editable = true;
+      if (this.openWeight.id === weight.id) {
+        weight.editable = true;
       } else {
         this.openWeight.editable = false;
-        this.initOpenWeight(w);
+        this.initOpenWeight(weight);
       }
     } else {
-      this.initOpenWeight(w);
+      this.initOpenWeight(weight);
     }
   }
 

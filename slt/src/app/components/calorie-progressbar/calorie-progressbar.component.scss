@@ -1,0 +1,72 @@
+@import "../../../css/public.scss";
+
+.progress {
+  height: 30px;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+
+  .achieved {
+    @include elevation(1);
+    background-color: lightGreen;
+    width: 50px;
+    height: 10px;
+    border-radius: 10%;
+  }
+  .todo {
+    @include elevation(1);
+    background-color: lightGrey;
+    width: 50px;
+    height: 10px;
+    border-radius: 10%;
+  }
+}
+
+.calorie-progressbar {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  text-align: center;
+  height: 60px;
+  width: 100%;
+  border-radius: 100%;
+  position: relative;
+
+  &__svg circle {
+    stroke-dashoffset: 0;
+    stroke: $secondary;
+    stroke-width: 1em;
+  }
+
+  &__svg .innerCircle {
+    transition: stroke-dashoffset 0.5s linear;
+    stroke: $primary;
+  }
+  &__svg .outerCircle {
+    stroke: $primaryDark;
+    transition: stroke-dashoffset 0.2s linear;
+    z-index: -1;
+  }
+}
+
+.center-text {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  border-radius: 100%;
+  z-index: 1;
+  margin-left: -80px;
+
+  &__percentages {
+    height: 100px;
+    width: 160px;
+    margin-top: -90px;
+    line-height: 160px;
+    font-size: 2em;
+  }
+
+  &__subtext {
+    font-size: 12px;
+  }
+}

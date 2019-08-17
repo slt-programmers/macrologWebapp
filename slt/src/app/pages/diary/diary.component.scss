@@ -1,72 +1,33 @@
 @import "../../../css/public.scss";
 
-.intake-goal-wrapper {
-  @media (min-width: $md) {
-    margin-bottom: ($gutter/2);
-    margin-top: 15px;
-    border-radius: 4px;
-  }
-  @media (min-width: $lg) {
-    margin-top: 0;
-  }
-
-  @include elevation(1);
-  background-color: $white;
-  color: $coal;
-  display: flex;
-  flex-direction: column;
-  padding: ($gutter/2);
-  margin-bottom: 5px;
-}
-
 .intake-goal {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: space-evenly;
 
-  &__numbers {
-    @media (min-width: $md) {
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-    }
-
-    @media (min-width: $lg) {
-      flex-grow: 1;
-    }
-
-    display: none;
-  }
-
-  &__graph {
-    flex-grow: 3;
-  }
-
-  &__calories {
-    @media (min-width: $lg) {
-      display: flex;
-      font-size: 24px;
-      margin-bottom: $gutter;
-    }
-    display: none;
-  }
-
-  &__macros {
-    @media (min-width: $md) {
-    }
-    display: flex;
+  &--calories {
     flex-direction: column;
-    height: 100%;
-    justify-content: space-around;
+    align-items: center;
   }
 
-  &__macro {
-    @media (min-width: $lg) {
-      margin-bottom: 5px;
+  &__text {
+    @media (min-width: $md) {
+      font-size: 20px;
     }
+    font-size: 18px;
+    margin-bottom: 0;
   }
 
-  &--placeholder {
-    font-weight: 400;
+  &__subtext {
+    @media(min-width: $md) {
+      font-size: 16px;
+    }
+    font-size: 14px;
   }
+}
+
+.intake-goal-wrapper {
+  padding-top: 15px;
+  display: flex;
+  flex-direction: column;
 }
