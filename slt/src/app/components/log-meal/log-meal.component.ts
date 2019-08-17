@@ -9,7 +9,8 @@ import { Portion } from '@app/model/portion';
 
 @Component({
 	selector: 'log-meal',
-	templateUrl: './log-meal.component.html'
+	templateUrl: './log-meal.component.html',
+	styleUrls: ['./log-meal.component.scss']
 })
 export class LogMealComponent implements OnInit, OnChanges {
 
@@ -20,6 +21,7 @@ export class LogMealComponent implements OnInit, OnChanges {
 	@Input() logEntries: LogEntry[];
 	@Input() date: Date;
 	@Input() open: boolean;
+	@Input() dummy = false;
 
 	@Output() dataChanged: EventEmitter<boolean> = new EventEmitter<boolean>();
 
@@ -96,40 +98,42 @@ export class LogMealComponent implements OnInit, OnChanges {
 	}
 
 	public copyPrevious() {
-		const prevDay = new Date(this.date.getTime());
-		prevDay.setDate(prevDay.getDate() - 1);
-		const copyFrom = this.pipe.transform(prevDay, 'yyyy-MM-dd');
+		if (!this.dummy) {
+			const prevDay = new Date(this.date.getTime());
+			prevDay.setDate(prevDay.getDate() - 1);
+			const copyFrom = this.pipe.transform(prevDay, 'yyyy-MM-dd');
 
-		for (const oldEntry of this.logEntries) {
-			this.diaryService.deleteLogEntry(oldEntry);
-			this.updateCalculatedMacros(oldEntry);
-		}
-
-		this.diaryService.getLogsForDay(copyFrom).subscribe(
-			data => {
-				const yesterdaysEntries = data;
-				const filteredEntries = yesterdaysEntries.filter(
-					entry => entry.meal === this.meal.toUpperCase()
-				);
-				for (const copiedEntry of filteredEntries) {
-					const logEntry = new LogEntry();
-					logEntry.meal = copiedEntry.meal;
-					logEntry.food = copiedEntry.food;
-					if (copiedEntry.portion) {
-						logEntry.portion = copiedEntry.portion;
-					}
-					logEntry.multiplier = copiedEntry.multiplier;
-					this.updateCalculatedMacros(logEntry);
-					logEntry.day = this.date;
-					this.logEntries.push(logEntry);
-					this.updateCalculatedMacros(logEntry);
-				}
-				this.toastService.setMessage(this.meal + ' has been copied from ' + copyFrom);
-			},
-			err => {
-				this.toastService.setMessage(this.meal + ' of ' + copyFrom + '  could not be copied');
+			for (const oldEntry of this.logEntries) {
+				this.diaryService.deleteLogEntry(oldEntry);
+				this.updateCalculatedMacros(oldEntry);
 			}
-		);
+
+			this.diaryService.getLogsForDay(copyFrom).subscribe(
+				data => {
+					const yesterdaysEntries = data;
+					const filteredEntries = yesterdaysEntries.filter(
+						entry => entry.meal === this.meal.toUpperCase()
+					);
+					for (const copiedEntry of filteredEntries) {
+						const logEntry = new LogEntry();
+						logEntry.meal = copiedEntry.meal;
+						logEntry.food = copiedEntry.food;
+						if (copiedEntry.portion) {
+							logEntry.portion = copiedEntry.portion;
+						}
+						logEntry.multiplier = copiedEntry.multiplier;
+						this.updateCalculatedMacros(logEntry);
+						logEntry.day = this.date;
+						this.logEntries.push(logEntry);
+						this.updateCalculatedMacros(logEntry);
+					}
+					this.toastService.setMessage(this.meal + ' has been copied from ' + copyFrom);
+				},
+				() => {
+					this.toastService.setMessage(this.meal + ' of ' + copyFrom + '  could not be copied');
+				}
+			);
+		}
 	}
 
 	public amountChange(logEntry: LogEntry) {
@@ -192,6 +196,7 @@ export class LogMealComponent implements OnInit, OnChanges {
 				const logEntry = new LogEntry();
 				logEntry.meal = this.meal.toUpperCase();
 				logEntry.food = ingredient.food;
+        logEntry.multiplier = ingredient.multiplier;
 				if (ingredient.portionId) {
 					for (const portion of ingredient.food.portions) {
 						if (portion.id === ingredient.portionId) {
@@ -232,11 +237,13 @@ export class LogMealComponent implements OnInit, OnChanges {
 	}
 
 	public deleteLogEntry(logEntry: LogEntry) {
-		const index: number = this.logEntries.indexOf(logEntry);
-		if (index !== -1) {
-			this.logEntries.splice(index, 1);
+		if (!this.dummy) {
+			const index: number = this.logEntries.indexOf(logEntry);
+			if (index !== -1) {
+				this.logEntries.splice(index, 1);
+			}
+			this.diaryService.deleteLogEntry(logEntry);
 		}
-		this.diaryService.deleteLogEntry(logEntry);
 	}
 
 	public saveAndClose() {
@@ -254,6 +261,10 @@ export class LogMealComponent implements OnInit, OnChanges {
 			newRequest.meal = this.meal.toUpperCase();
 			allEntries.push(newRequest);
 		}
-		this.diaryService.storeLogEntries(allEntries, this.closeCallBack);
+		if (!this.dummy) {
+			this.diaryService.storeLogEntries(allEntries, this.closeCallBack);
+		} else {
+			this.toastService.setMessage('Your meals have been saved!');
+		}
 	}
 }

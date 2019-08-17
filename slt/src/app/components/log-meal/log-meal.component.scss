@@ -1,3 +1,5 @@
+@import '../../../css/public.scss';
+
 .log-meal {
   &--grow {
     @media (min-width: $md) {
