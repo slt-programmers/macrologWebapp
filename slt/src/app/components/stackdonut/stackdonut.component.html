@@ -1,0 +1,18 @@
+<div #cont class="stackdonut">
+	<div class="stackdonut__center">
+		<div class="stackdonut__center__text">{{achieved |  number:'1.0-0'}}/{{goal}}</div>
+
+		<div class="stackdonut__center__subtext">{{text}}</div>
+	</div>
+
+	<svg [attr.height]="height" [attr.width]="width" style="transform: rotate(-90deg)" #svg >
+		<circle [attr.cx]="height/2" [attr.cy]="height/2" #outerCircle class="stackdonut__circle stackdonut__circle--outer" fill="transparent"
+			stroke-dashoffset="0"></circle>
+
+		<circle [attr.cx]="height/2" [attr.cy]="height/2" #innerBackgroundCircle class="stackdonut__circle" fill="transparent"
+			stroke-dashoffset="0"></circle>
+
+		<circle [attr.cx]="height/2" [attr.cy]="height/2" #innerCircle class="stackdonut__circle stackdonut__circle--inner" fill="transparent"
+			stroke-dashoffset="0"></circle>
+	</svg>
+</div>

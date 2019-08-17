@@ -45,21 +45,17 @@ export class FoodComponent implements OnInit {
 				this.allFoodFromDB = data;
 				this.percentageFood = this.calculatePercentages();
 				this.searchableFood = this.allFoodFromDB;
-				this.getPagedFood({pageIndex: 0});
+				this.getPagedFood({ pageIndex: 0 });
 				this.isLoading = false;
 			},
 			error => {
-				console.log(error);
 				this.isLoading = false;
 			}
 		);
 	}
 
 	public getPagedFood(page: any): void {
-		console.log('in get paged food');
-		console.log(page);
 		this.currentPage = page.pageIndex + 1;
-		console.log(this.currentPage)
 		this.displayedFood = this.searchableFood.slice(
 			((page.pageIndex + 1) * this.itemsPerPage) - this.itemsPerPage,
 			((page.pageIndex + 2) * this.itemsPerPage) - this.itemsPerPage);

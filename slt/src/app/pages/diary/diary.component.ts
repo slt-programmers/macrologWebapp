@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { DiaryService } from '../../services/diary.service';
 import { ActivityService } from '../../services/activity.service';
 import { UserService } from '../../services/user.service';
@@ -49,6 +49,8 @@ export class DiaryComponent implements OnInit {
 	public activititiesSync = false;
 	public intakeGoals;
 	public goalCal: number;
+	public circleRadius = 60;
+	public strokeWidth = 8;
 
 	constructor(private foodService: FoodService,
 		private userService: UserService,
@@ -64,6 +66,11 @@ export class DiaryComponent implements OnInit {
 		this.getUserGoals(this.pipe.transform(this.displayDate, 'yyyy-MM-dd'));
 		this.getAllFood();
 		this.getLogEntries(this.pipe.transform(this.displayDate, 'yyyy-MM-dd'));
+		console.log(window.innerWidth);
+		if (window.innerWidth < 480) {
+			this.circleRadius = 40;
+			this.strokeWidth = 5;
+		}
 	}
 
 	public refresh() {
@@ -76,7 +83,6 @@ export class DiaryComponent implements OnInit {
 				this.activitiesLogs = data;
 			},
 			error => {
-				console.log(error);
 				this.activitiesLogs = new Array();
 			}
 		);
@@ -182,7 +188,6 @@ export class DiaryComponent implements OnInit {
 				);
 			},
 			error => {
-				console.log(error);
 				this.allLogs = new Array();
 				this.breakfastLogs = new Array();
 				this.lunchLogs = new Array();
@@ -197,7 +202,6 @@ export class DiaryComponent implements OnInit {
 				this.activitiesLogs = data;
 			},
 			error => {
-				console.log(error);
 				this.activitiesLogs = new Array();
 			}
 		);
