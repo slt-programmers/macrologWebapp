@@ -34,6 +34,7 @@ import { PersonalComponent } from './pages/user/personal/personal.component';
 import { AccountComponent } from './pages/user/account/account.component';
 import { WeightTrackerComponent } from './pages/user/weighttracker/weighttracker.component';
 import { ConnectivityComponent } from './pages/user/connectivity/connectivity.component';
+
 import { UserService } from './services/user.service';
 import { SliderComponent } from './components/slider/slider.component';
 import { GoalProgressbarComponent } from './components/goal-progressbar/goal-progressbar.component';
@@ -59,7 +60,10 @@ import { AuthGuardService } from './services/auth-guard.service';
 import { ScrollBehaviourService } from './services/scroll-behaviour.service';
 import { HealthcheckService } from './services/healthcheck.service';
 import { AdminService } from './services/admin.service';
+import { WebhookService } from './services/webhook.service'
 import { AdminComponent } from './pages/admin/admin.component';
+import { UserManagementComponent } from './pages/admin/usermanagement/usermanagement.component';
+import { WebhooksComponent } from './pages/admin/webhooks/webhooks.component';
 import { LinegraphComponent } from './components/linegraph/linegraph.component';
 import { BargraphComponent } from './components/bargraph/bargraph.component';
 import { BrandComponent } from './pages/brand/brand.component';
@@ -80,7 +84,16 @@ const appRoutes: Routes = [
 			{ path: 'account', component: AccountComponent }
 		]
 	},
-	{ path: 'admin', component: AdminComponent, canActivate: [AuthGuardService] },
+	{
+		path: 'admin',
+    component: AdminComponent,
+    canActivate: [AuthGuardService],
+    children: [
+      { path: '', redirectTo: 'usermanagement', pathMatch: 'full'},
+      { path: 'usermanagement', component: UserManagementComponent },
+      { path: 'webhooks', component: WebhooksComponent }
+    ]
+  },
 	{ path: 'onboarding', component: OnboardingComponent, canActivate: [AuthGuardService] },
 	{ path: 'food', component: FoodComponent, canActivate: [AuthGuardService] },
 	{ path: 'dishes', component: DishesComponent, canActivate: [AuthGuardService] },
@@ -101,6 +114,8 @@ const appRoutes: Routes = [
 		LogActivityComponent,
 		FoodComponent,
 		UserComponent,
+    UserManagementComponent,
+    WebhooksComponent,
 		IntakeComponent,
 		PersonalComponent,
 		AccountComponent,
@@ -157,6 +172,7 @@ const appRoutes: Routes = [
 		AuthGuardService,
 		ScrollBehaviourService,
 		HealthcheckService,
+    WebhookService,
 		{ provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
 		{ provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
 	],
