@@ -28,7 +28,7 @@
 	<div class="connectivity__connection" *ngIf="isConnected()">
 		<img alt="strava profile picture" class="connectivity__connection__profile-pic" src="{{connection.image}}" />
 
-		<p>
+		<p class="connectivity__connection__link">
 			<a target="_blank" href="https://www.strava.com/athletes/{{connection.syncedAccountId}}">{{connection.name}}</a>
 		</p>
 
