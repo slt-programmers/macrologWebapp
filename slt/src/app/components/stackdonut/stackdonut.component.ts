@@ -15,9 +15,18 @@ export class StackDonutComponent implements AfterViewInit, OnChanges {
   @Input() achieved: number;
   @Input() text: string;
 
-  @Input() circleRadius = 80;
+  @Input() circleRadius = 60;
+  @Input() strokeWidth = 8;
+
+  public height: number;
+  public width: number;
 
   constructor(private renderer: Renderer2) { }
+
+  ngOnInit() {
+    this.height = (this.circleRadius + (this.strokeWidth * 2) + 1) * 2;
+    this.width = this.height;
+  }
 
   ngAfterViewInit() {
     this.renderer.setAttribute(this.innerCircle.nativeElement, 'stroke-dasharray', '' + this.getCircleLength(this.circleRadius));
@@ -26,8 +35,8 @@ export class StackDonutComponent implements AfterViewInit, OnChanges {
     this.renderer.setAttribute(this.innerBackgroundCircle.nativeElement, 'stroke-dasharray', '' + (this.getCircleLength(this.circleRadius)));
     this.renderer.setAttribute(this.innerBackgroundCircle.nativeElement, 'r', '' + (this.circleRadius));
 
-    this.renderer.setAttribute(this.outerCircle.nativeElement, 'stroke-dasharray', '' + this.getCircleLength(this.circleRadius + 9));
-    this.renderer.setAttribute(this.outerCircle.nativeElement, 'r', (this.circleRadius + 9) + '');
+    this.renderer.setAttribute(this.outerCircle.nativeElement, 'stroke-dasharray', '' + this.getCircleLength(this.circleRadius + this.strokeWidth + 1));
+    this.renderer.setAttribute(this.outerCircle.nativeElement, 'r', (this.circleRadius + this.strokeWidth + 1) + '');
 
     this.drawProgressCircle(0, 0);
   }

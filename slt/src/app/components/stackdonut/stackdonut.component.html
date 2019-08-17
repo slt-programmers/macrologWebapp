@@ -1,12 +1,18 @@
 <div #cont class="stackdonut">
 	<div class="stackdonut__center">
 		<div class="stackdonut__center__text">{{achieved |  number:'1.0-0'}}/{{goal}}</div>
+
 		<div class="stackdonut__center__subtext">{{text}}</div>
 	</div>
-	<svg style="transform: rotate(-90deg)" #svg width="200" height="200" viewPort="0 0 100 100" version="1.1" xmlns="http://www.w3.org/2000/svg">
-		<circle #outerCircle class="stackdonut__circle stackdonut__circle--outer" cx="100" cy="100" fill="transparent" stroke-dashoffset="0"></circle>
-		<circle #innerBackgroundCircle class="stackdonut__circle" cx="100" cy="100" fill="transparent" stroke-dashoffset="0"></circle>
-		<circle #innerCircle class="stackdonut__circle stackdonut__circle--inner" cx="100" cy="100" fill="transparent" stroke-dashoffset="0"></circle>
+
+	<svg [attr.height]="height" [attr.width]="width" style="transform: rotate(-90deg)" #svg >
+		<circle [attr.cx]="height/2" [attr.cy]="height/2" #outerCircle class="stackdonut__circle stackdonut__circle--outer" fill="transparent"
+			stroke-dashoffset="0"></circle>
+
+		<circle [attr.cx]="height/2" [attr.cy]="height/2" #innerBackgroundCircle class="stackdonut__circle" fill="transparent"
+			stroke-dashoffset="0"></circle>
+
+		<circle [attr.cx]="height/2" [attr.cy]="height/2" #innerCircle class="stackdonut__circle stackdonut__circle--inner" fill="transparent"
+			stroke-dashoffset="0"></circle>
 	</svg>
 </div>
-

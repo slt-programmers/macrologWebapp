@@ -11,25 +11,23 @@
   }
 
   &__text {
-    font-size: 20px;
-    font-weight: 400;
+    @media (min-width: $md) {
+      font-size: 20px;
+    }
+    font-size: 18px;
     margin-bottom: 0;
   }
 
   &__subtext {
-    font-size: 16px;
+    @media(min-width: $md) {
+      font-size: 16px;
+    }
+    font-size: 14px;
   }
 }
 
 .intake-goal-wrapper {
-  @media (min-width: $md) {
-    margin-bottom: ($gutter/2);
-    border-radius: 4px;
-  }
-  @media (min-width: $lg) {
-    margin-top: 0;
-  }
-
+  padding-top: 15px;
   display: flex;
   flex-direction: column;
 }

@@ -3,17 +3,17 @@
   <div class="intake-goal-wrapper" *ngIf="intakeGoals">
     <div class="intake-goal">
       <div class="stackdonut-wrapper">
-        <stackdonut [goal]="intakeGoals[0]" [circleRadius]="60" [text]="'Protein'" [achieved]="getTotal('protein')">
+        <stackdonut [goal]="intakeGoals[0]" [circleRadius]="circleRadius" [strokeWidth]="strokeWidth" [text]="'Protein'" [achieved]="getTotal('protein')">
         </stackdonut>
       </div>
 
       <div class="stackdonut-wrapper">
-        <stackdonut [goal]="intakeGoals[1]" [circleRadius]="60" [text]="'Fat'" [achieved]="getTotal('fat')">
+        <stackdonut [goal]="intakeGoals[1]" [circleRadius]="circleRadius" [strokeWidth]="strokeWidth" [text]="'Fat'" [achieved]="getTotal('fat')">
         </stackdonut>
       </div>
 
       <div class="stackdonut-wrapper">
-        <stackdonut [goal]="intakeGoals[2]" [circleRadius]="60" [text]="'Carbs'" [achieved]="getTotal('carbs')">
+        <stackdonut [goal]="intakeGoals[2]" [circleRadius]="circleRadius" [strokeWidth]="strokeWidth" [text]="'Carbs'" [achieved]="getTotal('carbs')">
         </stackdonut>
       </div>
     </div>
