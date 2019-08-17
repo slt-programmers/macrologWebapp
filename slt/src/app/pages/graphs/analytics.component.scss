@@ -1,13 +1,17 @@
 @import "../../../css/public.scss";
 
 .graph {
+  @media (min-width: $xl) {
+    flex-direction: row;
+  }
   display: flex;
-  flex-direction: row;
+  flex-direction: row-reverse;
   flex-wrap: wrap;
 
   &__spinner-wrapper {
     display: flex;
     flex-grow: 1;
+    width: 100%;
     justify-content: center;
   }
 
@@ -20,7 +24,7 @@
   }
 
   &__graphs-container {
-    @media (min-width: $lg) {
+    @media (min-width: $xl) {
       width: auto;
       margin: 15px;
     }
@@ -60,17 +64,24 @@
   }
 
   &__options {
-    @media (min-width: $lg) {
-      margin: 30px;
+    @media (min-width: $xl) {
+      margin: 15px 30px;
+      flex-direction: column;
+      flex-grow: 0;
+      justify-content: flex-start;
     }
     display: flex;
-    flex-direction: column;
-    margin-top: 30px;
+    flex-direction: row;
+    margin-top: 15px;
+    flex-grow: 1;
+    justify-content: space-around;
 
     &__option {
+      @media (min-width: $xl) {
+        margin-bottom: 15px;
+      }
       display: flex;
       flex-direction: column;
-      margin-bottom: 15px;
 
       &__label {
         font-weight: 600;

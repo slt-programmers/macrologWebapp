@@ -19,6 +19,29 @@
 				</button>
 			</div>
 
+			<div class="graph__options blue-theme">
+				<div class="graph__options__group">
+					<div class="graph__options__option__label">Measurement</div>
+
+					<mat-radio-group [disabled]="loading" class="graph__options__option" aria-label="Measurement"
+						(change)="switchMeasurement()" [(ngModel)]="measurement">
+						<mat-radio-button class="graph__options__option__radio" value="calories">Calories</mat-radio-button>
+						<mat-radio-button class="graph__options__option__radio" value="grams">Grams</mat-radio-button>
+					</mat-radio-group>
+				</div>
+
+				<div class="graph__options__group">
+					<div class="graph__options__option__label">Option</div>
+
+					<mat-radio-group [disabled]="loading" class="graph__options__option" aria-label="Options"
+						(change)="switchOption()" [(ngModel)]="measurementOption">
+						<mat-radio-button class="graph__options__option__radio" value="total">Total</mat-radio-button>
+						<mat-radio-button class="graph__options__option__radio" value="splitted">Splitted</mat-radio-button>
+						<mat-radio-button class="graph__options__option__radio" value="ratio">Ratio</mat-radio-button>
+					</mat-radio-group>
+				</div>
+			</div>
+
 			<div *ngIf="!loading" class="graph__graphs-container">
 				<div class="graph__bargraph-container" *ngIf="measurementOption === 'total'">
 					<div class="graph__bargraph-label">
@@ -69,7 +92,7 @@
 					<div class="graph__bargraph-label">
 						{{ratioGraphLabel}}
 					</div>
-					
+
 					<bargraph [colors]="['rgb(100, 149, 236)', 'rgb(60, 221, 234)', 'rgb(144, 238, 144)']"
 						[fillColors]="['rgba(100, 149, 236, 0.3)', 'rgba(60, 221, 234, 0.3)', 'rgba(144, 238, 144, 0.3)']"
 						[markers]="ratioMarkers" [datasets]="[proteinRatioDataset, fatRatioDataset, carbsRatioDataset]"
@@ -78,25 +101,7 @@
 				</div>
 			</div>
 
-			<div class="graph__options blue-theme">
-				<div class="graph__options__option__label">Measurement</div>
 
-				<mat-radio-group [disabled]="loading" class="graph__options__option" aria-label="Measurement"
-					(change)="switchMeasurement()" [(ngModel)]="measurement">
-					<mat-radio-button class="graph__options__option__radio" value="calories">Calories</mat-radio-button>
-					<mat-radio-button class="graph__options__option__radio" value="grams">Grams</mat-radio-button>
-				</mat-radio-group>
-
-				<div class="graph__options__option__label">Option</div>
-
-				<mat-radio-group [disabled]="loading" class="graph__options__option" aria-label="Options"
-					(change)="switchOption()" [(ngModel)]="measurementOption">
-					<mat-radio-button class="graph__options__option__radio" value="total">Total</mat-radio-button>
-					<mat-radio-button class="graph__options__option__radio" value="splitted">Splitted</mat-radio-button>
-					<mat-radio-button class="graph__options__option__radio" value="ratio">Ratio
-					</mat-radio-button>
-				</mat-radio-group>
-			</div>
 		</div>
 	</div>
 </div>
