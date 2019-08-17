@@ -1,11 +1,11 @@
-import { Component, OnChanges, Renderer2, Input, ViewChild, ElementRef, AfterViewInit, SimpleChanges } from '@angular/core';
+import { Component, OnInit, OnChanges, Renderer2, Input, ViewChild, ElementRef, AfterViewInit, SimpleChanges } from '@angular/core';
 
 @Component({
   templateUrl: './stackdonut.component.html',
   selector: 'stackdonut',
   styleUrls: ['./stackdonut.component.scss']
 })
-export class StackDonutComponent implements AfterViewInit, OnChanges {
+export class StackDonutComponent implements OnInit, AfterViewInit, OnChanges {
 
   @ViewChild('innerCircle', { static: false }) innerCircle: ElementRef;
   @ViewChild('innerBackgroundCircle', { static: false }) innerBackgroundCircle: ElementRef;
@@ -47,9 +47,9 @@ export class StackDonutComponent implements AfterViewInit, OnChanges {
 
   private drawProgressCircle(oldValue: number, newValue: number) {
     if (this.innerCircle && this.outerCircle) {
-      let val = (this.achieved * 100) / this.goal;
-      let radiusInner = this.innerCircle.nativeElement.getAttribute('r');
-      let radiusOuter = this.outerCircle.nativeElement.getAttribute('r');
+      const val = (this.achieved * 100) / this.goal;
+      const radiusInner = this.innerCircle.nativeElement.getAttribute('r');
+      const radiusOuter = this.outerCircle.nativeElement.getAttribute('r');
 
       let valInner = val;
       let valOuter = 0;
@@ -60,18 +60,18 @@ export class StackDonutComponent implements AfterViewInit, OnChanges {
       }
 
       const cInner = Math.PI * (radiusInner * 2);
-      let pctInner = ((100 - valInner) / 100) * cInner;
+      const pctInner = ((100 - valInner) / 100) * cInner;
 
       const cOuter = Math.PI * (radiusOuter * 2);
-      let pctOuter = ((100 - valOuter) / 100) * cOuter;
+      const pctOuter = ((100 - valOuter) / 100) * cOuter;
 
-      let outerCircleWasPresent = oldValue !== undefined && oldValue > this.goal;
+      const outerCircleWasPresent = oldValue !== undefined && oldValue > this.goal;
 
       // reset both delays
       this.renderer.setStyle(this.innerCircle.nativeElement, 'transition-delay', '0s');
       this.renderer.setStyle(this.outerCircle.nativeElement, 'transition-delay', '0s');
 
-      if (valOuter == 0) {
+      if (valOuter === 0) {
         // wait until the animation to remove outer circle has finished
         if (outerCircleWasPresent) {
           this.renderer.setStyle(this.innerCircle.nativeElement, 'transition-delay', '0.35s');

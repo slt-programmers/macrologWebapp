@@ -1,39 +1,39 @@
-import { Component, OnInit, OnChanges, Renderer2, Input, ViewChild, ElementRef, AfterViewInit,SimpleChanges } from '@angular/core';
+import { Component, OnChanges, Input, ViewChild, ElementRef, AfterViewInit, SimpleChanges } from '@angular/core';
 
 @Component({
-	templateUrl: './calorie-progressbar.component.html',
-	selector: 'calorie-progressbar',
+  templateUrl: './calorie-progressbar.component.html',
+  selector: 'calorie-progressbar',
   styleUrls: ['./calorie-progressbar.component.scss']
 })
 export class CalorieProgressbarComponent implements AfterViewInit, OnChanges {
 
-	@ViewChild('innerCircle' ,  {static: false}) innerCircle: ElementRef;
-	@ViewChild('outerCircle' ,  {static: false}) outerCircle: ElementRef;
+  @ViewChild('innerCircle', { static: false }) innerCircle: ElementRef;
+  @ViewChild('outerCircle', { static: false }) outerCircle: ElementRef;
 
-	@Input() goal:number;
-	@Input() achieved:number;
-  @Input() text;
+  @Input() goal: number;
+  @Input() achieved: number;
+  @Input() text: string;
 
-  public bars= new Array();
+  public bars = new Array();
   public step = 50;
 
-	constructor(private renderer: Renderer2) {}
+  constructor() { }
 
   ngAfterViewInit() {
-    this.drawProgress(0,0);
-	}
-	ngOnChanges(changes: SimpleChanges) {
-    this.drawProgress(changes.achieved.previousValue,changes.achieved.currentValue);
-	}
+    this.drawProgress(0, 0);
+  }
+  ngOnChanges(changes: SimpleChanges) {
+    this.drawProgress(changes.achieved.previousValue, changes.achieved.currentValue);
+  }
 
-  private drawProgress(oldValue:number, newValue:number){
-     this.bars= new Array();
-     for (var i=0; i<this.goal;i=i+this.step) {
-        if (i<this.achieved){
-          this.bars.push({'progress':'achieved'});
-        } else {
-          this.bars.push({'progress':'todo'});
-        }
-     }
+  private drawProgress(oldValue: number, newValue: number) {
+    this.bars = new Array();
+    for (let i = 0; i < this.goal; i = i + this.step) {
+      if (i < this.achieved) {
+        this.bars.push({ 'progress': 'achieved' });
+      } else {
+        this.bars.push({ 'progress': 'todo' });
+      }
+    }
   }
 }
