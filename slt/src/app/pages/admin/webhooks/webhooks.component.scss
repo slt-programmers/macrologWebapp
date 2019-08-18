@@ -1,9 +1,7 @@
 @import "../../../../css/public.scss";
 
 .webhook__card {
-  @include elevation(2);
   background-color: $white;
-  border-radius: 15px;
   color: $coal;
   display: flex;
   flex-direction: row;

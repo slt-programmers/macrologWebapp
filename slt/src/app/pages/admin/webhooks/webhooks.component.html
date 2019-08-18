@@ -27,9 +27,11 @@
 					<div class="webhook__status__details__value">{{getStatus('STRAVA').callback_url}}</div>
 				</div>
 				<div class="webhook__status__details__line">
-						<button mat-button (click)="disableWebhook('STRAVA')">
-							Disable
-						</button>
+
+					<div class="blue-theme modal__button-wrapper modal__button-wrapper--spread">
+						<button mat-stroked-button color="warn" (click)="disableWebhook('STRAVA')">Disable</button>
+					</div>
+
 				</div>
 			</div>
 		</div>
@@ -37,9 +39,11 @@
 			<div class="webhook__card__status">The Strava webhook is disabled.</div>
 			<div class="webhook__status__details">
 				<div class="webhook__status__details__line">
-					<button mat-button (click)="enableWebhook('STRAVA')">
-						Enable
-					</button>
+
+					<div class="blue-theme modal__button-wrapper modal__button-wrapper--spread">
+						<button mat-stroked-button color="primary" (click)="enableWebhook('STRAVA')">Enable</button>
+					</div>
+
 				</div>
 			</div>
 		</div>
