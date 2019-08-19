@@ -1,6 +1,6 @@
 import { TestBed, async, ComponentFixture, fakeAsync, tick } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
-import { UserComponent } from './user.component';
+import { AdminComponent } from './admin.component';
 import { ToastService } from '@app/services/toast.service';
 import { UserService } from '@app/services/user.service';
 import { HttpClient, HttpHandler } from '@angular/common/http';
