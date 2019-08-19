@@ -22,7 +22,7 @@ describe('UserManagementComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [AdminComponent],
+      declarations: [UserManagementComponent],
       imports: [MatTableModule, HttpClientTestingModule],
       providers: [AdminService, ToastService],
       schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA]
