@@ -19,7 +19,7 @@
 		<ng-container matColumnDef="delete">
 			<th mat-header-cell *matHeaderCellDef> Delete account</th>
 			<td mat-cell *matCellDef="let element">
-				<button id="deleteBtn" class="deleteBtn" *ngIf="!element.admin" mat-flat-button color="warn"
+				<button id="deleteBtn" *ngIf="!element.admin" mat-flat-button color="warn"
 								(click)=openModalWithUser(element)>Delete
 				</button>
 

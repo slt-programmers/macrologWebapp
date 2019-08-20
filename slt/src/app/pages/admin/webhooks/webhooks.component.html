@@ -1,7 +1,5 @@
 <div class="container container--first container--last">
 
-	<p>Webhooks status</p>
-
 	<div class="webhook__card">
 		<div class="webhook__card__logo">
 			<img alt="powered by Strava" src="../assets/api_logo_pwrdBy_strava_stack_light.png"/>
@@ -29,7 +27,7 @@
 				<div class="webhook__status__details__line">
 
 					<div class="blue-theme modal__button-wrapper modal__button-wrapper--spread">
-						<button mat-stroked-button color="warn" (click)="disableWebhook('STRAVA')">Disable</button>
+						<button mat-flat-button color="warn" (click)="disableWebhook('STRAVA')">Disable</button>
 					</div>
 
 				</div>
@@ -41,7 +39,7 @@
 				<div class="webhook__status__details__line">
 
 					<div class="blue-theme modal__button-wrapper modal__button-wrapper--spread">
-						<button mat-stroked-button color="primary" (click)="enableWebhook('STRAVA')">Enable</button>
+						<button mat-flat-button color="primary" (click)="enableWebhook('STRAVA')">Enable</button>
 					</div>
 
 				</div>
