@@ -1,61 +1,17 @@
-import { Component, OnInit } from '@angular/core';
-import { AdminService } from '@app/services/admin.service';
-import { UserAccount } from '@app/model/userAccount';
-import { ToastService } from '@app/services/toast.service';
+import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-admin',
-  templateUrl: './admin.component.html',
-  styleUrls: ['./admin.component.scss']
+	selector: 'admin-page',
+	templateUrl: './admin.component.html',
+	styleUrls:['./admin.component.scss']
 })
-export class AdminComponent implements OnInit {
+export class AdminComponent {
 
-  public allUsers: UserAccount[];
-  public isModalVisible = false;
-  public userName: string;
-  public displayedColumns: string[] = ['id', 'name', 'email', 'delete'];
+	constructor(public router: Router) {}
 
-  public selectedUser: UserAccount;
-
-  constructor(private adminService: AdminService,
-    private toastService: ToastService) { }
-
-  ngOnInit() {
-    this.getAllUsers();
-  }
-
-  private getAllUsers() {
-    this.adminService.getAllUsers().subscribe(
-      res => {
-        this.allUsers = res;
-      },
-      err => {
-        console.log(err);
-      }
-    );
-  }
-
-  public closeModal() {
-    this.isModalVisible = false;
-  }
-
-  public openModalWithUser(user: UserAccount) {
-    this.selectedUser = user;
-    this.isModalVisible = true;
-  }
-
-  public deleteUser() {
-    this.adminService.deleteUser(this.selectedUser).subscribe(
-      res => {
-        this.toastService.setMessage('User account successfully deleted');
-        this.getAllUsers();
-      },
-      err => {
-        this.toastService.setMessage('User account could not be deleted');
-      },
-      () => {
-        this.selectedUser = undefined;
-        this.closeModal();
-      });
-  }
+  public isAdmin(): boolean {
+		const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+		return (currentUser && currentUser.admin);
+	}
 }

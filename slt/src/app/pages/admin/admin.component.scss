@@ -1,20 +1,23 @@
-@import "../../../css/public.scss";
+@import '../../../css/public.scss';
 
-.users {
-  width: 100%;
-}
+.subnav {
+	border-bottom: 1px solid $smoke;
+  margin-bottom: 15px;
 
-.mat-header-cell {
-  border-bottom-color: $smoke;
-}
+	&__item {
+		border-bottom: 2px solid transparent;
+		color: $coal;
+		display: inline-block;
+		padding: 15px;
 
-.mat-cell {
-  @media (min-width: $md) {
-    max-width: none;
-  }
-  border-bottom-color: $smoke;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  max-width: 65px;
+		&:hover {
+			@media(min-width: $md) {
+			  border-bottom: 2px solid $smoke;
+			}
+		}
+
+		&--active {
+			border-bottom: 2px solid $primary;
+		}
+	}
 }

@@ -1,0 +1,39 @@
+@import "../../../../css/public.scss";
+
+.webhook__card {
+  color: $coal;
+  display: flex;
+  flex-direction: row;
+  width:100%;
+
+  &__logo {
+      padding:25px;
+      width: 250px;
+  }
+
+  &__info {
+      padding:25px;
+  }
+
+  &__status {
+    font-weight: 600;
+    padding-bottom:10px;
+  }
+}
+.webhook__status {
+  &__details {
+  		 display: flex;
+  	   flex-direction: column;
+
+     &__line {
+			 display: flex;
+			 flex-direction: row;
+     }
+     &__text{
+       width:150px;
+     }
+     &__value{
+     }
+
+  }
+}
