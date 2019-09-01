@@ -11,18 +11,18 @@
 		<p class="strong--warning" *ngIf="syncError">Unable to proceed with connecting to Strava.	{{syncError}}</p>
 	</div>
 
+	<div class="connectivity__connection" *ngIf="!isConnected()">
+		<a href="{{stravaConnectUrl}}">
+			<img alt="connect to Strava" src="../assets/btn_strava_connectwith_light.png" />
+		</a>
+	</div>
+
 	<div class="connectivity__info" *ngIf="isConnected()">
 		<p class="connectivity__info__text connectivity__info__text--bold">You have connected Strava to Macrolog!</p>
 
 		<p class="connectivity__info__text">The activities from Strava will be automatically added to Macrolog.</p>
 
 		<p class="connectivity__info__text">Number of activities synced with Strava: {{connection.numberActivitiesSynced}}</p>
-	</div>
-
-	<div class="connectivity__connection" *ngIf="!isConnected()">
-		<a href="{{stravaConnectUrl}}">
-			<img alt="connect to Strava" src="../assets/btn_strava_connectwith_light.png" />
-		</a>
 	</div>
 
 	<div class="connectivity__connection" *ngIf="isConnected()">
