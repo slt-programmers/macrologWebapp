@@ -66,7 +66,6 @@ export class DiaryComponent implements OnInit {
 		this.getUserGoals(this.pipe.transform(this.displayDate, 'yyyy-MM-dd'));
 		this.getAllFood();
 		this.getLogEntries(this.pipe.transform(this.displayDate, 'yyyy-MM-dd'));
-		console.log(window.innerWidth);
 		if (window.innerWidth < 480) {
 			this.circleRadius = 40;
 			this.strokeWidth = 5;
