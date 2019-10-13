@@ -1,0 +1,96 @@
+@import "../../../../css/variables.scss";
+
+.graph {
+  @media (min-width: $desktop) {
+    flex-direction: row;
+  }
+  display: flex;
+  flex-direction: row-reverse;
+  flex-wrap: wrap;
+
+  &__spinner-wrapper {
+    display: flex;
+    flex-grow: 1;
+    width: 100%;
+    justify-content: center;
+  }
+
+  &__month-picker {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+  }
+
+  &__graphs-container {
+    @media (min-width: $desktop) {
+      width: auto;
+      margin: 15px;
+    }
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    align-items: center;
+    margin-top: 30px;
+    width: 100%;
+  }
+
+  &__bargraph-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+
+  &__bargraph-label {
+    margin-bottom: 16px;
+  }
+
+  &__bargraph {
+    height: 350px;
+    width: 100%;
+    &--stacked {
+      height: 500px;
+    }
+    &--protein {
+      height: 200px;
+    }
+    &--fat {
+      height: 200px;
+    }
+    &--carbs {
+      height: 200px;
+    }
+  }
+
+  &__options {
+    @media (min-width: $desktop) {
+      margin: 15px 30px;
+      flex-direction: column;
+      flex-grow: 0;
+      justify-content: flex-start;
+    }
+    display: flex;
+    flex-direction: row;
+    margin-top: 15px;
+    flex-grow: 1;
+    justify-content: space-around;
+
+    &__option {
+      @media (min-width: $desktop) {
+        margin-bottom: 15px;
+      }
+      display: flex;
+      flex-direction: column;
+
+      &__label {
+        font-weight: 600;
+        margin-bottom: 10px;
+      }
+
+      &__radio {
+        margin-bottom: 5px;
+      }
+    }
+  }
+}

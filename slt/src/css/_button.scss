@@ -1,4 +1,4 @@
-@import './variables';
+@import "./variables";
 
 .button-wrapper {
   display: flex;
@@ -16,19 +16,49 @@
   }
 }
 
-button.mat-button {
+.button {
+  padding: 15px 30px;
+  color: $primary;
+  background-color: white;
+  border: 1px solid $primary;
   border-radius: 50px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  text-transform: capitalize;
+  font-size: 0.9em;
+  font-family: "Assistant", sans-serif;
+
+  &:hover {
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  &--primary {
+    color: white;
+    background-image: linear-gradient(to right, $primary, $secondary);
+    border: none;
+  }
+
+  &--large {
+    font-size: 1.125rem;
+  }
 }
 
-button.mat-raised-button {
-  border-radius: 50px;
-  background: $blueLightblueHorizontalGradient;
-}
-
-button.mat-stroked-button {
-  border-radius: 50px;
+.button-icon {
+  padding-left: 10px;
 }
 
 .wide {
   width: 100%;
+}
+
+.floating-action-button {
+  background-color: $primary;
+  color: white;
+  border: none;
+  border-radius: 50px;
+  height: 60px;
+  width: 60px;
+  display: flex;
+  justify-content: center;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.5);
 }

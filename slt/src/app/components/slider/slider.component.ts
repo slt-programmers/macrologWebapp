@@ -5,7 +5,8 @@ import {
 
 @Component({
 	selector: 'slider',
-	templateUrl: './slider.component.html'
+	templateUrl: './slider.component.html',
+	styleUrls: ['./slider.component.scss']
 })
 export class SliderComponent implements AfterViewInit, OnChanges {
 

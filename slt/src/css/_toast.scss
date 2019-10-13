@@ -1,10 +1,9 @@
 .toast {
-	@media(min-width: $md) {
+	@media(min-width: $phone) {
 		font-size: 16px;
 		min-width: 250px;
 	}
 
-	@elevation(8);
 	background-color: $primary;
 	border-radius: 3px 3px 0 0;
 	bottom: 0;

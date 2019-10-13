@@ -11,7 +11,7 @@
 }
 
 .modal {
-  @media (min-width: $md) {
+  @media (min-width: $phone) {
     width: 80%;
   }
   margin: 8% auto;
@@ -19,7 +19,7 @@
   width: 95%;
 
   &__header {
-    @media (min-width: $md) {
+    @media (min-width: $phone) {
       border-radius: 15px 15px 0 0;
       padding: 10px 15px 0 30px;
     }
@@ -39,7 +39,7 @@
   }
 
   &__content {
-    @media (min-width: $md) {
+    @media (min-width: $phone) {
       border-radius: 0 0 15px 15px;
       padding: $gutter;
     }

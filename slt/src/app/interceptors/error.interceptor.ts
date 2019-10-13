@@ -20,7 +20,7 @@ constructor(private authenticationService: AuthenticationService, private router
 					console.log(err);
 					if (err.status === 403) {
 						this.authenticationService.logout();
-						this.router.navigateByUrl('/login');
+						this.router.navigateByUrl('/');
 						return throwError(err);
 					} else if (err.status === 401) {
 						return throwError(err);

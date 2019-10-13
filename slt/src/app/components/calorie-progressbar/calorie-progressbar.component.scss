@@ -1,4 +1,4 @@
-@import "../../../css/public.scss";
+@import "../../../css/variables.scss";
 
 .progress {
   height: 30px;
@@ -8,14 +8,12 @@
   justify-content: center;
 
   .achieved {
-    @include elevation(1);
     background-color: lightGreen;
     width: 50px;
     height: 10px;
     border-radius: 10%;
   }
   .todo {
-    @include elevation(1);
     background-color: lightGrey;
     width: 50px;
     height: 10px;

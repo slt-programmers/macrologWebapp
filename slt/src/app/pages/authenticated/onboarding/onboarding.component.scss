@@ -1,0 +1,15 @@
+@import "../../../../css/variables.scss";
+
+.radios {
+  display: flex;
+  flex-grow: 1;
+
+  &__option {
+    margin-right: 15px;
+  }
+}
+
+.stepper-wrapper {
+  display: flex;
+  justify-content: center;
+}

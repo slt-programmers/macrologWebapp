@@ -1,0 +1,70 @@
+@import "../../../../css/variables.scss";
+
+
+.dish-grid {
+  display: flex;
+  width: 100%;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: stretch;
+
+  &--empty {
+    margin-left: auto;
+    margin-right: auto;
+    color: white;
+  }
+}
+
+.dish-card {
+  background-color: $white;
+  border-radius: 15px;
+  color: $coal;
+  display: flex;
+  flex-direction: column;
+  margin: ($gutter/2);
+  padding: ($gutter/2);
+  width: 275px;
+
+  &:hover {
+
+  }
+
+  &__title {
+    align-self: center;
+    font-weight: bold;
+    font-size: 20px;
+    color: $primary;
+    margin-bottom: 16px;
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+
+    &__pie-chart {
+      align-self: center;
+      margin-bottom: 20px;
+    }
+
+    &__ingredient-list {
+      margin-left: 20px;
+    }
+
+    &__ingredient {
+      display: flex;
+      flex-direction: row;
+      margin-bottom: 4px;
+
+      &__bullet {
+        color: $primary;
+        font-size: 8pt;
+        margin-top: 6px;
+        margin-right: 8px;
+      }
+
+      &__name {
+        font-size: 16px;
+      }
+    }
+  }
+}

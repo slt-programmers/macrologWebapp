@@ -1,51 +1,51 @@
-@import '../../../css/public.scss';
+@import "../../../css/variables.scss";
 
 .stepper {
-	display: flex;
-	margin-bottom: $gutter;
+  display: flex;
+  margin-bottom: $gutter;
 }
 
 .step-wrapper {
-	display: flex;
-	align-items: center;
+  display: flex;
+  align-items: center;
 }
 
 .step {
-	@include media-break($lg) {
-		padding: 5px;
-		width: $gutter;
+  @media (min-width: $tablet) {
+    padding: 5px;
+    width: $gutter;
     height: $gutter;
-	}
+  }
 
-	display: flex;
-	border-radius: 50%;
-	background-color: white;
-	color: $primary;
-	padding: 3px;
-	width: ($gutter/2);
+  display: flex;
+  border-radius: 50%;
+  background-color: white;
+  color: $primary;
+  padding: 3px;
+  width: ($gutter/2);
   height: ($gutter/2);
-	justify-content: center;
-	align-items: center;
-	font-weight: bold;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
 
-	&--current {
-		background-color: $secondary;
+  &--current {
+    background-color: $secondary;
     color: white;
-	}
+  }
 }
 
 .step-arrow {
-	@include media-break($lg) {
-		width: 100px;
-	}
+  @media (min-width: $tablet) {
+    width: 100px;
+  }
 
-	display: flex;
-	background-color: $smoke;
-	height: 3px;
-	width: 30px;
-	margin: 10px;
+  display: flex;
+  background-color: $smoke;
+  height: 3px;
+  width: 30px;
+  margin: 10px;
 
-	&--last {
-		display: none;
-	}
+  &--last {
+    display: none;
+  }
 }

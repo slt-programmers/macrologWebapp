@@ -1,16 +1,4 @@
 .logday {
-  @media (min-width: $md) {
-    font-size: 16px;
-    border-radius: 4px;
-  }
-
-  @include elevation(1);
-  background-color: $ghost;
-  color: $coal;
-  display: flex;
-  flex-direction: column;
-  font-size: 14px;
-
   &__date {
     align-items: center;
     border-bottom: 1px solid $cloud;
@@ -31,7 +19,7 @@
         display: none;
       }
 
-      @media (min-width: $md) {
+      @media (min-width: $phone) {
         flex-basis: 15%;
 
         &:first-child {
@@ -52,7 +40,7 @@
     padding: 15px;
 
     &__title {
-      @media (min-width: $md) {
+      @media (min-width: $phone) {
         flex-basis: 40%;
       }
       flex-basis: 100%;
@@ -64,7 +52,7 @@
 
 .total {
   &__macro {
-    @media (min-width: $md) {
+    @media (min-width: $phone) {
       flex-basis: 10%;
 
       &--first {
@@ -77,7 +65,7 @@
   }
 
   &__calories {
-    @media (min-width: $md) {
+    @media (min-width: $phone) {
       flex-basis: 20%;
     }
     flex-basis: 25%;

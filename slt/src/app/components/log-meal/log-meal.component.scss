@@ -1,9 +1,8 @@
-@import '../../../css/public.scss';
+@import "../../../css/variables.scss";
 
 .log-meal {
   &--grow {
-    @media (min-width: $md) {
-      @include elevation(2);
+    @media (min-width: $phone) {
       background: $white;
       margin-left: -8px;
       width: calc(100% + 16px);
@@ -12,7 +11,7 @@
 }
 
 .meal {
-  @media (min-width: $md) {
+  @media (min-width: $phone) {
     padding: ($gutter/2);
   }
   border-bottom: 1px solid $cloud;
@@ -32,7 +31,7 @@
   }
 
   &__ingredient {
-    @media (min-width: $md) {
+    @media (min-width: $phone) {
       flex-wrap: nowrap;
     }
     flex-direction: row;
@@ -45,7 +44,7 @@
     }
 
     &__name {
-      @media (min-width: $md) {
+      @media (min-width: $phone) {
         flex-basis: 30%;
       }
 
@@ -53,7 +52,7 @@
     }
 
     &__amount {
-      @media (min-width: $md) {
+      @media (min-width: $phone) {
         flex-basis: 10%;
       }
       flex-basis: 40%;
@@ -61,7 +60,7 @@
     }
 
     &__macro {
-      @media (min-width: $md) {
+      @media (min-width: $phone) {
         flex-basis: 15%;
       }
       flex-basis: 25%;
@@ -69,7 +68,7 @@
     }
 
     &__calories {
-      @media (min-width: $md) {
+      @media (min-width: $phone) {
         flex-basis: 15%;
       }
       flex-basis: 25%;
@@ -78,7 +77,7 @@
   }
 
   &__edit-ingredient {
-    @media (min-width: $md) {
+    @media (min-width: $phone) {
       flex-wrap: nowrap;
     }
     align-items: center;
@@ -88,14 +87,14 @@
     flex-wrap: wrap;
 
     &__name {
-      @media (min-width: $md) {
+      @media (min-width: $phone) {
         flex-basis: 30%;
       }
       flex-basis: 50%;
     }
 
     &__amount {
-      @media (min-width: $md) {
+      @media (min-width: $phone) {
         flex-basis: 10%;
       }
       align-self: stretch;
@@ -108,15 +107,14 @@
     }
 
     &__measurement {
-      @media (min-width: $md) {
+      @media (min-width: $phone) {
         flex-basis: 15%;
       }
       flex-basis: 30%;
-
     }
 
     &__macro {
-      @media (min-width: $md) {
+      @media (min-width: $phone) {
         flex-basis: 10%;
         padding: 0;
       }
@@ -126,7 +124,7 @@
     }
 
     &__calories {
-      @media (min-width: $md) {
+      @media (min-width: $phone) {
         flex-basis: 10%;
       }
       flex-basis: 25%;
@@ -134,7 +132,7 @@
     }
 
     &__delete {
-      @media (min-width: $md) {
+      @media (min-width: $phone) {
         flex-basis: 5%;
       }
       flex-basis: 100%;
@@ -143,7 +141,7 @@
   }
 
   &__new-ingredient {
-    @media (min-width: $md) {
+    @media (min-width: $phone) {
       flex-direction: row;
     }
     display: flex;

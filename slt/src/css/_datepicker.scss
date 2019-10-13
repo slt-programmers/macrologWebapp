@@ -4,7 +4,6 @@
 }
 
 .date {
-	@include elevation(2);
 	align-items: center;
 	background-color: $primary;
 	border-radius: 2px;
@@ -12,7 +11,7 @@
 	display: flex;
 
 	&__selected-day {
-		@media(min-width: $md) {
+		@media(min-width: $phone) {
 			font-size: 16px;
 		}
 		font-size: 14px;
@@ -30,7 +29,6 @@
 }
 
 .picker {
-	@include elevation(4);
 	background-color: $white;
 	padding: 10px;
 	position: absolute;

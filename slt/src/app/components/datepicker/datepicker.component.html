@@ -15,11 +15,11 @@
 
   <div class="picker" *ngIf="isOpen">
     <div class="blue-theme picker__header">
-      <button mat-button color="primary" (click)="previousMonth()">Previous</button>
+      <button (click)="previousMonth()">Previous</button>
 
       <span>{{selectedDate | date: 'MMMM'}}</span>
 
-      <button mat-button color="primary" (click)="nextMonth()">Next</button>
+      <button (click)="nextMonth()">Next</button>
     </div>
 
     <div class="picker__days">

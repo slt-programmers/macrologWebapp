@@ -27,6 +27,7 @@
     "@angular/platform-browser": "^8.1.2",
     "@angular/platform-browser-dynamic": "^8.1.2",
     "@angular/router": "^8.1.2",
+    "bulma": "^0.7.5",
     "codelyzer": "^5.1.0",
     "core-js": "^3.1.4",
     "d3": "^5.9.2",
@@ -41,7 +42,7 @@
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^0.801.2",
-    "@angular/cli": "^8.1.2",
+    "@angular/cli": "^8.3.6",
     "@angular/compiler-cli": "^8.1.2",
     "@angular/language-service": "^8.1.2",
     "@types/d3": "^5.7.2",

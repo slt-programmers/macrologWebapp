@@ -1,7 +1,6 @@
 .log-activity {
   &--grow {
-    @media (min-width: $md) {
-      @include elevation(2);
+    @media (min-width: $phone) {
       background: $white;
       margin-left: -8px;
       width: calc(100% + 16px);
@@ -10,7 +9,7 @@
 }
 
 .activity {
-  @media (min-width: $md) {
+  @media (min-width: $phone) {
     padding: ($gutter/2);
   }
   border-bottom: 1px solid $cloud;
@@ -43,7 +42,7 @@
   }
 
   &__name {
-    @media (min-width: $md) {
+    @media (min-width: $phone) {
       flex-basis: 30%;
     }
 
@@ -55,7 +54,7 @@
     }
   }
   &__calories {
-    @media (min-width: $md) {
+    @media (min-width: $phone) {
       flex-basis: 15%;
     }
     flex-basis: 25%;
@@ -77,20 +76,20 @@
     padding: 0 10px;
 
     &__name {
-      @media (min-width: $md) {
+      @media (min-width: $phone) {
         flex-basis: 30%;
       }
       flex-basis: 75%;
 	}
 
     &__filler {
-      @media (min-width: $md) {
+      @media (min-width: $phone) {
         flex-basis: 55%;
       }
     }
 
     &__calories {
-      @media (min-width: $md) {
+      @media (min-width: $phone) {
         flex-basis: 10%;
       }
       flex-basis: 25%;
@@ -98,7 +97,7 @@
 	}
 
     &__delete {
-      @media (min-width: $md) {
+      @media (min-width: $phone) {
         flex-basis: 5%;
       }
       flex-basis: 100%;
@@ -107,7 +106,7 @@
   }
 
   &__new-activity {
-    @media (min-width: $md) {
+    @media (min-width: $phone) {
       flex-direction: row;
     }
     display: flex;

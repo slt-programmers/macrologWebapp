@@ -1,9 +1,17 @@
 // Import angular material custom theme
 @import "theme";
 
-// Define variables and mixins
+// Define variables 
 @import "variables";
-@import "mixins/public";
+
+$family-primary: "Assistant", sans-serif;
+
+@import "../../node_modules/bulma/sass/utilities/_all.sass";
+@import "../../node_modules/bulma/sass/base/generic.sass";
+@import "../../node_modules/bulma/sass/layout/section.sass";
+@import "../../node_modules/bulma/sass/components/navbar.sass";
+@import "../../node_modules/bulma/sass/elements/container.sass";
+@import "../../node_modules/bulma/sass/grid/_all.sass";
 
 // Reset default styles
 @import "reset";
@@ -14,11 +22,9 @@
 @import "button";
 @import "calorie-box";
 @import "card";
-@import "container";
 @import "datepicker";
 @import "food-table";
 @import "form";
-@import "grid";
 @import "icon";
 @import "input";
 @import "loading-overlay";
@@ -31,7 +37,6 @@
 @import "search-bar";
 @import "select";
 @import "settings";
-@import "slider";
 @import "tabs";
-@import "tile";
 @import "toast";
+

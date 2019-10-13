@@ -9,7 +9,9 @@
     </svg>
 </div> -->
 
-<div id="loadingOverlay" class="loading-overlay" *ngIf="stillSleeping()">
+
+
+<!-- <div id="loadingOverlay" class="loading-overlay" *ngIf="stillSleeping()">
   <h1>Macrolog</h1>
 
   <p class="paragraph">The hamsters in the treadmill powering this app are still asleep.</p>
@@ -19,9 +21,9 @@
   <div class="svg-wrapper">
     <img src="../assets/hamster-wheel.svg" alt="hamster-wheel">
   </div>
-</div>
+</div> -->
 
-<div class="menu" *ngIf="loggedIn()">
+<!-- <div class="menu" *ngIf="loggedIn()">
   <div class="menu__logo"  routerLink="/about">
     <p class="menu__logo__text">M</p>
   </div>
@@ -67,7 +69,7 @@
   </div>
 </div>
 
-<div [@openClose]="smallMenuOpen ? 'open' : 'closed'" class="small-menu">
+<div [@openClose]="smallMenuOpen ? 'open' : 'closed'" class="small-menu" *ngIf="loggedIn()">
   <div matRipple class="small-menu__item small-menu__item--back" (click)="closeMenu()">
     <i class="fas fa-arrow-right"></i>
   </div>
@@ -80,9 +82,9 @@
     <div class="">Food</div>
   </div>
 
-  <!-- <div matRipple [ngClass]="{'small-menu__item--active' : router.url === '/meals'}" class="small-menu__item" routerLink="/meals" (click)="closeMenu()">
+  <div matRipple [ngClass]="{'small-menu__item--active' : router.url === '/meals'}" class="small-menu__item" routerLink="/meals" (click)="closeMenu()">
     <div class="">Meals</div>
-  </div> -->
+  </div>
 
   <div matRipple [ngClass]="{'small-menu__item--active' : router.url === '/graphs'}" class="small-menu__item" routerLink="/graphs" (click)="closeMenu()">
     <div class="">Graphs</div>
@@ -100,9 +102,9 @@
     <div class="small-menu__inline-text">Log out</div>
     <i class="fas fa-sign-out-alt"></i>
   </div>
-</div>
+</div> -->
 
-<div class="content">
+<div>
   <router-outlet></router-outlet>
 </div>
 
