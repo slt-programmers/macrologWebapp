@@ -40,32 +40,6 @@ describe('LoginComponent', () => {
 		expect(component).toBeTruthy();
 	});
 
-	it('should toggle login and about content', () => {
-		let result = component.showContentLogin;
-		expect(result).toBeTruthy();
-
-		// manipulate function directly
-		component.toggleLogin(false);
-		result = component.showContentLogin;
-		expect(result).toBeFalsy();
-
-		// test dom element click login
-		let paragraphElem = fixture.debugElement.query(By.css('#login'));
-		paragraphElem.nativeElement.click()
-		fixture.detectChanges();
-
-		result = component.showContentLogin;
-		expect(result).toBeTruthy();
-
-		// test dom element click about
-		paragraphElem = fixture.debugElement.query(By.css('#about'));
-		paragraphElem.nativeElement.click();
-		fixture.detectChanges();
-
-		result = component.showContentLogin;
-		expect(result).toBeFalsy();
-	});
-
 	it('should log in', fakeAsync(() => {
 		let loginSpy = spyOn(authService, 'login').and.returnValue(of(undefined));
 		spyOn(router, 'navigate');

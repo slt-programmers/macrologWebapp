@@ -37,7 +37,7 @@ export class PersonalComponent {
 				this.newWeight = this.weight;
 			},
 			error => {
-				console.log(error);
+        // TODO handle error
 			}
 		);
 	}

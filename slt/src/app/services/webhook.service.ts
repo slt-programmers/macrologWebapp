@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { forkJoin } from 'rxjs/observable/forkJoin';
 import { environment } from '../../environments/environment';
 import { WebhookStatus } from '@app/model/webhookStatus';
 
@@ -34,7 +33,6 @@ export class WebhookService {
 		};
 
 		const options = { headers: headers };
-		return this.http.delete(this.macrologBackendUrl + '/' + connectedApp + "/" + subscriptionId, options);
+		return this.http.delete(this.macrologBackendUrl + '/' + connectedApp + '/' + subscriptionId, options);
 	}
-
 }

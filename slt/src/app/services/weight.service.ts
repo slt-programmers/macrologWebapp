@@ -34,7 +34,6 @@ export class WeightService {
 		},
 			error => {
 				this.toastService.setMessage('Your weight could not be saved!');
-				console.log(error);
 			});
 	}
 
@@ -52,8 +51,6 @@ export class WeightService {
 			},
 			error => {
 				this.toastService.setMessage('Your weight measurement could not be deleted!');
-				console.log(error);
 			});
 	}
-
 }

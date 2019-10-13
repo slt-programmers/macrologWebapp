@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { AuthenticatedRoutingModule } from "./authenticated-router.module";
+import { AuthenticatedRoutingModule } from './authenticated-router.module';
 import { AdminComponent } from './admin/admin.component';
 import { DiaryComponent } from './diary/diary.component';
 import { LogMealComponent } from '@app/components/log-meal/log-meal.component';
@@ -92,4 +92,6 @@ import { MatTableModule } from '@angular/material/table';
     BargraphComponent,
   ]
 })
-export class AuthenticatedModule { }
+export class AuthenticatedModule {
+
+}

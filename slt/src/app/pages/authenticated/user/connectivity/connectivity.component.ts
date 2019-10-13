@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../../../services/user.service';
 import { ActivatedRoute } from '@angular/router';
 import { environment } from '../../../../../environments/environment';
@@ -8,7 +8,7 @@ import { environment } from '../../../../../environments/environment';
    templateUrl: './connectivity.component.html',
    styleUrls: ['./connectivity.component.scss']
 })
-export class ConnectivityComponent {
+export class ConnectivityComponent implements OnInit {
 
    public syncError: string;
    public stravaConnectUrl: string;

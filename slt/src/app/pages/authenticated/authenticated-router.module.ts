@@ -63,4 +63,6 @@ const authenticatedRoutes: Routes = [
     RouterModule
   ]
 })
-export class AuthenticatedRoutingModule { }
+export class AuthenticatedRoutingModule {
+
+}

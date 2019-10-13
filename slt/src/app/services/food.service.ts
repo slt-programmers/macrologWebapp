@@ -10,21 +10,22 @@ export class FoodService {
 	macrologBackendUrl = '//' + environment.backend + '/food';
 
 	constructor(private http: HttpClient,
-							private toastService: ToastService) {
+		private toastService: ToastService) {
 	}
 
 	public addFood(addFoodRequest: Food, callBack: Function) {
-		const headers = {'Content-Type': 'application/json',
+		const headers = {
+			'Content-Type': 'application/json',
 			'Access-Control-Allow-Origin': environment.origin
 		};
 
 		const options = { headers: headers };
 		return this.http.post<Food>(this.macrologBackendUrl + '/', addFoodRequest, options).subscribe(data => {
-				this.toastService.setMessage('The food has been added!');
-				callBack();
-			},
+			this.toastService.setMessage('The food has been added!');
+			callBack();
+		},
 			error => {
-				console.log(error);
+				// TODO handle error
 			});
 	}
 
@@ -40,7 +41,9 @@ export class FoodService {
 		let food;
 		this.getAllFood().subscribe(
 			data => food = data,
-			error => console.log(error)
+			error => {
+				// TODO handle error
+			}
 		);
 	}
 }

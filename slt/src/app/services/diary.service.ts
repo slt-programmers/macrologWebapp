@@ -38,7 +38,6 @@ export class DiaryService {
 			},
 			error => {
 				this.toastService.setMessage('Your meals could not be saved!');
-				console.log(error);
 			});
 	}
 
@@ -53,7 +52,6 @@ export class DiaryService {
 			() => { },
 			error => {
 				this.toastService.setMessage('Your entry has not been deleted!');
-				console.log(error);
 			});
 	}
 }

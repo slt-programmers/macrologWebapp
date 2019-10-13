@@ -11,18 +11,18 @@
     </div>
 
     <div class="menu__item">
-      <div matRipple [ngClass]="{'menu__item__text--active': showContentLogin}" class="menu__item__text" id="login"
+      <div matRipple class="menu__item__text menu__item__text--active" id="login"
         routerLink="/login">Log in</div>
     </div>
 
     <div class="menu__item">
-      <div matRipple [ngClass]="{'menu__item__text--active': !showContentLogin}" class="menu__item__text" id="about"
+      <div matRipple class="menu__item__text" id="about"
         routerLink="/about">About</div>
     </div>
   </div>
 
   <div class="content">
-    <div @enterLeaveTrigger *ngIf="showContentLogin" class="content__forms">
+    <div @enterLeaveTrigger class="content__forms">
       <div class="content__form content__form--login">
         <h3 class="content__form__title">Log in</h3>
 

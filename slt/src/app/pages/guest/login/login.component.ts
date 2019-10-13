@@ -33,7 +33,6 @@ export class LoginComponent implements OnInit {
 	public forgotError: string;
 
 	public showForgotPwModal = false;
-	public showContentLogin = true;
 
 	constructor(
 		private route: ActivatedRoute,
@@ -46,10 +45,6 @@ export class LoginComponent implements OnInit {
 		this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/log';
 	}
 
-	public toggleLogin(showContentLogin: boolean) {
-		this.showContentLogin = showContentLogin;
-	}
-
 	public login() {
 		this.loginError = '';
 		this.authService.login(this.usernameOrEmail, this.password)
@@ -57,8 +52,7 @@ export class LoginComponent implements OnInit {
 				() => {
 					this.router.navigate([this.returnUrl]);
 				},
-				err => {
-					console.log(err);
+				() => {
 					this.loginError = 'Username or password incorrect';
 				});
 	}
@@ -67,13 +61,12 @@ export class LoginComponent implements OnInit {
 		this.registerError = '';
 		this.authService.register(this.newUsername, this.newEmail, this.newPassword)
 			.subscribe(
-				res => {
+				() => {
 					this.authService.login(this.newUsername, this.newPassword)
 						.subscribe(
 							() => {
 								this.router.navigate(['/onboarding']);
-							}, err => {
-								console.log(err);
+							}, () => {
 								this.registerError = 'Error on login after registration.';
 							});
 					this.newUsername = '';
@@ -100,10 +93,11 @@ export class LoginComponent implements OnInit {
 		this.forgotError = '';
 		this.authService.resetPassword(this.forgotEmail)
 			.subscribe(
-				res => {
+				() => {
 					this.toastService.setMessage('We have send an email with your password!');
 					this.toggleForgotPwModal(false);
-				}, err => {
+				},
+				() => {
 					this.forgotError = 'The email adress was not found';
 				});
 	}

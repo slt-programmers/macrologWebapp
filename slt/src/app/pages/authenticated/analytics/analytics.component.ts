@@ -126,7 +126,6 @@ export class GraphsComponent implements OnInit {
         this.getGoals();
       },
       error => {
-        console.log(error);
         this.allMacros = [];
       });
   }
@@ -144,7 +143,9 @@ export class GraphsComponent implements OnInit {
         this.getDatasets();
         this.loading = false;
       },
-      error => console.log(error)
+      error => {
+        // TODO handle error
+      }
     );
   }
 

@@ -26,7 +26,9 @@ export class DishesComponent implements OnInit {
 				this.allDishes = data;
 				this.allDishes.sort((a, b) => a.name.localeCompare(b.name));
 			},
-			error => console.log(error)
+			error => {
+				// TODO handle error
+			}
 		);
 	}
 
@@ -46,7 +48,6 @@ export class DishesComponent implements OnInit {
 				return portion;
 			}
 		}
-		console.log('Unknown portion');
 	}
 
 	public getIngredientDescription(ingredient: Ingredient): string {

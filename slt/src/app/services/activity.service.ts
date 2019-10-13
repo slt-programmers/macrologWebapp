@@ -34,7 +34,7 @@ export class ActivityService {
 				callBack();
 			},
 			error => {
-				console.log(error);
+        // TODO handle error
 			});
 	}
 
@@ -48,7 +48,7 @@ export class ActivityService {
 			() => {
 			},
 			error => {
-				console.log(error);
+        // TODO handle error
 			});
 	}
 }

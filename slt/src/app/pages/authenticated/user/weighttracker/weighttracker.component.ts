@@ -43,7 +43,9 @@ export class WeightTrackerComponent {
         });
         this.getWeightDataset();
       },
-      error => console.log(error)
+      error => {
+        // TODO handle error
+      }
     );
   }
 

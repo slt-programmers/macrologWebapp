@@ -30,7 +30,7 @@ export class UserManagementComponent implements OnInit {
         this.allUsers = res;
       },
       err => {
-        console.log(err);
+        // TODO handle error
       }
     );
   }

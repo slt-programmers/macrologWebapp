@@ -134,7 +134,9 @@ export class DiaryComponent implements OnInit {
 				}
 				this.setGoalCal();
 			},
-			error => console.log(error)
+			error => {
+        // TODO handle error
+			}
 		);
 	}
 

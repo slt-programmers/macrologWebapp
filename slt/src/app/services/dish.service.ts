@@ -31,7 +31,7 @@ export class DishService {
 				callBack();
 			},
 			error => {
-				console.log(error);
+				// TODO handle error
 			});
 	}
 
@@ -48,7 +48,7 @@ export class DishService {
 				callBack();
 			},
 			error => {
-				console.log(error);
+				// TODO handle error
 			});
 	}
 }

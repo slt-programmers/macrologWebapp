@@ -17,7 +17,6 @@ constructor(private authenticationService: AuthenticationService, private router
 					return result;
 				}),
 				catchError(err => {
-					console.log(err);
 					if (err.status === 403) {
 						this.authenticationService.logout();
 						this.router.navigateByUrl('/');

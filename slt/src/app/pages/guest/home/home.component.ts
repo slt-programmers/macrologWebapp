@@ -16,7 +16,6 @@ export class HomeComponent implements OnInit {
   }
 
   public toggleMenu() {
-    console.log('Toggle')
     this.menuToggle = !this.menuToggle;
   }
 
