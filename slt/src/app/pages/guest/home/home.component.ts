@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthenticationService } from '@app/services/auth.service';
 
 @Component({
   selector: 'home',
@@ -9,7 +10,7 @@ export class HomeComponent implements OnInit {
 
   public menuToggle = false;
 
-  constructor() { }
+  constructor(private authService: AuthenticationService) { }
 
   ngOnInit() {
   }
@@ -17,5 +18,9 @@ export class HomeComponent implements OnInit {
   public toggleMenu() {
     console.log('Toggle')
     this.menuToggle = !this.menuToggle;
+  }
+
+  public isLoggedIn() {
+    return this.authService.isAuthenticated();
   }
 }

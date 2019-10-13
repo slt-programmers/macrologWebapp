@@ -32,7 +32,7 @@ $menuWidth: 200px;
   width: 100%;
   height: $menuHeight;
   z-index: 4;
-  box-shadow: 0 0 4px rgba(0,0,0,0.3);
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
 
   &__logo {
     @media (min-width: $tablet) {
@@ -129,6 +129,7 @@ $menuWidth: 200px;
   background: $backgroundGradient;
   z-index: 4;
   margin-right: -250px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
 
   &__item {
     position: relative;

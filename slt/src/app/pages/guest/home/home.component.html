@@ -13,9 +13,10 @@
     </div>
 
     <div class="navbar-mobile-menu" [ngClass]="{ 'is-visible' : menuToggle }">
-      <div class="navbar-mobile-item">About</div>
-      <div class="navbar-mobile-item">Log in</div>
-      <div class="navbar-mobile-item">Register</div>
+      <div class="navbar-mobile-item" routerLink="/about">About</div>
+      <div *ngIf="isLoggedIn()" class="navbar-mobile-item" routerLink="/log">Diary</div>
+      <div *ngIf="!isLoggedIn()" class="navbar-mobile-item" routerLink="/login">Log in</div>
+      <div *ngIf="!isLoggedIn()" class="navbar-mobile-item" routerLink="/login">Register</div>
     </div>
 
     <div class="navbar-menu">
@@ -24,11 +25,15 @@
       </div>
 
       <div class="navbar-end">
-        <div class="navbar-item">
+        <div *ngIf="isLoggedIn()" class="navbar-item">
+          <button class="button button--primary" routerLink="/log">Diary</button>
+        </div>
+
+        <div *ngIf="!isLoggedIn()" class="navbar-item">
           <button class="button button--primary" routerLink="/login">Log in</button>
         </div>
 
-        <div class="navbar-item">
+        <div *ngIf="!isLoggedIn()" class="navbar-item">
           <button class="button button--primary" routerLink="/login">Register</button>
         </div>
       </div>
