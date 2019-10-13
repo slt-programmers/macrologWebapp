@@ -49,7 +49,7 @@ export class UserService {
 		const options = { headers: headers };
 		return this.http.post(this.macrologBackendUrl + '/connectivity/' + syncWith, userInfo, options);
 	}
-	public disConnectSyncSettings(syncWith: string) {
+	public disconnectSyncSettings(syncWith: string) {
 		const headers = {
 			'Content-Type': 'application/json',
 			'Access-Control-Allow-Origin': environment.origin

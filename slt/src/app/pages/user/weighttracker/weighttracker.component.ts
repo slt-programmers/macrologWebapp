@@ -153,9 +153,14 @@ export class WeightTrackerComponent {
 
   public saveWeight(w) {
     const date = moment(w.dayString, 'D-M-YYYY', true);
-    w.day = this.pipe.transform(date, 'yyyy-MM-dd');
-    w.weight = w.weightString;
-    this.weightService.storeWeight(w, () => this.closeCallBack('updated!'));
+
+    const newRequest = new Weight();
+    newRequest.id = w.id;
+    newRequest.weight = w.weightString;
+    newRequest.day = this.pipe.transform(date, 'yyyy-MM-dd');
+    newRequest.remark = w.remark;
+
+    this.weightService.storeWeight(newRequest, () => this.closeCallBack('updated!'));
   }
 
   private documentClick(event) {
