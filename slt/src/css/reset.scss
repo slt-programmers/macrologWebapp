@@ -20,6 +20,10 @@ body {
   width: 100%;
 }
 
+*:focus {
+  outline: none;
+}
+
 p {
   line-height: 1.5;
   margin-bottom: 15px;
@@ -46,10 +50,11 @@ table {
   border-collapse: collapse;
 }
 
-table th, table td {
+table th,
+table td {
   vertical-align: middle;
 }
 
-*:focus {
-  outline: none;
+ul {
+  list-style: none;;
 }
