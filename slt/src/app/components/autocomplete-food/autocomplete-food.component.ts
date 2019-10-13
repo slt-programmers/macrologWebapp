@@ -5,6 +5,7 @@ import { Food } from '../../model/food';
 @Component({
 	templateUrl: './autocomplete-food.component.html',
 	selector: 'autocomplete-food',
+	styleUrls: ['./autocomplete-food.component.scss'],
 	host: { '(document: click)': 'closeAutoComplete($event)' }
 })
 export class AutocompleteFoodComponent {

@@ -1,6 +1,4 @@
 <div>
-  <h3>Update password</h3>
-
   <form #updateForm="ngForm">
     <div class="form-field">
       <label class="form-field__label">Old password</label>
@@ -24,7 +22,7 @@
   </form>
 
   <div class="blue-theme button-wrapper">
-    <button mat-stroked-button color="primary" [disabled]="updateForm.invalid" (click)="changePassword()">Change
+    <button class="button button--primary" [disabled]="updateForm.invalid" (click)="changePassword()">Change
       password
     </button>
   </div>

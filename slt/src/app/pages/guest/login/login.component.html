@@ -42,8 +42,8 @@
           <a id="forgotLink" class="content__form__link" (click)="toggleForgotPwModal(true)">Forgot password?</a>
         </form>
 
-        <button id="loginBtn" mat-stroked-button color="primary" class="content__form__button wide"
-          [disabled]="loginForm.invalid" (click)="login()">Log in
+        <button id="loginBtn" class="content__form__button button button--white is-wide" [disabled]="loginForm.invalid"
+          (click)="login()">Log in
         </button>
       </div>
 
@@ -75,7 +75,7 @@
           <p class="content__form__error" *ngIf="registerError">{{registerError}}</p>
         </form>
 
-        <button id="registerBtn" class="content__form__button wide" mat-stroked-button color="primary"
+        <button id="registerBtn" class="content__form__button button button--white is-wide"
           [disabled]="registerForm.invalid" (click)="register()">Register
         </button>
       </div>
@@ -87,8 +87,8 @@
       <div class="modal__header">
         <h3 class="modal__header__title">Forgot your password?</h3>
 
-        <button id="forgotClose" mat-icon-button aria-label="Close" (click)="toggleForgotPwModal(false)">
-          <mat-icon>close</mat-icon>
+        <button id="forgotClose" class="icon-button" aria-label="Close" (click)="toggleForgotPwModal(false)">
+          <mat-icon class="is-white">close</mat-icon>
         </button>
       </div>
 
@@ -104,9 +104,11 @@
 
         <p class="content__form__error" *ngIf="forgotError">{{forgotError}}</p>
 
-        <button id="resetBtn" mat-stroked-button color="primary" [disabled]="forgotForm.invalid"
-          (click)="resetPassword()">Send
-        </button>
+        <div class="button-wrapper button-wrapper--left">
+          <button id="resetBtn" class="button button--primary" [disabled]="forgotForm.invalid"
+            (click)="resetPassword()">Send
+          </button>
+        </div>
       </div>
     </div>
   </div>

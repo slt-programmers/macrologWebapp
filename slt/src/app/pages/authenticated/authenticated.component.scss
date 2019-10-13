@@ -32,6 +32,7 @@ $menuWidth: 200px;
   width: 100%;
   height: $menuHeight;
   z-index: 4;
+  box-shadow: 0 0 4px rgba(0,0,0,0.3);
 
   &__logo {
     @media (min-width: $tablet) {
@@ -164,7 +165,6 @@ $menuWidth: 200px;
   right: 0;
   left: 0;
   color: white;
-  overflow-y: scroll;
   overflow-x: hidden;
   z-index: 2;
 

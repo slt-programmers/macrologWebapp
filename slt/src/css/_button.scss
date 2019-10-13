@@ -17,12 +17,12 @@
 }
 
 .button {
-  padding: 15px 30px;
+  padding: 10px 30px;
   color: $primary;
   background-color: white;
   border: 1px solid $primary;
   border-radius: 50px;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
   text-transform: capitalize;
   font-size: 0.9em;
   font-family: "Assistant", sans-serif;
@@ -38,7 +38,21 @@
     border: none;
   }
 
+  &--warning {
+    color: white;
+    background-image: linear-gradient(to right, orange, red);
+    border: none;
+  }
+
+  &--white {
+    color: white;
+    background-color: transparent;
+    border: 1px solid white;
+    box-shadow: none;
+  }
+
   &--large {
+    padding: 15px 30px;
     font-size: 1.125rem;
   }
 }
@@ -47,8 +61,12 @@
   padding-left: 10px;
 }
 
-.wide {
+.is-wide {
   width: 100%;
+}
+
+.is-white {
+  color: white;
 }
 
 .floating-action-button {
@@ -56,9 +74,15 @@
   color: white;
   border: none;
   border-radius: 50px;
-  height: 60px;
-  width: 60px;
+  height: 55px;
+  width: 55px;
   display: flex;
   justify-content: center;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+}
+
+.icon-button {
+  color: $primary;
+  border: none;
+  background: none;
 }

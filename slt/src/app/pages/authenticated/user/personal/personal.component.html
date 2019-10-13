@@ -1,5 +1,4 @@
 <div>
-
   <form #personalForm="ngForm">
     <div class="form-field">
       <label class="form-field__label">Name</label>
@@ -52,7 +51,7 @@
     </div>
 
     <div class="blue-theme button-wrapper">
-      <button mat-stroked-button color="primary" (click)="saveUserSettings()"
+      <button class="button button--primary" (click)="saveUserSettings()"
         [disabled]="isInputUnchanged() || personalForm.invalid">Save</button>
     </div>
   </form>

@@ -4,6 +4,7 @@ html {
   width: 100%;
   box-sizing: border-box;
   font-size: 100%;
+  overflow-y: inherit;
 }
 
 body {
@@ -43,6 +44,10 @@ a.button {
 
 table {
   border-collapse: collapse;
+}
+
+table th, table td {
+  vertical-align: middle;
 }
 
 *:focus {

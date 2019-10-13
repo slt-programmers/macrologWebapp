@@ -58,14 +58,15 @@
   &__button-wrapper {
     display: flex;
     justify-content: flex-end;
-    padding-top: 15px;
+    margin-top: 1rem;
 
     &--spread {
       justify-content: space-between;
     }
 
-    button {
+    .button {
       max-width: 150px;
+      margin-left: 10px;
     }
   }
 }

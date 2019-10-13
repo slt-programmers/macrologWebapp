@@ -1,6 +1,5 @@
 @import "../../../../css/variables.scss";
 
-
 .dish-grid {
   display: flex;
   width: 100%;
@@ -25,13 +24,9 @@
   padding: ($gutter/2);
   width: 275px;
 
-  &:hover {
-
-  }
-
   &__title {
     align-self: center;
-    font-weight: bold;
+    font-weight: 400;
     font-size: 20px;
     color: $primary;
     margin-bottom: 16px;

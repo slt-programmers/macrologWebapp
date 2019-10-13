@@ -1,42 +1,38 @@
-<div class="container">
-  <div class="intake-goal-wrapper" *ngIf="intakeGoals">
-    <div class="intake-goal">
-      <div class="stackdonut-wrapper">
-        <stackdonut [goal]="intakeGoals[0]" [circleRadius]="circleRadius" [strokeWidth]="strokeWidth" [text]="'Protein'"
-          [achieved]="getTotal('protein')">
-        </stackdonut>
+<section class="section">
+  <div class="container">
+    <div class="intake-goal-wrapper" *ngIf="intakeGoals">
+      <div class="intake-goal">
+        <div class="stackdonut-wrapper">
+          <stackdonut [goal]="intakeGoals[0]" [circleRadius]="circleRadius" [strokeWidth]="strokeWidth"
+            [text]="'Protein'" [achieved]="getTotal('protein')">
+          </stackdonut>
+        </div>
+
+        <div class="stackdonut-wrapper">
+          <stackdonut [goal]="intakeGoals[1]" [circleRadius]="circleRadius" [strokeWidth]="strokeWidth" [text]="'Fat'"
+            [achieved]="getTotal('fat')">
+          </stackdonut>
+        </div>
+
+        <div class="stackdonut-wrapper">
+          <stackdonut [goal]="intakeGoals[2]" [circleRadius]="circleRadius" [strokeWidth]="strokeWidth" [text]="'Carbs'"
+            [achieved]="getTotal('carbs')">
+          </stackdonut>
+        </div>
       </div>
 
-      <div class="stackdonut-wrapper">
-        <stackdonut [goal]="intakeGoals[1]" [circleRadius]="circleRadius" [strokeWidth]="strokeWidth" [text]="'Fat'"
-          [achieved]="getTotal('fat')">
-        </stackdonut>
-      </div>
-
-      <div class="stackdonut-wrapper">
-        <stackdonut [goal]="intakeGoals[2]" [circleRadius]="circleRadius" [strokeWidth]="strokeWidth" [text]="'Carbs'"
-          [achieved]="getTotal('carbs')">
-        </stackdonut>
+      <div class="intake-goal intake-goal--calories">
+        <p class="intake-goal__text">{{getTotal('calories') | number:'1.0-0' }}/{{goalCal}}</p>
+        <p class="intake-goal__subtext">Calories</p>
       </div>
     </div>
 
-    <div class="intake-goal intake-goal--calories">
-      <p class="intake-goal__text">{{getTotal('calories') | number:'1.0-0' }}/{{goalCal}}</p>
-      <p class="intake-goal__subtext">Calories</p>
+    <div class="intake-goal-wrapper" *ngIf="!intakeGoals">
+      <div class="intake-goal intake-goal--placeholder">
+        <span>You haven't set your goal intake yet!</span>
+      </div>
     </div>
 
-    <div *ngIf="false" class="intake-calories logday">
-      <calorie-progressbar [goal]="goalCal" [achieved]="getTotal('calories')" [text]="'Calories'"></calorie-progressbar>
-    </div>
-  </div>
-
-  <div class="intake-goal-wrapper" *ngIf="!intakeGoals">
-    <div class="intake-goal intake-goal--placeholder">
-      <span>You haven't set your goal intake yet!</span>
-    </div>
-  </div>
-
-  <section class="section">
     <div class="logday card">
       <div class="logday__date">
         <datepicker (change)="getDifferentDay($event)"></datepicker>
@@ -69,17 +65,18 @@
         <span class="total__calories">{{getTotal("calories")  | number:'1.0-0'}} kcal</span>
       </div>
     </div>
-  </section>
 
-  <div class="blue-theme button-wrapper--floating-action">
-    <button class="floating-action-button" (click)="openModal()">
-      <mat-icon>add</mat-icon>
-    </button>
+    <div class="button-wrapper--floating-action">
+      <button class="floating-action-button" (click)="openModal()">
+        <mat-icon>add</mat-icon>
+      </button>
+    </div>
   </div>
+</section>
 
-  <div class="modal-wrapper" *ngIf="modalIsVisible">
-    <add-food-modal (close)="closeModal()"></add-food-modal>
-  </div>
+
+<div class="modal-wrapper" *ngIf="modalIsVisible">
+  <add-food-modal (close)="closeModal()"></add-food-modal>
 </div>
 
 <toast-component></toast-component>

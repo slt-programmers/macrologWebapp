@@ -9,6 +9,7 @@
 		color: $coal;
 		display: inline-block;
 		padding: 15px;
+		cursor: pointer;
 
 		&:hover {
 			@media(min-width: $phone) {

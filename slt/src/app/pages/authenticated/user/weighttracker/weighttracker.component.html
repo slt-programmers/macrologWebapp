@@ -28,13 +28,13 @@
 		</div>
 
 		<div class="blue-theme button-wrapper">
-			<button mat-stroked-button color="primary" (click)="saveNewWeight(weightForm)"
+			<button class="button button--primary" (click)="saveNewWeight(weightForm)"
 				[disabled]="weightForm.invalid">Save</button>
 		</div>
 
 	</form>
 
-	<div>
+	<div class="table-wrapper">
 		<div class="table">
 			<div class="weight-table-header">
 				<div class="weight-table-header__day">Date</div>
@@ -68,13 +68,13 @@
 				</div>
 
 				<div class="blue-theme editweight__close">
-					<button mat-icon-button color="primary" (click)="saveWeight(logWeight)">
+					<button class="icon-button" (click)="saveWeight(logWeight)">
 						<mat-icon>check</mat-icon>
 					</button>
 				</div>
 
 				<div class="blue-theme editweight__delete">
-					<button mat-icon-button color="primary" (click)="deleteWeight(logWeight)">
+					<button class="icon-button" (click)="deleteWeight(logWeight)">
 						<mat-icon>delete</mat-icon>
 					</button>
 				</div>

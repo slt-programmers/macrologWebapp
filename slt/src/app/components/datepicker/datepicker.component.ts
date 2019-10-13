@@ -2,7 +2,8 @@ import { Component, OnInit, AfterViewInit, Output, Renderer2, EventEmitter, Elem
 
 @Component({
 	selector: 'datepicker',
-	templateUrl: './datepicker.component.html'
+	templateUrl: './datepicker.component.html',
+	styleUrls: ['./datepicker.component.scss']
 })
 export class DatepickerComponent implements OnInit, AfterViewInit {
 
