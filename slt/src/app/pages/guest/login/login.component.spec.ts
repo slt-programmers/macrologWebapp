@@ -52,7 +52,7 @@ describe('LoginComponent', () => {
 		fixture.detectChanges();
 
 		expect(authService.login).toHaveBeenCalledWith('username', 'password');
-		expect(router.navigate).toHaveBeenCalledWith(['/']);
+		expect(router.navigate).toHaveBeenCalledWith(['/log']);
 		expect(component.loginError).toEqual('');
 
 		loginSpy.and.returnValue(throwError({ status: 404 }));

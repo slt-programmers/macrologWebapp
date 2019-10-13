@@ -23,9 +23,9 @@ describe('AuthGuardService', () => {
         spyOn(router, 'navigate');
 
         let result = service.canActivate();
-        expect(router.navigate).toHaveBeenCalledWith(['login']);
+        expect(router.navigate).toHaveBeenCalledWith(['/']);
         expect(result).toBeFalsy();
-       
+
         spyOn(authService, 'isAuthenticated').and.returnValue(true);
         result = service.canActivate();
         expect(result).toBeTruthy();
