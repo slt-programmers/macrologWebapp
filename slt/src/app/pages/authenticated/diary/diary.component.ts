@@ -87,7 +87,7 @@ export class DiaryComponent implements OnInit {
 		);
 	}
 
-	public getTotal(macro) {
+	public getTotal(macro: string) {
 		let total = 0.0;
 		for (const logentry of this.breakfastLogs) {
 			total += logentry.macrosCalculated[macro];
@@ -135,7 +135,7 @@ export class DiaryComponent implements OnInit {
 				this.setGoalCal();
 			},
 			error => {
-        // TODO handle error
+				// TODO handle error
 			}
 		);
 	}

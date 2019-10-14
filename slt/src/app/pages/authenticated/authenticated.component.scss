@@ -9,15 +9,6 @@ $menuWidth: 200px;
   width: 100vw;
 }
 
-// .svg-wrapper {
-//   @media(min-width: $tablet) {
-//     display: block;
-//   }
-//   width: 105%;
-//   position: absolute;
-//   display: none;
-// }
-
 .menu {
   @media (min-width: $tablet) {
     background: $whiteVerticalGradient;
@@ -42,7 +33,6 @@ $menuWidth: 200px;
       display: block;
       font-size: 96px;
       margin-top: 72px;
-      margin-left: 0;
     }
     cursor: pointer;
     color: white;

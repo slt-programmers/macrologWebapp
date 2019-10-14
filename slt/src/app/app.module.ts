@@ -29,7 +29,6 @@ import { ScrollBehaviourService } from './services/scroll-behaviour.service';
 import { HealthcheckService } from './services/healthcheck.service';
 import { AdminService } from './services/admin.service';
 import { WebhookService } from './services/webhook.service';
-import { BrandComponent } from './pages/brand/brand.component';
 import { HomeComponent } from './pages/guest/home/home.component';
 import { AppRoutingModule } from './app-routing.module';
 import { AuthenticatedModule } from './pages/authenticated/authenticated.module';
@@ -39,7 +38,6 @@ import { AuthenticatedModule } from './pages/authenticated/authenticated.module'
 		AppComponent,
 		AboutComponent,
 		LoginComponent,
-		BrandComponent,
 		HomeComponent
 	],
 	imports: [

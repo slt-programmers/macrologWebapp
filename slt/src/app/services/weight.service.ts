@@ -17,7 +17,7 @@ export class WeightService {
 	public getAllWeights() {
 		return this.http.get<Weight[]>(this.macrologBackendUrl, { responseType: 'json' });
 	}
-	public getDayActivities(date) {
+	public getDayActivities(date: string) {
 		return this.http.get<any[]>(this.macrologBackendUrl + '/day/' + date);
 	}
 
@@ -28,11 +28,12 @@ export class WeightService {
 		};
 
 		const options = { headers: headers };
-		return this.http.post<Weight>(this.macrologBackendUrl + '/', logWeight, options).subscribe(data => {
-			this.toastService.setMessage('Your weight has been saved!');
-			callBack();
-		},
-			error => {
+		return this.http.post<Weight>(this.macrologBackendUrl + '/', logWeight, options).subscribe(
+			() => {
+				this.toastService.setMessage('Your weight has been saved!');
+				callBack();
+			},
+			() => {
 				this.toastService.setMessage('Your weight could not be saved!');
 			});
 	}
@@ -46,10 +47,10 @@ export class WeightService {
 		const options = { headers: headers };
 
 		return this.http.delete<number>(this.macrologBackendUrl + '/' + logWeight.id, options).subscribe(
-			data => {
+			() => {
 				callBack();
 			},
-			error => {
+			() => {
 				this.toastService.setMessage('Your weight measurement could not be deleted!');
 			});
 	}

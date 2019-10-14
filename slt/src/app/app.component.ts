@@ -7,7 +7,6 @@ import { trigger, transition, style, animate, state, keyframes } from '@angular/
 @Component({
 	selector: 'app-root',
 	templateUrl: './app.component.html',
-	styleUrls: ['./app.component.scss'],
 	animations: [
 		trigger('move', [
 			state('forth', style({

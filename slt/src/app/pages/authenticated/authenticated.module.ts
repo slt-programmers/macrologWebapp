@@ -18,7 +18,6 @@ import { WeightTrackerComponent } from './user/weighttracker/weighttracker.compo
 import { ConnectivityComponent } from './user/connectivity/connectivity.component';
 import { SliderComponent } from '@app/components/slider/slider.component';
 import { GoalProgressbarComponent } from '@app/components/goal-progressbar/goal-progressbar.component';
-import { CalorieProgressbarComponent } from '@app/components/calorie-progressbar/calorie-progressbar.component';
 import { AddFoodModalComponent } from '@app/components/add-food-modal/add-food-modal.component';
 import { CalculateIntakeModalComponent } from '@app/components/calculate-intake-modal/calculate-intake-modal.component';
 import { DishesComponent } from './dishes/dishes.component';
@@ -73,7 +72,6 @@ import { MatTableModule } from '@angular/material/table';
     ConnectivityComponent,
     SliderComponent,
     GoalProgressbarComponent,
-    CalorieProgressbarComponent,
     AddFoodModalComponent,
     CalculateIntakeModalComponent,
     DishesComponent,
