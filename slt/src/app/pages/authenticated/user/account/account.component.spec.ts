@@ -8,6 +8,7 @@ import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { AccountComponent } from './account.component';
 import { AuthenticationService } from '@app/services/auth.service';
 import { AuthGuardService } from '@app/services/auth-guard.service';
+import { FormsModule } from '@angular/forms';
 
 describe('AccountComponent', () => {
   let component: AccountComponent;
@@ -18,7 +19,7 @@ describe('AccountComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [RouterTestingModule.withRoutes([])],
+      imports: [RouterTestingModule.withRoutes([]), FormsModule],
       declarations: [AccountComponent],
       providers: [AuthenticationService, ToastService, UserService, HttpClient, HttpHandler],
       schemas: [NO_ERRORS_SCHEMA]
@@ -48,7 +49,7 @@ describe('AccountComponent', () => {
     expect(component.message).toEqual('The confirmation password does not match with the new password.');
 
     component.confirmPassword = 'newpw';
-    spyOn(authService, 'changePassword').and.th
+    // spyOn(authService, 'changePassword').and.th
 
   }));
 
