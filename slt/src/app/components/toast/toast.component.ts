@@ -4,7 +4,8 @@ import {ToastDirective} from '../../directives/toast.directive';
 
 @Component({
 	selector: 'toast-component',
-	templateUrl: './toast.component.html'
+	templateUrl: './toast.component.html',
+	styleUrls: ['./toast.component.scss']
 })
 export class ToastComponent {
 

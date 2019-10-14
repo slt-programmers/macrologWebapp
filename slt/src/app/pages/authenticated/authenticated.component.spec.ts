@@ -5,9 +5,9 @@ import { HttpHandler, HttpClient } from '@angular/common/http';
 import { ScrollBehaviourService } from '../../services/scroll-behaviour.service';
 import { HealthcheckService } from '../../services/healthcheck.service';
 import { of, throwError } from 'rxjs';
-import { By } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { Renderer2 } from '@angular/core';
 
 describe('AuthenticatedComponent', () => {
   let component: AuthenticatedComponent;
@@ -20,7 +20,7 @@ describe('AuthenticatedComponent', () => {
     TestBed.configureTestingModule({
       imports: [RouterTestingModule.withRoutes([{ path: 'user', redirectTo: '' }]), BrowserAnimationsModule],
       declarations: [AuthenticatedComponent],
-      providers: [HealthcheckService, HttpClient, HttpHandler, ScrollBehaviourService],
+      providers: [HealthcheckService, HttpClient, HttpHandler, ScrollBehaviourService, Renderer2],
     }).compileComponents();
   }));
 
@@ -81,7 +81,7 @@ describe('AuthenticatedComponent', () => {
 
   it('should close menu', () => {
     spyOn(scrollBehaviourService, 'preventScrolling')
-    component.smallMenuOpen= true;
+    component.smallMenuOpen = true;
     component.closeMenu();
     expect(component.smallMenuOpen).toBeFalsy();
   })

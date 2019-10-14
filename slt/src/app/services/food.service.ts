@@ -20,11 +20,12 @@ export class FoodService {
 		};
 
 		const options = { headers: headers };
-		return this.http.post<Food>(this.macrologBackendUrl + '/', addFoodRequest, options).subscribe(data => {
-			this.toastService.setMessage('The food has been added!');
-			callBack();
-		},
-			error => {
+		return this.http.post<Food>(this.macrologBackendUrl + '/', addFoodRequest, options).subscribe(
+			() => {
+				this.toastService.setMessage('The food has been added!');
+				callBack();
+			},
+			() => {
 				// TODO handle error
 			});
 	}
@@ -35,15 +36,5 @@ export class FoodService {
 
 	public getAllFood() {
 		return this.http.get<Food[]>(this.macrologBackendUrl, { responseType: 'json' });
-	}
-
-	public getAllFoodNameIds() {
-		let food;
-		this.getAllFood().subscribe(
-			data => food = data,
-			error => {
-				// TODO handle error
-			}
-		);
 	}
 }

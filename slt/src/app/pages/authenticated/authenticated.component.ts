@@ -61,8 +61,7 @@ export class AuthenticatedComponent implements OnInit {
 
 	constructor(public router: Router,
 		private healthcheckService: HealthcheckService,
-		private sbs: ScrollBehaviourService,
-		private renderer: Renderer2) {
+		private sbs: ScrollBehaviourService) {
 	}
 
 	ngOnInit() {
@@ -73,7 +72,6 @@ export class AuthenticatedComponent implements OnInit {
 				this.asleep = !error;
 			}
 		});
-		this.sbs.renderer = this.renderer;
 	}
 
 	public onMove(event: any) {

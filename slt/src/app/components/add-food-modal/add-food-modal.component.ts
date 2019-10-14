@@ -10,7 +10,7 @@ import { ScrollBehaviourService } from '../../services/scroll-behaviour.service'
 })
 export class AddFoodModalComponent implements OnInit {
 
-	@Input() food;
+	@Input() food: Food;
 
 	@Output() close: EventEmitter<boolean> = new EventEmitter<boolean>();
 
@@ -21,7 +21,7 @@ export class AddFoodModalComponent implements OnInit {
 	public protein: number;
 	public fat: number;
 	public carbs: number;
-	public portions = [];
+	public portions: Portion[] = [];
 
 	constructor(private foodService: FoodService,
 		private scrollBehaviourService: ScrollBehaviourService) {
@@ -53,9 +53,8 @@ export class AddFoodModalComponent implements OnInit {
 		if (this.food) {
 			addFoodRequest.id = this.food.id;
 		}
-
 		addFoodRequest.portions = this.portions;
-
+		
 		const self = this;
 		const closeCallBack = () => {
 			self.closeModal();
@@ -76,11 +75,11 @@ export class AddFoodModalComponent implements OnInit {
 		return true;
 	}
 
-	public newPortion() {
+	public addNewPortion() {
 		this.portions.push(new Portion());
 	}
 
-	public removePortion(index) {
+	public removePortion(index: number) {
 		this.portions.splice(index, 1);
 	}
 }

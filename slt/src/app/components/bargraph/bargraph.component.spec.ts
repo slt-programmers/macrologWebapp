@@ -19,7 +19,7 @@ describe('BargraphComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it('should create bargraph', () => {
     expect(component).toBeTruthy();
   });
 });

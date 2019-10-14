@@ -9,15 +9,15 @@ class MockRenderer {
 
 describe('ScrollBehaviourService', () => {
     let service: ScrollBehaviourService;
-    let renderer: Renderer2;
+    let renderer2: Renderer2;
 
     beforeEach(() => {
         TestBed.configureTestingModule({
             providers: [ScrollBehaviourService, {provide: Renderer2, useClass: MockRenderer}]
         });
         service = TestBed.get(ScrollBehaviourService);
-        renderer = TestBed.get(Renderer2);
-        service.renderer = renderer;
+        renderer2 = TestBed.get(Renderer2);
+        service.setRenderer(renderer2);
     });
 
     afterEach(() => {
@@ -29,12 +29,12 @@ describe('ScrollBehaviourService', () => {
     });
 
     it('should prevent scrolling', () => {
-        spyOn(renderer, 'removeClass');
+        spyOn(renderer2, 'removeClass');
         service.preventScrolling(false);
-        expect(renderer.removeClass).toHaveBeenCalled();
+        expect(renderer2.removeClass).toHaveBeenCalled();
 
-        spyOn(renderer, 'addClass');
+        spyOn(renderer2, 'addClass');
         service.preventScrolling(true);
-        expect(renderer.addClass).toHaveBeenCalled();
+        expect(renderer2.addClass).toHaveBeenCalled();
     });
 });
