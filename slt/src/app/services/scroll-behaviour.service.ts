@@ -1,19 +1,23 @@
-import { Injectable, Renderer2 } from '@angular/core';
+import { Injectable, Renderer2, RendererFactory2 } from '@angular/core';
 
 @Injectable()
 export class ScrollBehaviourService {
 
-	constructor(private renderer: Renderer2) { }
+	private renderer2: Renderer2;
+
+	constructor(private rendererFactory2: RendererFactory2) { 
+		this.renderer2 = rendererFactory2.createRenderer(null, null);
+	}
 
 	public preventScrolling(toggle: boolean): void {
-		if (toggle && this.renderer) {
-			this.renderer.addClass(document.body, 'overlay-active');
+		if (toggle && this.renderer2) {
+			this.renderer2.addClass(document.body, 'overlay-active');
 		} else {
-			this.renderer.removeClass(document.body, 'overlay-active');
+			this.renderer2.removeClass(document.body, 'overlay-active');
 		}
 	}
 
-	public setRenderer(renderer: Renderer2) {
-		this.renderer = renderer;
+	public setRenderer(renderer2: Renderer2) {
+		this.renderer2 = renderer2;
 	}
 }
