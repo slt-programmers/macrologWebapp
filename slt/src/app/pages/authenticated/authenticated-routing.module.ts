@@ -17,7 +17,7 @@ import { FoodComponent } from './food/food.component';
 import { DishesComponent } from './dishes/dishes.component';
 import { GraphsComponent } from './analytics/analytics.component';
 
-const authenticatedRoutes: Routes = [
+export const authenticatedRoutes: Routes = [
   {
     path: '',
     component: AuthenticatedComponent,

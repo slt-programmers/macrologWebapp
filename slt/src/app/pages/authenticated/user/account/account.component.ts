@@ -25,9 +25,7 @@ export class AccountComponent {
 			this.authService.changePassword(this.oldPassword, this.newPassword, this.confirmPassword)
 				.subscribe(
 					data => {
-						if (data.status === 400 && data.error === 'passwords do not match') {
-							this.message = 'The confirmation password does not match with the new password.';
-						} else if (data.status === 200) {
+						if (data.status === 200) {
 							this.toastService.setMessage('Your password has changed');
 							this.oldPassword = '';
 							this.newPassword = '';
@@ -35,7 +33,9 @@ export class AccountComponent {
 						}
 					},
 					error => {
-						if (error.status === 401) {
+						if (error.status === 400 && error.error === 'passwords do not match') {
+							this.message = 'The confirmation password does not match with the new password.';
+						} else if (error.status === 401) {
 							this.message = 'Password invalid';
 						}
 					});

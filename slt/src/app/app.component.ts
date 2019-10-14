@@ -64,13 +64,15 @@ export class AppComponent implements OnInit {
 	}
 
 	ngOnInit() {
-		this.healthcheckService.checkState().subscribe(result => {
-			this.asleep = !result;
-		}, error => {
-			if (error.status === 403) {
-				this.asleep = !error;
-			}
-		});
+		this.healthcheckService.checkState().subscribe(
+			result => {
+				this.asleep = !result;
+			},
+			error => {
+				if (error.status === 403) {
+					this.asleep = !error;
+				}
+			});
 	}
 
 	public onMove(event: any) {

@@ -46,11 +46,11 @@ export class UserManagementComponent implements OnInit {
 
   public deleteUser() {
     this.adminService.deleteUser(this.selectedUser).subscribe(
-      res => {
+      () => {
         this.toastService.setMessage('User account successfully deleted');
         this.getAllUsers();
       },
-      err => {
+      () => {
         this.toastService.setMessage('User account could not be deleted');
       },
       () => {

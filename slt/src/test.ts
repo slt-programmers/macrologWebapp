@@ -25,7 +25,7 @@ getTestBed().initTestEnvironment(
   platformBrowserDynamicTesting()
 );
 // Then we find all the tests.
-// const context = require.context('./', true, /add-food-modal\.component\.spec\.ts$/);
+// const context = require.context('./', true, /authenticated-routing\.module\.spec\.ts$/);
 const context = require.context('./', true, /\.spec\.ts$/);
 
 // And load the modules.

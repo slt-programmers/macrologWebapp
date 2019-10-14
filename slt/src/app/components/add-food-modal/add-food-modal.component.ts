@@ -54,7 +54,7 @@ export class AddFoodModalComponent implements OnInit {
 			addFoodRequest.id = this.food.id;
 		}
 		addFoodRequest.portions = this.portions;
-		
+
 		const self = this;
 		const closeCallBack = () => {
 			self.closeModal();

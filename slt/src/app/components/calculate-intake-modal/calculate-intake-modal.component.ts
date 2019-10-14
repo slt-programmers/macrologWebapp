@@ -72,16 +72,17 @@ export class CalculateIntakeModalComponent implements OnInit {
 
 
 	public closeModal() {
-		this.close.emit({goalProtein: this.goalProtein,
+		this.close.emit({
+			goalProtein: this.goalProtein,
 			goalFat: this.goalFat, goalCarbs: this.goalCarbs
 		});
 	}
 
 	private setMarkers() {
 		this.markers = [
-			{title: 'deficit', value: (this.tdee - 200)},
-			{title: 'baseline', value: (this.tdee)},
-			{title: 'surplus', value: (this.tdee + 200)}
+			{ title: 'deficit', value: (this.tdee - 200) },
+			{ title: 'baseline', value: (this.tdee) },
+			{ title: 'surplus', value: (this.tdee + 200) }
 		];
 	}
 
@@ -117,13 +118,17 @@ export class CalculateIntakeModalComponent implements OnInit {
 				this.userService.addUserSetting('goalFat', Math.round(this.fatManual).toString()),
 				this.userService.addUserSetting('goalCarbs', Math.round(this.carbsManual).toString())
 			).subscribe(
-					data => {
-						this.goalProtein = Math.round(this.proteinManual).toString();
-						this.goalFat = Math.round(this.fatManual).toString();
-						this.goalCarbs = Math.round(this.carbsManual).toString();
-					},
-					error => console.error(error),
-					() => { this.closeModal(); }
+				() => {
+					this.goalProtein = Math.round(this.proteinManual).toString();
+					this.goalFat = Math.round(this.fatManual).toString();
+					this.goalCarbs = Math.round(this.carbsManual).toString();
+				},
+				error => {
+					// TODO handle error
+				},
+				() => {
+					this.closeModal();
+				}
 			);
 		} else {
 			forkJoin(
@@ -131,13 +136,15 @@ export class CalculateIntakeModalComponent implements OnInit {
 				this.userService.addUserSetting('goalFat', Math.round(this.fat).toString()),
 				this.userService.addUserSetting('goalCarbs', Math.round(this.carbs).toString())
 			).subscribe(
-					data => {
-						this.goalProtein = Math.round(this.protein).toString();
-						this.goalFat = Math.round(this.fat).toString();
-						this.goalCarbs = Math.round(this.carbs).toString();
-					},
-					error => console.error(error),
-					() => this.closeModal()
+				() => {
+					this.goalProtein = Math.round(this.protein).toString();
+					this.goalFat = Math.round(this.fat).toString();
+					this.goalCarbs = Math.round(this.carbs).toString();
+				},
+				error => {
+					// TODO handle error
+				},
+				() => this.closeModal()
 			);
 		}
 	}

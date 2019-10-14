@@ -9,27 +9,26 @@ import { AuthenticationService } from '../services/auth.service';
 
 @Injectable()
 export class ErrorInterceptor implements HttpInterceptor {
-constructor(private authenticationService: AuthenticationService, private router: Router) {}
+	constructor(private authenticationService: AuthenticationService, private router: Router) { }
 
 	intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 		return next.handle(request).pipe(
-				map(result => {
-					return result;
-				}),
-				catchError(err => {
-					if (err.status === 403) {
-						this.authenticationService.logout();
-						this.router.navigateByUrl('/');
-						return throwError(err);
-					} else if (err.status === 401) {
-						return throwError(err);
-					} else if (err.status === 404) {
-						return throwError(err);
-					} else if (err.status === 0) {
-						return throwError(err);
-					} else {
-						return of(new HttpResponse({body: err}));
-					}
+			map(result => {
+				return result;
+			}),
+			catchError(err => {
+				console.log('error interceptor');
+				if (err.status === 403) {
+					this.authenticationService.logout();
+					this.router.navigateByUrl('/');
+					return throwError(err);
+				} else if (err.status === 401) {
+					return throwError(err);
+				} else if (err.status === 404) {
+					return throwError(err);
+				} else {
+					return throwError(err);
+				}
 			})
 		);
 	}

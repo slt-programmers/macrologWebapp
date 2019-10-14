@@ -5,7 +5,7 @@ export class ScrollBehaviourService {
 
 	private renderer2: Renderer2;
 
-	constructor(private rendererFactory2: RendererFactory2) { 
+	constructor(private rendererFactory2: RendererFactory2) {
 		this.renderer2 = rendererFactory2.createRenderer(null, null);
 	}
 

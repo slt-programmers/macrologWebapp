@@ -125,7 +125,7 @@ export class GraphsComponent implements OnInit {
         this.allMacros = data;
         this.getGoals();
       },
-      error => {
+      () => {
         this.allMacros = [];
       });
   }
