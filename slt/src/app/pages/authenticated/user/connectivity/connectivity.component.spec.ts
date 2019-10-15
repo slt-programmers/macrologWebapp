@@ -78,6 +78,7 @@ describe('ConnectivityComponent', () => {
   }));
 
   it('should disconnect from platform', () => {
+    spyOn(userService, 'getSyncSettings').and.returnValue(of({status: 200}));
     spyOn(userService, 'disconnectSyncSettings').and.returnValue(of({status: 200}));
     component.disconnect();
     expect(userService.disconnectSyncSettings).toHaveBeenCalledWith('STRAVA');
