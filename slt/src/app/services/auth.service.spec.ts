@@ -1,6 +1,8 @@
-import { TestBed, fakeAsync, tick } from "@angular/core/testing";
-import { AuthenticationService } from "./auth.service";
+import { TestBed, fakeAsync, tick } from '@angular/core/testing';
+import { AuthenticationService } from './auth.service';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
+import { Router } from '@angular/router';
+import { RouterTestingModule } from '@angular/router/testing';
 
 describe('AuthService', () => {
     let http: HttpTestingController;
@@ -15,7 +17,7 @@ describe('AuthService', () => {
 
     afterEach(() => {
         localStorage.clear();
-    })
+    });
 
     it('should create service', () => {
         const service = TestBed.get(AuthenticationService);
@@ -36,9 +38,9 @@ describe('AuthService', () => {
         const service = TestBed.get(AuthenticationService);
         service.login('username', 'password').subscribe(
             () => {
-                let result = JSON.parse(localStorage.getItem('currentUser'));
-                expect(result.userName).toEqual('user')
-                expect(result.token).toEqual('token')
+                const result = JSON.parse(localStorage.getItem('currentUser'));
+                expect(result.userName).toEqual('user');
+                expect(result.token).toEqual('token');
             }
         );
         const request = http.expectOne(service.macrologBackendUrl + '/authenticate');
@@ -53,7 +55,7 @@ describe('AuthService', () => {
         const service = TestBed.get(AuthenticationService);
         service.login('username', 'password').subscribe(
             () => {
-                let result = localStorage.getItem('currentUser');
+                const result = localStorage.getItem('currentUser');
                 expect(result).toEqual(null);
             }
         );
@@ -78,7 +80,7 @@ describe('AuthService', () => {
 
     it('should log out', fakeAsync(() => {
         const service = TestBed.get(AuthenticationService);
-        localStorage.setItem('currentUser', JSON.stringify({ userName: 'username' }))
+        localStorage.setItem('currentUser', JSON.stringify({ userName: 'username' }));
         service.logout();
         tick();
         const result = localStorage.getItem('currentUser');
@@ -108,4 +110,27 @@ describe('AuthService', () => {
         expect(request.request.method).toEqual('POST');
         request.flush(mockResponse);
     });
-})
+
+    it('should delete account', fakeAsync(() => {
+        let mockResponse = { status: 200 };
+        const service = TestBed.get(AuthenticationService);
+        service.deleteAccount('password').subscribe(
+            res => {
+                expect(res.status).toEqual(200);
+            }
+        );
+        let request = http.expectOne(service.macrologBackendUrl + '/deleteAccount?password=password');
+        expect(request.request.method).toEqual('POST');
+        request.flush(mockResponse);
+
+        service.deleteAccount('password').subscribe(
+            () => { },
+            err => {
+                expect(err.status).toEqual(401);
+            }
+        );
+        mockResponse = { status: 401 };
+        request = http.expectOne(service.macrologBackendUrl + '/deleteAccount?password=password');
+        request.flush(mockResponse);
+    }));
+});

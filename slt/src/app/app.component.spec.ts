@@ -37,8 +37,8 @@ describe('AppComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should init the app component', fakeAsync(() => {
-    const healthSpy = spyOn(healthcheckService, 'checkState').and.returnValue(of(true));
-  }));
+  // it('should init the app component', fakeAsync(() => {
+  //   const healthSpy = spyOn(healthcheckService, 'checkState').and.returnValue(of(true));
+  // }));
 
 });

@@ -44,4 +44,13 @@ export class AuthenticationService {
 		return this.http.post(this.macrologBackendUrl + '/resetPassword', { email: email });
 	}
 
+	public deleteAccount(password: string) {
+		const headers = {
+			'Content-Type': 'application/json',
+			'Access-Control-Allow-Origin': environment.origin
+		};
+		const options = { headers: headers, params: { password: password } };
+		return this.http.post(this.macrologBackendUrl + '/deleteAccount', null, options);
+	}
+
 }
