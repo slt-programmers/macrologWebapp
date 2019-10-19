@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { ScrollBehaviourService } from '../../services/scroll-behaviour.service';
 import { HealthcheckService } from '../../services/healthcheck.service';
 import { trigger, transition, style, animate, state, keyframes } from '@angular/animations';
+import { AuthenticationService } from '@app/services/auth.service';
 
 @Component({
 	selector: 'authenticated',
@@ -61,6 +62,7 @@ export class AuthenticatedComponent implements OnInit {
 
 	constructor(public router: Router,
 		private healthcheckService: HealthcheckService,
+		private authService: AuthenticationService,
 		private sbs: ScrollBehaviourService) {
 	}
 
@@ -105,5 +107,9 @@ export class AuthenticatedComponent implements OnInit {
 	public isAdmin(): boolean {
 		const currentUser = JSON.parse(localStorage.getItem('currentUser'));
 		return (currentUser && currentUser.admin);
+	}
+
+	public logOut() {
+		this.authService.logout();
 	}
 }

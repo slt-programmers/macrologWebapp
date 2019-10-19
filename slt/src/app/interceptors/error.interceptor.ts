@@ -9,7 +9,7 @@ import { AuthenticationService } from '../services/auth.service';
 
 @Injectable()
 export class ErrorInterceptor implements HttpInterceptor {
-	constructor(private authenticationService: AuthenticationService, private router: Router) { }
+	constructor(private authService: AuthenticationService, private router: Router) { }
 
 	intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 		return next.handle(request).pipe(
@@ -17,9 +17,8 @@ export class ErrorInterceptor implements HttpInterceptor {
 				return result;
 			}),
 			catchError(err => {
-				console.log('error interceptor');
 				if (err.status === 403) {
-					this.authenticationService.logout();
+					this.authService.logout();
 					this.router.navigateByUrl('/');
 					return throwError(err);
 				} else if (err.status === 401) {

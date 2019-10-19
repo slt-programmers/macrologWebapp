@@ -1,8 +1,6 @@
 import { TestBed, fakeAsync, tick } from '@angular/core/testing';
 import { AuthenticationService } from './auth.service';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
-import { Router } from '@angular/router';
-import { RouterTestingModule } from '@angular/router/testing';
 
 describe('AuthService', () => {
     let http: HttpTestingController;

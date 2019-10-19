@@ -1,9 +1,9 @@
-import { AutocompleteFoodComponent } from "./autocomplete-food.component";
-import { ComponentFixture, TestBed, async } from "@angular/core/testing";
-import { NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
-import { By } from "@angular/platform-browser";
-import { Food } from "@app/model/food";
-import { Dish } from "@app/model/dish";
+import { AutocompleteFoodComponent } from './autocomplete-food.component';
+import { ComponentFixture, TestBed, async } from '@angular/core/testing';
+import { NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { By } from '@angular/platform-browser';
+import { Food } from '@app/model/food';
+import { Dish } from '@app/model/dish';
 
 describe('AutocompleteFoodComponent', () => {
 	let component: AutocompleteFoodComponent;
@@ -28,14 +28,14 @@ describe('AutocompleteFoodComponent', () => {
 
 	it('should call find food match on input and foodName to be set', () => {
 		spyOn(component, 'findFoodMatch');
-		let input = fixture.debugElement.query(By.css('#autoInput'));
+		const input = fixture.debugElement.query(By.css('#autoInput'));
 		expect(input.nativeElement.value).toEqual('');
 		input.nativeElement.value = 'A';
 		input.nativeElement.dispatchEvent(new Event('input'));
 		fixture.detectChanges();
 		expect(input.nativeElement.value).toEqual('A');
 		expect(component.findFoodMatch).toHaveBeenCalled();
-	})
+	});
 
 	it('should find food match', () => {
 		component.searchables = [
@@ -99,7 +99,7 @@ describe('AutocompleteFoodComponent', () => {
 
 	it('should show autocomplete dropdown on focus', () => {
 		spyOn(component, 'getDescription');
-		let input = fixture.debugElement.query(By.css('#autoInput'));
+		const input = fixture.debugElement.query(By.css('#autoInput'));
 		input.nativeElement.dispatchEvent(new Event('focus'));
 		component.foodMatch = [
 			{ food: new Food('Abc', 1, 2, 3), dish: undefined },
@@ -111,7 +111,7 @@ describe('AutocompleteFoodComponent', () => {
 		result = fixture.debugElement.query(By.css('#autoOption'));
 		expect(result).not.toEqual(null);
 		expect(component.getDescription).toHaveBeenCalled();
-	})
+	});
 
 	it('should handle click on autocomplete option', () => {
 		component.selectFn = () => { };
@@ -124,7 +124,7 @@ describe('AutocompleteFoodComponent', () => {
 			{ food: new Food('Cde', 1, 2, 3), dish: undefined }
 		];
 		fixture.detectChanges();
-		let result = fixture.debugElement.query(By.css('#autoOption'));
+		const result = fixture.debugElement.query(By.css('#autoOption'));
 		expect(result).not.toEqual(null);
 		result.nativeElement.click();
 		expect(component.selectFn).toHaveBeenCalled();
@@ -175,9 +175,9 @@ describe('AutocompleteFoodComponent', () => {
 			{ food: new Food('Cde', 1, 2, 3), dish: undefined }
 		];
 		fixture.detectChanges();
-		let input = fixture.debugElement.query(By.css('#autoInput'));
+		const input = fixture.debugElement.query(By.css('#autoInput'));
 		input.nativeElement.focus();
-		component.onKeyDown(new KeyboardEvent('keydown', { key: 'ArrowDown' }))
+		component.onKeyDown(new KeyboardEvent('keydown', { key: 'ArrowDown' }));
 		expect(component.handleInputKeydown).toHaveBeenCalled();
 		const wrapper = fixture.debugElement.query(By.css('#autoWrapper'));
 
@@ -185,7 +185,7 @@ describe('AutocompleteFoodComponent', () => {
 		fixture.detectChanges();
 		expect(component.handleOptionKeydown).not.toHaveBeenCalled();
 		expect(component.handleOptionKeydown).not.toHaveBeenCalled();
-	});;
+	});
 
 	it('should select next portion on keydown', () => {
 		spyOn(component, 'handleOptionKeydown');
@@ -196,9 +196,9 @@ describe('AutocompleteFoodComponent', () => {
 			{ food: new Food('Cde', 1, 2, 3), dish: undefined }
 		];
 		fixture.detectChanges();
-		let input = fixture.debugElement.query(By.css('#autoInput'));
+		const input = fixture.debugElement.query(By.css('#autoInput'));
 		input.nativeElement.focus();
-		component.onKeyDown(new KeyboardEvent('keydown', { key: 'ArrowDown' }))
+		component.onKeyDown(new KeyboardEvent('keydown', { key: 'ArrowDown' }));
 		fixture.detectChanges();
 
 		const wrapper = fixture.debugElement.query(By.css('#autoWrapper'));
@@ -243,7 +243,7 @@ describe('AutocompleteFoodComponent', () => {
 			{ food: new Food('Cde', 1, 2, 3), dish: undefined }
 		];
 		fixture.detectChanges();
-		let input = fixture.debugElement.query(By.css('#autoInput'));
+		const input = fixture.debugElement.query(By.css('#autoInput'));
 		input.nativeElement.focus();
 		component.onKeyDown(new KeyboardEvent('keydown', { key: 'ArrowDown' }));
 		expect(document.activeElement.className).toEqual('autocomplete__option option-0');
@@ -251,5 +251,5 @@ describe('AutocompleteFoodComponent', () => {
 		expect(document.activeElement.className).toEqual('autocomplete__option option-1');
 		component.onKeyDown(new KeyboardEvent('keydown', { key: 'ArrowUp' }));
 		expect(document.activeElement.className).toEqual('autocomplete__option option-0');
-	});;
+	});
 });

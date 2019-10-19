@@ -1,14 +1,14 @@
-import { AddFoodModalComponent } from "./add-food-modal.component";
-import { ComponentFixture, TestBed, async } from "@angular/core/testing";
-import { NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA, Renderer2, Type } from "@angular/core";
-import { Food } from "@app/model/food";
-import { ScrollBehaviourService } from "@app/services/scroll-behaviour.service";
-import { FoodService } from "@app/services/food.service";
-import { FormsModule } from "@angular/forms";
-import { HttpClient, HttpHandler } from "@angular/common/http";
-import { ToastService } from "@app/services/toast.service";
-import { Portion } from "@app/model/portion";
-import { Macros } from "@app/model/macro";
+import { AddFoodModalComponent } from './add-food-modal.component';
+import { ComponentFixture, TestBed, async } from '@angular/core/testing';
+import { NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA, Renderer2, Type } from '@angular/core';
+import { Food } from '@app/model/food';
+import { ScrollBehaviourService } from '@app/services/scroll-behaviour.service';
+import { FoodService } from '@app/services/food.service';
+import { FormsModule } from '@angular/forms';
+import { HttpClient, HttpHandler } from '@angular/common/http';
+import { ToastService } from '@app/services/toast.service';
+import { Portion } from '@app/model/portion';
+import { Macros } from '@app/model/macro';
 
 describe('AddFoodModal', () => {
 	let component: AddFoodModalComponent;
@@ -73,7 +73,7 @@ describe('AddFoodModal', () => {
 		food.portions = [];
 		component.saveFood();
 		expect(foodService.addFood).toHaveBeenCalledWith(food, jasmine.any(Function));
-	})
+	});
 
 	it('should close the modal', () => {
 		spyOn(scrollBehaviourService, 'preventScrolling');
@@ -81,7 +81,7 @@ describe('AddFoodModal', () => {
 		component.closeModal();
 		expect(scrollBehaviourService.preventScrolling).toHaveBeenCalledWith(false);
 		expect(component.close.emit).toHaveBeenCalled();
-	})
+	});
 
 	it('should check if portion is new', () => {
 		spyOn(scrollBehaviourService, 'preventScrolling');
@@ -101,7 +101,7 @@ describe('AddFoodModal', () => {
 		portion.id = 42;
 		result = component.isNewPortion(portion);
 		expect(result).toBeFalsy();
-	})
+	});
 
 	it('should add a new portion to the list', () => {
 		spyOn(scrollBehaviourService, 'preventScrolling');
@@ -109,12 +109,12 @@ describe('AddFoodModal', () => {
 		expect(component.portions.length).toEqual(1);
 		component.addNewPortion();
 		expect(component.portions.length).toEqual(2);
-	})
+	});
 
 	it('should remove portion from list', () => {
 		spyOn(scrollBehaviourService, 'preventScrolling');
-		component.portions = [new Portion(111, 'piece'), new Portion(222, 'slice')]
+		component.portions = [new Portion(111, 'piece'), new Portion(222, 'slice')];
 		component.removePortion(1);
 		expect(component.portions).toEqual([new Portion(111, 'piece')]);
-	})
+	});
 });

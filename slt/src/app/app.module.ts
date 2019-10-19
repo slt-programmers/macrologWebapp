@@ -25,6 +25,7 @@ import { DishService } from './services/dish.service';
 import { ActivityService } from './services/activity.service';
 import { WeightService } from './services/weight.service';
 import { AuthGuardService } from './services/auth-guard.service';
+import { GuestGuardService} from './services/guest-guard.service';
 import { ScrollBehaviourService } from './services/scroll-behaviour.service';
 import { HealthcheckService } from './services/healthcheck.service';
 import { AdminService } from './services/admin.service';
@@ -64,6 +65,7 @@ import { AuthenticatedModule } from './pages/authenticated/authenticated.module'
 		DishService,
 		WeightService,
 		AuthGuardService,
+		GuestGuardService,
 		ScrollBehaviourService,
 		HealthcheckService,
 		WebhookService,

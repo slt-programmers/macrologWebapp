@@ -1,6 +1,6 @@
-import { TestBed } from "@angular/core/testing";
-import { ScrollBehaviourService } from "./scroll-behaviour.service";
-import { Renderer2 } from "@angular/core";
+import { TestBed } from '@angular/core/testing';
+import { ScrollBehaviourService } from './scroll-behaviour.service';
+import { Renderer2 } from '@angular/core';
 
 class MockRenderer {
     removeClass() {}
@@ -22,7 +22,7 @@ describe('ScrollBehaviourService', () => {
 
     afterEach(() => {
         localStorage.clear();
-    })
+    });
 
     it('should create service', () => {
         expect(service).toBeTruthy();
