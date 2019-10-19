@@ -55,12 +55,7 @@ export class AddFoodModalComponent implements OnInit {
 		}
 		addFoodRequest.portions = this.portions;
 
-		const self = this;
-		const closeCallBack = () => {
-			self.closeModal();
-		};
-
-		this.foodService.addFood(addFoodRequest, closeCallBack);
+		this.foodService.addFood(addFoodRequest, this.getCloseCallback());
 	}
 
 	public closeModal() {
@@ -81,5 +76,12 @@ export class AddFoodModalComponent implements OnInit {
 
 	public removePortion(index: number) {
 		this.portions.splice(index, 1);
+	}
+
+	getCloseCallback(): Function {
+		const self = this;
+		return () => {
+			self.closeModal();
+		};
 	}
 }

@@ -27,4 +27,8 @@ export class AppComponent implements OnInit {
 				}
 			});
 	}
+
+	public isAsleep(): boolean {
+		return this.asleep;
+	}
 }

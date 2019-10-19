@@ -75,6 +75,24 @@ describe('AddFoodModal', () => {
 		expect(foodService.addFood).toHaveBeenCalledWith(food, jasmine.any(Function));
 	});
 
+	it('should save edited existing food', () => {
+		spyOn(scrollBehaviourService, 'preventScrolling');
+		spyOn(foodService, 'addFood');
+
+		component.food = new Food('food', 0, 0, 0);
+		component.food.id = 1234;
+		component.name = 'food';
+		component.protein = 1;
+		component.fat = 2;
+		component.carbs = 3;
+
+		const food = new Food('food', 1, 2, 3);
+		food.id = 1234;
+		food.portions = [];
+		component.saveFood();
+		expect(foodService.addFood).toHaveBeenCalledWith(food, jasmine.any(Function));
+	});
+
 	it('should close the modal', () => {
 		spyOn(scrollBehaviourService, 'preventScrolling');
 		spyOn(component.close, 'emit');
@@ -116,5 +134,12 @@ describe('AddFoodModal', () => {
 		component.portions = [new Portion(111, 'piece'), new Portion(222, 'slice')];
 		component.removePortion(1);
 		expect(component.portions).toEqual([new Portion(111, 'piece')]);
+	});
+
+	it('should close modal on callback', () => {
+		spyOn(component, 'closeModal');
+		const callback = component.getCloseCallback();
+		callback();
+		expect(component.closeModal).toHaveBeenCalled();
 	});
 });
