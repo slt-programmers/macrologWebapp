@@ -31,6 +31,6 @@ describe('AdminComponent', () => {
 
   afterEach(() => {
     localStorage.clear();
-  })
+  });
 
 });

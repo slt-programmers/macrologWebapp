@@ -38,6 +38,7 @@
     "path": "^0.12.7",
     "rxjs": "^6.2.1",
     "rxjs-compat": "^6.2.1",
+    "webdriver-manager": "^12.1.7",
     "zone.js": "^0.9.1"
   },
   "devDependencies": {

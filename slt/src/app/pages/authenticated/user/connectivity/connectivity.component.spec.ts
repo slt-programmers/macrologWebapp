@@ -41,7 +41,7 @@ describe('ConnectivityComponent', () => {
   });
 
   it('should init connectivity component succesful', fakeAsync(() => {
-    const result = { id: 42, syncedApplicationId: 43 }
+    const result = { id: 42, syncedApplicationId: 43 };
     spyOn(userService, 'getSyncSettings').and.returnValue(of(result));
     component.ngOnInit();
     expect(userService.getSyncSettings).toHaveBeenCalledWith('STRAVA');
@@ -52,7 +52,7 @@ describe('ConnectivityComponent', () => {
 
   it('should init connectivity component with code and bad scope', fakeAsync(() => {
     const route = TestBed.get(ActivatedRoute);
-    route.queryParams = of({code: 123, scope: 'badscope'});
+    route.queryParams = of({ code: 123, scope: 'badscope' });
 
     const result = { id: 42, syncedApplicationId: 43 }
     spyOn(userService, 'getSyncSettings').and.returnValue(of(result));
@@ -65,23 +65,22 @@ describe('ConnectivityComponent', () => {
 
   it('should init connectivity component with code and good scope', fakeAsync(() => {
     const route = TestBed.get(ActivatedRoute);
-    route.queryParams = of({code: 123, scope: 'read,activity:read_all'});
+    route.queryParams = of({ code: 123, scope: 'read,activity:read_all' });
 
     const result = { id: 42, syncedApplicationId: 43 }
     spyOn(userService, 'getSyncSettings').and.returnValue(of(result));
-    spyOn(userService, 'storeSyncSettings').and.returnValue(of({status: 200}))
+    spyOn(userService, 'storeSyncSettings').and.returnValue(of({ status: 200 }))
     component.ngOnInit();
 
     expect(userService.getSyncSettings).toHaveBeenCalledWith('STRAVA');
-    tick();  
+    tick();
     expect(userService.storeSyncSettings).toHaveBeenCalledWith('STRAVA', 123);
   }));
 
   it('should disconnect from platform', () => {
-    spyOn(userService, 'getSyncSettings').and.returnValue(of({status: 200}));
-    spyOn(userService, 'disconnectSyncSettings').and.returnValue(of({status: 200}));
+    spyOn(userService, 'getSyncSettings').and.returnValue(of({ status: 200 }));
+    spyOn(userService, 'disconnectSyncSettings').and.returnValue(of({ status: 200 }));
     component.disconnect();
     expect(userService.disconnectSyncSettings).toHaveBeenCalledWith('STRAVA');
   });
-
 });

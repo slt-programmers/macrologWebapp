@@ -17,14 +17,12 @@ export class DateValidator implements Validator {
 
   validate(c: AbstractControl): { [key: string]: any } {
     const value = c.value;
-
     if (value !== null && value !== undefined && value !== '') {
       const date = moment(value, 'D-M-YYYY', true);
       if (!date.isValid()) {
         return { 'DateValidator': true };
       }
     }
-
     return null;
   }
 }

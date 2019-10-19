@@ -13,12 +13,12 @@ describe('CalculateIntakeModalComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CalculateIntakeModalComponent ],
-			providers: [ScrollBehaviourService, FoodService, HttpClient, HttpHandler, ToastService, Renderer2],
-			imports: [FormsModule],
-			schemas: [NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA]
+      declarations: [CalculateIntakeModalComponent],
+      providers: [ScrollBehaviourService, FoodService, HttpClient, HttpHandler, ToastService, Renderer2],
+      imports: [FormsModule],
+      schemas: [NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
