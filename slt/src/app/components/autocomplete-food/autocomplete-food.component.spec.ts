@@ -65,6 +65,9 @@ describe('AutocompleteFoodComponent', () => {
 		component.findFoodMatch({ data: 'somedata' });
 		result = [];
 		expect(component.foodMatch).toEqual(result);
+
+		component.findFoodMatch({ data: null });
+		expect(component.foodMatch).toEqual(result);
 	});
 
 	it('should find dish match', () => {
@@ -165,7 +168,7 @@ describe('AutocompleteFoodComponent', () => {
 		expect(component.onKeyDown).toHaveBeenCalled();
 	});
 
-	it('should select first option on keydown', () => {
+	it('should select other options on keydown', () => {
 		spyOn(component, 'handleInputKeydown');
 		spyOn(component, 'handleOptionKeydown');
 		spyOn(component, 'handleOptionKeyup');
@@ -175,16 +178,45 @@ describe('AutocompleteFoodComponent', () => {
 			{ food: new Food('Cde', 1, 2, 3), dish: undefined }
 		];
 		fixture.detectChanges();
+
 		const input = fixture.debugElement.query(By.css('#autoInput'));
 		input.nativeElement.focus();
 		component.onKeyDown(new KeyboardEvent('keydown', { key: 'ArrowDown' }));
 		expect(component.handleInputKeydown).toHaveBeenCalled();
-		const wrapper = fixture.debugElement.query(By.css('#autoWrapper'));
 
+		const option = fixture.debugElement.query(By.css('#autoOption'));
+		option.nativeElement.focus();
+		component.onKeyDown(new KeyboardEvent('keydown', { key: 'ArrowDown' }));
+		expect(component.handleOptionKeydown).toHaveBeenCalled();
+
+		option.nativeElement.focus();
+		component.onKeyDown(new KeyboardEvent('keydown', { key: 'ArrowUp' }));
+		expect(component.handleOptionKeyup).toHaveBeenCalled();
+	});
+
+	it('should not select other options on different keys or elements', () => {
+		spyOn(component, 'handleInputKeydown');
+		spyOn(component, 'handleOptionKeydown');
+		spyOn(component, 'handleOptionKeyup');
+		component.showAutoComplete = true;
+		component.foodMatch = [
+			{ food: new Food('Abc', 1, 2, 3), dish: undefined },
+			{ food: new Food('Cde', 1, 2, 3), dish: undefined }
+		];
+		fixture.detectChanges();
+		component.onKeyDown(new KeyboardEvent('keydown', { key: 'ArrowDown' }));
+		expect(component.handleInputKeydown).not.toHaveBeenCalled();
+
+		const option = fixture.debugElement.query(By.css('#autoOption'));
+		option.nativeElement.focus();
+		component.onKeyDown(new KeyboardEvent('keydown', { key: 'Enter' }));
+		expect(component.handleOptionKeyup).not.toHaveBeenCalled();
+		expect(component.handleOptionKeydown).not.toHaveBeenCalled();
+
+		const wrapper = fixture.debugElement.query(By.css('#autoWrapper'));
 		wrapper.nativeElement.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter' }));
 		fixture.detectChanges();
-		expect(component.handleOptionKeydown).not.toHaveBeenCalled();
-		expect(component.handleOptionKeydown).not.toHaveBeenCalled();
+		expect(component.handleInputKeydown).not.toHaveBeenCalled();
 	});
 
 	it('should select next portion on keydown', () => {
@@ -236,7 +268,7 @@ describe('AutocompleteFoodComponent', () => {
 		expect(result).toBeTruthy();
 	});
 
-	it('should select first option on keydown', () => {
+	it('should select options but not unfocus on last or first element', () => {
 		component.showAutoComplete = true;
 		component.foodMatch = [
 			{ food: new Food('Abc', 1, 2, 3), dish: undefined },
@@ -247,9 +279,15 @@ describe('AutocompleteFoodComponent', () => {
 		input.nativeElement.focus();
 		component.onKeyDown(new KeyboardEvent('keydown', { key: 'ArrowDown' }));
 		expect(document.activeElement.className).toEqual('autocomplete__option option-0');
+		component.onKeyDown(new KeyboardEvent('keydown', { key: 'ArrowUp' }));
+		expect(document.activeElement.className).toEqual('autocomplete__option option-0');
 		component.onKeyDown(new KeyboardEvent('keydown', { key: 'ArrowDown' }));
 		expect(document.activeElement.className).toEqual('autocomplete__option option-1');
 		component.onKeyDown(new KeyboardEvent('keydown', { key: 'ArrowUp' }));
 		expect(document.activeElement.className).toEqual('autocomplete__option option-0');
+		component.onKeyDown(new KeyboardEvent('keydown', { key: 'ArrowDown' }));
+		expect(document.activeElement.className).toEqual('autocomplete__option option-1');
+		component.onKeyDown(new KeyboardEvent('keydown', { key: 'ArrowDown' }));
+		expect(document.activeElement.className).toEqual('autocomplete__option option-1');
 	});
 });
