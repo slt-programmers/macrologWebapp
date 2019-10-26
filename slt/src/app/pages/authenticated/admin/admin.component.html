@@ -8,6 +8,11 @@
 
         <div class="subnav__item" *ngIf="isAdmin()" [ngClass]="{'subnav__item--active': router.url === '/admin/webhooks'}"
           [routerLink]="['./webhooks']">Webhooks</div>
+
+				<div class="subnav__item" *ngIf="isAdmin()" [ngClass]="{'subnav__item--active': router.url === '/admin/mail'}"
+						 [routerLink]="['./mail']">Mail</div>
+
+
       </div>
 
       <router-outlet></router-outlet>

@@ -1,0 +1,38 @@
+<div class="webhook__card">
+	<div class="webhook__card__logo">
+		<img alt="powered by GMail" src="../assets/logo_gmail.png" />
+	</div>
+
+	<div class="webhook__card__info" *ngIf="isConnected">
+		<div class="webhook__card__status">GMail is connected.</div>
+		<div>
+			<div class="form-field">
+					<label class="form-field__label">Email address:</label>
+					<div class="form-field__element">
+					  <input class="input" [(ngModel)]="emailAddress" #foodField name="emailAddress" placeholder="e.g. dummy@test.com" required>
+					</div>
+				  </div>
+			<div>
+				<button id="testMail" class="button button--warning" (click)=sendTestMail()>Send testmail
+				</button>
+			</div>
+			<div *ngIf="mailSend">
+					Mail has been send!
+				</div>
+			</div>
+	</div>
+
+
+	<div class="webhook__card__info" *ngIf="!isConnected">
+		<div class="webhook__card__status">GMail is not connected.
+			<p class="strong--warning" *ngIf="syncError">Unable to proceed with connecting to GMAIL. {{syncError}}</p>
+		</div>
+		<div class="webhook__status__details">
+			<a href="{{googleConnectUrl}}">
+				<img alt="connect to GMail" src="../assets/sign-in-with-google-icon.png" style="width: 200px;" />
+			</a>
+		</div>
+	</div>
+</div>
+
+<toast-component></toast-component>

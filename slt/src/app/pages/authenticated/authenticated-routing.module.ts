@@ -12,6 +12,7 @@ import { AccountComponent } from './user/account/account.component';
 import { AdminComponent } from './admin/admin.component';
 import { UserManagementComponent } from './admin/usermanagement/usermanagement.component';
 import { WebhooksComponent } from './admin/webhooks/webhooks.component';
+import { MailComponent } from './admin/mail/mail.component';
 import { OnboardingComponent } from './onboarding/onboarding.component';
 import { FoodComponent } from './food/food.component';
 import { DishesComponent } from './dishes/dishes.component';
@@ -44,7 +45,8 @@ export const authenticatedRoutes: Routes = [
         children: [
           { path: '', redirectTo: 'usermanagement', pathMatch: 'full' },
           { path: 'usermanagement', component: UserManagementComponent },
-          { path: 'webhooks', component: WebhooksComponent }
+          { path: 'webhooks', component: WebhooksComponent },
+          { path: 'mail', component: MailComponent }
         ]
       },
       { path: 'onboarding', component: OnboardingComponent, canActivate: [AuthGuardService] },
