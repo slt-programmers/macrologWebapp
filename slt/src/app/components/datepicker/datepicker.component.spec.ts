@@ -9,10 +9,10 @@ describe('DatepickerComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ DatepickerComponent ],
+      declarations: [DatepickerComponent],
       schemas: [NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
@@ -21,7 +21,12 @@ describe('DatepickerComponent', () => {
     fixture.detectChanges();
   });
 
-  // it('should create bargraph', () => {
-  //   expect(component).toBeTruthy();
-  // });
+  it('should create datepicker', () => {
+    expect(component).toBeTruthy();
+  });
+
+  it('should subscribe to changes on after view init', () => {
+    component.ngAfterViewInit();
+    // expect()
+  });
 });

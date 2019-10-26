@@ -24,6 +24,7 @@ $menuWidth: 200px;
   height: $menuHeight;
   z-index: 4;
   box-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
+  overflow-x: hidden;
 
   &__logo {
     @media (min-width: $tablet) {

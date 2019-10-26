@@ -29,3 +29,9 @@ input[type="checkbox"] {
 input[type="number"] {
   -moz-appearance: textfield;
 }
+
+.input-error {
+  color: red;
+  font-size: 0.825rem;
+  margin-top: 0.5rem;
+}

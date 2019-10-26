@@ -31,7 +31,7 @@ describe('WebhooksComponent', () => {
 
   afterEach(() => {
     localStorage.clear();
-  })
+  });
 
 
 });

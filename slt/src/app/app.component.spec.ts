@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { Renderer2 } from '@angular/core';
 import { of } from 'rxjs/internal/observable/of';
+import { throwError } from 'rxjs';
 
 describe('AppComponent', () => {
   let component: AppComponent;
@@ -38,7 +39,23 @@ describe('AppComponent', () => {
   });
 
   it('should init the app component', fakeAsync(() => {
-    const healthSpy = spyOn(healthcheckService, 'checkState').and.returnValue(of(true));
+    spyOn(healthcheckService, 'checkState').and.returnValue(of(true));
+    component.ngOnInit();
+    tick();
+    expect(component.isAsleep()).toEqual(false);
   }));
 
+  it('should do healthcheck unauthorized', fakeAsync(() => {
+    spyOn(healthcheckService, 'checkState').and.returnValue(throwError({status: 403}));
+    component.ngOnInit();
+    tick();
+    expect(component.isAsleep()).toEqual(false);
+  }));
+
+  it('should do healthcheck random error', fakeAsync(() => {
+    spyOn(healthcheckService, 'checkState').and.returnValue(throwError({status: 500}));
+    component.ngOnInit();
+    tick();
+    expect(component.isAsleep()).toEqual(true);
+  }));
 });

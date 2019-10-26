@@ -1,9 +1,9 @@
-import { TestBed } from "@angular/core/testing";
-import { HttpClientTestingModule, HttpTestingController } from "@angular/common/http/testing";
-import { AuthenticationService } from "./auth.service";
-import { AuthGuardService } from "./auth-guard.service";
-import { RouterTestingModule } from "@angular/router/testing";
-import { Router } from "@angular/router";
+import { TestBed } from '@angular/core/testing';
+import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
+import { AuthenticationService } from './auth.service';
+import { AuthGuardService } from './auth-guard.service';
+import { RouterTestingModule } from '@angular/router/testing';
+import { Router } from '@angular/router';
 
 describe('AuthGuardService', () => {
     let authService: AuthenticationService;
@@ -31,5 +31,4 @@ describe('AuthGuardService', () => {
         expect(result).toBeTruthy();
     });
 
-
-})
+});

@@ -34,7 +34,7 @@ describe('ConnectivityComponent', () => {
 
   afterEach(() => {
     localStorage.clear();
-  })
+  });
 
   it('should create connectivity component', () => {
     expect(component).toBeTruthy();
@@ -54,7 +54,7 @@ describe('ConnectivityComponent', () => {
     const route = TestBed.get(ActivatedRoute);
     route.queryParams = of({ code: 123, scope: 'badscope' });
 
-    const result = { id: 42, syncedApplicationId: 43 }
+    const result = { id: 42, syncedApplicationId: 43 };
     spyOn(userService, 'getSyncSettings').and.returnValue(of(result));
     component.ngOnInit();
 
@@ -67,9 +67,9 @@ describe('ConnectivityComponent', () => {
     const route = TestBed.get(ActivatedRoute);
     route.queryParams = of({ code: 123, scope: 'read,activity:read_all' });
 
-    const result = { id: 42, syncedApplicationId: 43 }
+    const result = { id: 42, syncedApplicationId: 43 };
     spyOn(userService, 'getSyncSettings').and.returnValue(of(result));
-    spyOn(userService, 'storeSyncSettings').and.returnValue(of({ status: 200 }))
+    spyOn(userService, 'storeSyncSettings').and.returnValue(of({ status: 200 }));
     component.ngOnInit();
 
     expect(userService.getSyncSettings).toHaveBeenCalledWith('STRAVA');
