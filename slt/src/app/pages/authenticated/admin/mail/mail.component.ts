@@ -15,8 +15,8 @@ export class MailComponent implements OnInit {
     private route: ActivatedRoute) { }
 
   private clientId: number;
-  private googleConnectUrl: string;
-  private isConnected = false;
+  public googleConnectUrl: string;
+  public isConnected = false;
   public syncError: string;
   public emailAddress: string;
   public mailSend = false;
