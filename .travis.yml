@@ -21,8 +21,8 @@ jobs:
     script: ng test
     after_script: sonar-scanner -Dsonar.projectKey=slt-programmers_macrologWebapp
   - stage: "integration test"
-    if: branch = release
-    script: ng test
+    if: branch = release OR branch = master
+    script: ng e2e -c acc
     
 # Integration test has yet to be defined, for now just ng test again
 

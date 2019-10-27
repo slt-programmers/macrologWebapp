@@ -1,8 +1,6 @@
-import { Component, OnInit, ViewChild, ElementRef, Renderer2 } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { ScrollBehaviourService } from './services/scroll-behaviour.service';
 import { HealthcheckService } from './services/healthcheck.service';
-import { trigger, transition, style, animate, state, keyframes } from '@angular/animations';
 
 @Component({
 	selector: 'app-root',

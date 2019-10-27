@@ -1,4 +1,4 @@
-import { browser, by, element, ElementArrayFinder } from 'protractor';
+import { browser, by, element } from 'protractor';
 
 export class HomePage {
   navigateToHomePage() {

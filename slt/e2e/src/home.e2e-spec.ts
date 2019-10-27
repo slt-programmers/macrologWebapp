@@ -38,6 +38,14 @@ describe('Home page', () => {
         });
       });
     });
+
+    browser.getAllWindowHandles().then((handles) => {
+      browser.driver.switchTo().window(handles[1]);
+      browser.driver.close();
+      browser.driver.switchTo().window(handles[0]);
+    }).then(() => {
+      expect(browser.getCurrentUrl()).toBe(browser.baseUrl);
+    });
   });
 
   afterEach(async () => {

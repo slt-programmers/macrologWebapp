@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
-import { HttpRequest, HttpHandler, HttpResponse, HttpEvent, HttpInterceptor } from '@angular/common/http';
+import { HttpRequest, HttpHandler, HttpEvent, HttpInterceptor } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { throwError } from 'rxjs/internal/observable/throwError';
-import { of } from 'rxjs/internal/observable/of';
 import { catchError, map } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { AuthenticationService } from '../services/auth.service';
@@ -19,7 +18,7 @@ export class ErrorInterceptor implements HttpInterceptor {
 			catchError(err => {
 				if (err.status === 403) {
 					this.authService.logout();
-					this.router.navigateByUrl('/');
+					// this.router.navigateByUrl('/');
 					return throwError(err);
 				} else {
 					return throwError(err);

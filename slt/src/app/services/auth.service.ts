@@ -31,9 +31,7 @@ export class AuthenticationService {
 	}
 
 	public logout() {
-		setTimeout(() => {
-			localStorage.removeItem('currentUser');
-		});
+		localStorage.removeItem('currentUser');
 	}
 
 	public register(username: string, email: string, password: string) {

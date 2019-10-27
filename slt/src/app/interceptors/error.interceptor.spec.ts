@@ -44,7 +44,6 @@ describe('AuthService', () => {
       .subscribe(
         () => { },
         err => {
-          expect(router.navigateByUrl).toHaveBeenCalledWith('/');
           expect(authService.logout).toHaveBeenCalled();
         }
       );

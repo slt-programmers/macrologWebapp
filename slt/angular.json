@@ -25,7 +25,7 @@
             "assets": [
               "src/favicon.ico",
               "src/assets",
-							"src/google3bb89e24d542c3d5.html"
+              "src/google3bb89e24d542c3d5.html"
             ],
             "styles": [
               "src/css/public.scss"
@@ -50,23 +50,23 @@
               "vendorChunk": false,
               "buildOptimizer": true
             },
-						"acceptance": {
-							"fileReplacements": [
-								{
-									"replace": "src/environments/environment.ts",
-									"with": "src/environments/environment.acc.ts"
-								}
-							],
-							"optimization": true,
-							"outputHashing": "all",
-							"sourceMap": false,
-							"extractCss": true,
-							"namedChunks": false,
-							"aot": true,
-							"extractLicenses": true,
-							"vendorChunk": false,
-							"buildOptimizer": true
-						}
+            "acceptance": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.acc.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true
+            }
           }
         },
         "serve": {
@@ -79,9 +79,9 @@
             "production": {
               "browserTarget": "macrolog-webapp:build:production"
             },
-						"acceptance": {
-							"browserTarget": "macrolog-webapp:build:acceptance"
-						}
+            "acceptance": {
+              "browserTarget": "macrolog-webapp:build:acceptance"
+            }
           }
         },
         "extract-i18n": {
@@ -104,14 +104,14 @@
               "src/favicon.ico",
               "src/assets"
             ],
-						"tsConfig": "tsconfig.json",
-						"codeCoverage": true,
-						"codeCoverageExclude": [
-							"src/test/**",
-							"src/app/app.module.ts",
-							"src/test/**/*.mock.ts"
-						]
-					}
+            "tsConfig": "tsconfig.json",
+            "codeCoverage": true,
+            "codeCoverageExclude": [
+              "src/test/**",
+              "src/app/app.module.ts",
+              "src/test/**/*.mock.ts"
+            ]
+          }
         },
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
@@ -128,7 +128,7 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "macrolog-webapp:serve"
+            "baseUrl": "http://localhost:4200"
           },
           "configurations": {
             "acc": {

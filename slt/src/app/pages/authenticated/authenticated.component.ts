@@ -100,16 +100,15 @@ export class AuthenticatedComponent implements OnInit {
 		this.sbs.preventScrolling(false);
 	}
 
-	public loggedIn(): boolean {
-		return localStorage.getItem('currentUser') !== null;
-	}
-
 	public isAdmin(): boolean {
 		const currentUser = JSON.parse(localStorage.getItem('currentUser'));
 		return (currentUser && currentUser.admin);
 	}
 
 	public logOut() {
+		this.smallMenuOpen = false;
+		this.sbs.preventScrolling(false);
 		this.authService.logout();
+		this.router.navigate(['login']);
 	}
 }

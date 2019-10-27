@@ -11,7 +11,7 @@
     </div>
   </div>
 
-  <div class="menu" *ngIf="loggedIn()">
+  <div class="menu">
     <div class="menu__logo" routerLink="/">
       <p class="menu__logo__text">M</p>
     </div>
@@ -48,7 +48,7 @@
         <div class="menu__item__text">Admin options</div>
       </div>
 
-      <div matRipple class="menu__item" routerLink="/" (click)="logOut()">
+      <div matRipple class="menu__item" (click)="logOut()">
         <div class="menu__item__text">Log out</div>
       </div>
     </div>
@@ -58,7 +58,7 @@
     </div>
   </div>
 
-  <div [@openClose]="smallMenuOpen ? 'open' : 'closed'" class="small-menu" *ngIf="loggedIn()">
+  <div [@openClose]="smallMenuOpen ? 'open' : 'closed'" class="small-menu">
     <div matRipple class="small-menu__item small-menu__item--back" (click)="closeMenu()">
       <i class="fas fa-arrow-right"></i>
     </div>
@@ -93,7 +93,7 @@
       <div class="">AdminPanel</div>
     </div>
 
-    <div matRipple class="small-menu__item" routerLink="/login" (click)="closeMenu()">
+    <div matRipple class="small-menu__item" (click)="logOut()">
       <div class="small-menu__inline-text">Log out</div>
       <i class="fas fa-sign-out-alt"></i>
     </div>
