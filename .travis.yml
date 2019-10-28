@@ -11,6 +11,11 @@ stages:
 install: 
 - cd slt
 - npm install
+- npm i -g webdriver-manager
+- cd node_modules/protractor/bin
+- webdriver-manager clean
+- webdriver-manager update --versions.chrome 77.0.3865.120
+- cd ../../..
 
 jobs:
   allow_failures: 
@@ -21,10 +26,8 @@ jobs:
     script: ng test
     after_script: sonar-scanner -Dsonar.projectKey=slt-programmers_macrologWebapp
   - stage: "integration test"
-    if: branch = release OR branch = master
+    if: branch = master
     script: ng e2e -c acc
-    
-# Integration test has yet to be defined, for now just ng test again
 
 addons:
   sonarcloud:
