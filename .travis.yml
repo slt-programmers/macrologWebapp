@@ -15,7 +15,7 @@ install:
 - cd node_modules/protractor
 - webdriver-manager clean
 - webdriver-manager update --versions.chrome 77.0.3865.120
-- cd ../../..
+- cd ../..
 
 jobs:
   allow_failures: 
