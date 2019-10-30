@@ -6,5 +6,5 @@
 export const environment = {
 	production: true,
 	backend: 'localhost:8090',
-	origin: 'http://localhost:4200'
+	origin: 'https://localhost:4200'
 };

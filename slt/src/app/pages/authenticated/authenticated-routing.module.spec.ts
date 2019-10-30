@@ -36,6 +36,7 @@ import { DiaryService } from "@app/services/diary.service";
 import { UserService } from "@app/services/user.service";
 import { AdminService } from "@app/services/admin.service";
 import { ActivityService } from "@app/services/activity.service";
+import { MailComponent } from "./admin/mail/mail.component";
 
 describe("Router authenticated", () => {
   let location: Location;
@@ -50,7 +51,7 @@ describe("Router authenticated", () => {
       DishService, DiaryService, UserService, AdminService, ActivityService],
       declarations: [AuthenticatedComponent, DiaryComponent, FoodComponent, UserComponent, AdminComponent, AppComponent,
         DishesComponent, GraphsComponent, OnboardingComponent, PersonalComponent, UserManagementComponent, IntakeComponent,
-        WeightTrackerComponent, ConnectivityComponent, AccountComponent, WebhooksComponent
+        WeightTrackerComponent, ConnectivityComponent, AccountComponent, WebhooksComponent, MailComponent
       ],
       schemas: [NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA]
     });

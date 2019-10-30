@@ -68,7 +68,7 @@ import { AuthenticatedModule } from './pages/authenticated/authenticated.module'
 		ScrollBehaviourService,
 		HealthcheckService,
 		WebhookService,
-    GoogleService,
+        GoogleService,
 		{ provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
 		{ provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
 	],
