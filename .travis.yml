@@ -25,9 +25,11 @@ jobs:
     if: branch != release
     script: ng test
     after_script: sonar-scanner -Dsonar.projectKey=slt-programmers_macrologWebapp
-  - stage: "integration test"
-    if: branch = master
-    script: ng e2e -c acc
+  - stage: "unit test and scan"
+    if: branch != release
+    script: ng test
+
+# Integration tests are not working yet
 
 addons:
   sonarcloud:
