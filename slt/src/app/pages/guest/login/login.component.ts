@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AuthenticationService } from '../../../services/auth.service';
-import { ToastService } from '../../../services/toast.service';
 import { trigger, transition, style, animate } from '@angular/animations';
+import { AlertService } from '@app/services/alert.service';
 
 @Component({
 	templateUrl: 'login.component.html',
@@ -38,7 +38,7 @@ export class LoginComponent implements OnInit {
 		private route: ActivatedRoute,
 		private router: Router,
 		private authService: AuthenticationService,
-		private toastService: ToastService) { }
+		private alertService: AlertService) { }
 
 	ngOnInit() {
 		this.authService.logout();
@@ -94,7 +94,7 @@ export class LoginComponent implements OnInit {
 		this.authService.resetPassword(this.forgotEmail)
 			.subscribe(
 				() => {
-					this.toastService.setMessage('We have send an email with your password!');
+					this.alertService.setAlert('We have send an email with your password!', false);
 					this.toggleForgotPwModal(false);
 				},
 				() => {
