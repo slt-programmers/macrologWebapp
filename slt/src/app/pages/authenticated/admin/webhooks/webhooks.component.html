@@ -1,0 +1,48 @@
+<div class="webhook__card">
+	<div class="webhook__card__logo">
+		<img alt="powered by Strava" src="../assets/api_logo_pwrdBy_strava_stack_light.png" />
+	</div>
+
+	<div class="webhook__card__info" *ngIf="getStatus('STRAVA')">
+		<div class="webhook__card__status">The Strava webhook is enabled.</div>
+		<div class="webhook__status__details">
+			<div class="webhook__status__details__line">
+				<div class="webhook__status__details__text">Subscription ID</div>
+				<div class="webhook__status__details__value">{{getStatus('STRAVA').id}}</div>
+			</div>
+			<div class="webhook__status__details__line">
+				<div class="webhook__status__details__text">Created at</div>
+				<div class="webhook__status__details__value">{{getStatus('STRAVA').created_at}}</div>
+			</div>
+			<div class="webhook__status__details__line">
+				<div class="webhook__status__details__text">Updated at</div>
+				<div class="webhook__status__details__value">{{getStatus('STRAVA').updated_at}}</div>
+			</div>
+			<div class="webhook__status__details__line">
+				<div class="webhook__status__details__text">Callback url used:</div>
+				<div class="webhook__status__details__value">{{getStatus('STRAVA').callback_url}}</div>
+			</div>
+			<div class="webhook__status__details__line">
+
+				<div class="blue-theme modal__button-wrapper modal__button-wrapper--spread">
+					<button class="button button--warning" (click)="disableWebhook('STRAVA')">Disable</button>
+				</div>
+
+			</div>
+		</div>
+	</div>
+	<div class="webhook__card__info" *ngIf="!getStatus('STRAVA')">
+		<div class="webhook__card__status">The Strava webhook is disabled.</div>
+		<div class="webhook__status__details">
+			<div class="webhook__status__details__line">
+
+				<div class="blue-theme modal__button-wrapper modal__button-wrapper--spread">
+					<button class="button button--warning" (click)="enableWebhook('STRAVA')">Enable</button>
+				</div>
+
+			</div>
+		</div>
+	</div>
+</div>
+
+<toast-component></toast-component>

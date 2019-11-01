@@ -2,8 +2,8 @@
   <div class="modal__header">
     <h3 class="modal__header__title">{{modalTitle}}</h3>
 
-    <button mat-icon-button (click)="closeModal()">
-      <mat-icon>close</mat-icon>
+    <button class="icon-button" (click)="closeModal()">
+      <mat-icon class="is-white">close</mat-icon>
     </button>
   </div>
 
@@ -37,7 +37,7 @@
           <div class="form-field__text recipe__ingredient__name">{{ingr.food.name}}</div>
 
           <div class="form-field__button blue-theme recipe__ingredient__remove">
-            <button mat-icon-button color="primary" (click)="removeIngredient(i)">
+            <button class="icon-button" (click)="removeIngredient(i)">
               <mat-icon>remove</mat-icon>
             </button>
           </div>
@@ -51,9 +51,9 @@
       </div>
 
       <div class="blue-theme modal__button-wrapper">
-        <button mat-stroked-button color="primary" type="button" *ngIf="selectedDish" (click)="deleteDish()">Delete</button>
+        <button class="button" *ngIf="selectedDish" (click)="deleteDish()">Delete</button>
 
-        <button mat-stroked-button color="primary" type="button" [disabled]="makeDishForm.invalid" (click)="saveDish()">Save</button>
+        <button class="button button--primary" [disabled]="makeDishForm.invalid" (click)="saveDish()">Save</button>
       </div>
     </form>
   </div>

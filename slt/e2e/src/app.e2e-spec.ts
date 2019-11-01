@@ -1,16 +1,20 @@
 import { AppPage } from './app.po';
-import { browser, logging } from 'protractor';
+import { browser, logging, ExpectedConditions } from 'protractor';
 
-describe('workspace-project App', () => {
+describe('Start Macrolog', () => {
   let page: AppPage;
 
   beforeEach(() => {
     page = new AppPage();
   });
 
-  it('should display title', () => {
+  it('should wait for server', async () => {
     page.navigateTo();
-    expect(page.getTitleText()).toEqual('Macrolog');
+    const title = page.getTitle();
+    browser.wait(ExpectedConditions.presenceOf(title), 60000, 'Could not find title on homepage').then(async function () {
+      const titleText = await title.getText();
+      expect(titleText).toBe('Macrolog');
+    });
   });
 
   afterEach(async () => {

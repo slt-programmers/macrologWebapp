@@ -1,0 +1,58 @@
+<div>
+  <form #personalForm="ngForm">
+    <div class="form-field">
+      <label class="form-field__label">Name</label>
+      <div class="form-field__element">
+        <input required class="input" name="name" type="text" [(ngModel)]="name">
+      </div>
+    </div>
+
+    <div class="form-field">
+      <label class="form-field__label">Date of birth</label>
+      <div class="form-field__element">
+        <input required class="input" validDate placeholder="DD-MM-YYYY, eg 26-3-1989" name="birthday"
+          [(ngModel)]="birthday">
+      </div>
+    </div>
+
+    <div class="form-field blue-theme">
+      <label class="form-field__label">Gender</label>
+      <mat-radio-group class="radios" aria-label="gender" name="gender" [(ngModel)]="gender">
+        <mat-radio-button class="radios__option" value="MALE">Male</mat-radio-button>
+        <mat-radio-button class="radios__option" value="FEMALE">Female</mat-radio-button>
+      </mat-radio-group>
+    </div>
+
+    <div class="form-field">
+      <label class="form-field__label">Height (cm)</label>
+      <div class="form-field__element">
+        <input required class="input" name="height" type="number" [(ngModel)]="height">
+      </div>
+    </div>
+
+    <div class="form-field">
+      <label class="form-field__label">Weight (kg)</label>
+      <div class="form-field__element">
+        <input required class="input" name="weight" type="number" [(ngModel)]="weight" step="0.1">
+      </div>
+    </div>
+
+    <div class="form-field">
+      <label class="form-field__label">Activity level</label>
+      <div class="form-field__element">
+        <select class="" name="activity" [(ngModel)]="activity">
+          <option class="" value="1.2">Sedentary</option>
+          <option class="" value="1.375">Lightly active</option>
+          <option class="" value="1.55">Moderately active</option>
+          <option class="" value="1.725">Very active</option>
+          <option class="" value="1.9">Extremely active</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="blue-theme button-wrapper">
+      <button class="button button--primary" (click)="saveUserSettings()"
+        [disabled]="isInputUnchanged() || personalForm.invalid">Save</button>
+    </div>
+  </form>
+</div>

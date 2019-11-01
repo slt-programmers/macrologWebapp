@@ -3,8 +3,10 @@
   "compilerOptions": {
 		"baseUrl": "src",
     "outDir": "./dist/out-tsc",
+    "mapRoot": "./dist/out-tsc",
     "sourceMap": true,
     "declaration": false,
+    "incremental": true,
     "moduleResolution": "node",
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,

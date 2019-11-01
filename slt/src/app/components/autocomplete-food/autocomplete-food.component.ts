@@ -5,6 +5,7 @@ import { Food } from '../../model/food';
 @Component({
 	templateUrl: './autocomplete-food.component.html',
 	selector: 'autocomplete-food',
+	styleUrls: ['./autocomplete-food.component.scss'],
 	host: { '(document: click)': 'closeAutoComplete($event)' }
 })
 export class AutocompleteFoodComponent {
@@ -30,7 +31,7 @@ export class AutocompleteFoodComponent {
 				let matchDishName = false;
 				if (item.food) {
 					matchFoodName = item.food.name.toLowerCase().indexOf(this.foodName.toLowerCase()) >= 0;
-				} else if (item.dish) {
+				} else {
 					matchDishName = item.dish.name.toLowerCase().indexOf(this.foodName.toLowerCase()) >= 0;
 				}
 				if (matchFoodName || matchDishName) {
@@ -50,7 +51,7 @@ export class AutocompleteFoodComponent {
 			} else if (autoCompleteOptionSelected) {
 				if (event.key === 'ArrowDown') {
 					this.handleOptionKeydown(event);
-				} else if (event.key === 'ArrowUp') {
+				} else {
 					this.handleOptionKeyup(event);
 				}
 			}

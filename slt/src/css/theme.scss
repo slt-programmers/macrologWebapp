@@ -148,7 +148,6 @@ $macrolog-blue-theme: (
 @include mat-core-theme($macrolog-white-theme);
 @include mat-input-theme($macrolog-white-theme);
 @include mat-form-field-theme($macrolog-white-theme);
-@include mat-button-theme($macrolog-white-theme);
 @include mat-progress-spinner-theme($macrolog-white-theme);
 @include mat-radio-theme($macrolog-white-theme);
 @include mat-paginator-theme($macrolog-white-theme);
@@ -156,7 +155,6 @@ $macrolog-blue-theme: (
 .blue-theme {
   @include mat-form-field-theme($macrolog-blue-theme);
   @include mat-input-theme($macrolog-blue-theme);
-  @include mat-button-theme($macrolog-blue-theme);
   @include mat-progress-spinner-theme($macrolog-blue-theme);
   @include mat-radio-theme($macrolog-blue-theme);
   @include mat-paginator-theme($macrolog-blue-theme);

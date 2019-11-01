@@ -1,0 +1,24 @@
+@import '../../../../css/variables.scss';
+
+.subnav {
+	border-bottom: 1px solid $smoke;
+  margin-bottom: 15px;
+
+	&__item {
+		border-bottom: 2px solid transparent;
+		color: $coal;
+		display: inline-block;
+		padding: 15px;
+		cursor: pointer;
+
+		&:hover {
+			@media(min-width: $phone) {
+			  border-bottom: 2px solid $smoke;
+			}
+		}
+
+		&--active {
+			border-bottom: 2px solid $primary;
+		}
+	}
+}

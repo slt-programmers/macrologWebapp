@@ -1,7 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { UserService } from '../../services/user.service';
 import { Gender } from '../../model/gender';
-import { Observable } from 'rxjs/Observable';
 import { forkJoin } from 'rxjs/observable/forkJoin';
 import { calculateTDEE } from '@app/util/functions';
 
@@ -23,7 +22,7 @@ export class CalculateIntakeModalComponent implements OnInit {
 
 	public showCalories = false;
 	public showMacros = false;
-	public markers;
+	public markers: Array<any>;
 
 	public calories: number;
 
@@ -35,7 +34,6 @@ export class CalculateIntakeModalComponent implements OnInit {
 	public fatManual: number;
 	public carbsManual: number;
 
-	private bmr: number;
 	private tdee: number;
 
 	private goalProtein: string;
@@ -48,8 +46,7 @@ export class CalculateIntakeModalComponent implements OnInit {
 	}
 
 	ngOnInit() {
-		this.calories = (this.currentProtein * 4) + (this.currentFat * 9) +
-			(this.currentCarbs * 4);
+		this.calories = (this.currentProtein * 4) + (this.currentFat * 9) + (this.currentCarbs * 4);
 		this.proteinManual = this.currentProtein;
 		this.fatManual = this.currentFat;
 		this.carbsManual = this.currentCarbs;
@@ -70,24 +67,67 @@ export class CalculateIntakeModalComponent implements OnInit {
 		this.showMacros = true;
 	}
 
-
 	public closeModal() {
-		this.close.emit({goalProtein: this.goalProtein,
-			goalFat: this.goalFat, goalCarbs: this.goalCarbs
+		this.close.emit({
+			goalProtein: this.goalProtein,
+			goalFat: this.goalFat,
+			goalCarbs: this.goalCarbs
 		});
+	}
+
+	public changeCalories(event: number) {
+		this.calories = event;
+		this.calcCarbs();
+	}
+
+	public calcCaloriesManual(): void {
+		this.calories = (this.proteinManual * 4) + (this.fatManual * 9) + (this.carbsManual * 4);
+	}
+
+	public saveIntake() {
+		if (this.showMacros) {
+			forkJoin(
+				this.userService.addUserSetting('goalProtein', Math.round(this.proteinManual).toString()),
+				this.userService.addUserSetting('goalFat', Math.round(this.fatManual).toString()),
+				this.userService.addUserSetting('goalCarbs', Math.round(this.carbsManual).toString())
+			).subscribe(
+				() => {
+					this.goalProtein = Math.round(this.proteinManual).toString();
+					this.goalFat = Math.round(this.fatManual).toString();
+					this.goalCarbs = Math.round(this.carbsManual).toString();
+				},
+				error => {
+					// TODO handle error
+				},
+				() => {
+					this.closeModal();
+				}
+			);
+		} else {
+			forkJoin(
+				this.userService.addUserSetting('goalProtein', Math.round(this.protein).toString()),
+				this.userService.addUserSetting('goalFat', Math.round(this.fat).toString()),
+				this.userService.addUserSetting('goalCarbs', Math.round(this.carbs).toString())
+			).subscribe(
+				() => {
+					this.goalProtein = Math.round(this.protein).toString();
+					this.goalFat = Math.round(this.fat).toString();
+					this.goalCarbs = Math.round(this.carbs).toString();
+				},
+				error => {
+					// TODO handle error
+				},
+				() => this.closeModal()
+			);
+		}
 	}
 
 	private setMarkers() {
 		this.markers = [
-			{title: 'deficit', value: (this.tdee - 200)},
-			{title: 'baseline', value: (this.tdee)},
-			{title: 'surplus', value: (this.tdee + 200)}
+			{ title: 'deficit', value: (this.tdee - 200) },
+			{ title: 'baseline', value: (this.tdee) },
+			{ title: 'surplus', value: (this.tdee + 200) }
 		];
-	}
-
-	public changeCalories(event) {
-		this.calories = event;
-		this.calcCarbs();
 	}
 
 	private calcCalories(): void {
@@ -95,10 +135,6 @@ export class CalculateIntakeModalComponent implements OnInit {
 		this.setMarkers();
 		this.calories = this.tdee;
 		this.calcCarbs();
-	}
-
-	public calcCaloriesManual(): void {
-		this.calories = (this.proteinManual * 4) + (this.fatManual * 9) + (this.carbsManual * 4);
 	}
 
 	private calcTDEE(): void {
@@ -109,39 +145,4 @@ export class CalculateIntakeModalComponent implements OnInit {
 	private calcCarbs(): void {
 		this.carbs = (this.calories - (this.protein * 4.0) - (this.fat * 9.0)) / 4.0;
 	}
-
-	public saveIntake() {
-		if (this.showMacros) {
-			forkJoin(
-				this.userService.addUserSetting('goalProtein', Math.round(this.proteinManual).toString()),
-				this.userService.addUserSetting('goalFat', Math.round(this.fatManual).toString()),
-				this.userService.addUserSetting('goalCarbs', Math.round(this.carbsManual).toString())
-			).subscribe(
-					data => {
-						this.goalProtein = Math.round(this.proteinManual).toString();
-						this.goalFat = Math.round(this.fatManual).toString();
-						this.goalCarbs = Math.round(this.carbsManual).toString();
-					},
-					error => console.error(error),
-					() => { this.closeModal(); }
-			);
-		} else {
-			forkJoin(
-				this.userService.addUserSetting('goalProtein', Math.round(this.protein).toString()),
-				this.userService.addUserSetting('goalFat', Math.round(this.fat).toString()),
-				this.userService.addUserSetting('goalCarbs', Math.round(this.carbs).toString())
-			).subscribe(
-					data => {
-						this.goalProtein = Math.round(this.protein).toString();
-						this.goalFat = Math.round(this.fat).toString();
-						this.goalCarbs = Math.round(this.carbs).toString();
-					},
-					error => console.error(error),
-					() => this.closeModal()
-			);
-		}
-	}
-
-
-
 }

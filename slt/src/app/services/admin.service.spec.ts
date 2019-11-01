@@ -1,7 +1,7 @@
-import { TestBed, fakeAsync, tick } from "@angular/core/testing";
+import { TestBed, fakeAsync, tick } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
-import { AdminService } from "./admin.service";
-import { UserAccount } from "@app/model/userAccount";
+import { AdminService } from './admin.service';
+import { UserAccount } from '@app/model/userAccount';
 
 describe('AdminService', () => {
     let http: HttpTestingController;
@@ -16,7 +16,7 @@ describe('AdminService', () => {
 
     afterEach(() => {
         localStorage.clear();
-    })
+    });
 
     it('should create admin service', () => {
         const service = TestBed.get(AdminService);
@@ -33,7 +33,6 @@ describe('AdminService', () => {
             res => {
                 expect(res.length).toEqual(2);
                 expect(res).toEqual(mockResponse);
-                err => { }
             }
         );
         const request = http.expectOne(service.macrologBackendUrl + '/getAllUsers');
@@ -44,7 +43,7 @@ describe('AdminService', () => {
     }));
 
     it('should not get all users', fakeAsync(() => {
-        const mockResponse = { status: 401 }
+        const mockResponse = { status: 401 };
         const service = TestBed.get(AdminService);
         service.getAllUsers().subscribe(
             () => { },
@@ -68,8 +67,8 @@ describe('AdminService', () => {
         service.deleteUser(userAccount).subscribe(
             res => {
                 expect(res.status).toEqual(200);
-            }, 
-            () => {}
+            },
+            () => { }
         );
 
         const request = http.expectOne(service.macrologBackendUrl + '/deleteAccount?userId=123');
@@ -78,5 +77,4 @@ describe('AdminService', () => {
         tick();
         http.verify();
     }));
-
-})
+});

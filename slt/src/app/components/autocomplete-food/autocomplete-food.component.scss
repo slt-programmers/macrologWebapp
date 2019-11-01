@@ -1,0 +1,44 @@
+@import "../../../css/variables.scss";
+
+.autocomplete-wrapper {
+  position: relative;
+  margin-bottom: ($gutter/2);
+}
+
+.autocomplete {
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+  border-radius: 5px;
+  max-height: 250px;
+  overflow-y: auto;
+  position: absolute;
+  width: 100%;
+  z-index: 1;
+
+  &__option {
+    padding: ($gutter/3);
+    background-color: $white;
+    border: 1px solid $smoke;
+    border-top: 0;
+    font-size: 16px;
+    font-weight: 300;
+    text-align: left;
+
+    &:focus {
+      background-color: $mist;
+      outline: none;
+    }
+
+    &:first-child {
+      border-top: 1px solid $smoke;
+      border-radius: 5px 5px 0 0;
+    }
+
+    &:last-child {
+      border-radius: 0 0 5px 5px;
+    }
+
+    &:first-child:last-child {
+      border-radius: 5px;
+    }
+  }
+}

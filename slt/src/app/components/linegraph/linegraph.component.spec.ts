@@ -1,5 +1,4 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { LinegraphComponent, DataPoint, GraphPoint } from './linegraph.component';
 import { SimpleChange } from '@angular/core';
 
@@ -18,7 +17,7 @@ describe('LinegraphComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(LinegraphComponent);
     component = fixture.componentInstance;
-    datapoints = [new DataPoint(1, 4), new DataPoint(2, 3), new DataPoint(3, 5), new DataPoint(4, 7)]
+    datapoints = [new DataPoint(1, 4), new DataPoint(2, 3), new DataPoint(3, 5), new DataPoint(4, 7)];
     fixture.detectChanges();
   });
 

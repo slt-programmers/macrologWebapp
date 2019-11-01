@@ -43,7 +43,9 @@ export class MakeDishModalComponent implements OnInit {
 				this.food = data;
 				this.getFoodSearchableList();
 			},
-			error => console.log(error)
+			error => {
+				// TODO handle error
+			}
 		);
 	}
 
@@ -92,10 +94,8 @@ export class MakeDishModalComponent implements OnInit {
 	public calculateMultiplier(event: any, ingredient: Ingredient) {
 		if (ingredient.portion === undefined) {
 			ingredient.multiplier = (event.target.value / this.unitGrams);
-			console.log(ingredient.multiplier);
 		} else {
 			ingredient.multiplier = event.target.value;
-			console.log(ingredient.multiplier);
 		}
 	}
 

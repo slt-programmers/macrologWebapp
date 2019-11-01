@@ -1,6 +1,6 @@
-@import "../../../css/public.scss";
+@import "../../../css/variables.scss";
 
-@include media-break($md) {
+@media (min-width: $phone) {
   $yAxisWidth: 50px;
   $xAxisHeight: 50px;
 }
@@ -79,7 +79,7 @@ $xAxisHeight: 30px;
       position: absolute;
       color: $primary;
       font-size: 14px;
-      font-weight: bold;
+      font-weight: 400;
       text-align: center;
       align-self: center;
       flex-direction: column;

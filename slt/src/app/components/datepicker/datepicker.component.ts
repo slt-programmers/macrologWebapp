@@ -2,9 +2,10 @@ import { Component, OnInit, AfterViewInit, Output, Renderer2, EventEmitter, Elem
 
 @Component({
 	selector: 'datepicker',
-	templateUrl: './datepicker.component.html'
+	templateUrl: './datepicker.component.html',
+	styleUrls: ['./datepicker.component.scss']
 })
-export class DatepickerComponent implements OnInit, AfterViewInit {
+export class DatepickerComponent implements AfterViewInit {
 
 	@ViewChildren('dayRef') dayRefs: QueryList<any>;
 
@@ -36,16 +37,13 @@ export class DatepickerComponent implements OnInit, AfterViewInit {
 		});
 	}
 
-	ngOnInit() {
-	}
-
-	toggleOpen() {
+	public toggleOpen() {
 		this.isOpen = !this.isOpen;
 	}
 
 	public nextDay() {
 		this.selectedDate = new Date(this.selectedDate.getFullYear(),
-		this.selectedDate.getMonth(), this.selectedDate.getDate() + 1);
+			this.selectedDate.getMonth(), this.selectedDate.getDate() + 1);
 		this.setDaysInMonthArray();
 		this.getWeekdayPlaceholders();
 		this.change.emit(this.selectedDate);
@@ -82,7 +80,7 @@ export class DatepickerComponent implements OnInit, AfterViewInit {
 		this.change.emit(this.selectedDate);
 	}
 
-	public setDaysInMonthArray() {
+	private setDaysInMonthArray() {
 		this.daysInMonthArray = new Array();
 		this.daysInMonth = new Date(this.selectedDate.getFullYear(), this.selectedDate.getMonth() + 1, 0).getDate();
 		for (let i = 1; i <= this.daysInMonth; i++) {
@@ -90,11 +88,11 @@ export class DatepickerComponent implements OnInit, AfterViewInit {
 		}
 	}
 
-	public setWeekdays() {
+	private setWeekdays() {
 		this.weekdays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 	}
 
-	public getWeekdayPlaceholders() {
+	private getWeekdayPlaceholders() {
 		this.placeholders = new Array();
 		const firstOfMonth = new Date(this.selectedDate.getFullYear(), this.selectedDate.getMonth(), 1);
 		const dayOfWeek = firstOfMonth.getDay();
@@ -104,7 +102,7 @@ export class DatepickerComponent implements OnInit, AfterViewInit {
 		}
 	}
 
-	public markIfToday(item: ElementRef) {
+	private markIfToday(item: ElementRef) {
 		if (this.selectedDate.getMonth() === this.today.getMonth()) {
 			if (item.nativeElement.textContent === this.selectedDate.getDate()) {
 				this.renderer.addClass(item.nativeElement, 'picker__day--today');
@@ -112,7 +110,7 @@ export class DatepickerComponent implements OnInit, AfterViewInit {
 		}
 	}
 
-	removeMark(item) {
+	private removeMark(item) {
 		if (item.nativeElement.classList.contains('picker__day--today')) {
 			this.renderer.removeClass(item.nativeElement, 'picker__day--today');
 		}

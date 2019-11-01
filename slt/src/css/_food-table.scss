@@ -1,5 +1,5 @@
 .food-table {
-  @include media-break($md) {
+  @media (min-width: $phone) {
     font-size: 16px;
   }
 
@@ -10,7 +10,7 @@
 .table-header {
   display: flex;
   flex-direction: row;
-  font-weight: bold;
+  font-weight: 400;
   color: $white;
   padding: 10px;
   background-color: $primary;
@@ -21,14 +21,14 @@
   }
 
   &__amount {
-    @include media-break($md) {
+    @media (min-width: $phone) {
       flex-basis: 10%;
     }
     flex-basis: 20%;
   }
 
   &__protein {
-    @include media-break($md) {
+    @media (min-width: $phone) {
       display: flex;
     }
     flex-basis: 10%;
@@ -36,7 +36,7 @@
     justify-content: center;
 
     &--mobile {
-      @include media-break($md) {
+      @media (min-width: $phone) {
         display: none;
       }
       display: flex;
@@ -50,7 +50,7 @@
   }
 
   &__fat {
-    @include media-break($md) {
+    @media (min-width: $phone) {
       display: flex;
     }
     flex-basis: 10%;
@@ -58,7 +58,7 @@
     justify-content: center;
 
     &--mobile {
-      @include media-break($md) {
+      @media (min-width: $phone) {
         display: none;
       }
       display: flex;
@@ -72,7 +72,7 @@
   }
 
   &__carbs {
-    @include media-break($md) {
+    @media (min-width: $phone) {
       display: flex;
     }
     flex-basis: 10%;
@@ -80,7 +80,7 @@
     justify-content: center;
 
     &--mobile {
-      @include media-break($md) {
+      @media (min-width: $phone) {
         display: none;
       }
       display: flex;
@@ -106,7 +106,7 @@
   }
 
   &__amount {
-    @include media-break($md) {
+    @media (min-width: $phone) {
       flex-basis: 10%;
     }
     flex-basis: 20%;
@@ -159,7 +159,7 @@
   }
 
   &__amount {
-    @include media-break($md) {
+    @media (min-width: $phone) {
       flex-basis: 10%;
     }
     flex-basis: 20%;

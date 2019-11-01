@@ -1,0 +1,23 @@
+@import "../../../../css/variables.scss";
+
+.radios {
+  display: flex;
+  flex-grow: 1;
+
+  &__option {
+    margin-right: 15px;
+  }
+}
+
+.stepper-wrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.more-info {
+  margin: 0.5rem 0;
+}
+
+.logday-wrapper {
+  margin-bottom: 1rem;
+}
