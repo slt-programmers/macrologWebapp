@@ -1,4 +1,4 @@
-import { browser, by, element } from 'protractor';
+import { browser, by, element, ExpectedConditions } from 'protractor';
 
 export class RegisterPage {
   navigateTo() {
@@ -45,9 +45,13 @@ export class RegisterPage {
         const deleteButton = element(by.css('button.button.button--warning'));
         deleteButton.click().then(function () {
           const passwordInput = element(by.css('div.modal__content input'));
-          passwordInput.sendKeys('testtest01');
-          const yesButton = element(by.css('div.modal__button-wrapper button.button.button--warning'));
-          yesButton.click();
+          passwordInput.sendKeys('testtest01').then(function () {
+            const yesButton = element(by.css('div.modal__button-wrapper button.button.button--warning'));
+            yesButton.click().then(function () {
+              const subtitle = element(by.css('h1.subtitle'));
+              browser.wait(ExpectedConditions.presenceOf(subtitle));
+            });
+          });
         });
       });
     });
