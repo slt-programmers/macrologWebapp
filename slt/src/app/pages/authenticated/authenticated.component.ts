@@ -109,6 +109,6 @@ export class AuthenticatedComponent implements OnInit {
 		this.smallMenuOpen = false;
 		this.sbs.preventScrolling(false);
 		this.authService.logout();
-		this.router.navigate(['login']);
+		this.router.navigate(['']);
 	}
 }
