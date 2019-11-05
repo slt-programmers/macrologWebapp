@@ -37,7 +37,7 @@ export class MailComponent implements OnInit {
         if (res.connected === 'true') {
           this.isConnected = true;
         }
-        this.clientId = res.syncedApplicationId;
+        this.clientId = +res.syncedApplicationId;
         this.setGoogleUrl();
         if (!this.isConnected) {
           this.checkRegistrationResponse();
