@@ -9,13 +9,9 @@ export class GoogleService {
 
 	private macrologBackendUrl = '//' + environment.backend + '/admin/mail';
 
-
-	constructor(private http: HttpClient) {
-
-	}
+	constructor(private http: HttpClient) { }
 
 	public getStatus() {
-    console.log(this.macrologBackendUrl);
 		return this.http.get<GoogleStatus>(this.macrologBackendUrl, { responseType: 'json' });
 	}
 
@@ -37,7 +33,6 @@ export class GoogleService {
 
 		const userInfo = { name: 'mailAdress', value: mailAddress };
 		const options = { headers: headers };
-		return this.http.post(this.macrologBackendUrl+"/testmail", userInfo, options);
+		return this.http.post(this.macrologBackendUrl + '/testmail', userInfo, options);
 	}
-
 }

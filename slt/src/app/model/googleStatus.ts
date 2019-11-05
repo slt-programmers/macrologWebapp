@@ -1,10 +1,8 @@
 export class GoogleStatus {
 
-	public id;
-	public connected;
-	public syncedApplicationId
+	public id: string;
+	public connected: string;
+	public syncedApplicationId: string;
 
-  constructor () {
-
-	}
+	constructor() { }
 }

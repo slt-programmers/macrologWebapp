@@ -35,6 +35,7 @@ import { DiaryService } from '@app/services/diary.service';
 import { UserService } from '@app/services/user.service';
 import { AdminService } from '@app/services/admin.service';
 import { ActivityService } from '@app/services/activity.service';
+import { MailComponent } from './admin/mail/mail.component';
 
 describe('Router authenticated', () => {
   let location: Location;

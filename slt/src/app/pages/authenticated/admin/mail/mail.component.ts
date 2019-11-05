@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { GoogleService } from '@app/services/google.service';
-import { GoogleStatus } from '@app/model/googleStatus';
 import { ActivatedRoute } from '@angular/router';
 import { environment } from '../../../../../environments/environment';
 
@@ -11,34 +10,31 @@ import { environment } from '../../../../../environments/environment';
 })
 export class MailComponent implements OnInit {
 
-  constructor(private googleService: GoogleService,
-    private route: ActivatedRoute) { }
-
-  private clientId: number;
   public googleConnectUrl: string;
   public isConnected = false;
   public syncError: string;
   public emailAddress: string;
   public mailSend = false;
 
+  private clientId: number;
   private code: string;
   private scope: string;
 
+  constructor(private googleService: GoogleService,
+    private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.retrieveStatus();
   }
-
 
   getStatus() {
     return true;
   }
 
   private retrieveStatus() {
-    console.log('getting status');
     this.googleService.getStatus().subscribe(
       res => {
-        if (res.connected == "true") {
+        if (res.connected === 'true') {
           this.isConnected = true;
         }
         this.clientId = res.syncedApplicationId;
@@ -47,10 +43,10 @@ export class MailComponent implements OnInit {
           this.checkRegistrationResponse();
         }
       },
-      err => {
+      () => {
         // TODO handle error
       }
-    )
+    );
   }
 
   private checkRegistrationResponse() {
@@ -70,23 +66,23 @@ export class MailComponent implements OnInit {
   }
 
   private storeConnection() {
-    console.log('Store the code' + this.code)
-    this.googleService.storeMailSyncSettings(this.code).subscribe(result => {
-      console.log(result);
-      this.isConnected = true;
-    });
+    this.googleService.storeMailSyncSettings(this.code).subscribe(
+      result => {
+        this.isConnected = true;
+      });
   }
   private setGoogleUrl() {
-    const googleUrl = 'https://accounts.google.com/o/oauth2/auth?response_type=code&approval_prompt=force&scope=https://www.googleapis.com/auth/gmail.send&state=GMAILCONNECT&access_type=offline'
+    const googleUrl = 'https://accounts.google.com/o/oauth2/auth?response_type=code&approval_prompt=force&scope=https://www.googleapis.com/auth/gmail.send&state=GMAILCONNECT&access_type=offline';
     const redirectUrl = environment.origin + '/admin/mail';
     this.googleConnectUrl = googleUrl + '&client_id=' + this.clientId + '&redirect_uri=' + redirectUrl;
   }
 
   private sendTestMail() {
     this.mailSend = false;
-    this.googleService.sendTestMail(this.emailAddress).subscribe(result => {
-      this.mailSend = true;
-      this.emailAddress = null;
-    });
+    this.googleService.sendTestMail(this.emailAddress).subscribe(
+      () => {
+        this.mailSend = true;
+        this.emailAddress = null;
+      });
   }
 }
