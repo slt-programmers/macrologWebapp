@@ -1,15 +1,15 @@
-import { LogMealComponent } from "./log-meal.component";
-import { async, TestBed, ComponentFixture } from "@angular/core/testing";
-import { NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA, SimpleChange } from "@angular/core";
-import { DiaryService } from "@app/services/diary.service";
-import { ToastService } from "@app/services/toast.service";
-import { HttpClientTestingModule } from "@angular/common/http/testing";
-import { By } from "@angular/platform-browser";
-import { LogEntry } from "@app/model/logEntry";
-import { Portion } from "@app/model/portion";
-import { Food } from "@app/model/food";
-import { FoodSearchable } from "@app/model/foodSearchable";
-import { StoreLogRequest } from "@app/model/storeLogRequest";
+import { LogMealComponent } from './log-meal.component';
+import { async, TestBed, ComponentFixture } from '@angular/core/testing';
+import { NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA, SimpleChange } from '@angular/core';
+import { DiaryService } from '@app/services/diary.service';
+import { ToastService } from '@app/services/toast.service';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { By } from '@angular/platform-browser';
+import { LogEntry } from '@app/model/logEntry';
+import { Portion } from '@app/model/portion';
+import { Food } from '@app/model/food';
+import { FoodSearchable } from '@app/model/foodSearchable';
+import { StoreLogRequest } from '@app/model/storeLogRequest';
 
 describe('LogMealComponent', () => {
     let component: LogMealComponent;
@@ -46,7 +46,7 @@ describe('LogMealComponent', () => {
         let changes = { ['date']: undefined };
         component.ngOnChanges(changes);
         expect(component.saveAndClose).not.toHaveBeenCalled();
-        changes = { ['date']: new SimpleChange(undefined, '2019-01-01', true) }
+        changes = { ['date']: new SimpleChange(undefined, '2019-01-01', true) };
         component.editable = true;
         component.ngOnChanges(changes);
         expect(component.saveAndClose).toHaveBeenCalled();
@@ -54,16 +54,16 @@ describe('LogMealComponent', () => {
 
     it('should handle changes to the editable property input', () => {
         spyOn(component, 'saveAndClose');
-        let changes = { ['open']: new SimpleChange(undefined, false, true) }
+        let changes = { ['open']: new SimpleChange(undefined, false, true) };
         component.ngOnChanges(changes);
         expect(component.saveAndClose).not.toHaveBeenCalled();
-        changes = { ['open']: new SimpleChange(undefined, false, false) }
+        changes = { ['open']: new SimpleChange(undefined, false, false) };
         component.ngOnChanges(changes);
         expect(component.saveAndClose).toHaveBeenCalled();
-        changes = { ['open']: new SimpleChange(true, true, false) }
+        changes = { ['open']: new SimpleChange(true, true, false) };
         component.ngOnChanges(changes);
         expect(component.editable).toBeTruthy();
-    })
+    });
 
     it('should close the editable log-meal', () => {
         component.meal = 'lunch';
@@ -77,12 +77,12 @@ describe('LogMealComponent', () => {
 
     it('should call setmultiplier when input changes', () => {
         spyOn(component, 'setLogEntryMultiplier');
-        let logEntry = new LogEntry();
+        const logEntry = new LogEntry();
         logEntry.id = 1;
-        let food = new Food('name', 1, 2, 3);
-        let portion = new Portion();
+        const food = new Food('name', 1, 2, 3);
+        const portion = new Portion();
         portion.description = 'desc';
-        let macros = { protein: 1, fat: 2, carbs: 3 };
+        const macros = { protein: 1, fat: 2, carbs: 3 };
         logEntry.food = food;
         logEntry.portion = portion;
         logEntry.macrosCalculated = macros;
@@ -101,9 +101,9 @@ describe('LogMealComponent', () => {
     });
 
     it('should set the multiplier on logentry', () => {
-        let logEntry = new LogEntry();
+        const logEntry = new LogEntry();
         logEntry.multiplier = 5;
-        let portion = new Portion();
+        const portion = new Portion();
         portion.description = 'desc';
         logEntry.portion = portion;
 
@@ -120,7 +120,7 @@ describe('LogMealComponent', () => {
     });
 
     it('should get amount value from logentry', () => {
-        let logEntry = new LogEntry();
+        const logEntry = new LogEntry();
         logEntry.multiplier = 5;
 
         let result = component.getAmountValue(logEntry);
@@ -132,12 +132,12 @@ describe('LogMealComponent', () => {
 
     it('should call amount change on keyup', () => {
         spyOn(component, 'amountChange');
-        let logEntry = new LogEntry();
+        const logEntry = new LogEntry();
         logEntry.id = 1;
-        let food = new Food('name', 1, 2, 3);
-        let portion = new Portion();
+        const food = new Food('name', 1, 2, 3);
+        const portion = new Portion();
         portion.description = 'desc';
-        let macros = { protein: 1, fat: 2, carbs: 3 };
+        const macros = { protein: 1, fat: 2, carbs: 3 };
         logEntry.food = food;
         logEntry.portion = portion;
         logEntry.macrosCalculated = macros;
@@ -155,13 +155,13 @@ describe('LogMealComponent', () => {
     });
 
     it('should update macros calculated on logentry', () => {
-        let logEntry = new LogEntry();
+        const logEntry = new LogEntry();
         logEntry.multiplier = 3;
-        let food = new Food('name', 1, 2, 3);
-        let portion = new Portion();
+        const food = new Food('name', 1, 2, 3);
+        const portion = new Portion();
         portion.description = 'desc';
         portion.macros = { protein: 2, fat: 4, carbs: 6, calories: 8 };
-        let macros = { protein: 0, fat: 0, carbs: 0, calories: 0 };
+        const macros = { protein: 0, fat: 0, carbs: 0, calories: 0 };
         logEntry.food = food;
         logEntry.portion = portion;
         logEntry.macrosCalculated = macros;
@@ -177,7 +177,7 @@ describe('LogMealComponent', () => {
     });
 
     it('should return whether grams is selected', () => {
-        let logEntry = new LogEntry();
+        const logEntry = new LogEntry();
         let result = component.isGramsSelected(logEntry);
         expect(result).toEqual(true);
 
@@ -191,9 +191,9 @@ describe('LogMealComponent', () => {
     });
 
     it('should return whether unit is selected', () => {
-        let portion = new Portion();
+        const portion = new Portion();
         portion.description = 'desc';
-        let logEntry = new LogEntry();
+        const logEntry = new LogEntry();
         logEntry.portion = portion;
         let result = component.isUnitSelected(logEntry, portion);
         expect(result).toEqual(true);
@@ -204,22 +204,22 @@ describe('LogMealComponent', () => {
     });
 
     it('should get available portions', () => {
-        let food = new Food('name', 1, 2, 3);
+        const food = new Food('name', 1, 2, 3);
         food.id = 5;
-        let portionOne = new Portion();
+        const portionOne = new Portion();
         portionOne.description = 'portionOne';
-        let portionTwo = new Portion();
+        const portionTwo = new Portion();
         portionTwo.description = 'portionTwo';
         food.portions = [portionOne, portionTwo];
-        let searchables = [new FoodSearchable(food)];
+        const searchables = [new FoodSearchable(food)];
         component.searchables = searchables;
 
-        let logEntry = new LogEntry();
+        const logEntry = new LogEntry();
         logEntry.food = food;
         let result = component.getAvailablePortions(logEntry);
         expect(result).toEqual([portionOne, portionTwo]);
 
-        let newFood = new Food('name', 1, 2, 3);
+        const newFood = new Food('name', 1, 2, 3);
         newFood.id = 6;
         logEntry.food = newFood;
         result = component.getAvailablePortions(logEntry);
@@ -229,15 +229,15 @@ describe('LogMealComponent', () => {
     it('should change portion on logentry', () => {
         spyOn(component, 'updateCalculatedMacros');
         let event = { target: { value: 'grams' } };
-        let logEntry = new LogEntry();
-        let food = new Food('name', 1, 2, 3);
-        let portionOne = new Portion();
+        const logEntry = new LogEntry();
+        const food = new Food('name', 1, 2, 3);
+        const portionOne = new Portion();
         portionOne.description = 'portionOne';
-        let portionTwo = new Portion();
+        const portionTwo = new Portion();
         portionTwo.description = 'portionTwo';
         food.portions = [portionOne, portionTwo];
         logEntry.food = food;
-        let portion = new Portion();
+        const portion = new Portion();
         portion.description = 'stuk';
         logEntry.portion = portion;
 
@@ -252,15 +252,15 @@ describe('LogMealComponent', () => {
 
     it('should add new logentry', () => {
         spyOn(component, 'updateCalculatedMacros');
-        let searchable = new FoodSearchable(new Food('name', 1, 2, 3));
+        const searchable = new FoodSearchable(new Food('name', 1, 2, 3));
         component.logEntries = [];
         component.meal = 'lunch';
-        let date = new Date();
+        const date = new Date();
         component.date = date;
 
         component.addLogEntry(searchable);
         expect(component.updateCalculatedMacros).toHaveBeenCalled();
-        let result = new LogEntry();
+        const result = new LogEntry();
         result.meal = 'LUNCH';
         result.day = date;
         result.food = new Food('name', 1, 2, 3);
@@ -270,9 +270,9 @@ describe('LogMealComponent', () => {
     it('should save and close', () => {
         spyOn(component, 'close');
         spyOn(diaryService, 'storeLogEntries');
-        let logEntry = new LogEntry();
+        const logEntry = new LogEntry();
         logEntry.id = 1;
-        let food = new Food('name', 1, 2, 3);
+        const food = new Food('name', 1, 2, 3);
         food.id = 123;
         logEntry.food = food;
         logEntry.multiplier = 5;
@@ -280,15 +280,15 @@ describe('LogMealComponent', () => {
         component.meal = 'LUNCH';
         component.logEntries = [logEntry];
 
-        let resultReuqest = new StoreLogRequest();
+        const resultReuqest = new StoreLogRequest();
         resultReuqest.id = 1;
         resultReuqest.foodId = 123;
         resultReuqest.multiplier = 5;
         resultReuqest.day = '2019-01-01';
         resultReuqest.meal = 'LUNCH';
 
-        let allEntries = [resultReuqest];
-        let callback = () => {
+        const allEntries = [resultReuqest];
+        const callback = () => {
         };
         component.closeCallBack = callback;
         component.saveAndClose();

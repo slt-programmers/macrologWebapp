@@ -7,16 +7,19 @@ import { throwError, of } from 'rxjs';
 
 import { FormsModule } from '@angular/forms';
 import { ToastService } from '@app/services/toast.service';
+import { RouterTestingModule } from '@angular/router/testing';
+import { Router } from '@angular/router';
 
 describe('AccountComponent', () => {
   let component: AccountComponent;
   let fixture: ComponentFixture<AccountComponent>;
   let authService: AuthenticationService;
   let toastService: ToastService;
+  let router: Router;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [FormsModule],
+      imports: [FormsModule, RouterTestingModule],
       declarations: [AccountComponent],
       providers: [AuthenticationService, ToastService, HttpClient, HttpHandler],
       schemas: [NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA]
@@ -28,11 +31,12 @@ describe('AccountComponent', () => {
     component = fixture.componentInstance;
     authService = TestBed.get(AuthenticationService);
     toastService = TestBed.get(ToastService);
+    router = TestBed.get(Router);
   });
 
   afterEach(() => {
     localStorage.clear();
-  })
+  });
 
   it('should create account component', () => {
     expect(component).toBeTruthy();
@@ -66,4 +70,23 @@ describe('AccountComponent', () => {
     expect(component.confirmPassword).toEqual('');
   }));
 
+  it('should delete account', fakeAsync(() => {
+    const authSpy = spyOn(authService, 'deleteAccount').and.returnValue(of({ status: 200 }));
+    spyOn(router, 'navigate');
+    localStorage.setItem('currentUser', 'user');
+    component.password = 'password';
+    component.deleteAccount();
+    expect(authService.deleteAccount).toHaveBeenCalledWith('password');
+    tick();
+    expect(router.navigate).toHaveBeenCalledWith(['/']);
+    expect(localStorage.getItem('currentUser')).toBeNull();
+
+    authSpy.and.returnValue(throwError({status: 401}));
+    localStorage.setItem('currentUser', 'user');
+    component.deleteAccount();
+    expect(authService.deleteAccount).toHaveBeenCalledWith('password');
+    tick();
+    expect(localStorage.getItem('currentUser')).toEqual('user');
+    expect(component.errorMessage).toEqual('Password is incorrect');
+  }));
 });

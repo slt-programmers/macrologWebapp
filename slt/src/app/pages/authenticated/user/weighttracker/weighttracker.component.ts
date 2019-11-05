@@ -16,7 +16,7 @@ export class WeightTrackerComponent {
 
   public trackedWeights = new Array<Weight>();
   public measurementDate: string;
-  public weight;
+  public weight: number;
   public remark: string;
   public openWeight;
 

@@ -1,9 +1,9 @@
-import { TestBed, fakeAsync, tick } from "@angular/core/testing";
+import { TestBed, fakeAsync, tick } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
-import { DiaryService } from "./diary.service";
-import { LogEntry } from "@app/model/logEntry";
-import { ToastService } from "./toast.service";
-import { StoreLogRequest } from "@app/model/storeLogRequest";
+import { DiaryService } from './diary.service';
+import { LogEntry } from '@app/model/logEntry';
+import { ToastService } from './toast.service';
+import { StoreLogRequest } from '@app/model/storeLogRequest';
 
 describe('DiaryService', () => {
     let service: DiaryService;
@@ -20,7 +20,7 @@ describe('DiaryService', () => {
 
     afterEach(() => {
         localStorage.clear();
-    })
+    });
 
     it('should create service', () => {
         expect(service).toBeTruthy();
@@ -33,7 +33,7 @@ describe('DiaryService', () => {
         service.getLogsForDay('2019-01-01').subscribe(
             res => {
                 expect(res[0].id).toEqual(123);
-             }
+            }
         );
         const request = http.expectOne(service.macrologBackendUrl + '/day/2019-01-01');
         expect(request.request.method).toEqual('GET');
@@ -43,11 +43,11 @@ describe('DiaryService', () => {
     }));
 
     it('should get macros', fakeAsync(() => {
-        const mockResponse = [{macro: 'macro'}];
+        const mockResponse = [{ macro: 'macro' }];
         service.getMacrosPerDay('2019-01-01', '2019-01-02').subscribe(
             res => {
                 expect(res[0].macro).toEqual('macro');
-             }
+            }
         );
         const request = http.expectOne(service.macrologBackendUrl + '/macros?from=2019-01-01&to=2019-01-02');
         expect(request.request.method).toEqual('GET');
@@ -56,12 +56,12 @@ describe('DiaryService', () => {
         http.verify();
     }));
 
-    it('should store log entries', fakeAsync(() => { 
+    it('should store log entries', fakeAsync(() => {
         const mockStoreLog = new StoreLogRequest();
         let result = false;
         const mockCallback = () => {
             result = true;
-        }
+        };
         mockStoreLog.id = 123;
         const mockResponse = [mockStoreLog];
         service.storeLogEntries(mockResponse, mockCallback);
@@ -79,10 +79,8 @@ describe('DiaryService', () => {
         service.deleteLogEntry(mockLog);
         const request = http.expectOne(service.macrologBackendUrl + '/' + 123);
         expect(request.request.method).toEqual('DELETE');
-        request.flush({status: 200});
+        request.flush({ status: 200 });
         tick();
         http.verify();
     }));
-
-
-})
+});

@@ -19,12 +19,12 @@
 
   &__title {
     flex-basis: 20%;
-    font-weight: 400;
+    font-weight: 600;
     margin-bottom: 5px;
 
-    &--sync{
-       margin-left:5px;
-       cursor: pointer;
+    &--sync {
+      margin-left: 5px;
+      cursor: pointer;
     }
   }
 
@@ -49,8 +49,8 @@
     flex-basis: 60%;
 
     &--sync {
-       font-style:italic;
-       padding-left:5px;
+      font-style: italic;
+      padding-left: 5px;
     }
   }
   &__calories {
@@ -80,7 +80,7 @@
         flex-basis: 30%;
       }
       flex-basis: 75%;
-	}
+    }
 
     &__filler {
       @media (min-width: $phone) {
@@ -94,7 +94,7 @@
       }
       flex-basis: 25%;
       text-align: end;
-	}
+    }
 
     &__delete {
       @media (min-width: $phone) {

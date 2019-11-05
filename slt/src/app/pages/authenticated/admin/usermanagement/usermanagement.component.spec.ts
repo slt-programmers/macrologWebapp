@@ -43,7 +43,7 @@ describe('UserManagementComponent', () => {
   });
 
   it('should init usermanagement component', fakeAsync(() => {
-    const adminSpy = spyOn(adminService, 'getAllUsers').and.returnValue(of(allUsers))
+    const adminSpy = spyOn(adminService, 'getAllUsers').and.returnValue(of(allUsers));
     component.ngOnInit();
     tick();
     fixture.detectChanges();
@@ -60,7 +60,7 @@ describe('UserManagementComponent', () => {
   it('should open and close delete user modal', fakeAsync(() => {
     const userAccount = new UserAccount();
     userAccount.id = 123;
-    userAccount.userName = 'Test'
+    userAccount.userName = 'Test';
     component.openModalWithUser(userAccount);
     expect(component.isModalVisible).toBeTruthy();
     component.closeModal();

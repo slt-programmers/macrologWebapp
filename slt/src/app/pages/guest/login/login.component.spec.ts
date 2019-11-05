@@ -41,14 +41,14 @@ describe('LoginComponent', () => {
 	});
 
 	it('should log in', fakeAsync(() => {
-		let loginSpy = spyOn(authService, 'login').and.returnValue(of(undefined));
+		const loginSpy = spyOn(authService, 'login').and.returnValue(of(undefined));
 		spyOn(router, 'navigate');
 		component.usernameOrEmail = 'username';
 		component.password = 'password';
 
 		const loginButton = fixture.debugElement.query(By.css('#loginBtn'));
 		loginButton.nativeElement.click();
-		tick()
+		tick();
 		fixture.detectChanges();
 
 		expect(authService.login).toHaveBeenCalledWith('username', 'password');
@@ -57,7 +57,7 @@ describe('LoginComponent', () => {
 
 		loginSpy.and.returnValue(throwError({ status: 404 }));
 		loginButton.nativeElement.click();
-		tick()
+		tick();
 		fixture.detectChanges();
 
 		expect(authService.login).toHaveBeenCalledWith('username', 'password');
@@ -65,8 +65,8 @@ describe('LoginComponent', () => {
 	}));
 
 	it('should register new user', fakeAsync(() => {
-		let registerSpy = spyOn(authService, 'register').and.returnValue(of({}));
-		let loginSpy = spyOn(authService, 'login').and.returnValue(of(undefined));
+		const registerSpy = spyOn(authService, 'register').and.returnValue(of({}));
+		const loginSpy = spyOn(authService, 'login').and.returnValue(of(undefined));
 		spyOn(router, 'navigate');
 		component.newUsername = 'username';
 		component.newEmail = 'email@email.com';
@@ -112,22 +112,22 @@ describe('LoginComponent', () => {
 		component.newPassword = 'password';
 		registerSpy.and.returnValue(throwError({ status: 401, error: 'Username or email already in use' }));
 		registerButton.nativeElement.click();
-		tick()
+		tick();
 		fixture.detectChanges();
-		expect(component.registerError).toEqual('Username or email is already in use. Please try a different username or use \"Forgot password\" to retrieve a new password.');
+		expect(component.registerError).toEqual('Username or email is already in use. Please try a different username or use \'Forgot password\' to retrieve a new password.');
 
 
 		// other error 401
 		registerSpy.and.returnValue(throwError({ status: 401, error: 'Error' }));
 		registerButton.nativeElement.click();
-		tick()
+		tick();
 		fixture.detectChanges();
 		expect(component.registerError).toEqual('Unknown error during registration.');
 
 		// other error
 		registerSpy.and.returnValue(throwError({ status: 404 }));
 		registerButton.nativeElement.click();
-		tick()
+		tick();
 		fixture.detectChanges();
 		expect(component.registerError).toEqual('Unknown error during registration.');
 	}));
@@ -143,15 +143,15 @@ describe('LoginComponent', () => {
 		forgotModalButton.nativeElement.click();
 		fixture.detectChanges();
 		expect(component.showForgotPwModal).toBeFalsy();
-	})
+	});
 
 	it('should reset password', fakeAsync(() => {
-		let resetSpy = spyOn(authService, 'resetPassword').and.returnValue(of({}));
+		const resetSpy = spyOn(authService, 'resetPassword').and.returnValue(of({}));
 		spyOn(toastService, 'setMessage');
 		component.forgotError = 'error';
 		component.forgotEmail = 'email@email.com';
 
-		let forgotLink = fixture.debugElement.query(By.css('#forgotLink'));
+		const forgotLink = fixture.debugElement.query(By.css('#forgotLink'));
 		forgotLink.nativeElement.click();
 		fixture.detectChanges();
 
@@ -164,12 +164,12 @@ describe('LoginComponent', () => {
 		expect(toastService.setMessage).toHaveBeenCalled();
 		expect(component.showForgotPwModal).toBeFalsy();
 
-		resetSpy.and.returnValue(throwError({ status: 404 }))
+		resetSpy.and.returnValue(throwError({ status: 404 }));
 		forgotLink.nativeElement.click();
 		fixture.detectChanges();
 		resetBtn = fixture.debugElement.query(By.css('#resetBtn'));
 		// the button was gone when the model was closed
-		resetBtn.nativeElement.click()
+		resetBtn.nativeElement.click();
 		tick();
 		fixture.detectChanges();
 		expect(component.forgotError).toEqual('The email adress was not found');

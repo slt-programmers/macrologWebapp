@@ -34,9 +34,9 @@ describe('AuthenticatedComponent', () => {
 
   afterEach(() => {
     localStorage.clear();
-  })
+  });
 
-  it('should create the app', () => {
+  it('should create authenticated component', () => {
     expect(component).toBeTruthy();
   });
 
@@ -70,7 +70,7 @@ describe('AuthenticatedComponent', () => {
   }));
 
   it('should open menu', () => {
-    spyOn(scrollBehaviourService, 'preventScrolling')
+    spyOn(scrollBehaviourService, 'preventScrolling');
     component.smallMenuOpen = false;
     component.openMenu();
     expect(component.smallMenuOpen).toBeTruthy();
@@ -80,16 +80,16 @@ describe('AuthenticatedComponent', () => {
   });
 
   it('should close menu', () => {
-    spyOn(scrollBehaviourService, 'preventScrolling')
+    spyOn(scrollBehaviourService, 'preventScrolling');
     component.smallMenuOpen = true;
     component.closeMenu();
     expect(component.smallMenuOpen).toBeFalsy();
-  })
+  });
 
   it('should determine if admin', () => {
     let result = component.isAdmin();
     expect(result).toBeFalsy();
-    localStorage.setItem('currentUser', '{"user": "Carmen", "admin": "true"}');
+    localStorage.setItem('currentUser', JSON.stringify({ 'user': 'Carmen', 'admin': 'true' }));
     result = component.isAdmin();
     expect(result).toBeTruthy();
   });
