@@ -16,7 +16,7 @@ export class MailComponent implements OnInit {
   public emailAddress: string;
   public mailSend = false;
 
-  private clientId: number;
+  private clientId: string;
   private code: string;
   private scope: string;
 
@@ -34,10 +34,10 @@ export class MailComponent implements OnInit {
   private retrieveStatus() {
     this.googleService.getStatus().subscribe(
       res => {
-        if (res.connected === 'true') {
+        if (res.connected === true) {
           this.isConnected = true;
         }
-        this.clientId = +res.syncedApplicationId;
+        this.clientId = res.syncedApplicationId;
         this.setGoogleUrl();
         if (!this.isConnected) {
           this.checkRegistrationResponse();
