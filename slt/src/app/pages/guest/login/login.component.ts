@@ -9,8 +9,8 @@ import { AlertService } from '@app/services/alert.service';
 	animations: [
 		trigger('enterLeaveTrigger', [
 			transition(':enter', [
-				style({ opacity: 0, marginTop: '15px' }),
-				animate('0.3s', style({ opacity: 1, marginTop: '0' })),
+				style({ transform: 'translateY(15px)' }),
+				animate('300ms', style({ transform: 'translateY(0px)' }))
 			]),
 		]),
 	],

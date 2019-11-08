@@ -72,7 +72,7 @@ import { AlertService } from './services/alert.service';
 		ScrollBehaviourService,
 		HealthcheckService,
 		WebhookService,
-        GoogleService,
+		GoogleService,
 		{ provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
 		{ provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
 	],
