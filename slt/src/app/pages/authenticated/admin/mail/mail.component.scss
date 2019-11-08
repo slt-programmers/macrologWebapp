@@ -1,6 +1,6 @@
 @import "../../../../../css/variables.scss";
 
-.webhook__card {
+.mail {
   color: $coal;
   display: flex;
   flex-direction: row;
@@ -9,29 +9,22 @@
   &__logo {
     padding: 25px;
     width: 250px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   &__info {
     padding: 25px;
-  }
 
-  &__status {
-    font-weight: 600;
-    padding-bottom: 10px;
-  }
-}
-.webhook__status {
-  &__details {
-    display: flex;
-    flex-direction: column;
-
-    &__line {
-      display: flex;
-      flex-direction: row;
+    &__status {
+      font-weight: 600;
+      padding-bottom: 10px;
     }
-    
-    &__text {
-      width: 150px;
+
+    &__details {
+      display: flex;
+      flex-direction: column;
     }
   }
 }

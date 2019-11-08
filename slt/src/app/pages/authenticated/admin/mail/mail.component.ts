@@ -67,7 +67,7 @@ export class MailComponent implements OnInit {
 
   private storeConnection() {
     this.googleService.storeMailSyncSettings(this.code).subscribe(
-      result => {
+      () => {
         this.isConnected = true;
       });
   }
@@ -81,6 +81,7 @@ export class MailComponent implements OnInit {
     this.mailSend = false;
     this.googleService.sendTestMail(this.emailAddress).subscribe(
       () => {
+        // TODO use alert/toaster
         this.mailSend = true;
         this.emailAddress = null;
       });
