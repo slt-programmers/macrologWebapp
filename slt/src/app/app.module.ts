@@ -29,6 +29,7 @@ import { ScrollBehaviourService } from './services/scroll-behaviour.service';
 import { HealthcheckService } from './services/healthcheck.service';
 import { AdminService } from './services/admin.service';
 import { WebhookService } from './services/webhook.service';
+import { GoogleService } from './services/google.service';
 import { HomeComponent } from './pages/guest/home/home.component';
 import { AppRoutingModule } from './app-routing.module';
 import { AuthenticatedModule } from './pages/authenticated/authenticated.module';
@@ -71,6 +72,7 @@ import { AlertService } from './services/alert.service';
 		ScrollBehaviourService,
 		HealthcheckService,
 		WebhookService,
+        GoogleService,
 		{ provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
 		{ provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
 	],

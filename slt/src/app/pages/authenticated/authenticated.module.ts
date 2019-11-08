@@ -11,6 +11,7 @@ import { FoodComponent } from './food/food.component';
 import { UserComponent } from './user/user.component';
 import { UserManagementComponent } from './admin/usermanagement/usermanagement.component';
 import { WebhooksComponent } from './admin/webhooks/webhooks.component';
+import { MailComponent } from './admin/mail/mail.component';
 import { IntakeComponent } from './user/intake/intake.component';
 import { PersonalComponent } from './user/personal/personal.component';
 import { AccountComponent } from './user/account/account.component';
@@ -62,6 +63,7 @@ import { MatTableModule } from '@angular/material/table';
     UserComponent,
     UserManagementComponent,
     WebhooksComponent,
+    MailComponent,
     IntakeComponent,
     PersonalComponent,
     AccountComponent,
