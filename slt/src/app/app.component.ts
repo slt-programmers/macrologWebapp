@@ -3,30 +3,31 @@ import { Router } from '@angular/router';
 import { HealthcheckService } from './services/healthcheck.service';
 
 @Component({
-	selector: 'app-root',
-	templateUrl: './app.component.html'
+  selector: 'app-root',
+  templateUrl: './app.component.html',
 })
 export class AppComponent implements OnInit {
+  private asleep = true;
 
-	private asleep = true;
+  constructor(
+    public router: Router,
+    private healthcheckService: HealthcheckService
+  ) {}
 
-	constructor(public router: Router,
-		private healthcheckService: HealthcheckService) {
-	}
+  ngOnInit(): void {
+    this.healthcheckService.checkState().subscribe(
+      (result) => {
+        this.asleep = !result;
+      },
+      (error) => {
+        if (error.status === 403) {
+          this.asleep = !error;
+        }
+      }
+    );
+  }
 
-	ngOnInit() {
-		this.healthcheckService.checkState().subscribe(
-			result => {
-				this.asleep = !result;
-			},
-			error => {
-				if (error.status === 403) {
-					this.asleep = !error;
-				}
-			});
-	}
-
-	public isAsleep(): boolean {
-		return this.asleep;
-	}
+  isAsleep(): boolean {
+    return this.asleep;
+  }
 }
