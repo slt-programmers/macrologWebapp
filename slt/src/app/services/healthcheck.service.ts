@@ -4,16 +4,14 @@ import { Observable } from 'rxjs/internal/Observable';
 import { environment } from '../../environments/environment';
 
 @Injectable({
-	providedIn: 'root'
+  providedIn: 'root',
 })
 export class HealthcheckService {
+  private macrologBackendUrl = '//' + environment.backend + '/healthcheck';
 
-	private macrologBackendUrl = '//' + environment.backend + '/healthcheck';
+  constructor(private http: HttpClient) {}
 
-	constructor(private http: HttpClient) { }
-
-	public checkState(): Observable<boolean> {
-		return this.http.get<boolean>(this.macrologBackendUrl);
-	}
-
+  public checkState(): Observable<boolean> {
+    return this.http.get<boolean>(this.macrologBackendUrl);
+  }
 }
