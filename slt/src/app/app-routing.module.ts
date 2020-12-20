@@ -9,12 +9,16 @@ import { GuestGuardService } from './services/guest-guard.service';
 export const routes: Routes = [
   { path: '', component: HomeComponent, canActivate: [GuestGuardService] },
   { path: 'about', component: AboutComponent },
-  { path: 'login', component: LoginComponent, canActivate: [GuestGuardService] },
-  { path: '*', component: AuthenticatedComponent }
+  {
+    path: 'login',
+    component: LoginComponent,
+    canActivate: [GuestGuardService],
+  },
+  { path: '*', component: AuthenticatedComponent },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

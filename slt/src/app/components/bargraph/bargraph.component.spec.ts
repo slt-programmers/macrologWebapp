@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { BargraphComponent } from './bargraph.component';
 import { DataPoint } from '../linegraph/linegraph.component';
 import { SimpleChange } from '@angular/core';
@@ -7,14 +7,10 @@ describe('BargraphComponent', () => {
   let component: BargraphComponent;
   let fixture: ComponentFixture<BargraphComponent>;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [BargraphComponent]
-    })
-      .compileComponents();
-  }));
-
   beforeEach(() => {
+    TestBed.configureTestingModule({
+      declarations: [BargraphComponent],
+    }).compileComponents();
     fixture = TestBed.createComponent(BargraphComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
@@ -37,7 +33,7 @@ describe('BargraphComponent', () => {
     component.xAxisPoints = undefined;
     component.yAxisPoints = undefined;
     const simpleChange = new SimpleChange(undefined, makeDataSets, true);
-    const simpleChanges = { 'datasets': simpleChange };
+    const simpleChanges = { datasets: simpleChange };
     component.ngOnChanges(simpleChanges);
     expect(component.xAxisPoints).not.toBeDefined();
     expect(component.yAxisPoints).not.toBeDefined();
@@ -55,7 +51,7 @@ describe('BargraphComponent', () => {
     component.datasets = makeDataSets();
     component.yAxisStep = 10;
     const simpleChange = new SimpleChange(undefined, makeDataSets, true);
-    const simpleChanges = { 'datasets': simpleChange };
+    const simpleChanges = { datasets: simpleChange };
     component.ngOnChanges(simpleChanges);
     expect(component.yAxisPoints).toEqual([30, 20, 10]);
 
@@ -78,7 +74,7 @@ describe('BargraphComponent', () => {
   it('should determine x-axis points', () => {
     component.datasets = makeDataSets();
     const simpleChange = new SimpleChange(undefined, makeDataSets, true);
-    const simpleChanges = { 'datasets': simpleChange };
+    const simpleChanges = { datasets: simpleChange };
     component.ngOnChanges(simpleChanges);
     expect(component.xAxisPoints).toEqual([1, 2, 3]);
   });
@@ -88,7 +84,7 @@ describe('BargraphComponent', () => {
     component.yAxisStep = 10;
     component.datasets = makeDataSets();
     const simpleChange = new SimpleChange(undefined, makeDataSets, true);
-    const simpleChanges = { 'datasets': simpleChange };
+    const simpleChanges = { datasets: simpleChange };
 
     component.ngOnChanges(simpleChanges);
     expect(component.yAxisPoints).toEqual([30, 20, 10]);
@@ -104,7 +100,7 @@ describe('BargraphComponent', () => {
     component.datasets = makeDataSets();
     component.datasets[0][0].y = undefined;
     const simpleChange = new SimpleChange(undefined, makeDataSets, true);
-    const simpleChanges = { 'datasets': simpleChange };
+    const simpleChanges = { datasets: simpleChange };
 
     component.ngOnChanges(simpleChanges);
     expect(component.yAxisPoints).toEqual([30, 20, 10]);
@@ -112,8 +108,16 @@ describe('BargraphComponent', () => {
 
   function makeDataSets() {
     let datasets: DataPoint[][];
-    const datasetOne = [new DataPoint(1, 15), new DataPoint(2, 14), new DataPoint(3, 13)];
-    const datasetTwo = [new DataPoint(1, 10), new DataPoint(2, 12), new DataPoint(3, 14)];
+    const datasetOne = [
+      new DataPoint(1, 15),
+      new DataPoint(2, 14),
+      new DataPoint(3, 13),
+    ];
+    const datasetTwo = [
+      new DataPoint(1, 10),
+      new DataPoint(2, 12),
+      new DataPoint(3, 14),
+    ];
     datasets = [datasetOne, datasetTwo];
     return datasets;
   }

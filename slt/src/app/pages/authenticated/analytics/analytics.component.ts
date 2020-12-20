@@ -2,22 +2,21 @@ import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { DiaryService } from '../../../services/diary.service';
 import { UserService } from '../../../services/user.service';
 import * as moment from 'moment';
-import { MacrosPerDay } from '@app/model/macrosPerDay';
-import { DataPoint } from '@app/components/linegraph/linegraph.component';
-
+import { DataPoint } from 'src/app/components/linegraph/linegraph.component';
+import { MacrosPerDay } from 'src/app/model/macrosPerDay';
+import { Macros } from 'src/app/model/macro';
 
 @Component({
   selector: 'graphs',
   templateUrl: './analytics.component.html',
-  styleUrls: ['./analytics.component.scss']
+  styleUrls: ['./analytics.component.scss'],
 })
 export class GraphsComponent implements OnInit {
-
   constructor(
     private logService: DiaryService,
     private userService: UserService,
-    private ref: ChangeDetectorRef) {
-  }
+    private ref: ChangeDetectorRef
+  ) {}
 
   public measurement = 'calories';
   public measurementOption = 'total';
@@ -25,14 +24,12 @@ export class GraphsComponent implements OnInit {
   public splitted = false;
   public percentages = false;
   public loading = true;
+  public dateTo: Date;
+  public dateFrom: Date;
 
-  private userGoals;
+  private userGoals: any[];
   private goalCalories = 0;
-
   private allMacros: MacrosPerDay[] = [];
-
-  private dateFrom: Date;
-  private dateTo: Date;
 
   public yAxisStep = 20;
 
@@ -53,8 +50,8 @@ export class GraphsComponent implements OnInit {
   public proteinMarker: number;
   public fatMarker: number;
   public carbsMarker: number;
-  public markers = [];
-  public ratioMarkers = [];
+  public markers: any[] = [];
+  public ratioMarkers: any[] = [];
 
   private numberOfValues = 30;
   // Types of graphs:
@@ -120,33 +117,47 @@ export class GraphsComponent implements OnInit {
   private getLogData() {
     this.loading = true;
     this.allMacros = [];
-    this.logService.getMacrosPerDay(moment(this.dateFrom).format('YYYY-MM-DD'), moment(this.dateTo).format('YYYY-MM-DD')).subscribe(
-      data => {
-        this.allMacros = data;
-        this.getGoals();
-      },
-      () => {
-        this.allMacros = [];
-      });
+    this.logService
+      .getMacrosPerDay(
+        moment(this.dateFrom).format('YYYY-MM-DD'),
+        moment(this.dateTo).format('YYYY-MM-DD')
+      )
+      .subscribe(
+        (data) => {
+          this.allMacros = data;
+          this.getGoals();
+        },
+        () => {
+          this.allMacros = [];
+        }
+      );
   }
 
   private getGoals() {
-    this.userService.getUserGoalStats(moment(this.dateFrom).format('YYYY-MM-DD')).subscribe(
-      data => {
-        if (data[0] === null) {
-          this.userGoals = null;
-        } else {
-          this.userGoals = data;
+    this.userService
+      .getUserGoalStats(moment(this.dateFrom).format('YYYY-MM-DD'))
+      .subscribe(
+        (data) => {
+          if (data[0] === null) {
+            this.userGoals = null;
+          } else {
+            this.userGoals = data;
+          }
+          this.setGoalCalories();
+          this.numberOfValues =
+            (this.dateTo.getTime() - this.dateFrom.getTime()) /
+              1000 /
+              60 /
+              60 /
+              24 +
+            1;
+          this.getDatasets();
+          this.loading = false;
+        },
+        (error) => {
+          // TODO handle error
         }
-        this.setGoalCalories();
-        this.numberOfValues = ((this.dateTo.getTime() - this.dateFrom.getTime()) / 1000 / 60 / 60 / 24) + 1;
-        this.getDatasets();
-        this.loading = false;
-      },
-      error => {
-        // TODO handle error
-      }
-    );
+      );
   }
 
   private getDatasets() {
@@ -173,11 +184,17 @@ export class GraphsComponent implements OnInit {
       let fatForDay: number;
       let carbsForDay: number;
       if (type === 'calories') {
-        proteinForDay = this.getMacroForDay(day, this.numberOfValues, 'protein') * 4;
+        proteinForDay =
+          this.getMacroForDay(day, this.numberOfValues, 'protein') * 4;
         fatForDay = this.getMacroForDay(day, this.numberOfValues, 'fat') * 9;
-        carbsForDay = this.getMacroForDay(day, this.numberOfValues, 'carbs') * 4;
+        carbsForDay =
+          this.getMacroForDay(day, this.numberOfValues, 'carbs') * 4;
       } else {
-        proteinForDay = this.getMacroForDay(day, this.numberOfValues, 'protein');
+        proteinForDay = this.getMacroForDay(
+          day,
+          this.numberOfValues,
+          'protein'
+        );
         fatForDay = this.getMacroForDay(day, this.numberOfValues, 'fat');
         carbsForDay = this.getMacroForDay(day, this.numberOfValues, 'carbs');
       }
@@ -187,9 +204,18 @@ export class GraphsComponent implements OnInit {
       const fatDataPoint = new DataPoint(daynumber, fatForDay);
       const carbsDataPoint = new DataPoint(daynumber, carbsForDay);
 
-      const proteinRatioDataPoint = new DataPoint(daynumber, proteinForDay / total * 100);
-      const fatRatioDataPoint = new DataPoint(daynumber, fatForDay / total * 100);
-      const carbsRatioDataPoint = new DataPoint(daynumber, carbsForDay / total * 100);
+      const proteinRatioDataPoint = new DataPoint(
+        daynumber,
+        (proteinForDay / total) * 100
+      );
+      const fatRatioDataPoint = new DataPoint(
+        daynumber,
+        (fatForDay / total) * 100
+      );
+      const carbsRatioDataPoint = new DataPoint(
+        daynumber,
+        (carbsForDay / total) * 100
+      );
 
       carbsDataset.push(carbsDataPoint);
       fatDataset.push(fatDataPoint);
@@ -207,7 +233,8 @@ export class GraphsComponent implements OnInit {
     this.carbsRatioDataset = carbsRatioDataset;
     this.reverseDatasets();
 
-    const totalGoals = this.userGoals[0] + this.userGoals[1] + this.userGoals[2];
+    const totalGoals =
+      this.userGoals[0] + this.userGoals[1] + this.userGoals[2];
 
     if (type === 'calories') {
       this.proteinMarker = this.userGoals[0] * 4;
@@ -215,11 +242,21 @@ export class GraphsComponent implements OnInit {
       this.carbsMarker = this.userGoals[2] * 4;
       this.markers = [this.goalCalories];
 
-      const ratioProteinMarker = Math.round(this.proteinMarker / this.goalCalories * 100);
-      const ratioFatMarker = Math.round(this.fatMarker / this.goalCalories * 100);
-      const ratioCarbsMarker = Math.round(this.carbsMarker / this.goalCalories * 100);
+      const ratioProteinMarker = Math.round(
+        (this.proteinMarker / this.goalCalories) * 100
+      );
+      const ratioFatMarker = Math.round(
+        (this.fatMarker / this.goalCalories) * 100
+      );
+      const ratioCarbsMarker = Math.round(
+        (this.carbsMarker / this.goalCalories) * 100
+      );
 
-      this.ratioMarkers = [ratioProteinMarker, ratioFatMarker, ratioCarbsMarker];
+      this.ratioMarkers = [
+        ratioProteinMarker,
+        ratioFatMarker,
+        ratioCarbsMarker,
+      ];
       this.yAxisStep = 200;
     } else {
       this.proteinMarker = this.userGoals[0];
@@ -227,11 +264,19 @@ export class GraphsComponent implements OnInit {
       this.carbsMarker = this.userGoals[2];
       this.markers = [this.proteinMarker, this.fatMarker, this.carbsMarker];
 
-      const ratioProteinMarker = Math.round(this.proteinMarker / totalGoals * 100);
-      const ratioFatMarker = Math.round(this.fatMarker / totalGoals * 100);
-      const ratioCarbsMarker = Math.round(this.carbsMarker / totalGoals * 100);
+      const ratioProteinMarker = Math.round(
+        (this.proteinMarker / totalGoals) * 100
+      );
+      const ratioFatMarker = Math.round((this.fatMarker / totalGoals) * 100);
+      const ratioCarbsMarker = Math.round(
+        (this.carbsMarker / totalGoals) * 100
+      );
 
-      this.ratioMarkers = [ratioProteinMarker, ratioFatMarker, ratioCarbsMarker];
+      this.ratioMarkers = [
+        ratioProteinMarker,
+        ratioFatMarker,
+        ratioCarbsMarker,
+      ];
       this.yAxisStep = 20;
     }
   }
@@ -248,15 +293,20 @@ export class GraphsComponent implements OnInit {
 
   private setGoalCalories() {
     if (this.userGoals) {
-      this.goalCalories = (this.userGoals[0] * 4) + (this.userGoals[1] * 9) + (this.userGoals[2] * 4);
+      this.goalCalories =
+        this.userGoals[0] * 4 + this.userGoals[1] * 9 + this.userGoals[2] * 4;
     }
   }
 
   private getMacroForDay(date: Date, numberOfValues: number, macro: string) {
     for (let i = 0; i < numberOfValues; i++) {
       const macrosPerDay = this.allMacros[i];
-      if (macrosPerDay && moment(macrosPerDay.day).format('YYYY-MM-DD') === moment(date).format('YYYY-MM-DD')) {
-        return Math.round(macrosPerDay.macro[macro]);
+      if (
+        macrosPerDay &&
+        moment(macrosPerDay.day).format('YYYY-MM-DD') ===
+          moment(date).format('YYYY-MM-DD')
+      ) {
+        return Math.round(macrosPerDay.macro[macro as keyof Macros]);
       }
     }
     return undefined;

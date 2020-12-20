@@ -1,19 +1,17 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthenticationService } from '@app/services/auth.service';
+import { AuthenticationService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss']
+  styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit {
-
   public menuToggle = false;
 
-  constructor(private authService: AuthenticationService) { }
+  constructor(private authService: AuthenticationService) {}
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   public toggleMenu() {
     this.menuToggle = !this.menuToggle;

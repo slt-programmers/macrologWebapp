@@ -1,15 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { AdminService } from '@app/services/admin.service';
-import { UserAccount } from '@app/model/userAccount';
-import { ToastService } from '@app/services/toast.service';
+import { UserAccount } from 'src/app/model/userAccount';
+import { AdminService } from 'src/app/services/admin.service';
+import { ToastService } from 'src/app/services/toast.service';
 
 @Component({
   selector: 'app-usermanagement',
   templateUrl: './usermanagement.component.html',
-  styleUrls: ['./usermanagement.component.scss']
+  styleUrls: ['./usermanagement.component.scss'],
 })
 export class UserManagementComponent implements OnInit {
-
   public allUsers: UserAccount[];
   public isModalVisible = false;
   public userName: string;
@@ -17,8 +16,10 @@ export class UserManagementComponent implements OnInit {
 
   public selectedUser: UserAccount;
 
-  constructor(private adminService: AdminService,
-    private toastService: ToastService) { }
+  constructor(
+    private adminService: AdminService,
+    private toastService: ToastService
+  ) {}
 
   ngOnInit() {
     this.getAllUsers();
@@ -26,10 +27,10 @@ export class UserManagementComponent implements OnInit {
 
   private getAllUsers() {
     this.adminService.getAllUsers().subscribe(
-      res => {
+      (res) => {
         this.allUsers = res;
       },
-      err => {
+      (err) => {
         // TODO handle error
       }
     );
@@ -56,6 +57,7 @@ export class UserManagementComponent implements OnInit {
       () => {
         this.selectedUser = undefined;
         this.closeModal();
-      });
+      }
+    );
   }
 }

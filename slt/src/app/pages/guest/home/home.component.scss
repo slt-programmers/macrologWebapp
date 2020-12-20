@@ -1,4 +1,4 @@
-@import "../../../../css/variables.scss";
+@import '../../../../css/variables.scss';
 
 .logo {
   @media (min-width: $desktop) {
@@ -114,7 +114,12 @@
 }
 
 .intro {
-  background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.5)), url("assets/homepage-bowl.jpg");
+  background-image: linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0),
+      rgba(0, 0, 0, 0.5)
+    ),
+    url('../../../../assets/homepage-bowl.jpg');
   background-size: cover, cover;
   background-repeat: no-repeat, no-repeat;
   background-position: center;
@@ -180,15 +185,23 @@
 .one,
 .three,
 .five {
-  background-image: radial-gradient(transparent, transparent 67%, rgba(0, 0, 0, 0.1));
+  background-image: radial-gradient(
+    transparent,
+    transparent 67%,
+    rgba(0, 0, 0, 0.1)
+  );
   .title {
     color: $secondary;
   }
 }
 
 .two {
-  background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.8)),
-    url("assets/homepage-lifting.jpg");
+  background-image: linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0.5),
+      rgba(0, 0, 0, 0.8)
+    ),
+    url('../../../../assets/homepage-lifting.jpg');
   background-size: cover, cover;
   background-repeat: no-repeat, no-repeat;
   background-position: center;
@@ -196,7 +209,7 @@
 }
 
 .four {
-  background-image: url("assets/homepage-salad.jpg");
+  background-image: url('../../../../assets/homepage-salad.jpg');
   background-size: cover, cover;
   background-repeat: no-repeat, no-repeat;
   background-position: center;

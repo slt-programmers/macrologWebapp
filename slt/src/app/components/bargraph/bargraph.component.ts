@@ -1,13 +1,20 @@
-import { Component, ViewChild, ElementRef, Input, OnChanges, SimpleChanges, AfterViewInit, ChangeDetectorRef, SimpleChange } from '@angular/core';
+import {
+  Component,
+  ViewChild,
+  ElementRef,
+  Input,
+  OnChanges,
+  SimpleChanges,
+  AfterViewInit,
+} from '@angular/core';
 import { DataPoint, GraphPoint } from '../linegraph/linegraph.component';
 
 @Component({
   selector: 'bargraph',
   templateUrl: './bargraph.component.html',
-  styleUrls: ['./bargraph.component.scss']
+  styleUrls: ['./bargraph.component.scss'],
 })
 export class BargraphComponent implements OnChanges, AfterViewInit {
-
   @ViewChild('yAxis', { static: false }) public yAxisElement: ElementRef;
   @ViewChild('xAxis', { static: false }) public xAxisElement: ElementRef;
 
@@ -27,8 +34,7 @@ export class BargraphComponent implements OnChanges, AfterViewInit {
   xAxisHeight: number;
   markerHeights: number[];
 
-  constructor() {
-  }
+  constructor() {}
 
   ngAfterViewInit() {
     this.yAxisHeight = this.yAxisElement.nativeElement.clientHeight;
@@ -75,7 +81,7 @@ export class BargraphComponent implements OnChanges, AfterViewInit {
     }
 
     for (let j = 0; j < yValuesToAdd; j++) {
-      let value = yAxisPoints[j];
+      let value = yAxisPoints[j] as number;
       value += this.yAxisStep;
       yAxisPoints.push(value);
     }
@@ -112,7 +118,8 @@ export class BargraphComponent implements OnChanges, AfterViewInit {
       for (const dataPoint of this.datasets[i]) {
         let height: number;
         if (dataPoint.y !== undefined) {
-          height = (dataPoint.y) * (this.yAxisHeight / differenceHighestLowestYValue);
+          height =
+            dataPoint.y * (this.yAxisHeight / differenceHighestLowestYValue);
         }
         const graphPoint = new GraphPoint(dataPoint.y, height);
         graphPointSet.push(graphPoint);
@@ -130,7 +137,11 @@ export class BargraphComponent implements OnChanges, AfterViewInit {
       for (let j = 0; j <= i; j++) {
         markerValue += this.markers[j];
       }
-      this.markerHeights.push((markerValue * (this.yAxisHeight / differenceHighestLowestYValue)) + (2 * i) + 1); // border correction
+      this.markerHeights.push(
+        markerValue * (this.yAxisHeight / differenceHighestLowestYValue) +
+          2 * i +
+          1
+      ); // border correction
     }
   }
 }

@@ -5,9 +5,9 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { MatInputModule } from '@angular/material';
-import { MatFormFieldModule } from '@angular/material';
-import { MatButtonModule } from '@angular/material';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatButtonModule } from '@angular/material/button';
 import { MatRippleModule } from '@angular/material/core';
 import { MatIconModule } from '@angular/material/icon';
 
@@ -25,7 +25,7 @@ import { DishService } from './services/dish.service';
 import { ActivityService } from './services/activity.service';
 import { WeightService } from './services/weight.service';
 import { AuthGuardService } from './services/auth-guard.service';
-import { GuestGuardService} from './services/guest-guard.service';
+import { GuestGuardService } from './services/guest-guard.service';
 import { ScrollBehaviourService } from './services/scroll-behaviour.service';
 import { HealthcheckService } from './services/healthcheck.service';
 import { AdminService } from './services/admin.service';
@@ -36,45 +36,40 @@ import { AppRoutingModule } from './app-routing.module';
 import { AuthenticatedModule } from './pages/authenticated/authenticated.module';
 
 @NgModule({
-	declarations: [
-		AppComponent,
-		AboutComponent,
-		LoginComponent,
-		HomeComponent
-	],
-	imports: [
-		BrowserModule,
-		ReactiveFormsModule,
-		FormsModule,
-		HttpClientModule,
-		BrowserAnimationsModule,
-		AppRoutingModule,
-		AuthenticatedModule,
-		MatInputModule,
-		MatFormFieldModule,
-		MatButtonModule,
-		MatIconModule,
-		MatRippleModule
-	],
-	providers: [
-		AdminService,
-		ActivityService,
-		FoodService,
-		DiaryService,
-		UserService,
-		ToastService,
-		DishService,
-		WeightService,
-		AuthGuardService,
-		GuestGuardService,
-		ScrollBehaviourService,
-		HealthcheckService,
-		WebhookService,
-        GoogleService,
-		{ provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
-		{ provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
-	],
-	bootstrap: [AppComponent],
-	entryComponents: []
+  declarations: [AppComponent, AboutComponent, LoginComponent, HomeComponent],
+  imports: [
+    BrowserModule,
+    ReactiveFormsModule,
+    FormsModule,
+    HttpClientModule,
+    BrowserAnimationsModule,
+    AppRoutingModule,
+    AuthenticatedModule,
+    MatInputModule,
+    MatFormFieldModule,
+    MatButtonModule,
+    MatIconModule,
+    MatRippleModule,
+  ],
+  providers: [
+    AdminService,
+    ActivityService,
+    FoodService,
+    DiaryService,
+    UserService,
+    ToastService,
+    DishService,
+    WeightService,
+    AuthGuardService,
+    GuestGuardService,
+    ScrollBehaviourService,
+    HealthcheckService,
+    WebhookService,
+    GoogleService,
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+  ],
+  bootstrap: [AppComponent],
+  entryComponents: [],
 })
-export class AppModule { }
+export class AppModule {}

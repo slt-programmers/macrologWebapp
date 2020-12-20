@@ -1,13 +1,10 @@
 export class LogActivity {
+  public id: number;
+  public day: Date;
+  public name: string;
+  public calories: number;
+  public syncedWith?: string;
+  public syncedId?: number;
 
-	public id: number;
-	public day;
-	public name;
-	public calories;
-  public syncedWith?;
-  public syncedId?;
-
-	constructor () {
-
-	}
+  constructor() {}
 }

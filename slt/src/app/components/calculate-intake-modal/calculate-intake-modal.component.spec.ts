@@ -1,30 +1,31 @@
-import { async, ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
+import {
+  ComponentFixture,
+  TestBed,
+  fakeAsync,
+  tick,
+} from '@angular/core/testing';
 import { CalculateIntakeModalComponent } from './calculate-intake-modal.component';
 import { NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { UserService } from '@app/services/user.service';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { of, throwError } from 'rxjs';
+import { UserService } from 'src/app/services/user.service';
 
 describe('CalculateIntakeModalComponent', () => {
   let component: CalculateIntakeModalComponent;
   let fixture: ComponentFixture<CalculateIntakeModalComponent>;
   let userService: UserService;
 
-  beforeEach(async(() => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [CalculateIntakeModalComponent],
       providers: [UserService],
       imports: [FormsModule, HttpClientTestingModule],
-      schemas: [NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA]
-    })
-      .compileComponents();
-  }));
-
-  beforeEach(() => {
+      schemas: [NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA],
+    }).compileComponents();
     fixture = TestBed.createComponent(CalculateIntakeModalComponent);
     component = fixture.componentInstance;
-    userService = TestBed.get(UserService);
+    userService = TestBed.inject(UserService);
     fixture.detectChanges();
   });
 
@@ -37,7 +38,7 @@ describe('CalculateIntakeModalComponent', () => {
     component.currentFat = 34;
     component.currentCarbs = 45;
     component.ngOnInit();
-    expect(component.calories).toEqual((12 * 4) + (34 * 9) + (45 * 4));
+    expect(component.calories).toEqual(12 * 4 + 34 * 9 + 45 * 4);
   });
 
   it('should show calorie tab', () => {
@@ -57,7 +58,9 @@ describe('CalculateIntakeModalComponent', () => {
     spyOn(component.close, 'emit');
     component.closeModal();
     const emitted = {
-      goalProtein: undefined, goalFat: undefined, goalCarbs: undefined
+      goalProtein: undefined as number,
+      goalFat: undefined as number,
+      goalCarbs: undefined as number,
     };
     expect(component.close.emit).toHaveBeenCalledWith(emitted);
   });
@@ -75,11 +78,13 @@ describe('CalculateIntakeModalComponent', () => {
     component.fatManual = 60;
     component.carbsManual = 250;
     component.calcCaloriesManual();
-    expect(component.calories).toEqual((100 * 4) + (60 * 9) + (250 * 4));
+    expect(component.calories).toEqual(100 * 4 + 60 * 9 + 250 * 4);
   });
 
   it('should save macros intake', fakeAsync(() => {
-    const userSpy = spyOn(userService, 'addUserSetting').and.returnValue(throwError({ status: 404 }));
+    const userSpy = spyOn(userService, 'addUserSetting').and.returnValue(
+      throwError({ status: 404 })
+    );
     spyOn(component.close, 'emit');
     component.showMacros = true;
     component.proteinManual = 100;
@@ -95,13 +100,17 @@ describe('CalculateIntakeModalComponent', () => {
     tick();
     expect(userService.addUserSetting).toHaveBeenCalledTimes(6);
     const emitted = {
-      goalProtein: '100', goalFat: '60', goalCarbs: '250'
+      goalProtein: '100',
+      goalFat: '60',
+      goalCarbs: '250',
     };
     expect(component.close.emit).toHaveBeenCalledWith(emitted);
   }));
 
   it('should save calories intake', fakeAsync(() => {
-    const userSpy = spyOn(userService, 'addUserSetting').and.returnValue(throwError({ status: 404 }));
+    const userSpy = spyOn(userService, 'addUserSetting').and.returnValue(
+      throwError({ status: 404 })
+    );
     spyOn(component.close, 'emit');
     component.showCalories = true;
     component.protein = 100;
@@ -117,9 +126,10 @@ describe('CalculateIntakeModalComponent', () => {
     tick();
     expect(userService.addUserSetting).toHaveBeenCalledTimes(6);
     const emitted = {
-      goalProtein: '100', goalFat: '60', goalCarbs: '250'
+      goalProtein: '100',
+      goalFat: '60',
+      goalCarbs: '250',
     };
     expect(component.close.emit).toHaveBeenCalledWith(emitted);
   }));
-
 });

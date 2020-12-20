@@ -1,15 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { GoogleService } from '@app/services/google.service';
 import { ActivatedRoute } from '@angular/router';
+import { GoogleService } from 'src/app/services/google.service';
 import { environment } from '../../../../../environments/environment';
 
 @Component({
   selector: 'app-mail',
   templateUrl: './mail.component.html',
-  styleUrls: ['./mail.component.scss']
+  styleUrls: ['./mail.component.scss'],
 })
 export class MailComponent implements OnInit {
-
   public googleConnectUrl: string;
   public isConnected = false;
   public syncError: string;
@@ -20,8 +19,10 @@ export class MailComponent implements OnInit {
   private code: string;
   private scope: string;
 
-  constructor(private googleService: GoogleService,
-    private route: ActivatedRoute) { }
+  constructor(
+    private googleService: GoogleService,
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit() {
     this.retrieveStatus();
@@ -33,7 +34,7 @@ export class MailComponent implements OnInit {
 
   private retrieveStatus() {
     this.googleService.getStatus().subscribe(
-      res => {
+      (res) => {
         if (res.connected === true) {
           this.isConnected = true;
         }
@@ -50,13 +51,15 @@ export class MailComponent implements OnInit {
   }
 
   private checkRegistrationResponse() {
-    if (!this.code) { // only if not done before
-      this.route.queryParamMap.subscribe(queryParams => {
+    if (!this.code) {
+      // only if not done before
+      this.route.queryParamMap.subscribe((queryParams) => {
         this.code = queryParams.get('code');
         this.scope = queryParams.get('scope');
         if (this.code) {
           if (this.scope !== 'https://www.googleapis.com/auth/gmail.send') {
-            this.syncError = 'Please give access to send mail in order to allow Macrolog send mails to new users.';
+            this.syncError =
+              'Please give access to send mail in order to allow Macrolog send mails to new users.';
           } else {
             this.storeConnection();
           }
@@ -66,24 +69,28 @@ export class MailComponent implements OnInit {
   }
 
   private storeConnection() {
-    this.googleService.storeMailSyncSettings(this.code).subscribe(
-      () => {
-        this.isConnected = true;
-      });
+    this.googleService.storeMailSyncSettings(this.code).subscribe(() => {
+      this.isConnected = true;
+    });
   }
   private setGoogleUrl() {
-    const googleUrl = 'https://accounts.google.com/o/oauth2/auth?response_type=code&approval_prompt=force&scope=https://www.googleapis.com/auth/gmail.send&state=GMAILCONNECT&access_type=offline';
+    const googleUrl =
+      'https://accounts.google.com/o/oauth2/auth?response_type=code&approval_prompt=force&scope=https://www.googleapis.com/auth/gmail.send&state=GMAILCONNECT&access_type=offline';
     const redirectUrl = environment.origin + '/admin/mail';
-    this.googleConnectUrl = googleUrl + '&client_id=' + this.clientId + '&redirect_uri=' + redirectUrl;
+    this.googleConnectUrl =
+      googleUrl +
+      '&client_id=' +
+      this.clientId +
+      '&redirect_uri=' +
+      redirectUrl;
   }
 
-  private sendTestMail() {
+  sendTestMail() {
     this.mailSend = false;
-    this.googleService.sendTestMail(this.emailAddress).subscribe(
-      () => {
-        // TODO use alert/toaster
-        this.mailSend = true;
-        this.emailAddress = null;
-      });
+    this.googleService.sendTestMail(this.emailAddress).subscribe(() => {
+      // TODO use alert/toaster
+      this.mailSend = true;
+      this.emailAddress = null;
+    });
   }
 }

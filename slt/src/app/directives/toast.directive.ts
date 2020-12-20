@@ -1,20 +1,20 @@
-import { Directive, Injectable, Renderer, ElementRef } from '@angular/core';
+import { Directive, Renderer2, ElementRef } from '@angular/core';
 
 @Directive({
-	selector: '[toast]'
+  selector: '[toast]',
 })
 export class ToastDirective {
+  private nativeElement: Node;
 
-	private nativeElement: Node;
+  constructor(private renderer: Renderer2, private element: ElementRef) {
+    this.nativeElement = element.nativeElement;
+  }
 
-	constructor(private renderer: Renderer,
-							private element: ElementRef) {
-		this.nativeElement = element.nativeElement;
-	}
-
-	public showToast() {
-		this.renderer.setElementStyle(this.nativeElement, 'height', '50px');
-		setTimeout(() => this.renderer.setElementStyle(this.nativeElement, 'height', '0'), 1200);
-	}
-
+  public showToast() {
+    this.renderer.setStyle(this.nativeElement, 'height', '50px');
+    setTimeout(
+      () => this.renderer.setStyle(this.nativeElement, 'height', '0'),
+      1200
+    );
+  }
 }
