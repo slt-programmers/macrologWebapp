@@ -1,4 +1,10 @@
-import { TestBed, async, ComponentFixture, fakeAsync, tick } from '@angular/core/testing';
+import {
+  TestBed,
+  async,
+  ComponentFixture,
+  fakeAsync,
+  tick,
+} from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AuthenticatedComponent } from './authenticated.component';
 import { HttpHandler, HttpClient } from '@angular/common/http';
@@ -18,18 +24,27 @@ describe('AuthenticatedComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [RouterTestingModule.withRoutes([{ path: 'user', redirectTo: '' }]), BrowserAnimationsModule],
+      imports: [
+        RouterTestingModule.withRoutes([{ path: 'user', redirectTo: '' }]),
+        BrowserAnimationsModule,
+      ],
       declarations: [AuthenticatedComponent],
-      providers: [HealthcheckService, HttpClient, HttpHandler, ScrollBehaviourService, Renderer2],
+      providers: [
+        HealthcheckService,
+        HttpClient,
+        HttpHandler,
+        ScrollBehaviourService,
+        Renderer2,
+      ],
     }).compileComponents();
   }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(AuthenticatedComponent);
     component = fixture.componentInstance;
-    healthcheckService = TestBed.get(HealthcheckService);
-    scrollBehaviourService = TestBed.get(ScrollBehaviourService);
-    router = TestBed.get(Router);
+    healthcheckService = TestBed.inject(HealthcheckService);
+    scrollBehaviourService = TestBed.inject(ScrollBehaviourService);
+    router = TestBed.inject(Router);
   });
 
   afterEach(() => {
@@ -41,7 +56,9 @@ describe('AuthenticatedComponent', () => {
   });
 
   it('should init the app component', fakeAsync(() => {
-    const healthSpy = spyOn(healthcheckService, 'checkState').and.returnValue(of(true));
+    const healthSpy = spyOn(healthcheckService, 'checkState').and.returnValue(
+      of(true)
+    );
     let result = component.stillSleeping();
     expect(result).toBeTruthy();
     component.ngOnInit();
@@ -58,7 +75,8 @@ describe('AuthenticatedComponent', () => {
     result = component.stillSleeping();
     expect(result).toBeFalsy();
 
-    component = TestBed.createComponent(AuthenticatedComponent).componentInstance;
+    component = TestBed.createComponent(AuthenticatedComponent)
+      .componentInstance;
     result = component.stillSleeping();
     expect(result).toBeTruthy();
     healthSpy.and.returnValue(throwError({ status: 404 }));
@@ -89,9 +107,11 @@ describe('AuthenticatedComponent', () => {
   it('should determine if admin', () => {
     let result = component.isAdmin();
     expect(result).toBeFalsy();
-    localStorage.setItem('currentUser', JSON.stringify({ 'user': 'Carmen', 'admin': 'true' }));
+    localStorage.setItem(
+      'currentUser',
+      JSON.stringify({ user: 'Carmen', admin: 'true' })
+    );
     result = component.isAdmin();
     expect(result).toBeTruthy();
   });
-
 });

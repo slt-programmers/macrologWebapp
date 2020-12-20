@@ -30,7 +30,7 @@ describe('LogMealComponent', () => {
     }).compileComponents();
     fixture = TestBed.createComponent(LogMealComponent);
     component = fixture.componentInstance;
-    diaryService = TestBed.get(DiaryService);
+    diaryService = TestBed.inject(DiaryService);
     fixture.detectChanges();
   });
 

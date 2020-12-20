@@ -5,7 +5,7 @@ import { UserAccount } from '../model/userAccount';
 
 @Injectable()
 export class AdminService {
-  private macrologBackendUrl = '//' + environment.backend + '/admin';
+  public macrologBackendUrl = '//' + environment.backend + '/admin';
 
   constructor(private http: HttpClient) {}
 

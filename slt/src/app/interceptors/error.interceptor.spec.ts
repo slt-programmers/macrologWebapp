@@ -27,10 +27,10 @@ describe('AuthService', () => {
         { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
       ],
     });
-    interceptor = TestBed.get(ErrorInterceptor);
-    httpClient = TestBed.get(HttpClient);
-    router = TestBed.get(Router);
-    authService = TestBed.get(AuthenticationService);
+    interceptor = TestBed.inject(ErrorInterceptor);
+    httpClient = TestBed.inject(HttpClient);
+    router = TestBed.inject(Router);
+    authService = TestBed.inject(AuthenticationService);
   });
 
   afterEach(() => {

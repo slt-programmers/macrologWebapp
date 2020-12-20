@@ -32,8 +32,8 @@ describe('AppComponent', () => {
 
     fixture = TestBed.createComponent(AppComponent);
     component = fixture.componentInstance;
-    healthcheckService = TestBed.get(HealthcheckService);
-    router = TestBed.get(Router);
+    healthcheckService = TestBed.inject(HealthcheckService);
+    router = TestBed.inject(Router);
   });
 
   afterEach(() => {

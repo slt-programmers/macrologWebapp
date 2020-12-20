@@ -2,15 +2,10 @@ import { Location } from '@angular/common';
 import { TestBed, fakeAsync, tick } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { Router } from '@angular/router';
-
 import { NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpHandler, HttpClient } from '@angular/common/http';
-
 import { authenticatedRoutes } from './authenticated-routing.module';
-import { ScrollBehaviourService } from '@app/services/scroll-behaviour.service';
-import { HealthcheckService } from '@app/services/healthcheck.service';
-import { ToastService } from '@app/services/toast.service';
 import { DiaryComponent } from './diary/diary.component';
 import { FoodComponent } from './food/food.component';
 import { UserComponent } from './user/user.component';
@@ -26,16 +21,19 @@ import { WeightTrackerComponent } from './user/weighttracker/weighttracker.compo
 import { ConnectivityComponent } from './user/connectivity/connectivity.component';
 import { AccountComponent } from './user/account/account.component';
 import { WebhooksComponent } from './admin/webhooks/webhooks.component';
-import { AuthGuardService } from '@app/services/auth-guard.service';
-import { MatTableModule } from '@angular/material';
-import { AppComponent } from '@app/app.component';
-import { FoodService } from '@app/services/food.service';
-import { DishService } from '@app/services/dish.service';
-import { DiaryService } from '@app/services/diary.service';
-import { UserService } from '@app/services/user.service';
-import { AdminService } from '@app/services/admin.service';
-import { ActivityService } from '@app/services/activity.service';
 import { MailComponent } from './admin/mail/mail.component';
+import { MatTableModule } from '@angular/material/table';
+import { AppComponent } from 'src/app/app.component';
+import { ActivityService } from 'src/app/services/activity.service';
+import { AdminService } from 'src/app/services/admin.service';
+import { AuthGuardService } from 'src/app/services/auth-guard.service';
+import { DiaryService } from 'src/app/services/diary.service';
+import { DishService } from 'src/app/services/dish.service';
+import { FoodService } from 'src/app/services/food.service';
+import { HealthcheckService } from 'src/app/services/healthcheck.service';
+import { ScrollBehaviourService } from 'src/app/services/scroll-behaviour.service';
+import { ToastService } from 'src/app/services/toast.service';
+import { UserService } from 'src/app/services/user.service';
 
 describe('Router authenticated', () => {
   let location: Location;
@@ -44,19 +42,50 @@ describe('Router authenticated', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [RouterTestingModule.withRoutes(authenticatedRoutes), FormsModule, MatTableModule],
-      providers: [HttpClient, HttpHandler, ScrollBehaviourService, HealthcheckService, ToastService, AuthGuardService, FoodService,
-        DishService, DiaryService, UserService, AdminService, ActivityService],
-      declarations: [AuthenticatedComponent, DiaryComponent, FoodComponent, UserComponent, AdminComponent, AppComponent,
-        DishesComponent, GraphsComponent, OnboardingComponent, PersonalComponent, UserManagementComponent, IntakeComponent,
-        WeightTrackerComponent, ConnectivityComponent, AccountComponent, WebhooksComponent, MailComponent
+      imports: [
+        RouterTestingModule.withRoutes(authenticatedRoutes),
+        FormsModule,
+        MatTableModule,
       ],
-      schemas: [NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA]
+      providers: [
+        HttpClient,
+        HttpHandler,
+        ScrollBehaviourService,
+        HealthcheckService,
+        ToastService,
+        AuthGuardService,
+        FoodService,
+        DishService,
+        DiaryService,
+        UserService,
+        AdminService,
+        ActivityService,
+      ],
+      declarations: [
+        AuthenticatedComponent,
+        DiaryComponent,
+        FoodComponent,
+        UserComponent,
+        AdminComponent,
+        AppComponent,
+        DishesComponent,
+        GraphsComponent,
+        OnboardingComponent,
+        PersonalComponent,
+        UserManagementComponent,
+        IntakeComponent,
+        WeightTrackerComponent,
+        ConnectivityComponent,
+        AccountComponent,
+        WebhooksComponent,
+        MailComponent,
+      ],
+      schemas: [NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA],
     });
 
-    router = TestBed.get(Router);
-    location = TestBed.get(Location);
-    authGuard = TestBed.get(AuthGuardService);
+    router = TestBed.inject(Router);
+    location = TestBed.inject(Location);
+    authGuard = TestBed.inject(AuthGuardService);
     router.initialNavigation();
     spyOn(authGuard, 'canActivate').and.returnValue(true);
   });

@@ -1,5 +1,10 @@
 import { Location } from '@angular/common';
-import { TestBed, fakeAsync, tick, ComponentFixture } from '@angular/core/testing';
+import {
+  TestBed,
+  fakeAsync,
+  tick,
+  ComponentFixture,
+} from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { Router } from '@angular/router';
 import { routes } from './app-routing.module';
@@ -23,13 +28,26 @@ describe('Router app', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [RouterTestingModule.withRoutes(routes), FormsModule],
-      providers: [HttpClient, HttpHandler, ScrollBehaviourService, HealthcheckService, ToastService, GuestGuardService],
-      declarations: [HomeComponent, AboutComponent, AuthenticatedComponent, LoginComponent, AppComponent],
-      schemas: [NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA]
+      providers: [
+        HttpClient,
+        HttpHandler,
+        ScrollBehaviourService,
+        HealthcheckService,
+        ToastService,
+        GuestGuardService,
+      ],
+      declarations: [
+        HomeComponent,
+        AboutComponent,
+        AuthenticatedComponent,
+        LoginComponent,
+        AppComponent,
+      ],
+      schemas: [NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA],
     });
 
-    router = TestBed.get(Router);
-    location = TestBed.get(Location);
+    router = TestBed.inject(Router);
+    location = TestBed.inject(Location);
     router.initialNavigation();
   });
 
@@ -55,10 +73,12 @@ describe('Router app', () => {
   }));
 
   it('should navigate to authenticated', fakeAsync(() => {
-    router.navigate(['/log']).then(() => {
-    }).catch(() => {
-      expect(location.path()).toBe('/');
-    });
+    router
+      .navigate(['/log'])
+      .then(() => {})
+      .catch(() => {
+        expect(location.path()).toBe('/');
+      });
     tick();
   }));
 });

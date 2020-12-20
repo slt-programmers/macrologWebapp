@@ -38,8 +38,8 @@ describe('AddFoodModal', () => {
     }).compileComponents();
     fixture = TestBed.createComponent(AddFoodModalComponent);
     component = fixture.componentInstance;
-    foodService = TestBed.get(FoodService);
-    scrollBehaviourService = TestBed.get(ScrollBehaviourService);
+    foodService = TestBed.inject(FoodService);
+    scrollBehaviourService = TestBed.inject(ScrollBehaviourService);
     renderer2 = fixture.componentRef.injector.get<Renderer2>(
       Renderer2 as Type<Renderer2>
     );

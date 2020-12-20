@@ -15,19 +15,18 @@ describe('LogActivityComponent', () => {
       declarations: [LogActivityComponent],
       providers: [ActivityService, ToastService],
       imports: [HttpClientTestingModule],
-      schemas: [NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA]
+      schemas: [NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
   }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(LogActivityComponent);
     component = fixture.componentInstance;
-    activityService = TestBed.get(ActivityService);
+    activityService = TestBed.inject(ActivityService);
     fixture.detectChanges();
   });
 
   it('should create log-activity component', () => {
     expect(component).toBeTruthy();
   });
-
 });

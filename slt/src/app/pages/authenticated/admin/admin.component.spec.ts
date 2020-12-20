@@ -1,11 +1,11 @@
-import { TestBed, async, ComponentFixture, fakeAsync, tick } from '@angular/core/testing';
+import { TestBed, ComponentFixture } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AdminComponent } from './admin.component';
-import { ToastService } from '@app/services/toast.service';
-import { UserService } from '@app/services/user.service';
 import { HttpClient, HttpHandler } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { ToastService } from 'src/app/services/toast.service';
+import { UserService } from 'src/app/services/user.service';
 
 describe('AdminComponent', () => {
   let component: AdminComponent;
@@ -13,24 +13,20 @@ describe('AdminComponent', () => {
   let toastService: ToastService;
   let router: Router;
 
-  beforeEach(async(() => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [RouterTestingModule.withRoutes([])],
       declarations: [AdminComponent],
       providers: [ToastService, UserService, HttpClient, HttpHandler],
-      schemas: [NO_ERRORS_SCHEMA]
+      schemas: [NO_ERRORS_SCHEMA],
     }).compileComponents();
-  }));
-
-  beforeEach(() => {
     fixture = TestBed.createComponent(AdminComponent);
     component = fixture.componentInstance;
-    toastService = TestBed.get(ToastService);
-    router = TestBed.get(Router);
+    toastService = TestBed.inject(ToastService);
+    router = TestBed.inject(Router);
   });
 
   afterEach(() => {
     localStorage.clear();
   });
-
 });

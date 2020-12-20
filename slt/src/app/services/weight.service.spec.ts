@@ -4,23 +4,21 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ToastService } from './toast.service';
 
 describe('WeightService', () => {
-	let service: WeightService;
+  let service: WeightService;
 
-	beforeEach(() => {
-		TestBed.configureTestingModule({
-			imports: [HttpClientTestingModule],
-			providers: [WeightService, ToastService]
-		});
-		service = TestBed.get(WeightService);
-	});
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      imports: [HttpClientTestingModule],
+      providers: [WeightService, ToastService],
+    });
+    service = TestBed.inject(WeightService);
+  });
 
-	afterEach(() => {
-		localStorage.clear();
-	});
+  afterEach(() => {
+    localStorage.clear();
+  });
 
-	it('should create service', () => {
-		expect(service).toBeTruthy();
-	});
-
+  it('should create service', () => {
+    expect(service).toBeTruthy();
+  });
 });
-
