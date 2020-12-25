@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { UserService } from '../../../services/user.service';
 import { Gender } from '../../../model/gender';
 import { Food } from '../../../model/food';
@@ -14,7 +14,6 @@ import { calculateTDEE } from 'src/app/util/functions';
   selector: 'app-onboarding',
   templateUrl: './onboarding.component.html',
   styleUrls: ['./onboarding.component.scss'],
-  host: { '(document: click)': 'documentClick($event)' },
 })
 export class OnboardingComponent implements OnInit {
   @ViewChild('breakfast', { static: false }) private breakfastEref: any;

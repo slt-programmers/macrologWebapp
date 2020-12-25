@@ -10,7 +10,6 @@ import { FoodSearchable } from '../../../model/foodSearchable';
 import { DatePipe } from '@angular/common';
 import { Dish } from 'src/app/model/dish';
 import { Food } from 'src/app/model/food';
-import { ElementRef } from '@angular/core';
 
 @Component({
   selector: 'diary-page',
@@ -19,12 +18,11 @@ import { ElementRef } from '@angular/core';
   host: { '(document: click)': 'documentClick($event)' },
 })
 export class DiaryComponent implements OnInit {
-  @ViewChild('breakfast', { static: false }) private breakfastEref: ElementRef;
-  @ViewChild('lunch', { static: false }) private lunchEref: ElementRef;
-  @ViewChild('dinner', { static: false }) private dinnerEref: ElementRef;
-  @ViewChild('snacks', { static: false }) private snacksEref: ElementRef;
-  @ViewChild('activities', { static: false })
-  private activitiesEref: ElementRef;
+  @ViewChild('breakfast', { static: false }) private breakfastEref: any;
+  @ViewChild('lunch', { static: false }) private lunchEref: any;
+  @ViewChild('dinner', { static: false }) private dinnerEref: any;
+  @ViewChild('snacks', { static: false }) private snacksEref: any;
+  @ViewChild('activities', { static: false }) private activitiesEref: any;
 
   public modalIsVisible = false;
   public isLogMealOpen: boolean;
@@ -228,6 +226,32 @@ export class DiaryComponent implements OnInit {
         this.intakeGoals[0] * 4 +
         this.intakeGoals[1] * 9 +
         this.intakeGoals[2] * 4;
+    }
+  }
+
+  private documentClick(event: any) {
+    if (
+      !event.target.classList.contains('autocomplete__option') &&
+      !event.target.classList.contains('trash') &&
+      !event.target.classList.contains('button--delete') &&
+      !event.target.classList.contains('activity__name--sync') &&
+      !event.target.classList.contains('activity__title--sync')
+    ) {
+      this.breakfastOpen = this.breakfastEref.logMealEref.nativeElement.contains(
+        event.target
+      );
+      this.lunchOpen = this.lunchEref.logMealEref.nativeElement.contains(
+        event.target
+      );
+      this.dinnerOpen = this.dinnerEref.logMealEref.nativeElement.contains(
+        event.target
+      );
+      this.snacksOpen = this.snacksEref.logMealEref.nativeElement.contains(
+        event.target
+      );
+      this.activitiesOpen = this.activitiesEref.logActivityEref.nativeElement.contains(
+        event.target
+      );
     }
   }
 }

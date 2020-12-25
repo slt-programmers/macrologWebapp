@@ -1,10 +1,5 @@
 import { Location } from '@angular/common';
-import {
-  TestBed,
-  fakeAsync,
-  tick,
-  ComponentFixture,
-} from '@angular/core/testing';
+import { TestBed, fakeAsync, tick } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { Router } from '@angular/router';
 import { routes } from './app-routing.module';
@@ -19,7 +14,7 @@ import { HttpHandler, HttpClient } from '@angular/common/http';
 import { ScrollBehaviourService } from './services/scroll-behaviour.service';
 import { HealthcheckService } from './services/healthcheck.service';
 import { ToastService } from './services/toast.service';
-import { GuestGuardService } from './services/guest-guard.service';
+import { GuestGuard } from './services/guest.guard';
 
 describe('Router app', () => {
   let location: Location;
@@ -34,7 +29,7 @@ describe('Router app', () => {
         ScrollBehaviourService,
         HealthcheckService,
         ToastService,
-        GuestGuardService,
+        GuestGuard,
       ],
       declarations: [
         HomeComponent,

@@ -4,14 +4,13 @@ import { WeightService } from '../../../../services/weight.service';
 import { Weight } from '../../../../model/weight';
 import { ToastService } from '../../../../services/toast.service';
 import * as moment from 'moment';
-import { DataPoint } from 'src/app/components/linegraph/linegraph.component';
-import { Form, FormGroup, NgForm } from '@angular/forms';
+import { DataPoint } from 'src/app/shared/components/linegraph/linegraph.component';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'weighttracker',
   templateUrl: './weighttracker.component.html',
   styleUrls: ['./weighttracker.component.scss'],
-  host: { '(document: click)': 'documentClick($event)' },
 })
 export class WeightTrackerComponent {
   public trackedWeights = new Array<Weight>();

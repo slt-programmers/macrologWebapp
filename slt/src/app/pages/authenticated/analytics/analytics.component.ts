@@ -2,7 +2,7 @@ import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { DiaryService } from '../../../services/diary.service';
 import { UserService } from '../../../services/user.service';
 import * as moment from 'moment';
-import { DataPoint } from 'src/app/components/linegraph/linegraph.component';
+import { DataPoint } from 'src/app/shared/components/linegraph/linegraph.component';
 import { MacrosPerDay } from 'src/app/model/macrosPerDay';
 import { Macros } from 'src/app/model/macro';
 

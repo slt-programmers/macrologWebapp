@@ -26,7 +26,7 @@ import { MatTableModule } from '@angular/material/table';
 import { AppComponent } from 'src/app/app.component';
 import { ActivityService } from 'src/app/services/activity.service';
 import { AdminService } from 'src/app/services/admin.service';
-import { AuthGuardService } from 'src/app/services/auth-guard.service';
+import { AuthGuard } from 'src/app/services/auth.guard';
 import { DiaryService } from 'src/app/services/diary.service';
 import { DishService } from 'src/app/services/dish.service';
 import { FoodService } from 'src/app/services/food.service';
@@ -38,7 +38,7 @@ import { UserService } from 'src/app/services/user.service';
 describe('Router authenticated', () => {
   let location: Location;
   let router: Router;
-  let authGuard: AuthGuardService;
+  let authGuard: AuthGuard;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -53,7 +53,7 @@ describe('Router authenticated', () => {
         ScrollBehaviourService,
         HealthcheckService,
         ToastService,
-        AuthGuardService,
+        AuthGuard,
         FoodService,
         DishService,
         DiaryService,
@@ -85,7 +85,7 @@ describe('Router authenticated', () => {
 
     router = TestBed.inject(Router);
     location = TestBed.inject(Location);
-    authGuard = TestBed.inject(AuthGuardService);
+    authGuard = TestBed.inject(AuthGuard);
     router.initialNavigation();
     spyOn(authGuard, 'canActivate').and.returnValue(true);
   });
