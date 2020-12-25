@@ -9,9 +9,8 @@ describe('StepperComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ToastComponent],
-      schemas: [NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA]
-    })
-      .compileComponents();
+      schemas: [NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA],
+    }).compileComponents();
   }));
 
   beforeEach(() => {
@@ -19,9 +18,4 @@ describe('StepperComponent', () => {
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
-
-  // it('should create piechart', () => {
-  //   expect(component).toBeTruthy();
-  // });
-
 });

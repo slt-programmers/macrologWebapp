@@ -8,8 +8,8 @@ import {
 import { RouterTestingModule } from '@angular/router/testing';
 import { AuthenticatedComponent } from './authenticated.component';
 import { HttpHandler, HttpClient } from '@angular/common/http';
-import { ScrollBehaviourService } from '../../services/scroll-behaviour.service';
-import { HealthcheckService } from '../../services/healthcheck.service';
+import { ScrollBehaviourService } from '../../shared/services/scroll-behaviour.service';
+import { HealthcheckService } from '../../shared/services/healthcheck.service';
 import { of, throwError } from 'rxjs';
 import { Router } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';

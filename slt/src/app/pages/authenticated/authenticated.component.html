@@ -7,7 +7,7 @@
     <p>Please wait while we wake them up...</p>
 
     <div class="svg-wrapper">
-      <img src="../assets/hamster-wheel.svg" alt="hamster-wheel">
+      <img src="../assets/hamster-wheel.svg" alt="hamster-wheel" />
     </div>
   </div>
 
@@ -16,35 +16,63 @@
       <p class="menu__logo__text">M</p>
     </div>
 
-    <div class="menu__title">
+    <div class="menu__title" (click)="showToaster()">
       <p>Macrolog</p>
     </div>
 
     <div class="menu__items">
-      <div matRipple class="menu__item" [ngClass]="{'menu__item--active' : router.url === '/log'}" routerLink="/log">
+      <div
+        matRipple
+        class="menu__item"
+        [ngClass]="{ 'menu__item--active': router.url === '/log' }"
+        routerLink="/log"
+      >
         <div class="menu__item__text">Diary</div>
       </div>
 
-      <div matRipple class="menu__item" [ngClass]="{'menu__item--active' : router.url === '/food'}" routerLink="/food">
+      <div
+        matRipple
+        class="menu__item"
+        [ngClass]="{ 'menu__item--active': router.url === '/food' }"
+        routerLink="/food"
+      >
         <div class="menu__item__text">Food</div>
       </div>
 
-      <div matRipple class="menu__item" [ngClass]="{'menu__item--active' : router.url === '/dishes'}"
-        routerLink="/dishes">
+      <div
+        matRipple
+        class="menu__item"
+        [ngClass]="{ 'menu__item--active': router.url === '/dishes' }"
+        routerLink="/dishes"
+      >
         <div class="menu__item__text">Dishes</div>
       </div>
 
-      <div matRipple class="menu__item" [ngClass]="{'menu__item--active' : router.url === '/graphs'}"
-        routerLink="/graphs">
+      <div
+        matRipple
+        class="menu__item"
+        [ngClass]="{ 'menu__item--active': router.url === '/graphs' }"
+        routerLink="/graphs"
+      >
         <div class="menu__item__text">Graphs</div>
       </div>
 
-      <div matRipple class="menu__item" [ngClass]="{'menu__item--active' : router.url === '/user'}" routerLink="/user">
+      <div
+        matRipple
+        class="menu__item"
+        [ngClass]="{ 'menu__item--active': router.url === '/user' }"
+        routerLink="/user"
+      >
         <div class="menu__item__text">Profile</div>
       </div>
 
-      <div matRipple class="menu__item" *ngIf="isAdmin()" [ngClass]="{'menu__item--active' : router.url === '/admin'}"
-        routerLink="/admin">
+      <div
+        matRipple
+        class="menu__item"
+        *ngIf="isAdmin()"
+        [ngClass]="{ 'menu__item--active': router.url === '/admin' }"
+        routerLink="/admin"
+      >
         <div class="menu__item__text">Admin options</div>
       </div>
 
@@ -59,37 +87,71 @@
   </div>
 
   <div [@openClose]="smallMenuOpen ? 'open' : 'closed'" class="small-menu">
-    <div matRipple class="small-menu__item small-menu__item--back" (click)="closeMenu()">
+    <div
+      matRipple
+      class="small-menu__item small-menu__item--back"
+      (click)="closeMenu()"
+    >
       <i class="fas fa-arrow-right"></i>
     </div>
 
-    <div matRipple [ngClass]="{'small-menu__item--active' : router.url === '/log'}" class="small-menu__item"
-      routerLink="/log" (click)="closeMenu()">
+    <div
+      matRipple
+      [ngClass]="{ 'small-menu__item--active': router.url === '/log' }"
+      class="small-menu__item"
+      routerLink="/log"
+      (click)="closeMenu()"
+    >
       <div class="">Diary</div>
     </div>
 
-    <div matRipple [ngClass]="{'small-menu__item--active' : router.url === '/food'}" class="small-menu__item"
-      routerLink="/food" (click)="closeMenu()">
+    <div
+      matRipple
+      [ngClass]="{ 'small-menu__item--active': router.url === '/food' }"
+      class="small-menu__item"
+      routerLink="/food"
+      (click)="closeMenu()"
+    >
       <div class="">Food</div>
     </div>
 
-    <div matRipple [ngClass]="{'small-menu__item--active' : router.url === '/meals'}" class="small-menu__item"
-      routerLink="/meals" (click)="closeMenu()">
+    <div
+      matRipple
+      [ngClass]="{ 'small-menu__item--active': router.url === '/meals' }"
+      class="small-menu__item"
+      routerLink="/meals"
+      (click)="closeMenu()"
+    >
       <div class="">Meals</div>
     </div>
 
-    <div matRipple [ngClass]="{'small-menu__item--active' : router.url === '/graphs'}" class="small-menu__item"
-      routerLink="/graphs" (click)="closeMenu()">
+    <div
+      matRipple
+      [ngClass]="{ 'small-menu__item--active': router.url === '/graphs' }"
+      class="small-menu__item"
+      routerLink="/graphs"
+      (click)="closeMenu()"
+    >
       <div class="">Graphs</div>
     </div>
 
-    <div matRipple [ngClass]="{'small-menu__item--active' : router.url === '/user'}" class="small-menu__item"
-      routerLink="/user" (click)="closeMenu()">
+    <div
+      matRipple
+      [ngClass]="{ 'small-menu__item--active': router.url === '/user' }"
+      class="small-menu__item"
+      routerLink="/user"
+      (click)="closeMenu()"
+    >
       <div class="">Profile</div>
     </div>
 
-    <div matRipple [ngClass]="{'small-menu__item--active' : router.url === '/admin'}" class="small-menu__item"
-      routerLink="/admin" (click)="closeMenu()">
+    <div
+      matRipple
+      [ngClass]="{ 'small-menu__item--active': router.url === '/admin' }"
+      class="small-menu__item"
+      routerLink="/admin"
+      (click)="closeMenu()"
+    >
       <div class="">AdminPanel</div>
     </div>
 

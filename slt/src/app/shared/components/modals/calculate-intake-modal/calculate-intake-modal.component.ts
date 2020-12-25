@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { UserService } from '../../../services/user.service';
-import { Gender } from '../../../model/gender';
+import { Gender } from '../../../../model/gender';
 import { forkJoin } from 'rxjs';
 import { calculateTDEE } from 'src/app/util/functions';
 

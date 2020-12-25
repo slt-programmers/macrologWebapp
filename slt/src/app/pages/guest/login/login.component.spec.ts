@@ -13,8 +13,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { By } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { of, throwError } from 'rxjs';
-import { AuthenticationService } from 'src/app/services/auth.service';
-import { ToastService } from 'src/app/services/toast.service';
+import { AuthenticationService } from 'src/app/shared/services/auth.service';
+import { ToastService } from 'src/app/shared/services/toast.service';
 
 describe('LoginComponent', () => {
   let component: LoginComponent;

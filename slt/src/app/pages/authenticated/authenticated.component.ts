@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { ScrollBehaviourService } from '../../services/scroll-behaviour.service';
-import { HealthcheckService } from '../../services/healthcheck.service';
+import { ScrollBehaviourService } from '../../shared/services/scroll-behaviour.service';
+import { HealthcheckService } from '../../shared/services/healthcheck.service';
 import {
   trigger,
   transition,
@@ -10,7 +10,8 @@ import {
   state,
   keyframes,
 } from '@angular/animations';
-import { AuthenticationService } from 'src/app/services/auth.service';
+import { AuthenticationService } from '../../shared/services/auth.service';
+import { ToastService } from '../../shared/services/toast.service';
 
 @Component({
   selector: 'authenticated',
@@ -87,6 +88,7 @@ export class AuthenticatedComponent implements OnInit {
     public router: Router,
     private healthcheckService: HealthcheckService,
     private authService: AuthenticationService,
+    private toastService: ToastService,
     private sbs: ScrollBehaviourService
   ) {}
 

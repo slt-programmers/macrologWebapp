@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { DatePipe } from '@angular/common';
-import { WeightService } from '../../../../services/weight.service';
+import { WeightService } from '../../../../shared/services/weight.service';
 import { Weight } from '../../../../model/weight';
-import { ToastService } from '../../../../services/toast.service';
+import { ToastService } from '../../../../shared/services/toast.service';
 import * as moment from 'moment';
 import { DataPoint } from 'src/app/shared/components/linegraph/linegraph.component';
 import { NgForm } from '@angular/forms';

@@ -7,7 +7,7 @@ import { AboutComponent } from './about/about.component';
 
 import { RouterModule, Routes } from '@angular/router';
 
-import { GuestGuard } from '../../services/guest.guard';
+import { GuestGuard } from '../../shared/services/guest.guard';
 import { SharedModule } from 'src/app/shared/shared.module';
 
 export const guestRoutes: Routes = [

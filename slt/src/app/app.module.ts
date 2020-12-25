@@ -5,24 +5,40 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppComponent } from './app.component';
 
-import { FoodService } from './services/food.service';
-import { ToastService } from './services/toast.service';
-import { DiaryService } from './services/diary.service';
-import { UserService } from './services/user.service';
-import { DishService } from './services/dish.service';
-import { WeightService } from './services/weight.service';
-import { ActivityService } from './services/activity.service';
-import { HealthcheckService } from './services/healthcheck.service';
-import { ScrollBehaviourService } from './services/scroll-behaviour.service';
-import { AdminService } from './services/admin.service';
-import { GoogleService } from './services/google.service';
-import { WebhookService } from './services/webhook.service';
+import { FoodService } from './shared/services/food.service';
+import { ToastService } from './shared/services/toast.service';
+import { DiaryService } from './shared/services/diary.service';
+import { UserService } from './shared/services/user.service';
+import { DishService } from './shared/services/dish.service';
+import { WeightService } from './shared/services/weight.service';
+import { ActivityService } from './shared/services/activity.service';
+import { HealthcheckService } from './shared/services/healthcheck.service';
+import { ScrollBehaviourService } from './shared/services/scroll-behaviour.service';
+import { AdminService } from './shared/services/admin.service';
+import { GoogleService } from './shared/services/google.service';
+import { WebhookService } from './shared/services/webhook.service';
 
 import { JwtInterceptor } from './interceptors/jwt.interceptor';
 import { ErrorInterceptor } from './interceptors/error.interceptor';
-import { AppRoutingModule } from './app-routing.module';
 import { AuthenticatedModule } from './pages/authenticated/authenticated.module';
 import { GuestModule } from './pages/guest/guest.module';
+import { SharedModule } from './shared/shared.module';
+import { RouterModule, Routes } from '@angular/router';
+
+export const routes: Routes = [
+  {
+    path: '',
+    loadChildren: () =>
+      import('./pages/guest/guest.module').then((m) => m.GuestModule),
+  },
+  {
+    path: 'dashboard',
+    loadChildren: () =>
+      import('./pages/authenticated/authenticated.module').then(
+        (m) => m.AuthenticatedModule
+      ),
+  },
+];
 
 @NgModule({
   declarations: [AppComponent],
@@ -30,9 +46,10 @@ import { GuestModule } from './pages/guest/guest.module';
     BrowserModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    AppRoutingModule,
+    SharedModule,
     AuthenticatedModule,
     GuestModule,
+    RouterModule.forRoot(routes),
   ],
   providers: [
     AdminService,

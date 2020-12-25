@@ -7,7 +7,7 @@ import {
 import { RouterTestingModule } from '@angular/router/testing';
 import { AppComponent } from './app.component';
 import { HttpHandler, HttpClient } from '@angular/common/http';
-import { HealthcheckService } from './services/healthcheck.service';
+import { HealthcheckService } from './shared/services/healthcheck.service';
 import { Router } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { Renderer2 } from '@angular/core';

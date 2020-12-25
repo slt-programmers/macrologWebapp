@@ -4,8 +4,8 @@ import { AdminComponent } from './admin.component';
 import { HttpClient, HttpHandler } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
-import { ToastService } from 'src/app/services/toast.service';
-import { UserService } from 'src/app/services/user.service';
+import { ToastService } from 'src/app/shared/services/toast.service';
+import { UserService } from 'src/app/shared/services/user.service';
 
 describe('AdminComponent', () => {
   let component: AdminComponent;

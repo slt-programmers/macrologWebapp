@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { UserService } from '../../../../services/user.service';
+import { UserService } from '../../../../shared/services/user.service';
 import { Gender } from '../../../../model/gender';
-import { ToastService } from '../../../../services/toast.service';
+import { ToastService } from '../../../../shared/services/toast.service';
 import * as moment from 'moment';
 import { forkJoin } from 'rxjs';
 import { UserSettings } from 'src/app/model/userSettings';

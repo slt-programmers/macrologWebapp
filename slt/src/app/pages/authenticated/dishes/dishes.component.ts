@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Ingredient } from '../../../model/ingredient';
 import { Dish } from '../../../model/dish';
-import { DishService } from '../../../services/dish.service';
+import { DishService } from '../../../shared/services/dish.service';
 import { Portion } from 'src/app/model/portion';
 
 @Component({

@@ -1,6 +1,5 @@
-import { Component, ViewChild } from '@angular/core';
-import { ToastService } from '../../../services/toast.service';
-import { ToastDirective } from '../../../directives/toast.directive';
+import { Component, Renderer2, ViewChild } from '@angular/core';
+import { ToastService } from '../../services/toast.service';
 
 @Component({
   selector: 'toast-component',
@@ -8,14 +7,24 @@ import { ToastDirective } from '../../../directives/toast.directive';
   styleUrls: ['./toast.component.scss'],
 })
 export class ToastComponent {
-  @ViewChild(ToastDirective, { static: false }) toast: ToastDirective;
+  @ViewChild('toast') toast: any;
 
   public message: string;
+  public isError: boolean;
 
-  constructor(private toastService: ToastService) {
-    this.toastService.messageObservable.subscribe((message: string) => {
-      this.message = message;
-      this.toast.showToast();
+  constructor(private toastService: ToastService, private renderer: Renderer2) {
+    this.toastService.messageObservable.subscribe((messageObj: any) => {
+      this.message = messageObj.message;
+      this.isError = messageObj.isError;
+      this.showToast();
     });
+  }
+
+  public showToast() {
+    this.renderer.setStyle(this.toast.nativeElement, 'height', '50px');
+    setTimeout(
+      () => this.renderer.setStyle(this.toast.nativeElement, 'height', '0'),
+      1200
+    );
   }
 }

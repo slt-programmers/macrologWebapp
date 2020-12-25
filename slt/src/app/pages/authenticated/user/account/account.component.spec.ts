@@ -11,8 +11,8 @@ import { throwError, of } from 'rxjs';
 import { FormsModule } from '@angular/forms';
 import { RouterTestingModule } from '@angular/router/testing';
 import { Router } from '@angular/router';
-import { AuthenticationService } from 'src/app/services/auth.service';
-import { ToastService } from 'src/app/services/toast.service';
+import { AuthenticationService } from 'src/app/shared/services/auth.service';
+import { ToastService } from 'src/app/shared/services/toast.service';
 
 describe('AccountComponent', () => {
   let component: AccountComponent;

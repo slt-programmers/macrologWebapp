@@ -24,16 +24,16 @@ import { WebhooksComponent } from './admin/webhooks/webhooks.component';
 import { MailComponent } from './admin/mail/mail.component';
 import { MatTableModule } from '@angular/material/table';
 import { AppComponent } from 'src/app/app.component';
-import { ActivityService } from 'src/app/services/activity.service';
-import { AdminService } from 'src/app/services/admin.service';
-import { AuthGuard } from 'src/app/services/auth.guard';
-import { DiaryService } from 'src/app/services/diary.service';
-import { DishService } from 'src/app/services/dish.service';
-import { FoodService } from 'src/app/services/food.service';
-import { HealthcheckService } from 'src/app/services/healthcheck.service';
-import { ScrollBehaviourService } from 'src/app/services/scroll-behaviour.service';
-import { ToastService } from 'src/app/services/toast.service';
-import { UserService } from 'src/app/services/user.service';
+import { ActivityService } from 'src/app/shared/services/activity.service';
+import { AdminService } from 'src/app/shared/services/admin.service';
+import { AuthGuard } from 'src/app/shared/services/auth.guard';
+import { DiaryService } from 'src/app/shared/services/diary.service';
+import { DishService } from 'src/app/shared/services/dish.service';
+import { FoodService } from 'src/app/shared/services/food.service';
+import { HealthcheckService } from 'src/app/shared/services/healthcheck.service';
+import { ScrollBehaviourService } from 'src/app/shared/services/scroll-behaviour.service';
+import { ToastService } from 'src/app/shared/services/toast.service';
+import { UserService } from 'src/app/shared/services/user.service';
 
 describe('Router authenticated', () => {
   let location: Location;

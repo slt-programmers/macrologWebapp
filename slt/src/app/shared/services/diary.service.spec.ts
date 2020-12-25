@@ -5,8 +5,8 @@ import {
 } from '@angular/common/http/testing';
 import { DiaryService } from './diary.service';
 import { ToastService } from './toast.service';
-import { LogEntry } from '../model/logEntry';
-import { StoreLogRequest } from '../model/storeLogRequest';
+import { LogEntry } from '../../model/logEntry';
+import { StoreLogRequest } from '../../model/storeLogRequest';
 
 describe('DiaryService', () => {
   let service: DiaryService;

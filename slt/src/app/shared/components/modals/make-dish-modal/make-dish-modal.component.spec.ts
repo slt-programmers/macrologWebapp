@@ -9,10 +9,10 @@ import { FormsModule } from '@angular/forms';
 import { HttpClient, HttpHandler } from '@angular/common/http';
 
 import { MakeDishModalComponent } from './make-dish-modal.component';
-import { DishService } from 'src/app/services/dish.service';
-import { FoodService } from 'src/app/services/food.service';
-import { ScrollBehaviourService } from 'src/app/services/scroll-behaviour.service';
-import { ToastService } from 'src/app/services/toast.service';
+import { DishService } from 'src/app/shared/services/dish.service';
+import { FoodService } from 'src/app/shared/services/food.service';
+import { ScrollBehaviourService } from 'src/app/shared/services/scroll-behaviour.service';
+import { ToastService } from 'src/app/shared/services/toast.service';
 
 describe('MakeDishModalComponent', () => {
   let component: MakeDishModalComponent;

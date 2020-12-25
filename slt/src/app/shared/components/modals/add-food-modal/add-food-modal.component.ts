@@ -1,6 +1,6 @@
 import { Component, OnInit, Output, Input, EventEmitter } from '@angular/core';
-import { Food } from '../../../model/food';
-import { Portion } from '../../../model/portion';
+import { Food } from '../../../../model/food';
+import { Portion } from '../../../../model/portion';
 import { FoodService } from '../../../services/food.service';
 import { ScrollBehaviourService } from '../../../services/scroll-behaviour.service';
 

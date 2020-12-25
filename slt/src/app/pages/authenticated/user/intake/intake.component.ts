@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { UserService } from '../../../../services/user.service';
+import { UserService } from '../../../../shared/services/user.service';
 import { Gender } from '../../../../model/gender';
 import * as moment from 'moment';
 

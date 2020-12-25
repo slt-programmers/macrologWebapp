@@ -1,7 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { HomeComponent } from './home.component';
 import { HttpClient, HttpHandler } from '@angular/common/http';
-import { AuthenticationService } from 'src/app/services/auth.service';
+import { AuthenticationService } from 'src/app/shared/services/auth.service';
 
 describe('HomeComponent', () => {
   let component: HomeComponent;

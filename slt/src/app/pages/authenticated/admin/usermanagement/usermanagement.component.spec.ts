@@ -10,8 +10,8 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { async, of, throwError } from 'rxjs';
 import { MatTableModule } from '@angular/material/table';
 import { UserAccount } from 'src/app/model/userAccount';
-import { AdminService } from 'src/app/services/admin.service';
-import { ToastService } from 'src/app/services/toast.service';
+import { AdminService } from 'src/app/shared/services/admin.service';
+import { ToastService } from 'src/app/shared/services/toast.service';
 
 describe('UserManagementComponent', () => {
   let component: UserManagementComponent;

@@ -11,10 +11,10 @@ import { AppComponent } from './app.component';
 import { NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpHandler, HttpClient } from '@angular/common/http';
-import { ScrollBehaviourService } from './services/scroll-behaviour.service';
-import { HealthcheckService } from './services/healthcheck.service';
-import { ToastService } from './services/toast.service';
-import { GuestGuard } from './services/guest.guard';
+import { ScrollBehaviourService } from './shared/services/scroll-behaviour.service';
+import { HealthcheckService } from './shared/services/healthcheck.service';
+import { ToastService } from './shared/services/toast.service';
+import { GuestGuard } from './shared/services/guest.guard';
 
 describe('Router app', () => {
   let location: Location;

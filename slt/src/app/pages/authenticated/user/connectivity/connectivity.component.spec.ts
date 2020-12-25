@@ -10,8 +10,8 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { ConnectivityComponent } from './connectivity.component';
 import { of } from 'rxjs';
-import { ToastService } from 'src/app/services/toast.service';
-import { UserService } from 'src/app/services/user.service';
+import { ToastService } from 'src/app/shared/services/toast.service';
+import { UserService } from 'src/app/shared/services/user.service';
 
 describe('ConnectivityComponent', () => {
   let component: ConnectivityComponent;

@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { environment } from '../../environments/environment';
-import { ConnectivityRequest } from '../model/connectivityRequest';
-import { ConnectivityStatus } from '../model/connectivityStatus';
-import { MailRequest } from '../model/mailRequest';
+import { environment } from '../../../environments/environment';
+import { ConnectivityRequest } from '../../model/connectivityRequest';
+import { ConnectivityStatus } from '../../model/connectivityStatus';
+import { MailRequest } from '../../model/mailRequest';
 
 @Injectable()
 export class GoogleService {

@@ -1,7 +1,7 @@
 import { Component, OnInit, Output, Input, EventEmitter } from '@angular/core';
-import { Dish } from '../../../model/dish';
-import { Ingredient } from '../../../model/ingredient';
-import { FoodSearchable } from '../../../model/foodSearchable';
+import { Dish } from '../../../../model/dish';
+import { Ingredient } from '../../../../model/ingredient';
+import { FoodSearchable } from '../../../../model/foodSearchable';
 import { FoodService } from '../../../services/food.service';
 import { DishService } from '../../../services/dish.service';
 import { Food } from 'src/app/model/food';

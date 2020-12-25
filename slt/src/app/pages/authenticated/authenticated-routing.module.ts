@@ -10,7 +10,7 @@ import { OnboardingComponent } from './onboarding/onboarding.component';
 import { FoodComponent } from './food/food.component';
 import { DishesComponent } from './dishes/dishes.component';
 import { GraphsComponent } from './analytics/analytics.component';
-import { AuthGuard } from 'src/app/services/auth.guard';
+import { AuthGuard } from 'src/app/shared/services/auth.guard';
 import { UserComponent } from './user/user.component';
 
 export const authenticatedRoutes: Routes = [

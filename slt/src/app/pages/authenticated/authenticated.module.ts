@@ -13,7 +13,7 @@ import { GraphsComponent } from './analytics/analytics.component';
 import { OnboardingComponent } from './onboarding/onboarding.component';
 import { AuthenticatedComponent } from './authenticated.component';
 import { UserModule } from './user/user.module';
-import { SharedModule } from 'src/app/shared/shared.module';
+import { SharedModule } from '../../shared/shared.module';
 
 @NgModule({
   imports: [

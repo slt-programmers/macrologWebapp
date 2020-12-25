@@ -1,9 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { DiaryService } from '../../../services/diary.service';
-import { ActivityService } from '../../../services/activity.service';
-import { UserService } from '../../../services/user.service';
-import { FoodService } from '../../../services/food.service';
-import { DishService } from '../../../services/dish.service';
+import { DiaryService } from '../../../shared/services/diary.service';
+import { ActivityService } from '../../../shared/services/activity.service';
+import { UserService } from '../../../shared/services/user.service';
+import { FoodService } from '../../../shared/services/food.service';
+import { DishService } from '../../../shared/services/dish.service';
 import { LogEntry } from '../../../model/logEntry';
 import { LogActivity } from '../../../model/logActivity';
 import { FoodSearchable } from '../../../model/foodSearchable';

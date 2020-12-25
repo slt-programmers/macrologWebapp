@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { GoogleService } from 'src/app/services/google.service';
+import { GoogleService } from 'src/app/shared/services/google.service';
 import { environment } from '../../../../../environments/environment';
 
 @Component({

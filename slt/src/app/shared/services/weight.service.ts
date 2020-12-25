@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ToastService } from './toast.service';
-import { Weight } from '../model/weight';
-import { environment } from '../../environments/environment';
+import { Weight } from '../../model/weight';
+import { environment } from '../../../environments/environment';
 
 @Injectable()
 export class WeightService {

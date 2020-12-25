@@ -13,8 +13,8 @@ import { FoodSearchable } from 'src/app/model/foodSearchable';
 import { LogEntry } from 'src/app/model/logEntry';
 import { Portion } from 'src/app/model/portion';
 import { StoreLogRequest } from 'src/app/model/storeLogRequest';
-import { DiaryService } from 'src/app/services/diary.service';
-import { ToastService } from 'src/app/services/toast.service';
+import { DiaryService } from 'src/app/shared/services/diary.service';
+import { ToastService } from 'src/app/shared/services/toast.service';
 
 describe('LogMealComponent', () => {
   let component: LogMealComponent;

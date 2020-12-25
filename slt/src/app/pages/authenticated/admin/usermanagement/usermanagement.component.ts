@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserAccount } from 'src/app/model/userAccount';
-import { AdminService } from 'src/app/services/admin.service';
-import { ToastService } from 'src/app/services/toast.service';
+import { AdminService } from 'src/app/shared/services/admin.service';
+import { ToastService } from 'src/app/shared/services/toast.service';
 
 @Component({
   selector: 'app-usermanagement',

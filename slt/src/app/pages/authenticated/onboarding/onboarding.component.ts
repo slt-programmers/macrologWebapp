@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { UserService } from '../../../services/user.service';
+import { UserService } from '../../../shared/services/user.service';
 import { Gender } from '../../../model/gender';
 import { Food } from '../../../model/food';
 import { Portion } from '../../../model/portion';
