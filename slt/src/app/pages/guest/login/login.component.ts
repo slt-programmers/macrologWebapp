@@ -42,7 +42,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     this.authService.logout();
-    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/log';
+    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/dashboard';
   }
 
   public login() {
@@ -65,7 +65,7 @@ export class LoginComponent implements OnInit {
         () => {
           this.authService.login(this.newUsername, this.newPassword).subscribe(
             () => {
-              this.router.navigate(['/onboarding']);
+              this.router.navigate(['dashboard', 'onboarding']);
             },
             () => {
               this.registerError = 'Error on login after registration.';

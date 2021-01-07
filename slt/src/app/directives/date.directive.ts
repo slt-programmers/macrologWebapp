@@ -1,6 +1,6 @@
 import { Directive, forwardRef } from '@angular/core';
 import { Validator, AbstractControl, NG_VALIDATORS } from '@angular/forms';
-import * as moment from 'moment';
+import { parse, isValid } from 'date-fns';
 
 @Directive({
   selector: '[validDate]',
@@ -18,8 +18,8 @@ export class DateValidator implements Validator {
   validate(c: AbstractControl): { [key: string]: any } {
     const value = c.value;
     if (value !== null && value !== undefined && value !== '') {
-      const date = moment(value, 'D-M-YYYY', true);
-      if (!date.isValid()) {
+      const date = parse(value, 'd-M-yyyy', new Date())
+      if (!isValid(date)) {
         return { 'DateValidator': true };
       }
     }

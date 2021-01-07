@@ -6,9 +6,9 @@ import { Portion } from '../../../model/portion';
 import { Macros } from '../../../model/macro';
 import { FoodSearchable } from '../../../model/foodSearchable';
 import { Router } from '@angular/router';
-import * as moment from 'moment';
 import { forkJoin } from 'rxjs';
 import { calculateTDEE } from 'src/app/util/functions';
+import { differenceInYears, isValid, parse } from 'date-fns';
 
 @Component({
   selector: 'app-onboarding',
@@ -99,9 +99,9 @@ export class OnboardingComponent implements OnInit {
 
   calcTDEE(): void {
     let age: number;
-    const birthdayDate = moment(this.birthday, 'D-M-YYYY', true);
-    if (birthdayDate.isValid()) {
-      age = moment().diff(birthdayDate, 'years');
+    const birthdayDate = parse(this.birthday, 'dd-MM-yyyy', new Date());
+    if (isValid(birthdayDate)) {
+      age = differenceInYears(new Date(), birthdayDate);
       const bmr = calculateTDEE(this.gender, this.weight, this.height, age);
       this.tdee = bmr * this.activity;
     }

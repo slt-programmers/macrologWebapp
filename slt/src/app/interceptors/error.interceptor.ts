@@ -5,10 +5,10 @@ import {
   HttpEvent,
   HttpInterceptor,
 } from '@angular/common/http';
-import { catchError, map } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { AuthenticationService } from '../shared/services/auth.service';
 import { Observable, throwError } from 'rxjs';
+import { catchError, map } from 'rxjs/operators';
 
 @Injectable()
 export class ErrorInterceptor implements HttpInterceptor {
@@ -28,7 +28,6 @@ export class ErrorInterceptor implements HttpInterceptor {
       catchError((err) => {
         if (err.status === 403) {
           this.authService.logout();
-          // this.router.navigateByUrl('/');
           return throwError(err);
         } else {
           return throwError(err);

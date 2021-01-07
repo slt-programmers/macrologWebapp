@@ -9,8 +9,8 @@ import { ToastService } from '../../services/toast.service';
 export class ToastComponent {
   @ViewChild('toast') toast: any;
 
-  public message: string;
-  public isError: boolean;
+  public message: string = '';
+  public isError = false;
 
   constructor(private toastService: ToastService, private renderer: Renderer2) {
     this.toastService.messageObservable.subscribe((messageObj: any) => {

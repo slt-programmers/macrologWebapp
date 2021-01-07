@@ -9,20 +9,20 @@ import { environment } from '../../../../../environments/environment';
   styleUrls: ['./mail.component.scss'],
 })
 export class MailComponent implements OnInit {
-  public googleConnectUrl: string;
+  public googleConnectUrl: string = '';
   public isConnected = false;
-  public syncError: string;
-  public emailAddress: string;
+  public syncError: string = '';
+  public emailAddress: string | null = null;
   public mailSend = false;
 
-  private clientId: string;
-  private code: string;
-  private scope: string;
+  private clientId: string = '';
+  private code: string | null = null;
+  private scope: string | null = null;
 
   constructor(
     private googleService: GoogleService,
     private route: ActivatedRoute
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.retrieveStatus();
@@ -69,10 +69,13 @@ export class MailComponent implements OnInit {
   }
 
   private storeConnection() {
-    this.googleService.storeMailSyncSettings(this.code).subscribe(() => {
-      this.isConnected = true;
-    });
+    if (this.code) {
+      this.googleService.storeMailSyncSettings(this.code).subscribe(() => {
+        this.isConnected = true;
+      });
+    }
   }
+
   private setGoogleUrl() {
     const googleUrl =
       'https://accounts.google.com/o/oauth2/auth?response_type=code&approval_prompt=force&scope=https://www.googleapis.com/auth/gmail.send&state=GMAILCONNECT&access_type=offline';
@@ -87,10 +90,12 @@ export class MailComponent implements OnInit {
 
   sendTestMail() {
     this.mailSend = false;
-    this.googleService.sendTestMail(this.emailAddress).subscribe(() => {
-      // TODO use alert/toaster
-      this.mailSend = true;
-      this.emailAddress = null;
-    });
+    if (this.emailAddress) {
+      this.googleService.sendTestMail(this.emailAddress).subscribe(() => {
+        // TODO use alert/toaster
+        this.mailSend = true;
+        this.emailAddress = null;
+      });
+    }
   }
 }

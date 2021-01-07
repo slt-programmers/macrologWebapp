@@ -8,7 +8,7 @@ import { WebhookService } from 'src/app/shared/services/webhook.service';
   styleUrls: ['./webhooks.component.scss'],
 })
 export class WebhooksComponent implements OnInit {
-  constructor(private webhookService: WebhookService) {}
+  constructor(private webhookService: WebhookService) { }
 
   public allWebhooks = new Array();
 
@@ -18,14 +18,16 @@ export class WebhooksComponent implements OnInit {
 
   disableWebhook(connectedApp: string) {
     const hook = this.getStatus(connectedApp);
-    this.webhookService.endWebhook(connectedApp, hook.id).subscribe(
-      () => {
-        this.retrieveStatus(connectedApp);
-      },
-      (err) => {
-        // TODO handle error
-      }
-    );
+    if (hook.id) {
+      this.webhookService.endWebhook(connectedApp, hook.id).subscribe(
+        () => {
+          this.retrieveStatus(connectedApp);
+        },
+        (err) => {
+          // TODO handle error
+        }
+      );
+    }
   }
 
   enableWebhook(connectedApp: string) {
@@ -45,7 +47,7 @@ export class WebhooksComponent implements OnInit {
         return hook.webhook;
       }
     }
-    return undefined;
+    return {} as WebhookStatus;
   }
 
   private retrieveStatus(connectedApp: string) {

@@ -2,9 +2,9 @@ import { Component } from '@angular/core';
 import { UserService } from '../../../../shared/services/user.service';
 import { Gender } from '../../../../model/gender';
 import { ToastService } from '../../../../shared/services/toast.service';
-import * as moment from 'moment';
 import { forkJoin } from 'rxjs';
 import { UserSettings } from 'src/app/model/userSettings';
+import { format, parse } from 'date-fns';
 
 @Component({
   selector: 'personal',
@@ -12,15 +12,15 @@ import { UserSettings } from 'src/app/model/userSettings';
   templateUrl: './personal.component.html',
 })
 export class PersonalComponent {
-  private originalResult: UserSettings;
+  private originalResult?: UserSettings;
 
-  public name: string;
-  public birthday: string;
-  public gender: Gender;
-  public height: number;
-  public weight: number;
-  public activity: number;
-  public newWeight: number;
+  public name?: string;
+  public birthday?: string;
+  public gender?: Gender;
+  public height?: number;
+  public weight?: number;
+  public activity?: number;
+  public newWeight?: number;
 
   constructor(
     private userService: UserService,
@@ -30,9 +30,7 @@ export class PersonalComponent {
       (result) => {
         this.originalResult = result;
         this.name = result.name;
-        this.birthday = moment(result.birthday, 'YYYY-M-D', true).format(
-          'DD-MM-YYYY'
-        );
+        this.birthday = result.birthday ? format(parse(result.birthday, 'yyyy-MM-dd', new Date()), 'dd-MM-yyyy') : undefined;
         this.gender = result.gender || Gender.Male;
         this.height = result.height;
         this.weight = result.currentWeight;
@@ -48,11 +46,11 @@ export class PersonalComponent {
   public saveUserSettings(): void {
     forkJoin([
       this.userService.addUserSetting('name', this.name),
-      this.userService.addUserSetting('birthday', this.birthday.toString()),
-      this.userService.addUserSetting('gender', this.gender.toString()),
-      this.userService.addUserSetting('height', this.height.toString()),
-      this.userService.addUserSetting('weight', this.weight.toString()),
-      this.userService.addUserSetting('activity', this.activity.toString()),
+      this.userService.addUserSetting('birthday', this.birthday?.toString()),
+      this.userService.addUserSetting('gender', this.gender?.toString()),
+      this.userService.addUserSetting('height', this.height?.toString()),
+      this.userService.addUserSetting('weight', this.weight?.toString()),
+      this.userService.addUserSetting('activity', this.activity?.toString()),
     ]).subscribe(
       (data) => this.toastService.setMessage('Your data is saved!'),
       (error) => console.error(error)

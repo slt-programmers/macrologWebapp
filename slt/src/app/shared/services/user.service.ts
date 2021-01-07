@@ -10,7 +10,7 @@ export class UserService {
 
   constructor(private http: HttpClient) {}
 
-  public addUserSetting(key: string, value: string) {
+  public addUserSetting(key: string, value: string | undefined) {
     const headers = {
       'Content-Type': 'application/json',
       'Access-Control-Allow-Origin': environment.origin,

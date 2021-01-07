@@ -1,9 +1,10 @@
-export class Weight {
-  public id: number;
-  public day: string;
-  public weight: number;
-  public remark: string;
-  public editable: boolean;
+export interface Weight {
 
-  constructor() {}
+   id?: number;
+   day?: string;
+   weight?: number;
+   remark?: string;
+   editable?: boolean;
+
+ 
 }

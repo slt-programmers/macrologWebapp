@@ -1,22 +1,22 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { DiaryService } from '../../../shared/services/diary.service';
 import { UserService } from '../../../shared/services/user.service';
-import * as moment from 'moment';
 import { DataPoint } from 'src/app/shared/components/linegraph/linegraph.component';
 import { MacrosPerDay } from 'src/app/model/macrosPerDay';
 import { Macros } from 'src/app/model/macro';
+import { format } from 'date-fns';
 
 @Component({
   selector: 'graphs',
-  templateUrl: './analytics.component.html',
-  styleUrls: ['./analytics.component.scss'],
+  templateUrl: './graphs.component.html',
+  styleUrls: ['./graphs.component.scss'],
 })
 export class GraphsComponent implements OnInit {
   constructor(
     private logService: DiaryService,
     private userService: UserService,
     private ref: ChangeDetectorRef
-  ) {}
+  ) { }
 
   public measurement = 'calories';
   public measurementOption = 'total';
@@ -119,8 +119,8 @@ export class GraphsComponent implements OnInit {
     this.allMacros = [];
     this.logService
       .getMacrosPerDay(
-        moment(this.dateFrom).format('YYYY-MM-DD'),
-        moment(this.dateTo).format('YYYY-MM-DD')
+        format(this.dateFrom, 'yyyy-MM-dd'),
+        format(this.dateTo, 'yyyy-MM-dd')
       )
       .subscribe(
         (data) => {
@@ -135,7 +135,7 @@ export class GraphsComponent implements OnInit {
 
   private getGoals() {
     this.userService
-      .getUserGoalStats(moment(this.dateFrom).format('YYYY-MM-DD'))
+      .getUserGoalStats(format(this.dateFrom, 'yyyy-MM-dd'))
       .subscribe(
         (data) => {
           if (data[0] === null) {
@@ -146,10 +146,10 @@ export class GraphsComponent implements OnInit {
           this.setGoalCalories();
           this.numberOfValues =
             (this.dateTo.getTime() - this.dateFrom.getTime()) /
-              1000 /
-              60 /
-              60 /
-              24 +
+            1000 /
+            60 /
+            60 /
+            24 +
             1;
           this.getDatasets();
           this.loading = false;
@@ -299,13 +299,12 @@ export class GraphsComponent implements OnInit {
   }
 
   private getMacroForDay(date: Date, numberOfValues: number, macro: string) {
-    for (let i = 0; i < numberOfValues; i++) {
+    let indexMax = Math.min(numberOfValues, this.allMacros.length);
+    for (let i = 0; i < indexMax; i++) {
       const macrosPerDay = this.allMacros[i];
-      if (
-        macrosPerDay &&
-        moment(macrosPerDay.day).format('YYYY-MM-DD') ===
-          moment(date).format('YYYY-MM-DD')
-      ) {
+      const macrosString = format(new Date(macrosPerDay.day), 'yyyy-MM-dd');
+      const dateString = format(date, 'yyyy-MM-dd');
+      if (macrosPerDay && macrosString === dateString) {
         return Math.round(macrosPerDay.macro[macro as keyof Macros]);
       }
     }

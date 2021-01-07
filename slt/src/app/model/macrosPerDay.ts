@@ -3,7 +3,7 @@ import { Macros } from './macro';
 export class MacrosPerDay {
 
   public macro: Macros;
-  public day: Date;
+  public day: Date | undefined;
 
   constructor(day?: Date, macros?: Macros, protein?: number, fat?: number, carbs?: number, calories?: number) {
     this.day = day;

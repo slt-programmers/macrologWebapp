@@ -2,7 +2,6 @@ import { Location } from '@angular/common';
 import { TestBed, fakeAsync, tick } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { Router } from '@angular/router';
-import { routes } from './app-routing.module';
 import { AboutComponent } from './pages/guest/about/about.component';
 import { AuthenticatedComponent } from './pages/authenticated/authenticated.component';
 import { LoginComponent } from './pages/guest/login/login.component';
@@ -14,7 +13,7 @@ import { HttpHandler, HttpClient } from '@angular/common/http';
 import { ScrollBehaviourService } from './shared/services/scroll-behaviour.service';
 import { HealthcheckService } from './shared/services/healthcheck.service';
 import { ToastService } from './shared/services/toast.service';
-import { GuestGuard } from './shared/services/guest.guard';
+import { GuestGuard } from './pages/guest/guest.guard';
 
 describe('Router app', () => {
   let location: Location;
@@ -22,7 +21,7 @@ describe('Router app', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [RouterTestingModule.withRoutes(routes), FormsModule],
+      imports: [RouterTestingModule, FormsModule],
       providers: [
         HttpClient,
         HttpHandler,

@@ -3,15 +3,26 @@ import { RouterModule, Routes } from '@angular/router';
 import { AuthenticatedComponent } from './authenticated.component';
 import { DiaryComponent } from './diary/diary.component';
 import { AdminComponent } from './admin/admin.component';
-import { UserManagementComponent } from './admin/usermanagement/usermanagement.component';
-import { WebhooksComponent } from './admin/webhooks/webhooks.component';
-import { MailComponent } from './admin/mail/mail.component';
 import { OnboardingComponent } from './onboarding/onboarding.component';
 import { FoodComponent } from './food/food.component';
 import { DishesComponent } from './dishes/dishes.component';
-import { GraphsComponent } from './analytics/analytics.component';
-import { AuthGuard } from 'src/app/shared/services/auth.guard';
+import { GraphsComponent } from './graphs/graphs.component';
+import { AuthGuard } from 'src/app/pages/authenticated/auth.guard';
 import { UserComponent } from './user/user.component';
+import { CommonModule } from '@angular/common';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { BargraphComponent } from 'src/app/shared/components/bargraph/bargraph.component';
+import { MaterialModule } from 'src/app/shared/material.module';
+import { MakeDishModalComponent } from 'src/app/shared/components/modals/make-dish-modal/make-dish-modal.component';
+import { AutocompleteFoodComponent } from 'src/app/shared/components/autocomplete-food/autocomplete-food.component';
+import { PiechartComponent } from 'src/app/shared/components/piechart/piechart.component';
+import { AddFoodModalComponent } from 'src/app/shared/components/modals/add-food-modal/add-food-modal.component';
+import { LogMealComponent } from 'src/app/shared/components/log-meal/log-meal.component';
+import { ComponentsModule } from 'src/app/shared/components.module';
+import { StepperComponent } from 'src/app/shared/components/stepper/stepper.component';
+import { LogActivityComponent } from 'src/app/shared/components/log-activity/log-activity.component';
+import { StackDonutComponent } from 'src/app/shared/components/stackdonut/stackdonut.component';
+import { DatepickerComponent } from 'src/app/shared/components/datepicker/datepicker.component';
 
 export const authenticatedRoutes: Routes = [
   {
@@ -20,26 +31,23 @@ export const authenticatedRoutes: Routes = [
     canActivate: [AuthGuard],
     children: [
       {
-        path: 'log',
+        path: '',
         component: DiaryComponent,
         canActivate: [AuthGuard],
       },
       {
         path: 'user',
         component: UserComponent,
+        canActivate: [AuthGuard],
         loadChildren: () =>
-          import('./user/user.module').then((m) => m.UserModule),
+          import('./user/user.module').then((m) => m.UserModule)
       },
       {
         path: 'admin',
         component: AdminComponent,
         canActivate: [AuthGuard],
-        children: [
-          { path: '', redirectTo: 'usermanagement', pathMatch: 'full' },
-          { path: 'usermanagement', component: UserManagementComponent },
-          { path: 'webhooks', component: WebhooksComponent },
-          { path: 'mail', component: MailComponent },
-        ],
+        loadChildren: () =>
+          import('./admin/admin.module').then((m) => m.AdminModule)
       },
       {
         path: 'onboarding',
@@ -66,8 +74,37 @@ export const authenticatedRoutes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forChild(authenticatedRoutes)],
-  providers: [AuthGuard],
+  imports: [
+    CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MaterialModule,
+    ComponentsModule,
+    RouterModule.forChild(authenticatedRoutes)],
+  declarations: [
+    AuthenticatedComponent,
+    DiaryComponent,
+    UserComponent,
+    AdminComponent,
+    OnboardingComponent,
+    FoodComponent,
+    DishesComponent,
+    GraphsComponent,
+
+    BargraphComponent,
+    MakeDishModalComponent,
+    AutocompleteFoodComponent,
+    PiechartComponent,
+    AddFoodModalComponent,
+    LogMealComponent,
+    StepperComponent,
+    LogActivityComponent,
+    StackDonutComponent,
+    DatepickerComponent
+  ],
+  providers: [
+    AuthGuard
+  ],
   exports: [RouterModule],
 })
-export class AuthenticatedRoutingModule {}
+export class AuthenticatedRoutingModule { }

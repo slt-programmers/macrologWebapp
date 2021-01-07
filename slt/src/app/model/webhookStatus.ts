@@ -1,11 +1,8 @@
-export class WebhookStatus {
+export interface WebhookStatus {
 
-	public id: number;
-  public callback_url: string;
-  public created_at: string;
-	public updated_at: string;
+	 id: number;
+   callback_url: string;
+   created_at: string;
+	 updated_at: string;
 
-  constructor () {
-
-	}
 }

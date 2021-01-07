@@ -11,8 +11,7 @@ import { HealthcheckService } from './shared/services/healthcheck.service';
 import { Router } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { Renderer2 } from '@angular/core';
-import { of } from 'rxjs/internal/observable/of';
-import { throwError } from 'rxjs';
+import { of, throwError } from 'rxjs';
 
 describe('AppComponent', () => {
   let component: AppComponent;

@@ -1,9 +1,9 @@
 export class Macros {
 
-	public protein: number;
-	public fat: number;
-	public carbs: number;
-	public calories: number;
+	public protein?: number;
+	public fat?: number;
+	public carbs?: number;
+	public calories?: number;
 
 	constructor(protein?: number, fat?: number, carbs?: number, calories?: number) {
 		this.protein = protein;

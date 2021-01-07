@@ -2,10 +2,10 @@ import { Macros } from './macro';
 
 export class Portion {
 
-	public id: number;
-	public grams: number;
-	public description: string;
-	public macros: Macros;
+	public id?: number;
+	public grams?: number;
+	public description?: string;
+	public macros?: Macros;
 
 	constructor(grams?: number, description?: string, macros?: Macros) {
 		this.grams = grams;

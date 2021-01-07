@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { UserService } from '../../../../shared/services/user.service';
 import { Gender } from '../../../../model/gender';
-import * as moment from 'moment';
+import { differenceInYears, parse } from 'date-fns';
 
 @Component({
   selector: 'intake',
@@ -34,8 +34,8 @@ export class IntakeComponent {
       this.goalFat = result.goalFat;
       this.goalCarbs = result.goalCarbs;
 
-      const birthdayDate = moment(this.birthday, 'YYYY-M-D', true);
-      this.age = moment().diff(birthdayDate, 'years');
+      const birthdayDate = parse(this.birthday, 'yyy-MM-dd', new Date());
+      this.age = differenceInYears(new Date(), birthdayDate);
     });
   }
 
