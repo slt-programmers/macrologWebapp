@@ -12,41 +12,83 @@
       <div class="blue-theme" #step1 *ngIf="currentStep === 1">
         <h3 class="form-description">Personal details</h3>
 
-        <p>To calculate how much energy you need in a day, we need to know a few things about you. </p>
+        <p>
+          To calculate how much energy you need in a day, we need to know a few
+          things about you.
+        </p>
 
         <form #personalIntake="ngForm">
           <div class="form-field">
             <label class="form-field__label">Name</label>
-            <input class="input form-field__input" name="name" type="text" [(ngModel)]="name" required>
+            <input
+              class="input form-field__input"
+              name="name"
+              type="text"
+              [(ngModel)]="name"
+              required
+            />
           </div>
 
           <div class="form-field">
             <label class="form-field__label">Date of birth</label>
-            <input class="input form-field__input" required validDate placeholder="DD-MM-YYYY, eg 26-3-1989"
-              name="birthday" [(ngModel)]="birthday">
+            <input
+              class="input form-field__input"
+              required
+              validDate
+              placeholder="DD-MM-YYYY, eg 26-3-1989"
+              name="birthday"
+              [(ngModel)]="birthday"
+            />
           </div>
 
           <div class="form-field">
             <label class="form-field__label">Gender</label>
-            <mat-radio-group class="radios" aria-label="gender" name="gender" [(ngModel)]="gender">
-              <mat-radio-button class="radios__option" value="MALE">Male</mat-radio-button>
-              <mat-radio-button class="radios__option" value="FEMALE">Female</mat-radio-button>
+            <mat-radio-group
+              class="radios"
+              aria-label="gender"
+              name="gender"
+              [(ngModel)]="gender"
+            >
+              <mat-radio-button class="radios__option" value="MALE"
+                >Male</mat-radio-button
+              >
+              <mat-radio-button class="radios__option" value="FEMALE"
+                >Female</mat-radio-button
+              >
             </mat-radio-group>
           </div>
 
           <div class="form-field">
             <label class="form-field__label">Height (cm)</label>
-            <input class="input form-field__input" name="height" type="number" [(ngModel)]="height" required>
+            <input
+              class="input form-field__input"
+              name="height"
+              type="number"
+              [(ngModel)]="height"
+              required
+            />
           </div>
 
           <div class="form-field">
             <label class="form-field__label">Start weight (kg)</label>
-            <input class="input form-field__input" name="weight" type="number" [(ngModel)]="weight" step="0.1" required>
+            <input
+              class="input form-field__input"
+              name="weight"
+              type="number"
+              [(ngModel)]="weight"
+              step="0.1"
+              required
+            />
           </div>
 
           <div class="form-field">
             <label class="form-field__label">Activity level</label>
-            <select class="form-field__input" name="activity" [(ngModel)]="activity" required>
+            <select
+              class="form-field__input"
+              name="activity"
+              [(ngModel)]="activity"
+              required
+            >
               <option value="1.2">Sedentary</option>
               <option value="1.375">Lightly active</option>
               <option value="1.55">Moderately active</option>
@@ -57,51 +99,81 @@
         </form>
 
         <div class="button-wrapper">
-          <button class="button button--primary" (click)="saveUserSettings()">Next</button>
+          <button class="button button--primary" (click)="saveUserSettings()">
+            Next
+          </button>
         </div>
       </div>
 
       <div class="" #step2 *ngIf="currentStep === 2">
         <h3 class="form-description">Set your intake goal</h3>
 
-        <p>This is the amount of calories you need to maintain your current weight. Increase or decrease the amount of
-          calories to respectively
+        <p>
+          This is the amount of calories you need to maintain your current
+          weight. Increase or decrease the amount of calories to respectively
           gain or lose weight. Do this by adjusting the calories or the macro's.
         </p>
 
         <div class="calorie-box">
-          <span class="calorie-box__title">{{calories | number : '1.0-0'}} Calories</span>
+          <span class="calorie-box__title"
+            >{{ calories | number: '1.0-0' }} Calories</span
+          >
         </div>
 
         <div class="tabs">
           <div class="tabs-header">
-            <div class="tab" (click)="showCaloriesTab()" [ngClass]="{'tab--active': showCalories}">Adjust calories
+            <div
+              class="tab"
+              (click)="showCaloriesTab()"
+              [ngClass]="{ 'tab--active': showCalories }"
+            >
+              Adjust calories
             </div>
-            <div class="tab" (click)="showMacrosTab()" [ngClass]="{'tab--active': showMacros}">Adjust macro's
+            <div
+              class="tab"
+              (click)="showMacrosTab()"
+              [ngClass]="{ 'tab--active': showMacros }"
+            >
+              Adjust macro's
             </div>
           </div>
           <div class="tabs-content">
-
             <!--Calories-->
             <div *ngIf="showCalories">
-              <p>The light-blue markers show a surplus or deficit of 200 calories. We suggest
-                this because we think slow progress prevents yoyo-ing. Feel free to
-                adjust according to your own preferences.</p>
+              <p>
+                The light-blue markers show a surplus or deficit of 200
+                calories. We suggest this because we think slow progress
+                prevents yoyo-ing. Feel free to adjust according to your own
+                preferences.
+              </p>
 
               <div class="form-field form-field--slider">
-                <div class="form-field__label form-field__label--slider">Calories</div>
+                <div class="form-field__label form-field__label--slider">
+                  Calories
+                </div>
                 <div class="form-field__slider">
-                  <slider [value]="calories" (valueChange)="changeCalories($event)" [upperBound]="4000"
-                    [lowerBound]="1200" [markers]="markers"></slider>
+                  <slider
+                    [value]="calories"
+                    (valueChange)="changeCalories($event)"
+                    [upperBound]="4000"
+                    [lowerBound]="1200"
+                    [markers]="markers"
+                  ></slider>
                 </div>
               </div>
 
               <p>This results in the following macros:</p>
 
               <div class="macro-box">
-                <p class="macro-box__macro"><strong>Protein: {{protein | number : '1.0-0'}} gr</strong></p>
-                <p class="macro-box__macro"><strong>Fat: {{fat | number : '1.0-0'}} gr</strong></p>
-                <p class="macro-box__macro"><strong>Carbs: {{carbs | number : '1.0-0'}} gr</strong></p>
+                <p class="macro-box__macro">
+                  <strong>Protein: {{ protein | number: '1.0-0' }} gr</strong>
+                </p>
+                <p class="macro-box__macro">
+                  <strong>Fat: {{ fat | number: '1.0-0' }} gr</strong>
+                </p>
+                <p class="macro-box__macro">
+                  <strong>Carbs: {{ carbs | number: '1.0-0' }} gr</strong>
+                </p>
               </div>
             </div>
 
@@ -111,24 +183,36 @@
                 <div class="form-field">
                   <label class="form-field__label">Protein</label>
                   <div class="form-field__element">
-                    <input class="input form-field__input" (change)="calcCaloriesManual()" [(ngModel)]="proteinManual"
-                      type="number">
+                    <input
+                      class="input form-field__input"
+                      (change)="calcCaloriesManual()"
+                      [(ngModel)]="proteinManual"
+                      type="number"
+                    />
                   </div>
                 </div>
 
                 <div class="form-field">
                   <label class="form-field__label">Fat</label>
                   <div class="form-field__element">
-                    <input class="input form-field__input" (change)="calcCaloriesManual()" [(ngModel)]="fatManual"
-                      type="number">
+                    <input
+                      class="input form-field__input"
+                      (change)="calcCaloriesManual()"
+                      [(ngModel)]="fatManual"
+                      type="number"
+                    />
                   </div>
                 </div>
 
                 <div class="form-field">
                   <label class="form-field__label">Carbs</label>
                   <div class="form-field__element">
-                    <input class="input form-field__input" (change)="calcCaloriesManual()" [(ngModel)]="carbsManual"
-                      type="number">
+                    <input
+                      class="input form-field__input"
+                      (change)="calcCaloriesManual()"
+                      [(ngModel)]="carbsManual"
+                      type="number"
+                    />
                   </div>
                 </div>
               </div>
@@ -137,10 +221,16 @@
         </div>
 
         <div class="button-wrapper button-wrapper--space-between">
-          <button class="button button--primary" (click)="previousStep()">Previous</button>
+          <button class="button button--primary" (click)="previousStep()">
+            Previous
+          </button>
 
-          <button class="button button--primary" (click)="saveIntake()"
-            [disabled]="showCalories === false && showMacros === false">Next
+          <button
+            class="button button--primary"
+            (click)="saveIntake()"
+            [disabled]="showCalories === false && showMacros === false"
+          >
+            Next
           </button>
         </div>
       </div>
@@ -148,18 +238,20 @@
       <div class="blue-theme" #step2 *ngIf="currentStep === 3">
         <h3 class="form-description">Adding food</h3>
 
-        <p>The first step is to add food to your database. You do this by using the
-          floating plus-button in the bottom right corner on the diary page.
+        <p>
+          The first step is to add food to your database. You do this by using
+          the floating plus-button in the bottom right corner on the diary page.
         </p>
 
-        <button class="floating-action-button" (click)="openModal()">
+        <button class="floating-action-button">
           <mat-icon>add</mat-icon>
         </button>
 
         <h3 class="form-description">Portions</h3>
 
-        <p>To make diary entries easier you can add portions that you
-          regularly use. This is entirely optional. You add a portion by clicking on the
+        <p>
+          To make diary entries easier you can add portions that you regularly
+          use. This is entirely optional. You add a portion by clicking on the
           plus sign.
         </p>
 
@@ -168,41 +260,52 @@
         </button>
 
         <div class="more-info">
-          <a class="primary" (click)="expandMoreInfo = !expandMoreInfo">More on this setup</a>
+          <a class="primary" (click)="expandMoreInfo = !expandMoreInfo"
+            >More on this setup</a
+          >
         </div>
 
         <div *ngIf="expandMoreInfo">
-          <p>Macrolog is not hooked up to an existing food database. This has two reasons.
-            First, a shared database is likely to have a multitude of variations of the
-            food you are trying to find, including different brands and different portions.
-            This may feel overwhelming and it's easy to pick something that may not be
-            representative of what you actually ate.
-            Second, it forces you to look up the nutrients of your food. By adding it
-            to your own personal database manually you actively increase your knowledge
-            of what your food consists of, instead of passively copying numbers.
+          <p>
+            Macrolog is not hooked up to an existing food database. This has two
+            reasons. First, a shared database is likely to have a multitude of
+            variations of the food you are trying to find, including different
+            brands and different portions. This may feel overwhelming and it's
+            easy to pick something that may not be representative of what you
+            actually ate. Second, it forces you to look up the nutrients of your
+            food. By adding it to your own personal database manually you
+            actively increase your knowledge of what your food consists of,
+            instead of passively copying numbers.
           </p>
 
-          <p>This choice does have a trade off. In the beginning it may take some time to
-            fill up your database. We know when an app requires a lot of tedious action
-            you will stop using it all together, so we try to make the daily use of it as
-            easy and fast as possible. We think it's best to invest a little time at the
-            start, and once it's set up don't spend a second longer on it than you have to.
-            Your time is valuable.
+          <p>
+            This choice does have a trade off. In the beginning it may take some
+            time to fill up your database. We know when an app requires a lot of
+            tedious action you will stop using it all together, so we try to
+            make the daily use of it as easy and fast as possible. We think it's
+            best to invest a little time at the start, and once it's set up
+            don't spend a second longer on it than you have to. Your time is
+            valuable.
           </p>
         </div>
 
         <div class="button-wrapper button-wrapper--space-between">
-          <button class="button button--primary" (click)="previousStep()">Previous</button>
+          <button class="button button--primary" (click)="previousStep()">
+            Previous
+          </button>
 
-          <button class="button button--primary" (click)="nextStep()">Next</button>
+          <button class="button button--primary" (click)="nextStep()">
+            Next
+          </button>
         </div>
       </div>
 
       <div #step4 *ngIf="currentStep === 4">
         <h3 class="form-description">Filling your diary</h3>
 
-        <p>Clicking on <strong>Breakfast</strong> will enable you to add food to it. Try adding an
-          <strong>Apple</strong>.
+        <p>
+          Clicking on <strong>Breakfast</strong> will enable you to add food to
+          it. Try adding an <strong>Apple</strong>.
         </p>
 
         <div class="logday-wrapper">
@@ -214,19 +317,29 @@
               <span class="logday__header__macro">Carbs</span>
             </div>
 
-            <log-meal #breakfast [dummy]="true" [open]="breakfastOpen" [searchables]="foodSearchables"
-              [date]="displayDate" [meal]="'Breakfast'" [logEntries]="[]" (dataChanged)="dummy()"></log-meal>
+            <log-meal
+              #breakfast
+              [dummy]="true"
+              [open]="breakfastOpen"
+              [searchables]="foodSearchables"
+              [date]="displayDate"
+              [meal]="'Breakfast'"
+              [logEntries]="[]"
+              (dataChanged)="dummy()"
+            ></log-meal>
           </div>
         </div>
 
         <div class="button-wrapper button-wrapper--space-between">
-          <button class="button button--primary" (click)="previousStep()">Previous</button>
+          <button class="button button--primary" (click)="previousStep()">
+            Previous
+          </button>
 
-          <button class="button button--primary" (click)="finish()">Done</button>
+          <button class="button button--primary" (click)="finish()">
+            Done
+          </button>
         </div>
       </div>
     </div>
   </div>
 </div>
-
-<toast-component></toast-component>

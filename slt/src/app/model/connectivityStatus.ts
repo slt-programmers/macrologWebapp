@@ -1,7 +1,6 @@
-export class ConnectivityStatus {
+export interface ConnectivityStatus {
 
-	public connected: boolean;
-	public syncedApplicationId: string;
+	connected: boolean;
+	syncedApplicationId: string;
 
-	constructor() { }
 }

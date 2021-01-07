@@ -1,12 +1,9 @@
-export class UserAccount {
+export interface UserAccount {
 
-    public id: number;
-    public userName: string;
-    public token: string;
-    public email: string;
-    public admin: boolean;
+  id: number;
+  userName: string;
+  token: string;
+  email: string;
+  admin: boolean;
 
-    constructor() {
-
-    }
 }
