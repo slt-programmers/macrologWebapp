@@ -1,20 +1,33 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { HomeComponent } from './pages/guest/home/home.component';
-import { AboutComponent } from './pages/guest/about/about.component';
-import { LoginComponent } from './pages/guest/login/login.component';
-import { AuthenticatedComponent } from './pages/authenticated/authenticated.component';
-import { GuestGuardService } from './services/guest-guard.service';
+import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
 
 export const routes: Routes = [
-  { path: '', component: HomeComponent, canActivate: [GuestGuardService] },
-  { path: 'about', component: AboutComponent },
-  { path: 'login', component: LoginComponent, canActivate: [GuestGuardService] },
-  { path: '*', component: AuthenticatedComponent }
+  {
+    path: '',
+    loadChildren: () =>
+      import('./pages/guest/guest.module').then((m) => m.GuestModule),
+  },
+  {
+    path: 'dashboard',
+    loadChildren: () =>
+      import('./pages/authenticated/authenticated.module').then(
+        (m) => m.AuthenticatedModule),
+  },
+  {
+    path: '**',
+    component: PageNotFoundComponent
+  }
 ];
-
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  imports: [
+    RouterModule.forRoot(routes)
+  ],
+  exports: [
+    RouterModule
+  ],
+  declarations: [
+    PageNotFoundComponent
+  ]
 })
 export class AppRoutingModule { }

@@ -1,14 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { WebhookService } from '@app/services/webhook.service';
-import { WebhookStatus } from '@app/model/webhookStatus';
+import { WebhookStatus } from 'src/app/model/webhookStatus';
+import { WebhookService } from 'src/app/shared/services/webhook.service';
 
 @Component({
   selector: 'app-webhooks',
   templateUrl: './webhooks.component.html',
-  styleUrls: ['./webhooks.component.scss']
+  styleUrls: ['./webhooks.component.scss'],
 })
 export class WebhooksComponent implements OnInit {
-
   constructor(private webhookService: WebhookService) { }
 
   public allWebhooks = new Array();
@@ -19,14 +18,16 @@ export class WebhooksComponent implements OnInit {
 
   disableWebhook(connectedApp: string) {
     const hook = this.getStatus(connectedApp);
-    this.webhookService.endWebhook(connectedApp, hook.id).subscribe(
-      () => {
-        this.retrieveStatus(connectedApp);
-      },
-      err => {
-        // TODO handle error
-      }
-    );
+    if (hook.id) {
+      this.webhookService.endWebhook(connectedApp, hook.id).subscribe(
+        () => {
+          this.retrieveStatus(connectedApp);
+        },
+        (err) => {
+          // TODO handle error
+        }
+      );
+    }
   }
 
   enableWebhook(connectedApp: string) {
@@ -34,7 +35,7 @@ export class WebhooksComponent implements OnInit {
       () => {
         this.retrieveStatus(connectedApp);
       },
-      err => {
+      (err) => {
         // TODO handle error
       }
     );
@@ -46,17 +47,17 @@ export class WebhooksComponent implements OnInit {
         return hook.webhook;
       }
     }
-    return undefined;
+    return {} as WebhookStatus;
   }
 
   private retrieveStatus(connectedApp: string) {
     // delete old one. Only strava now, so delete all :p
     this.allWebhooks = new Array();
     this.webhookService.getWebhookStatus(connectedApp).subscribe(
-      res => {
-        this.allWebhooks.push({ 'connectedApp': connectedApp, 'webhook': res });
+      (res) => {
+        this.allWebhooks.push({ connectedApp: connectedApp, webhook: res });
       },
-      err => {
+      (err) => {
         // TODO handle error
       }
     );

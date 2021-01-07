@@ -1,15 +1,13 @@
 .search-bar {
+  display: flex;
+  align-items: center;
+  margin-bottom: ($gutter/2);
 
-	display: flex;
-	align-items: center;
-	margin-bottom: ($gutter/2);
+  &__input {
+    margin-right: ($gutter/2);
+  }
 
-	&__input {
-		margin-right: ($gutter/2);
-	}
-
-	&__label {
-		margin-right: ($gutter/2);
-	}
-
+  &__label {
+    margin-right: ($gutter/2);
+  }
 }

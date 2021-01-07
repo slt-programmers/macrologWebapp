@@ -21,15 +21,14 @@
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
-            "tsConfig": "src/tsconfig.app.json",
+            "tsConfig": "tsconfig.app.json",
+            "aot": true,
             "assets": [
               "src/favicon.ico",
               "src/assets",
               "src/google3bb89e24d542c3d5.html"
             ],
-            "styles": [
-              "src/css/public.scss"
-            ],
+            "styles": ["src/css/public.scss"],
             "scripts": []
           },
           "configurations": {
@@ -43,12 +42,22 @@
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
-              "extractCss": true,
               "namedChunks": false,
-              "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,
-              "buildOptimizer": true
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kb",
+                  "maximumError": "1mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "2kb",
+                  "maximumError": "4kb"
+                }
+              ]
             },
             "acceptance": {
               "fileReplacements": [
@@ -60,12 +69,22 @@
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
-              "extractCss": true,
               "namedChunks": false,
-              "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,
-              "buildOptimizer": true
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kb",
+                  "maximumError": "1mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "2kb",
+                  "maximumError": "4kb"
+                }
+              ]
             }
           }
         },
@@ -95,16 +114,11 @@
           "options": {
             "main": "src/test.ts",
             "polyfills": "src/polyfills.ts",
-            "karmaConfig": "src/karma.conf.js",
-            "styles": [
-              "src/css/public.scss"
-            ],
+            "karmaConfig": "karma.conf.js",
+            "styles": ["src/css/public.scss"],
             "scripts": [],
-            "assets": [
-              "src/favicon.ico",
-              "src/assets"
-            ],
-            "tsConfig": "tsconfig.json",
+            "assets": ["src/favicon.ico", "src/assets"],
+            "tsConfig": "tsconfig.spec.json",
             "codeCoverage": true,
             "codeCoverageExclude": [
               "src/test/**",
@@ -117,11 +131,11 @@
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": [
-              "src/tsconfig.app.json"
+              "tsconfig.app.json",
+              "tsconfig.spec.json",
+              "e2e/tsconfig.json"
             ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
+            "exclude": ["**/node_modules/**"]
           }
         },
         "e2e": {
@@ -141,5 +155,8 @@
       }
     }
   },
-  "defaultProject": "macrolog-webapp"
+  "defaultProject": "macrolog-webapp",
+  "cli": {
+    "analytics": "be3c8820-63e9-44ec-b7f7-d15f2eaa4756"
+  }
 }

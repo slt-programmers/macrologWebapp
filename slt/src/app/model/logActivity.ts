@@ -1,13 +1,9 @@
-export class LogActivity {
+export interface LogActivity {
+  id: number;
+  day: Date;
+  name: string;
+  calories: number;
+  syncedWith?: string;
+  syncedId?: number;
 
-	public id: number;
-	public day;
-	public name;
-	public calories;
-  public syncedWith?;
-  public syncedId?;
-
-	constructor () {
-
-	}
 }

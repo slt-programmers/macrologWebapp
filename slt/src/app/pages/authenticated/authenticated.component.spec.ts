@@ -1,13 +1,19 @@
-import { TestBed, async, ComponentFixture, fakeAsync, tick } from '@angular/core/testing';
+import {
+  TestBed,
+  ComponentFixture,
+  fakeAsync,
+  tick,
+} from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AuthenticatedComponent } from './authenticated.component';
 import { HttpHandler, HttpClient } from '@angular/common/http';
-import { ScrollBehaviourService } from '../../services/scroll-behaviour.service';
-import { HealthcheckService } from '../../services/healthcheck.service';
+import { ScrollBehaviourService } from '../../shared/services/scroll-behaviour.service';
+import { HealthcheckService } from '../../shared/services/healthcheck.service';
 import { of, throwError } from 'rxjs';
 import { Router } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { Renderer2 } from '@angular/core';
+import { ToastService } from 'src/app/shared/services/toast.service';
 
 describe('AuthenticatedComponent', () => {
   let component: AuthenticatedComponent;
@@ -16,20 +22,27 @@ describe('AuthenticatedComponent', () => {
   let scrollBehaviourService: ScrollBehaviourService;
   let router: Router;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      imports: [RouterTestingModule.withRoutes([{ path: 'user', redirectTo: '' }]), BrowserAnimationsModule],
-      declarations: [AuthenticatedComponent],
-      providers: [HealthcheckService, HttpClient, HttpHandler, ScrollBehaviourService, Renderer2],
-    }).compileComponents();
-  }));
-
   beforeEach(() => {
+    TestBed.configureTestingModule({
+      imports: [
+        RouterTestingModule.withRoutes([{ path: 'user', redirectTo: '' }]),
+        BrowserAnimationsModule,
+      ],
+      declarations: [AuthenticatedComponent],
+      providers: [
+        HealthcheckService,
+        HttpClient,
+        HttpHandler,
+        ScrollBehaviourService,
+        Renderer2,
+        ToastService,
+      ],
+    }).compileComponents();
     fixture = TestBed.createComponent(AuthenticatedComponent);
     component = fixture.componentInstance;
-    healthcheckService = TestBed.get(HealthcheckService);
-    scrollBehaviourService = TestBed.get(ScrollBehaviourService);
-    router = TestBed.get(Router);
+    healthcheckService = TestBed.inject(HealthcheckService);
+    scrollBehaviourService = TestBed.inject(ScrollBehaviourService);
+    router = TestBed.inject(Router);
   });
 
   afterEach(() => {
@@ -41,7 +54,9 @@ describe('AuthenticatedComponent', () => {
   });
 
   it('should init the app component', fakeAsync(() => {
-    const healthSpy = spyOn(healthcheckService, 'checkState').and.returnValue(of(true));
+    const healthSpy = spyOn(healthcheckService, 'checkState').and.returnValue(
+      of(true)
+    );
     let result = component.stillSleeping();
     expect(result).toBeTruthy();
     component.ngOnInit();
@@ -58,7 +73,8 @@ describe('AuthenticatedComponent', () => {
     result = component.stillSleeping();
     expect(result).toBeFalsy();
 
-    component = TestBed.createComponent(AuthenticatedComponent).componentInstance;
+    component = TestBed.createComponent(AuthenticatedComponent)
+      .componentInstance;
     result = component.stillSleeping();
     expect(result).toBeTruthy();
     healthSpy.and.returnValue(throwError({ status: 404 }));
@@ -89,9 +105,11 @@ describe('AuthenticatedComponent', () => {
   it('should determine if admin', () => {
     let result = component.isAdmin();
     expect(result).toBeFalsy();
-    localStorage.setItem('currentUser', JSON.stringify({ 'user': 'Carmen', 'admin': 'true' }));
+    localStorage.setItem(
+      'currentUser',
+      JSON.stringify({ user: 'Carmen', admin: 'true' })
+    );
     result = component.isAdmin();
     expect(result).toBeTruthy();
   });
-
 });

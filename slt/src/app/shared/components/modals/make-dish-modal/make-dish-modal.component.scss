@@ -1,0 +1,29 @@
+@import '../../../../../css/variables.scss';
+
+.recipe {
+  display: flex;
+  flex-direction: column;
+  margin-top: 10px;
+
+  &__ingredient {
+    display: flex;
+    flex-direction: row;
+
+    &__amount {
+      flex-basis: 60px;
+      margin-top: 3px;
+    }
+    &__portion {
+      flex-basis: 150px;
+      margin-left: 10px;
+    }
+    &__name {
+      flex-grow: 1;
+      margin-left: 10px;
+    }
+    &__remove {
+      flex-basis: 50px;
+      margin-right: auto;
+    }
+  }
+}

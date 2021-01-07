@@ -2,67 +2,109 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthenticatedComponent } from './authenticated.component';
 import { DiaryComponent } from './diary/diary.component';
-import { AuthGuardService } from '@app/services/auth-guard.service';
-import { UserComponent } from './user/user.component';
-import { PersonalComponent } from './user/personal/personal.component';
-import { IntakeComponent } from './user/intake/intake.component';
-import { WeightTrackerComponent } from './user/weighttracker/weighttracker.component';
-import { ConnectivityComponent } from './user/connectivity/connectivity.component';
-import { AccountComponent } from './user/account/account.component';
 import { AdminComponent } from './admin/admin.component';
-import { UserManagementComponent } from './admin/usermanagement/usermanagement.component';
-import { WebhooksComponent } from './admin/webhooks/webhooks.component';
 import { OnboardingComponent } from './onboarding/onboarding.component';
 import { FoodComponent } from './food/food.component';
 import { DishesComponent } from './dishes/dishes.component';
-import { GraphsComponent } from './analytics/analytics.component';
+import { GraphsComponent } from './graphs/graphs.component';
+import { AuthGuard } from 'src/app/pages/authenticated/auth.guard';
+import { UserComponent } from './user/user.component';
+import { CommonModule } from '@angular/common';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { BargraphComponent } from 'src/app/shared/components/bargraph/bargraph.component';
+import { MaterialModule } from 'src/app/shared/material.module';
+import { MakeDishModalComponent } from 'src/app/shared/components/modals/make-dish-modal/make-dish-modal.component';
+import { AutocompleteFoodComponent } from 'src/app/shared/components/autocomplete-food/autocomplete-food.component';
+import { PiechartComponent } from 'src/app/shared/components/piechart/piechart.component';
+import { AddFoodModalComponent } from 'src/app/shared/components/modals/add-food-modal/add-food-modal.component';
+import { LogMealComponent } from 'src/app/shared/components/log-meal/log-meal.component';
+import { ComponentsModule } from 'src/app/shared/components.module';
+import { StepperComponent } from 'src/app/shared/components/stepper/stepper.component';
+import { LogActivityComponent } from 'src/app/shared/components/log-activity/log-activity.component';
+import { StackDonutComponent } from 'src/app/shared/components/stackdonut/stackdonut.component';
+import { DatepickerComponent } from 'src/app/shared/components/datepicker/datepicker.component';
 
 export const authenticatedRoutes: Routes = [
   {
     path: '',
     component: AuthenticatedComponent,
-    canActivate: [AuthGuardService],
+    canActivate: [AuthGuard],
     children: [
-      { path: 'log', component: DiaryComponent, canActivate: [AuthGuardService] },
+      {
+        path: '',
+        component: DiaryComponent,
+        canActivate: [AuthGuard],
+      },
       {
         path: 'user',
         component: UserComponent,
-        canActivate: [AuthGuardService],
-        children: [
-          { path: '', redirectTo: 'personal', pathMatch: 'full' },
-          { path: 'personal', component: PersonalComponent },
-          { path: 'foodintake', component: IntakeComponent },
-          { path: 'weighttracker', component: WeightTrackerComponent },
-          { path: 'connectivity', component: ConnectivityComponent },
-          { path: 'account', component: AccountComponent }
-        ]
+        canActivate: [AuthGuard],
+        loadChildren: () =>
+          import('./user/user.module').then((m) => m.UserModule)
       },
       {
         path: 'admin',
         component: AdminComponent,
-        canActivate: [AuthGuardService],
-        children: [
-          { path: '', redirectTo: 'usermanagement', pathMatch: 'full' },
-          { path: 'usermanagement', component: UserManagementComponent },
-          { path: 'webhooks', component: WebhooksComponent }
-        ]
+        canActivate: [AuthGuard],
+        loadChildren: () =>
+          import('./admin/admin.module').then((m) => m.AdminModule)
       },
-      { path: 'onboarding', component: OnboardingComponent, canActivate: [AuthGuardService] },
-      { path: 'food', component: FoodComponent, canActivate: [AuthGuardService] },
-      { path: 'dishes', component: DishesComponent, canActivate: [AuthGuardService] },
-      { path: 'graphs', component: GraphsComponent, canActivate: [AuthGuardService] }
-    ]
-  }
+      {
+        path: 'onboarding',
+        component: OnboardingComponent,
+        canActivate: [AuthGuard],
+      },
+      {
+        path: 'food',
+        component: FoodComponent,
+        canActivate: [AuthGuard],
+      },
+      {
+        path: 'dishes',
+        component: DishesComponent,
+        canActivate: [AuthGuard],
+      },
+      {
+        path: 'graphs',
+        component: GraphsComponent,
+        canActivate: [AuthGuard],
+      },
+    ],
+  },
 ];
 
 @NgModule({
   imports: [
-    RouterModule.forChild(authenticatedRoutes)
-  ],
-  exports: [
-    RouterModule
-  ]
-})
-export class AuthenticatedRoutingModule {
+    CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MaterialModule,
+    ComponentsModule,
+    RouterModule.forChild(authenticatedRoutes)],
+  declarations: [
+    AuthenticatedComponent,
+    DiaryComponent,
+    UserComponent,
+    AdminComponent,
+    OnboardingComponent,
+    FoodComponent,
+    DishesComponent,
+    GraphsComponent,
 
-}
+    BargraphComponent,
+    MakeDishModalComponent,
+    AutocompleteFoodComponent,
+    PiechartComponent,
+    AddFoodModalComponent,
+    LogMealComponent,
+    StepperComponent,
+    LogActivityComponent,
+    StackDonutComponent,
+    DatepickerComponent
+  ],
+  providers: [
+    AuthGuard
+  ],
+  exports: [RouterModule],
+})
+export class AuthenticatedRoutingModule { }
