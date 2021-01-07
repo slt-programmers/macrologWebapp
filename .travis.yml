@@ -5,6 +5,7 @@ node_js:
   - 'lts/*'
 
 stages:
+  - 'build'
   - 'unit test and scan'
   - 'integration test'
 
@@ -21,6 +22,8 @@ jobs:
   allow_failures:
     - script: sonar-scanner -Dsonar.projectKey=slt-programmers_macrologWebapp
   include:
+    - stage: 'build'
+      script: ng build
     - stage: 'unit test and scan'
       if: branch != release
       script: ng test
