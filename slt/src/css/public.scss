@@ -1,39 +1,35 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
 // Import angular material custom theme
-@import "theme";
+@import "@angular/material/_theming.scss";
+@import "theme.scss";
 
 // Define variables 
-@import "variables";
-
-$family-primary: "Assistant", sans-serif;
-
-@import "../../node_modules/bulma/sass/utilities/_all.sass";
-@import "../../node_modules/bulma/sass/base/generic.sass";
-@import "../../node_modules/bulma/sass/layout/section.sass";
-@import "../../node_modules/bulma/sass/components/navbar.sass";
-@import "../../node_modules/bulma/sass/elements/container.sass";
-@import "../../node_modules/bulma/sass/grid/_all.sass";
+@import "variables.scss";
 
 // Reset default styles
-@import "reset";
+@import "reset.scss";
 
 // Style components
-@import "base";
-@import "button";
-@import "calorie-box";
-@import "card";
-@import "food-table";
-@import "form";
-@import "icon";
-@import "input";
-@import "loading-overlay";
-@import "logday";
-@import "log-activity";
-@import "log-weight";
-@import "macro-box";
-@import "main-backdrop";
-@import "modal";
-@import "search-bar";
-@import "select";
-@import "settings";
-@import "tabs";
+@import "_base.scss";
+@import "_button.scss";
+@import "_calorie-box.scss";
+@import "_card.scss";
+@import "_food-table.scss";
+@import "_form.scss";
+@import "_icon.scss";
+@import "_input.scss";
+@import "_loading-overlay.scss";
+@import "_logday.scss";
+@import "_log-activity.scss";
+@import "_log-weight.scss";
+@import "_macro-box.scss";
+@import "_main-backdrop.scss";
+@import "_modal.scss";
+@import "_search-bar.scss";
+@import "_select.scss";
+@import "_settings.scss";
+@import "_tabs.scss";
 
