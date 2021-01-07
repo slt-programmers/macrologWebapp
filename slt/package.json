@@ -14,8 +14,8 @@
     "webpack-init": "webpack --profile --json > stats.json"
   },
   "engines": {
-    "node": "11.9.0",
-    "npm": "6.5.0"
+    "node": "14.15.3",
+    "npm": "6.14.10"
   },
   "private": true,
   "dependencies": {
