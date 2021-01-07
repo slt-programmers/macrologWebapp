@@ -1,6 +1,5 @@
 import {
   TestBed,
-  async,
   ComponentFixture,
   fakeAsync,
   tick,
@@ -14,6 +13,7 @@ import { of, throwError } from 'rxjs';
 import { Router } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { Renderer2 } from '@angular/core';
+import { ToastService } from 'src/app/shared/services/toast.service';
 
 describe('AuthenticatedComponent', () => {
   let component: AuthenticatedComponent;
@@ -22,7 +22,7 @@ describe('AuthenticatedComponent', () => {
   let scrollBehaviourService: ScrollBehaviourService;
   let router: Router;
 
-  beforeEach(async(() => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [
         RouterTestingModule.withRoutes([{ path: 'user', redirectTo: '' }]),
@@ -35,11 +35,9 @@ describe('AuthenticatedComponent', () => {
         HttpHandler,
         ScrollBehaviourService,
         Renderer2,
+        ToastService,
       ],
     }).compileComponents();
-  }));
-
-  beforeEach(() => {
     fixture = TestBed.createComponent(AuthenticatedComponent);
     component = fixture.componentInstance;
     healthcheckService = TestBed.inject(HealthcheckService);

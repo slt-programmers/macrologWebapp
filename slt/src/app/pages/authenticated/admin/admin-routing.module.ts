@@ -7,6 +7,7 @@ import { UserManagementComponent } from "./usermanagement/usermanagement.compone
 import { WebhooksComponent } from "./webhooks/webhooks.component";
 
 export const adminRoutes: Routes = [
+  { path: '', redirectTo: '/usermanagement'},
   { path: 'usermanagement', component: UserManagementComponent },
   { path: 'webhooks', component: WebhooksComponent },
   { path: 'mail', component: MailComponent },

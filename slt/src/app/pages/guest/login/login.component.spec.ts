@@ -30,7 +30,7 @@ describe('LoginComponent', () => {
       imports: [
         FormsModule,
         BrowserAnimationsModule,
-        RouterTestingModule.withRoutes([]),
+        RouterTestingModule,
       ],
       schemas: [NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
@@ -58,7 +58,7 @@ describe('LoginComponent', () => {
     fixture.detectChanges();
 
     expect(authService.login).toHaveBeenCalledWith('username', 'password');
-    expect(router.navigate).toHaveBeenCalledWith(['/log']);
+    expect(router.navigate).toHaveBeenCalledWith(['dashboard']);
     expect(component.loginError).toEqual('');
 
     loginSpy.and.returnValue(throwError({ status: 404 }));
@@ -96,7 +96,7 @@ describe('LoginComponent', () => {
     expect(component.newPassword).toEqual('');
     tick();
     fixture.detectChanges();
-    expect(router.navigate).toHaveBeenCalledWith(['/onboarding']);
+    expect(router.navigate).toHaveBeenCalledWith(['dashboard', 'onboarding']);
 
     // register but failed login
     registerSpy.and.returnValue(of({}));

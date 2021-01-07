@@ -29,7 +29,7 @@ describe('GuestGuardService', () => {
     const authSpy = spyOn(authService, 'isAuthenticated').and.returnValue(true);
     let result = service.canActivate();
     expect(result).toBeFalsy();
-    expect(router.navigate).toHaveBeenCalledWith(['/log']);
+    expect(router.navigate).toHaveBeenCalledWith(['dashboard']);
 
     authSpy.and.returnValue(false);
     result = service.canActivate();

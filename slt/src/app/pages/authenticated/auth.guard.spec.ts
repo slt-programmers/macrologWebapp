@@ -23,7 +23,7 @@ describe('AuthGuardService', () => {
     spyOn(router, 'navigate');
 
     let result = service.canActivate();
-    expect(router.navigate).toHaveBeenCalledWith(['/']);
+    expect(router.navigate).toHaveBeenCalledWith(['']);
     expect(result).toBeFalsy();
 
     spyOn(authService, 'isAuthenticated').and.returnValue(true);

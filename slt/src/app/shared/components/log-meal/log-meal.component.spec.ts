@@ -303,6 +303,4 @@ describe('LogMealComponent', () => {
       callback
     );
   });
-
-  it('should copy from previous day', () => {});
 });

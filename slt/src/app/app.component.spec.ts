@@ -12,6 +12,8 @@ import { Router } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { Renderer2 } from '@angular/core';
 import { of, throwError } from 'rxjs';
+import { ToastComponent } from './shared/components/toast/toast.component';
+import { ToastService } from './shared/services/toast.service';
 
 describe('AppComponent', () => {
   let component: AppComponent;
@@ -25,8 +27,16 @@ describe('AppComponent', () => {
         RouterTestingModule.withRoutes([{ path: 'user', redirectTo: '' }]),
         BrowserAnimationsModule,
       ],
-      declarations: [AppComponent],
-      providers: [HealthcheckService, HttpClient, HttpHandler, Renderer2],
+      declarations: [
+        AppComponent, 
+        ToastComponent
+      ],
+      providers: [
+        HealthcheckService,
+         HttpClient, 
+         HttpHandler, 
+         Renderer2,
+        ToastService],
     }).compileComponents();
 
     fixture = TestBed.createComponent(AppComponent);

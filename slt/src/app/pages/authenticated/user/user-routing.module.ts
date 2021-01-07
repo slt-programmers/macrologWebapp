@@ -13,6 +13,7 @@ import { PersonalComponent } from "./personal/personal.component";
 import { WeightTrackerComponent } from "./weighttracker/weighttracker.component";
 
 export const userRoutes: Routes = [
+  { path: '', redirectTo: '/personal'},
   { path: 'personal', component: PersonalComponent },
   { path: 'foodintake', component: IntakeComponent },
   { path: 'weighttracker', component: WeightTrackerComponent },
