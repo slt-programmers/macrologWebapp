@@ -7,11 +7,11 @@ import {
 import { UserManagementComponent } from './usermanagement.component';
 import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { async, of, throwError } from 'rxjs';
+import { of, throwError } from 'rxjs';
 import { MatTableModule } from '@angular/material/table';
-import { UserAccount } from 'src/app/model/userAccount';
 import { AdminService } from 'src/app/shared/services/admin.service';
 import { ToastService } from 'src/app/shared/services/toast.service';
+import { UserAccount } from 'src/app/model/userAccount';
 
 describe('UserManagementComponent', () => {
   let component: UserManagementComponent;
@@ -79,7 +79,7 @@ describe('UserManagementComponent', () => {
   }));
 
   it('should open and close delete user modal', fakeAsync(() => {
-    const userAccount = new UserAccount();
+    const userAccount: UserAccount = {} as UserAccount;
     userAccount.id = 123;
     userAccount.userName = 'Test';
     component.openModalWithUser(userAccount);
@@ -91,7 +91,7 @@ describe('UserManagementComponent', () => {
   it('should delete user', fakeAsync(() => {
     spyOn(adminService, 'deleteUser').and.returnValue(of({}));
     spyOn(toastService, 'setMessage');
-    const userAccount = new UserAccount();
+    const userAccount: UserAccount = {} as UserAccount;
     userAccount.id = 123;
     component.selectedUser = userAccount;
 
@@ -109,7 +109,7 @@ describe('UserManagementComponent', () => {
     spyOn(adminService, 'deleteUser').and.returnValue(
       throwError({ status: 401 })
     );
-    const userAccount = new UserAccount();
+    const userAccount: UserAccount = {} as UserAccount;
     userAccount.id = 123;
     component.selectedUser = userAccount;
 

@@ -61,7 +61,7 @@ describe('AdminService', () => {
 
   it('should delete user', fakeAsync(() => {
     const service = TestBed.inject(AdminService);
-    const userAccount = new UserAccount();
+    const userAccount: UserAccount = {} as UserAccount;
     userAccount.id = 123;
     const mockResponse = { status: 200 };
 
