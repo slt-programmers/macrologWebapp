@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthenticationService } from 'src/app/shared/services/auth.service';
 
 @Component({
   selector: 'home',
@@ -7,17 +6,9 @@ import { AuthenticationService } from 'src/app/shared/services/auth.service';
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit {
-  public menuOpen = false;
 
-  constructor(private authService: AuthenticationService) {}
+  constructor() {}
 
   ngOnInit() {}
 
-  public toggleMenu() {
-    this.menuOpen = !this.menuOpen;
-  }
-
-  public isLoggedIn() {
-    return this.authService.isAuthenticated();
-  }
 }

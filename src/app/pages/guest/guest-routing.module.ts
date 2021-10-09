@@ -1,8 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { Routes, RouterModule } from '@angular/router';
+import { ComponentsModule } from 'src/app/shared/components/components.module';
 import { MaterialModule } from 'src/app/shared/material.module';
 
 import { AboutComponent } from './about/about.component';
@@ -32,6 +32,7 @@ export const guestRoutes: Routes = [
     FormsModule,
     ReactiveFormsModule,
     MaterialModule,
+    ComponentsModule,
     RouterModule.forChild(guestRoutes)],
   providers: [GuestGuard],
   declarations: [

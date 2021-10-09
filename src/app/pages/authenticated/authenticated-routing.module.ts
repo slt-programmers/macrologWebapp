@@ -18,7 +18,7 @@ import { AutocompleteFoodComponent } from 'src/app/shared/components/autocomplet
 import { PiechartComponent } from 'src/app/shared/components/piechart/piechart.component';
 import { AddFoodModalComponent } from 'src/app/shared/components/modals/add-food-modal/add-food-modal.component';
 import { LogMealComponent } from 'src/app/shared/components/log-meal/log-meal.component';
-import { ComponentsModule } from 'src/app/shared/components.module';
+import { ComponentsModule } from 'src/app/shared/components/components.module';
 import { StepperComponent } from 'src/app/shared/components/stepper/stepper.component';
 import { LogActivityComponent } from 'src/app/shared/components/log-activity/log-activity.component';
 import { StackDonutComponent } from 'src/app/shared/components/stackdonut/stackdonut.component';
