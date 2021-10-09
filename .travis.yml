@@ -10,7 +10,6 @@ stages:
   - 'integration test'
 
 install:
-  - cd slt
   - npm install
   - npm i -g webdriver-manager
   - cd node_modules/protractor
