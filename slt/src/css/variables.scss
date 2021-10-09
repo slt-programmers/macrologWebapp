@@ -1,3 +1,6 @@
+// Colors
+// @import 'theme';
+
 // Greyscale
 $black: #000000;
 $coal: #191919;
@@ -57,8 +60,14 @@ $blueLightblueHorizontalGradient: linear-gradient(
 // Distances
 $gutter: 32px;
 
+//
 $phone: 480px;
+
+// Bootstrap
 $tablet: 768px;
-$desktop: 1024px;
-$widescreen: 1216px;
-$fullhd: 1408px;
+// 1024px
+$desktop: 960px + (2 * $gutter);
+// 1200px
+$widescreen: 1152px + (2 * $gutter);
+// 1408px
+$fullhd: 1344px + (2 * $gutter);

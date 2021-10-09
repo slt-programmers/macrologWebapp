@@ -15,11 +15,8 @@
       },
       "architect": {
         "build": {
-          "builder": "@angular-builders/custom-webpack:browser",
+          "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "customWebpackConfig": {
-              "path": "webpack.config.js"
-            },
             "outputPath": "dist",
             "index": "src/index.html",
             "main": "src/main.ts",
@@ -31,9 +28,7 @@
               "src/assets",
               "src/google3bb89e24d542c3d5.html"
             ],
-            "styles": [
-              "src/css/public.scss"
-            ],
+            "styles": ["src/css/public.scss"],
             "scripts": []
           },
           "configurations": {
@@ -94,7 +89,7 @@
           }
         },
         "serve": {
-          "builder": "@angular-builders/custom-webpack:dev-server",
+          "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
             "browserTarget": "macrolog-webapp:build",
             "port": 4200
@@ -115,22 +110,14 @@
           }
         },
         "test": {
-          "builder": "@angular-builders/custom-webpack:browser",
+          "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "customWebpackConfig": {
-              "path": "webpack.config.js"
-            },
             "main": "src/test.ts",
             "polyfills": "src/polyfills.ts",
             "karmaConfig": "karma.conf.js",
-            "styles": [
-              "src/css/public.scss"
-            ],
+            "styles": ["src/css/public.scss"],
             "scripts": [],
-            "assets": [
-              "src/favicon.ico",
-              "src/assets"
-            ],
+            "assets": ["src/favicon.ico", "src/assets"],
             "tsConfig": "tsconfig.spec.json",
             "codeCoverage": true,
             "codeCoverageExclude": [
@@ -148,9 +135,7 @@
               "tsconfig.spec.json",
               "e2e/tsconfig.json"
             ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
+            "exclude": ["**/node_modules/**"]
           }
         },
         "e2e": {
