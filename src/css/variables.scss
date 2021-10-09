@@ -61,9 +61,8 @@ $blueLightblueHorizontalGradient: linear-gradient(
 $gutter: 32px;
 $halfGutter: 16px;
 
-//
+// TODO refactor to new breakpoints
 $phone: 480px;
-
 // Bootstrap
 $tablet: 768px;
 // 1024px
@@ -72,3 +71,22 @@ $desktop: 960px + (2 * $gutter);
 $widescreen: 1152px + (2 * $gutter);
 // 1408px
 $fullhd: 1344px + (2 * $gutter);
+
+// New breakpoints
+$xs: 448px; // 28rem
+$sm: 640px; // 40rem
+$md: 768px; // 48rem
+$lg: 1024px; // 64rem
+$xl: 1280px; // 80rem
+$xxl: 1536px; // 96rem 
+
+.xs-only {
+  @media (min-width: $xs) {
+    display: none
+  }
+}
+.xs {
+  @media (max-width: $xs - 1) {
+    display: none;
+  }
+}

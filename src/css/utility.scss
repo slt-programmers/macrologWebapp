@@ -1,0 +1,47 @@
+.flex {
+  display: flex;
+}
+
+.flex-col {
+  display: flex;
+  flex-direction: column;
+}
+
+.flex-wrap {
+  flex-wrap: wrap;
+}
+
+.align-right {
+  margin-left: auto;
+}
+
+.align-center {
+  align-items: center;
+}
+
+.text-center {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.fixed {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+
+.relative {
+  position: relative;
+}
+
+.full-height {
+  height: 100%;
+}
+
+.z-1 {
+  z-index: 1;
+}
+.z-2 {
+  z-index: 2;
+}
