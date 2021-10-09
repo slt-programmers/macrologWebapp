@@ -1,4 +1,5 @@
 // Custom Theming for Angular Material
+@use '~@angular/material' as mat;
 // For more information: https://material.angular.io/guide/theming
 @import "~@angular/material/theming";
 // Plus imports for other components in your app.
@@ -6,8 +7,8 @@
 // Include the common styles for Angular Material. We include this here so that you only
 // have to load a single css file for Angular Material in your app.
 // Be sure that you only ever include this mixin once!
-@include mat-core(
-  mat-typography-config($font-family: '"Assistant", sans-serif')
+@include mat.core(
+  mat.define-typography-config($font-family: '"Assistant", sans-serif')
 );
 
 // Palette
@@ -44,9 +45,9 @@ $mat-white: (
   )
 );
 
-$macrolog-webapp-primary: mat-palette($mat-white);
-$macrolog-webapp-accent: mat-palette($mat-white, A200, A100, A400);
-$macrolog-webapp-warn: mat-palette($mat-orange);
+$macrolog-webapp-primary: mat.define-palette($mat-white);
+$macrolog-webapp-accent: mat.define-palette($mat-white, A200, A100, A400);
+$macrolog-webapp-warn: mat.define-palette(mat.$orange-palette);
 
 // Dark foreground
 $macrolog-dark-theme-foreground: (
@@ -70,31 +71,31 @@ $macrolog-dark-theme-foreground: (
 // Dark background
 $macrolog-dark-theme-background: (
   status-bar: black,
-  app-bar: map_get($mat-grey, 900),
+  app-bar: map_get(mat.$grey-palette, 900),
   background: #303030,
   hover: rgba(white, 0.04),
-  dialog: map_get($mat-grey, 800),
+  dialog: map_get(mat.$grey-palette, 800),
   disabled-button: rgba(white, 0.12),
-  raised-button: map-get($mat-grey, 800),
+  raised-button: map-get(mat.$grey-palette, 800),
   focused-button: $light-focused,
-  selected-button: map_get($mat-grey, 900),
-  selected-disabled-button: map_get($mat-grey, 800),
+  selected-button: map_get(mat.$grey-palette, 900),
+  selected-disabled-button: map_get(mat.$grey-palette, 800),
   disabled-button-toggle: black,
-  unselected-chip: map_get($mat-grey, 700),
+  unselected-chip: map_get(mat.$grey-palette, 700),
   disabled-list-option: black
 );
 
 // Light foreground
 $macrolog-light-theme-foreground: (
   base: black,
-  divider: map_get($mat-indigo, 500),
+  divider: map_get(mat.$indigo-palette, 500),
   dividers: $dark-dividers,
   disabled: $dark-disabled-text,
   disabled-button: rgba(black, 0.26),
   disabled-text: $dark-disabled-text,
   elevation: black,
   hint-text: $dark-disabled-text,
-  secondary-text: map_get($mat-indigo, 500),
+  secondary-text: map_get(mat.$indigo-palette, 500),
   icon: rgba(black, 0.54),
   icons: rgba(black, 0.54),
   text: rgba(black, 0.87),
@@ -105,20 +106,20 @@ $macrolog-light-theme-foreground: (
 
 // Light background
 $macrolog-light-theme-background: (
-  status-bar: map_get($mat-grey, 300),
-  app-bar: map_get($mat-grey, 100),
-  background: map_get($mat-grey, 50),
+  status-bar: map_get(mat.$grey-palette, 300),
+  app-bar: map_get(mat.$grey-palette, 100),
+  background: map_get(mat.$grey-palette, 50),
   hover: rgba(black, 0.04),
   card: white,
   dialog: white,
   disabled-button: rgba(black, 0.12),
   raised-button: white,
   focused-button: $dark-focused,
-  selected-button: map_get($mat-grey, 300),
-  selected-disabled-button: map_get($mat-grey, 400),
-  disabled-button-toggle: map_get($mat-grey, 200),
-  unselected-chip: map_get($mat-grey, 300),
-  disabled-list-option: map_get($mat-grey, 200)
+  selected-button: map_get(mat.$grey-palette, 300),
+  selected-disabled-button: map_get(mat.$grey-palette, 400),
+  disabled-button-toggle: map_get(mat.$grey-palette, 200),
+  unselected-chip: map_get(mat.$grey-palette, 300),
+  disabled-list-option: map_get(mat.$grey-palette, 200)
 );
 
 $macrolog-white-theme: (
@@ -131,8 +132,8 @@ $macrolog-white-theme: (
 );
 
 $macrolog-blue-theme: (
-  primary: mat-palette($mat-indigo),
-  accent: mat-palette($mat-indigo),
+  primary: mat.define-palette(mat.$indigo-palette),
+  accent: mat.define-palette(mat.$indigo-palette),
   warn: $macrolog-webapp-warn,
   is-dark: true,
   foreground: $macrolog-light-theme-foreground,
@@ -145,17 +146,17 @@ $macrolog-blue-theme: (
 // OR
 
 // Include certain parts
-@include mat-core-theme($macrolog-white-theme);
-@include mat-input-theme($macrolog-white-theme);
-@include mat-form-field-theme($macrolog-white-theme);
-@include mat-progress-spinner-theme($macrolog-white-theme);
-@include mat-radio-theme($macrolog-white-theme);
-@include mat-paginator-theme($macrolog-white-theme);
+@include mat.core-theme($macrolog-white-theme);
+@include mat.input-theme($macrolog-white-theme);
+@include mat.form-field-theme($macrolog-white-theme);
+@include mat.progress-spinner-theme($macrolog-white-theme);
+@include mat.radio-theme($macrolog-white-theme);
+@include mat.paginator-theme($macrolog-white-theme);
 
 .blue-theme {
-  @include mat-form-field-theme($macrolog-blue-theme);
-  @include mat-input-theme($macrolog-blue-theme);
-  @include mat-progress-spinner-theme($macrolog-blue-theme);
-  @include mat-radio-theme($macrolog-blue-theme);
-  @include mat-paginator-theme($macrolog-blue-theme);
+  @include mat.form-field-theme($macrolog-blue-theme);
+  @include mat.input-theme($macrolog-blue-theme);
+  @include mat.progress-spinner-theme($macrolog-blue-theme);
+  @include mat.radio-theme($macrolog-blue-theme);
+  @include mat.paginator-theme($macrolog-blue-theme);
 }
