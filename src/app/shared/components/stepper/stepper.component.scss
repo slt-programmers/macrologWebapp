@@ -23,8 +23,8 @@
   border: 1px solid $secondary;
   color: $primary;
   padding: 3px;
-  width: ($gutter/2);
-  height: ($gutter/2);
+  width: $halfGutter;
+  height: $halfGutter;
   justify-content: center;
   align-items: center;
   font-weight: 400;

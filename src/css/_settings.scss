@@ -1,9 +1,9 @@
 .settings {
 	display: flex;
 	align-items: center;
-	margin-bottom: ($gutter/2);
+	margin-bottom: $halfGutter;
 
 	&__label {
-		margin-right: ($gutter/2);
+		margin-right: $halfGutter;
 	}
 }

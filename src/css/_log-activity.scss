@@ -10,12 +10,12 @@
 
 .activity {
   @media (min-width: $phone) {
-    padding: ($gutter/2);
+    padding: $halfGutter;
   }
   border-bottom: 1px solid $cloud;
   display: flex;
   flex-direction: column;
-  padding: ($gutter/3);
+  padding: 8px;
 
   &__title {
     flex-basis: 20%;
@@ -64,7 +64,7 @@
 
   &__icon {
     color: $primary;
-    margin-left: $gutter/2;
+    margin-left: $halfGutter;
   }
 
   &__edit-activity {

@@ -20,8 +20,8 @@
   color: $coal;
   display: flex;
   flex-direction: column;
-  margin: ($gutter/2);
-  padding: ($gutter/2);
+  margin: $halfGutter;
+  padding: $halfGutter;
   width: 275px;
 
   &__title {

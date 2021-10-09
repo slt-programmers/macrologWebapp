@@ -4,7 +4,7 @@
     border-bottom: 1px solid $cloud;
     display: flex;
     flex-direction: row;
-    padding: ($gutter/2);
+    padding: $halfGutter;
     justify-content: center;
   }
 

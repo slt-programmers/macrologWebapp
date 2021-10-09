@@ -16,13 +16,13 @@
     padding: $gutter;
   }
   border: 1px solid $smoke;
-  padding: ($gutter/2);
+  padding: $halfGutter;
 }
 
 .tab {
   background-color: $smoke;
   border-right: 1px solid $platinum;
-  padding: $gutter/2;
+  padding: $halfGutter;
   font-weight: 400;
   flex-grow: 1;
   text-align: center;
