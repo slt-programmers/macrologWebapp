@@ -2,18 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AuthenticationService } from '../../../shared/services/auth.service';
 import { ToastService } from '../../../shared/services/toast.service';
-import { trigger, transition, style, animate } from '@angular/animations';
 
 @Component({
   templateUrl: 'login.component.html',
-  animations: [
-    trigger('enterLeaveTrigger', [
-      transition(':enter', [
-        style({ opacity: 0, marginTop: '15px' }),
-        animate('0.3s', style({ opacity: 1, marginTop: '0' })),
-      ]),
-    ]),
-  ],
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit {
