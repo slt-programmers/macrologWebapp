@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
-import { UserAccount } from '../../model/userAccount';
+import { UserAccount } from '../model/userAccount';
 
 @Injectable()
 export class AdminService {

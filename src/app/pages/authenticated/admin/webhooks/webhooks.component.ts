@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { WebhookStatus } from 'src/app/model/webhookStatus';
+import { WebhookStatus } from 'src/app/shared/model/webhookStatus';
 import { WebhookService } from 'src/app/shared/services/webhook.service';
 
 @Component({

@@ -1,6 +1,6 @@
 import { Component, Input, ViewChild, ElementRef } from '@angular/core';
-import { FoodSearchable } from '../../../model/foodSearchable';
-import { Food } from '../../../model/food';
+import { FoodSearchable } from '../../model/foodSearchable';
+import { Food } from '../../model/food';
 
 @Component({
   templateUrl: './autocomplete-food.component.html',

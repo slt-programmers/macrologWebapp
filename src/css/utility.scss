@@ -1,36 +1,37 @@
+// Flex
 .flex {
   display: flex;
 }
-
 .flex-col {
   display: flex;
   flex-direction: column;
 }
-
 .flex-wrap {
   flex-wrap: wrap;
 }
-
+.content-center {
+  justify-content: center;
+}
 .align-right {
   margin-left: auto;
 }
-
 .align-center {
   align-items: center;
 }
 
+// Text align
 .text-center {
   margin-left: auto;
   margin-right: auto;
 }
 
+// Position
 .fixed {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
 }
-
 .relative {
   position: relative;
 }
@@ -39,6 +40,12 @@
   height: 100%;
 }
 
+// Margins
+.m-4 {
+  margin: 4rem;
+}
+
+// Z index
 .z-1 {
   z-index: 1;
 }

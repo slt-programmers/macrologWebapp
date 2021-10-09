@@ -8,9 +8,9 @@ import {
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClient, HttpHandler } from '@angular/common/http';
-import { Food } from 'src/app/model/food';
-import { Macros } from 'src/app/model/macro';
-import { Portion } from 'src/app/model/portion';
+import { Food } from 'src/app/shared/model/food';
+import { Macros } from 'src/app/shared/model/macro';
+import { Portion } from 'src/app/shared/model/portion';
 import { FoodService } from 'src/app/shared/services/food.service';
 import { ScrollBehaviourService } from 'src/app/shared/services/scroll-behaviour.service';
 import { ToastService } from 'src/app/shared/services/toast.service';

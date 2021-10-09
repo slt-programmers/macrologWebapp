@@ -2,8 +2,8 @@ import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { DiaryService } from '../../../shared/services/diary.service';
 import { UserService } from '../../../shared/services/user.service';
 import { DataPoint } from 'src/app/shared/components/linegraph/linegraph.component';
-import { MacrosPerDay } from 'src/app/model/macrosPerDay';
-import { Macros } from 'src/app/model/macro';
+import { MacrosPerDay } from 'src/app/shared/model/macrosPerDay';
+import { Macros } from 'src/app/shared/model/macro';
 import { format } from 'date-fns';
 
 @Component({

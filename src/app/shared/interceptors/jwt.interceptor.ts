@@ -5,7 +5,7 @@ import {
   HttpEvent,
   HttpInterceptor,
 } from '@angular/common/http';
-import { environment } from '../../environments/environment';
+import { environment } from '../../../environments/environment';
 import { Observable } from 'rxjs';
 
 @Injectable()

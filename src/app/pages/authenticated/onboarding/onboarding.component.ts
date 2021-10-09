@@ -1,10 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { UserService } from '../../../shared/services/user.service';
-import { Gender } from '../../../model/gender';
-import { Food } from '../../../model/food';
-import { Portion } from '../../../model/portion';
-import { Macros } from '../../../model/macro';
-import { FoodSearchable } from '../../../model/foodSearchable';
+import { Gender } from '../../../shared/model/gender';
+import { Food } from '../../../shared/model/food';
+import { Portion } from '../../../shared/model/portion';
+import { Macros } from '../../../shared/model/macro';
+import { FoodSearchable } from '../../../shared/model/foodSearchable';
 import { Router } from '@angular/router';
 import { forkJoin } from 'rxjs';
 import { calculateTDEE } from 'src/app/util/functions';

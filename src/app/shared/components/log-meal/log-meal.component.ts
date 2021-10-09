@@ -10,12 +10,12 @@ import {
   SimpleChanges,
 } from '@angular/core';
 import { DatePipe } from '@angular/common';
-import { LogEntry } from '../../../model/logEntry';
-import { StoreLogRequest } from '../../../model/storeLogRequest';
+import { LogEntry } from '../../model/logEntry';
+import { StoreLogRequest } from '../../model/storeLogRequest';
 import { DiaryService } from '../../services/diary.service';
-import { FoodSearchable } from '../../../model/foodSearchable';
+import { FoodSearchable } from '../../model/foodSearchable';
 import { ToastService } from '../../services/toast.service';
-import { Portion } from 'src/app/model/portion';
+import { Portion } from 'src/app/shared/model/portion';
 
 @Component({
   selector: 'log-meal',

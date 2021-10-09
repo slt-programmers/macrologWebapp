@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Ingredient } from '../../../model/ingredient';
-import { Dish } from '../../../model/dish';
+import { Ingredient } from '../../../shared/model/ingredient';
+import { Dish } from '../../../shared/model/dish';
 import { DishService } from '../../../shared/services/dish.service';
-import { Portion } from 'src/app/model/portion';
+import { Portion } from 'src/app/shared/model/portion';
 
 @Component({
   selector: 'app-dishes',

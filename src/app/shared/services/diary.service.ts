@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { StoreLogRequest } from '../../model/storeLogRequest';
-import { LogEntry } from '../../model/logEntry';
+import { StoreLogRequest } from '../model/storeLogRequest';
+import { LogEntry } from '../model/logEntry';
 import { ToastService } from './toast.service';
 import { environment } from '../../../environments/environment';
-import { MacrosPerDay } from '../../model/macrosPerDay';
+import { MacrosPerDay } from '../model/macrosPerDay';
 
 @Injectable()
 export class DiaryService {

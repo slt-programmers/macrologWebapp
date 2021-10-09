@@ -6,7 +6,7 @@ import {
   ElementRef,
   AfterViewInit,
 } from '@angular/core';
-import { Macros } from 'src/app/model/macro';
+import { Macros } from 'src/app/shared/model/macro';
 
 @Component({
   templateUrl: './piechart.component.html',

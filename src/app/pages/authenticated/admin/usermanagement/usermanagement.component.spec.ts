@@ -11,7 +11,7 @@ import { of, throwError } from 'rxjs';
 import { MatTableModule } from '@angular/material/table';
 import { AdminService } from 'src/app/shared/services/admin.service';
 import { ToastService } from 'src/app/shared/services/toast.service';
-import { UserAccount } from 'src/app/model/userAccount';
+import { UserAccount } from 'src/app/shared/model/userAccount';
 
 describe('UserManagementComponent', () => {
   let component: UserManagementComponent;

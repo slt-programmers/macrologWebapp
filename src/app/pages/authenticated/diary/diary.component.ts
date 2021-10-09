@@ -4,12 +4,12 @@ import { ActivityService } from '../../../shared/services/activity.service';
 import { UserService } from '../../../shared/services/user.service';
 import { FoodService } from '../../../shared/services/food.service';
 import { DishService } from '../../../shared/services/dish.service';
-import { LogEntry } from '../../../model/logEntry';
-import { LogActivity } from '../../../model/logActivity';
-import { FoodSearchable } from '../../../model/foodSearchable';
+import { LogEntry } from '../../../shared/model/logEntry';
+import { LogActivity } from '../../../shared/model/logActivity';
+import { FoodSearchable } from '../../../shared/model/foodSearchable';
 import { DatePipe } from '@angular/common';
-import { Dish } from 'src/app/model/dish';
-import { Food } from 'src/app/model/food';
+import { Dish } from 'src/app/shared/model/dish';
+import { Food } from 'src/app/shared/model/food';
 
 @Component({
   selector: 'diary-page',

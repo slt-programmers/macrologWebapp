@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FoodService } from '../../../shared/services/food.service';
-import { Food } from '../../../model/food';
+import { Food } from '../../../shared/model/food';
 
 @Component({
   selector: 'app-food',

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { WeightService } from '../../../../shared/services/weight.service';
-import { Weight } from '../../../../model/weight';
+import { Weight } from '../../../../shared/model/weight';
 import { ToastService } from '../../../../shared/services/toast.service';
 import { DataPoint } from 'src/app/shared/components/linegraph/linegraph.component';
 import { NgForm } from '@angular/forms';

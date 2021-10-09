@@ -8,7 +8,7 @@ import {
   HTTP_INTERCEPTORS,
 } from '@angular/common/http';
 import { throwError, of } from 'rxjs';
-import { AuthenticationService } from '../shared/services/auth.service';
+import { AuthenticationService } from '../services/auth.service';
 
 describe('AuthService', () => {
   let httpClient: HttpClient;

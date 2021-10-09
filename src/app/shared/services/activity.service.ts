@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { StoreActivityRequest } from '../../model/storeActivityRequest';
+import { StoreActivityRequest } from '../model/storeActivityRequest';
 import { ToastService } from './toast.service';
-import { LogActivity } from '../../model/logActivity';
+import { LogActivity } from '../model/logActivity';
 import { environment } from '../../../environments/environment';
 
 @Injectable()

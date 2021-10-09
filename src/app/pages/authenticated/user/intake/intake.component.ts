@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { UserService } from '../../../../shared/services/user.service';
-import { Gender } from '../../../../model/gender';
+import { Gender } from '../../../../shared/model/gender';
 import { differenceInYears, parse } from 'date-fns';
 
 @Component({

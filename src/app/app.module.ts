@@ -4,8 +4,8 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
-import { JwtInterceptor } from './interceptors/jwt.interceptor';
-import { ErrorInterceptor } from './interceptors/error.interceptor';
+import { JwtInterceptor } from './shared/interceptors/jwt.interceptor';
+import { ErrorInterceptor } from './shared/interceptors/error.interceptor';
 import { ToastComponent } from './shared/components/toast/toast.component';
 import { HealthcheckService } from './shared/services/healthcheck.service';
 import { ToastService } from './shared/services/toast.service';

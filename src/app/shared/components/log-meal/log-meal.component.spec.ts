@@ -8,11 +8,11 @@ import {
 
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { By } from '@angular/platform-browser';
-import { Food } from 'src/app/model/food';
-import { FoodSearchable } from 'src/app/model/foodSearchable';
-import { LogEntry } from 'src/app/model/logEntry';
-import { Portion } from 'src/app/model/portion';
-import { StoreLogRequest } from 'src/app/model/storeLogRequest';
+import { Food } from 'src/app/shared/model/food';
+import { FoodSearchable } from 'src/app/shared/model/foodSearchable';
+import { LogEntry } from 'src/app/shared/model/logEntry';
+import { Portion } from 'src/app/shared/model/portion';
+import { StoreLogRequest } from 'src/app/shared/model/storeLogRequest';
 import { DiaryService } from 'src/app/shared/services/diary.service';
 import { ToastService } from 'src/app/shared/services/toast.service';
 

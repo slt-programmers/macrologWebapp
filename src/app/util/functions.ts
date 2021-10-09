@@ -1,4 +1,4 @@
-import { Gender } from '../model/gender';
+import { Gender } from '../shared/model/gender';
 
 export function calculateTDEE(
   gender: Gender,

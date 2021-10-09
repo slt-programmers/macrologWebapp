@@ -10,8 +10,8 @@ import {
   SimpleChanges,
 } from '@angular/core';
 import { DatePipe } from '@angular/common';
-import { LogActivity } from '../../../model/logActivity';
-import { StoreActivityRequest } from '../../../model/storeActivityRequest';
+import { LogActivity } from '../../model/logActivity';
+import { StoreActivityRequest } from '../../model/storeActivityRequest';
 import { ActivityService } from '../../services/activity.service';
 
 @Component({

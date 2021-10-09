@@ -4,7 +4,7 @@ import {
   HttpTestingController,
 } from '@angular/common/http/testing';
 import { AdminService } from './admin.service';
-import { UserAccount } from '../../model/userAccount';
+import { UserAccount } from '../model/userAccount';
 
 describe('AdminService', () => {
   let http: HttpTestingController;

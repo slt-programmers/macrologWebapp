@@ -2,8 +2,8 @@ import { AutocompleteFoodComponent } from './autocomplete-food.component';
 import { ComponentFixture, TestBed, async } from '@angular/core/testing';
 import { NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { By } from '@angular/platform-browser';
-import { Dish } from 'src/app/model/dish';
-import { Food } from 'src/app/model/food';
+import { Dish } from 'src/app/shared/model/dish';
+import { Food } from 'src/app/shared/model/food';
 
 describe('AutocompleteFoodComponent', () => {
   let component: AutocompleteFoodComponent;

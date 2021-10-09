@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { UserService } from '../../../../shared/services/user.service';
-import { Gender } from '../../../../model/gender';
+import { Gender } from '../../../../shared/model/gender';
 import { ToastService } from '../../../../shared/services/toast.service';
 import { forkJoin } from 'rxjs';
-import { UserSettings } from 'src/app/model/userSettings';
+import { UserSettings } from 'src/app/shared/model/userSettings';
 import { format, parse } from 'date-fns';
 
 @Component({
