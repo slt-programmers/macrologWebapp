@@ -2,7 +2,7 @@
   <div class="flex align-center full-height">
     <div class="navbar__item">
       <!-- TODO Make image -->
-      <h1 class="logo">M</h1>
+      <h1 class="logo" [routerLink]="['/']">M</h1>
     </div>
 
     <div class="xs-only align-right">
@@ -15,27 +15,27 @@
     </div>
 
     <div class="navbar__mobile-menu xs-only flex-col" *ngIf="menuOpen">
-      <a class="navbar__item" [routerLink]="['about']">About</a>
-    <a *ngIf="isLoggedIn()" class="navbar__item" [routerLink]="['log']">Diary</a>
-      <a *ngIf="!isLoggedIn()" class="navbar__item" [routerLink]="['login']">Log in</a>
-      <a *ngIf="!isLoggedIn()" class="navbar__item" [routerLink]="['login']">Register</a>
+      <a class="navbar__item" [routerLink]="['/about']">About</a>
+      <a *ngIf="isLoggedIn()" class="navbar__item" [routerLink]="['/log']">Diary</a>
+      <a *ngIf="!isLoggedIn()" class="navbar__item" [routerLink]="['/login']">Log in</a>
+      <a *ngIf="!isLoggedIn()" class="navbar__item" [routerLink]="['/login']">Register</a>
     </div>
 
     <div class="flex align-center xs">
-      <a class="navbar__item hide-mobile" [routerLink]="['about']">About</a>
+      <a class="navbar__item hide-mobile" [routerLink]="['/about']">About</a>
     </div>
 
     <div class="flex align-center align-right xs">
       <div *ngIf="isLoggedIn()" class="navbar__item">
-        <button class="button button--primary" [routerLink]="['log']">Diary</button>
+        <button class="button button--primary" [routerLink]="['/log']">Diary</button>
       </div>
 
       <div *ngIf="!isLoggedIn()" class="navbar__item">
-        <a class="navbar__item" [routerLink]="['login']">Log in</a>
+        <a class="navbar__item" [routerLink]="['/login']">Log in</a>
       </div>
 
       <div *ngIf="!isLoggedIn()" class="navbar__item">
-        <button class="button button--primary" [routerLink]="['login']">Register</button>
+        <button class="button button--primary" [routerLink]="['/login']">Register</button>
       </div>
     </div>
   </div>
