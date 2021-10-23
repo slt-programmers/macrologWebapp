@@ -1,6 +1,13 @@
-form {
+form, .form {
   display: flex;
   flex-direction: column;
+  * {
+    margin-top: 1rem;
+    &:first-child {
+      margin-top: 0;
+    }
+  }
+
 }
 
 // form-field (default) (vertical on mobile, horizontal on big screen)

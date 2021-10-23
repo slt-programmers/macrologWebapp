@@ -1,162 +1,162 @@
-// Custom Theming for Angular Material
-@use '~@angular/material' as mat;
-// For more information: https://material.angular.io/guide/theming
-@import "~@angular/material/theming";
-// Plus imports for other components in your app.
+// // Custom Theming for Angular Material
+// @use '~@angular/material' as mat;
+// // For more information: https://material.angular.io/guide/theming
+// @import "~@angular/material/theming";
+// // Plus imports for other components in your app.
 
-// Include the common styles for Angular Material. We include this here so that you only
-// have to load a single css file for Angular Material in your app.
-// Be sure that you only ever include this mixin once!
-@include mat.core(
-  mat.define-typography-config($font-family: '"Assistant", sans-serif')
-);
+// // Include the common styles for Angular Material. We include this here so that you only
+// // have to load a single css file for Angular Material in your app.
+// // Be sure that you only ever include this mixin once!
+// @include mat.core(
+//   mat.define-typography-config($font-family: '"Assistant", sans-serif')
+// );
 
-// Palette
-$mat-white: (
-  50: #ffffff,
-  100: #ffffff,
-  200: #ffffff,
-  300: #ffffff,
-  400: #ffffff,
-  500: #ffffff,
-  600: #ffffff,
-  700: #ffffff,
-  800: #ffffff,
-  900: #ffffff,
-  A100: #ffffff,
-  A200: #ffffff,
-  A400: #ffffff,
-  A700: #ffffff,
-  contrast: (
-    50: $dark-primary-text,
-    100: $dark-primary-text,
-    200: $dark-primary-text,
-    300: $dark-primary-text,
-    400: $dark-primary-text,
-    500: $dark-primary-text,
-    600: $light-primary-text,
-    700: $light-primary-text,
-    800: $light-primary-text,
-    900: $light-primary-text,
-    A100: $dark-primary-text,
-    A200: $dark-primary-text,
-    A400: $dark-primary-text,
-    A700: $light-primary-text
-  )
-);
+// // Palette
+// $mat-white: (
+//   50: #ffffff,
+//   100: #ffffff,
+//   200: #ffffff,
+//   300: #ffffff,
+//   400: #ffffff,
+//   500: #ffffff,
+//   600: #ffffff,
+//   700: #ffffff,
+//   800: #ffffff,
+//   900: #ffffff,
+//   A100: #ffffff,
+//   A200: #ffffff,
+//   A400: #ffffff,
+//   A700: #ffffff,
+//   contrast: (
+//     50: $dark-primary-text,
+//     100: $dark-primary-text,
+//     200: $dark-primary-text,
+//     300: $dark-primary-text,
+//     400: $dark-primary-text,
+//     500: $dark-primary-text,
+//     600: $light-primary-text,
+//     700: $light-primary-text,
+//     800: $light-primary-text,
+//     900: $light-primary-text,
+//     A100: $dark-primary-text,
+//     A200: $dark-primary-text,
+//     A400: $dark-primary-text,
+//     A700: $light-primary-text
+//   )
+// );
 
-$macrolog-webapp-primary: mat.define-palette($mat-white);
-$macrolog-webapp-accent: mat.define-palette($mat-white, A200, A100, A400);
-$macrolog-webapp-warn: mat.define-palette(mat.$orange-palette);
+// $macrolog-webapp-primary: mat.define-palette($mat-white);
+// $macrolog-webapp-accent: mat.define-palette($mat-white, A200, A100, A400);
+// $macrolog-webapp-warn: mat.define-palette(mat.$orange-palette);
 
-// Dark foreground
-$macrolog-dark-theme-foreground: (
-  base: white,
-  divider: rgba(255, 255, 255, 0.5),
-  dividers: $light-dividers,
-  disabled: $light-disabled-text,
-  disabled-button: rgba(white, 0.3),
-  disabled-text: $light-disabled-text,
-  elevation: black,
-  hint-text: $light-disabled-text,
-  secondary-text: white,
-  icon: white,
-  icons: white,
-  text: white,
-  slider-min: white,
-  slider-off: rgba(white, 0.3),
-  slider-off-active: rgba(white, 0.3)
-);
+// // Dark foreground
+// $macrolog-dark-theme-foreground: (
+//   base: white,
+//   divider: rgba(255, 255, 255, 0.5),
+//   dividers: $light-dividers,
+//   disabled: $light-disabled-text,
+//   disabled-button: rgba(white, 0.3),
+//   disabled-text: $light-disabled-text,
+//   elevation: black,
+//   hint-text: $light-disabled-text,
+//   secondary-text: white,
+//   icon: white,
+//   icons: white,
+//   text: white,
+//   slider-min: white,
+//   slider-off: rgba(white, 0.3),
+//   slider-off-active: rgba(white, 0.3)
+// );
 
-// Dark background
-$macrolog-dark-theme-background: (
-  status-bar: black,
-  app-bar: map_get(mat.$grey-palette, 900),
-  background: #303030,
-  hover: rgba(white, 0.04),
-  dialog: map_get(mat.$grey-palette, 800),
-  disabled-button: rgba(white, 0.12),
-  raised-button: map-get(mat.$grey-palette, 800),
-  focused-button: $light-focused,
-  selected-button: map_get(mat.$grey-palette, 900),
-  selected-disabled-button: map_get(mat.$grey-palette, 800),
-  disabled-button-toggle: black,
-  unselected-chip: map_get(mat.$grey-palette, 700),
-  disabled-list-option: black
-);
+// // Dark background
+// $macrolog-dark-theme-background: (
+//   status-bar: black,
+//   app-bar: map_get(mat.$grey-palette, 900),
+//   background: #303030,
+//   hover: rgba(white, 0.04),
+//   dialog: map_get(mat.$grey-palette, 800),
+//   disabled-button: rgba(white, 0.12),
+//   raised-button: map-get(mat.$grey-palette, 800),
+//   focused-button: $light-focused,
+//   selected-button: map_get(mat.$grey-palette, 900),
+//   selected-disabled-button: map_get(mat.$grey-palette, 800),
+//   disabled-button-toggle: black,
+//   unselected-chip: map_get(mat.$grey-palette, 700),
+//   disabled-list-option: black
+// );
 
-// Light foreground
-$macrolog-light-theme-foreground: (
-  base: black,
-  divider: map_get(mat.$indigo-palette, 500),
-  dividers: $dark-dividers,
-  disabled: $dark-disabled-text,
-  disabled-button: rgba(black, 0.26),
-  disabled-text: $dark-disabled-text,
-  elevation: black,
-  hint-text: $dark-disabled-text,
-  secondary-text: map_get(mat.$indigo-palette, 500),
-  icon: rgba(black, 0.54),
-  icons: rgba(black, 0.54),
-  text: rgba(black, 0.87),
-  slider-min: rgba(black, 0.87),
-  slider-off: rgba(black, 0.26),
-  slider-off-active: rgba(black, 0.38)
-);
+// // Light foreground
+// $macrolog-light-theme-foreground: (
+//   base: black,
+//   divider: map_get(mat.$indigo-palette, 500),
+//   dividers: $dark-dividers,
+//   disabled: $dark-disabled-text,
+//   disabled-button: rgba(black, 0.26),
+//   disabled-text: $dark-disabled-text,
+//   elevation: black,
+//   hint-text: $dark-disabled-text,
+//   secondary-text: map_get(mat.$indigo-palette, 500),
+//   icon: rgba(black, 0.54),
+//   icons: rgba(black, 0.54),
+//   text: rgba(black, 0.87),
+//   slider-min: rgba(black, 0.87),
+//   slider-off: rgba(black, 0.26),
+//   slider-off-active: rgba(black, 0.38)
+// );
 
-// Light background
-$macrolog-light-theme-background: (
-  status-bar: map_get(mat.$grey-palette, 300),
-  app-bar: map_get(mat.$grey-palette, 100),
-  background: map_get(mat.$grey-palette, 50),
-  hover: rgba(black, 0.04),
-  card: white,
-  dialog: white,
-  disabled-button: rgba(black, 0.12),
-  raised-button: white,
-  focused-button: $dark-focused,
-  selected-button: map_get(mat.$grey-palette, 300),
-  selected-disabled-button: map_get(mat.$grey-palette, 400),
-  disabled-button-toggle: map_get(mat.$grey-palette, 200),
-  unselected-chip: map_get(mat.$grey-palette, 300),
-  disabled-list-option: map_get(mat.$grey-palette, 200)
-);
+// // Light background
+// $macrolog-light-theme-background: (
+//   status-bar: map_get(mat.$grey-palette, 300),
+//   app-bar: map_get(mat.$grey-palette, 100),
+//   background: map_get(mat.$grey-palette, 50),
+//   hover: rgba(black, 0.04),
+//   card: white,
+//   dialog: white,
+//   disabled-button: rgba(black, 0.12),
+//   raised-button: white,
+//   focused-button: $dark-focused,
+//   selected-button: map_get(mat.$grey-palette, 300),
+//   selected-disabled-button: map_get(mat.$grey-palette, 400),
+//   disabled-button-toggle: map_get(mat.$grey-palette, 200),
+//   unselected-chip: map_get(mat.$grey-palette, 300),
+//   disabled-list-option: map_get(mat.$grey-palette, 200)
+// );
 
-$macrolog-white-theme: (
-  primary: $macrolog-webapp-primary,
-  accent: $macrolog-webapp-accent,
-  warn: $macrolog-webapp-warn,
-  is-dark: true,
-  foreground: $macrolog-dark-theme-foreground,
-  background: $macrolog-dark-theme-background
-);
+// $macrolog-white-theme: (
+//   primary: $macrolog-webapp-primary,
+//   accent: $macrolog-webapp-accent,
+//   warn: $macrolog-webapp-warn,
+//   is-dark: true,
+//   foreground: $macrolog-dark-theme-foreground,
+//   background: $macrolog-dark-theme-background
+// );
 
-$macrolog-blue-theme: (
-  primary: mat.define-palette(mat.$indigo-palette),
-  accent: mat.define-palette(mat.$indigo-palette),
-  warn: $macrolog-webapp-warn,
-  is-dark: true,
-  foreground: $macrolog-light-theme-foreground,
-  background: $macrolog-light-theme-background
-);
+// $macrolog-blue-theme: (
+//   primary: mat.define-palette(mat.$indigo-palette),
+//   accent: mat.define-palette(mat.$indigo-palette),
+//   warn: $macrolog-webapp-warn,
+//   is-dark: true,
+//   foreground: $macrolog-light-theme-foreground,
+//   background: $macrolog-light-theme-background
+// );
 
-// Include entire theme
-//@include angular-material-theme($macrolog-webapp-theme);
+// // Include entire theme
+// //@include angular-material-theme($macrolog-webapp-theme);
 
-// OR
+// // OR
 
-// Include certain parts
-@include mat.core-theme($macrolog-white-theme);
-@include mat.input-theme($macrolog-white-theme);
-@include mat.form-field-theme($macrolog-white-theme);
-@include mat.progress-spinner-theme($macrolog-white-theme);
-@include mat.radio-theme($macrolog-white-theme);
-@include mat.paginator-theme($macrolog-white-theme);
+// // Include certain parts
+// @include mat.core-theme($macrolog-white-theme);
+// @include mat.input-theme($macrolog-white-theme);
+// @include mat.form-field-theme($macrolog-white-theme);
+// @include mat.progress-spinner-theme($macrolog-white-theme);
+// @include mat.radio-theme($macrolog-white-theme);
+// @include mat.paginator-theme($macrolog-white-theme);
 
-.blue-theme {
-  @include mat.form-field-theme($macrolog-blue-theme);
-  @include mat.input-theme($macrolog-blue-theme);
-  @include mat.progress-spinner-theme($macrolog-blue-theme);
-  @include mat.radio-theme($macrolog-blue-theme);
-  @include mat.paginator-theme($macrolog-blue-theme);
-}
+// .blue-theme {
+//   @include mat.form-field-theme($macrolog-blue-theme);
+//   @include mat.input-theme($macrolog-blue-theme);
+//   @include mat.progress-spinner-theme($macrolog-blue-theme);
+//   @include mat.radio-theme($macrolog-blue-theme);
+//   @include mat.paginator-theme($macrolog-blue-theme);
+// }
