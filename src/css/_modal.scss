@@ -1,77 +1,38 @@
-.modal-wrapper {
-  background: $blackHorizontalGradient;
-  height: 100%;
-  left: 0;
-  overflow: scroll;
-  overflow-x: hidden;
+.modal-backdrop{
+  background: rgba(0, 0, 0, 0.2);
   position: fixed;
   top: 0;
-  width: 100%;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
   z-index: 20;
 }
 
-.modal {
-  @media (min-width: $phone) {
-    width: 80%;
-  }
-  margin: 8% auto;
-  max-width: 700px;
-  width: 95%;
-
-  &__header {
-    @media (min-width: $phone) {
-      border-radius: 15px 15px 0 0;
-      padding: 10px 15px 0 30px;
-    }
-    align-items: center;
-    background-color: $secondary;
-    border-radius: 5px 5px 0 0;
-    color: $cloud;
-    display: flex;
-    height: 52px;
-    justify-content: space-between;
-    padding: 0 15px;
-
-    &__title {
-      font-weight: normal;
-      margin: 0;
-    }
-  }
-
-  &__content {
-    @media (min-width: $phone) {
-      border-radius: 0 0 15px 15px;
-      padding: $gutter;
-    }
-    background-color: $ghost;
-    border-radius: 0 0 5px 5px;
-    color: $coal;
-    padding: 15px;
-  }
-
-  &__label {
-    display: block;
-    padding-top: 10px;
-    margin-bottom: 10px;
-  }
-
-  &__button-wrapper {
-    display: flex;
-    justify-content: flex-end;
-    margin-top: 1rem;
-
-    &--spread {
-      justify-content: space-between;
-    }
-
-    .button {
-      max-width: 150px;
-      margin-left: 10px;
-    }
-  }
+.modal-wrapper {
+  display: flex;
+  margin: 1rem;
 }
 
-// utility
-.overlay-active {
-  overflow: hidden;
+.modal {
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 2rem;
+  background-color: white;
+  border-radius: 1rem;
+  display: flex;
+  flex-direction: column;
+  max-width: 800px;
+  padding: 2rem;
+  
+  &__header {
+    display: flex;
+    &__title {
+      // font-weight: 600;
+      font-size: 1.25rem;
+    }
+  }
+
+  &__body {
+    padding-top: 0;
+  }
 }

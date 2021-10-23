@@ -1,11 +1,5 @@
 @import "../../../../css/variables.scss";
 
-.page {
-  min-height: 100vh;
-  background: $backgroundGradient;
-  color: white;
-}
-
 .content {
   &__title {
     font-size: 24px;
