@@ -1,12 +1,3 @@
-@import "../../../../css/variables.scss";
-
-.content {
-  &__title {
-    font-size: 24px;
-    font-weight: 700;
-  }
-
-  margin: 1rem;
-  margin-top: 4rem;
-  max-width: $sm;
+.max-w-48 {
+  max-width: 48rem;
 }

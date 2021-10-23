@@ -1,57 +1,37 @@
-<section class="section">
-  <div class="container">
-    <div class="card">
-      <div class="subnav">
-        <div
-          class="subnav__item"
-          [ngClass]="{
+<div class="content">
+  <div class="card">
+    <div class="subnav">
+      <div class="subnav__item" [ngClass]="{
             'subnav__item--active': router.url === '/user/personal'
-          }"
-          [routerLink]="['./personal']"
-        >
-          Personal
-        </div>
-
-        <div
-          class="subnav__item"
-          [ngClass]="{
-            'subnav__item--active': router.url === '/user/foodintake'
-          }"
-          [routerLink]="['./foodintake']"
-        >
-          Food Intake
-        </div>
-
-        <div
-          class="subnav__item"
-          [ngClass]="{
-            'subnav__item--active': router.url === '/user/weighttracker'
-          }"
-          [routerLink]="['./weighttracker']"
-        >
-          Weight Tracker
-        </div>
-
-        <div
-          class="subnav__item"
-          [ngClass]="{
-            'subnav__item--active': router.url.startsWith('/user/conne')
-          }"
-          [routerLink]="['./connectivity']"
-        >
-          Connectivity
-        </div>
-
-        <div
-          class="subnav__item"
-          [ngClass]="{ 'subnav__item--active': router.url === '/user/account' }"
-          [routerLink]="['./account']"
-        >
-          Account
-        </div>
+          }" [routerLink]="['./personal']">
+        Personal
       </div>
 
-      <router-outlet></router-outlet>
+      <div class="subnav__item" [ngClass]="{
+            'subnav__item--active': router.url === '/user/foodintake'
+          }" [routerLink]="['./foodintake']">
+        Food Intake
+      </div>
+
+      <div class="subnav__item" [ngClass]="{
+            'subnav__item--active': router.url === '/user/weighttracker'
+          }" [routerLink]="['./weighttracker']">
+        Weight Tracker
+      </div>
+
+      <div class="subnav__item" [ngClass]="{
+            'subnav__item--active': router.url.startsWith('/user/conne')
+          }" [routerLink]="['./connectivity']">
+        Connectivity
+      </div>
+
+      <div class="subnav__item"
+        [ngClass]="{ 'subnav__item--active': router.url === '/user/account' }"
+        [routerLink]="['./account']">
+        Account
+      </div>
     </div>
+
+    <router-outlet></router-outlet>
   </div>
-</section>
+</div>
