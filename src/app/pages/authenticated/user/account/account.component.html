@@ -57,7 +57,7 @@
       <input class="input" placeholder="Password" type="password" #usernameField [(ngModel)]="password" name="password"
         required />
 
-      <p class="input-error" *ngIf="errorMessage">Password incorrect</p>
+      <p class="error" *ngIf="errorMessage">Password incorrect</p>
 
       <div class="modal__button-wrapper modal__button-wrapper--spread">
         <button class="button" (click)="closeModal()">No</button>

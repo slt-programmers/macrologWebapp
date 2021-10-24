@@ -1,12 +1,12 @@
 <div class="page">
-  <div id="loadingOverlay" class="loading-overlay" *ngIf="stillSleeping()">
-    <h1>Macrolog</h1>
+  <div id="loadingOverlay" class="loading-overlay content" *ngIf="stillSleeping()">
+    <h1 class="text-xl">Macrolog</h1>
 
     <p>The hamsters in the treadmill powering this app are still asleep.</p>
 
     <p>Please wait while we wake them up...</p>
 
-    <div class="svg-wrapper">
+    <div class="w-6">
       <img src="../assets/hamster-wheel.svg" alt="hamster-wheel" />
     </div>
   </div>
