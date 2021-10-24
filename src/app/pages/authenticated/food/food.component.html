@@ -131,9 +131,20 @@
         </div>
       </div>
 
-      <mat-paginator [length]="searchableFood.length" [pageSize]="itemsPerPage"
-        [pageSizeOptions]="[15]" (page)="getPagedFood($event)">
-      </mat-paginator>
+      <div class="paginator flex flex-grow">
+        <div class="previous flex-grow">
+          <div *ngIf="currentPage > 1" (click)="getPagedFood({pageIndex: currentPage - 2})">
+            <em class="fas fa-chevron-left"></em>
+            Previous
+          </div>
+        </div>
+
+        <div *ngIf="hasNextPage()" class="previous"
+          (click)="getPagedFood({pageIndex: currentPage})">
+          Next
+          <em class="fas fa-chevron-right"></em>
+        </div>
+      </div>
     </div>
   </div>
 

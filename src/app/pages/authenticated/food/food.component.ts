@@ -53,6 +53,12 @@ export class FoodComponent implements OnInit {
     );
   }
 
+  public hasNextPage() {
+    return this.searchableFood.slice(
+      (this.currentPage + 1) * this.itemsPerPage - this.itemsPerPage,
+    ).length > 0;
+  }
+
   public getPagedFood(page: any): void {
     this.currentPage = page.pageIndex + 1;
     this.displayedFood = this.searchableFood.slice(
