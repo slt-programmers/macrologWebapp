@@ -15,6 +15,11 @@ export class AuthenticationService {
     return user != null;
   }
 
+  public isAdmin(): boolean {
+    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    return currentUser && currentUser.admin;
+  }
+
   public login(usernameOrEmail: string, password: string) {
     return this.http
       .post<any>(this.macrologBackendUrl + '/authenticate', {

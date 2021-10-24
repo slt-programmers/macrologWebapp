@@ -29,4 +29,8 @@ export class NavigationComponent implements OnInit {
     return this.authService.isAuthenticated();
   }
 
+  public isAdmin() {
+    return this.authService.isAdmin();
+  }
+
 }

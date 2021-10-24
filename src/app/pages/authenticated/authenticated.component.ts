@@ -2,80 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ScrollBehaviourService } from '../../shared/services/scroll-behaviour.service';
 import { HealthcheckService } from '../../shared/services/healthcheck.service';
-import {
-  trigger,
-  transition,
-  style,
-  animate,
-  state,
-  keyframes,
-} from '@angular/animations';
 import { AuthenticationService } from '../../shared/services/auth.service';
-import { ToastService } from '../../shared/services/toast.service';
 
 @Component({
   selector: 'authenticated',
   templateUrl: './authenticated.component.html',
-  styleUrls: ['./authenticated.component.scss'],
-  animations: [
-    trigger('move', [
-      state(
-        'forth',
-        style({
-          marginLeft: '-75px',
-        })
-      ),
-      state(
-        'back',
-        style({
-          marginLeft: '0',
-        })
-      ),
-      transition('* <=> *', [animate('5s 0s ease-in-out')]),
-    ]),
-    trigger('moveDelay', [
-      state(
-        'forth',
-        style({
-          marginRight: '-75px',
-        })
-      ),
-      state(
-        'back',
-        style({
-          marginRight: '0',
-        })
-      ),
-      transition('* <=> *', [animate('4s 0s ease-in-out')]),
-    ]),
-    trigger('openClose', [
-      state(
-        'open',
-        style({
-          marginRight: '0',
-        })
-      ),
-      state(
-        'closed',
-        style({
-          marginRight: '-250px',
-        })
-      ),
-      transition('open => closed', [
-        animate(
-          '0.5s ease',
-          keyframes([
-            style({ marginRight: '0', offset: 0 }),
-            style({ marginRight: '0', offset: 0.6 }),
-            style({ marginRight: '-250px', offset: 1 }),
-          ])
-        ),
-      ]),
-      transition('closed => open', [
-        animate('0.2s 0s ease-out', style({ marginRight: 0 })),
-      ]),
-    ]),
-  ],
+  styleUrls: ['./authenticated.component.scss'] 
 })
 export class AuthenticatedComponent implements OnInit {
   public moveState = 'forth';
@@ -88,7 +20,6 @@ export class AuthenticatedComponent implements OnInit {
     public router: Router,
     private healthcheckService: HealthcheckService,
     private authService: AuthenticationService,
-    private toastService: ToastService,
     private sbs: ScrollBehaviourService
   ) {}
 
@@ -103,14 +34,6 @@ export class AuthenticatedComponent implements OnInit {
         }
       }
     );
-  }
-
-  public onMove(event: any) {
-    this.moveState = this.moveState === 'forth' ? 'back' : 'forth';
-  }
-
-  public onMoveDelay(event: any) {
-    this.moveDelayState = this.moveDelayState === 'forth' ? 'back' : 'forth';
   }
 
   public stillSleeping(): boolean {
@@ -130,8 +53,7 @@ export class AuthenticatedComponent implements OnInit {
   }
 
   public isAdmin(): boolean {
-    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
-    return currentUser && currentUser.admin;
+    return this.authService.isAdmin();
   }
 
   public logOut() {

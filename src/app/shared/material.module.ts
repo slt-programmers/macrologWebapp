@@ -5,7 +5,6 @@ import { MatInputModule } from "@angular/material/input";
 import { MatPaginatorModule } from "@angular/material/paginator";
 import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 import { MatRadioModule } from "@angular/material/radio";
-import { MatTableModule } from "@angular/material/table";
 
 @NgModule({
   imports: [
@@ -15,7 +14,6 @@ import { MatTableModule } from "@angular/material/table";
     MatPaginatorModule,
     MatProgressSpinnerModule,
     MatRadioModule,
-    MatTableModule
   ], 
   exports: [
     MatInputModule,
@@ -24,7 +22,6 @@ import { MatTableModule } from "@angular/material/table";
     MatPaginatorModule,
     MatProgressSpinnerModule,
     MatRadioModule,
-    MatTableModule
   ]
 })
 export class MaterialModule { }

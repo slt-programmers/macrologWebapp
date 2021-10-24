@@ -16,7 +16,16 @@
 
     <div class="navbar__mobile-menu xs-only flex-col" *ngIf="menuOpen">
       <a class="navbar__item" [routerLink]="['/about']">About</a>
-      <a *ngIf="isLoggedIn()" class="navbar__item" [routerLink]="['/dashboard']">Diary</a>
+      <ng-container *ngIf="isLoggedIn()">
+        <a class="navbar__item" [routerLink]="['/dashboard']">Diary</a>
+        <a class="navbar__item" [routerLink]="['/dashboard', 'food']">Food</a>
+        <a class="navbar__item" [routerLink]="['/dashboard', 'dishes']">Dishes</a>
+        <a class="navbar__item" [routerLink]="['/dashboard', 'graphs']">Graphs</a>
+        <a class="navbar__item" [routerLink]="['/dashboard', 'user']">Profile</a>
+        <a class="navbar__item" *ngIf="isAdmin()" [routerLink]="['/dashboard', 'admin']">Admin</a>
+        <a class="navbar__item" (click)="logOut()">Log out</a>
+      </ng-container>
+
       <a *ngIf="!isLoggedIn()" class="navbar__item" [routerLink]="['/login']">Log in</a>
       <a *ngIf="!isLoggedIn()" class="navbar__item" [routerLink]="['/login']">Register</a>
     </div>
@@ -35,7 +44,7 @@
     <div class="flex align-center align-right xs">
       <div *ngIf="isLoggedIn()" class="navbar__item">
         <a class="navbar__item" [routerLink]="['/dashboard', 'user']">Profile</a>
-        <a class="navbar__item" [routerLink]="['/dashboard', 'admin']">Admin</a>
+        <a class="navbar__item" *ngIf="isAdmin()" [routerLink]="['/dashboard', 'admin']">Admin</a>
         <a class="navbar__item" (click)="logOut()">Log out</a>
       </div>
 

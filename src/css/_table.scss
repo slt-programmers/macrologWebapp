@@ -1,0 +1,10 @@
+table, .table {
+  th,
+  td {
+    padding: 0.5rem;
+  }
+  tr:nth-child(even),
+  th {
+    background-color: $lightIndigo;
+  }
+}
