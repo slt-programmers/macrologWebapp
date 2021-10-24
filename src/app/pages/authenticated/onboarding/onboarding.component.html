@@ -20,25 +20,14 @@
         <form #personalIntake="ngForm">
           <div class="form-field">
             <label class="form-field__label">Name</label>
-            <input
-              class="input form-field__input"
-              name="name"
-              type="text"
-              [(ngModel)]="name"
-              required
-            />
+            <input class="input form-field__input" name="name" type="text" [(ngModel)]="name"
+              required />
           </div>
 
           <div class="form-field">
             <label class="form-field__label">Date of birth</label>
-            <input
-              class="input form-field__input"
-              required
-              validDate
-              placeholder="DD-MM-YYYY, eg 26-3-1989"
-              name="birthday"
-              [(ngModel)]="birthday"
-            />
+            <input class="input form-field__input" required validDate
+              placeholder="DD-MM-YYYY, eg 26-3-1989" name="birthday" [(ngModel)]="birthday" />
           </div>
 
           <div class="flex col-gap-1">
@@ -48,7 +37,7 @@
               <input type="radio" id="male" [(ngModel)]="gender" value="MALE">
               <label for="male">Male</label>
             </div>
-    
+
             <div class="flex align-center">
               <input type="radio" id="female" [(ngModel)]="gender" value="FEMALE">
               <label for="female">Female</label>
@@ -57,35 +46,19 @@
 
           <div class="form-field">
             <label class="form-field__label">Height (cm)</label>
-            <input
-              class="input form-field__input"
-              name="height"
-              type="number"
-              [(ngModel)]="height"
-              required
-            />
+            <input class="input form-field__input" name="height" type="number" [(ngModel)]="height"
+              required />
           </div>
 
           <div class="form-field">
             <label class="form-field__label">Start weight (kg)</label>
-            <input
-              class="input form-field__input"
-              name="weight"
-              type="number"
-              [(ngModel)]="weight"
-              step="0.1"
-              required
-            />
+            <input class="input form-field__input" name="weight" type="number" [(ngModel)]="weight"
+              step="0.1" required />
           </div>
 
           <div class="form-field">
             <label class="form-field__label">Activity level</label>
-            <select
-              class="form-field__input"
-              name="activity"
-              [(ngModel)]="activity"
-              required
-            >
+            <select class="form-field__input" name="activity" [(ngModel)]="activity" required>
               <option value="1.2">Sedentary</option>
               <option value="1.375">Lightly active</option>
               <option value="1.55">Moderately active</option>
@@ -112,25 +85,16 @@
         </p>
 
         <div class="calorie-box">
-          <span class="calorie-box__title"
-            >{{ calories | number: '1.0-0' }} Calories</span
-          >
+          <span class="calorie-box__title">{{ calories | number: '1.0-0' }} Calories</span>
         </div>
 
         <div class="tabs">
           <div class="tabs-header">
-            <div
-              class="tab"
-              (click)="showCaloriesTab()"
-              [ngClass]="{ 'tab--active': showCalories }"
-            >
+            <div class="tab" (click)="showCaloriesTab()"
+              [ngClass]="{ 'tab--active': showCalories }">
               Adjust calories
             </div>
-            <div
-              class="tab"
-              (click)="showMacrosTab()"
-              [ngClass]="{ 'tab--active': showMacros }"
-            >
+            <div class="tab" (click)="showMacrosTab()" [ngClass]="{ 'tab--active': showMacros }">
               Adjust macro's
             </div>
           </div>
@@ -149,13 +113,8 @@
                   Calories
                 </div>
                 <div class="form-field__slider">
-                  <slider
-                    [value]="calories"
-                    (valueChange)="changeCalories($event)"
-                    [upperBound]="4000"
-                    [lowerBound]="1200"
-                    [markers]="markers"
-                  ></slider>
+                  <slider [value]="calories" (valueChange)="changeCalories($event)"
+                    [upperBound]="4000" [lowerBound]="1200" [markers]="markers"></slider>
                 </div>
               </div>
 
@@ -180,36 +139,24 @@
                 <div class="form-field">
                   <label class="form-field__label">Protein</label>
                   <div class="form-field__element">
-                    <input
-                      class="input form-field__input"
-                      (change)="calcCaloriesManual()"
-                      [(ngModel)]="proteinManual"
-                      type="number"
-                    />
+                    <input class="input form-field__input" (change)="calcCaloriesManual()"
+                      [(ngModel)]="proteinManual" type="number" />
                   </div>
                 </div>
 
                 <div class="form-field">
                   <label class="form-field__label">Fat</label>
                   <div class="form-field__element">
-                    <input
-                      class="input form-field__input"
-                      (change)="calcCaloriesManual()"
-                      [(ngModel)]="fatManual"
-                      type="number"
-                    />
+                    <input class="input form-field__input" (change)="calcCaloriesManual()"
+                      [(ngModel)]="fatManual" type="number" />
                   </div>
                 </div>
 
                 <div class="form-field">
                   <label class="form-field__label">Carbs</label>
                   <div class="form-field__element">
-                    <input
-                      class="input form-field__input"
-                      (change)="calcCaloriesManual()"
-                      [(ngModel)]="carbsManual"
-                      type="number"
-                    />
+                    <input class="input form-field__input" (change)="calcCaloriesManual()"
+                      [(ngModel)]="carbsManual" type="number" />
                   </div>
                 </div>
               </div>
@@ -222,11 +169,8 @@
             Previous
           </button>
 
-          <button
-            class="button button--primary"
-            (click)="saveIntake()"
-            [disabled]="showCalories === false && showMacros === false"
-          >
+          <button class="button button--primary" (click)="saveIntake()"
+            [disabled]="showCalories === false && showMacros === false">
             Next
           </button>
         </div>
@@ -241,7 +185,7 @@
         </p>
 
         <button class="floating-action-button">
-          <em class="small-icon fas fa-add"></em>
+          <em class="fas fa-plus"></em>
         </button>
 
         <h3 class="form-description">Portions</h3>
@@ -253,13 +197,11 @@
         </p>
 
         <button class="icon-button">
-          <em class="small-icon fas fa-add"></em>
+          <em class="fas fa-plus"></em>
         </button>
 
         <div class="more-info">
-          <a class="primary" (click)="expandMoreInfo = !expandMoreInfo"
-            >More on this setup</a
-          >
+          <a (click)="expandMoreInfo = !expandMoreInfo">More on this setup</a>
         </div>
 
         <div *ngIf="expandMoreInfo">
@@ -314,16 +256,9 @@
               <span class="logday__header__macro">Carbs</span>
             </div>
 
-            <log-meal
-              #breakfast
-              [dummy]="true"
-              [open]="breakfastOpen"
-              [searchables]="foodSearchables"
-              [date]="displayDate"
-              [meal]="'Breakfast'"
-              [logEntries]="[]"
-              (dataChanged)="dummy()"
-            ></log-meal>
+            <log-meal #breakfast [dummy]="true" [open]="breakfastOpen"
+              [searchables]="foodSearchables" [date]="displayDate" [meal]="'Breakfast'"
+              [logEntries]="[]" (dataChanged)="dummy()"></log-meal>
           </div>
         </div>
 

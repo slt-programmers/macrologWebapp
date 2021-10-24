@@ -204,6 +204,6 @@ export class OnboardingComponent implements OnInit {
   dummy() {}
 
   finish() {
-    this.router.navigate(['/log']);
+    this.router.navigate(['/dashboard']);
   }
 }
