@@ -5,7 +5,6 @@ import { RouterModule, Routes } from "@angular/router";
 import { ComponentsModule } from "src/app/shared/components/components.module";
 import { LinegraphComponent } from "src/app/shared/components/linegraph/linegraph.component";
 import { CalculateIntakeModalComponent } from "src/app/shared/components/modals/calculate-intake-modal/calculate-intake-modal.component";
-import { MaterialModule } from "src/app/shared/material.module";
 import { AccountComponent } from "./account/account.component";
 import { ConnectivityComponent } from "./connectivity/connectivity.component";
 import { IntakeComponent } from "./intake/intake.component";
@@ -26,7 +25,6 @@ export const userRoutes: Routes = [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    MaterialModule,
     ComponentsModule,
     RouterModule.forChild(userRoutes),
   ],

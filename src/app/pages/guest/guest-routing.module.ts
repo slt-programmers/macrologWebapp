@@ -3,7 +3,6 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
 import { ComponentsModule } from 'src/app/shared/components/components.module';
-import { MaterialModule } from 'src/app/shared/material.module';
 
 import { AboutComponent } from './about/about.component';
 import { GuestGuard } from './guest.guard';
@@ -31,7 +30,6 @@ export const guestRoutes: Routes = [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    MaterialModule,
     ComponentsModule,
     RouterModule.forChild(guestRoutes)],
   providers: [GuestGuard],

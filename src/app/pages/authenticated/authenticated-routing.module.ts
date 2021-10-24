@@ -12,7 +12,6 @@ import { UserComponent } from './user/user.component';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BargraphComponent } from 'src/app/shared/components/bargraph/bargraph.component';
-import { MaterialModule } from 'src/app/shared/material.module';
 import { MakeDishModalComponent } from 'src/app/shared/components/modals/make-dish-modal/make-dish-modal.component';
 import { AutocompleteFoodComponent } from 'src/app/shared/components/autocomplete-food/autocomplete-food.component';
 import { PiechartComponent } from 'src/app/shared/components/piechart/piechart.component';
@@ -78,7 +77,6 @@ export const authenticatedRoutes: Routes = [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    MaterialModule,
     ComponentsModule,
     RouterModule.forChild(authenticatedRoutes)],
   declarations: [
