@@ -1,108 +1,128 @@
-	<div class="content">
-		<div class="card">
-			<div class="graph ">
-				<div *ngIf="loading" class="graph__spinner-wrapper">
-					<div class="spinner">
-            <em class="fas fa-spinner"></em>
+<div class="content">
+  <div class="card">
+    <div class="graph ">
+      <div *ngIf="loading" class="graph__spinner-wrapper">
+        <div class="spinner">
+          <em class="fas fa-spinner"></em>
+        </div>
+      </div>
+
+      <div class="month-picker" *ngIf="!loading">
+        <button class="icon-button" [disabled]="loading" (click)="monthBack()">
+          <em class="small-icon fas fa-chevron-left"></em>
+        </button>
+
+        <div class="month-picker__datelabel">{{dateFrom | date:'dd MMMM yyyy'}} -
+          {{dateTo | date:'dd MMMM yyyy'}}
+        </div>
+
+        <button class="icon-button" [disabled]="loading" (click)="monthForward()">
+          <em class="small-icon fas fa-chevron-right"></em>
+        </button>
+      </div>
+
+      <div class="graph__options ">
+        <div class="graph__options__group">
+          <div class="graph__options__option__label">Measurement</div>
+
+          <!-- TODO fix switch -->
+          <div class="flex flex-col" (click)="switchMeasurement()">
+            <div class="flex align-center">
+              <input type="radio" id="grams" [(ngModel)]="measurement" value="calories"
+                (onChange)="switchMeasurement()">
+              <label for="grams">Calories</label>
+            </div>
+
+            <div class="flex align-center">
+              <input type="radio" id="percentage" [(ngModel)]="measurement" value="grams"
+                (onChange)="switchMeasurement()">
+              <label for="percentage">Grams</label>
+            </div>
           </div>
-				</div>
+        </div>
 
-				<div class="month-picker" *ngIf="!loading">
-					<button class="icon-button" [disabled]="loading" (click)="monthBack()">
-            <em class="small-icon fas fa-chevron-left"></em>
-					</button>
+        <div class="graph__options__group mt-2">
+          <div class="graph__options__option__label">Option</div>
 
-					<div class="month-picker__datelabel">{{dateFrom | date:'dd MMMM yyyy'}} -
-						{{dateTo | date:'dd MMMM yyyy'}}
-					</div>
+          <!-- TODO fix switch -->
+          <div class="flex flex-col" (click)="switchOption()">
+            <div class="flex align-center">
+              <input type="radio" id="total" [(ngModel)]="measurementOption" value="total">
+              <label for="total">Total</label>
+            </div>
 
-					<button class="icon-button" [disabled]="loading" (click)="monthForward()">
-            <em class="small-icon fas fa-chevron-right"></em>
-					</button>
-				</div>
+            <div class="flex align-center">
+              <input type="radio" id="splitted" [(ngModel)]="measurementOption" value="splitted">
+              <label for="splitted">Split per macro</label>
+            </div>
+            <div class="flex align-center">
+              <input type="radio" id="ratio" [(ngModel)]="measurementOption" value="ratio">
+              <label for="ratio">Ratio</label>
+            </div>
+          </div>
+        </div>
+      </div>
 
-				<div class="graph__options ">
-					<div class="graph__options__group">
-						<div class="graph__options__option__label">Measurement</div>
+      <div *ngIf="!loading" class="graph__graphs-container">
+        <div class="graph__bargraph-container" *ngIf="measurementOption === 'total'">
+          <div class="graph__bargraph-label">
+            {{graphLabel}}
+          </div>
 
-						<mat-radio-group [disabled]="loading" class="graph__options__option" aria-label="Measurement"
-							(change)="switchMeasurement()" [(ngModel)]="measurement">
-							<mat-radio-button class="graph__options__option__radio" value="calories">Calories</mat-radio-button>
-							<mat-radio-button class="graph__options__option__radio" value="grams">Grams</mat-radio-button>
-						</mat-radio-group>
-					</div>
+          <bargraph [colors]="['rgb(100, 149, 236)', 'rgb(60, 221, 234)', 'rgb(144, 238, 144)']"
+            [fillColors]="['rgba(100, 149, 236, 0.3)', 'rgba(60, 221, 234, 0.3)', 'rgba(144, 238, 144, 0.3)']"
+            [markers]="markers" [datasets]="[proteinDataset, fatDataset, carbsDataset]"
+            [xAxisStep]="1" [yAxisStep]="yAxisStep"
+            class="graph__bargraph graph__bargraph--stacked">
+          </bargraph>
+        </div>
 
-					<div class="graph__options__group">
-						<div class="graph__options__option__label">Option</div>
+        <div class="graph__bargraph-container" *ngIf="measurementOption === 'splitted'">
+          <div class="graph__bargraph-label">
+            {{proteinGraphLabel}}
+          </div>
 
-						<mat-radio-group [disabled]="loading" class="graph__options__option" aria-label="Options"
-							(change)="switchOption()" [(ngModel)]="measurementOption">
-							<mat-radio-button class="graph__options__option__radio" value="total">Total</mat-radio-button>
-							<mat-radio-button class="graph__options__option__radio" value="splitted">Split per macro
-							</mat-radio-button>
-							<mat-radio-button class="graph__options__option__radio" value="ratio">Ratio</mat-radio-button>
-						</mat-radio-group>
-					</div>
-				</div>
+          <bargraph [colors]="['rgb(100, 149, 236)']" [fillColors]="['rgba(100, 149, 236, 0.3)']"
+            [markers]="[proteinMarker]" [datasets]="[proteinDataset]" [xAxisStep]="1"
+            [yAxisStep]="yAxisStep" class="graph__bargraph graph__bargraph--protein">
+          </bargraph>
+        </div>
 
-				<div *ngIf="!loading" class="graph__graphs-container">
-					<div class="graph__bargraph-container" *ngIf="measurementOption === 'total'">
-						<div class="graph__bargraph-label">
-							{{graphLabel}}
-						</div>
+        <div class="graph__bargraph-container" *ngIf="measurementOption === 'splitted'">
+          <div class="graph__bargraph-label">
+            {{fatGraphLabel}}
+          </div>
 
-						<bargraph [colors]="['rgb(100, 149, 236)', 'rgb(60, 221, 234)', 'rgb(144, 238, 144)']"
-							[fillColors]="['rgba(100, 149, 236, 0.3)', 'rgba(60, 221, 234, 0.3)', 'rgba(144, 238, 144, 0.3)']"
-							[markers]="markers" [datasets]="[proteinDataset, fatDataset, carbsDataset]" [xAxisStep]="1"
-							[yAxisStep]="yAxisStep" class="graph__bargraph graph__bargraph--stacked">
-						</bargraph>
-					</div>
+          <bargraph [colors]="['rgb(60, 221, 234)']" [fillColors]="['rgba(60, 221, 234, 0.3)']"
+            [markers]="[fatMarker]" [datasets]="[fatDataset]" [xAxisStep]="1"
+            [yAxisStep]="yAxisStep" class="graph__bargraph graph__bargraph--fat">
+          </bargraph>
+        </div>
 
-					<div class="graph__bargraph-container" *ngIf="measurementOption === 'splitted'">
-						<div class="graph__bargraph-label">
-							{{proteinGraphLabel}}
-						</div>
+        <div class="graph__bargraph-container" *ngIf="measurementOption === 'splitted'">
+          <div class="graph__bargraph-label">
+            {{carbsGraphLabel}}
+          </div>
 
-						<bargraph [colors]="['rgb(100, 149, 236)']" [fillColors]="['rgba(100, 149, 236, 0.3)']"
-							[markers]="[proteinMarker]" [datasets]="[proteinDataset]" [xAxisStep]="1" [yAxisStep]="yAxisStep"
-							class="graph__bargraph graph__bargraph--protein">
-						</bargraph>
-					</div>
+          <bargraph [colors]="['rgb(144, 238, 144)']" [fillColors]="['rgba(144, 238, 144, 0.3)']"
+            [markers]="[carbsMarker]" [datasets]="[carbsDataset]" [xAxisStep]="1"
+            [yAxisStep]="yAxisStep" class="graph__bargraph graph__bargraph--carbs">
+          </bargraph>
+        </div>
 
-					<div class="graph__bargraph-container" *ngIf="measurementOption === 'splitted'">
-						<div class="graph__bargraph-label">
-							{{fatGraphLabel}}
-						</div>
+        <div class="graph__bargraph-container" *ngIf="measurementOption === 'ratio'">
+          <div class="graph__bargraph-label">
+            {{ratioGraphLabel}}
+          </div>
 
-						<bargraph [colors]="['rgb(60, 221, 234)']" [fillColors]="['rgba(60, 221, 234, 0.3)']"
-							[markers]="[fatMarker]" [datasets]="[fatDataset]" [xAxisStep]="1" [yAxisStep]="yAxisStep"
-							class="graph__bargraph graph__bargraph--fat">
-						</bargraph>
-					</div>
-
-					<div class="graph__bargraph-container" *ngIf="measurementOption === 'splitted'">
-						<div class="graph__bargraph-label">
-							{{carbsGraphLabel}}
-						</div>
-
-						<bargraph [colors]="['rgb(144, 238, 144)']" [fillColors]="['rgba(144, 238, 144, 0.3)']"
-							[markers]="[carbsMarker]" [datasets]="[carbsDataset]" [xAxisStep]="1" [yAxisStep]="yAxisStep"
-							class="graph__bargraph graph__bargraph--carbs">
-						</bargraph>
-					</div>
-
-					<div class="graph__bargraph-container" *ngIf="measurementOption === 'ratio'">
-						<div class="graph__bargraph-label">
-							{{ratioGraphLabel}}
-						</div>
-
-						<bargraph [colors]="['rgb(100, 149, 236)', 'rgb(60, 221, 234)', 'rgb(144, 238, 144)']"
-							[fillColors]="['rgba(100, 149, 236, 0.3)', 'rgba(60, 221, 234, 0.3)', 'rgba(144, 238, 144, 0.3)']"
-							[markers]="ratioMarkers" [datasets]="[proteinRatioDataset, fatRatioDataset, carbsRatioDataset]"
-							[xAxisStep]="1" [yAxisStep]="10" class="graph__bargraph graph__bargraph--stacked">
-						</bargraph>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+          <bargraph [colors]="['rgb(100, 149, 236)', 'rgb(60, 221, 234)', 'rgb(144, 238, 144)']"
+            [fillColors]="['rgba(100, 149, 236, 0.3)', 'rgba(60, 221, 234, 0.3)', 'rgba(144, 238, 144, 0.3)']"
+            [markers]="ratioMarkers"
+            [datasets]="[proteinRatioDataset, fatRatioDataset, carbsRatioDataset]" [xAxisStep]="1"
+            [yAxisStep]="10" class="graph__bargraph graph__bargraph--stacked">
+          </bargraph>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

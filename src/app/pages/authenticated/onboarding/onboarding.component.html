@@ -41,21 +41,18 @@
             />
           </div>
 
-          <div class="form-field">
+          <div class="flex col-gap-1">
             <label class="form-field__label">Gender</label>
-            <mat-radio-group
-              class="radios"
-              aria-label="gender"
-              name="gender"
-              [(ngModel)]="gender"
-            >
-              <mat-radio-button class="radios__option" value="MALE"
-                >Male</mat-radio-button
-              >
-              <mat-radio-button class="radios__option" value="FEMALE"
-                >Female</mat-radio-button
-              >
-            </mat-radio-group>
+
+            <div class="flex align-center">
+              <input type="radio" id="male" [(ngModel)]="gender" value="MALE">
+              <label for="male">Male</label>
+            </div>
+    
+            <div class="flex align-center">
+              <input type="radio" id="female" [(ngModel)]="gender" value="FEMALE">
+              <label for="female">Female</label>
+            </div>
           </div>
 
           <div class="form-field">

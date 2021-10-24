@@ -1,26 +1,28 @@
 <div class="content">
-  <div class="">
-    <div class="card">
-      <div class="search-bar">
-        <label class="search-bar__label">Search</label>
-
-        <input class="input search-bar__input" [(ngModel)]="searchInput"
-          (input)="findFoodMatch()" />
+  <div class="card">
+    <div class="content">
+      <div class="flex align-center">
+        <label for="search" class="search-bar__label">Search</label>
+        <input id="seach" class="input search-bar__input" [(ngModel)]="searchInput"
+          (input)="findFoodMatch()"/>
 
         <button class="button button--primary" (click)="clearSearch()">
           Clear
         </button>
       </div>
 
-      <div class="settings">
-        <label class="settings__label">Display in:</label>
+      <div class="flex col-gap-1 align-center">
+        <label>Display in</label>
 
-        <mat-radio-group class="settings__radios" aria-label="display mode"
-          [(ngModel)]="displayMode">
-          <mat-radio-button class="settings__radios__option" value="grams">Grams</mat-radio-button>
-          <mat-radio-button class="settings__radios__option" value="percentage">Percentage
-          </mat-radio-button>
-        </mat-radio-group>
+        <div class="flex align-center">
+          <input type="radio" id="grams" [(ngModel)]="displayMode" value="grams">
+          <label for="grams">Grams</label>
+        </div>
+
+        <div class="flex align-center">
+          <input type="radio" id="percentage" [(ngModel)]="displayMode" value="percentage">
+          <label for="percentage">Percentage</label>
+        </div>
       </div>
 
       <div class="spinner-wrapper" *ngIf="isLoading">
@@ -147,12 +149,12 @@
       </div>
     </div>
   </div>
+</div>
 
-  <div class=" button-wrapper--floating-action">
-    <button class="floating-action-button" (click)="openModal(undefined)">
-      <em class="small-icon fas fa-add"></em>
-    </button>
-  </div>
+<div class=" button-wrapper--floating-action">
+  <button class="floating-action-button" (click)="openModal(undefined)">
+    <em class="small-icon fas fa-add"></em>
+  </button>
 </div>
 
 <div class="modal-wrapper" *ngIf="modalIsVisible">
