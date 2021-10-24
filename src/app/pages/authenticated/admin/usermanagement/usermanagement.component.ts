@@ -25,12 +25,9 @@ export class UserManagementComponent implements OnInit {
   }
 
   private getAllUsers() {
-    console.log(this.allUsers)
     this.adminService.getAllUsers().subscribe(
       (res) => {
-        console.log(res);
         this.allUsers = res;
-        console.log(this.allUsers)
       },
       (err) => {
         // TODO handle error

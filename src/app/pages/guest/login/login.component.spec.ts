@@ -8,13 +8,14 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { LoginComponent } from './login.component';
 import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { HttpClient, HttpHandler } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { By } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { of, throwError } from 'rxjs';
 import { AuthenticationService } from 'src/app/shared/services/auth.service';
 import { ToastService } from 'src/app/shared/services/toast.service';
+import { NavigationComponent } from 'src/app/shared/components/navigation/navigation.component';
+import { MockComponent, MockProvider } from 'ng-mocks';
 
 describe('LoginComponent', () => {
   let component: LoginComponent;
@@ -25,14 +26,19 @@ describe('LoginComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [LoginComponent],
-      providers: [AuthenticationService, ToastService, HttpClient, HttpHandler],
+      declarations: [
+        LoginComponent,
+        MockComponent(NavigationComponent)
+      ],
+      providers: [
+        MockProvider(AuthenticationService),
+        MockProvider(ToastService)
+      ],
       imports: [
         FormsModule,
         BrowserAnimationsModule,
         RouterTestingModule,
-      ],
-      schemas: [NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA],
+      ]
     }).compileComponents();
     fixture = TestBed.createComponent(LoginComponent);
     component = fixture.componentInstance;

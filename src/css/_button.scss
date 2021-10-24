@@ -17,7 +17,7 @@
 }
 
 .button {
-  padding: 10px 30px;
+  padding: 0.5rem 1.5rem;
   color: $primary;
   background-color: white;
   border: 1px solid $primary;
@@ -66,7 +66,7 @@
 }
 
 .floating-action-button {
-  background-color: $primary;
+  background-image: linear-gradient(to right, $primary, $secondary);
   color: white;
   border: none;
   border-radius: 50px;

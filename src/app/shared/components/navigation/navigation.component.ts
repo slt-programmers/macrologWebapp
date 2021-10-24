@@ -24,7 +24,7 @@ export class NavigationComponent implements OnInit {
     this.authService.logout();
     this.router.navigate(['']);
   }
-  
+
   public isLoggedIn() {
     return this.authService.isAuthenticated();
   }

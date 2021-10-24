@@ -6,20 +6,21 @@ import {
 } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AuthenticatedComponent } from './authenticated.component';
-import { HttpHandler, HttpClient } from '@angular/common/http';
 import { ScrollBehaviourService } from '../../shared/services/scroll-behaviour.service';
 import { HealthcheckService } from '../../shared/services/healthcheck.service';
 import { of, throwError } from 'rxjs';
 import { Router } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { Renderer2 } from '@angular/core';
-import { ToastService } from 'src/app/shared/services/toast.service';
+import { NavigationComponent } from 'src/app/shared/components/navigation/navigation.component';
+import { MockProvider } from 'ng-mocks';
+import { AuthenticationService } from 'src/app/shared/services/auth.service';
 
 describe('AuthenticatedComponent', () => {
   let component: AuthenticatedComponent;
   let fixture: ComponentFixture<AuthenticatedComponent>;
   let healthcheckService: HealthcheckService;
   let scrollBehaviourService: ScrollBehaviourService;
+  let authService: AuthenticationService;
   let router: Router;
 
   beforeEach(() => {
@@ -28,20 +29,20 @@ describe('AuthenticatedComponent', () => {
         RouterTestingModule.withRoutes([{ path: 'user', redirectTo: '' }]),
         BrowserAnimationsModule,
       ],
-      declarations: [AuthenticatedComponent],
+      declarations: [AuthenticatedComponent,
+        NavigationComponent],
       providers: [
-        HealthcheckService,
-        HttpClient,
-        HttpHandler,
-        ScrollBehaviourService,
-        Renderer2,
-        ToastService,
+        MockProvider(HealthcheckService),
+        MockProvider(ScrollBehaviourService),
+        MockProvider(AuthenticationService),
       ],
     }).compileComponents();
+
     fixture = TestBed.createComponent(AuthenticatedComponent);
     component = fixture.componentInstance;
     healthcheckService = TestBed.inject(HealthcheckService);
     scrollBehaviourService = TestBed.inject(ScrollBehaviourService);
+    authService = TestBed.inject(AuthenticationService);
     router = TestBed.inject(Router);
   });
 
@@ -103,13 +104,26 @@ describe('AuthenticatedComponent', () => {
   });
 
   it('should determine if admin', () => {
+    let authspy = spyOn(authService, 'isAdmin')
+    authspy.and.returnValue(false);
     let result = component.isAdmin();
-    expect(result).toBeFalsy();
-    localStorage.setItem(
-      'currentUser',
-      JSON.stringify({ user: 'Carmen', admin: 'true' })
-    );
+    expect(result).toBeFalse();
+
+    authspy.and.returnValue(true);
     result = component.isAdmin();
-    expect(result).toBeTruthy();
+    expect(result).toBeTrue();
+  });
+
+  it('should log user out', () => {
+    spyOn(router, 'navigate');
+    spyOn(scrollBehaviourService, 'preventScrolling');
+    spyOn(authService, 'logout');
+    component.smallMenuOpen = true;
+
+    component.logOut();
+    expect(router.navigate).toHaveBeenCalledWith(['']);
+    expect(scrollBehaviourService.preventScrolling).toHaveBeenCalledWith(false);
+    expect(authService.logout).toHaveBeenCalled();
+    expect(component.smallMenuOpen).toBeFalse();
   });
 });

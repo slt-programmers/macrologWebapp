@@ -4,6 +4,8 @@ import {
   HttpClientTestingModule,
   HttpTestingController,
 } from '@angular/common/http/testing';
+import { HttpClient } from '@angular/common/http';
+import { MockProvider } from 'ng-mocks';
 
 describe('AuthService', () => {
   let http: HttpTestingController;
@@ -11,7 +13,9 @@ describe('AuthService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
-      providers: [AuthenticationService],
+      providers: [
+        AuthenticationService,
+        HttpClient],
     });
     http = TestBed.inject(HttpTestingController);
   });
@@ -134,7 +138,7 @@ describe('AuthService', () => {
     request.flush(mockResponse);
 
     service.deleteAccount('password').subscribe(
-      () => {},
+      () => { },
       (err) => {
         expect(err.status).toEqual(401);
       }

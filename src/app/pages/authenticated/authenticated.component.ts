@@ -10,17 +10,16 @@ import { AuthenticationService } from '../../shared/services/auth.service';
   styleUrls: ['./authenticated.component.scss'] 
 })
 export class AuthenticatedComponent implements OnInit {
-  public moveState = 'forth';
-  public moveDelayState = 'forth';
+
   public smallMenuOpen = false;
 
   private asleep = true;
 
   constructor(
-    public router: Router,
-    private healthcheckService: HealthcheckService,
-    private authService: AuthenticationService,
-    private sbs: ScrollBehaviourService
+    private readonly router: Router,
+    private readonly healthcheckService: HealthcheckService,
+    private readonly authService: AuthenticationService,
+    private readonly scrollBehaviourService: ScrollBehaviourService
   ) {}
 
   ngOnInit() {
@@ -43,13 +42,13 @@ export class AuthenticatedComponent implements OnInit {
   public openMenu() {
     this.smallMenuOpen = !this.smallMenuOpen;
     if (this.smallMenuOpen) {
-      this.sbs.preventScrolling(true);
+      this.scrollBehaviourService.preventScrolling(true);
     }
   }
 
   public closeMenu() {
     this.smallMenuOpen = false;
-    this.sbs.preventScrolling(false);
+    this.scrollBehaviourService.preventScrolling(false);
   }
 
   public isAdmin(): boolean {
@@ -58,7 +57,7 @@ export class AuthenticatedComponent implements OnInit {
 
   public logOut() {
     this.smallMenuOpen = false;
-    this.sbs.preventScrolling(false);
+    this.scrollBehaviourService.preventScrolling(false);
     this.authService.logout();
     this.router.navigate(['']);
   }

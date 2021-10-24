@@ -1,7 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { HomeComponent } from './home.component';
-import { HttpClient, HttpHandler } from '@angular/common/http';
 import { AuthenticationService } from 'src/app/shared/services/auth.service';
+import { NavigationComponent } from 'src/app/shared/components/navigation/navigation.component';
+import { MockComponent, MockProvider } from 'ng-mocks';
 
 describe('HomeComponent', () => {
   let component: HomeComponent;
@@ -9,8 +10,12 @@ describe('HomeComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [HomeComponent],
-      providers: [AuthenticationService, HttpClient, HttpHandler],
+      declarations: [
+        HomeComponent,
+        MockComponent(NavigationComponent)],
+      providers: [
+        MockProvider(AuthenticationService)
+      ],
     }).compileComponents();
   }));
 
