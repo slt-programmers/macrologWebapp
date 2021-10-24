@@ -7,7 +7,7 @@
 
 				<div class="month-picker" *ngIf="!loading">
 					<button class="icon-button" [disabled]="loading" (click)="monthBack()">
-						<mat-icon>chevron_left</mat-icon>
+            <em class="small-icon fas fa-chevron-left"></em>
 					</button>
 
 					<div class="month-picker__datelabel">{{dateFrom | date:'dd MMMM yyyy'}} -
@@ -15,7 +15,7 @@
 					</div>
 
 					<button class="icon-button" [disabled]="loading" (click)="monthForward()">
-						<mat-icon>chevron_right</mat-icon>
+            <em class="small-icon fas fa-chevron-right"></em>
 					</button>
 				</div>
 

@@ -3,7 +3,7 @@
     <h3 class="modal__header__title">{{title}}</h3>
 
     <button class="icon-button is-white" (click)="closeModal()">
-      <mat-icon class="is-white">close</mat-icon>
+      <em class="small-icon fas fa-times"></em>
     </button>
   </div>
 
@@ -56,13 +56,13 @@
         </div>
 
         <button class="icon-button" (click)="removePortion(i)" *ngIf="isNewPortion(port)">
-          <mat-icon>remove</mat-icon>
+          <em class="small-icon fas fa-minus"></em>
         </button>
       </div>
 
       <div class="button-wrapper button-wrapper--left">
         <button class="icon-button" (click)="addNewPortion()">
-          <mat-icon>add</mat-icon>
+          <em class="small-icon fas fa-add"></em>
         </button>
       </div>
 

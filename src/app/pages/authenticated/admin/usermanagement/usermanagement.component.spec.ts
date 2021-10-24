@@ -8,7 +8,6 @@ import { UserManagementComponent } from './usermanagement.component';
 import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { of, throwError } from 'rxjs';
-import { MatTableModule } from '@angular/material/table';
 import { AdminService } from 'src/app/shared/services/admin.service';
 import { ToastService } from 'src/app/shared/services/toast.service';
 import { UserAccount } from 'src/app/shared/model/userAccount';
@@ -46,7 +45,7 @@ describe('UserManagementComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [UserManagementComponent],
-      imports: [MatTableModule, HttpClientTestingModule],
+      imports: [HttpClientTestingModule],
       providers: [AdminService, ToastService],
       schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
     }).compileComponents();

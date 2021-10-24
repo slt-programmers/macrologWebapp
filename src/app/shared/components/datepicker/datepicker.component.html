@@ -1,13 +1,13 @@
 <div class="datepicker-wrapper">
   <div class="date">
     <button class="date__button" (click)="previousDay()">
-      <mat-icon>chevron_left</mat-icon>
+      <em class="small-icon fas fa-chevron-left"></em>
     </button>
 
     <div class="date__selected-day" (click)="toggleOpen()">{{selectedDate | date: dateformat}}</div>
 
     <button class="date__button" (click)="nextDay()">
-      <mat-icon>chevron_right</mat-icon>
+      <em class="small-icon fas fa-chevron-right"></em>
     </button>
   </div>
 
