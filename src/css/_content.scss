@@ -1,6 +1,5 @@
+// spreading items vertically 
 .content {
-  padding: 2rem;
-
   > * {
     margin-top: 1rem;
     &:first-child {

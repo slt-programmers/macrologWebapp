@@ -13,7 +13,7 @@ import { LoginComponent } from './login/login.component';
 export const guestRoutes: Routes = [
   {
     path: '',
-    component: HomeComponent, canActivate: [GuestGuard]
+    component: HomeComponent
   },
   {
     path: 'about',

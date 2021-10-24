@@ -3,4 +3,8 @@
 .page {
   background: $lightIndigo;
   min-height: 100vh;
+
+  > *:last-child{
+    padding-bottom: 2rem;
+  }
 }

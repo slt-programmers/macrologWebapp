@@ -15,7 +15,7 @@
       </div>
     </div>
 
-    <div class="form-field blue-theme">
+    <div class="form-field ">
       <label class="form-field__label">Gender</label>
       <mat-radio-group class="radios" aria-label="gender" name="gender" [(ngModel)]="gender">
         <mat-radio-button class="radios__option" value="MALE">Male</mat-radio-button>
@@ -50,7 +50,7 @@
       </div>
     </div>
 
-    <div class="blue-theme button-wrapper">
+    <div class=" button-wrapper">
       <button class="button button--primary" (click)="saveUserSettings()"
         [disabled]="isInputUnchanged() || personalForm.invalid">Save</button>
     </div>

@@ -14,7 +14,7 @@
   <div class="overlay" *ngIf="isOpen" (click)="toggleOpen()"></div>
 
   <div class="picker" *ngIf="isOpen">
-    <div class="blue-theme picker__header">
+    <div class=" picker__header">
       <button class="picker__button" (click)="previousMonth()">Previous</button>
 
       <span>{{selectedDate | date: 'MMMM'}}</span>

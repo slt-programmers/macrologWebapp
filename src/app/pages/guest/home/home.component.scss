@@ -1,4 +1,4 @@
-@import '../../../../css/variables.scss';
+@import "../../../../css/variables.scss";
 
 .title {
   font-size: 2rem;
@@ -35,16 +35,15 @@
 }
 
 .intro {
-  background-image: linear-gradient(
-      to bottom,
-      rgba(0, 0, 0, 0),
-      rgba(0, 0, 0, 0.5)
-    ),
-    url('../../../../assets/homepage-bowl.jpg');
+  background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.5)),
+    url("../../../../assets/homepage-bowl.jpg");
   background-size: cover, cover;
   background-repeat: no-repeat, no-repeat;
   background-position: center;
   color: white;
+  display: flex;
+  flex-direction: column;
+  margin-top: -2rem;
 
   .title {
     font-size: 4em;
@@ -105,34 +104,31 @@
 .one,
 .three,
 .five {
-  background-image: radial-gradient(
-    transparent,
-    transparent 67%,
-    rgba(0, 0, 0, 0.1)
-  );
   .title {
     color: $secondary;
   }
+  display: flex;
+  flex-direction: column;
 }
 
 .two {
-  background-image: linear-gradient(
-      to bottom,
-      rgba(0, 0, 0, 0.5),
-      rgba(0, 0, 0, 0.8)
-    ),
-    url('../../../../assets/homepage-lifting.jpg');
+  background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.8)),
+    url("../../../../assets/homepage-lifting.jpg");
   background-size: cover, cover;
   background-repeat: no-repeat, no-repeat;
   background-position: center;
   color: white;
+  display: flex;
+  flex-direction: column;
 }
 
 .four {
-  background-image: url('../../../../assets/homepage-salad.jpg');
+  background-image: url("../../../../assets/homepage-salad.jpg");
   background-size: cover, cover;
   background-repeat: no-repeat, no-repeat;
   background-position: center;
+  display: flex;
+  flex-direction: column;
 }
 
 .has-background {

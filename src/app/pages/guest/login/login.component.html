@@ -1,96 +1,96 @@
 <div class="page">
   <app-navigation></app-navigation>
 
-  <div class="content flex flex-wrap justify-center align-start">
-    <div class="login-form">
-      <div class="flex-col m-2">
-        <form #loginForm="ngForm">
-          <h1 class="text-lg">Log in</h1>
+  <div class="container">
+    <div class="flex col-gap-2 row-gap-2 flex-wrap justify-center align-start">
+      <div class="card login-form">
+        <div class="flex-col">
+          <form #loginForm="ngForm">
+            <h1 class="text-lg">Log in</h1>
 
-          <label for="usernameOrEmail">
-            Username or email
-            <input class="input" placeholder="Username or email" type="text" #usernameField
-              [(ngModel)]="usernameOrEmail" name="usernameOrEmail" required />
-          </label>
+            <label for="usernameOrEmail">
+              Username or email
+              <input class="input" placeholder="Username or email" type="text" #usernameField
+                [(ngModel)]="usernameOrEmail" name="usernameOrEmail" required />
+            </label>
 
-          <label for="password">
-            Password
-            <input class="input" placeholder="Password" type="password" #passwordField
-              [(ngModel)]="password" (keyup.enter)="login()" name="password" required />
-          </label>
+            <label for="password">
+              Password
+              <input class="input" placeholder="Password" type="password" #passwordField
+                [(ngModel)]="password" (keyup.enter)="login()" name="password" required />
+            </label>
 
-          <p class="error" *ngIf="loginError">{{loginError}}</p>
+            <p class="error" *ngIf="loginError">{{loginError}}</p>
 
-          <a id="forgotLink" (click)="toggleForgotPwModal(true)">Forgot
-            password?</a>
+            <a id="forgotLink" (click)="toggleForgotPwModal(true)">Forgot
+              password?</a>
 
-          <button id="loginBtn" class="button button--primary mt-2" [disabled]="loginForm.invalid"
-            (click)="login()">Log in
-          </button>
-        </form>
+            <button id="loginBtn" class="button button--primary mt-2" [disabled]="loginForm.invalid"
+              (click)="login()">Log in
+            </button>
+          </form>
+        </div>
       </div>
-    </div>
 
-    <div class="register-form">
-      <div class="flex-col m-2">
-        <form #registerForm="ngForm">
-          <h1 class="text-lg">Register</h1>
+      <div class="card register-form">
+        <div class="flex-col">
+          <form #registerForm="ngForm">
+            <h1 class="text-lg">Register</h1>
 
-          <label for="newUsername">
-            Username
-            <input class="input" placeholder="Username" type="text" #usernameField
-              [(ngModel)]="newUsername" name="newUsername" required />
-          </label>
+            <label for="newUsername">
+              Username
+              <input class="input" placeholder="Username" type="text" #usernameField
+                [(ngModel)]="newUsername" name="newUsername" required />
+            </label>
 
-          <label for="newEmal">
-            Email
-            <input class="input" placeholder="Email" type="email" #emailField [(ngModel)]="newEmail"
-              name="newEmail" required />
-          </label>
+            <label for="newEmal">
+              Email
+              <input class="input" placeholder="Email" type="email" #emailField
+                [(ngModel)]="newEmail" name="newEmail" required />
+            </label>
 
-          <label for="newPassword">
-            Password
-            <input class="input" placeholder="Password" type="password" #passwordField
-              [(ngModel)]="newPassword" name="newPassword" required (keyup.enter)="register()" />
-          </label>
+            <label for="newPassword">
+              Password
+              <input class="input" placeholder="Password" type="password" #passwordField
+                [(ngModel)]="newPassword" name="newPassword" required (keyup.enter)="register()" />
+            </label>
 
-          <p class="error" *ngIf="registerError">{{registerError}}</p>
+            <p class="error" *ngIf="registerError">{{registerError}}</p>
 
-          <button id="registerBtn" class="button button--primary mt-2"
-            [disabled]="registerForm.invalid" (click)="register()">Register
-          </button>
-        </form>
+            <button id="registerBtn" class="button button--primary mt-2"
+              [disabled]="registerForm.invalid" (click)="register()">Register
+            </button>
+          </form>
+        </div>
       </div>
     </div>
   </div>
 </div>
 
-<div class="modal-backdrop" *ngIf="showForgotPwModal">
-  <div class="modal-wrapper">
-    <div class="modal">
-      <div class="flex">
-        <h3 class="text-lg flex-grow">Forgot your password?</h3>
+<div class="modal-wrapper" *ngIf="showForgotPwModal">
+  <div class="modal">
+    <div class="flex flex-grow">
+      <h3 class="text-lg flex-grow">Forgot your password?</h3>
 
-        <button id="forgotClose" class="icon-button" aria-label="Close"
-          (click)="toggleForgotPwModal(false)">
-          <mat-icon>close</mat-icon>
+      <button id="forgotClose" class="icon-button" aria-label="Close"
+        (click)="toggleForgotPwModal(false)">
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+
+    <form #forgotForm="ngForm" class="mt-1">
+      <p>Please enter your email so we can send a link to reset your password</p>
+
+      <input class="input" placeholder="Email" type="email" #forgotEmailField
+        [(ngModel)]="forgotEmail" name="forgotEmail" />
+
+      <p class="error" *ngIf="forgotError">{{forgotError}}</p>
+
+      <div class="button-wrapper button-wrapper--left">
+        <button id="resetBtn" class="button button--primary" [disabled]="forgotForm.invalid"
+          (click)="resetPassword()">Send
         </button>
       </div>
-
-      <form #forgotForm="ngForm" class="mt-1">
-        <p>Please enter your email so we can send a link to reset your password</p>
-
-        <input class="input" placeholder="Email" type="email" #forgotEmailField
-          [(ngModel)]="forgotEmail" name="forgotEmail" />
-
-        <p class="error" *ngIf="forgotError">{{forgotError}}</p>
-
-        <div class="button-wrapper button-wrapper--left">
-          <button id="resetBtn" class="button button--primary" [disabled]="forgotForm.invalid"
-            (click)="resetPassword()">Send
-          </button>
-        </div>
-      </form>
-    </div>
+    </form>
   </div>
 </div>

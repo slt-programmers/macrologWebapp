@@ -1,8 +1,7 @@
-@import "./variables.scss";
-
+// adding padding, bordered white background and dropshadow
 .card {
 	background-color: white;
-	color: $coal;
 	border-radius: 1rem;
-  padding: 1rem;
+  padding: 2rem;
+  box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.05);
 }

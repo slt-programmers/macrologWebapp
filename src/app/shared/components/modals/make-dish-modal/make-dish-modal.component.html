@@ -1,4 +1,4 @@
-<div class="blue-theme modal">
+<div class=" modal">
   <div class="modal__header">
     <h3 class="modal__header__title">{{modalTitle}}</h3>
 
@@ -36,7 +36,7 @@
           </div>
           <div class="form-field__text recipe__ingredient__name">{{ingr.food.name}}</div>
 
-          <div class="form-field__button blue-theme recipe__ingredient__remove">
+          <div class="form-field__button  recipe__ingredient__remove">
             <button class="icon-button" (click)="removeIngredient(i)">
               <mat-icon>remove</mat-icon>
             </button>
@@ -50,7 +50,7 @@
         </autocomplete-food>
       </div>
 
-      <div class="blue-theme modal__button-wrapper">
+      <div class=" modal__button-wrapper">
         <button class="button" *ngIf="selectedDish" (click)="deleteDish()">Delete</button>
 
         <button class="button button--primary" [disabled]="makeDishForm.invalid" (click)="saveDish()">Save</button>

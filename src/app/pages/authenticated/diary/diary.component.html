@@ -75,12 +75,12 @@
       <span class="total__calories">{{ getTotal('calories') | number: '1.0-0' }} kcal</span>
     </div>
   </div>
+</div>
 
-  <div class="button-wrapper--floating-action">
-    <button class="floating-action-button" (click)="openModal()">
-      <mat-icon>add</mat-icon>
-    </button>
-  </div>
+<div class="button-wrapper--floating-action">
+  <button class="floating-action-button" (click)="openModal()">
+    <em class="small-icon fas fa-plus"></em>
+  </button>
 </div>
 
 <div class="modal-wrapper" *ngIf="modalIsVisible">
