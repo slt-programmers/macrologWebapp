@@ -24,7 +24,9 @@
       </div>
 
       <div class="spinner-wrapper" *ngIf="isLoading">
-        <mat-spinner [diameter]="50"></mat-spinner>
+        <div class="spinner">
+          <em class="fas fa-spinner"></em>
+        </div>
       </div>
 
       <div *ngIf="!isLoading" class="food-table">

@@ -3,7 +3,6 @@ import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatIconModule } from "@angular/material/icon";
 import { MatInputModule } from "@angular/material/input";
 import { MatPaginatorModule } from "@angular/material/paginator";
-import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 import { MatRadioModule } from "@angular/material/radio";
 
 @NgModule({
@@ -12,7 +11,6 @@ import { MatRadioModule } from "@angular/material/radio";
     MatFormFieldModule,
     MatIconModule,
     MatPaginatorModule,
-    MatProgressSpinnerModule,
     MatRadioModule,
   ], 
   exports: [
@@ -20,7 +18,6 @@ import { MatRadioModule } from "@angular/material/radio";
     MatFormFieldModule,
     MatIconModule,
     MatPaginatorModule,
-    MatProgressSpinnerModule,
     MatRadioModule,
   ]
 })
