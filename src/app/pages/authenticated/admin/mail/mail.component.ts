@@ -19,10 +19,7 @@ export class MailComponent implements OnInit {
   private code: string | null = null;
   private scope: string | null = null;
 
-  constructor(
-    private googleService: GoogleService,
-    private route: ActivatedRoute
-  ) { }
+  constructor(private readonly googleService: GoogleService, private readonly route: ActivatedRoute) { }
 
   ngOnInit() {
     this.retrieveStatus();
@@ -30,6 +27,16 @@ export class MailComponent implements OnInit {
 
   getStatus() {
     return true;
+  }
+
+  sendTestMail() {
+    this.mailSend = false;
+    if (this.emailAddress) {
+      this.googleService.sendTestMail(this.emailAddress).subscribe(() => {
+        this.mailSend = true;
+        this.emailAddress = null;
+      });
+    }
   }
 
   private retrieveStatus() {
@@ -86,16 +93,5 @@ export class MailComponent implements OnInit {
       this.clientId +
       '&redirect_uri=' +
       redirectUrl;
-  }
-
-  sendTestMail() {
-    this.mailSend = false;
-    if (this.emailAddress) {
-      this.googleService.sendTestMail(this.emailAddress).subscribe(() => {
-        // TODO use alert/toaster
-        this.mailSend = true;
-        this.emailAddress = null;
-      });
-    }
   }
 }

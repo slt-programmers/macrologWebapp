@@ -61,9 +61,7 @@ describe('UserManagementComponent', () => {
   });
 
   it('should init usermanagement component', fakeAsync(() => {
-    const adminSpy = spyOn(adminService, 'getAllUsers').and.returnValue(
-      of(allUsers)
-    );
+    const adminSpy = spyOn(adminService, 'getAllUsers').and.returnValue(of(allUsers));
     component.ngOnInit();
     tick();
     fixture.detectChanges();
@@ -103,7 +101,16 @@ describe('UserManagementComponent', () => {
     );
   }));
 
-  it('should not delete user', fakeAsync(() => {
+  it('should not delete user when none selected', () => {
+    spyOn(toastService, 'setMessage');
+    spyOn(adminService, 'deleteUser');
+    component.selectedUser = undefined;
+    component.deleteUser();
+    expect(adminService.deleteUser).not.toHaveBeenCalled();
+    expect(toastService.setMessage).not.toHaveBeenCalled();
+  }); 
+  
+  it('should handle error on deleting user', fakeAsync(() => {
     spyOn(toastService, 'setMessage');
     spyOn(adminService, 'deleteUser').and.returnValue(
       throwError({ status: 401 })
