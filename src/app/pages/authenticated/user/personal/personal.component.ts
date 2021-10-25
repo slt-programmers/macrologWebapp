@@ -36,9 +36,6 @@ export class PersonalComponent {
         this.weight = result.currentWeight;
         this.activity = result.activity;
         this.newWeight = this.weight;
-      },
-      (error) => {
-        // TODO handle error
       }
     );
   }

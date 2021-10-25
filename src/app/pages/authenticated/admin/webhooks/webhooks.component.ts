@@ -8,7 +8,7 @@ import { WebhookService } from 'src/app/shared/services/webhook.service';
   styleUrls: ['./webhooks.component.scss'],
 })
 export class WebhooksComponent implements OnInit {
-  constructor(private webhookService: WebhookService) { }
+  constructor(private readonly webhookService: WebhookService) { }
 
   public allWebhooks = new Array();
 
@@ -19,26 +19,16 @@ export class WebhooksComponent implements OnInit {
   disableWebhook(connectedApp: string) {
     const hook = this.getStatus(connectedApp);
     if (hook.id) {
-      this.webhookService.endWebhook(connectedApp, hook.id).subscribe(
-        () => {
-          this.retrieveStatus(connectedApp);
-        },
-        (err) => {
-          // TODO handle error
-        }
-      );
+      this.webhookService.endWebhook(connectedApp, hook.id).subscribe(() => {
+        this.retrieveStatus(connectedApp);
+      });
     }
   }
 
   enableWebhook(connectedApp: string) {
-    this.webhookService.startWebhook(connectedApp).subscribe(
-      () => {
-        this.retrieveStatus(connectedApp);
-      },
-      (err) => {
-        // TODO handle error
-      }
-    );
+    this.webhookService.startWebhook(connectedApp).subscribe(() => {
+      this.retrieveStatus(connectedApp);
+    });
   }
 
   getStatus(connectedApp: string): WebhookStatus {
@@ -53,13 +43,8 @@ export class WebhooksComponent implements OnInit {
   private retrieveStatus(connectedApp: string) {
     // delete old one. Only strava now, so delete all :p
     this.allWebhooks = new Array();
-    this.webhookService.getWebhookStatus(connectedApp).subscribe(
-      (res) => {
-        this.allWebhooks.push({ connectedApp: connectedApp, webhook: res });
-      },
-      (err) => {
-        // TODO handle error
-      }
-    );
+    this.webhookService.getWebhookStatus(connectedApp).subscribe(it => {
+      this.allWebhooks.push({ connectedApp: connectedApp, webhook: it });
+    });
   }
 }

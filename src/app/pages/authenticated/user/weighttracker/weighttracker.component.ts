@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { WeightService } from '../../../../shared/services/weight.service';
 import { Weight } from '../../../../shared/model/weight';
-import { ToastService } from '../../../../shared/services/toast.service';
 import { DataPoint } from 'src/app/shared/components/linegraph/linegraph.component';
 import { NgForm } from '@angular/forms';
 import { format, isAfter, isBefore, parse } from 'date-fns';
@@ -24,33 +23,25 @@ export class WeightTrackerComponent {
 
   private pipe: DatePipe;
 
-  constructor(
-    private weightService: WeightService,
-    private toastService: ToastService
-  ) {
+  constructor(private readonly weightService: WeightService) {
     this.getAllWeights();
     this.pipe = new DatePipe('en-US');
     this.init();
   }
 
   private getAllWeights() {
-    this.weightService.getAllWeights().subscribe(
-      (data) => {
-        this.trackedWeights = data;
-        this.trackedWeights.sort((a, b) => {
-          if (a.day && b.day) {
-            const date1 = parse(a.day, 'yyyy-MM-dd', new Date());
-            const date2 = parse(b.day, 'yyyy-MM-dd', new Date());
-            return this.compare(date1, date2);
-          }
-          return 0;
-        });
-        this.getWeightDataset();
-      },
-      (error) => {
-        // TODO handle error
-      }
-    );
+    this.weightService.getAllWeights().subscribe(it => {
+      this.trackedWeights = it;
+      this.trackedWeights.sort((a, b) => {
+        if (a.day && b.day) {
+          const date1 = parse(a.day, 'yyyy-MM-dd', new Date());
+          const date2 = parse(b.day, 'yyyy-MM-dd', new Date());
+          return this.compare(date1, date2);
+        }
+        return 0;
+      });
+      this.getWeightDataset();
+    });
   }
 
   public init() {
@@ -115,19 +106,17 @@ export class WeightTrackerComponent {
   }
 
   public saveNewWeight(formUsed: NgForm): void {
-    const newRequest: Weight = {};
-    newRequest.weight = this.weight;
+    const newWeight: Weight = {};
+    newWeight.weight = this.weight;
     const date = parse(this.measurementDate || '', 'dd-MM-yyyy', new Date());
-    newRequest.day = this.pipe.transform(date, 'yyyy-MM-dd') || undefined;
-    newRequest.remark = this.remark;
+    newWeight.day = this.pipe.transform(date, 'yyyy-MM-dd') || undefined;
+    newWeight.remark = this.remark;
 
-    const closeCallBack = () => {
+    this.weightService.storeWeight(newWeight).subscribe(it => {
       formUsed.reset();
       this.getAllWeights();
       this.init();
-    };
-
-    this.weightService.storeWeight(newRequest, closeCallBack);
+    });
   }
 
   public editWeight(weight: Weight) {
@@ -150,16 +139,11 @@ export class WeightTrackerComponent {
     weight.editable = true;
   }
 
-  private closeCallBack(action: string) {
-    this.getAllWeights();
-    this.openWeight = undefined;
-    this.toastService.setMessage('Your weight measurement has been ' + action);
-  }
-
   public deleteWeight(weight: Weight) {
-    this.weightService.deleteWeight(weight, () =>
-      this.closeCallBack('deleted!')
-    );
+    this.weightService.deleteWeight(weight).subscribe(it => {
+      this.getAllWeights();
+      this.openWeight = undefined;
+    });
   }
 
   public saveWeight(weight: Weight) {
@@ -171,8 +155,9 @@ export class WeightTrackerComponent {
     newRequest.day = this.pipe.transform(date, 'yyyy-MM-dd') || undefined;
     newRequest.remark = weight.remark;
 
-    this.weightService.storeWeight(newRequest, () =>
-      this.closeCallBack('updated!')
-    );
+    this.weightService.storeWeight(newRequest).subscribe(it => {
+      this.getAllWeights();
+      this.openWeight = undefined;
+    });
   }
 }

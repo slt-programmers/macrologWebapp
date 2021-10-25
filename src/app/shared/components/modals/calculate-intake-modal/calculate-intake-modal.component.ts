@@ -41,11 +41,10 @@ export class CalculateIntakeModalComponent implements OnInit {
 
   @Output() close: EventEmitter<any> = new EventEmitter<any>();
 
-  constructor(private userService: UserService) {}
+  constructor(private readonly userService: UserService) { }
 
   ngOnInit() {
-    this.calories =
-      this.currentProtein * 4 + this.currentFat * 9 + this.currentCarbs * 4;
+    this.calories = this.currentProtein * 4 + this.currentFat * 9 + this.currentCarbs * 4;
     this.proteinManual = this.currentProtein;
     this.fatManual = this.currentFat;
     this.carbsManual = this.currentCarbs;
@@ -87,56 +86,26 @@ export class CalculateIntakeModalComponent implements OnInit {
   public saveIntake() {
     if (this.showMacros) {
       forkJoin([
-        this.userService.addUserSetting(
-          'goalProtein',
-          Math.round(this.proteinManual).toString()
-        ),
-        this.userService.addUserSetting(
-          'goalFat',
-          Math.round(this.fatManual).toString()
-        ),
-        this.userService.addUserSetting(
-          'goalCarbs',
-          Math.round(this.carbsManual).toString()
-        ),
-      ]).subscribe(
-        () => {
-          this.goalProtein = Math.round(this.proteinManual).toString();
-          this.goalFat = Math.round(this.fatManual).toString();
-          this.goalCarbs = Math.round(this.carbsManual).toString();
-        },
-        (error) => {
-          // TODO handle error
-        },
-        () => {
-          this.closeModal();
-        }
-      );
+        this.userService.addUserSetting('goalProtein', Math.round(this.proteinManual).toString()),
+        this.userService.addUserSetting('goalFat', Math.round(this.fatManual).toString()),
+        this.userService.addUserSetting('goalCarbs', Math.round(this.carbsManual).toString()),
+      ]).subscribe(() => {
+        this.goalProtein = Math.round(this.proteinManual).toString();
+        this.goalFat = Math.round(this.fatManual).toString();
+        this.goalCarbs = Math.round(this.carbsManual).toString();
+        this.closeModal();
+      });
     } else {
       forkJoin([
-        this.userService.addUserSetting(
-          'goalProtein',
-          Math.round(this.protein).toString()
-        ),
-        this.userService.addUserSetting(
-          'goalFat',
-          Math.round(this.fat).toString()
-        ),
-        this.userService.addUserSetting(
-          'goalCarbs',
-          Math.round(this.carbs).toString()
-        ),
-      ]).subscribe(
-        () => {
-          this.goalProtein = Math.round(this.protein).toString();
-          this.goalFat = Math.round(this.fat).toString();
-          this.goalCarbs = Math.round(this.carbs).toString();
-        },
-        (error) => {
-          // TODO handle error
-        },
-        () => this.closeModal()
-      );
+        this.userService.addUserSetting('goalProtein', Math.round(this.protein).toString()),
+        this.userService.addUserSetting('goalFat', Math.round(this.fat).toString()),
+        this.userService.addUserSetting('goalCarbs', Math.round(this.carbs).toString()),
+      ]).subscribe(() => {
+        this.goalProtein = Math.round(this.protein).toString();
+        this.goalFat = Math.round(this.fat).toString();
+        this.goalCarbs = Math.round(this.carbs).toString();
+        this.closeModal()
+      });
     }
   }
 

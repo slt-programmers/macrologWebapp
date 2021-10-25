@@ -5,11 +5,11 @@ import {
   tick,
 } from '@angular/core/testing';
 import { CalculateIntakeModalComponent } from './calculate-intake-modal.component';
-import { NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { of, throwError } from 'rxjs';
 import { UserService } from 'src/app/shared/services/user.service';
+import { MockProvider } from 'ng-mocks';
 
 describe('CalculateIntakeModalComponent', () => {
   let component: CalculateIntakeModalComponent;
@@ -18,11 +18,13 @@ describe('CalculateIntakeModalComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [CalculateIntakeModalComponent],
-      providers: [UserService],
       imports: [FormsModule, HttpClientTestingModule],
-      schemas: [NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA],
+      declarations: [CalculateIntakeModalComponent],
+      providers: [
+        MockProvider(UserService)
+      ]
     }).compileComponents();
+
     fixture = TestBed.createComponent(CalculateIntakeModalComponent);
     component = fixture.componentInstance;
     userService = TestBed.inject(UserService);
@@ -82,9 +84,7 @@ describe('CalculateIntakeModalComponent', () => {
   });
 
   it('should save macros intake', fakeAsync(() => {
-    const userSpy = spyOn(userService, 'addUserSetting').and.returnValue(
-      throwError({ status: 404 })
-    );
+    spyOn(userService, 'addUserSetting').and.returnValue(of({ status: 200 }));
     spyOn(component.close, 'emit');
     component.showMacros = true;
     component.proteinManual = 100;
@@ -93,12 +93,7 @@ describe('CalculateIntakeModalComponent', () => {
 
     component.saveIntake();
     tick();
-    expect(component.close.emit).not.toHaveBeenCalled();
-
-    userSpy.and.returnValue(of({ status: 200 }));
-    component.saveIntake();
-    tick();
-    expect(userService.addUserSetting).toHaveBeenCalledTimes(6);
+    expect(userService.addUserSetting).toHaveBeenCalledTimes(3);
     const emitted = {
       goalProtein: '100',
       goalFat: '60',
@@ -108,9 +103,7 @@ describe('CalculateIntakeModalComponent', () => {
   }));
 
   it('should save calories intake', fakeAsync(() => {
-    const userSpy = spyOn(userService, 'addUserSetting').and.returnValue(
-      throwError({ status: 404 })
-    );
+    spyOn(userService, 'addUserSetting').and.returnValue(of({ status: 200 }));
     spyOn(component.close, 'emit');
     component.showCalories = true;
     component.protein = 100;
@@ -119,12 +112,7 @@ describe('CalculateIntakeModalComponent', () => {
 
     component.saveIntake();
     tick();
-    expect(component.close.emit).not.toHaveBeenCalled();
-
-    userSpy.and.returnValue(of({ status: 200 }));
-    component.saveIntake();
-    tick();
-    expect(userService.addUserSetting).toHaveBeenCalledTimes(6);
+    expect(userService.addUserSetting).toHaveBeenCalledTimes(3);
     const emitted = {
       goalProtein: '100',
       goalFat: '60',

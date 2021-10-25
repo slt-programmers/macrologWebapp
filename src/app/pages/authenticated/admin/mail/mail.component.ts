@@ -25,10 +25,6 @@ export class MailComponent implements OnInit {
     this.retrieveStatus();
   }
 
-  getStatus() {
-    return true;
-  }
-
   sendTestMail() {
     this.mailSend = false;
     if (this.emailAddress) {
@@ -76,11 +72,9 @@ export class MailComponent implements OnInit {
   }
 
   private storeConnection() {
-    if (this.code) {
-      this.googleService.storeMailSyncSettings(this.code).subscribe(() => {
-        this.isConnected = true;
-      });
-    }
+    this.googleService.storeMailSyncSettings(this.code).subscribe(() => {
+      this.isConnected = true;
+    });
   }
 
   private setGoogleUrl() {
