@@ -38,7 +38,8 @@ describe('GoogleService', () => {
     spyOn(http, 'post').and.returnValue(of({} as ConnectivityRequest));
     const result = await service.storeMailSyncSettings('code').toPromise()
     expect(result).toEqual({} as ConnectivityRequest);
-    expect(http.post).toHaveBeenCalledWith('//' + environment.backend + '/admin/mail', new ConnectivityRequest('code'),
+    expect(http.post).toHaveBeenCalledWith('//' + environment.backend + '/admin/mail',
+      { clientAuthorizationCode: 'code' },
       {
         headers: {
           'Content-Type': 'application/json',

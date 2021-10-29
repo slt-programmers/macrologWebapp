@@ -5,6 +5,5 @@ export interface Weight {
    weight?: number;
    remark?: string;
    editable?: boolean;
-
  
 }

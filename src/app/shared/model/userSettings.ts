@@ -1,17 +1,16 @@
 import { Gender } from './gender';
 
-export class UserSettings {
+export interface UserSettings {
 
-    public name?: string;
-    public gender?: Gender;
-    public birthday?: string;
-    public height?: number;
-    public currentWeight?: number;
-    public activity?: number;
+  name?: string;
+  gender?: Gender;
+  birthday?: string;
+  height?: number;
+  currentWeight?: number;
+  activity?: number;
 
-    public goalProtein?: number;
-    public goalFat?: number;
-    public goalCarbs?: number;
+  goalProtein?: number;
+  goalFat?: number;
+  goalCarbs?: number;
 
-    constructor() {}
 }

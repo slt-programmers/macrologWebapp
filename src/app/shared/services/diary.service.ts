@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { StoreLogRequest } from '../model/storeLogRequest';
-import { LogEntry } from '../model/logEntry';
+import { Entry } from '../model/entry';
 import { ToastService } from './toast.service';
 import { environment } from '../../../environments/environment';
 import { MacrosPerDay } from '../model/macrosPerDay';
@@ -14,8 +14,8 @@ export class DiaryService {
 
   constructor(private http: HttpClient) { }
 
-  public getLogsForDay(date: string): Observable<LogEntry[]> {
-    return this.http.get<LogEntry[]>(this.macrologBackendUrl + '/day/' + date).pipe(
+  public getLogsForDay(date: string): Observable<Entry[]> {
+    return this.http.get<Entry[]>(this.macrologBackendUrl + '/day/' + date).pipe(
       catchError(error => {
         return of<any>()
       }));
@@ -30,7 +30,7 @@ export class DiaryService {
     }));
   }
 
-  public addEntries(storeLogEntryRequest: StoreLogRequest[]): Observable<LogEntry[]> {
+  public addEntries(storeLogEntryRequest: StoreLogRequest[]): Observable<Entry[]> {
     const headers = {
       'Content-Type': 'application/json',
       'Access-Control-Allow-Origin': environment.origin,
@@ -41,7 +41,7 @@ export class DiaryService {
       .pipe(catchError(error => { return of<any>() }));
   }
 
-  public deleteEntry(logEntry: LogEntry): Observable<number> {
+  public deleteEntry(logEntry: Entry): Observable<number> {
     const headers = {
       'Content-Type': 'application/json',
       'Access-Control-Allow-Origin': environment.origin,

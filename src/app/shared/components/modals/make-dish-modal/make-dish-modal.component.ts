@@ -47,7 +47,7 @@ export class MakeDishModalComponent implements OnInit {
   private getFoodSearchableList() {
     const foodList = new Array();
     for (const item of this.food) {
-      const searchable = new FoodSearchable(item);
+      const searchable: FoodSearchable = {food: item};
       foodList.push(searchable);
     }
     this.searchables = foodList;
@@ -127,7 +127,7 @@ export class MakeDishModalComponent implements OnInit {
   }
 
   public saveDish() {
-    const dish = new Dish(this.dishName);
+    const dish: Dish = {name: this.dishName};
     if (this.selectedDish) {
       dish.id = this.selectedDish.id;
     }

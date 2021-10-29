@@ -1,8 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 import { DiaryService } from './diary.service';
-import { ToastService } from './toast.service';
-import { LogEntry } from '../model/logEntry';
-import { StoreLogRequest } from '../model/storeLogRequest';
+import { Entry } from '../model/entry';
 import { of, throwError } from 'rxjs';
 import { MockProvider } from 'ng-mocks';
 import { HttpClient } from '@angular/common/http';
@@ -33,7 +31,7 @@ describe('DiaryService', () => {
   it('should get logs for date', async () => {
     spyOn(http, 'get').and.returnValue(of([{}]));
     const result = await service.getLogsForDay('2019-01-01').toPromise();
-    expect(result).toEqual([{} as LogEntry]);
+    expect(result).toEqual([{} as Entry]);
     expect(http.get).toHaveBeenCalledWith('//' + environment.backend + '/logs/day/2019-01-01');
   });
 
@@ -67,7 +65,7 @@ describe('DiaryService', () => {
   it('should add entries', async () => {
     spyOn(http, 'post').and.returnValue(of([{}]))
     const result = await service.addEntries([{}]).toPromise();;
-    expect(result).toEqual([{} as LogEntry]);
+    expect(result).toEqual([{} as Entry]);
     expect(http.post).toHaveBeenCalledWith('//' + environment.backend + '/logs/', [{}], {
       headers: {
         'Content-Type': 'application/json',
@@ -90,7 +88,7 @@ describe('DiaryService', () => {
 
   it('should delete entry', async () => {
     spyOn(http, 'delete').and.returnValue(of(123));
-    const result = await service.deleteEntry({ id: 123 } as LogEntry).toPromise();
+    const result = await service.deleteEntry({ id: 123 } as Entry).toPromise();
     expect(result).toEqual(123);
     expect(http.delete).toHaveBeenCalledWith('//' + environment.backend + '/logs/123', {
       headers: {
@@ -102,7 +100,7 @@ describe('DiaryService', () => {
 
   it('should handle error on delete entry', async () => {
     spyOn(http, 'delete').and.returnValue(throwError({ status: 404 }));
-    const result = await service.deleteEntry({ id: 123 } as LogEntry).toPromise();
+    const result = await service.deleteEntry({ id: 123 } as Entry).toPromise();
     expect(result).toEqual(undefined);
     expect(http.delete).toHaveBeenCalledWith('//' + environment.backend + '/logs/123', {
       headers: {

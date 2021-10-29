@@ -3,7 +3,7 @@ import { UserService } from '../../../shared/services/user.service';
 import { Gender } from '../../../shared/model/gender';
 import { Food } from '../../../shared/model/food';
 import { Portion } from '../../../shared/model/portion';
-import { Macros } from '../../../shared/model/macro';
+import { Macros } from '../../../shared/model/macros';
 import { FoodSearchable } from '../../../shared/model/foodSearchable';
 import { Router } from '@angular/router';
 import { forkJoin } from 'rxjs';
@@ -50,10 +50,10 @@ export class OnboardingComponent implements OnInit {
   public currentStep: number;
 
   constructor(private userService: UserService, private router: Router) {
-    const item = new Food('Apple', 0.4, 0.0, 12);
+    const item:Food = {name: 'Apple', protein: 0.4, fat: 0.0,carbs: 12};
     item.portions = [];
     const portion = new Portion();
-    const macros = new Macros();
+    const macros: Macros = {};
     macros.protein = 0.8;
     macros.fat = 0.0;
     macros.carbs = 24;
@@ -62,7 +62,7 @@ export class OnboardingComponent implements OnInit {
     portion.description = 'piece';
     item.portions.push(portion);
 
-    const searchable = new FoodSearchable(item);
+    const searchable:FoodSearchable = {food: item};
     this.foodSearchables.push(searchable);
   }
 

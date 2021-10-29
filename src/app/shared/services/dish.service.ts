@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ToastService } from './toast.service';
 import { Dish } from '../model/dish';
-import { StoreDishRequest } from '../model/storeDishRequest';
 import { environment } from '../../../environments/environment';
 import { catchError } from 'rxjs/operators';
 import { Observable, of } from 'rxjs';

@@ -1,12 +1,11 @@
+import { DatePipe } from "@angular/common";
 import { HttpClient } from "@angular/common/http";
 import { TestBed } from "@angular/core/testing";
-import { MockProvider } from "ng-mocks";
+import { MockPipe, MockProvider } from "ng-mocks";
 import { of, throwError } from "rxjs";
 import { environment } from "src/environments/environment";
-import { LogActivity } from "../model/logActivity";
+import { Activity } from "../model/activity";
 import { ActivityService } from "./activity.service";
-import { AdminService } from "./admin.service";
-import { AuthenticationService } from "./auth.service";
 
 describe('ActivityService', () => {
   let http: HttpClient;
@@ -16,6 +15,9 @@ describe('ActivityService', () => {
       providers: [
         ActivityService,
         MockProvider(HttpClient)],
+        declarations: [
+          MockPipe(DatePipe)
+        ]
     });
     http = TestBed.inject(HttpClient);
   });
@@ -29,7 +31,7 @@ describe('ActivityService', () => {
     spyOn(http, 'get').and.returnValue(of([{}]));
     const service = TestBed.inject(ActivityService);
     const result = await service.getActivitiesForDate("2020-01-01").toPromise();
-    expect(result).toEqual([{} as LogActivity]);
+    expect(result).toEqual([{} as Activity]);
     expect(http.get).toHaveBeenCalledWith('//' + environment.backend + '/activities/day/2020-01-01');
   });
 
@@ -45,7 +47,7 @@ describe('ActivityService', () => {
     spyOn(http, 'get').and.returnValue(of([{}]));
     const service = TestBed.inject(ActivityService);
     const result = await service.getActivitiesForDateForced("2020-01-01").toPromise();
-    expect(result).toEqual([{} as LogActivity]);
+    expect(result).toEqual([{} as Activity]);
     expect(http.get).toHaveBeenCalledWith('//' + environment.backend + '/activities/day/2020-01-01?forceSync=true');
   });
 
@@ -61,7 +63,7 @@ describe('ActivityService', () => {
     spyOn(http, 'post').and.returnValue(of([{}]));
     const service = TestBed.inject(ActivityService);
     const result = await service.addActivities([{}]).toPromise();
-    expect(result).toEqual([{} as LogActivity]);
+    expect(result).toEqual([{} as Activity]);
     expect(http.post).toHaveBeenCalledWith('//' + environment.backend + '/activities/', [{}],
       {
         headers: {
@@ -88,7 +90,7 @@ describe('ActivityService', () => {
   it('should delete activity', async () => {
     spyOn(http, 'delete').and.returnValue(of(123));
     const service = TestBed.inject(ActivityService);
-    const result = await service.deleteActivity({ id: 123 } as LogActivity).toPromise();
+    const result = await service.deleteActivity({ id: 123 } as Activity).toPromise();
     expect(result).toEqual(123);
     expect(http.delete).toHaveBeenCalledWith('//' + environment.backend + '/activities/123',
       {
@@ -102,7 +104,7 @@ describe('ActivityService', () => {
   it('should handle error on  delete activity', async () => {
     spyOn(http, 'delete').and.returnValue(throwError({status: 404}));
     const service = TestBed.inject(ActivityService);
-    const result = await service.deleteActivity({ id: 123 } as LogActivity).toPromise();
+    const result = await service.deleteActivity({ id: 123 } as Activity).toPromise();
     expect(result).toEqual(undefined);
     expect(http.delete).toHaveBeenCalledWith('//' + environment.backend + '/activities/123',
       {

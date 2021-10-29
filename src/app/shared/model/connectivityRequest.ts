@@ -1,6 +1,5 @@
-export class ConnectivityRequest {
+export interface ConnectivityRequest {
 
-	constructor(public clientAuthorizationCode:string) {
-		this.clientAuthorizationCode = clientAuthorizationCode;
-	 }
+  clientAuthorizationCode: string;
+
 }

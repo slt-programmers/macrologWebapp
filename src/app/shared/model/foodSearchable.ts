@@ -1,13 +1,9 @@
 import { Food } from './food';
 import { Dish } from './dish';
 
-export class FoodSearchable {
+export interface FoodSearchable {
 
-	public food: Food = undefined;
-	public dish: Dish = undefined;
+  food?: Food;
+  dish?: Dish;
 
-	constructor(food?: Food, dish?: Dish) {
-		this.food = food;
-		this.dish = dish;
-	}
 }

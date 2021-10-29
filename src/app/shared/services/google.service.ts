@@ -10,7 +10,7 @@ import { Observable } from 'rxjs';
 export class GoogleService {
   private macrologBackendUrl = '//' + environment.backend + '/admin/mail';
 
-  constructor(private readonly http: HttpClient) {}
+  constructor(private readonly http: HttpClient) { }
 
   public getStatus() {
     return this.http.get<ConnectivityStatus>(
@@ -24,7 +24,7 @@ export class GoogleService {
       'Content-Type': 'application/json',
       'Access-Control-Allow-Origin': environment.origin,
     };
-    const connectivityRequest = new ConnectivityRequest(code);
+    const connectivityRequest: ConnectivityRequest = { clientAuthorizationCode: code };
     const options = { headers: headers };
     return this.http.post<ConnectivityRequest>(
       this.macrologBackendUrl,

@@ -1,12 +1,10 @@
-export class StoreLogRequest {
+export interface StoreLogRequest {
 
-	public id?: number;
-	public foodId?: number;
-	public portionId?: number;
-	public multiplier?: number;
-	public day?: string;
-	public meal?: string;
+  id?: number;
+  meal?: string;
+  foodId?: number;
+  portionId?: number;
+  multiplier?: number;
+  day?: string;
 
-	constructor () {
-	}
 }

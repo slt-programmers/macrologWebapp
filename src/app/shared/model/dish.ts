@@ -1,9 +1,10 @@
 import { Ingredient } from './ingredient';
 
-export class Dish {
-  public id: number;
-  public ingredients: Ingredient[];
-  public macrosCalculated: any;
+export interface Dish {
 
-  constructor(public name: string) {}
+  id?: number;
+  name?: string;
+  ingredients?: Ingredient[];
+  macrosCalculated?: any;
+
 }

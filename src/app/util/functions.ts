@@ -1,5 +1,6 @@
 import { Gender } from '../shared/model/gender';
 
+// TODO move calculations to backend
 export function calculateTDEE(
   gender: Gender,
   weight: number,

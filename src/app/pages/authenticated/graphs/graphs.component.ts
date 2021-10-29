@@ -3,7 +3,7 @@ import { DiaryService } from '../../../shared/services/diary.service';
 import { UserService } from '../../../shared/services/user.service';
 import { DataPoint } from 'src/app/shared/components/linegraph/linegraph.component';
 import { MacrosPerDay } from 'src/app/shared/model/macrosPerDay';
-import { Macros } from 'src/app/shared/model/macro';
+import { Macros } from 'src/app/shared/model/macros';
 import { format } from 'date-fns';
 
 @Component({

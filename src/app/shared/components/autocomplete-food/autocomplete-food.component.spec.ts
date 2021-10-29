@@ -75,35 +75,35 @@ describe('AutocompleteFoodComponent', () => {
 
   it('should find dish match', () => {
     component.searchables = [
-      { food: undefined, dish: new Dish('Abc') },
-      { food: undefined, dish: new Dish('Def') },
+      { food: undefined, dish: { name: 'Abc' } },
+      { food: undefined, dish: { name: 'Def' } },
     ];
     component.foodName = 'A';
     expect(component.foodMatch).toEqual(new Array());
     component.findFoodMatch({ data: 'somedata' });
-    let result = [{ food: undefined as Food, dish: new Dish('Abc') }];
+    let result = [{ food: undefined as Food, dish: { name: 'Abc' } }];
     expect(component.foodMatch).toEqual(result);
 
     component.searchables = [
-      { food: undefined, dish: new Dish('Abc') },
-      { food: undefined, dish: new Dish('Cde') },
+      { food: undefined, dish: { name: 'Abc' } },
+      { food: undefined, dish: { name: 'Cde' } },
     ];
     component.foodName = 'C';
     component.findFoodMatch({ data: 'somedata' });
     result = [
-      { food: undefined, dish: new Dish('Abc') },
-      { food: undefined, dish: new Dish('Cde') },
+      { food: undefined, dish: { name: 'Abc' } },
+      { food: undefined, dish: { name: 'Cde' } },
     ];
     expect(component.foodMatch).toEqual(result);
 
     component.searchables = [
-      { food: { name: 'Abc', protein: 1, fat: 2, carbs: 3 }, dish: new Dish('Abc with def') },
+      { food: { name: 'Abc', protein: 1, fat: 2, carbs: 3 }, dish: { name: 'Abc with Def' } },
       { food: { name: 'Cde', protein: 1, fat: 2, carbs: 3 }, dish: undefined },
     ];
     component.foodName = 'c';
     component.findFoodMatch({ data: 'somedata' });
     result = [
-      { food: { name: 'Abc', protein: 1, fat: 2, carbs: 3 }, dish: new Dish('Abc with def') },
+      { food: { name: 'Abc', protein: 1, fat: 2, carbs: 3 }, dish: { name: 'Abc with Def' } },
       { food: { name: 'Cde', protein: 1, fat: 2, carbs: 3 }, dish: undefined },
     ];
     expect(component.foodMatch).toEqual(result);
@@ -145,7 +145,7 @@ describe('AutocompleteFoodComponent', () => {
   });
 
   it('should get food or dish description', () => {
-    const dish = new Dish('someDish');
+    const dish = { name: 'Somedish' };
     let result = component.getDescription({ food: undefined, dish: dish });
     expect(result).toEqual(dish.name + ' (dish)');
 

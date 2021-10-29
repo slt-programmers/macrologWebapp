@@ -4,8 +4,8 @@ import { ActivityService } from '../../../shared/services/activity.service';
 import { UserService } from '../../../shared/services/user.service';
 import { FoodService } from '../../../shared/services/food.service';
 import { DishService } from '../../../shared/services/dish.service';
-import { LogEntry } from '../../../shared/model/logEntry';
-import { LogActivity } from '../../../shared/model/logActivity';
+import { Entry } from '../../../shared/model/entry';
+import { Activity } from '../../../shared/model/activity';
 import { FoodSearchable } from '../../../shared/model/foodSearchable';
 import { DatePipe } from '@angular/common';
 import { Dish } from 'src/app/shared/model/dish';
@@ -26,18 +26,18 @@ export class DiaryComponent implements OnInit {
 
   public modalIsVisible = false;
   public isLogMealOpen: boolean;
-  public allLogs: LogEntry[];
+  public allLogs: Entry[];
   public food: Food[];
   public dishes: Dish[];
   public searchableFood: FoodSearchable[];
   public displayDate: Date;
   private pipe: DatePipe;
 
-  public breakfastLogs = new Array<LogEntry>();
-  public lunchLogs = new Array<LogEntry>();
-  public dinnerLogs = new Array<LogEntry>();
-  public snacksLogs = new Array<LogEntry>();
-  public activitiesLogs = new Array<LogActivity>();
+  public breakfastLogs = new Array<Entry>();
+  public lunchLogs = new Array<Entry>();
+  public dinnerLogs = new Array<Entry>();
+  public snacksLogs = new Array<Entry>();
+  public activitiesLogs = new Array<Activity>();
 
   public breakfastOpen = false;
   public lunchOpen = false;
@@ -210,11 +210,11 @@ export class DiaryComponent implements OnInit {
     const searchables: Array<FoodSearchable> = [];
 
     for (const item of this.food) {
-      const searchable = new FoodSearchable(item);
+      const searchable = {food: item};
       searchables.push(searchable);
     }
     for (const dish of this.dishes) {
-      searchables.push(new FoodSearchable(undefined, dish));
+      searchables.push({dish: dish});
     }
 
     this.searchableFood = searchables;

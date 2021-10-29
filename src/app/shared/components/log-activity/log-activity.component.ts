@@ -10,8 +10,7 @@ import {
   SimpleChanges,
 } from '@angular/core';
 import { DatePipe } from '@angular/common';
-import { LogActivity } from '../../model/logActivity';
-import { StoreActivityRequest } from '../../model/storeActivityRequest';
+import { Activity } from '../../model/activity';
 import { ActivityService } from '../../services/activity.service';
 
 @Component({
@@ -22,7 +21,7 @@ export class LogActivityComponent implements OnInit, OnChanges {
   @ViewChild('logActivity', { static: false })
   private logActivityEref: ElementRef;
 
-  @Input() logActivities: LogActivity[];
+  @Input() logActivities: Activity[];
   @Input() date: Date;
   @Input() open: boolean;
   @Input() syncAvailable: boolean;
@@ -35,11 +34,8 @@ export class LogActivityComponent implements OnInit, OnChanges {
   public addActivityCallBack: Function;
   public syncing = false;
 
-  private pipe: DatePipe;
-
   constructor(private activityService: ActivityService) {
     this.editable = false;
-    this.pipe = new DatePipe('en-US');
   }
 
   ngOnInit() {
@@ -84,7 +80,7 @@ export class LogActivityComponent implements OnInit, OnChanges {
     this.newActivityName = null;
   }
 
-  public deleteLogActivity(logActivity: LogActivity) {
+  public deleteLogActivity(logActivity: Activity) {
     const index: number = this.logActivities.indexOf(logActivity);
     if (index !== -1) {
       this.logActivities.splice(index, 1);
@@ -95,18 +91,7 @@ export class LogActivityComponent implements OnInit, OnChanges {
 
   public saveAndClose() {
     this.close();
-    const allEntries = [];
-    for (const logActivity of this.logActivities) {
-      const newRequest = new StoreActivityRequest();
-      newRequest.id = logActivity.id;
-      newRequest.name = logActivity.name;
-      newRequest.calories = logActivity.calories;
-      newRequest.syncedId = logActivity.syncedId;
-      newRequest.syncedWith = logActivity.syncedWith;
-      newRequest.day = this.pipe.transform(logActivity.day, 'yyyy-MM-dd');
-      allEntries.push(newRequest);
-    }
-    this.activityService.addActivities(allEntries).subscribe(it => {
+    this.activityService.addActivities(this.logActivities).subscribe(it => {
       this.dataChanged.emit(true);
     });
   }

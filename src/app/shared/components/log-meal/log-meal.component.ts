@@ -10,7 +10,7 @@ import {
   SimpleChanges,
 } from '@angular/core';
 import { DatePipe } from '@angular/common';
-import { LogEntry } from '../../model/logEntry';
+import { Entry } from '../../model/entry';
 import { StoreLogRequest } from '../../model/storeLogRequest';
 import { DiaryService } from '../../services/diary.service';
 import { FoodSearchable } from '../../model/foodSearchable';
@@ -27,7 +27,7 @@ export class LogMealComponent implements OnInit, OnChanges {
 
   @Input() searchables: FoodSearchable[];
   @Input() meal: string;
-  @Input() logEntries: LogEntry[];
+  @Input() logEntries: Entry[];
   @Input() date: Date;
   @Input() open: boolean;
   @Input() dummy = false;
@@ -72,7 +72,7 @@ export class LogMealComponent implements OnInit, OnChanges {
     this.editable = false;
   }
 
-  public setLogEntryMultiplier(event: any, logEntry: LogEntry) {
+  public setLogEntryMultiplier(event: any, logEntry: Entry) {
     if (event.data === '.') {
       return logEntry.multiplier;
     }
@@ -84,7 +84,7 @@ export class LogMealComponent implements OnInit, OnChanges {
     return logEntry.multiplier;
   }
 
-  public getAmountValue(logEntry: LogEntry) {
+  public getAmountValue(logEntry: Entry) {
     if (logEntry.portion) {
       return logEntry.multiplier;
     } else {
@@ -92,7 +92,7 @@ export class LogMealComponent implements OnInit, OnChanges {
     }
   }
 
-  public isGramsSelected(logEntry: LogEntry) {
+  public isGramsSelected(logEntry: Entry) {
     if (logEntry.portion === undefined) {
       return true;
     } else {
@@ -100,7 +100,7 @@ export class LogMealComponent implements OnInit, OnChanges {
     }
   }
 
-  public isUnitSelected(logEntry: LogEntry, portion: Portion) {
+  public isUnitSelected(logEntry: Entry, portion: Portion) {
     if (
       logEntry.portion !== undefined &&
       logEntry.portion.description === portion.description
@@ -129,7 +129,7 @@ export class LogMealComponent implements OnInit, OnChanges {
             (entry) => entry.meal === this.meal.toUpperCase()
           );
           for (const copiedEntry of filteredEntries) {
-            const logEntry = new LogEntry();
+            const logEntry: Entry = {};
             logEntry.meal = copiedEntry.meal;
             logEntry.food = copiedEntry.food;
             if (copiedEntry.portion) {
@@ -154,11 +154,11 @@ export class LogMealComponent implements OnInit, OnChanges {
     }
   }
 
-  public amountChange(logEntry: LogEntry) {
+  public amountChange(logEntry: Entry) {
     this.updateCalculatedMacros(logEntry);
   }
 
-  public getAvailablePortions(logEntry: LogEntry) {
+  public getAvailablePortions(logEntry: Entry) {
     for (const item of this.searchables) {
       if (item.food.id === logEntry.food.id) {
         return item.food.portions;
@@ -167,7 +167,7 @@ export class LogMealComponent implements OnInit, OnChanges {
     return undefined;
   }
 
-  public portionChange(logEntry: LogEntry, event: any) {
+  public portionChange(logEntry: Entry, event: any) {
     if (event.target.value === this.unitName) {
       logEntry.portion = undefined;
       logEntry.multiplier = logEntry.multiplier / 100;
@@ -185,7 +185,7 @@ export class LogMealComponent implements OnInit, OnChanges {
     this.updateCalculatedMacros(logEntry);
   }
 
-  updateCalculatedMacros(logEntry: LogEntry) {
+  updateCalculatedMacros(logEntry: Entry) {
     const protein = this.calculateProtein(logEntry);
     const carbs = this.calculateCarbs(logEntry);
     const fat = this.calculateFat(logEntry);
@@ -202,7 +202,7 @@ export class LogMealComponent implements OnInit, OnChanges {
     const food = foodSearchable.food;
     const dish = foodSearchable.dish;
     if (food !== undefined) {
-      const logEntry = new LogEntry();
+      const logEntry: Entry = {};
       logEntry.meal = this.meal.toUpperCase();
       logEntry.food = food;
       if (food.portions) {
@@ -216,7 +216,7 @@ export class LogMealComponent implements OnInit, OnChanges {
       this.logEntries.push(logEntry);
     } else if (dish !== undefined) {
       for (const ingredient of dish.ingredients) {
-        const logEntry = new LogEntry();
+        const logEntry: Entry = {};
         logEntry.meal = this.meal.toUpperCase();
         logEntry.food = ingredient.food;
         logEntry.multiplier = ingredient.multiplier;
@@ -235,7 +235,7 @@ export class LogMealComponent implements OnInit, OnChanges {
     }
   }
 
-  private calculateProtein(logEntry: LogEntry) {
+  private calculateProtein(logEntry: Entry) {
     if (logEntry.portion !== undefined) {
       return logEntry.multiplier * logEntry.portion.macros.protein;
     } else {
@@ -243,7 +243,7 @@ export class LogMealComponent implements OnInit, OnChanges {
     }
   }
 
-  private calculateFat(logEntry: LogEntry) {
+  private calculateFat(logEntry: Entry) {
     if (logEntry.portion) {
       return logEntry.multiplier * logEntry.portion.macros.fat;
     } else {
@@ -251,7 +251,7 @@ export class LogMealComponent implements OnInit, OnChanges {
     }
   }
 
-  private calculateCarbs(logEntry: LogEntry) {
+  private calculateCarbs(logEntry: Entry) {
     if (logEntry.portion) {
       return logEntry.multiplier * logEntry.portion.macros.carbs;
     } else {
@@ -259,7 +259,7 @@ export class LogMealComponent implements OnInit, OnChanges {
     }
   }
 
-  public deleteLogEntry(logEntry: LogEntry) {
+  public deleteLogEntry(logEntry: Entry) {
     if (!this.dummy) {
       const index: number = this.logEntries.indexOf(logEntry);
       if (index !== -1) {
@@ -273,7 +273,7 @@ export class LogMealComponent implements OnInit, OnChanges {
     this.close();
     const allEntries = [];
     for (const logEntry of this.logEntries) {
-      const newRequest = new StoreLogRequest();
+      const newRequest: StoreLogRequest = {};
       newRequest.id = logEntry.id;
       newRequest.foodId = logEntry.food.id;
       if (logEntry.portion) {

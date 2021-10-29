@@ -10,7 +10,7 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { By } from '@angular/platform-browser';
 import { Food } from 'src/app/shared/model/food';
 import { FoodSearchable } from 'src/app/shared/model/foodSearchable';
-import { LogEntry } from 'src/app/shared/model/logEntry';
+import { Entry } from 'src/app/shared/model/entry';
 import { Portion } from 'src/app/shared/model/portion';
 import { StoreLogRequest } from 'src/app/shared/model/storeLogRequest';
 import { DiaryService } from 'src/app/shared/services/diary.service';
@@ -79,7 +79,7 @@ describe('LogMealComponent', () => {
 
   it('should call setmultiplier when input changes', () => {
     spyOn(component, 'setLogEntryMultiplier');
-    const logEntry = new LogEntry();
+    const logEntry: Entry = {};
     logEntry.id = 1;
     const food = { name: 'food', protein: 1, fat: 2, carbs: 3 }
     const portion = new Portion();
@@ -105,7 +105,7 @@ describe('LogMealComponent', () => {
   });
 
   it('should set the multiplier on logentry', () => {
-    const logEntry = new LogEntry();
+    const logEntry: Entry = {};
     logEntry.multiplier = 5;
     const portion = new Portion();
     portion.description = 'desc';
@@ -124,7 +124,7 @@ describe('LogMealComponent', () => {
   });
 
   it('should get amount value from logentry', () => {
-    const logEntry = new LogEntry();
+    const logEntry: Entry = {};
     logEntry.multiplier = 5;
 
     let result = component.getAmountValue(logEntry);
@@ -136,7 +136,7 @@ describe('LogMealComponent', () => {
 
   it('should call amount change on keyup', () => {
     spyOn(component, 'amountChange');
-    const logEntry = new LogEntry();
+    const logEntry: Entry = {};
     logEntry.id = 1;
     const food = { name: 'food', protein: 1, fat: 2, carbs: 3 }
     const portion = new Portion();
@@ -161,7 +161,7 @@ describe('LogMealComponent', () => {
   });
 
   it('should update macros calculated on logentry', () => {
-    const logEntry = new LogEntry();
+    const logEntry: Entry = {};
     logEntry.multiplier = 3;
     const food = { name: 'name', protein: 1, fat: 2, carbs: 3 }
     const portion = new Portion();
@@ -183,7 +183,7 @@ describe('LogMealComponent', () => {
   });
 
   it('should return whether grams is selected', () => {
-    const logEntry = new LogEntry();
+    const logEntry: Entry = {};
     let result = component.isGramsSelected(logEntry);
     expect(result).toEqual(true);
 
@@ -199,7 +199,7 @@ describe('LogMealComponent', () => {
   it('should return whether unit is selected', () => {
     const portion = new Portion();
     portion.description = 'desc';
-    const logEntry = new LogEntry();
+    const logEntry: Entry = {};
     logEntry.portion = portion;
     let result = component.isUnitSelected(logEntry, portion);
     expect(result).toEqual(true);
@@ -217,10 +217,10 @@ describe('LogMealComponent', () => {
     const portionTwo = new Portion();
     portionTwo.description = 'portionTwo';
     food.portions = [portionOne, portionTwo];
-    const searchables = [new FoodSearchable(food)];
+    const searchables = [{food:food}];
     component.searchables = searchables;
 
-    const logEntry = new LogEntry();
+    const logEntry: Entry = {};
     logEntry.food = food;
     let result = component.getAvailablePortions(logEntry);
     expect(result).toEqual([portionOne, portionTwo]);
@@ -235,7 +235,7 @@ describe('LogMealComponent', () => {
   it('should change portion on logentry', () => {
     spyOn(component, 'updateCalculatedMacros');
     let event = { target: { value: 'grams' } };
-    const logEntry = new LogEntry();
+    const logEntry: Entry = {};
     const food: Food = { name: 'food', protein: 1, fat: 2, carbs: 3 }
     const portionOne = new Portion();
     portionOne.description = 'portionOne';
@@ -258,7 +258,7 @@ describe('LogMealComponent', () => {
 
   it('should add new logentry', () => {
     spyOn(component, 'updateCalculatedMacros');
-    const searchable = new FoodSearchable({ name: 'food', protein: 1, fat: 2, carbs: 3 });
+    const searchable = {food: { name: 'food', protein: 1, fat: 2, carbs: 3 }};
     component.logEntries = [];
     component.meal = 'lunch';
     const date = new Date();
@@ -266,17 +266,18 @@ describe('LogMealComponent', () => {
 
     component.addLogEntry(searchable);
     expect(component.updateCalculatedMacros).toHaveBeenCalled();
-    const result = new LogEntry();
-    result.meal = 'LUNCH';
-    result.day = date;
-    result.food = { name: 'food', protein: 1, fat: 2, carbs: 3 }
-    expect(component.logEntries).toEqual([result]);
+    const logEntry: Entry = {};
+    logEntry.meal = 'LUNCH';
+    logEntry.day = date;
+    logEntry.multiplier = 1;
+    logEntry.food = { name: 'food', protein: 1, fat: 2, carbs: 3}
+    expect(component.logEntries).toEqual([logEntry]);
   });
 
   it('should save and close', () => {
     spyOn(component, 'close');
     spyOn(diaryService, 'addEntries');
-    const logEntry = new LogEntry();
+    const logEntry: Entry = {};
     logEntry.id = 1;
     const food: Food = { name: 'food', protein: 1, fat: 2, carbs: 3 }
     food.id = 123;
@@ -286,7 +287,7 @@ describe('LogMealComponent', () => {
     component.meal = 'LUNCH';
     component.logEntries = [logEntry];
 
-    const resultReuqest = new StoreLogRequest();
+    const resultReuqest: StoreLogRequest = {};
     resultReuqest.id = 1;
     resultReuqest.foodId = 123;
     resultReuqest.multiplier = 5;

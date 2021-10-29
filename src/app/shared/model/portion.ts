@@ -1,4 +1,4 @@
-import { Macros } from './macro';
+import { Macros } from './macros';
 
 export class Portion {
 
