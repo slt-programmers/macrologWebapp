@@ -46,7 +46,7 @@ describe('WeightService', () => {
 
   it('should store weight', async () => {
     spyOn(http, 'post').and.returnValue(of({}));
-    const result = await service.storeWeight({ weight: 70 }).toPromise();
+    const result = await service.addWeight({ weight: 70 }).toPromise();
     expect(http.post).toHaveBeenCalledWith('//' + environment.backend + '/weight/', { weight: 70 },
       {
         headers: {
@@ -60,7 +60,7 @@ describe('WeightService', () => {
   it('should handle error on store weight', async () => {
     spyOn(http, 'post').and.returnValue(throwError(undefined));
     spyOn(toastService, 'setMessage');
-    const result = await service.storeWeight({ weight: 70 }).toPromise();
+    const result = await service.addWeight({ weight: 70 }).toPromise();
     expect(http.post).toHaveBeenCalledWith('//' + environment.backend + '/weight/', { weight: 70 },
       {
         headers: {

@@ -21,7 +21,7 @@ export class WeightService {
       }));
   }
 
-  public storeWeight(weight: Weight): Observable<any> {
+  public addWeight(weight: Weight): Observable<any> {
     const headers = {
       'Content-Type': 'application/json',
       'Access-Control-Allow-Origin': environment.origin,

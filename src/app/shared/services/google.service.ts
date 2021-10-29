@@ -4,12 +4,13 @@ import { environment } from '../../../environments/environment';
 import { ConnectivityRequest } from '../model/connectivityRequest';
 import { ConnectivityStatus } from '../model/connectivityStatus';
 import { MailRequest } from '../model/mailRequest';
+import { Observable } from 'rxjs';
 
 @Injectable()
 export class GoogleService {
   private macrologBackendUrl = '//' + environment.backend + '/admin/mail';
 
-  constructor(private http: HttpClient) {}
+  constructor(private readonly http: HttpClient) {}
 
   public getStatus() {
     return this.http.get<ConnectivityStatus>(
@@ -18,12 +19,11 @@ export class GoogleService {
     );
   }
 
-  public storeMailSyncSettings(code: string) {
+  public storeMailSyncSettings(code: string): Observable<any> {
     const headers = {
       'Content-Type': 'application/json',
       'Access-Control-Allow-Origin': environment.origin,
     };
-
     const connectivityRequest = new ConnectivityRequest(code);
     const options = { headers: headers };
     return this.http.post<ConnectivityRequest>(
@@ -32,6 +32,7 @@ export class GoogleService {
       options
     );
   }
+
   public sendTestMail(mailAddress: string) {
     const headers = {
       'Content-Type': 'application/json',

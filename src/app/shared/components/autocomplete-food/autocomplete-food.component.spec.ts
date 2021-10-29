@@ -39,30 +39,30 @@ describe('AutocompleteFoodComponent', () => {
 
   it('should find food match', () => {
     component.searchables = [
-      { food: new Food('Abc', 1, 2, 3), dish: undefined },
-      { food: new Food('Def', 1, 2, 3), dish: undefined },
+      { food: { name: 'Abc', protein: 1, fat: 2, carbs: 3 }, dish: undefined },
+      { food: { name: 'Def', protein: 1, fat: 2, carbs: 3 }, dish: undefined },
     ];
     component.foodName = 'A';
     expect(component.foodMatch).toEqual(new Array());
     component.findFoodMatch({ data: 'somedata' });
-    let result = [{ food: new Food('Abc', 1, 2, 3), dish: undefined as Dish }];
+    let result = [{ food: { name: 'Abc', protein: 1, fat: 2, carbs: 3 }, dish: undefined as Dish }];
     expect(component.foodMatch).toEqual(result);
 
     component.searchables = [
-      { food: new Food('Abc', 1, 2, 3), dish: undefined },
-      { food: new Food('Cde', 1, 2, 3), dish: undefined },
+      { food: { name: 'Abc', protein: 1, fat: 2, carbs: 3 }, dish: undefined },
+      { food: { name: 'Cde', protein: 1, fat: 2, carbs: 3 }, dish: undefined },
     ];
     component.foodName = 'C';
     component.findFoodMatch({ data: 'somedata' });
     result = [
-      { food: new Food('Abc', 1, 2, 3), dish: undefined },
-      { food: new Food('Cde', 1, 2, 3), dish: undefined },
+      { food: { name: 'Abc', protein: 1, fat: 2, carbs: 3 }, dish: undefined },
+      { food: { name: 'Cde', protein: 1, fat: 2, carbs: 3 }, dish: undefined },
     ];
     expect(component.foodMatch).toEqual(result);
 
     component.searchables = [
-      { food: new Food('Abc', 1, 2, 3), dish: undefined },
-      { food: new Food('Cde', 1, 2, 3), dish: undefined },
+      { food: { name: 'Abc', protein: 1, fat: 2, carbs: 3 }, dish: undefined },
+      { food: { name: 'Cde', protein: 1, fat: 2, carbs: 3 }, dish: undefined },
     ];
     component.foodName = 'Aa';
     component.findFoodMatch({ data: 'somedata' });
@@ -97,14 +97,14 @@ describe('AutocompleteFoodComponent', () => {
     expect(component.foodMatch).toEqual(result);
 
     component.searchables = [
-      { food: new Food('Abc', 1, 2, 3), dish: new Dish('Abc with def') },
-      { food: new Food('Cde', 1, 2, 3), dish: undefined },
+      { food: { name: 'Abc', protein: 1, fat: 2, carbs: 3 }, dish: new Dish('Abc with def') },
+      { food: { name: 'Cde', protein: 1, fat: 2, carbs: 3 }, dish: undefined },
     ];
     component.foodName = 'c';
     component.findFoodMatch({ data: 'somedata' });
     result = [
-      { food: new Food('Abc', 1, 2, 3), dish: new Dish('Abc with def') },
-      { food: new Food('Cde', 1, 2, 3), dish: undefined },
+      { food: { name: 'Abc', protein: 1, fat: 2, carbs: 3 }, dish: new Dish('Abc with def') },
+      { food: { name: 'Cde', protein: 1, fat: 2, carbs: 3 }, dish: undefined },
     ];
     expect(component.foodMatch).toEqual(result);
   });
@@ -114,8 +114,8 @@ describe('AutocompleteFoodComponent', () => {
     const input = fixture.debugElement.query(By.css('#autoInput'));
     input.nativeElement.dispatchEvent(new Event('focus'));
     component.foodMatch = [
-      { food: new Food('Abc', 1, 2, 3), dish: undefined },
-      { food: new Food('Cde', 1, 2, 3), dish: undefined },
+      { food: { name: 'Abc', protein: 1, fat: 2, carbs: 3 }, dish: undefined },
+      { food: { name: 'Cde', protein: 1, fat: 2, carbs: 3 }, dish: undefined },
     ];
     fixture.detectChanges();
     let result = fixture.debugElement.query(By.css('#autoDropdown'));
@@ -126,14 +126,14 @@ describe('AutocompleteFoodComponent', () => {
   });
 
   it('should handle click on autocomplete option', () => {
-    component.selectFn = () => {};
+    component.selectFn = () => { };
     component.foodName = 'Test';
     component.showAutoComplete = true;
     spyOn(component, 'selectFn');
     component.showAutoComplete = true;
     component.foodMatch = [
-      { food: new Food('Abc', 1, 2, 3), dish: undefined },
-      { food: new Food('Cde', 1, 2, 3), dish: undefined },
+      { food: { name: 'Abc', protein: 1, fat: 2, carbs: 3 }, dish: undefined },
+      { food: { name: 'Cde', protein: 1, fat: 2, carbs: 3 }, dish: undefined },
     ];
     fixture.detectChanges();
     const result = fixture.debugElement.query(By.css('#autoOption'));
@@ -149,7 +149,7 @@ describe('AutocompleteFoodComponent', () => {
     let result = component.getDescription({ food: undefined, dish: dish });
     expect(result).toEqual(dish.name + ' (dish)');
 
-    const food = new Food('someFood', 1, 2, 3);
+    const food = { name: 'Somefood', protein: 1, fat: 2, carbs: 3 };
     result = component.getDescription({ food: food, dish: dish });
     expect(result).toEqual(dish.name + ' (dish)');
 
@@ -167,8 +167,8 @@ describe('AutocompleteFoodComponent', () => {
     spyOn(component, 'onKeyDown');
     component.showAutoComplete = true;
     component.foodMatch = [
-      { food: new Food('Abc', 1, 2, 3), dish: undefined },
-      { food: new Food('Cde', 1, 2, 3), dish: undefined },
+      { food: { name: 'Abc', protein: 1, fat: 2, carbs: 3 }, dish: undefined },
+      { food: { name: 'Cde', protein: 1, fat: 2, carbs: 3 }, dish: undefined },
     ];
     fixture.detectChanges();
     const wrapper = fixture.debugElement.query(By.css('#autoWrapper'));
@@ -185,8 +185,8 @@ describe('AutocompleteFoodComponent', () => {
     spyOn(component, 'handleOptionKeyup');
     component.showAutoComplete = true;
     component.foodMatch = [
-      { food: new Food('Abc', 1, 2, 3), dish: undefined },
-      { food: new Food('Cde', 1, 2, 3), dish: undefined },
+      { food: { name: 'Abc', protein: 1, fat: 2, carbs: 3 }, dish: undefined },
+      { food: { name: 'Cde', protein: 1, fat: 2, carbs: 3 }, dish: undefined },
     ];
     fixture.detectChanges();
 
@@ -211,8 +211,8 @@ describe('AutocompleteFoodComponent', () => {
     spyOn(component, 'handleOptionKeyup');
     component.showAutoComplete = true;
     component.foodMatch = [
-      { food: new Food('Abc', 1, 2, 3), dish: undefined },
-      { food: new Food('Cde', 1, 2, 3), dish: undefined },
+      { food: { name: 'Abc', protein: 1, fat: 2, carbs: 3 }, dish: undefined },
+      { food: { name: 'Cde', protein: 1, fat: 2, carbs: 3 }, dish: undefined },
     ];
     fixture.detectChanges();
     component.onKeyDown(new KeyboardEvent('keydown', { key: 'ArrowDown' }));
@@ -237,8 +237,8 @@ describe('AutocompleteFoodComponent', () => {
     spyOn(component, 'handleOptionKeyup');
     component.showAutoComplete = true;
     component.foodMatch = [
-      { food: new Food('Abc', 1, 2, 3), dish: undefined },
-      { food: new Food('Cde', 1, 2, 3), dish: undefined },
+      { food: { name: 'Abc', protein: 1, fat: 2, carbs: 3 }, dish: undefined },
+      { food: { name: 'Cde', protein: 1, fat: 2, carbs: 3 }, dish: undefined },
     ];
     fixture.detectChanges();
     const input = fixture.debugElement.query(By.css('#autoInput'));
@@ -291,8 +291,8 @@ describe('AutocompleteFoodComponent', () => {
   it('should select options but not unfocus on last or first element', () => {
     component.showAutoComplete = true;
     component.foodMatch = [
-      { food: new Food('Abc', 1, 2, 3), dish: undefined },
-      { food: new Food('Cde', 1, 2, 3), dish: undefined },
+      { food: { name: 'Abc', protein: 1, fat: 2, carbs: 3 }, dish: undefined },
+      { food: { name: 'Cde', protein: 1, fat: 2, carbs: 3 }, dish: undefined },
     ];
     fixture.detectChanges();
     const input = fixture.debugElement.query(By.css('#autoInput'));

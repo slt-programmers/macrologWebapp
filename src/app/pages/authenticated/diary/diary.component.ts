@@ -79,7 +79,7 @@ export class DiaryComponent implements OnInit {
 
   public forceSync() {
     this.activityService
-      .getDayActivitiesForced(
+      .getActivitiesForDateForced(
         this.pipe.transform(this.displayDate, 'yyyy-MM-dd')
       )
       .subscribe(
@@ -196,7 +196,7 @@ export class DiaryComponent implements OnInit {
       }
     );
 
-    this.activityService.getDayActivities(date).subscribe(
+    this.activityService.getActivitiesForDate(date).subscribe(
       (data) => {
         this.activitiesLogs = data;
       },

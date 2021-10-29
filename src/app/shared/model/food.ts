@@ -1,14 +1,12 @@
 import { Portion } from './portion';
 
-export class Food {
+export interface Food {
 
-	public id: number;
-	public portions: Portion[];
+  id?: number;
+  portions?: Portion[];
+  name?: string;
+  protein?: number;
+  fat?: number;
+  carbs?: number;
 
-	constructor(public name: string,
-		public protein: number,
-		public fat: number,
-		public carbs: number) {
-
-	}
 }

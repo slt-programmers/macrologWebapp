@@ -9,8 +9,8 @@ import { ErrorInterceptor } from './shared/interceptors/error.interceptor';
 import { ToastComponent } from './shared/components/toast/toast.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { ServicesModule } from './shared/services/services.module';
-import { ComponentsModule } from './shared/components/components.module';
+import { ServicesModule } from './shared/services.module';
+import { ComponentsModule } from './shared/components.module';
 
 @NgModule({
   declarations: [

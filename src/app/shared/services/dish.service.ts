@@ -4,60 +4,45 @@ import { ToastService } from './toast.service';
 import { Dish } from '../model/dish';
 import { StoreDishRequest } from '../model/storeDishRequest';
 import { environment } from '../../../environments/environment';
+import { catchError } from 'rxjs/operators';
+import { Observable, of } from 'rxjs';
 
 @Injectable()
 export class DishService {
   private macrologBackendUrl = '//' + environment.backend + '/dishes';
 
-  constructor(private http: HttpClient, private toastService: ToastService) {}
+  constructor(private http: HttpClient, private toastService: ToastService) { }
 
-  public getAllDishes() {
+  public getAllDishes(): Observable<Dish[]> {
     return this.http.get<Dish[]>(this.macrologBackendUrl, {
       responseType: 'json',
-    });
+    }).pipe(
+      catchError(error => {
+        return of<any>();
+      }));
   }
 
-  public insertDish(storeDishRequest: StoreDishRequest, callBack: Function) {
+  public addDish(dish: Dish): Observable<Dish> {
     const headers = {
       'Content-Type': 'application/json',
       'Access-Control-Allow-Origin': environment.origin,
     };
-
     const options = { headers: headers };
-    return this.http
-      .post<StoreDishRequest>(
-        this.macrologBackendUrl + '/',
-        storeDishRequest,
-        options
-      )
-      .subscribe(
-        (data) => {
-          this.toastService.setMessage('Your dish have been saved!');
-          callBack();
-        },
-        (error) => {
-          // TODO handle error
-        }
-      );
+    return this.http.post<Dish>(this.macrologBackendUrl + '/', dish, options).pipe(
+      catchError(error => {
+        return of<any>();
+      }));
   }
 
-  public deleteDish(dish: Dish, callBack: Function) {
+  public deleteDish(dish: Dish):Observable<number> {
     const headers = {
       'Content-Type': 'application/json',
       'Access-Control-Allow-Origin': environment.origin,
     };
-
     const options = { headers: headers };
-    return this.http
-      .delete<number>(this.macrologBackendUrl + '/' + dish.id, options)
-      .subscribe(
-        (data) => {
-          this.toastService.setMessage('Your dish have been deleted!');
-          callBack();
-        },
-        (error) => {
-          // TODO handle error
-        }
-      );
+    return this.http.delete<number>(this.macrologBackendUrl + '/' + dish.id, options).pipe(
+      catchError(error => {
+        return of<any>();
+      }));
   }
 }

@@ -90,7 +90,7 @@ export class LogActivityComponent implements OnInit, OnChanges {
       this.logActivities.splice(index, 1);
     }
 
-    this.activityService.deleteLogActivity(logActivity);
+    this.activityService.deleteActivity(logActivity);
   }
 
   public saveAndClose() {
@@ -106,9 +106,8 @@ export class LogActivityComponent implements OnInit, OnChanges {
       newRequest.day = this.pipe.transform(logActivity.day, 'yyyy-MM-dd');
       allEntries.push(newRequest);
     }
-    const closeCallBack = () => {
+    this.activityService.addActivities(allEntries).subscribe(it => {
       this.dataChanged.emit(true);
-    };
-    this.activityService.storeLogActivities(allEntries, closeCallBack);
+    });
   }
 }

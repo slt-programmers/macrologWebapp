@@ -118,7 +118,7 @@ export class LogMealComponent implements OnInit, OnChanges {
       const copyFrom = this.pipe.transform(prevDay, 'yyyy-MM-dd');
 
       for (const oldEntry of this.logEntries) {
-        this.diaryService.deleteLogEntry(oldEntry);
+        this.diaryService.deleteEntry(oldEntry);
         this.updateCalculatedMacros(oldEntry);
       }
 
@@ -265,7 +265,7 @@ export class LogMealComponent implements OnInit, OnChanges {
       if (index !== -1) {
         this.logEntries.splice(index, 1);
       }
-      this.diaryService.deleteLogEntry(logEntry);
+      this.diaryService.deleteEntry(logEntry);
     }
   }
 
@@ -285,7 +285,7 @@ export class LogMealComponent implements OnInit, OnChanges {
       allEntries.push(newRequest);
     }
     if (!this.dummy) {
-      this.diaryService.storeLogEntries(allEntries, this.closeCallBack);
+      this.diaryService.addEntries(allEntries);
     } else {
       this.toastService.setMessage('Your meals have been saved!');
     }

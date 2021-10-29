@@ -1,24 +1,25 @@
-import { TestBed, fakeAsync, tick } from '@angular/core/testing';
-import {
-  HttpClientTestingModule,
-  HttpTestingController,
-} from '@angular/common/http/testing';
+import { TestBed } from '@angular/core/testing';
 import { DiaryService } from './diary.service';
 import { ToastService } from './toast.service';
 import { LogEntry } from '../model/logEntry';
 import { StoreLogRequest } from '../model/storeLogRequest';
+import { of, throwError } from 'rxjs';
+import { MockProvider } from 'ng-mocks';
+import { HttpClient } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
+import { MacrosPerDay } from '../model/macrosPerDay';
 
 describe('DiaryService', () => {
   let service: DiaryService;
-  let http: HttpTestingController;
+  let http: HttpClient;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule],
-      providers: [DiaryService, ToastService],
+      providers: [DiaryService,
+        MockProvider(HttpClient)],
     });
     service = TestBed.inject(DiaryService);
-    http = TestBed.inject(HttpTestingController);
+    http = TestBed.inject(HttpClient);
   });
 
   afterEach(() => {
@@ -29,61 +30,85 @@ describe('DiaryService', () => {
     expect(service).toBeTruthy();
   });
 
-  it('should get logs for a day', fakeAsync(() => {
-    const mockLog = new LogEntry();
-    mockLog.id = 123;
-    const mockResponse = [mockLog];
-    service.getLogsForDay('2019-01-01').subscribe((res) => {
-      expect(res[0].id).toEqual(123);
+  it('should get logs for date', async () => {
+    spyOn(http, 'get').and.returnValue(of([{}]));
+    const result = await service.getLogsForDay('2019-01-01').toPromise();
+    expect(result).toEqual([{} as LogEntry]);
+    expect(http.get).toHaveBeenCalledWith('//' + environment.backend + '/logs/day/2019-01-01');
+  });
+
+  it('should handle error on get logs for date', async () => {
+    spyOn(http, 'get').and.returnValue(throwError({ status: 404 }));
+    const result = await service.getLogsForDay('2019-01-01').toPromise();
+    expect(result).toEqual(undefined);
+    expect(http.get).toHaveBeenCalledWith('//' + environment.backend + '/logs/day/2019-01-01');
+  });
+
+  it('should get macros', async () => {
+    spyOn(http, 'get').and.returnValue(of([{}]));
+    const result = await service.getMacrosPerDay('2019-01-01', '2019-02-01').toPromise();
+    expect(result).toEqual([{} as MacrosPerDay]);
+    expect(http.get).toHaveBeenCalledWith('//' + environment.backend + '/logs/macros', {
+      params: { from: '2019-01-01', to: '2019-02-01' },
+      responseType: 'json'
     });
-    const request = http.expectOne(
-      service.macrologBackendUrl + '/day/2019-01-01'
-    );
-    expect(request.request.method).toEqual('GET');
-    request.flush(mockResponse);
-    tick();
-    http.verify();
-  }));
+  });
 
-  it('should get macros', fakeAsync(() => {
-    const mockResponse = [{ macro: 'macro' }];
-    service.getMacrosPerDay('2019-01-01', '2019-01-02').subscribe((res) => {
-      // expect(res[0].macro).toEqual('macro');
+  it('should handle error on get macros', async () => {
+    spyOn(http, 'get').and.returnValue(throwError({ status: 404 }));
+    const result = await service.getMacrosPerDay('2019-01-01', '2019-02-01').toPromise();
+    expect(result).toEqual(undefined);
+    expect(http.get).toHaveBeenCalledWith('//' + environment.backend + '/logs/macros', {
+      params: { from: '2019-01-01', to: '2019-02-01' },
+      responseType: 'json'
     });
-    const request = http.expectOne(
-      service.macrologBackendUrl + '/macros?from=2019-01-01&to=2019-01-02'
-    );
-    expect(request.request.method).toEqual('GET');
-    request.flush(mockResponse);
-    tick();
-    http.verify();
-  }));
+  });
 
-  it('should store log entries', fakeAsync(() => {
-    const mockStoreLog = new StoreLogRequest();
-    let result = false;
-    const mockCallback = () => {
-      result = true;
-    };
-    mockStoreLog.id = 123;
-    const mockResponse = [mockStoreLog];
-    service.storeLogEntries(mockResponse, mockCallback);
-    const request = http.expectOne(service.macrologBackendUrl + '/');
-    expect(request.request.method).toEqual('POST');
-    request.flush(mockResponse);
-    tick();
-    http.verify();
-    expect(result).toBeTruthy();
-  }));
+  it('should add entries', async () => {
+    spyOn(http, 'post').and.returnValue(of([{}]))
+    const result = await service.addEntries([{}]).toPromise();;
+    expect(result).toEqual([{} as LogEntry]);
+    expect(http.post).toHaveBeenCalledWith('//' + environment.backend + '/logs/', [{}], {
+      headers: {
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': environment.origin,
+      }
+    })
+  });
 
-  it('should delete log entry', fakeAsync(() => {
-    const mockLog = new LogEntry();
-    mockLog.id = 123;
-    service.deleteLogEntry(mockLog);
-    const request = http.expectOne(service.macrologBackendUrl + '/' + 123);
-    expect(request.request.method).toEqual('DELETE');
-    request.flush({ status: 200 });
-    tick();
-    http.verify();
-  }));
+  it('should handle error on add entries', async () => {
+    spyOn(http, 'post').and.returnValue(throwError({ status: 404 }));
+    const result = await service.addEntries([{}]).toPromise();;
+    expect(result).toEqual(undefined);
+    expect(http.post).toHaveBeenCalledWith('//' + environment.backend + '/logs/', [{}], {
+      headers: {
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': environment.origin,
+      }
+    });
+  });
+
+  it('should delete entry', async () => {
+    spyOn(http, 'delete').and.returnValue(of(123));
+    const result = await service.deleteEntry({ id: 123 } as LogEntry).toPromise();
+    expect(result).toEqual(123);
+    expect(http.delete).toHaveBeenCalledWith('//' + environment.backend + '/logs/123', {
+      headers: {
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': environment.origin,
+      }
+    });
+  });
+
+  it('should handle error on delete entry', async () => {
+    spyOn(http, 'delete').and.returnValue(throwError({ status: 404 }));
+    const result = await service.deleteEntry({ id: 123 } as LogEntry).toPromise();
+    expect(result).toEqual(undefined);
+    expect(http.delete).toHaveBeenCalledWith('//' + environment.backend + '/logs/123', {
+      headers: {
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': environment.origin,
+      }
+    });
+  });
 });

@@ -7,7 +7,7 @@ import { UserService } from './user.service';
 import { ToastService } from './toast.service';
 import { UserSettings } from '../model/userSettings';
 
-describe('WebhookService', () => {
+describe('UserService', () => {
   let service: UserService;
   let http: HttpClient;
   let toastService: ToastService;

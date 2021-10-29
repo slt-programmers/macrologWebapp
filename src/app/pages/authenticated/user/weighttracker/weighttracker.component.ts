@@ -112,7 +112,7 @@ export class WeightTrackerComponent {
     newWeight.day = this.pipe.transform(date, 'yyyy-MM-dd') || undefined;
     newWeight.remark = this.remark;
 
-    this.weightService.storeWeight(newWeight).subscribe(it => {
+    this.weightService.addWeight(newWeight).subscribe(it => {
       formUsed.reset();
       this.getAllWeights();
       this.init();
@@ -155,7 +155,7 @@ export class WeightTrackerComponent {
     newRequest.day = this.pipe.transform(date, 'yyyy-MM-dd') || undefined;
     newRequest.remark = weight.remark;
 
-    this.weightService.storeWeight(newRequest).subscribe(it => {
+    this.weightService.addWeight(newRequest).subscribe(it => {
       this.getAllWeights();
       this.openWeight = undefined;
     });

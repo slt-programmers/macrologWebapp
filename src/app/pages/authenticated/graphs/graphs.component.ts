@@ -118,11 +118,7 @@ export class GraphsComponent implements OnInit {
     this.loading = true;
     this.allMacros = [];
     this.logService
-      .getMacrosPerDay(
-        format(this.dateFrom, 'yyyy-MM-dd'),
-        format(this.dateTo, 'yyyy-MM-dd')
-      )
-      .subscribe(
+      .getMacrosPerDay(format(this.dateFrom, 'yyyy-MM-dd'), format(this.dateTo, 'yyyy-MM-dd')).subscribe(
         (data) => {
           this.allMacros = data;
           this.getGoals();

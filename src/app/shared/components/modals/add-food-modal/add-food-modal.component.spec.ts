@@ -8,42 +8,35 @@ import {
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClient, HttpHandler } from '@angular/common/http';
-import { Food } from 'src/app/shared/model/food';
 import { Macros } from 'src/app/shared/model/macro';
 import { Portion } from 'src/app/shared/model/portion';
 import { FoodService } from 'src/app/shared/services/food.service';
 import { ScrollBehaviourService } from 'src/app/shared/services/scroll-behaviour.service';
 import { ToastService } from 'src/app/shared/services/toast.service';
+import { Food } from 'src/app/shared/model/food';
+import { MockProvider } from 'ng-mocks';
+import { of } from 'rxjs';
 
 describe('AddFoodModal', () => {
   let component: AddFoodModalComponent;
   let fixture: ComponentFixture<AddFoodModalComponent>;
   let foodService: FoodService;
   let scrollBehaviourService: ScrollBehaviourService;
-  let renderer2: Renderer2;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [AddFoodModalComponent],
       providers: [
-        ScrollBehaviourService,
-        FoodService,
-        HttpClient,
-        HttpHandler,
-        ToastService,
-        Renderer2,
+        MockProvider(ScrollBehaviourService),
+        MockProvider(FoodService),
       ],
       imports: [FormsModule],
-      schemas: [NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
+
     fixture = TestBed.createComponent(AddFoodModalComponent);
     component = fixture.componentInstance;
     foodService = TestBed.inject(FoodService);
     scrollBehaviourService = TestBed.inject(ScrollBehaviourService);
-    renderer2 = fixture.componentRef.injector.get<Renderer2>(
-      Renderer2 as Type<Renderer2>
-    );
-    scrollBehaviourService.setRenderer(renderer2);
     fixture.detectChanges();
   });
 
@@ -58,13 +51,13 @@ describe('AddFoodModal', () => {
     expect(scrollBehaviourService.preventScrolling).toHaveBeenCalled();
     expect(component.title).toEqual('Add food');
 
-    component.food = new Food('food', 1, 2, 3);
+    component.food = { name: 'food', protein: 1, fat: 2, carbs: 3 };
     component.ngOnInit();
     expect(component.title).toEqual('Edit food');
     expect(component.name).toEqual('food');
     expect(component.portions).toEqual([]);
 
-    component.food = new Food('second', 4, 5, 6);
+    component.food = { name: 'second', protein: 4, fat: 5, carbs: 6 };
     const portion = new Portion(111, 'piece', new Macros());
     component.food.portions = [portion];
     component.ngOnInit();
@@ -73,43 +66,39 @@ describe('AddFoodModal', () => {
     ]);
   });
 
-  it('should save food', () => {
+  it('should save food', ()  => {
     spyOn(scrollBehaviourService, 'preventScrolling');
-    spyOn(foodService, 'addFood');
+    spyOn(foodService, 'addFood').and.returnValue(of({}));
 
     component.name = 'food';
     component.protein = 1;
     component.fat = 2;
     component.carbs = 3;
 
-    const food = new Food('food', 1, 2, 3);
+    const food: Food = { name: 'food', protein: 1, fat: 2, carbs: 3 };
     food.portions = [];
     component.saveFood();
-    expect(foodService.addFood).toHaveBeenCalledWith(
-      food,
-      jasmine.any(Function)
-    );
+    expect(foodService.addFood).toHaveBeenCalledWith(food);
+    expect(scrollBehaviourService.preventScrolling).toHaveBeenCalledWith(false);
   });
-
+  
   it('should save edited existing food', () => {
     spyOn(scrollBehaviourService, 'preventScrolling');
-    spyOn(foodService, 'addFood');
-
-    component.food = new Food('food', 0, 0, 0);
+    spyOn(foodService, 'addFood').and.returnValue(of({}))
+    
+    component.food = { name: 'food', protein: 0, fat: 0, carbs: 0 };
     component.food.id = 1234;
     component.name = 'food';
     component.protein = 1;
     component.fat = 2;
     component.carbs = 3;
-
-    const food = new Food('food', 1, 2, 3);
+    
+    const food: Food = { name: 'food', protein: 1, fat: 2, carbs: 3 };
     food.id = 1234;
     food.portions = [];
     component.saveFood();
-    expect(foodService.addFood).toHaveBeenCalledWith(
-      food,
-      jasmine.any(Function)
-    );
+    expect(foodService.addFood).toHaveBeenCalledWith(food);
+    expect(scrollBehaviourService.preventScrolling).toHaveBeenCalledWith(false);
   });
 
   it('should close the modal', () => {
@@ -155,10 +144,4 @@ describe('AddFoodModal', () => {
     expect(component.portions).toEqual([new Portion(111, 'piece')]);
   });
 
-  it('should close modal on callback', () => {
-    spyOn(component, 'closeModal');
-    const callback = component.getCloseCallback();
-    callback();
-    expect(component.closeModal).toHaveBeenCalled();
-  });
 });

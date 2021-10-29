@@ -28,7 +28,7 @@ export class MakeDishModalComponent implements OnInit {
   constructor(
     private foodService: FoodService,
     private dishService: DishService
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.loadDishFromInput();
@@ -41,11 +41,7 @@ export class MakeDishModalComponent implements OnInit {
       (data) => {
         this.food = data;
         this.getFoodSearchableList();
-      },
-      (error) => {
-        // TODO handle error
-      }
-    );
+      });
   }
 
   private getFoodSearchableList() {
@@ -136,19 +132,15 @@ export class MakeDishModalComponent implements OnInit {
       dish.id = this.selectedDish.id;
     }
     dish.ingredients = this.ingredients;
-    const self = this;
-    const closeCallBack = () => {
-      self.closeModal();
-    };
-    this.dishService.insertDish(dish, closeCallBack);
+    this.dishService.addDish(dish).subscribe(it => {
+      this.closeModal();
+    });
   }
 
   public deleteDish() {
-    const self = this;
-    const closeCallBack = () => {
-      self.closeModal();
-    };
-    this.dishService.deleteDish(this.selectedDish, closeCallBack);
+    this.dishService.deleteDish(this.selectedDish).subscribe(it => {
+      this.closeModal();
+    })
   }
 
   public closeModal() {

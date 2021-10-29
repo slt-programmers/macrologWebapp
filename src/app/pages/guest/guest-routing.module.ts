@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
-import { ComponentsModule } from 'src/app/shared/components/components.module';
+import { ComponentsModule } from 'src/app/shared/components.module';
 
 import { AboutComponent } from './about/about.component';
 import { GuestGuard } from './guest.guard';

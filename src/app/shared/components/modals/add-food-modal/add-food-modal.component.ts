@@ -22,12 +22,10 @@ export class AddFoodModalComponent implements OnInit {
   public carbs: number;
   public portions: Portion[] = [];
 
-  constructor(
-    private foodService: FoodService,
-    private scrollBehaviourService: ScrollBehaviourService
-  ) {}
+  constructor(private foodService: FoodService,
+    private scrollBehaviourService: ScrollBehaviourService) { }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.scrollBehaviourService.preventScrolling(true);
     if (this.food) {
       this.title = 'Edit food';
@@ -45,45 +43,41 @@ export class AddFoodModalComponent implements OnInit {
     }
   }
 
-  public saveFood() {
-    const addFoodRequest = new Food(
-      this.name,
-      this.protein,
-      this.fat,
-      this.carbs
-    );
+  public saveFood(): void {
+    const newFood: Food = {
+      name: this.name,
+      protein: this.protein,
+      fat: this.fat,
+      carbs: this.carbs
+    };
     if (this.food) {
-      addFoodRequest.id = this.food.id;
+      newFood.id = this.food.id;
     }
-    addFoodRequest.portions = this.portions;
+    newFood.portions = this.portions;
 
-    this.foodService.addFood(addFoodRequest, this.getCloseCallback());
+    this.foodService.addFood(newFood).subscribe(() => {
+      this.closeModal();
+    });
   }
 
-  public closeModal() {
+  public closeModal(): void {
     this.scrollBehaviourService.preventScrolling(false);
     this.close.emit(true);
   }
 
-  public isNewPortion(portion: Portion) {
+  public isNewPortion(portion: Portion): boolean {
     if (portion.id !== null && portion.id !== undefined && portion.id !== 0) {
       return false;
     }
     return true;
   }
 
-  public addNewPortion() {
+  public addNewPortion(): void {
     this.portions.push(new Portion());
   }
 
-  public removePortion(index: number) {
+  public removePortion(index: number): void {
     this.portions.splice(index, 1);
   }
 
-  getCloseCallback(): Function {
-    const self = this;
-    return () => {
-      self.closeModal();
-    };
-  }
 }

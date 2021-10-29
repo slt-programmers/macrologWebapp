@@ -32,7 +32,7 @@ export class FoodComponent implements OnInit {
   public unitName = 'gram';
   public unitGrams = 100.0;
 
-  constructor(private foodService: FoodService) {}
+  constructor(private foodService: FoodService) { }
 
   ngOnInit() {
     this.loadAllFood();
@@ -46,11 +46,7 @@ export class FoodComponent implements OnInit {
         this.searchableFood = this.allFoodFromDB;
         this.getPagedFood({ pageIndex: 0 });
         this.isLoading = false;
-      },
-      (error) => {
-        this.isLoading = false;
-      }
-    );
+      });
   }
 
   public hasNextPage() {
