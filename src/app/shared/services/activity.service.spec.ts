@@ -64,7 +64,7 @@ describe('ActivityService', () => {
     const service = TestBed.inject(ActivityService);
     const result = await service.addActivities([{}]).toPromise();
     expect(result).toEqual([{} as Activity]);
-    expect(http.post).toHaveBeenCalledWith('//' + environment.backend + '/activities/', [{}],
+    expect(http.post).toHaveBeenCalledWith('//' + environment.backend + '/activities/', [undefined],
       {
         headers: {
           'Content-Type': 'application/json',
@@ -78,7 +78,7 @@ describe('ActivityService', () => {
     const service = TestBed.inject(ActivityService);
     const result = await service.addActivities([{}]).toPromise();
     expect(result).toEqual(undefined);
-    expect(http.post).toHaveBeenCalledWith('//' + environment.backend + '/activities/', [{}],
+    expect(http.post).toHaveBeenCalledWith('//' + environment.backend + '/activities/', [undefined],
       {
         headers: {
           'Content-Type': 'application/json',

@@ -1,18 +1,10 @@
 import { AddFoodModalComponent } from './add-food-modal.component';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import {
-  NO_ERRORS_SCHEMA,
-  CUSTOM_ELEMENTS_SCHEMA,
-  Renderer2,
-  Type,
-} from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { HttpClient, HttpHandler } from '@angular/common/http';
 import { Macros } from 'src/app/shared/model/macros';
 import { Portion } from 'src/app/shared/model/portion';
 import { FoodService } from 'src/app/shared/services/food.service';
 import { ScrollBehaviourService } from 'src/app/shared/services/scroll-behaviour.service';
-import { ToastService } from 'src/app/shared/services/toast.service';
 import { Food } from 'src/app/shared/model/food';
 import { MockProvider } from 'ng-mocks';
 import { of } from 'rxjs';
@@ -58,7 +50,7 @@ describe('AddFoodModal', () => {
     expect(component.portions).toEqual([]);
 
     component.food = { name: 'second', protein: 4, fat: 5, carbs: 6 };
-    const portion = new Portion(111, 'piece', new Macros());
+    const portion = new Portion(111, 'piece',{} as Macros);
     component.food.portions = [portion];
     component.ngOnInit();
     expect(component.portions).toEqual([
