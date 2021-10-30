@@ -29,7 +29,7 @@ export class LoginComponent implements OnInit {
     private router: Router,
     private authService: AuthenticationService,
     private toastService: ToastService
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.authService.logout();
@@ -50,35 +50,31 @@ export class LoginComponent implements OnInit {
 
   public register() {
     this.registerError = '';
-    this.authService
-      .register(this.newUsername, this.newEmail, this.newPassword)
-      .subscribe(
+    this.authService.register(this.newUsername, this.newEmail, this.newPassword).subscribe(() => {
+      this.authService.login(this.newUsername, this.newPassword).subscribe(
         () => {
-          this.authService.login(this.newUsername, this.newPassword).subscribe(
-            () => {
-              this.router.navigate(['dashboard', 'onboarding']);
-            },
-            () => {
-              this.registerError = 'Error on login after registration.';
-            }
-          );
-          this.newUsername = '';
-          this.newEmail = '';
-          this.newPassword = '';
+          this.router.navigate(['dashboard', 'onboarding']);
         },
-        (err) => {
-          if (err.status === 401) {
-            if (err.error === 'Username or email already in use') {
-              this.registerError =
-                "Username or email is already in use. Please try a different username or use 'Forgot password' to retrieve a new password.";
-            } else {
-              this.registerError = 'Unknown error during registration.';
-            }
-          } else {
-            this.registerError = 'Unknown error during registration.';
-          }
+        () => {
+          this.registerError = 'Error on login after registration.';
         }
       );
+      this.newUsername = '';
+      this.newEmail = '';
+      this.newPassword = '';
+    }, (error) => {
+      if (error.status === 401) {
+        if (error.error === 'Username or email already in use') {
+          this.registerError =
+            "Username or email is already in use. Please try a different username or use 'Forgot password' to retrieve a new password.";
+        } else {
+          this.registerError = 'Unknown error during registration.';
+        }
+      } else {
+        this.registerError = 'Unknown error during registration.';
+      }
+    }
+    );
   }
 
   public toggleForgotPwModal(toggle: boolean) {

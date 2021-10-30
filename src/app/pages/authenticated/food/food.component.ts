@@ -33,22 +33,21 @@ export class FoodComponent implements OnInit {
 
   constructor(private foodService: FoodService) { }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.loadAllFood();
   }
 
-  private loadAllFood() {
-    this.foodService.getAllFood().subscribe(
-      (data) => {
-        this.allFoodFromDB = data;
-        this.percentageFood = this.calculatePercentages();
-        this.searchableFood = this.allFoodFromDB;
-        this.getPagedFood({ pageIndex: 0 });
-        this.isLoading = false;
-      });
+  private loadAllFood(): void {
+    this.foodService.getAllFood().subscribe(it => {
+      this.allFoodFromDB = it;
+      this.percentageFood = this.calculatePercentages();
+      this.searchableFood = this.allFoodFromDB;
+      this.getPagedFood({ pageIndex: 0 });
+      this.isLoading = false;
+    });
   }
 
-  public hasNextPage() {
+  public hasNextPage(): boolean {
     return this.searchableFood.slice(
       (this.currentPage + 1) * this.itemsPerPage - this.itemsPerPage,
     ).length > 0;
@@ -63,15 +62,13 @@ export class FoodComponent implements OnInit {
   }
 
   public findFoodMatch(): void {
-    const foodMatch = new Array<Food>();
+    const foodMatch: Food[] = [];
     for (const food of this.searchableFood) {
-      const matchFoodName =
-        food.name.toLowerCase().indexOf(this.searchInput.toLowerCase()) >= 0;
+      const matchFoodName = food.name.toLowerCase().indexOf(this.searchInput.toLowerCase()) >= 0;
       if (matchFoodName) {
         foodMatch.push(food);
       }
     }
-
     this.searchableFood = foodMatch;
   }
 

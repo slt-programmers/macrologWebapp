@@ -74,8 +74,12 @@ describe('AuthService', () => {
   it('should handle error on log in', async () => {
     spyOn(http, 'post').and.returnValue(throwError({ status: 404 }));
     const service = TestBed.inject(AuthenticationService);
-    const result = await service.login('username', 'password').toPromise();
-    expect(result).toEqual(undefined);
+    service.login('username', 'password').subscribe(
+      () => { },
+      (error) => {
+        expect(error).toEqual({ status: 404 });
+      }
+    );
     expect(http.post).toHaveBeenCalledWith('//' + environment.backend + '/api/authenticate', {
       username: 'username', password: 'password'
     });
@@ -128,8 +132,12 @@ describe('AuthService', () => {
   it('should handle error on register', async () => {
     spyOn(http, 'post').and.returnValue(throwError({ status: 404 }));
     const service = TestBed.inject(AuthenticationService);
-    const result = await service.register('username', 'email@email.com', 'password').toPromise();
-    expect(result).toEqual(undefined);
+    service.register('username', 'email@email.com', 'password').subscribe(
+      () => { },
+      (error) => {
+        expect(error).toEqual({ status: 404 });
+      }
+    );
     expect(http.post).toHaveBeenCalledWith('//' + environment.backend + '/api/signup', {
       username: 'username', email: 'email@email.com', password: 'password'
     });
@@ -169,7 +177,7 @@ describe('AuthService', () => {
   });
 
   it('should handle error on delete account', async () => {
-    spyOn(http, 'post').and.returnValue(throwError({status: 404}));
+    spyOn(http, 'post').and.returnValue(throwError({ status: 404 }));
     const service = TestBed.inject(AuthenticationService);
     const result = await service.deleteAccount('password').toPromise();
     expect(result).toEqual(undefined);
@@ -179,6 +187,6 @@ describe('AuthService', () => {
         params: { password: 'password' }
       }
     );
-  });  
+  });
 
 });

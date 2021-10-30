@@ -12,12 +12,11 @@ import { UserComponent } from './user/user.component';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BargraphComponent } from 'src/app/shared/components/bargraph/bargraph.component';
-import { MakeDishModalComponent } from 'src/app/shared/components/modals/make-dish-modal/make-dish-modal.component';
 import { AutocompleteFoodComponent } from 'src/app/shared/components/autocomplete-food/autocomplete-food.component';
 import { PiechartComponent } from 'src/app/shared/components/piechart/piechart.component';
 import { AddFoodModalComponent } from 'src/app/shared/components/modals/add-food-modal/add-food-modal.component';
 import { LogMealComponent } from 'src/app/shared/components/log-meal/log-meal.component';
-import { ComponentsModule } from 'src/app/shared/components.module';
+import { ComponentsModule } from 'src/app/shared/components/components.module';
 import { StepperComponent } from 'src/app/shared/components/stepper/stepper.component';
 import { LogActivityComponent } from 'src/app/shared/components/log-activity/log-activity.component';
 import { StackDonutComponent } from 'src/app/shared/components/stackdonut/stackdonut.component';
@@ -88,9 +87,7 @@ export const authenticatedRoutes: Routes = [
     FoodComponent,
     DishesComponent,
     GraphsComponent,
-
     BargraphComponent,
-    MakeDishModalComponent,
     AutocompleteFoodComponent,
     PiechartComponent,
     AddFoodModalComponent,

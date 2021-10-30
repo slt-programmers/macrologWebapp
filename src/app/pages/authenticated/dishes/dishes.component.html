@@ -29,6 +29,56 @@
   </button>
 </div>
 
-<div class="modal-wrapper" *ngIf="modalIsVisible">
-  <make-dish-modal [selectedDish]="selectedDish" (close)="closeModal($event)"></make-dish-modal>
-</div>
+<app-modal class="min-w-" *ngIf="modalIsVisible" [title]="modalTitle" (close)="closeModal()">
+  <form #makeDishForm="ngForm" >
+    <div class="flex flex-col content">
+
+      <div class="flex align-center">
+        <label for="dishName">Name</label>
+        <input class="input" [(ngModel)]="selectedDish.name" type="text" name="dishName"
+          id="dishName" required>
+      </div>
+
+      <div class="flex align-center col-gap-1" *ngFor="let ingr of selectedDish.ingredients; index as i">
+        <div class="flex-2">
+          <select (change)="portionChange(ingr, $event.target)">
+            <!-- 100 grams -->
+            <option>{{unitName}}</option>
+
+            <!-- portion amount -->
+            <option *ngFor="let portion of getAvailablePortions(ingr)"
+              value="{{portion.description}}" [selected]="portion.id == ingr.portion?.id">
+              {{portion.description}}
+            </option>
+          </select>
+        </div>
+
+        <div class="flex-1">
+          <input class="input" name="ingrAmount" type="number" [value]="getValue(ingr)"
+            (input)="calculateMultiplier($event, ingr)" step="{{getStep(ingr)}}" min="0">
+        </div>
+
+        <p class="flex-3">{{ingr.food.name}}</p>
+
+        <div class="flex justify-end">
+          <button class="icon-button" (click)="removeIngredient(i)">
+            <em class="fas fa-minus"></em>
+          </button>
+        </div>
+      </div>
+
+      <div class="autocomplete-wrapper">
+        <autocomplete-food [placeholder]="'Search for food'" [searchables]="searchables"
+          (select)="addIngredient($event)">
+        </autocomplete-food>
+      </div>
+    </div>
+
+    <div class="flex justify-end col-gap-1">
+      <button class="button" *ngIf="selectedDish" (click)="deleteDish()">Delete</button>
+
+      <button class="button button--primary" [disabled]="makeDishForm.invalid"
+        (click)="saveDish()">Save</button>
+    </div>
+  </form>
+</app-modal>

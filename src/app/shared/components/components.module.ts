@@ -1,15 +1,17 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { SliderComponent } from './components/slider/slider.component';
+import { SliderComponent } from './slider/slider.component';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { NavigationComponent } from './components/navigation/navigation.component';
+import { NavigationComponent } from './navigation/navigation.component';
 import { RouterModule } from '@angular/router';
+import { ModalComponent } from './modal/modal.component';
 
 @NgModule({
   declarations: [
     SliderComponent,
     NavigationComponent,
+    ModalComponent
   ],
   imports: [
     RouterModule,
@@ -20,6 +22,7 @@ import { RouterModule } from '@angular/router';
   exports: [
     SliderComponent,
     NavigationComponent,
+    ModalComponent,
   ]
 })
 export class ComponentsModule { }

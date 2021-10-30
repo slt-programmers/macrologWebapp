@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { catchError, map } from 'rxjs/operators';
 import { environment } from '../../../environments/environment';
 import { UserAccount } from '../model/userAccount';
-import { Observable, of } from 'rxjs';
+import { Observable, of, throwError } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class AuthenticationService {
@@ -22,7 +22,7 @@ export class AuthenticationService {
     return !!currentUser && currentUser.admin;
   }
 
-  public login(usernameOrEmail: string, password: string): Observable<UserAccount> {
+  public login(usernameOrEmail: string, password: string): Observable<UserAccount | void> {
     return this.http.post<UserAccount>(this.macrologBackendUrl + '/authenticate', {
       username: usernameOrEmail,
       password: password,
@@ -32,7 +32,7 @@ export class AuthenticationService {
           localStorage.setItem('currentUser', JSON.stringify(res));
         }
       }),
-      catchError(error => { return of<any>() })
+      catchError(error => throwError(error))
     );
   }
 
@@ -53,7 +53,7 @@ export class AuthenticationService {
       username: username,
       email: email,
       password: password,
-    }).pipe(catchError(error => of<any>()));
+    }).pipe(catchError(error => throwError(error)));
   }
 
   public resetPassword(email: string): Observable<any> {

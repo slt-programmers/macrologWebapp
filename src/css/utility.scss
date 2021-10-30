@@ -2,6 +2,15 @@
 .flex {
   display: flex;
 }
+.flex-1 {
+  flex: 1;
+}
+.flex-2 {
+  flex: 2;
+}
+.flex-3 {
+  flex: 3;
+}
 .flex-col {
   display: flex;
   flex-direction: column;
@@ -18,6 +27,9 @@
 .justify-center {
   justify-content: center;
 }
+.justify-end {
+  justify-content: flex-end;
+}
 .align-right {
   margin-left: auto;
 }
@@ -33,10 +45,10 @@
 .col-gap-2 {
   column-gap: 2rem;
 }
-.row-gap-1{
+.row-gap-1 {
   row-gap: 1rem;
 }
-.row-gap-2{
+.row-gap-2 {
   row-gap: 2rem;
 }
 
@@ -62,12 +74,14 @@
   height: 100%;
 }
 
-// Width 
+// Width
 .w-6 {
   width: 6rem;
-}.w-8 {
+}
+.w-8 {
   width: 8rem;
 }
+
 
 // Margins
 .m-1 {

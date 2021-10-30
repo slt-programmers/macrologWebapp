@@ -67,30 +67,19 @@
   </div>
 </div>
 
-<div class="modal-wrapper" *ngIf="showForgotPwModal">
-  <div class="modal">
-    <div class="flex flex-grow">
-      <h3 class="text-lg flex-grow">Forgot your password?</h3>
+<app-modal [title]="'Forgot your password?'" (close)="toggleForgotPwModal(false)" *ngIf="showForgotPwModal">
+  <form #forgotForm="ngForm" class="mt-1">
+    <p>Please enter your email so we can send a link to reset your password</p>
 
-      <button id="forgotClose" class="icon-button" aria-label="Close"
-        (click)="toggleForgotPwModal(false)">
-        <em class="fas fa-times"></em>
+    <input class="input" placeholder="Email" type="email" #forgotEmailField
+      [(ngModel)]="forgotEmail" name="forgotEmail" />
+
+    <p class="error" *ngIf="forgotError">{{forgotError}}</p>
+
+    <div class="button-wrapper button-wrapper--left">
+      <button id="resetBtn" class="button button--primary" [disabled]="forgotForm.invalid"
+        (click)="resetPassword()">Send
       </button>
     </div>
-
-    <form #forgotForm="ngForm" class="mt-1">
-      <p>Please enter your email so we can send a link to reset your password</p>
-
-      <input class="input" placeholder="Email" type="email" #forgotEmailField
-        [(ngModel)]="forgotEmail" name="forgotEmail" />
-
-      <p class="error" *ngIf="forgotError">{{forgotError}}</p>
-
-      <div class="button-wrapper button-wrapper--left">
-        <button id="resetBtn" class="button button--primary" [disabled]="forgotForm.invalid"
-          (click)="resetPassword()">Send
-        </button>
-      </div>
-    </form>
-  </div>
-</div>
+  </form>
+</app-modal>

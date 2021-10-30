@@ -2,7 +2,7 @@ import { CommonModule } from "@angular/common";
 import { NgModule } from "@angular/core";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { RouterModule, Routes } from "@angular/router";
-import { ComponentsModule } from "src/app/shared/components.module";
+import { ComponentsModule } from "src/app/shared/components/components.module";
 import { LinegraphComponent } from "src/app/shared/components/linegraph/linegraph.component";
 import { CalculateIntakeModalComponent } from "src/app/shared/components/modals/calculate-intake-modal/calculate-intake-modal.component";
 import { AccountComponent } from "./account/account.component";

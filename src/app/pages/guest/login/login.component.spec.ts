@@ -15,6 +15,7 @@ import { AuthenticationService } from 'src/app/shared/services/auth.service';
 import { ToastService } from 'src/app/shared/services/toast.service';
 import { NavigationComponent } from 'src/app/shared/components/navigation/navigation.component';
 import { MockComponent, MockProvider } from 'ng-mocks';
+import { ModalComponent } from 'src/app/shared/components/modal/modal.component';
 
 describe('LoginComponent', () => {
   let component: LoginComponent;
@@ -27,7 +28,8 @@ describe('LoginComponent', () => {
     TestBed.configureTestingModule({
       declarations: [
         LoginComponent,
-        MockComponent(NavigationComponent)
+        MockComponent(NavigationComponent),
+        MockComponent(ModalComponent)
       ],
       providers: [
         MockProvider(AuthenticationService),
@@ -166,13 +168,6 @@ describe('LoginComponent', () => {
     forgotLink.nativeElement.click();
     fixture.detectChanges();
     expect(component.showForgotPwModal).toBeTruthy();
-
-    const forgotModalButton = fixture.debugElement.query(
-      By.css('#forgotClose')
-    );
-    forgotModalButton.nativeElement.click();
-    fixture.detectChanges();
-    expect(component.showForgotPwModal).toBeFalsy();
   });
 
   it('should reset password', fakeAsync(() => {

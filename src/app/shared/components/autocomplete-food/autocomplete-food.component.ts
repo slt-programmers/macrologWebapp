@@ -1,4 +1,4 @@
-import { Component, Input, ViewChild, ElementRef } from '@angular/core';
+import { Component, Input, ViewChild, ElementRef, Output, EventEmitter } from '@angular/core';
 import { FoodSearchable } from '../../model/foodSearchable';
 import { Food } from '../../model/food';
 
@@ -17,12 +17,13 @@ export class AutocompleteFoodComponent {
   @Input() placeholder = '';
   @Input() selectFn: Function;
   @Input() searchables: FoodSearchable[];
+  @Output() select: EventEmitter<FoodSearchable> = new EventEmitter<FoodSearchable>();
 
   public foodMatch = new Array();
   public foodName: string;
   public showAutoComplete: boolean;
 
-  constructor() {}
+  constructor() { }
 
   public findFoodMatch(event: any) {
     this.foodMatch = new Array<Food>();
@@ -31,13 +32,9 @@ export class AutocompleteFoodComponent {
         let matchFoodName = false;
         let matchDishName = false;
         if (item.food) {
-          matchFoodName =
-            item.food.name.toLowerCase().indexOf(this.foodName.toLowerCase()) >=
-            0;
+          matchFoodName = item.food.name.toLowerCase().indexOf(this.foodName.toLowerCase()) >= 0;
         } else {
-          matchDishName =
-            item.dish.name.toLowerCase().indexOf(this.foodName.toLowerCase()) >=
-            0;
+          matchDishName = item.dish.name.toLowerCase().indexOf(this.foodName.toLowerCase()) >= 0;
         }
         if (matchFoodName || matchDishName) {
           this.foodMatch.push(item);
@@ -47,71 +44,80 @@ export class AutocompleteFoodComponent {
   }
 
   public onKeyDown(event: any) {
-    const autoCompleteInputSelected = document.activeElement.classList.contains(
-      'autocomplete__input'
-    );
-    const autoCompleteOptionSelected = document.activeElement.classList.contains(
-      'autocomplete__option'
-    );
-    if (
-      this.autoCompleteEref &&
-      (event.key === 'ArrowDown' || event.key === 'ArrowUp')
-    ) {
-      const nodelist = this.autoCompleteEref.nativeElement.childNodes;
-      if (autoCompleteInputSelected) {
-        this.handleInputKeydown(event, nodelist);
-      } else if (autoCompleteOptionSelected) {
-        if (event.key === 'ArrowDown') {
-          this.handleOptionKeydown(event);
-        } else {
-          this.handleOptionKeyup(event);
-        }
+    if (this.autoCompleteEref) {
+      if (event.key === 'ArrowDown') {
+        event.preventDefault();
+        this.handleArrowDown();
+      }
+      if (event.key === 'ArrowUp') {
+        event.preventDefault();
+        this.handleArrowUp();
+      }
+      if (event.key === 'Enter') {
+        event.preventDefault();
+        this.handleEnter();
       }
     }
   }
 
-  handleInputKeydown(event: any, nodelist: any) {
-    if (event.key === 'ArrowDown') {
-      event.preventDefault();
-      for (let index = 0; index < nodelist.length; index++) {
-        if (nodelist[index].localName === 'div') {
-          nodelist[index].focus();
-          break;
-        }
-      }
+  public selectMatch(match: FoodSearchable) {
+    this.foodName = '';
+    this.showAutoComplete = false
+    if (this.selectFn) {
+      this.selectFn(match)
+    } else {
+      this.select.emit(match);
     }
   }
 
-  handleOptionKeydown(event: any) {
-    event.preventDefault();
+  private handleArrowDown() {
     const activeElement = document.activeElement;
-    let current = activeElement.nextSibling;
-    while (true) {
-      if (current && current.nodeName !== 'DIV') {
-        current = current.nextSibling;
-      } else if (current) {
-        (current as HTMLElement).focus();
-        break;
-      } else {
-        break;
+    if (activeElement.classList.contains('autocomplete__input')) {
+      const element = document.getElementsByClassName('option-0')[0] as HTMLElement;
+      if (element) {
+        element.focus();
+      }
+    } else {
+      const index = this.getCurrentOptionIndex();
+      const element = document.getElementsByClassName('option-' + (index + 1))[0] as HTMLElement;
+      if (element) {
+        element.focus();
       }
     }
   }
 
-  handleOptionKeyup(event: any) {
-    event.preventDefault();
+  private handleEnter() {
+    const element = document.activeElement;
+
+    const index = this.getCurrentOptionIndex();
+    this.selectMatch(this.foodMatch[index]);
+  }
+
+  private handleArrowUp() {
     const activeElement = document.activeElement;
-    let current = activeElement.previousSibling;
-    while (true) {
-      if (current && current.nodeName !== 'DIV') {
-        current = current.previousSibling;
-      } else if (current) {
-        (current as HTMLElement).focus();
-        break;
+    if (activeElement.classList.contains('autocomplete__option')) {
+      const index = this.getCurrentOptionIndex();
+      if (index === 0) {
+        const element = document.getElementsByClassName('autocomplete__input')[0] as HTMLElement;
+        element.focus();
       } else {
-        break;
+        const element = document.getElementsByClassName('option-' + (index - 1))[0] as HTMLElement;
+        element.focus();
       }
     }
+  }
+
+  private getCurrentOptionIndex(): number {
+    const activeElement = document.activeElement;
+    const classList: String[] = []
+    activeElement.classList.forEach(it => {
+      if (it.startsWith('option-')) {
+        classList.push(it);
+      }
+    });
+    const className = classList[0];
+    const index = className.charAt(className.length - 1);
+    return +index;
   }
 
   public getDescription(foodSearchable: FoodSearchable) {
