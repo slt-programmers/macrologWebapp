@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { WeightService } from '../../../../shared/services/weight.service';
 import { Weight } from '../../../../shared/model/weight';
@@ -11,7 +11,7 @@ import { format, isAfter, isBefore, parse } from 'date-fns';
   templateUrl: './weighttracker.component.html',
   styleUrls: ['./weighttracker.component.scss'],
 })
-export class WeightTrackerComponent {
+export class WeightTrackerComponent implements OnInit {
   public trackedWeights = new Array<Weight>();
   public measurementDate?: string;
   public weight?: number;
@@ -24,8 +24,11 @@ export class WeightTrackerComponent {
   private pipe: DatePipe;
 
   constructor(private readonly weightService: WeightService) {
-    this.getAllWeights();
     this.pipe = new DatePipe('en-US');
+  }
+
+  ngOnInit() {
+    this.getAllWeights();
     this.init();
   }
 

@@ -4,8 +4,7 @@ import { Food } from '../../../shared/model/food';
 
 @Component({
   selector: 'app-food',
-  templateUrl: './food.component.html',
-  styleUrls: ['./food.component.scss'],
+  templateUrl: './food.component.html'
 })
 export class FoodComponent implements OnInit {
   // All food from database, don't overwrite

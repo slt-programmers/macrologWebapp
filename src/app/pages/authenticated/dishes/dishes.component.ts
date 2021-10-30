@@ -6,8 +6,7 @@ import { Portion } from 'src/app/shared/model/portion';
 
 @Component({
   selector: 'app-dishes',
-  templateUrl: './dishes.component.html',
-  styleUrls: ['./dishes.component.scss'],
+  templateUrl: './dishes.component.html'
 })
 export class DishesComponent implements OnInit {
   public allDishes: Dish[] = [];

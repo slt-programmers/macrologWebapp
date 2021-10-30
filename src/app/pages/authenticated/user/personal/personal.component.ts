@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../../../shared/services/user.service';
 import { Gender } from '../../../../shared/model/gender';
 import { ToastService } from '../../../../shared/services/toast.service';
@@ -11,7 +11,7 @@ import { format, parse } from 'date-fns';
   styleUrls: ['./personal.component.scss'],
   templateUrl: './personal.component.html',
 })
-export class PersonalComponent {
+export class PersonalComponent implements OnInit {
   private originalResult?: UserSettings;
 
   public name?: string;
@@ -22,10 +22,9 @@ export class PersonalComponent {
   public activity?: number;
   public newWeight?: number;
 
-  constructor(
-    private userService: UserService,
-    private toastService: ToastService
-  ) {
+  constructor(private userService: UserService, private toastService: ToastService) { }
+
+  ngOnInit() {
     this.userService.getUserSettings().subscribe(
       (result) => {
         this.originalResult = result;

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../../../shared/services/user.service';
 import { Gender } from '../../../../shared/model/gender';
 import { differenceInYears, parse } from 'date-fns';
@@ -7,7 +7,7 @@ import { differenceInYears, parse } from 'date-fns';
   selector: 'intake',
   templateUrl: './intake.component.html',
 })
-export class IntakeComponent {
+export class IntakeComponent implements OnInit {
   public goalProtein: number;
   public goalFat: number;
   public goalCarbs: number;
@@ -21,7 +21,9 @@ export class IntakeComponent {
 
   public showCalcModal = false;
 
-  constructor(private userService: UserService) {
+  constructor(private userService: UserService) { }
+
+  ngOnInit(): void {
     this.userService.getUserSettings().subscribe((result) => {
       // FOR CALC MODAL
       this.birthday = result.birthday;
