@@ -14,15 +14,14 @@ import { Food } from 'src/app/shared/model/food';
 @Component({
   selector: 'diary-page',
   templateUrl: './diary.component.html',
-  styleUrls: ['./diary.component.scss'],
   host: { '(document: click)': 'documentClick($event)' },
 })
 export class DiaryComponent implements OnInit {
-  @ViewChild('breakfast', { static: false }) private breakfastEref: any;
-  @ViewChild('lunch', { static: false }) private lunchEref: any;
-  @ViewChild('dinner', { static: false }) private dinnerEref: any;
-  @ViewChild('snacks', { static: false }) private snacksEref: any;
-  @ViewChild('activities', { static: false }) private activitiesEref: any;
+  @ViewChild('breakfast', { static: false }) breakfastEref: any;
+  @ViewChild('lunch', { static: false }) lunchEref: any;
+  @ViewChild('dinner', { static: false }) dinnerEref: any;
+  @ViewChild('snacks', { static: false }) snacksEref: any;
+  @ViewChild('activities', { static: false }) activitiesEref: any;
 
   public modalIsVisible = false;
   public isLogMealOpen: boolean;
@@ -51,13 +50,9 @@ export class DiaryComponent implements OnInit {
   public circleRadius = 60;
   public strokeWidth = 8;
 
-  constructor(
-    private foodService: FoodService,
-    private userService: UserService,
-    private logService: DiaryService,
-    private activityService: ActivityService,
-    private dishService: DishService
-  ) {
+  constructor(private foodService: FoodService, private userService: UserService,
+    private logService: DiaryService, private activityService: ActivityService,
+    private dishService: DishService, private readonly window: Window) {
     this.displayDate = new Date();
     this.pipe = new DatePipe('en-US');
   }
@@ -67,7 +62,7 @@ export class DiaryComponent implements OnInit {
     this.getUserGoals(this.pipe.transform(this.displayDate, 'yyyy-MM-dd'));
     this.getAllFood();
     this.getLogEntries(this.pipe.transform(this.displayDate, 'yyyy-MM-dd'));
-    if (window.innerWidth < 480) {
+    if (this.window.innerWidth < 480) {
       this.circleRadius = 40;
       this.strokeWidth = 5;
     }
@@ -78,33 +73,26 @@ export class DiaryComponent implements OnInit {
   }
 
   public forceSync() {
-    this.activityService
-      .getActivitiesForDateForced(
-        this.pipe.transform(this.displayDate, 'yyyy-MM-dd')
-      )
-      .subscribe(
-        (data) => {
-          this.activitiesLogs = data;
-        },
-        (error) => {
-          this.activitiesLogs = new Array();
-        }
-      );
+    this.activitiesLogs = [];
+    this.activityService.getActivitiesForDateForced(
+      this.pipe.transform(this.displayDate, 'yyyy-MM-dd')).subscribe(it => {
+        this.activitiesLogs = it;
+      });
   }
 
-  public getTotal(macro: string) {
+  public getTotal(macro: string): number {
     let total = 0.0;
     for (const logentry of this.breakfastLogs) {
-      total += logentry.macrosCalculated[macro];
+      total += +logentry.macrosCalculated[macro];
     }
     for (const logentry of this.lunchLogs) {
-      total += logentry.macrosCalculated[macro];
+      total += +logentry.macrosCalculated[macro];
     }
     for (const logentry of this.dinnerLogs) {
-      total += logentry.macrosCalculated[macro];
+      total += +logentry.macrosCalculated[macro];
     }
     for (const logentry of this.snacksLogs) {
-      total += logentry.macrosCalculated[macro];
+      total += +logentry.macrosCalculated[macro];
     }
     return total;
   }
@@ -129,23 +117,15 @@ export class DiaryComponent implements OnInit {
     this.getAllFood();
   }
 
-  private getUserGoals(date: string) {
-    this.userService.getUserGoalStats(date).subscribe(
-      (data) => {
-        if (data[0] === null) {
-          this.intakeGoals = null;
-        } else {
-          this.intakeGoals = data;
-        }
-        this.setGoalCal();
-      },
-      (error) => {
-        // TODO handle error
-      }
-    );
+  private getUserGoals(date: string): void {
+    this.intakeGoals = [];
+    this.userService.getUserGoalStats(date).subscribe(it => {
+      this.intakeGoals = it
+      this.setGoalCal();
+    });
   }
 
-  private getSyncSettings() {
+  private getSyncSettings(): void {
     this.userService.getSyncSettings('STRAVA').subscribe((result) => {
       if (result.syncedAccountId) {
         this.activititiesSync = true; // TODO --> GET THIS TO ACTIVITIES PAGE TO ENABLE SYNC BUTTON
@@ -153,14 +133,14 @@ export class DiaryComponent implements OnInit {
     });
   }
 
-  private getAllFood() {
+  private getAllFood(): void {
     this.foodService.getAllFood().subscribe((data) => {
       this.food = data;
       this.getAllDishes();
     });
   }
 
-  private getAllDishes() {
+  private getAllDishes(): void {
     this.dishService.getAllDishes().subscribe((data) => {
       this.dishes = data;
       this.getFoodSearchableList();
@@ -168,53 +148,33 @@ export class DiaryComponent implements OnInit {
   }
 
   private getLogEntries(date: string) {
-    this.logService.getLogsForDay(date).subscribe(
-      (data) => {
-        this.allLogs = data;
-        this.breakfastLogs = new Array();
-        this.breakfastLogs = this.allLogs.filter(
-          (entry) => entry.meal === 'BREAKFAST'
-        );
-        this.lunchLogs = new Array();
-        this.lunchLogs = this.allLogs.filter((entry) => entry.meal === 'LUNCH');
-        this.dinnerLogs = new Array();
-        this.dinnerLogs = this.allLogs.filter(
-          (entry) => entry.meal === 'DINNER'
-        );
-        this.snacksLogs = new Array();
-        this.snacksLogs = this.allLogs.filter(
-          (entry) => entry.meal === 'SNACKS'
-        );
-      },
-      (error) => {
-        this.allLogs = new Array();
-        this.breakfastLogs = new Array();
-        this.lunchLogs = new Array();
-        this.dinnerLogs = new Array();
-        this.snacksLogs = new Array();
-        this.activitiesLogs = new Array();
-      }
-    );
+    this.allLogs = [];
+    this.breakfastLogs = [];
+    this.lunchLogs = [];
+    this.snacksLogs = [];
+    this.activitiesLogs = [];
+    this.logService.getLogsForDate(date).subscribe(it => {
+      this.allLogs = it;
+      this.breakfastLogs = this.allLogs.filter((entry) => entry.meal === 'BREAKFAST');
+      this.lunchLogs = this.allLogs.filter((entry) => entry.meal === 'LUNCH');
+      this.dinnerLogs = this.allLogs.filter((entry) => entry.meal === 'DINNER');
+      this.snacksLogs = this.allLogs.filter((entry) => entry.meal === 'SNACKS');
+    });
 
-    this.activityService.getActivitiesForDate(date).subscribe(
-      (data) => {
-        this.activitiesLogs = data;
-      },
-      (error) => {
-        this.activitiesLogs = new Array();
-      }
-    );
+    this.activityService.getActivitiesForDate(date).subscribe(it => {
+      this.activitiesLogs = it;
+    });
   }
 
   private getFoodSearchableList() {
     const searchables: Array<FoodSearchable> = [];
 
     for (const item of this.food) {
-      const searchable = {food: item};
+      const searchable = { food: item };
       searchables.push(searchable);
     }
     for (const dish of this.dishes) {
-      searchables.push({dish: dish});
+      searchables.push({ dish: dish });
     }
 
     this.searchableFood = searchables;

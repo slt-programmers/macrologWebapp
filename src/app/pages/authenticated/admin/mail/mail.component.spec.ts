@@ -1,12 +1,10 @@
-import { TestBed, ComponentFixture, fakeAsync, tick } from '@angular/core/testing';
+import { TestBed, ComponentFixture } from '@angular/core/testing';
 import { MockProvider } from 'ng-mocks';
-import { WebhookService } from 'src/app/shared/services/webhook.service';
-import { of, throwError } from 'rxjs';
+import { of } from 'rxjs';
 import { MailComponent } from './mail.component';
 import { GoogleService } from 'src/app/shared/services/google.service';
 import { ActivatedRoute } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
-import { not } from '@angular/compiler/src/output/output_ast';
 
 describe('MailComponent', () => {
   let component: MailComponent;
@@ -24,30 +22,25 @@ describe('MailComponent', () => {
       ]
     }).compileComponents();
 
-    fixture = TestBed.createComponent(MailComponent);
-    component = fixture.componentInstance;
     googleService = TestBed.inject(GoogleService);
     route = TestBed.inject(ActivatedRoute);
   });
 
   it('should create', () => {
+    fixture = TestBed.createComponent(MailComponent);
+    component = fixture.componentInstance;
     expect(component).toBeTruthy();
   });
 
   it('should init component', () => {
     spyOn(googleService, 'getStatus').and.returnValue(of({ syncedApplicationId: 'test', connected: true }));
+    fixture = TestBed.createComponent(MailComponent);
+    component = fixture.componentInstance;
     component.ngOnInit();
     expect(googleService.getStatus).toHaveBeenCalled();
     expect(component.isConnected).toBeTrue();
     expect(component.googleConnectUrl).toEqual(
       'https://accounts.google.com/o/oauth2/auth?response_type=code&approval_prompt=force&scope=https://www.googleapis.com/auth/gmail.send&state=GMAILCONNECT&access_type=offline&client_id=test&redirect_uri=https://localhost:4200/admin/mail');
-  });
-
-  it('should handle error on init component', () => {
-    spyOn(googleService, 'getStatus').and.returnValue(throwError({ status: 404 }));
-    component.ngOnInit();
-    expect(googleService.getStatus).toHaveBeenCalled();
-    expect(component.isConnected).toBeFalse();
   });
 
   it('should init component and check registration response', () => {
@@ -57,7 +50,8 @@ describe('MailComponent', () => {
         if (prop === 'code') { return 'code' } else { return 'scope' }
       }
     }));
-
+    fixture = TestBed.createComponent(MailComponent);
+    component = fixture.componentInstance;
     component.ngOnInit();
     expect(googleService.getStatus).toHaveBeenCalled();
     expect(component.isConnected).toBeFalse();
@@ -72,7 +66,8 @@ describe('MailComponent', () => {
       }
     }));
     spyOn(googleService, 'storeMailSyncSettings');
-
+    fixture = TestBed.createComponent(MailComponent);
+    component = fixture.componentInstance;
     component.ngOnInit();
     expect(googleService.getStatus).toHaveBeenCalled();
     expect(component.isConnected).toBeFalse();
@@ -87,7 +82,8 @@ describe('MailComponent', () => {
         if (prop === 'code') { return 'code' } else { return 'https://www.googleapis.com/auth/gmail.send' }
       }
     }));
-
+    fixture = TestBed.createComponent(MailComponent);
+    component = fixture.componentInstance;
     component.ngOnInit();
     expect(googleService.getStatus).toHaveBeenCalled();
     expect(googleService.storeMailSyncSettings).toHaveBeenCalledWith('code');
@@ -96,6 +92,8 @@ describe('MailComponent', () => {
 
   it('should send testmail', () => {
     spyOn(googleService, 'sendTestMail').and.returnValue(of({}));
+    fixture = TestBed.createComponent(MailComponent);
+    component = fixture.componentInstance;
     component.sendTestMail();
     expect(googleService.sendTestMail).not.toHaveBeenCalled();
     component.emailAddress = 'test@test.com';

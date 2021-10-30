@@ -13,9 +13,7 @@ export class DishService {
   constructor(private http: HttpClient, private toastService: ToastService) { }
 
   public getAllDishes(): Observable<Dish[]> {
-    return this.http.get<Dish[]>(this.macrologBackendUrl, {
-      responseType: 'json',
-    }).pipe(
+    return this.http.get<Dish[]>(this.macrologBackendUrl).pipe(
       catchError(error => {
         return of<any>();
       }));

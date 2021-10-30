@@ -18,12 +18,13 @@ describe('GraphsComponent', () => {
       imports: [RouterTestingModule.withRoutes([])],
       declarations: [GraphsComponent],
       providers: [ToastService, UserService, HttpClient, HttpHandler],
-      schemas: [NO_ERRORS_SCHEMA],
+
     }).compileComponents();
-    fixture = TestBed.createComponent(GraphsComponent);
-    component = fixture.componentInstance;
+
     toastService = TestBed.inject(ToastService);
     router = TestBed.inject(Router);
+    fixture = TestBed.createComponent(GraphsComponent);
+    component = fixture.componentInstance;
   });
 
   afterEach(() => {

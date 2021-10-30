@@ -12,11 +12,6 @@ import { format } from 'date-fns';
   styleUrls: ['./graphs.component.scss'],
 })
 export class GraphsComponent implements OnInit {
-  constructor(
-    private logService: DiaryService,
-    private userService: UserService,
-    private ref: ChangeDetectorRef
-  ) { }
 
   public measurement = 'calories';
   public measurementOption = 'total';
@@ -63,6 +58,9 @@ export class GraphsComponent implements OnInit {
   //    Total calories per day grouped by macros -- done
   //    Splitted total calories per day per macro -- done
   //    Percentage/ratio calories per macro per day (streched bars)
+
+  constructor(private logService: DiaryService, private userService: UserService,
+    private ref: ChangeDetectorRef) { }
 
   ngOnInit() {
     this.dateTo = new Date();
@@ -149,9 +147,6 @@ export class GraphsComponent implements OnInit {
             1;
           this.getDatasets();
           this.loading = false;
-        },
-        (error) => {
-          // TODO handle error
         }
       );
   }

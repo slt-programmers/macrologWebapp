@@ -29,9 +29,7 @@ describe('GoogleService', () => {
     spyOn(http, 'get').and.returnValue(of({} as ConnectivityStatus));
     const result = await service.getStatus().toPromise()
     expect(result).toEqual({} as ConnectivityStatus);
-    expect(http.get).toHaveBeenCalledWith('//' + environment.backend + '/admin/mail/status', {
-      responseType: 'json'
-    });
+    expect(http.get).toHaveBeenCalledWith('//' + environment.backend + '/admin/mail/status');
   });
 
   it('should store mail sync settings', async () => {

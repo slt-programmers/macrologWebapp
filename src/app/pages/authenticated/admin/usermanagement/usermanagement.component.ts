@@ -1,12 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { UserAccount } from 'src/app/shared/model/userAccount';
 import { AdminService } from 'src/app/shared/services/admin.service';
-import { ToastService } from 'src/app/shared/services/toast.service';
 
 @Component({
   selector: 'app-usermanagement',
-  templateUrl: './usermanagement.component.html',
-  styleUrls: ['./usermanagement.component.scss'],
+  templateUrl: './usermanagement.component.html'
 })
 export class UserManagementComponent implements OnInit {
   public allUsers: UserAccount[] = []
@@ -15,24 +13,16 @@ export class UserManagementComponent implements OnInit {
 
   public selectedUser: UserAccount | undefined;
 
-  constructor(
-    private adminService: AdminService,
-    private toastService: ToastService
-  ) { }
+  constructor(private adminService: AdminService) { }
 
   ngOnInit() {
     this.getAllUsers();
   }
 
   private getAllUsers() {
-    this.adminService.getAllUsers().subscribe(
-      (res) => {
-        this.allUsers = res;
-      },
-      (err) => {
-        // TODO handle error
-      }
-    );
+    this.adminService.getAllUsers().subscribe((it) => {
+      this.allUsers = it;
+    });
   }
 
   public closeModal() {
@@ -46,19 +36,11 @@ export class UserManagementComponent implements OnInit {
 
   public deleteUser() {
     if (this.selectedUser) {
-      this.adminService.deleteUser(this.selectedUser).subscribe(
-        () => {
-          this.toastService.setMessage('User account successfully deleted');
-          this.getAllUsers();
-        },
-        () => {
-          this.toastService.setMessage('User account could not be deleted');
-        },
-        () => {
-          this.selectedUser = undefined;
-          this.closeModal();
-        }
-      );
+      this.adminService.deleteUser(this.selectedUser).subscribe(it => {
+        this.getAllUsers();
+        this.selectedUser = undefined;
+        this.closeModal();
+      });
     }
   }
 }

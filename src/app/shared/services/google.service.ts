@@ -13,10 +13,7 @@ export class GoogleService {
   constructor(private readonly http: HttpClient) { }
 
   public getStatus() {
-    return this.http.get<ConnectivityStatus>(
-      this.macrologBackendUrl + '/status',
-      { responseType: 'json' }
-    );
+    return this.http.get<ConnectivityStatus>(this.macrologBackendUrl + '/status');
   }
 
   public storeMailSyncSettings(code: string): Observable<any> {

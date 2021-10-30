@@ -4,13 +4,12 @@ import { WebhookService } from 'src/app/shared/services/webhook.service';
 
 @Component({
   selector: 'app-webhooks',
-  templateUrl: './webhooks.component.html',
-  styleUrls: ['./webhooks.component.scss'],
+  templateUrl: './webhooks.component.html'
 })
 export class WebhooksComponent implements OnInit {
   constructor(private readonly webhookService: WebhookService) { }
 
-  public allWebhooks = new Array();
+  public allWebhooks: any[] = [];
 
   ngOnInit() {
     this.retrieveStatus('STRAVA');

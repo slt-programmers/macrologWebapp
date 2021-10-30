@@ -12,12 +12,11 @@ export class WebhookService {
   constructor(private readonly http: HttpClient) { }
 
   public getWebhookStatus(connectedApp: string) {
-    return this.http.get<WebhookStatus>(this.macrologBackendUrl + '/' + connectedApp,
-      { responseType: 'json' }).pipe(
-        catchError(error => {
-          console.log(error);
-          return of()
-        }));
+    return this.http.get<WebhookStatus>(this.macrologBackendUrl + '/' + connectedApp).pipe(
+      catchError(error => {
+        console.log(error);
+        return of()
+      }));
   }
 
   public startWebhook(connectedApp: string) {
@@ -26,7 +25,7 @@ export class WebhookService {
       'Access-Control-Allow-Origin': environment.origin,
     };
     const options = { headers: headers };
-    return this.http.post(this.macrologBackendUrl + '/' + connectedApp, {}, options ).pipe(
+    return this.http.post(this.macrologBackendUrl + '/' + connectedApp, {}, options).pipe(
       catchError(error => {
         console.log(error);
         return of();

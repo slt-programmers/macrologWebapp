@@ -12,7 +12,7 @@ import { of, throwError } from 'rxjs';
 import { Router } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NavigationComponent } from 'src/app/shared/components/navigation/navigation.component';
-import { MockProvider } from 'ng-mocks';
+import { MockComponent, MockProvider } from 'ng-mocks';
 import { AuthenticationService } from 'src/app/shared/services/auth.service';
 
 describe('AuthenticatedComponent', () => {
@@ -26,11 +26,11 @@ describe('AuthenticatedComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [
-        RouterTestingModule.withRoutes([{ path: 'user', redirectTo: '' }]),
-        BrowserAnimationsModule,
+        RouterTestingModule.withRoutes([{ path: 'user', redirectTo: '' }])
       ],
-      declarations: [AuthenticatedComponent,
-        NavigationComponent],
+      declarations: [
+        AuthenticatedComponent,
+        MockComponent(NavigationComponent)],
       providers: [
         MockProvider(HealthcheckService),
         MockProvider(ScrollBehaviourService),
@@ -74,8 +74,7 @@ describe('AuthenticatedComponent', () => {
     result = component.stillSleeping();
     expect(result).toBeFalsy();
 
-    component = TestBed.createComponent(AuthenticatedComponent)
-      .componentInstance;
+    component = TestBed.createComponent(AuthenticatedComponent).componentInstance;
     result = component.stillSleeping();
     expect(result).toBeTruthy();
     healthSpy.and.returnValue(throwError({ status: 404 }));

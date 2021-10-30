@@ -31,7 +31,7 @@ describe('WeightService', () => {
   it('should get all weights', async () => {
     spyOn(http, 'get').and.returnValue(of([{ weight: 70 } as Weight]));
     const result = await service.getAllWeights().toPromise();
-    expect(http.get).toHaveBeenCalledWith('//' + environment.backend + '/weight', { responseType: 'json' });
+    expect(http.get).toHaveBeenCalledWith('//' + environment.backend + '/weight');
     expect(result).toEqual([{ weight: 70 }]);
   });
 
@@ -39,7 +39,7 @@ describe('WeightService', () => {
     spyOn(http, 'get').and.returnValue(throwError(undefined));
     spyOn(toastService, 'setMessage');
     const result = await service.getAllWeights().toPromise();
-    expect(http.get).toHaveBeenCalledWith('//' + environment.backend + '/weight', { responseType: 'json' });
+    expect(http.get).toHaveBeenCalledWith('//' + environment.backend + '/weight');
     expect(result).toEqual([]);
     expect(toastService.setMessage).toHaveBeenCalledWith('Your weights could not be fetched!');
   });

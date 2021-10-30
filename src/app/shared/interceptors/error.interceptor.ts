@@ -12,15 +12,9 @@ import { catchError, map } from 'rxjs/operators';
 
 @Injectable()
 export class ErrorInterceptor implements HttpInterceptor {
-  constructor(
-    private authService: AuthenticationService,
-    private router: Router
-  ) {}
+  constructor(private authService: AuthenticationService, private router: Router) { }
 
-  intercept(
-    request: HttpRequest<any>,
-    next: HttpHandler
-  ): Observable<HttpEvent<any>> {
+  intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     return next.handle(request).pipe(
       map((result) => {
         return result;
@@ -32,6 +26,7 @@ export class ErrorInterceptor implements HttpInterceptor {
         } else {
           return throwError(err);
         }
+        // TODO add general error handling
       })
     );
   }

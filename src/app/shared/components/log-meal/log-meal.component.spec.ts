@@ -9,7 +9,6 @@ import {
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { By } from '@angular/platform-browser';
 import { Food } from 'src/app/shared/model/food';
-import { FoodSearchable } from 'src/app/shared/model/foodSearchable';
 import { Entry } from 'src/app/shared/model/entry';
 import { Portion } from 'src/app/shared/model/portion';
 import { StoreLogRequest } from 'src/app/shared/model/storeLogRequest';

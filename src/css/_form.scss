@@ -122,3 +122,8 @@ form, .form {
 .form-description {
   color: $secondary;
 }
+
+label, .label {
+  padding-right: 1rem;
+  line-height: 1.5;
+}

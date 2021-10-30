@@ -31,8 +31,7 @@ describe('AdminService', () => {
     const service = TestBed.inject(AdminService);
     const result = await service.getAllUsers().toPromise();
     expect(result).toEqual([{} as UserAccount]);
-    expect(http.get).toHaveBeenCalledWith('//' + environment.backend + '/admin/getAllUsers',
-      { responseType: 'json' });
+    expect(http.get).toHaveBeenCalledWith('//' + environment.backend + '/admin/getAllUsers');
   });
 
   it('should handle error on get all users', async () => {
@@ -40,8 +39,7 @@ describe('AdminService', () => {
     const service = TestBed.inject(AdminService);
     const result = await service.getAllUsers().toPromise();
     expect(result).toEqual(undefined);
-    expect(http.get).toHaveBeenCalledWith('//' + environment.backend + '/admin/getAllUsers',
-      { responseType: 'json' });
+    expect(http.get).toHaveBeenCalledWith('//' + environment.backend + '/admin/getAllUsers');
   });
 
   it('should delete user', async () => {

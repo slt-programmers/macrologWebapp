@@ -5,8 +5,7 @@ import { environment } from '../../../../../environments/environment';
 
 @Component({
   selector: 'app-mail',
-  templateUrl: './mail.component.html',
-  styleUrls: ['./mail.component.scss'],
+  templateUrl: './mail.component.html'
 })
 export class MailComponent implements OnInit {
   public googleConnectUrl: string = '';
@@ -36,12 +35,9 @@ export class MailComponent implements OnInit {
   }
 
   private retrieveStatus() {
-    this.googleService.getStatus().subscribe(
-      (res) => {
-        if (res.connected === true) {
-          this.isConnected = true;
-        }
-        this.clientId = res.syncedApplicationId;
+    this.googleService.getStatus().subscribe(it => {
+        this.isConnected = it.connected;
+        this.clientId = it.syncedApplicationId;
         this.setGoogleUrl();
         if (!this.isConnected) {
           this.checkRegistrationResponse();

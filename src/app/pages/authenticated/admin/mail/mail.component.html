@@ -1,55 +1,33 @@
-<div class="mail">
-  <div class="mail__logo">
+<div class="flex">
+  <div class="p-2">
     <img alt="powered by GMail" src="../assets/logo_gmail.png" />
   </div>
 
-  <div class="mail__info" *ngIf="isConnected">
-    <p class="mail__info__status">GMail is connected.</p>
+  <div class="flex flex-col content" *ngIf="isConnected">
+    <p class="strong">GMail is connected</p>
+
+    <label for="emailAddress">Email address
+      <input id="emailAddress" class="input" [(ngModel)]="emailAddress" #foodField
+        name="emailAddress" required />
+    </label>
 
     <div>
-      <div class="form-field">
-        <label class="form-field__label">Email address:</label>
-
-        <div class="form-field__element">
-          <input
-            class="input"
-            [(ngModel)]="emailAddress"
-            #foodField
-            name="emailAddress"
-            placeholder="e.g. dummy@test.com"
-            required
-          />
-        </div>
-      </div>
-
-      <div>
-        <button
-          id="testMail"
-          class="button button--warning"
-          (click)="sendTestMail()"
-        >
-          Send testmail
-        </button>
-      </div>
+      <button id="testMail" class="button button--warning" (click)="sendTestMail()">
+        Send testmail
+      </button>
     </div>
   </div>
 
-  <div class="mail__info" *ngIf="!isConnected">
-    <div class="mail__info__status">
-      GMail is not connected.
-      <p class="error" *ngIf="syncError">
-        Unable to proceed with connecting to GMAIL. {{ syncError }}
-      </p>
-    </div>
+  <div class="flex flex-col justify-center content" *ngIf="!isConnected">
+    <p class="strong"> GMail is not connected </p>
 
-    <div class="mail__info__details">
-      <a href="{{ googleConnectUrl }}">
-        <img
-          alt="connect to GMail"
-          src="../assets/sign-in-with-google-icon.png"
-          style="width: 200px"
-        />
-      </a>
-    </div>
+    <p class="error" *ngIf="syncError">
+      Unable to proceed with connecting to GMAIL. {{ syncError }}
+    </p>
+
+    <a href="{{ googleConnectUrl }}">
+      <img alt="connect to GMail" src="../assets/sign-in-with-google-icon.png"
+        style="width: 200px" />
+    </a>
   </div>
 </div>

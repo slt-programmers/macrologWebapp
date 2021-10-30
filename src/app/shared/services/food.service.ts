@@ -25,7 +25,7 @@ export class FoodService {
   }
 
   public getAllFood(): Observable<Food[]> {
-    return this.http.get<Food[]>(this.macrologBackendUrl, { responseType: 'json' }).pipe(
+    return this.http.get<Food[]>(this.macrologBackendUrl).pipe(
       catchError(error => {
         return of<any>();
       }));

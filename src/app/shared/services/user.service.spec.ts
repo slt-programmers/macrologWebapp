@@ -33,7 +33,7 @@ describe('UserService', () => {
     const result = await service.getSetting('test', '2021-01-01').toPromise();
     expect(result).toEqual('test');
     expect(http.get).toHaveBeenCalledWith('//' + environment.backend + '/settings/test',
-      { params: { date: '2021-01-01' }, responseType: 'json' });
+      { params: { date: '2021-01-01' } });
   });
 
   it('should handle error on get settings', async () => {
@@ -41,7 +41,7 @@ describe('UserService', () => {
     const result = await service.getSetting('test', '2021-01-01').toPromise();
     expect(result).toEqual(undefined);
     expect(http.get).toHaveBeenCalledWith('//' + environment.backend + '/settings/test',
-      { params: { date: '2021-01-01' }, responseType: 'json' });
+      { params: { date: '2021-01-01' } });
   });
 
   it('should get user settings', async () => {
@@ -89,29 +89,25 @@ describe('UserService', () => {
     const result = await service.getUserGoalStats("2022-01-01").toPromise();
     expect(result).toEqual(["123", "234", "345"]);
     expect(http.get).toHaveBeenCalledWith('//' + environment.backend + '/settings/goalProtein',
-      { params: { date: "2022-01-01" }, responseType: 'json' });
+      { params: { date: "2022-01-01" } });
     expect(http.get).toHaveBeenCalledWith('//' + environment.backend + '/settings/goalFat',
-      { params: { date: "2022-01-01" }, responseType: 'json' });
+      { params: { date: "2022-01-01" } });
     expect(http.get).toHaveBeenCalledWith('//' + environment.backend + '/settings/goalCarbs',
-      { params: { date: "2022-01-01" }, responseType: 'json' });
+      { params: { date: "2022-01-01" } });
   });
 
   it('should get sync settings', async () => {
     spyOn(http, 'get').and.returnValue(of({}));
     const result = await service.getSyncSettings('STRAVA').toPromise();
     expect(result).toEqual({});
-    expect(http.get).toHaveBeenCalledWith('//' + environment.backend + '/settings/connectivity/STRAVA', {
-      responseType: 'json'
-    });
+    expect(http.get).toHaveBeenCalledWith('//' + environment.backend + '/settings/connectivity/STRAVA');
   });
 
   it('should handle error on get sync settings', async () => {
     spyOn(http, 'get').and.returnValue(throwError({}));
     const result = await service.getSyncSettings('STRAVA').toPromise();
     expect(result).toEqual(undefined);
-    expect(http.get).toHaveBeenCalledWith('//' + environment.backend + '/settings/connectivity/STRAVA', {
-      responseType: 'json'
-    });
+    expect(http.get).toHaveBeenCalledWith('//' + environment.backend + '/settings/connectivity/STRAVA');
   });
 
   it('should store sync settings', async () => {

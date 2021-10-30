@@ -6,14 +6,12 @@ import {
 } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AppComponent } from './app.component';
-import { HttpHandler, HttpClient } from '@angular/common/http';
 import { HealthcheckService } from './shared/services/healthcheck.service';
 import { Router } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { Renderer2 } from '@angular/core';
 import { of, throwError } from 'rxjs';
 import { ToastComponent } from './shared/components/toast/toast.component';
-import { ToastService } from './shared/services/toast.service';
+import { MockComponent, MockProvider } from 'ng-mocks';
 
 describe('AppComponent', () => {
   let component: AppComponent;
@@ -28,15 +26,12 @@ describe('AppComponent', () => {
         BrowserAnimationsModule,
       ],
       declarations: [
-        AppComponent, 
-        ToastComponent
+        AppComponent,
+        MockComponent(ToastComponent)
       ],
       providers: [
-        HealthcheckService,
-         HttpClient, 
-         HttpHandler, 
-         Renderer2,
-        ToastService],
+        MockProvider(HealthcheckService)
+      ]
     }).compileComponents();
 
     fixture = TestBed.createComponent(AppComponent);

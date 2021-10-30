@@ -14,7 +14,7 @@ export class WeightService {
   constructor(private http: HttpClient, private toastService: ToastService) { }
 
   public getAllWeights() {
-    return this.http.get<Weight[]>(this.macrologBackendUrl, { responseType: 'json' }).pipe(
+    return this.http.get<Weight[]>(this.macrologBackendUrl).pipe(
       catchError((error) => {
         this.toastService.setMessage('Your weights could not be fetched!');
         return of([]);

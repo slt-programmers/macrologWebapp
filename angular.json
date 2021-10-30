@@ -129,7 +129,8 @@
             "codeCoverageExclude": [
               "src/test/**",
               "src/app/app.module.ts",
-              "src/test/**/*.mock.ts"
+              "src/test/**/*.mock.ts",
+              "./test.ts"
             ]
           }
         },

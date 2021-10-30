@@ -122,7 +122,7 @@ export class LogMealComponent implements OnInit, OnChanges {
         this.updateCalculatedMacros(oldEntry);
       }
 
-      this.diaryService.getLogsForDay(copyFrom).subscribe(
+      this.diaryService.getLogsForDate(copyFrom).subscribe(
         (data) => {
           const yesterdaysEntries = data;
           const filteredEntries = yesterdaysEntries.filter(

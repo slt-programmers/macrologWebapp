@@ -12,10 +12,8 @@ export class AdminService {
   constructor(private http: HttpClient) { }
 
   public getAllUsers(): Observable<UserAccount[]> {
-    return this.http.get<UserAccount[]>(
-      this.macrologBackendUrl + '/getAllUsers',
-      { responseType: 'json' }
-    ).pipe(catchError(error => of<any>()));
+    return this.http.get<UserAccount[]>(this.macrologBackendUrl + '/getAllUsers').pipe(
+      catchError(error => of<any>()));
   }
 
   public deleteUser(user: UserAccount): Observable<any> {
@@ -27,10 +25,7 @@ export class AdminService {
       headers: headers,
       params: { userId: user.id.toString() },
     };
-    return this.http.post<any>(
-      this.macrologBackendUrl + '/deleteAccount',
-      null,
-      options
-    ).pipe(catchError(error => of<any>()));
+    return this.http.post<any>(this.macrologBackendUrl + '/deleteAccount', null, options).pipe(
+      catchError(error => of<any>()));
   }
 }

@@ -30,14 +30,14 @@ describe('DiaryService', () => {
 
   it('should get logs for date', async () => {
     spyOn(http, 'get').and.returnValue(of([{}]));
-    const result = await service.getLogsForDay('2019-01-01').toPromise();
+    const result = await service.getLogsForDate('2019-01-01').toPromise();
     expect(result).toEqual([{} as Entry]);
     expect(http.get).toHaveBeenCalledWith('//' + environment.backend + '/logs/day/2019-01-01');
   });
 
   it('should handle error on get logs for date', async () => {
     spyOn(http, 'get').and.returnValue(throwError({ status: 404 }));
-    const result = await service.getLogsForDay('2019-01-01').toPromise();
+    const result = await service.getLogsForDate('2019-01-01').toPromise();
     expect(result).toEqual(undefined);
     expect(http.get).toHaveBeenCalledWith('//' + environment.backend + '/logs/day/2019-01-01');
   });
@@ -47,8 +47,7 @@ describe('DiaryService', () => {
     const result = await service.getMacrosPerDay('2019-01-01', '2019-02-01').toPromise();
     expect(result).toEqual([{} as MacrosPerDay]);
     expect(http.get).toHaveBeenCalledWith('//' + environment.backend + '/logs/macros', {
-      params: { from: '2019-01-01', to: '2019-02-01' },
-      responseType: 'json'
+      params: { from: '2019-01-01', to: '2019-02-01' }
     });
   });
 
@@ -57,8 +56,7 @@ describe('DiaryService', () => {
     const result = await service.getMacrosPerDay('2019-01-01', '2019-02-01').toPromise();
     expect(result).toEqual(undefined);
     expect(http.get).toHaveBeenCalledWith('//' + environment.backend + '/logs/macros', {
-      params: { from: '2019-01-01', to: '2019-02-01' },
-      responseType: 'json'
+      params: { from: '2019-01-01', to: '2019-02-01' }
     });
   });
 

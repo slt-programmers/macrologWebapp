@@ -27,16 +27,14 @@ describe('WebhookService', () => {
     spyOn(http, 'get').and.returnValue(of([{}]));
     const result = await service.getWebhookStatus('STRAVA').toPromise();
     expect(result).toEqual([{}]);
-    expect(http.get).toHaveBeenCalledWith('//' + environment.backend + '/webhooks/STRAVA',
-      { responseType: 'json' });
+    expect(http.get).toHaveBeenCalledWith('//' + environment.backend + '/webhooks/STRAVA');
   });
 
   it('should handle error get webhook status', async () => {
     spyOn(http, 'get').and.returnValue(throwError({ status: 404 }));
     const result = await service.getWebhookStatus('STRAVA').toPromise();
     expect(result).toEqual(undefined);
-    expect(http.get).toHaveBeenCalledWith('//' + environment.backend + '/webhooks/STRAVA',
-      { responseType: 'json' });
+    expect(http.get).toHaveBeenCalledWith('//' + environment.backend + '/webhooks/STRAVA');
   });
 
   it('should start webhook ', async () => {

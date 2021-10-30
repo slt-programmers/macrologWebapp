@@ -49,7 +49,7 @@
       <span class="logday__header__macro"></span>
     </div>
 
-    <log-meal #breakfast [open]="breakfastOpen" [searchables]="searchableFood" [date]="displayDate"
+    <log-meal id="breakfast" #breakfast [open]="breakfastOpen" [searchables]="searchableFood" [date]="displayDate"
       [meal]="'Breakfast'" [logEntries]="breakfastLogs" (dataChanged)="refresh()"></log-meal>
     <log-meal #lunch [open]="lunchOpen" [searchables]="searchableFood" [date]="displayDate"
       [meal]="'Lunch'" [logEntries]="lunchLogs" (dataChanged)="refresh()"></log-meal>

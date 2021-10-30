@@ -11,10 +11,10 @@ export class UserService {
   private macrologBackendUrl = '//' + environment.backend + '/settings';
 
   constructor(private readonly http: HttpClient, private readonly toastService: ToastService) { }
- 
+
   public getSetting(key: string, date: string): Observable<String> {
     return this.http.get<String>(this.macrologBackendUrl + '/' + key,
-      { params: { date: date }, responseType: 'json', }).pipe(
+      { params: { date: date } }).pipe(
         catchError(error => {
           this.toastService.setMessage('Could not get settings');
           return of<String>();
@@ -54,8 +54,7 @@ export class UserService {
 
   // TODO map Synced Account DTO
   public getSyncSettings(key: string): Observable<any> {
-    return this.http.get<any>(this.macrologBackendUrl + '/connectivity/' + key,
-      { responseType: 'json' }).pipe(
+    return this.http.get<any>(this.macrologBackendUrl + '/connectivity/' + key).pipe(
         catchError(error => {
           this.toastService.setMessage('Could not get sync settings');
           return of();

@@ -30,16 +30,14 @@ describe('FoodService', () => {
     spyOn(http, 'get').and.returnValue(of([{ name: 'food' } as Food]));
     const result = await service.getAllFood().toPromise()
     expect(result).toEqual([{ name: 'food' } as Food]);
-    expect(http.get).toHaveBeenCalledWith('//' + environment.backend + '/food',
-      { responseType: 'json' });
+    expect(http.get).toHaveBeenCalledWith('//' + environment.backend + '/food');
   });
 
   it('should handle error on get all food', async () => {
     spyOn(http, 'get').and.returnValue(throwError({status: 404}));
     const result = await service.getAllFood().toPromise()
     expect(result).toEqual(undefined);
-    expect(http.get).toHaveBeenCalledWith('//' + environment.backend + '/food',
-      { responseType: 'json' });
+    expect(http.get).toHaveBeenCalledWith('//' + environment.backend + '/food');
   });
 
   it('should add food', async () => {

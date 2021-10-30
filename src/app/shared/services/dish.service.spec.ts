@@ -31,14 +31,14 @@ describe('DishService', () => {
     spyOn(http, 'get').and.returnValue(of([{} as Dish]));
     const result = await service.getAllDishes().toPromise();
     expect(result).toEqual([{} as Dish]);
-    expect(http.get).toHaveBeenCalledWith('//' + environment.backend + '/dishes', { responseType: 'json' });
+    expect(http.get).toHaveBeenCalledWith('//' + environment.backend + '/dishes');
   });
 
   it('should handle error on get all dishes', async () => {
     spyOn(http, 'get').and.returnValue(throwError({ status: 404 }));
     const result = await service.getAllDishes().toPromise();
     expect(result).toEqual(undefined);
-    expect(http.get).toHaveBeenCalledWith('//' + environment.backend + '/dishes', { responseType: 'json' });
+    expect(http.get).toHaveBeenCalledWith('//' + environment.backend + '/dishes');
   });
 
   it('should post dish', async () => {
