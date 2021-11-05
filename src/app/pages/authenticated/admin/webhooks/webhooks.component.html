@@ -4,7 +4,7 @@
   </div>
 
   <div class="flex flex-col content"  *ngIf="getStatus('STRAVA')">
-    <p class="strong">The Strava webhook is enabled.</p>
+    <p class="strong font-bold">The Strava webhook is enabled.</p>
 
     <div class="flex">
       <label class="flex-grow">Subscription ID </label>
@@ -34,7 +34,7 @@
   </div>
 
   <div class="flex flex-col content" *ngIf="!getStatus('STRAVA')">
-    <p class="strong">The Strava webhook is disabled.</p>
+    <p class="strong font-bold">The Strava webhook is disabled.</p>
 
     <div>
       <button class="button button--warning" (click)="enableWebhook('STRAVA')">

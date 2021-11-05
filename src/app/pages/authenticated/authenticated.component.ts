@@ -6,8 +6,7 @@ import { AuthenticationService } from '../../shared/services/auth.service';
 
 @Component({
   selector: 'authenticated',
-  templateUrl: './authenticated.component.html',
-  styleUrls: ['./authenticated.component.scss'] 
+  templateUrl: './authenticated.component.html'
 })
 export class AuthenticatedComponent implements OnInit {
 

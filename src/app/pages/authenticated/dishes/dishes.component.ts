@@ -22,8 +22,7 @@ export class DishesComponent implements OnInit {
 
   public food: Food[] = [];
   public searchables: FoodSearchable[] = [];
-  public unitName = 'gram';
-  public addIngredientCallBack: Function;
+  public unitName = 'grams';
 
   private unitGrams = 100.0;
 
@@ -31,31 +30,6 @@ export class DishesComponent implements OnInit {
 
   ngOnInit() {
     this.getAllDishes();
-    this.getAllFood();
-    this.addIngredientCallBack = this.addIngredient.bind(this);
-  }
-
-  private getAllDishes(): void {
-    this.dishService.getAllDishes().subscribe(it => {
-      this.allDishes = it;
-      this.allDishes.sort((a, b) => a.name.localeCompare(b.name));
-    });
-  }
-
-  private getAllFood(): void {
-    this.foodService.getAllFood().subscribe(it => {
-      this.food = it
-      this.getFoodSearchableList();
-    });
-  }
-
-  private getFoodSearchableList(): void {
-    const foodList = new Array();
-    for (const item of this.food) {
-      const searchable: FoodSearchable = { food: item };
-      foodList.push(searchable);
-    }
-    this.searchables = foodList;
   }
 
   public openModal(dish: Dish): void {
@@ -71,7 +45,6 @@ export class DishesComponent implements OnInit {
       }
     }
     this.modalIsVisible = true;
-    console.log(this.selectedDish);
   }
 
   public closeModal(): void {
@@ -169,5 +142,12 @@ export class DishesComponent implements OnInit {
     this.dishService.deleteDish(this.selectedDish).subscribe(it => {
       this.closeModal();
     })
+  }
+
+  private getAllDishes(): void {
+    this.dishService.getAllDishes().subscribe(it => {
+      this.allDishes = it;
+      this.allDishes.sort((a, b) => a.name.localeCompare(b.name));
+    });
   }
 }

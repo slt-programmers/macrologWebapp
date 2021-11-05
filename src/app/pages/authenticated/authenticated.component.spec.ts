@@ -10,7 +10,6 @@ import { ScrollBehaviourService } from '../../shared/services/scroll-behaviour.s
 import { HealthcheckService } from '../../shared/services/healthcheck.service';
 import { of, throwError } from 'rxjs';
 import { Router } from '@angular/router';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NavigationComponent } from 'src/app/shared/components/navigation/navigation.component';
 import { MockComponent, MockProvider } from 'ng-mocks';
 import { AuthenticationService } from 'src/app/shared/services/auth.service';

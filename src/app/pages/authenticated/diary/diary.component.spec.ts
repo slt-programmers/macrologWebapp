@@ -9,8 +9,6 @@ import { AddFoodModalComponent } from "src/app/shared/components/modals/add-food
 import { StackDonutComponent } from "src/app/shared/components/stackdonut/stackdonut.component"
 import { ActivityService } from "src/app/shared/services/activity.service"
 import { DiaryService } from "src/app/shared/services/diary.service"
-import { DishService } from "src/app/shared/services/dish.service"
-import { FoodService } from "src/app/shared/services/food.service"
 import { ToastService } from "src/app/shared/services/toast.service"
 import { UserService } from "src/app/shared/services/user.service"
 import { DiaryComponent } from "./diary.component"
@@ -29,8 +27,6 @@ class MockWindow {
 describe('DiaryComponent', () => {
   let fixture: ComponentFixture<DiaryComponent>;
   let component: DiaryComponent;
-  let foodService: FoodService;
-  let dishService: DishService;
   let activityService: ActivityService;
   let userService: UserService;
   let diaryService: DiaryService;
@@ -39,8 +35,6 @@ describe('DiaryComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [
-        MockProvider(FoodService),
-        MockProvider(DishService),
         MockProvider(ActivityService),
         MockProvider(UserService),
         MockProvider(DiaryService),
@@ -58,8 +52,6 @@ describe('DiaryComponent', () => {
       ]
     }).compileComponents();
 
-    foodService = TestBed.inject(FoodService);
-    dishService = TestBed.inject(DishService);
     activityService = TestBed.inject(ActivityService);
     userService = TestBed.inject(UserService);
     diaryService = TestBed.inject(DiaryService);
@@ -76,10 +68,8 @@ describe('DiaryComponent', () => {
   it('should init component', async () => {
     spyOn(userService, 'getSyncSettings').and.returnValue(of({}));
     spyOn(userService, 'getUserGoalStats').and.returnValue(of([]));
-    spyOn(foodService, 'getAllFood').and.returnValue(of([]));
     spyOn(diaryService, 'getLogsForDate').and.returnValue(of([]));
     spyOn(activityService, 'getActivitiesForDate').and.returnValue(of([]));
-    spyOn(dishService, 'getAllDishes').and.returnValue(of([]));
     spyOnProperty(window, 'innerWidth', 'get').and.returnValue(123);
 
     fixture.detectChanges();
@@ -90,10 +80,8 @@ describe('DiaryComponent', () => {
   it('should init component with large window', async () => {
     spyOn(userService, 'getSyncSettings').and.returnValue(of({}));
     spyOn(userService, 'getUserGoalStats').and.returnValue(of([]));
-    spyOn(foodService, 'getAllFood').and.returnValue(of([]));
     spyOn(diaryService, 'getLogsForDate').and.returnValue(of([]));
     spyOn(activityService, 'getActivitiesForDate').and.returnValue(of([]));
-    spyOn(dishService, 'getAllDishes').and.returnValue(of([]));
     spyOnProperty(window, 'innerWidth', 'get').and.returnValue(500);
 
     fixture.detectChanges();
@@ -104,10 +92,8 @@ describe('DiaryComponent', () => {
   it('should init component with usersettings', async () => {
     spyOn(userService, 'getSyncSettings').and.returnValue(of({ syncedAccountId: 'someId' }));
     spyOn(userService, 'getUserGoalStats').and.returnValue(of(undefined));
-    spyOn(foodService, 'getAllFood').and.returnValue(of([]));
     spyOn(diaryService, 'getLogsForDate').and.returnValue(of([]));
     spyOn(activityService, 'getActivitiesForDate').and.returnValue(of([]));
-    spyOn(dishService, 'getAllDishes').and.returnValue(of([]));
     spyOnProperty(window, 'innerWidth', 'get').and.returnValue(123);
 
     fixture.detectChanges();
@@ -170,13 +156,9 @@ describe('DiaryComponent', () => {
   });
 
   it('should close modal', () => {
-    spyOn(foodService, 'getAllFood').and.returnValue(of([{}]));
-    spyOn(dishService, 'getAllDishes').and.returnValue(of([{}]));
     component.modalIsVisible = true;
     component.closeModal();
     expect(component.modalIsVisible).toBeFalse();
-    expect(foodService.getAllFood).toHaveBeenCalled();
-    expect(dishService.getAllDishes).toHaveBeenCalled();
   });
 
   it('should handle document click', () => {

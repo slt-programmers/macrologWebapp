@@ -49,13 +49,13 @@
       <span class="logday__header__macro"></span>
     </div>
 
-    <log-meal id="breakfast" #breakfast [open]="breakfastOpen" [searchables]="searchableFood" [date]="displayDate"
+    <log-meal id="breakfast" #breakfast [open]="breakfastOpen" [date]="displayDate"
       [meal]="'Breakfast'" [logEntries]="breakfastLogs" (dataChanged)="refresh()"></log-meal>
-    <log-meal #lunch [open]="lunchOpen" [searchables]="searchableFood" [date]="displayDate"
+    <log-meal #lunch [open]="lunchOpen" [date]="displayDate"
       [meal]="'Lunch'" [logEntries]="lunchLogs" (dataChanged)="refresh()"></log-meal>
-    <log-meal #dinner [open]="dinnerOpen" [searchables]="searchableFood" [date]="displayDate"
+    <log-meal #dinner [open]="dinnerOpen" [date]="displayDate"
       [meal]="'Dinner'" [logEntries]="dinnerLogs" (dataChanged)="refresh()"></log-meal>
-    <log-meal #snacks [open]="snacksOpen" [searchables]="searchableFood" [date]="displayDate"
+    <log-meal #snacks [open]="snacksOpen" [date]="displayDate"
       [meal]="'Snacks'" [logEntries]="snacksLogs" (dataChanged)="refresh()"></log-meal>
     <log-activity #activities [open]="activitiesOpen" [date]="displayDate"
       [logActivities]="activitiesLogs" [syncAvailable]="activititiesSync" (dataChanged)="refresh()"

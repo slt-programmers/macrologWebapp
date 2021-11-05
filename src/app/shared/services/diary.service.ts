@@ -21,11 +21,9 @@ export class DiaryService {
   }
 
   public getMacrosPerDay(dateFrom: string, dateTo: string): Observable<MacrosPerDay[]> {
-    return this.http.get<MacrosPerDay[]>(this.macrologBackendUrl + '/macros', {
-      params: { from: dateFrom, to: dateTo }
-    }).pipe(catchError(error => {
-      return of<any>()
-    }));
+    return this.http.get<MacrosPerDay[]>(this.macrologBackendUrl + '/macros',
+      { params: { from: dateFrom, to: dateTo } })
+      .pipe(catchError(error => { return of<any>() }));
   }
 
   public addEntries(storeLogEntryRequest: StoreLogRequest[]): Observable<Entry[]> {
@@ -33,7 +31,6 @@ export class DiaryService {
       'Content-Type': 'application/json',
       'Access-Control-Allow-Origin': environment.origin,
     };
-
     const options = { headers: headers };
     return this.http.post<StoreLogRequest[]>(this.macrologBackendUrl + '/', storeLogEntryRequest, options)
       .pipe(catchError(error => { return of<any>() }));
@@ -45,9 +42,7 @@ export class DiaryService {
       'Access-Control-Allow-Origin': environment.origin,
     };
     const options = { headers: headers };
-    return this.http.delete<number>(this.macrologBackendUrl + '/' + logEntry.id, options).pipe(
-      catchError(error => {
-        return of<any>()
-      }));
+    return this.http.delete<number>(this.macrologBackendUrl + '/' + logEntry.id, options)
+      .pipe(catchError(error => { return of<any>() }));
   }
 }

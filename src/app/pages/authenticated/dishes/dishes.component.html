@@ -29,8 +29,8 @@
   </button>
 </div>
 
-<app-modal class="min-w-" *ngIf="modalIsVisible" [title]="modalTitle" (close)="closeModal()">
-  <form #makeDishForm="ngForm" >
+<app-modal *ngIf="modalIsVisible" [title]="modalTitle" (close)="closeModal()">
+  <form #makeDishForm="ngForm">
     <div class="flex flex-col content">
 
       <div class="flex align-center">
@@ -68,7 +68,7 @@
       </div>
 
       <div class="autocomplete-wrapper">
-        <autocomplete-food [placeholder]="'Search for food'" [searchables]="searchables"
+        <autocomplete-food [placeholder]="'Search for food'"
           (select)="addIngredient($event)">
         </autocomplete-food>
       </div>

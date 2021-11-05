@@ -6,10 +6,7 @@ import { FoodService } from '../../../shared/services/food.service';
 import { DishService } from '../../../shared/services/dish.service';
 import { Entry } from '../../../shared/model/entry';
 import { Activity } from '../../../shared/model/activity';
-import { FoodSearchable } from '../../../shared/model/foodSearchable';
 import { DatePipe } from '@angular/common';
-import { Dish } from 'src/app/shared/model/dish';
-import { Food } from 'src/app/shared/model/food';
 
 @Component({
   selector: 'diary-page',
@@ -26,9 +23,6 @@ export class DiaryComponent implements OnInit {
   public modalIsVisible = false;
   public isLogMealOpen: boolean;
   public allLogs: Entry[];
-  public food: Food[];
-  public dishes: Dish[];
-  public searchableFood: FoodSearchable[];
   public displayDate: Date;
   private pipe: DatePipe;
 
@@ -50,9 +44,9 @@ export class DiaryComponent implements OnInit {
   public circleRadius = 60;
   public strokeWidth = 8;
 
-  constructor(private foodService: FoodService, private userService: UserService,
+  constructor(private userService: UserService,
     private logService: DiaryService, private activityService: ActivityService,
-    private dishService: DishService, private readonly window: Window) {
+    private readonly window: Window) {
     this.displayDate = new Date();
     this.pipe = new DatePipe('en-US');
   }
@@ -60,7 +54,6 @@ export class DiaryComponent implements OnInit {
   ngOnInit() {
     this.getSyncSettings();
     this.getUserGoals(this.pipe.transform(this.displayDate, 'yyyy-MM-dd'));
-    this.getAllFood();
     this.getLogEntries(this.pipe.transform(this.displayDate, 'yyyy-MM-dd'));
     if (this.window.innerWidth < 480) {
       this.circleRadius = 40;
@@ -114,7 +107,6 @@ export class DiaryComponent implements OnInit {
 
   public closeModal() {
     this.modalIsVisible = false;
-    this.getAllFood();
   }
 
   private getUserGoals(date: string): void {
@@ -130,20 +122,6 @@ export class DiaryComponent implements OnInit {
       if (result.syncedAccountId) {
         this.activititiesSync = true; // TODO --> GET THIS TO ACTIVITIES PAGE TO ENABLE SYNC BUTTON
       }
-    });
-  }
-
-  private getAllFood(): void {
-    this.foodService.getAllFood().subscribe((data) => {
-      this.food = data;
-      this.getAllDishes();
-    });
-  }
-
-  private getAllDishes(): void {
-    this.dishService.getAllDishes().subscribe((data) => {
-      this.dishes = data;
-      this.getFoodSearchableList();
     });
   }
 
@@ -164,20 +142,6 @@ export class DiaryComponent implements OnInit {
     this.activityService.getActivitiesForDate(date).subscribe(it => {
       this.activitiesLogs = it;
     });
-  }
-
-  private getFoodSearchableList() {
-    const searchables: Array<FoodSearchable> = [];
-
-    for (const item of this.food) {
-      const searchable = { food: item };
-      searchables.push(searchable);
-    }
-    for (const dish of this.dishes) {
-      searchables.push({ dish: dish });
-    }
-
-    this.searchableFood = searchables;
   }
 
   private setGoalCal() {

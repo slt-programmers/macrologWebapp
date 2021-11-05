@@ -1,6 +1,9 @@
 import { Component, Input, ViewChild, ElementRef, Output, EventEmitter } from '@angular/core';
 import { FoodSearchable } from '../../model/foodSearchable';
 import { Food } from '../../model/food';
+import { FoodService } from '../../services/food.service';
+import { DishService } from '../../services/dish.service';
+import { Dish } from '../../model/dish';
 
 @Component({
   templateUrl: './autocomplete-food.component.html',
@@ -16,14 +19,42 @@ export class AutocompleteFoodComponent {
 
   @Input() placeholder = '';
   @Input() selectFn: Function;
-  @Input() searchables: FoodSearchable[];
+  @Input() includeDishes = false;
   @Output() select: EventEmitter<FoodSearchable> = new EventEmitter<FoodSearchable>();
 
+  public searchables: any[]
   public foodMatch = new Array();
   public foodName: string;
   public showAutoComplete: boolean;
+  public allFood: Food[];
+  public allDishes: Dish[];
 
-  constructor() { }
+  constructor(private readonly foodService: FoodService, private readonly dishService: DishService) {
+    this.foodService.getAllFood().subscribe(it => {
+      this.allFood = it;
+      this.getFoodSearchableList();
+    });
+    this.dishService.getAllDishes().subscribe(it => {
+      this.allDishes = it;
+      this.getFoodSearchableList();
+    });
+  }
+
+  private getFoodSearchableList(): void {
+    if (!!this.allFood && !!this.allDishes) {
+      const searchList = [];
+      for (const item of this.allFood) {
+        const searchable: FoodSearchable = { food: item };
+        searchList.push(searchable);
+      }
+      if (this.includeDishes) {
+        for (const dish of this.allDishes) {
+          searchList.push({ dish: dish });
+        }
+      }
+      this.searchables = searchList;
+    }
+  }
 
   public findFoodMatch(event: any) {
     this.foodMatch = new Array<Food>();
@@ -87,8 +118,6 @@ export class AutocompleteFoodComponent {
   }
 
   private handleEnter() {
-    const element = document.activeElement;
-
     const index = this.getCurrentOptionIndex();
     this.selectMatch(this.foodMatch[index]);
   }

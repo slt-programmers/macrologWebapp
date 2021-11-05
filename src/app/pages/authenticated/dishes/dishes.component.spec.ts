@@ -1,6 +1,8 @@
 import { ComponentFixture, TestBed } from "@angular/core/testing"
 import { MockComponent, MockProvider } from "ng-mocks"
 import { of } from "rxjs";
+import { Dish } from "src/app/shared/model/dish";
+import { Food } from "src/app/shared/model/food";
 import { Ingredient } from "src/app/shared/model/ingredient";
 import { DishService } from "src/app/shared/services/dish.service"
 import { FoodService } from "src/app/shared/services/food.service";
@@ -78,4 +80,15 @@ describe('DishesComponent', () => {
     expect(result).toEqual(123);
   });
 
+  it('should open modal', () => {
+    component.openModal(undefined);
+    expect(component.modalTitle).toEqual('Make a dish');
+    expect(component.selectedDish).toEqual({name: '', ingredients: []});
+
+    const dish = {name: 'dish', ingredients: [{name: 'food'} as Food]} as Dish
+    component.openModal(dish);
+    expect(component.modalTitle).toEqual('Edit dish');
+    expect(component.selectedDish).toEqual(dish);
+  });
+  
 });

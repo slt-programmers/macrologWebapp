@@ -87,8 +87,9 @@
       </div>
 
       <div class="meal__new-ingredient">
-        <autocomplete-food class="meal__new-ingredient__name" [searchables]="searchables"
-          [placeholder]="'What did you have for ' + meal.toLowerCase() + '?'" [selectFn]="addLogEntryCallBack">
+        <autocomplete-food class="meal__new-ingredient__name" [includeDishes]="true"
+          [placeholder]="'What did you have for ' + meal.toLowerCase() + '?'"
+          (select)="addLogEntry($event)">
         </autocomplete-food>
 
         <div class=" meal__new-ingredient__close">
