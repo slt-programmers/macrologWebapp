@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 import { forkJoin } from 'rxjs';
 import { calculateTDEE } from 'src/app/util/functions';
 import { differenceInYears, isValid, parse } from 'date-fns';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-onboarding',
@@ -47,10 +48,19 @@ export class OnboardingComponent implements OnInit {
   public breakfastOpen = false;
   public foodSearchables = new Array();
 
+  public intakeForm: FormGroup;
   public currentStep: number;
 
   constructor(private userService: UserService, private router: Router) {
-    const item:Food = {name: 'Apple', protein: 0.4, fat: 0.0,carbs: 12};
+    this.intakeForm = new FormGroup({
+      name: new FormControl('', Validators.required),
+      birthday: new FormControl('', Validators.required),
+      gender: new FormControl('', Validators.required),
+      height: new FormControl('', Validators.required),
+      weight: new FormControl('', Validators.required),
+      activity: new FormControl('', Validators.required)
+    });
+    const item: Food = { name: 'Apple', protein: 0.4, fat: 0.0, carbs: 12 };
     item.portions = [];
     const portion = new Portion();
     const macros: Macros = {};
@@ -62,7 +72,7 @@ export class OnboardingComponent implements OnInit {
     portion.description = 'piece';
     item.portions.push(portion);
 
-    const searchable:FoodSearchable = {food: item};
+    const searchable: FoodSearchable = { food: item };
     this.foodSearchables.push(searchable);
   }
 
@@ -144,17 +154,21 @@ export class OnboardingComponent implements OnInit {
   }
 
   public saveUserSettings(): void {
-    forkJoin([
-      this.userService.addUserSetting('name', this.name),
-      this.userService.addUserSetting('birthday', this.birthday.toString()),
-      this.userService.addUserSetting('gender', this.gender.toString()),
-      this.userService.addUserSetting('height', this.height.toString()),
-      this.userService.addUserSetting('weight', this.weight.toString()),
-      this.userService.addUserSetting('activity', this.activity.toString()),
-    ]).subscribe(
-      () => this.nextStep(),
-      (error) => console.error(error)
-    );
+    this.intakeForm.markAllAsTouched();
+    if (this.intakeForm.valid) {
+      const data = this.intakeForm.value;
+      forkJoin([
+        this.userService.addUserSetting('name', data.name),
+        this.userService.addUserSetting('birthday', data.birthday.toString()),
+        this.userService.addUserSetting('gender', data.gender.toString()),
+        this.userService.addUserSetting('height', data.height.toString()),
+        this.userService.addUserSetting('weight', data.weight.toString()),
+        this.userService.addUserSetting('activity', data.activity.toString()),
+      ]).subscribe(
+        () => this.nextStep(),
+        (error) => console.error(error)
+      );
+    }
   }
 
   public saveIntake() {
@@ -201,7 +215,7 @@ export class OnboardingComponent implements OnInit {
     }
   }
 
-  dummy() {}
+  dummy() { }
 
   finish() {
     this.router.navigate(['/dashboard']);

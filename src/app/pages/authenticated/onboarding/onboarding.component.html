@@ -17,48 +17,48 @@
           things about you.
         </p>
 
-        <form #personalIntake="ngForm">
+        <form [formGroup]="intakeForm">
           <div class="form-field">
             <label class="form-field__label">Name</label>
-            <input class="input form-field__input" name="name" type="text" [(ngModel)]="name"
+            <input class="input form-field__input" name="name" type="text" formControlName="name"
               required />
           </div>
 
           <div class="form-field">
             <label class="form-field__label">Date of birth</label>
             <input class="input form-field__input" required validDate
-              placeholder="DD-MM-YYYY, eg 26-3-1989" name="birthday" [(ngModel)]="birthday" />
+              placeholder="DD-MM-YYYY, eg 26-3-1989" name="birthday" formControlName="birthday" />
           </div>
 
           <div class="flex col-gap-1">
             <label class="form-field__label">Gender</label>
 
             <div class="flex align-center">
-              <input type="radio" id="male" [(ngModel)]="gender" value="MALE">
+              <input type="radio" id="male" formControlName="gender" value="MALE">
               <label for="male">Male</label>
             </div>
 
             <div class="flex align-center">
-              <input type="radio" id="female" [(ngModel)]="gender" value="FEMALE">
+              <input type="radio" id="female" formControlName="gender" value="FEMALE">
               <label for="female">Female</label>
             </div>
           </div>
 
           <div class="form-field">
             <label class="form-field__label">Height (cm)</label>
-            <input class="input form-field__input" name="height" type="number" [(ngModel)]="height"
+            <input class="input form-field__input" name="height" type="number" formControlName="height"
               required />
           </div>
 
           <div class="form-field">
             <label class="form-field__label">Start weight (kg)</label>
-            <input class="input form-field__input" name="weight" type="number" [(ngModel)]="weight"
+            <input class="input form-field__input" name="weight" type="number" formControlName="weight"
               step="0.1" required />
           </div>
 
           <div class="form-field">
             <label class="form-field__label">Activity level</label>
-            <select class="form-field__input" name="activity" [(ngModel)]="activity" required>
+            <select class="form-field__input" name="activity" formControlName="activity" required>
               <option value="1.2">Sedentary</option>
               <option value="1.375">Lightly active</option>
               <option value="1.55">Moderately active</option>
