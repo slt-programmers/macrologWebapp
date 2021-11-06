@@ -46,7 +46,7 @@
             <option>{{unitName}}</option>
 
             <!-- portion amount -->
-            <option *ngFor="let portion of getAvailablePortions(ingr)"
+            <option *ngFor="let portion of ingr.food.portions"
               value="{{portion.description}}" [selected]="portion.id == ingr.portion?.id">
               {{portion.description}}
             </option>

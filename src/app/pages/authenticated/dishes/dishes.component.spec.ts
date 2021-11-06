@@ -63,7 +63,10 @@ describe('DishesComponent', () => {
 
   it('should get description', () => {
     const ingredient: Ingredient = {
-      portion: { id: 1, description: 'portionDesc' }, multiplier: 1, food: {
+      portionId: 1,
+      portion: { id: 1, description: 'portionDesc' }, 
+      multiplier: 1, 
+      food: {
         portions: [
           { id: 1, description: 'portionDesc' }]
       }
@@ -71,6 +74,7 @@ describe('DishesComponent', () => {
     let result = component.getIngredientDescription(ingredient);
     expect(result).toEqual('1 portionDesc');
     ingredient.portion = undefined;
+    ingredient.portionId = undefined;
     result = component.getIngredientDescription(ingredient);
     expect(result).toEqual('100 gram');
   });
@@ -80,15 +84,4 @@ describe('DishesComponent', () => {
     expect(result).toEqual(123);
   });
 
-  it('should open modal', () => {
-    component.openModal(undefined);
-    expect(component.modalTitle).toEqual('Make a dish');
-    expect(component.selectedDish).toEqual({name: '', ingredients: []});
-
-    const dish = {name: 'dish', ingredients: [{name: 'food'} as Food]} as Dish
-    component.openModal(dish);
-    expect(component.modalTitle).toEqual('Edit dish');
-    expect(component.selectedDish).toEqual(dish);
-  });
-  
 });

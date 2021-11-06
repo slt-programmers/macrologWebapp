@@ -35,8 +35,14 @@ export class DishesComponent implements OnInit {
   public openModal(dish: Dish): void {
     if (!!dish) {
       this.modalTitle = 'Edit dish';
-      this.selectedDish = {...dish, ingredients: [...dish.ingredients]};
-      
+      const ingredients = [];
+      for (let ingredient of dish.ingredients) {
+        ingredients.push({
+          ...ingredient,
+          portion: this.getPortion(ingredient, ingredient.portionId)
+        });
+      }
+      this.selectedDish = { ...dish, ingredients: ingredients };
     } else {
       this.modalTitle = 'Make a dish';
       this.selectedDish = {
@@ -63,8 +69,8 @@ export class DishesComponent implements OnInit {
   }
 
   public getIngredientDescription(ingredient: Ingredient): string {
-    if (ingredient.portion) {
-      const usedPortion = this.getPortion(ingredient, ingredient.portion.id);
+    if (ingredient.portionId) {
+      const usedPortion = this.getPortion(ingredient, ingredient.portionId);
       return ingredient.multiplier + ' ' + usedPortion.description;
     } else {
       return ingredient.multiplier * 100 + ' gram';
@@ -82,6 +88,7 @@ export class DishesComponent implements OnInit {
   }
 
   public saveDish() {
+    console.log(this.selectedDish);
     this.dishService.addDish(this.selectedDish).subscribe(it => {
       this.closeModal();
     });
@@ -91,22 +98,15 @@ export class DishesComponent implements OnInit {
     this.selectedDish.ingredients.splice(index, 1);
   }
 
-  public getAvailablePortions(ingredient: Ingredient) {
-    for (const item of this.searchables) {
-      if (item.food.id === ingredient.food.id) {
-        return item.food.portions;
-      }
-    }
-    return undefined;
-  }
-
   public portionChange(ingredient: Ingredient, eventTarget: any) {
     if (eventTarget.value === this.unitName) {
       ingredient.portion = undefined;
+      ingredient.portionId = undefined;
     } else {
       for (const portion of ingredient.food.portions) {
         if (portion.description === eventTarget.value) {
           ingredient.portion = portion;
+          ingredient.portionId = portion.id;
           break;
         }
       }

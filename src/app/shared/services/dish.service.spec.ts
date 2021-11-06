@@ -43,9 +43,10 @@ describe('DishService', () => {
 
   it('should post dish', async () => {
     spyOn(http, 'post').and.returnValue(of({} as Dish));
-    const result = await service.addDish({ name: 'dish' } as Dish).toPromise();
+    const result = await service.addDish({ name: 'dish', ingredients:[] } as Dish).toPromise();
     expect(result).toEqual({} as Dish);
-    expect(http.post).toHaveBeenCalledWith('//' + environment.backend + '/dishes/', { name: 'dish' },
+    expect(http.post).toHaveBeenCalledWith('//' + environment.backend + '/dishes/', 
+    { name: 'dish', id: undefined, ingredients: [] },
       {
         headers: {
           'Content-Type': 'application/json',
@@ -56,9 +57,10 @@ describe('DishService', () => {
 
   it('should handle error on post dish', async () => {
     spyOn(http, 'post').and.returnValue(throwError({ status: 404 }));
-    const result = await service.addDish({ name: 'dish' } as Dish).toPromise();
+    const result = await service.addDish({ name: 'dish', ingredients:[]  } as Dish).toPromise();
     expect(result).toEqual(undefined);
-    expect(http.post).toHaveBeenCalledWith('//' + environment.backend + '/dishes/', { name: 'dish' },
+    expect(http.post).toHaveBeenCalledWith('//' + environment.backend + '/dishes/', 
+    { name: 'dish', id: undefined, ingredients: [] },
       {
         headers: {
           'Content-Type': 'application/json',
