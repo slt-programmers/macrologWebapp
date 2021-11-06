@@ -101,14 +101,6 @@ export class DiaryComponent implements OnInit {
     this.getLogEntries(this.pipe.transform(this.displayDate, 'yyyy-MM-dd'));
   }
 
-  public openModal() {
-    this.modalIsVisible = true;
-  }
-
-  public closeModal() {
-    this.modalIsVisible = false;
-  }
-
   private getUserGoals(date: string): void {
     this.intakeGoals = [];
     this.userService.getUserGoalStats(date).subscribe(it => {

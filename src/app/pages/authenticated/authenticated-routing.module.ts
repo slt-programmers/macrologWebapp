@@ -14,7 +14,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BargraphComponent } from 'src/app/shared/components/bargraph/bargraph.component';
 import { AutocompleteFoodComponent } from 'src/app/shared/components/autocomplete-food/autocomplete-food.component';
 import { PiechartComponent } from 'src/app/shared/components/piechart/piechart.component';
-import { AddFoodModalComponent } from 'src/app/shared/components/modals/add-food-modal/add-food-modal.component';
 import { LogMealComponent } from 'src/app/shared/components/log-meal/log-meal.component';
 import { ComponentsModule } from 'src/app/shared/components/components.module';
 import { StepperComponent } from 'src/app/shared/components/stepper/stepper.component';
@@ -90,7 +89,6 @@ export const authenticatedRoutes: Routes = [
     BargraphComponent,
     AutocompleteFoodComponent,
     PiechartComponent,
-    AddFoodModalComponent,
     LogMealComponent,
     StepperComponent,
     LogActivityComponent,

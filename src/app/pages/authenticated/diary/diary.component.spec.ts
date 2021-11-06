@@ -5,7 +5,6 @@ import { of } from "rxjs"
 import { DatepickerComponent } from "src/app/shared/components/datepicker/datepicker.component"
 import { LogActivityComponent } from "src/app/shared/components/log-activity/log-activity.component"
 import { LogMealComponent } from "src/app/shared/components/log-meal/log-meal.component"
-import { AddFoodModalComponent } from "src/app/shared/components/modals/add-food-modal/add-food-modal.component"
 import { StackDonutComponent } from "src/app/shared/components/stackdonut/stackdonut.component"
 import { ActivityService } from "src/app/shared/services/activity.service"
 import { DiaryService } from "src/app/shared/services/diary.service"
@@ -47,7 +46,6 @@ describe('DiaryComponent', () => {
         LogMealComponent,
         MockComponent(LogActivityComponent),
         MockComponent(StackDonutComponent),
-        MockComponent(AddFoodModalComponent),
         MockComponent(DatepickerComponent),
       ]
     }).compileComponents();
@@ -147,18 +145,6 @@ describe('DiaryComponent', () => {
     expect(component.dinnerOpen).toBeFalse();
     expect(component.snacksOpen).toBeFalse();
     expect(component.activitiesOpen).toBeFalse();
-  });
-
-  it('should open modal', () => {
-    component.modalIsVisible = false;
-    component.openModal();
-    expect(component.modalIsVisible).toBeTrue();
-  });
-
-  it('should close modal', () => {
-    component.modalIsVisible = true;
-    component.closeModal();
-    expect(component.modalIsVisible).toBeFalse();
   });
 
   it('should handle document click', () => {
