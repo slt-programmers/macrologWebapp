@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FoodService } from '../../../shared/services/food.service';
 import { Food } from '../../../shared/model/food';
+import { Portion } from 'src/app/shared/model/portion';
 
 @Component({
   selector: 'app-food',
@@ -21,6 +22,7 @@ export class FoodComponent implements OnInit {
 
   public isLoading = true;
   public modalIsVisible = false;
+  public modalTitle = 'Add food';
   public currentPage = 1;
   public itemsPerPage = 15;
   public selectedFood: Food = null; // input voor modal popup
@@ -73,21 +75,19 @@ export class FoodComponent implements OnInit {
   }
 
   public openModal(food: Food) {
-    this.selectedFood = null;
-    if (food !== undefined && (food.id === undefined || food.id === null)) {
-      for (const searchableFood of this.allFoodFromDB) {
-        if (searchableFood.name === food.name) {
-          this.selectedFood = searchableFood;
-        }
-      }
+    if (food) {
+      this.modalTitle = 'Edit food';
+      this.selectedFood = JSON.parse(JSON.stringify(food)) as Food;
     } else {
-      this.selectedFood = food;
+      this.modalTitle = 'Add food';
+      this.selectedFood = {
+        portions: []
+      }
     }
-
     this.modalIsVisible = true;
   }
 
-  public closeModal(event: any) {
+  public closeModal() {
     this.loadAllFood();
     this.modalIsVisible = false;
   }
@@ -160,5 +160,37 @@ export class FoodComponent implements OnInit {
       percentageFood.push(newFood);
     }
     return percentageFood;
+  }
+
+  public saveFood(): void {
+    const newFood: Food = {
+      name: this.selectedFood.name,
+      protein: this.selectedFood.protein,
+      fat: this.selectedFood.fat,
+      carbs: this.selectedFood.carbs
+    };
+    if (this.selectedFood) {
+      newFood.id = this.selectedFood.id;
+    }
+    newFood.portions = this.selectedFood.portions;
+
+    this.foodService.addFood(newFood).subscribe(() => {
+      this.closeModal();
+    });
+  }
+
+  public isNewPortion(portion: Portion): boolean {
+    if (portion.id !== null && portion.id !== undefined && portion.id !== 0) {
+      return false;
+    }
+    return true;
+  }
+
+  public addNewPortion(): void {
+    this.selectedFood.portions.push(new Portion());
+  }
+
+  public removePortion(index: number): void {
+    this.selectedFood.portions.splice(index, 1);
   }
 }
