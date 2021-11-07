@@ -24,7 +24,7 @@ export class JwtInterceptor implements HttpInterceptor {
         setHeaders: {
           Authorization: `Bearer ${currentUser.token}`,
           'Access-Control-Allow-Origin': environment.origin,
-          'Access-Control-Allow-Methods': 'PUT, GET, POST',
+          'Access-Control-Allow-Methods': 'PUT, GET, POST, DELETE, OPTIONS',
           'Access-Control-Allow-Headers':
             'Origin, Methods, Content-Type, Accept',
         },
@@ -37,7 +37,7 @@ export class JwtInterceptor implements HttpInterceptor {
             'Access-Control-Allow-Origin, Accept, X-Requested-With, Content-Type, ' +
             'Access-Control-Request-Method, Access-Control-Request-Headers',
           'Access-Control-Allow-Origin': environment.origin,
-          'Access-Control-Allow-Methods': 'PUT, GET, POST',
+          'Access-Control-Allow-Methods': 'PUT, GET, POST, DELETE, OPTIONS',
         },
       });
     }
