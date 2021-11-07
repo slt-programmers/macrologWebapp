@@ -5,6 +5,7 @@ node_js:
   - 'lts/*'
 
 stages:
+  - 'build and test'
   - 'build'
   - 'unit test and scan'
   - 'integration test'
@@ -21,12 +22,18 @@ jobs:
   allow_failures:
     - script: sonar-scanner -Dsonar.projectKey=slt-programmers_macrologWebapp
   include:
-    - stage: 'build'
-      script: ng build
-    - stage: 'unit test and scan'
+    - stage: 'build and unit-test'
       if: branch != release
-      script: npm run test
+      name: 'build'
+      script: npm run build
+    - script: npm run test
+      name: 'unit-test'
       after_script: sonar-scanner -Dsonar.projectKey=slt-programmers_macrologWebapp
+
+    # - stage: 'unit test and scan'
+    #   if: branch != release
+    #   script: npm run test
+    #   after_script: sonar-scanner -Dsonar.projectKey=slt-programmers_macrologWebapp
   # - stage: "integration tests"
   #   if: branch != release
   #   script: ng e2e -c acc
