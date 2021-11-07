@@ -8,30 +8,6 @@
     justify-content: center;
   }
 
-  &__header {
-    border-bottom: 1px solid $cloud;
-    display: flex;
-    font-weight: 600;
-    padding: 10px;
-
-    &__macro {
-      &:first-child {
-        display: none;
-      }
-
-      @media (min-width: $phone) {
-        flex-basis: 15%;
-
-        &:first-child {
-          display: flex;
-          flex-basis: 40%;
-        }
-      }
-
-      text-align: center;
-      flex-basis: 25%;
-    }
-  }
 
   &__total {
     display: flex;

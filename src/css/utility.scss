@@ -24,6 +24,12 @@
 .flex-grow {
   flex-grow: 1;
 }
+.flex-grow-2 {
+  flex-grow: 2;
+}
+.flex-grow-3 {
+  flex-grow: 3;
+}
 .justify-center {
   justify-content: center;
 }
@@ -138,6 +144,9 @@
 }
 .text-white {
   color: white;
+}
+.font-semibold {
+  font-weight: 600;
 }
 .font-bold,
 .strong {

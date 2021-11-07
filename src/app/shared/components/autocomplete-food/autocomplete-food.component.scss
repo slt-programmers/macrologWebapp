@@ -2,7 +2,6 @@
 
 .autocomplete-wrapper {
   position: relative;
-  margin-bottom: $halfGutter;
 }
 
 .autocomplete {
@@ -16,7 +15,7 @@
 
   &__option {
     padding: 8px;
-    background-color: $white;
+    background-color: white;
     border: 1px solid $smoke;
     border-top: 0;
     font-size: 16px;
