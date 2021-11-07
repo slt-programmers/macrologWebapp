@@ -26,8 +26,8 @@ jobs:
       if: branch != release
       name: 'build'
       script: npm run build
+    - script: npm run test
       name: 'unit-test'
-      script: npm run test
       after_script: sonar-scanner -Dsonar.projectKey=slt-programmers_macrologWebapp
 
     # - stage: 'unit test and scan'
