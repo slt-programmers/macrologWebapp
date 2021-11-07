@@ -42,8 +42,14 @@ export class StackDonutComponent implements OnInit, AfterViewInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    if (changes.achieved) {
-      this.drawProgressCircle(changes.achieved.previousValue, changes.achieved.currentValue);
+    if (changes.achieved || changes.goal) {
+      if (changes.achieved) {
+        this.achieved = changes.achieved.currentValue;
+      }
+      if (changes.goal) {
+        this.goal = changes.goal.currentValue | 0
+      }
+      this.drawProgressCircle(this.achieved, 0);
     }
   }
 

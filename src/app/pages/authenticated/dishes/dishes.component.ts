@@ -88,7 +88,6 @@ export class DishesComponent implements OnInit {
   }
 
   public saveDish() {
-    console.log(this.selectedDish);
     this.dishService.addDish(this.selectedDish).subscribe(it => {
       this.closeModal();
     });

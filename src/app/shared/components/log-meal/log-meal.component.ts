@@ -197,7 +197,6 @@ export class LogMealComponent implements OnChanges {
   }
   
   private multiplyMacro(logEntry: Entry, macro: 'protein' | 'fat' | 'carbs'): number {
-    console.log(logEntry);
     if (logEntry.portion) {
       return logEntry.multiplier * logEntry.portion.macros[macro];
     } else {
