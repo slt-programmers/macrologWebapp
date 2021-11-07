@@ -7,6 +7,8 @@ import { DishService } from '../../../shared/services/dish.service';
 import { Entry } from '../../../shared/model/entry';
 import { Activity } from '../../../shared/model/activity';
 import { DatePipe } from '@angular/common';
+import { ToastComponent } from 'src/app/shared/components/toast/toast.component';
+import { ToastService } from 'src/app/shared/services/toast.service';
 
 @Component({
   selector: 'diary-page',
@@ -44,7 +46,7 @@ export class DiaryComponent implements OnInit {
   public circleRadius = 60;
   public strokeWidth = 8;
 
-  constructor(private userService: UserService,
+  constructor(private userService: UserService, private readonly toastService: ToastService,
     private logService: DiaryService, private activityService: ActivityService,
     private readonly window: Window) {
     this.displayDate = new Date();

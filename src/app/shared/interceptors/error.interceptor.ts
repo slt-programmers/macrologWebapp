@@ -9,10 +9,11 @@ import { Router } from '@angular/router';
 import { AuthenticationService } from '../services/auth.service';
 import { Observable, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
+import { ToastService } from '../services/toast.service';
 
 @Injectable()
 export class ErrorInterceptor implements HttpInterceptor {
-  constructor(private authService: AuthenticationService, private router: Router) { }
+  constructor(private authService: AuthenticationService, private readonly toastService: ToastService) { }
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     return next.handle(request).pipe(
@@ -24,9 +25,9 @@ export class ErrorInterceptor implements HttpInterceptor {
           this.authService.logout();
           return throwError(err);
         } else {
+          this.toastService.setMessage(err.message, true, 'Error');
           return throwError(err);
         }
-        // TODO add general error handling
       })
     );
   }

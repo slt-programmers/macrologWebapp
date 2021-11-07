@@ -1,28 +1,25 @@
-@import '../../../../css/variables.scss';
-
 .toast {
-  @media (min-width: $phone) {
-    font-size: 16px;
-    min-width: 250px;
-  }
-
-  background-color: $primary;
-  border-radius: 3px 3px 0 0;
-  bottom: 0;
-  color: $mist;
-  font-size: 14px;
-  font-weight: 300;
-  height: 0;
+  display: block;
   position: fixed;
-  text-align: center;
-  transition: height 0.2s;
-  padding: 0 $gutter;
-  left: 50%;
-  transform: translateX(-50%);
-  white-space: nowrap;
+  top: 3rem;
+  right: 2rem;
+
+  opacity: 0;
+  background-color: #cfeecf;
+  box-shadow: 0px 0px 10px rgb(0, 0, 0, 0.1);
+
+  border-radius: 4px;
+  color: #333333;
+  padding: 1rem;
+
+  min-height: 4rem;
+  max-width: 20rem;
+  width: 20rem;
+  
+  transition: top 0.2s;
   z-index: 24;
 
-  &__message {
-    padding-top: $halfGutter;
+  &--error {
+    background-color: #f9c0c0;
   }
 }
