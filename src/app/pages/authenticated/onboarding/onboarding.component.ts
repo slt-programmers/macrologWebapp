@@ -60,20 +60,6 @@ export class OnboardingComponent implements OnInit {
       weight: new FormControl('', Validators.required),
       activity: new FormControl('', Validators.required)
     });
-    const item: Food = { name: 'Apple', protein: 0.4, fat: 0.0, carbs: 12 };
-    item.portions = [];
-    const portion = new Portion();
-    const macros: Macros = {};
-    macros.protein = 0.8;
-    macros.fat = 0.0;
-    macros.carbs = 24;
-    portion.macros = macros;
-    portion.grams = 200;
-    portion.description = 'piece';
-    item.portions.push(portion);
-
-    const searchable: FoodSearchable = { food: item };
-    this.foodSearchables.push(searchable);
   }
 
   ngOnInit() {

@@ -24,7 +24,6 @@ import { Portion } from 'src/app/shared/model/portion';
 export class LogMealComponent implements OnChanges {
   @ViewChild('logMeal', { static: false }) private logMealEref: ElementRef;
 
-  @Input() searchables: FoodSearchable[];
   @Input() meal: string;
   @Input() logEntries: Entry[];
   @Input() date: Date;

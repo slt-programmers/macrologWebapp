@@ -9,7 +9,7 @@
         <stepper [currentStep]="currentStep" [numberOfSteps]="4"></stepper>
       </div>
 
-      <div class="" #step1 *ngIf="currentStep === 1">
+      <div class="content" #step1 *ngIf="currentStep === 1">
         <h3 class="form-description">Personal details</h3>
 
         <p>
@@ -46,14 +46,14 @@
 
           <div class="form-field">
             <label class="form-field__label">Height (cm)</label>
-            <input class="input form-field__input" name="height" type="number" formControlName="height"
-              required />
+            <input class="input form-field__input" name="height" type="number"
+              formControlName="height" required />
           </div>
 
           <div class="form-field">
             <label class="form-field__label">Start weight (kg)</label>
-            <input class="input form-field__input" name="weight" type="number" formControlName="weight"
-              step="0.1" required />
+            <input class="input form-field__input" name="weight" type="number"
+              formControlName="weight" step="0.1" required />
           </div>
 
           <div class="form-field">
@@ -75,7 +75,7 @@
         </div>
       </div>
 
-      <div class="" #step2 *ngIf="currentStep === 2">
+      <div class="content" #step2 *ngIf="currentStep === 2">
         <h3 class="form-description">Set your intake goal</h3>
 
         <p>
@@ -176,7 +176,7 @@
         </div>
       </div>
 
-      <div class="" #step2 *ngIf="currentStep === 3">
+      <div class="content" #step3 *ngIf="currentStep === 3">
         <h3 class="form-description">Adding food</h3>
 
         <p>
@@ -247,7 +247,7 @@
           it. Try adding an <strong>Apple</strong>.
         </p>
 
-        <div class="logday-wrapper">
+        <div class="logday-wrapper" (click)="breakfastOpen = true">
           <div class="logday">
             <div class="logday__header">
               <span class="logday__header__macro"></span>
@@ -256,9 +256,8 @@
               <span class="logday__header__macro">Carbs</span>
             </div>
 
-            <log-meal #breakfast [dummy]="true" [open]="breakfastOpen"
-              [searchables]="foodSearchables" [date]="displayDate" [meal]="'Breakfast'"
-              [logEntries]="[]" (dataChanged)="dummy()"></log-meal>
+            <log-meal #breakfast [dummy]="true" [open]="breakfastOpen" [date]="displayDate"
+              [meal]="'Breakfast'" [logEntries]="[]" (dataChanged)="dummy()"></log-meal>
           </div>
         </div>
 

@@ -4,6 +4,8 @@ import { Food } from '../../model/food';
 import { FoodService } from '../../services/food.service';
 import { DishService } from '../../services/dish.service';
 import { Dish } from '../../model/dish';
+import { Portion } from '../../model/portion';
+import { Macros } from '../../model/macros';
 
 @Component({
   templateUrl: './autocomplete-food.component.html',
@@ -17,6 +19,7 @@ export class AutocompleteFoodComponent {
   @ViewChild('autoComplete', { static: false })
   private autoCompleteEref: ElementRef;
 
+  @Input() dummy = false;
   @Input() placeholder = '';
   @Input() selectFn: Function;
   @Input() includeDishes = false;
@@ -41,18 +44,37 @@ export class AutocompleteFoodComponent {
   }
 
   private getFoodSearchableList(): void {
-    if (!!this.allFood && !!this.allDishes) {
-      const searchList = [];
-      for (const item of this.allFood) {
-        const searchable: FoodSearchable = { food: item };
-        searchList.push(searchable);
-      }
-      if (this.includeDishes) {
-        for (const dish of this.allDishes) {
-          searchList.push({ dish: dish });
+    if(!this.dummy) {
+
+      if (!!this.allFood && !!this.allDishes) {
+        const searchList = [];
+        for (const item of this.allFood) {
+          const searchable: FoodSearchable = { food: item };
+          searchList.push(searchable);
         }
+        if (this.includeDishes) {
+          for (const dish of this.allDishes) {
+            searchList.push({ dish: dish });
+          }
+        }
+        this.searchables = searchList;
       }
-      this.searchables = searchList;
+    } else {
+      const item: Food = { name: 'Apple', protein: 0.4, fat: 0.0, carbs: 12 };
+      item.portions = [];
+      const portion = new Portion();
+      const macros: Macros = {};
+      macros.protein = 0.8;
+      macros.fat = 0.0;
+      macros.carbs = 24;
+      portion.macros = macros;
+      portion.grams = 200;
+      portion.description = 'piece';
+      item.portions.push(portion);
+  
+      const searchable: FoodSearchable = { food: item };
+      this.searchables = [];
+      this.searchables.push(searchable);
     }
   }
 
