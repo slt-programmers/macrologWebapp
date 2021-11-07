@@ -8,7 +8,6 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { AppComponent } from './app.component';
 import { HealthcheckService } from './shared/services/healthcheck.service';
 import { Router } from '@angular/router';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { of, throwError } from 'rxjs';
 import { ToastComponent } from './shared/components/toast/toast.component';
 import { MockComponent, MockProvider } from 'ng-mocks';
@@ -23,7 +22,6 @@ describe('AppComponent', () => {
     TestBed.configureTestingModule({
       imports: [
         RouterTestingModule.withRoutes([{ path: 'user', redirectTo: '' }]),
-        BrowserAnimationsModule,
       ],
       declarations: [
         AppComponent,

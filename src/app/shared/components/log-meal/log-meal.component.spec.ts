@@ -212,8 +212,6 @@ describe('LogMealComponent', () => {
     const portionTwo = new Portion();
     portionTwo.description = 'portionTwo';
     food.portions = [portionOne, portionTwo];
-    const searchables = [{ food: food }];
-    component.searchables = searchables;
 
     const logEntry: Entry = {};
     logEntry.food = food;

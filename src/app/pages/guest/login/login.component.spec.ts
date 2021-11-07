@@ -7,7 +7,6 @@ import {
 import { RouterTestingModule } from '@angular/router/testing';
 import { LoginComponent } from './login.component';
 import { FormsModule } from '@angular/forms';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { By } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { of, throwError } from 'rxjs';
@@ -37,7 +36,6 @@ describe('LoginComponent', () => {
       ],
       imports: [
         FormsModule,
-        BrowserAnimationsModule,
         RouterTestingModule,
       ]
     }).compileComponents();

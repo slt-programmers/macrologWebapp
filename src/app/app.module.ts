@@ -7,7 +7,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { JwtInterceptor } from './shared/interceptors/jwt.interceptor';
 import { ErrorInterceptor } from './shared/interceptors/error.interceptor';
 import { ToastComponent } from './shared/components/toast/toast.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { ServicesModule } from './shared/services.module';
 import { ComponentsModule } from './shared/components/components.module';
@@ -19,7 +18,6 @@ import { ComponentsModule } from './shared/components/components.module';
   ],
   imports: [
     BrowserModule,
-    BrowserAnimationsModule,
     HttpClientModule,
     ServicesModule,
     AppRoutingModule,
