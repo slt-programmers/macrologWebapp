@@ -25,7 +25,7 @@ jobs:
       script: ng build
     - stage: 'unit test and scan'
       if: branch != release
-      script: ng test
+      script: npm run test
       after_script: sonar-scanner -Dsonar.projectKey=slt-programmers_macrologWebapp
   # - stage: "integration tests"
   #   if: branch != release
