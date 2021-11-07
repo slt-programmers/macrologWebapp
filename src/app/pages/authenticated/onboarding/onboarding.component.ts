@@ -165,7 +165,15 @@ export class OnboardingComponent implements OnInit {
         this.userService.addUserSetting('weight', data.weight.toString()),
         this.userService.addUserSetting('activity', data.activity.toString()),
       ]).subscribe(
-        () => this.nextStep(),
+        () => { 
+          this.name = data.name;
+          this.birthday = data.birthday;
+          this.gender = data.gender;
+          this.height = data.height;
+          this.weight = data.weight;
+          this.activity = data.activity;
+          this.nextStep()
+        },
         (error) => console.error(error)
       );
     }
@@ -174,42 +182,20 @@ export class OnboardingComponent implements OnInit {
   public saveIntake() {
     if (this.showMacros) {
       forkJoin([
-        this.userService.addUserSetting(
-          'goalProtein',
-          Math.round(this.proteinManual).toString()
-        ),
-        this.userService.addUserSetting(
-          'goalFat',
-          Math.round(this.fatManual).toString()
-        ),
-        this.userService.addUserSetting(
-          'goalCarbs',
-          Math.round(this.carbsManual).toString()
-        ),
+        this.userService.addUserSetting('goalProtein', Math.round(this.proteinManual).toString()),
+        this.userService.addUserSetting('goalFat', Math.round(this.fatManual).toString()),
+        this.userService.addUserSetting('goalCarbs', Math.round(this.carbsManual).toString()),
       ]).subscribe(
-        () => {
-          this.nextStep();
-        },
+        () => { this.nextStep(); },
         (error) => console.error(error)
       );
     } else {
       forkJoin([
-        this.userService.addUserSetting(
-          'goalProtein',
-          Math.round(this.protein).toString()
-        ),
-        this.userService.addUserSetting(
-          'goalFat',
-          Math.round(this.fat).toString()
-        ),
-        this.userService.addUserSetting(
-          'goalCarbs',
-          Math.round(this.carbs).toString()
-        ),
+        this.userService.addUserSetting('goalProtein', Math.round(this.protein).toString()),
+        this.userService.addUserSetting('goalFat', Math.round(this.fat).toString()),
+        this.userService.addUserSetting('goalCarbs', Math.round(this.carbs).toString()),
       ]).subscribe(
-        () => {
-          this.nextStep();
-        },
+        () => { this.nextStep(); },
         (error) => console.error(error)
       );
     }
