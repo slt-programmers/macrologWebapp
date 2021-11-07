@@ -1,0 +1,9 @@
+.settings {
+	display: flex;
+	align-items: center;
+	margin-bottom: $halfGutter;
+
+	&__label {
+		margin-right: $halfGutter;
+	}
+}

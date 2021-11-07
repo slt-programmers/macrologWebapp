@@ -1,0 +1,44 @@
+.tabs {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-bottom: $gutter;
+  cursor: pointer;
+}
+
+.tabs-header {
+  display: flex;
+  flex-direction: row;
+}
+
+.tabs-content {
+  @media (min-width: $phone) {
+    padding: $gutter;
+  }
+  border: 1px solid $smoke;
+  padding: $halfGutter;
+}
+
+.tab {
+  background-color: $smoke;
+  border-right: 1px solid $platinum;
+  padding: $halfGutter;
+  font-weight: 400;
+  flex-grow: 1;
+  text-align: center;
+
+  &--active {
+    background-color: $primary;
+    border: 0;
+    color: $white;
+  }
+
+  &:first-child {
+    border-radius: 5px 0 0 0;
+  }
+
+  &:last-child {
+    border-radius: 0 5px 0 0;
+    border-right: 0;
+  }
+}

@@ -1,0 +1,62 @@
+<nav class="navbar fixed z-2">
+  <div class="flex align-center h-100">
+    <div class="navbar__item">
+      <!-- TODO Make image -->
+      <h1 class="logo pointer" [routerLink]="['/']">M</h1>
+    </div>
+
+    <div class="xs-only align-right">
+      <div role="button" class="navbar__item" aria-label="menu" aria-expanded="false"
+        (click)="toggleMenu()">
+        <div class="navbar__hamburger-line"></div>
+        <div class="navbar__hamburger-line"></div>
+        <div class="navbar__hamburger-line"></div>
+      </div>
+    </div>
+
+    <div class="navbar__mobile-menu xs-only flex-col" *ngIf="menuOpen">
+      <a class="navbar__item" [routerLink]="['/about']">About</a>
+      <ng-container *ngIf="isLoggedIn()">
+        <a class="navbar__item" [routerLink]="['/dashboard']">Diary</a>
+        <a class="navbar__item" [routerLink]="['/dashboard', 'food']">Food</a>
+        <a class="navbar__item" [routerLink]="['/dashboard', 'dishes']">Dishes</a>
+        <a class="navbar__item" [routerLink]="['/dashboard', 'graphs']">Graphs</a>
+        <a class="navbar__item" [routerLink]="['/dashboard', 'user']">Profile</a>
+        <a class="navbar__item" *ngIf="isAdmin()" [routerLink]="['/dashboard', 'admin']">Admin</a>
+        <a class="navbar__item" (click)="logOut()">Log out</a>
+      </ng-container>
+
+      <a *ngIf="!isLoggedIn()" class="navbar__item" [routerLink]="['/login']">Log in</a>
+      <a *ngIf="!isLoggedIn()" class="navbar__item" [routerLink]="['/login']">Register</a>
+    </div>
+
+    <div class="flex align-center xs">
+      <ng-container *ngIf="isLoggedIn()">
+        <a class="navbar__item" [routerLink]="['/dashboard']">Diary</a>
+        <a class="navbar__item" [routerLink]="['/dashboard', 'food']">Food</a>
+        <a class="navbar__item" [routerLink]="['/dashboard', 'dishes']">Dishes</a>
+        <a class="navbar__item" [routerLink]="['/dashboard', 'graphs']">Graphs</a>
+      </ng-container>
+      
+      <a class="navbar__item" [routerLink]="['/about']">About</a>
+    </div>
+
+    <div class="flex align-center align-right xs">
+      <div *ngIf="isLoggedIn()" class="navbar__item">
+        <a class="navbar__item" [routerLink]="['/dashboard', 'user']">Profile</a>
+        <a class="navbar__item" *ngIf="isAdmin()" [routerLink]="['/dashboard', 'admin']">Admin</a>
+        <a class="navbar__item" (click)="logOut()">Log out</a>
+      </div>
+
+      <div *ngIf="!isLoggedIn()" class="navbar__item">
+        <a class="navbar__item" [routerLink]="['/login']">Log in</a>
+      </div>
+
+      <div *ngIf="!isLoggedIn()" class="navbar__item">
+        <button class="button button--primary" [routerLink]="['/login']">Register</button>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<div class="navbar-placeholder"></div>

@@ -1,0 +1,79 @@
+<div class="content">
+  <div class="card">
+    <div class="flex flex-col align-center" *ngIf="intakeGoals">
+      <div class="flex">
+        <div class="stackdonut-wrapper">
+          <stackdonut [goal]="intakeGoals[0]" [circleRadius]="circleRadius"
+            [strokeWidth]="strokeWidth" [text]="'Protein'" [achieved]="getTotal('protein')">
+          </stackdonut>
+        </div>
+
+        <div class="stackdonut-wrapper">
+          <stackdonut [goal]="intakeGoals[1]" [circleRadius]="circleRadius"
+            [strokeWidth]="strokeWidth" [text]="'Fat'" [achieved]="getTotal('fat')">
+          </stackdonut>
+        </div>
+
+        <div class="stackdonut-wrapper">
+          <stackdonut [goal]="intakeGoals[2]" [circleRadius]="circleRadius"
+            [strokeWidth]="strokeWidth" [text]="'Carbs'" [achieved]="getTotal('carbs')">
+          </stackdonut>
+        </div>
+      </div>
+
+      <div class="intake-goal intake-goal--calories">
+        <p class="intake-goal__text">
+          {{ getTotal('calories') | number: '1.0-0' }}/{{ goalCal }}
+        </p>
+        <p class="intake-goal__subtext">Calories</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="intake-goal-wrapper" *ngIf="!intakeGoals">
+    <div class="intake-goal intake-goal--placeholder">
+      <span>You haven't set your goal intake yet!</span>
+    </div>
+  </div>
+
+  <div class="logday card">
+    <div class="logday__date">
+      <datepicker (change)="getDifferentDay($event)"></datepicker>
+    </div>
+
+    <div class="flex">
+      <div class="flex-3"></div>
+      <div class="flex-2"></div>
+      <div class="flex-1 font-semibold">Protein</div>
+      <div class="flex-1 font-semibold">Fat</div>
+      <div class="flex-1 font-semibold">Carbs</div>
+      <div class="flex-1"></div>
+    </div>
+
+    <log-meal id="breakfast" #breakfast [open]="breakfastOpen" [date]="displayDate"
+      [meal]="'Breakfast'" [logEntries]="breakfastLogs" (dataChanged)="refresh()"></log-meal>
+    <log-meal #lunch [open]="lunchOpen" [date]="displayDate"
+      [meal]="'Lunch'" [logEntries]="lunchLogs" (dataChanged)="refresh()"></log-meal>
+    <log-meal #dinner [open]="dinnerOpen" [date]="displayDate"
+      [meal]="'Dinner'" [logEntries]="dinnerLogs" (dataChanged)="refresh()"></log-meal>
+    <log-meal #snacks [open]="snacksOpen" [date]="displayDate"
+      [meal]="'Snacks'" [logEntries]="snacksLogs" (dataChanged)="refresh()"></log-meal>
+    <log-activity #activities [open]="activitiesOpen" [date]="displayDate"
+      [logActivities]="activitiesLogs" [syncAvailable]="activititiesSync" (dataChanged)="refresh()"
+      (forced)="forceSync()"></log-activity>
+
+    <div class="logday__total">
+      <span class="logday__total__title">Daily total</span>
+      <span class="total__macro total__macro--first">{{
+        getTotal('protein') | number: '1.1-1'
+        }}</span>
+      <span class="total__macro">{{
+        getTotal('fat') | number: '1.1-1'
+        }}</span>
+      <span class="total__macro">{{
+        getTotal('carbs') | number: '1.1-1'
+        }}</span>
+      <span class="total__calories">{{ getTotal('calories') | number: '1.0-0' }} kcal</span>
+    </div>
+  </div>
+</div>
