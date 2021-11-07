@@ -1,0 +1,129 @@
+form, .form {
+  display: flex;
+  flex-direction: column;
+  > * {
+    margin-top: 1rem;
+    &:first-child {
+      margin-top: 0;
+    }
+  }
+
+}
+
+// form-field (default) (vertical on mobile, horizontal on big screen)
+// form-field vertical (on big and small screen)
+// form-field horizontal (on big and small screen)
+
+.form-field {
+  @media (min-width: $phone) {
+    flex-direction: row;
+    align-items: center;
+  }
+
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+
+  &--vertical {
+    flex-direction: column;
+    align-items: flex-start;
+
+    .form-field__label {
+      margin-bottom: 5px;
+    }
+  }
+
+  &--horizontal {
+    flex-direction: row;
+  }
+
+  &--slider {
+    @media (min-width: $tablet) {
+      flex-direction: row;
+    }
+    flex-direction: column;
+  }
+
+  &__label {
+    @media (min-width: $phone) {
+      flex-basis: 40%;
+      margin-bottom: 0;
+
+      &--small {
+        flex-basis: auto;
+        flex-grow: 0;
+      }
+
+      &--slider {
+        flex-basis: auto;
+        flex-grow: 1;
+        margin-top: 15px;
+        align-self: start;
+      }
+    }
+
+    margin-right: 8px;
+    margin-bottom: 4px;
+  }
+
+  &__input {
+    margin-bottom: 5px;
+    flex-basis: 60%;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  &__element {
+    flex-grow: 1;
+
+    &--column {
+      @media (min-width: $tablet) {
+        align-items: flex-start;
+        flex-direction: column;
+        margin-bottom: 0;
+        width: auto;
+      }
+      align-items: center;
+      flex-direction: row;
+      margin-right: 10px;
+      margin-bottom: 10px;
+      width: 100%;
+    }
+
+    &--end {
+      @media (min-width: $phone) {
+        align-self: flex-end;
+      }
+    }
+  }
+
+  &__text {
+    font-weight: 500;
+    min-width: 30px;
+  }
+
+  &__slider {
+    @media (min-width: $tablet) {
+      flex-basis: 100%;
+      flex-shrink: 1;
+    }
+
+    width: 100%;
+  }
+
+  &__disclaimer {
+    color: $primary;
+    font-size: 14px;
+  }
+}
+
+.form-description {
+  color: $secondary;
+}
+
+label, .label {
+  padding-right: 1rem;
+  line-height: 1.5;
+}

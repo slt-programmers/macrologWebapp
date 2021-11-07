@@ -1,0 +1,11 @@
+@import "../../../../css/variables.scss";
+
+.login-form,
+.register-form {
+  width: 16rem;
+}
+
+.error{
+  color: $error;
+  font-size: 0.9rem;
+}

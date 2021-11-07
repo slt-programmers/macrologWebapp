@@ -1,0 +1,74 @@
+.logday {
+  &__date {
+    align-items: center;
+    border-bottom: 1px solid $cloud;
+    display: flex;
+    flex-direction: row;
+    padding: $halfGutter;
+    justify-content: center;
+  }
+
+  &__header {
+    border-bottom: 1px solid $cloud;
+    display: flex;
+    font-weight: 600;
+    padding: 10px;
+
+    &__macro {
+      &:first-child {
+        display: none;
+      }
+
+      @media (min-width: $phone) {
+        flex-basis: 15%;
+
+        &:first-child {
+          display: flex;
+          flex-basis: 40%;
+        }
+      }
+
+      text-align: center;
+      flex-basis: 25%;
+    }
+  }
+
+  &__total {
+    display: flex;
+    flex-wrap: wrap;
+    font-weight: 600;
+    padding: 15px;
+
+    &__title {
+      @media (min-width: $phone) {
+        flex-basis: 40%;
+      }
+      flex-basis: 100%;
+      font-weight: 600;
+      margin-bottom: 5px;
+    }
+  }
+}
+
+.total {
+  &__macro {
+    @media (min-width: $phone) {
+      flex-basis: 10%;
+
+      &--first {
+        flex-basis: 20%;
+      }
+    }
+
+    flex-basis: 25%;
+    text-align: center;
+  }
+
+  &__calories {
+    @media (min-width: $phone) {
+      flex-basis: 20%;
+    }
+    flex-basis: 25%;
+    text-align: end;
+  }
+}

@@ -1,0 +1,84 @@
+<div class="content">
+  <div class="dish-grid dish-grid--empty" *ngIf="allDishes.length === 0">
+    <div class="card">
+      <p>You havent created any dishes yet!</p>
+    </div>
+  </div>
+
+  <div class="flex" *ngIf="allDishes.length !== 0">
+    <div class="card" *ngFor="let dish of allDishes" (click)="openModal(dish)">
+      <div class="content">
+        <h1>{{ dish.name }}</h1>
+
+        <div class="dish-card__content__pie-chart">
+          <piechart [mealId]="dish.id" [macros]="getTotal(dish)"></piechart>
+        </div>
+
+        <div class="flex align-center col-gap-1" *ngFor="let ingredient of dish.ingredients">
+          <i class="fas fa-chevron-right"></i>
+          <p> {{ getIngredientDescription(ingredient) }} {{ ingredient.food.name }} </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="button-wrapper--floating-action">
+  <button class="floating-action-button" (click)="openModal(null)">
+    <em class="fas fa-plus"></em>
+  </button>
+</div>
+
+<app-modal *ngIf="modalIsVisible" [title]="modalTitle" (close)="closeModal()">
+  <form #makeDishForm="ngForm">
+    <div class="flex flex-col content">
+
+      <div class="flex align-center">
+        <label for="dishName">Name</label>
+        <input class="input" [(ngModel)]="selectedDish.name" type="text" name="dishName"
+          id="dishName" required>
+      </div>
+
+      <div class="flex align-center col-gap-1" *ngFor="let ingr of selectedDish.ingredients; index as i">
+        <div class="flex-2">
+          <select (change)="portionChange(ingr, $event.target)">
+            <!-- 100 grams -->
+            <option>{{unitName}}</option>
+
+            <!-- portion amount -->
+            <option *ngFor="let portion of ingr.food.portions"
+              value="{{portion.description}}" [selected]="portion.id == ingr.portion?.id">
+              {{portion.description}}
+            </option>
+          </select>
+        </div>
+
+        <div class="flex-1">
+          <input class="input" name="ingrAmount" type="number" [value]="getValue(ingr)"
+            (input)="calculateMultiplier($event, ingr)" step="{{getStep(ingr)}}" min="0">
+        </div>
+
+        <p class="flex-3">{{ingr.food.name}}</p>
+
+        <div class="flex justify-end">
+          <button class="icon-button" (click)="removeIngredient(i)">
+            <em class="fas fa-minus"></em>
+          </button>
+        </div>
+      </div>
+
+      <div class="autocomplete-wrapper">
+        <autocomplete-food [placeholder]="'Search for food'"
+          (select)="addIngredient($event)">
+        </autocomplete-food>
+      </div>
+    </div>
+
+    <div class="flex justify-end col-gap-1">
+      <button class="button" *ngIf="selectedDish" (click)="deleteDish()">Delete</button>
+
+      <button class="button button--primary" [disabled]="makeDishForm.invalid"
+        (click)="saveDish()">Save</button>
+    </div>
+  </form>
+</app-modal>

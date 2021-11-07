@@ -1,0 +1,13 @@
+.calorie-box {
+	align-items: center;
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	margin-bottom: $halfGutter;
+
+	&__title {
+		font-size: 24px;
+		font-weight: 600;
+		margin: 10px 0;
+	}
+}

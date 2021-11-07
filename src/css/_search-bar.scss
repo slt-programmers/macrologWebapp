@@ -1,0 +1,13 @@
+.search-bar {
+  display: flex;
+  align-items: center;
+  margin-bottom: $halfGutter;
+
+  &__input {
+    margin-right: $halfGutter;
+  }
+
+  &__label {
+    margin-right: $halfGutter;
+  }
+}
