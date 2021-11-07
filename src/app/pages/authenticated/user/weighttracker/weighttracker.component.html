@@ -1,12 +1,8 @@
 <div>
   <div class="weightgraph-wrapper">
     <div class="weightgraph">
-      <linegraph
-        [dataset]="dataset"
-        [xAxisStep]="1"
-        [yAxisStep]="0.5"
-        [hasOffgridValue]="hasOffgridValue"
-      ></linegraph>
+      <linegraph [dataset]="dataset" [xAxisStep]="1" [yAxisStep]="0.5"
+        [hasOffgridValue]="hasOffgridValue"></linegraph>
     </div>
   </div>
 
@@ -14,28 +10,15 @@
     <div class="form-field">
       <label class="form-field__label">Measurement date</label>
       <div class="form-field__element">
-        <input
-          required
-          class="input"
-          validDate
-          placeholder="DD-MM-YYYY"
-          name="birthday"
-          [(ngModel)]="measurementDate"
-        />
+        <input required class="input" validDate placeholder="DD-MM-YYYY" name="birthday"
+          [(ngModel)]="measurementDate" />
       </div>
     </div>
 
     <div class="form-field">
       <label class="form-field__label">Weight (kg)</label>
       <div class="form-field__element">
-        <input
-          required
-          class="input"
-          name="weight"
-          type="number"
-          [(ngModel)]="weight"
-          step="0.1"
-        />
+        <input required class="input" name="weight" type="number" [(ngModel)]="weight" step="0.1" />
       </div>
     </div>
 
@@ -47,11 +30,8 @@
     </div>
 
     <div class=" button-wrapper">
-      <button
-        class="button button--primary"
-        (click)="saveNewWeight(weightForm)"
-        [disabled]="weightForm.invalid"
-      >
+      <button class="button button--primary" (click)="saveNewWeight(weightForm)"
+        [disabled]="weightForm.invalid">
         Save
       </button>
     </div>
@@ -66,11 +46,7 @@
       </div>
     </div>
 
-    <div
-      class="table-row"
-      *ngFor="let logWeight of trackedWeights"
-      (click)="editWeight(logWeight)"
-    >
+    <div class="table-row" *ngFor="let logWeight of trackedWeights" (click)="editWeight(logWeight)">
       <div class="weight" *ngIf="!logWeight.editable">
         <div class="weight__day">{{ logWeight.day | date: 'dd-MM-yyyy' }}</div>
         <div class="weight__remark">{{ logWeight.remark }}</div>
@@ -80,47 +56,34 @@
         <div class="weight__hiddenbuttons"></div>
       </div>
 
-      <div class="editweight" *ngIf="logWeight.editable">
-        <div class="editweight__day">
-          <input
-            required
-            class="input editweight__day-input"
-            validDate
-            placeholder="DD-MM-YYYY"
-            [(ngModel)]="logWeight.day"
-          />
-        </div>
+      <div class="p-1" *ngIf="logWeight.editable">
+        <div class="flex flex-grow col-gap-1 items-center">
+          <div class="">
+            <input name="date" required class="input" validDate placeholder="DD-MM-YYYY"
+              [(ngModel)]="logWeight.day" />
+          </div>
 
-        <div class="editweight__remark">
-          <input
-            required
-            class="input editweight__remark-input"
-            name="remark"
-            type="text"
-            [(ngModel)]="logWeight.remark"
-          />
-        </div>
+          <div class="">
+            <input class="input" name="weight" type="number" [(ngModel)]="logWeight.weight"
+              step="0.1" />
+          </div>
 
-        <div class="editweight__weight">
-          <input
-            class="input editweight__weight-input"
-            name="weight"
-            type="number"
-            [(ngModel)]="logWeight.weight"
-            step="0.1"
-          />
-        </div>
+          <div class="flex flex-grow">
+            <input required class="input" placeholder="Remark" name="remark" type="text"
+              [(ngModel)]="logWeight.remark" [required]="false" />
+          </div>
 
-        <div class=" editweight__close">
-          <button class="icon-button" (click)="saveWeight(logWeight)">
-            <em class="fas fa-check"></em>
-          </button>
-        </div>
+          <div class="flex">
+            <button class="icon-button" (click)="saveWeight(logWeight)">
+              <em class="fas fa-check"></em>
+            </button>
+          </div>
 
-        <div class=" editweight__delete">
-          <button class="icon-button" (click)="deleteWeight(logWeight)">
-            <em class="fas fa-trash"></em>
-          </button>
+          <div class="flex">
+            <button class="icon-button" (click)="deleteWeight(logWeight)">
+              <em class="fas fa-trash"></em>
+            </button>
+          </div>
         </div>
       </div>
     </div>

@@ -4,7 +4,6 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { RouterModule, Routes } from "@angular/router";
 import { ComponentsModule } from "src/app/shared/components/components.module";
 import { LinegraphComponent } from "src/app/shared/components/linegraph/linegraph.component";
-import { CalculateIntakeModalComponent } from "src/app/shared/components/modals/calculate-intake-modal/calculate-intake-modal.component";
 import { AccountComponent } from "./account/account.component";
 import { ConnectivityComponent } from "./connectivity/connectivity.component";
 import { IntakeComponent } from "./intake/intake.component";
@@ -33,8 +32,6 @@ export const userRoutes: Routes = [
   ],
   declarations: [
     LinegraphComponent,
-    CalculateIntakeModalComponent,
-
     PersonalComponent,
     IntakeComponent,
     WeightTrackerComponent,
