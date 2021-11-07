@@ -26,28 +26,21 @@
   </table>
 </div>
 
-<div id="deleteModal" class="modal-wrapper" *ngIf="isModalVisible">
-  <div class="modal">
-    <div class="modal__header ">
-      <h3 class="modal__header__title">Delete user account</h3>
+<app-modal [title]="'Delete user account'" *ngIf="isModalVisible" (close)="closeModal()">
+  <div class="content">
+    <p>
+      Are you sure you want to delete
+      <strong>{{ selectedUser.userName }}</strong>'s account? This action is irreversable.
+    </p>
 
-      <button class="icon-button" (click)="closeModal()">
-        <em class="fas fa-times"></em>
-      </button>
-    </div>
+    <form #deleteForm="ngForm">
+      <label for="username">
+        Enter the name of the user
+        <input class="input" placeholder="Username" type="text" #usernameField
+          [(ngModel)]="userName" name="username" required />
+      </label>
 
-    <div class="modal__content">
-      <p>
-        Are you sure you want to delete
-        <strong>{{ selectedUser.userName }}</strong>'s account? This action is irreversable.
-      </p>
-
-      <p>Enter the name of the user:</p>
-
-      <input class="input" placeholder="Username" type="text" #usernameField [(ngModel)]="userName"
-        name="username" required />
-
-      <div class=" modal__button-wrapper modal__button-wrapper--spread">
+      <div class="flex justify-end col-gap-1">
         <button class="button" (click)="closeModal()">No</button>
 
         <button [disabled]="selectedUser.userName != userName" class="button button--warning"
@@ -55,6 +48,6 @@
           Yes
         </button>
       </div>
-    </div>
+    </form>
   </div>
-</div>
+</app-modal>
