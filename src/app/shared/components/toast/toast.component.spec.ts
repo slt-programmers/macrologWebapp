@@ -1,18 +1,11 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { Renderer2 } from '@angular/core';
 import { ToastComponent } from './toast.component';
 import { MockProvider } from 'ng-mocks';
 import { ToastService } from '../../services/toast.service';
 import { of } from 'rxjs';
+import { Toast } from '../../model/toast';
 
-
-class MockRenderer {
-  public setStyle(a: any, b: any, c: any) {
-
-  }
-}
-
-describe('StepperComponent', () => {
+describe('ToastComponent', () => {
   let component: ToastComponent;
   let fixture: ComponentFixture<ToastComponent>;
   let service: ToastService;
@@ -21,12 +14,13 @@ describe('StepperComponent', () => {
     TestBed.configureTestingModule({
       declarations: [ToastComponent],
       providers: [
-        ToastService,
-        MockProvider(Renderer2)
+        MockProvider(ToastService)
       ]
     }).compileComponents();
 
     service = TestBed.inject(ToastService);
+    service.messageObservable = of({title: 'title', message: 'message', isError: true} as Toast);
+
     fixture = TestBed.createComponent(ToastComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
@@ -37,16 +31,12 @@ describe('StepperComponent', () => {
   });
 
   it('should set toast fields', () => {
-    service.setMessage('test', true, 'title');
-    expect(component.isError).toBeTrue();
-    expect(component.message).toEqual('test');
-    expect(component.title).toEqual('title');
+    expect(component.toasts).toEqual([{title: 'title', message: 'message', isError: true} as Toast]);
   });
 
   it('should close toast', () => {
-    component.closeToast();
-    expect(component.title).toEqual('')
-    expect(component.message).toEqual('')
-    expect(component.isError).toEqual(false)
+    expect(component.toasts.length).toEqual(1);
+    component.closeToast(0);
+    expect(component.toasts.length).toEqual(0);
   });
 });

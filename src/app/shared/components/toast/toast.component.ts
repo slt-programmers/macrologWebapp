@@ -1,4 +1,5 @@
-import { Component, Renderer2, ViewChild } from '@angular/core';
+import { Component } from '@angular/core';
+import { Toast } from '../../model/toast';
 import { ToastService } from '../../services/toast.service';
 
 @Component({
@@ -7,32 +8,20 @@ import { ToastService } from '../../services/toast.service';
   styleUrls: ['./toast.component.scss'],
 })
 export class ToastComponent {
-  @ViewChild('toast') toast: any;
 
-  public message: string = '';
-  public title: string = '';
-  public isError = false;
+  public toasts: Toast[] = [];
 
-  constructor(private toastService: ToastService, private renderer: Renderer2) {
+  constructor(private toastService: ToastService) {
     this.toastService.messageObservable.subscribe(it => {
-      this.title = it.title;
-      this.message = it.message;
-      this.isError = it.isError;
-      this.showToast();
+      this.toasts.push({
+        title: it.title,
+        message: it.message,
+        isError: it.isError,
+      });
     });
   }
 
-  public showToast() {
-    this.renderer.setStyle(this.toast.nativeElement, 'opacity', '1');
-    this.renderer.setStyle(this.toast.nativeElement, 'top', '2rem');
-  }
-
-  public closeToast() {
-    this.title = '';
-    this.message = '';
-    this.isError = false;
-    this.renderer.setStyle(this.toast.nativeElement, 'top', '3rem');
-    this.renderer.setStyle(this.toast.nativeElement, 'opacity', '0');
-
+  public closeToast(index: number) {
+    this.toasts.splice(index, 1);
   }
 }

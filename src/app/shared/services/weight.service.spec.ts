@@ -41,7 +41,6 @@ describe('WeightService', () => {
     const result = await service.getAllWeights().toPromise();
     expect(http.get).toHaveBeenCalledWith('//' + environment.backend + '/weight');
     expect(result).toEqual([]);
-    expect(toastService.setMessage).toHaveBeenCalledWith('Your weights could not be fetched!');
   });
 
   it('should store weight', async () => {
@@ -69,8 +68,6 @@ describe('WeightService', () => {
         }
       });
     expect(result).toEqual(undefined);
-    expect(toastService.setMessage).toHaveBeenCalledWith('Your weight could not be saved!');
-
   });
 
   it('should delete weight', async () => {
@@ -98,6 +95,5 @@ describe('WeightService', () => {
         }
       });
     expect(result).toEqual(undefined);
-    expect(toastService.setMessage).toHaveBeenCalledWith('Your weight could not be deleted!');
   });
 });

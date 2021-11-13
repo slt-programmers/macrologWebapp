@@ -84,7 +84,7 @@ $xxl: 1536px; // 96rem
   }
 }
 .xs {
-  @media (max-width: $xs - 1) {
+  @media (max-width: ($xs - 1)) {
     display: none;
   }
 }

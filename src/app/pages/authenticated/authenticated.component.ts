@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ScrollBehaviourService } from '../../shared/services/scroll-behaviour.service';
-import { HealthcheckService } from '../../shared/services/healthcheck.service';
 import { AuthenticationService } from '../../shared/services/auth.service';
+import { HealthcheckService } from 'src/app/shared/services/healthcheck.service';
 
 @Component({
   selector: 'authenticated',
