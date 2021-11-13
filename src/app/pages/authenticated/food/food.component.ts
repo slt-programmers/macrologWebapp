@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { Food } from '../../../shared/model/food';
 import { Store } from '@ngrx/store';
 import { selectAllFood, selectFoodLoading } from 'src/app/shared/store/selectors/food.selectors';
@@ -8,7 +8,7 @@ import { Observable, Subscription } from 'rxjs';
   selector: 'ml-food',
   templateUrl: './food.component.html'
 })
-export class FoodComponent implements OnInit, OnDestroy {
+export class FoodComponent implements OnDestroy {
   // All food from database, don't overwrite
   private allFood = new Array();
 
@@ -36,9 +36,7 @@ export class FoodComponent implements OnInit, OnDestroy {
 
   private foodSubscription: Subscription;
 
-  constructor(private readonly store: Store) { }
-
-  ngOnInit(): void {
+  constructor(private readonly store: Store) { 
     this.foodSubscription = this.store.select(selectAllFood).subscribe(it => {
       this.allFood = it;
       this.percentageFood = this.calculatePercentages();
