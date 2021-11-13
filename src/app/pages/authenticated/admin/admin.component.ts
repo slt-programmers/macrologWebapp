@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
-	selector: 'admin-page',
+	selector: 'ml-admin-page',
 	templateUrl: './admin.component.html',
 	styleUrls:['./admin.component.scss']
 })

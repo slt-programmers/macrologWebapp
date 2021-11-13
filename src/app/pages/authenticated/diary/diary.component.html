@@ -3,21 +3,21 @@
     <div class="flex flex-col align-center" *ngIf="intakeGoals">
       <div class="flex">
         <div class="stackdonut-wrapper">
-          <stackdonut [goal]="intakeGoals[0]" [circleRadius]="circleRadius"
+          <ml-stackdonut [goal]="intakeGoals[0]" [circleRadius]="circleRadius"
             [strokeWidth]="strokeWidth" [text]="'Protein'" [achieved]="getTotal('protein')">
-          </stackdonut>
+          </ml-stackdonut>
         </div>
 
         <div class="stackdonut-wrapper">
-          <stackdonut [goal]="intakeGoals[1]" [circleRadius]="circleRadius"
+          <ml-stackdonut [goal]="intakeGoals[1]" [circleRadius]="circleRadius"
             [strokeWidth]="strokeWidth" [text]="'Fat'" [achieved]="getTotal('fat')">
-          </stackdonut>
+          </ml-stackdonut>
         </div>
 
         <div class="stackdonut-wrapper">
-          <stackdonut [goal]="intakeGoals[2]" [circleRadius]="circleRadius"
+          <ml-stackdonut [goal]="intakeGoals[2]" [circleRadius]="circleRadius"
             [strokeWidth]="strokeWidth" [text]="'Carbs'" [achieved]="getTotal('carbs')">
-          </stackdonut>
+          </ml-stackdonut>
         </div>
       </div>
 
@@ -38,7 +38,7 @@
 
   <div class="logday card">
     <div class="logday__date">
-      <datepicker (change)="getDifferentDay($event)"></datepicker>
+      <ml-datepicker (change$)="getDifferentDay($event)"></ml-datepicker>
     </div>
 
     <div class="flex">
@@ -50,17 +50,17 @@
       <div class="flex-1"></div>
     </div>
 
-    <log-meal id="breakfast" #breakfast [open]="breakfastOpen" [date]="displayDate"
-      [meal]="'Breakfast'" [logEntries]="breakfastLogs" (dataChanged)="refresh()"></log-meal>
-    <log-meal #lunch [open]="lunchOpen" [date]="displayDate"
-      [meal]="'Lunch'" [logEntries]="lunchLogs" (dataChanged)="refresh()"></log-meal>
-    <log-meal #dinner [open]="dinnerOpen" [date]="displayDate"
-      [meal]="'Dinner'" [logEntries]="dinnerLogs" (dataChanged)="refresh()"></log-meal>
-    <log-meal #snacks [open]="snacksOpen" [date]="displayDate"
-      [meal]="'Snacks'" [logEntries]="snacksLogs" (dataChanged)="refresh()"></log-meal>
-    <log-activity #activities [open]="activitiesOpen" [date]="displayDate"
+    <ml-log-meal id="breakfast" #breakfast [open]="breakfastOpen" [date]="displayDate"
+      [meal]="'Breakfast'" [logEntries]="breakfastLogs" (dataChanged)="refresh()"></ml-log-meal>
+    <ml-log-meal #lunch [open]="lunchOpen" [date]="displayDate"
+      [meal]="'Lunch'" [logEntries]="lunchLogs" (dataChanged)="refresh()"></ml-log-meal>
+    <ml-log-meal #dinner [open]="dinnerOpen" [date]="displayDate"
+      [meal]="'Dinner'" [logEntries]="dinnerLogs" (dataChanged)="refresh()"></ml-log-meal>
+    <ml-log-meal #snacks [open]="snacksOpen" [date]="displayDate"
+      [meal]="'Snacks'" [logEntries]="snacksLogs" (dataChanged)="refresh()"></ml-log-meal>
+    <ml-log-activity #activities [open]="activitiesOpen" [date]="displayDate"
       [logActivities]="activitiesLogs" [syncAvailable]="activititiesSync" (dataChanged)="refresh()"
-      (forced)="forceSync()"></log-activity>
+      (forced)="forceSync()"></ml-log-activity>
 
     <div class="logday__total">
       <span class="logday__total__title">Daily total</span>

@@ -3,7 +3,7 @@ import { UserAccount } from 'src/app/shared/model/userAccount';
 import { AdminService } from 'src/app/shared/services/admin.service';
 
 @Component({
-  selector: 'app-usermanagement',
+  selector: 'ml-usermanagement',
   templateUrl: './usermanagement.component.html'
 })
 export class UserManagementComponent implements OnInit {

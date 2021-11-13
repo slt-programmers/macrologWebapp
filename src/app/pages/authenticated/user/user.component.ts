@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
-	selector: 'user-page',
+	selector: 'ml-user-page',
 	templateUrl: './user.component.html',
 	styleUrls:['./user.component.scss']
 })

@@ -4,7 +4,7 @@ import { Food } from '../../../shared/model/food';
 import { Portion } from 'src/app/shared/model/portion';
 
 @Component({
-  selector: 'app-food',
+  selector: 'ml-food',
   templateUrl: './food.component.html'
 })
 export class FoodComponent implements OnInit {

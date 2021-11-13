@@ -1,20 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthenticationService } from '../../services/auth.service';
 
 @Component({
-  selector: 'app-navigation',
+  selector: 'ml-navigation',
   templateUrl: './navigation.component.html',
   styleUrls: ['./navigation.component.scss']
 })
-export class NavigationComponent implements OnInit {
+export class NavigationComponent{
 
   public menuOpen = false;
 
   constructor(private readonly authService: AuthenticationService, private readonly router: Router) { }
-
-  ngOnInit(): void {
-  }
 
   public toggleMenu() {
     this.menuOpen = !this.menuOpen;

@@ -7,7 +7,7 @@ import { NgForm } from '@angular/forms';
 import { format, isAfter, isBefore, parse } from 'date-fns';
 
 @Component({
-  selector: 'weighttracker',
+  selector: 'ml-weighttracker',
   templateUrl: './weighttracker.component.html',
   styleUrls: ['./weighttracker.component.scss'],
 })

@@ -10,14 +10,14 @@ import {
 } from '@angular/core';
 
 @Component({
-  selector: 'datepicker',
+  selector: 'ml-datepicker',
   templateUrl: './datepicker.component.html',
   styleUrls: ['./datepicker.component.scss'],
 })
 export class DatepickerComponent implements AfterViewInit {
   @ViewChildren('dayRef') dayRefs: QueryList<any>;
 
-  @Output() change = new EventEmitter<Date>();
+  @Output() change$ = new EventEmitter<Date>();
 
   public dateformat = 'dd-MM-yyyy';
   public today: Date;
@@ -57,7 +57,7 @@ export class DatepickerComponent implements AfterViewInit {
     );
     this.setDaysInMonthArray();
     this.getWeekdayPlaceholders();
-    this.change.emit(this.selectedDate);
+    this.change$.emit(this.selectedDate);
   }
 
   public previousDay() {
@@ -68,7 +68,7 @@ export class DatepickerComponent implements AfterViewInit {
     );
     this.setDaysInMonthArray();
     this.getWeekdayPlaceholders();
-    this.change.emit(this.selectedDate);
+    this.change$.emit(this.selectedDate);
   }
 
   public nextMonth() {
@@ -100,7 +100,7 @@ export class DatepickerComponent implements AfterViewInit {
       day
     );
     this.isOpen = false;
-    this.change.emit(this.selectedDate);
+    this.change$.emit(this.selectedDate);
   }
 
   private setDaysInMonthArray() {

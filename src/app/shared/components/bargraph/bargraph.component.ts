@@ -10,7 +10,7 @@ import {
 import { DataPoint, GraphPoint } from '../linegraph/linegraph.component';
 
 @Component({
-  selector: 'bargraph',
+  selector: 'ml-bargraph',
   templateUrl: './bargraph.component.html',
   styleUrls: ['./bargraph.component.scss'],
 })

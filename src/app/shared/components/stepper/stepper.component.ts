@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
-	selector: 'stepper',
+	selector: 'ml-stepper',
 	templateUrl: './stepper.component.html',
 	styleUrls: ['./stepper.component.scss']
 })

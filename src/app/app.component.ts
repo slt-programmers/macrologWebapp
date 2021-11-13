@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { HealthcheckService } from './shared/services/healthcheck.service';
 
 @Component({
-  selector: 'app-root',
+  selector: 'ml-root',
   templateUrl: './app.component.html',
 })
 export class AppComponent implements OnInit {

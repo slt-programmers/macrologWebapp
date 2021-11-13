@@ -26,7 +26,7 @@
   </table>
 </div>
 
-<app-modal [title]="'Delete user account'" *ngIf="isModalVisible" (close)="closeModal()">
+<ml-modal [title]="'Delete user account'" *ngIf="isModalVisible" (close$)="closeModal()">
   <div class="content">
     <p>
       Are you sure you want to delete
@@ -43,11 +43,11 @@
       <div class="flex justify-end col-gap-1">
         <button class="button" (click)="closeModal()">No</button>
 
-        <button [disabled]="selectedUser.userName != userName" class="button button--warning"
+        <button [disabled]="selectedUser.userName !== userName" class="button button--warning"
           (click)="deleteUser()">
           Yes
         </button>
       </div>
     </form>
   </div>
-</app-modal>
+</ml-modal>

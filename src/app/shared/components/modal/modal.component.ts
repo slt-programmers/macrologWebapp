@@ -1,22 +1,19 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
-  selector: 'app-modal',
+  selector: 'ml-modal',
   templateUrl: './modal.component.html',
   styleUrls: ['./modal.component.scss']
 })
-export class ModalComponent implements OnInit {
+export class ModalComponent {
 
   @Input() title: String;
-  @Output() close: EventEmitter<any> = new EventEmitter<any>();
+  @Output() close$: EventEmitter<any> = new EventEmitter<any>();
 
   constructor() { }
 
-  ngOnInit(): void {
-  }
-
   public closeModal() {
-    this.close.emit();
+    this.close$.emit();
   }
 
 }

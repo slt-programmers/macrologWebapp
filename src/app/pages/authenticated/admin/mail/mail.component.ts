@@ -4,7 +4,7 @@ import { GoogleService } from 'src/app/shared/services/google.service';
 import { environment } from '../../../../../environments/environment';
 
 @Component({
-  selector: 'app-mail',
+  selector: 'ml-mail',
   templateUrl: './mail.component.html'
 })
 export class MailComponent implements OnInit {

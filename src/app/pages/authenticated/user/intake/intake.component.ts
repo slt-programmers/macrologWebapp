@@ -6,7 +6,7 @@ import { forkJoin } from 'rxjs';
 import { calculateTDEE } from 'src/app/util/functions';
 
 @Component({
-  selector: 'intake',
+  selector: 'ml-intake',
   templateUrl: './intake.component.html',
 })
 export class IntakeComponent implements OnInit {
