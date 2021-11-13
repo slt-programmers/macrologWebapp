@@ -15,18 +15,12 @@ export class UserService {
   public getSetting(key: string, date: string): Observable<String> {
     return this.http.get<String>(this.macrologBackendUrl + '/' + key,
       { params: { date: date } }).pipe(
-        catchError(error => {
-          this.toastService.setMessage('Could not get settings');
-          return of<String>();
-        }));
+        catchError(error => { return of<String>(); }));
   }
 
   public getUserSettings(): Observable<UserSettings> {
     return this.http.get<UserSettings>(this.macrologBackendUrl + '/user').pipe(
-      catchError(error => {
-        this.toastService.setMessage('Could not get user settings');
-        return of<UserSettings>();
-      }));
+      catchError(error => { return of<UserSettings>(); }));
   }
 
   public getUserGoalStats(date: string): Observable<String[]> {
@@ -46,19 +40,13 @@ export class UserService {
     const setting = { name: key, value: value };
     const options = { headers: headers };
     return this.http.put<any>(this.macrologBackendUrl + '/', setting, options).pipe(
-      catchError(error => {
-        this.toastService.setMessage('Could not put user settings');
-        return of<any>();
-      }));
+      catchError(error => { return of<any>(); }));
   }
 
   // TODO map Synced Account DTO
   public getSyncSettings(key: string): Observable<any> {
     return this.http.get<any>(this.macrologBackendUrl + '/connectivity/' + key).pipe(
-        catchError(error => {
-          this.toastService.setMessage('Could not get sync settings');
-          return of();
-        }));
+      catchError(error => { return of<any>(); }));
   }
 
   // TODO map SyncedAccount DTO
@@ -71,10 +59,7 @@ export class UserService {
     const userInfo = { name: 'code', value: code };
     const options = { headers: headers };
     return this.http.post<any>(this.macrologBackendUrl + '/connectivity/' + syncWith, userInfo, options).pipe(
-      catchError(error => {
-        this.toastService.setMessage('Could not store sync settings');
-        return of();
-      }));
+      catchError(error => { return of<any>(); }));
   }
 
   public disconnectSyncSettings(syncWith: string): Observable<any> {
@@ -85,10 +70,7 @@ export class UserService {
 
     const options = { headers: headers };
     return this.http.delete<any>(this.macrologBackendUrl + '/connectivity/' + syncWith, options).pipe(
-      catchError(error => {
-        this.toastService.setMessage('Could not disconnect sync settings');
-        return of<any>();
-      }));
+      catchError(error => { return of<any>(); }));
   }
 
 }

@@ -1,4 +1,5 @@
-import { Component, Renderer2, ViewChild } from '@angular/core';
+import { Component } from '@angular/core';
+import { Toast } from '../../model/toast';
 import { ToastService } from '../../services/toast.service';
 
 @Component({
@@ -7,24 +8,20 @@ import { ToastService } from '../../services/toast.service';
   styleUrls: ['./toast.component.scss'],
 })
 export class ToastComponent {
-  @ViewChild('toast') toast: any;
 
-  public message: string = '';
-  public isError = false;
+  public toasts: Toast[] = [];
 
-  constructor(private toastService: ToastService, private renderer: Renderer2) {
-    this.toastService.messageObservable.subscribe((messageObj: any) => {
-      this.message = messageObj.message;
-      this.isError = messageObj.isError;
-      this.showToast();
+  constructor(private toastService: ToastService) {
+    this.toastService.messageObservable.subscribe(it => {
+      this.toasts.push({
+        title: it.title,
+        message: it.message,
+        isError: it.isError,
+      });
     });
   }
 
-  public showToast() {
-    this.renderer.setStyle(this.toast.nativeElement, 'height', '50px');
-    setTimeout(
-      () => this.renderer.setStyle(this.toast.nativeElement, 'height', '0'),
-      1200
-    );
+  public closeToast(index: number) {
+    this.toasts.splice(index, 1);
   }
 }

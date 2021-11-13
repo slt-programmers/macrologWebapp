@@ -18,7 +18,7 @@ describe('ToastService', () => {
   it('should check state', (done) => {
     const result = service.messageObservable
     result.subscribe(it => {
-      expect(it).toEqual({ message: 'test', isError: true });
+      expect(it).toEqual({ message: 'test', isError: true, title: undefined });
       done();
     })
     service.setMessage('test', true);

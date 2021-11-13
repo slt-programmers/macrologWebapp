@@ -1,3 +1,22 @@
-<div #toast class="toast">
-  <div class="toast__message">{{ message }}</div>
+<div class="toast-holder">
+  <ng-container *ngFor="let toast of toasts; index as index">
+    <div class="relative">
+      <div class="toast-border" [class.toast-border--error]="toast.isError"></div>
+      <div class="toast" [class.toast--error]="toast.isError">
+        <div class="flex-col">
+          <div class="flex col-gap-1 justify-center">
+            <div class="font-bold flex-grow">
+              {{ toast.title || 'An error has occurred' }}
+            </div>
+            
+            <div class="" (click)="closeToast(index)">
+              <em class="fas fa-times"></em>
+            </div>
+          </div>
+          
+          <div class="flex-grow"> {{ toast.message }} </div>
+        </div>
+      </div>
+    </div>
+  </ng-container>
 </div>

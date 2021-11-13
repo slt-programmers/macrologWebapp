@@ -29,18 +29,4 @@ describe('Directive: valid date', () => {
     inputEl = fixture.debugElement.query(By.css('input'));
   });
 
-  // TODO Fix or move to protractor
-  // it('should validate the date', async () => {
-  //   inputEl.nativeElement.value = '26-03198';
-  //   const inputEvent = new Event('input');
-  //   inputEl.nativeElement.dispatchEvent(inputEvent);
-  //   fixture.detectChanges();
-  //   fixture.whenStable().then(() => {
-  //     // dispatchEvent(inputEl.nativeElement, 'input');
-  //     inputEl.nativeElement.dispatchEvent(inputEvent);
-  //     expect(inputEl.nativeElement.style.borderColor).toEqual('red');
-  //   });
-  // });
-
-
 });
