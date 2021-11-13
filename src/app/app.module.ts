@@ -10,6 +10,7 @@ import { ServicesModule } from './shared/services.module';
 import { ComponentsModule } from './shared/components/components.module';
 import { StoreModule } from '@ngrx/store';
 import { reducers } from './shared/store/reducers';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { reducers } from './shared/store/reducers';
     AppRoutingModule,
     ComponentsModule,
     StoreModule.forRoot(reducers),
+    FontAwesomeModule,
   ],
   providers: [
     { provide: Window, useValue: window},

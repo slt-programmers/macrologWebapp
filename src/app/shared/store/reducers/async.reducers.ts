@@ -12,26 +12,26 @@ export interface AsyncState<T> {
 export const createAsyncReducers = <T>(initialState: AsyncState<T>, actions: AsyncActions<T>) => {
   return createReducer(
     initialState,
-    on(actions.get, (state) => {
+    on(actions.get, (state): AsyncState<T> => {
       return {
         ...state,
         loading: true
       }
     }),
-    on(actions.post, (state) => {
+    on(actions.post, (state): AsyncState<T> => {
       return {
         ...state,
         loading: true
       }
     }),
-    on(actions.success, (state, { response }) => {
+    on(actions.success, (state, { response }): AsyncState<T> => {
       return {
         data: response,
         loading: false,
         error: undefined
       }
     }),
-    on(actions.failed, (state, { response }) => {
+    on(actions.failed, (state, { response }): AsyncState<T> => {
       return {
         loading: false,
         data: undefined,
