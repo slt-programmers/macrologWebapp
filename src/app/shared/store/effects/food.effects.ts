@@ -19,19 +19,37 @@ export class FoodEffects {
       concatMap((action) => {
         return this.http.get<Food[]>(this.backendUrl).pipe(
           map(response => {
-            console.log(response)
             return foodActions.success(response);
           }),
-          catchError(err => {
-            return of(foodActions.failed({ response: err }));
+          catchError(error => {
+            return of(foodActions.failed({ response: error }));
           })
         );
       })
     )
+  });
+
+  postFood$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(foodActions.post),
+      concatMap((action) => {
+        const headers = {
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': environment.origin,
+        };
+        console.log(action);
+        const options = { headers: headers };
+        return this.http.post<Food>(this.backendUrl + '/', action.body, options).pipe(
+          map(() => {
+            return foodActions.get();
+          }),
+          catchError(error => {
+            return of(foodActions.failed({ response: error }));
+          }));
+      })
+    );
   })
 
-  constructor(private readonly actions$: Actions,
-    private readonly http: HttpClient) {
+  constructor(private readonly actions$: Actions, private readonly http: HttpClient) { }
 
-  }
 }

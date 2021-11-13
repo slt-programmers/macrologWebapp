@@ -11,6 +11,10 @@ import { ComponentsModule } from './shared/components/components.module';
 import { StoreModule } from '@ngrx/store';
 import { reducers } from './shared/store/reducers';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { EffectsModule } from '@ngrx/effects';
+import { FoodEffects } from './shared/store/effects/food.effects';
+import { environment } from 'src/environments/environment';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 @NgModule({
   declarations: [
@@ -24,6 +28,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     AppRoutingModule,
     ComponentsModule,
     StoreModule.forRoot(reducers),
+    StoreDevtoolsModule.instrument(),
+    EffectsModule.forRoot([FoodEffects]),
     FontAwesomeModule,
   ],
   providers: [

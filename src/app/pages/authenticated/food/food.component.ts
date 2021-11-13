@@ -1,15 +1,16 @@
-import { Component, OnInit } from '@angular/core';
-import { FoodService } from '../../../shared/services/food.service';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Food } from '../../../shared/model/food';
-import { Portion } from 'src/app/shared/model/portion';
+import { Store } from '@ngrx/store';
+import { selectAllFood, selectFoodLoading } from 'src/app/shared/store/selectors/food.selectors';
+import { Observable, Subscription } from 'rxjs';
 
 @Component({
   selector: 'ml-food',
   templateUrl: './food.component.html'
 })
-export class FoodComponent implements OnInit {
+export class FoodComponent implements OnInit, OnDestroy {
   // All food from database, don't overwrite
-  private allFoodFromDB = new Array();
+  private allFood = new Array();
 
   // All food but converted to percentages of macro's
   public percentageFood = new Array();
@@ -20,7 +21,7 @@ export class FoodComponent implements OnInit {
   // Displayed on one page
   public displayedFood = new Array();
 
-  public isLoading = true;
+  public loading$: Observable<boolean>;
   public modalIsVisible = false;
   public modalTitle = 'Add food';
   public currentPage = 1;
@@ -33,26 +34,23 @@ export class FoodComponent implements OnInit {
   public unitName = 'gram';
   public unitGrams = 100.0;
 
-  constructor(private foodService: FoodService) { }
+  private foodSubscription: Subscription;
+
+  constructor(private readonly store: Store) { }
 
   ngOnInit(): void {
-    this.loadAllFood();
-  }
-
-  private loadAllFood(): void {
-    this.foodService.getAllFood().subscribe(it => {
-      this.allFoodFromDB = it;
+    this.foodSubscription = this.store.select(selectAllFood).subscribe(it => {
+      this.allFood = it;
       this.percentageFood = this.calculatePercentages();
-      this.searchableFood = this.allFoodFromDB;
+      this.searchableFood = this.allFood;
       this.getPagedFood({ pageIndex: 0 });
-      this.isLoading = false;
     });
+    this.loading$ = this.store.select(selectFoodLoading);
   }
 
   public hasNextPage(): boolean {
-    return this.searchableFood.slice(
-      (this.currentPage + 1) * this.itemsPerPage - this.itemsPerPage,
-    ).length > 0;
+    return this.searchableFood
+      .slice((this.currentPage + 1) * this.itemsPerPage - this.itemsPerPage).length > 0;
   }
 
   public getPagedFood(page: any): void {
@@ -65,13 +63,14 @@ export class FoodComponent implements OnInit {
 
   public findFoodMatch(): void {
     const foodMatch: Food[] = [];
-    for (const food of this.searchableFood) {
+    for (const food of this.allFood) {
       const matchFoodName = food.name.toLowerCase().indexOf(this.searchInput.toLowerCase()) >= 0;
       if (matchFoodName) {
         foodMatch.push(food);
       }
     }
     this.searchableFood = foodMatch;
+    this.getPagedFood({ pageIndex: 0 });
   }
 
   public openModal(food: Food) {
@@ -88,13 +87,13 @@ export class FoodComponent implements OnInit {
   }
 
   public closeModal() {
-    this.loadAllFood();
     this.modalIsVisible = false;
   }
 
   public clearSearch(): void {
     this.searchInput = '';
-    this.searchableFood = this.allFoodFromDB;
+    this.searchableFood = this.allFood;
+    this.getPagedFood({ pageIndex: 0 });
   }
 
   private setReversed(header: string): void {
@@ -124,7 +123,7 @@ export class FoodComponent implements OnInit {
     }
 
     this.searchableFood = sortedArray;
-    this.getPagedFood(this.currentPage);
+    this.getPagedFood({pageIndex: this.currentPage -1});
   }
 
   public changeDisplay(mode: string): void {
@@ -132,7 +131,7 @@ export class FoodComponent implements OnInit {
     this.displayMode = mode;
 
     if (this.displayMode === 'grams') {
-      this.searchableFood = this.allFoodFromDB;
+      this.searchableFood = this.allFood;
     } else {
       this.searchableFood = this.percentageFood;
     }
@@ -144,7 +143,7 @@ export class FoodComponent implements OnInit {
   private calculatePercentages() {
     const percentageFood = new Array();
 
-    for (const food of this.allFoodFromDB) {
+    for (const food of this.allFood) {
       const total = food.protein + food.fat + food.carbs;
       const newProtein = (food.protein / total) * 100;
       const newFat = (food.fat / total) * 100;
@@ -162,35 +161,8 @@ export class FoodComponent implements OnInit {
     return percentageFood;
   }
 
-  public saveFood(): void {
-    const newFood: Food = {
-      name: this.selectedFood.name,
-      protein: this.selectedFood.protein,
-      fat: this.selectedFood.fat,
-      carbs: this.selectedFood.carbs
-    };
-    if (this.selectedFood) {
-      newFood.id = this.selectedFood.id;
-    }
-    newFood.portions = this.selectedFood.portions;
-
-    this.foodService.addFood(newFood).subscribe(() => {
-      this.closeModal();
-    });
+  ngOnDestroy(): void {
+    this.foodSubscription.unsubscribe();
   }
 
-  public isNewPortion(portion: Portion): boolean {
-    if (portion.id !== null && portion.id !== undefined && portion.id !== 0) {
-      return false;
-    }
-    return true;
-  }
-
-  public addNewPortion(): void {
-    this.selectedFood.portions.push(new Portion());
-  }
-
-  public removePortion(index: number): void {
-    this.selectedFood.portions.splice(index, 1);
-  }
 }
