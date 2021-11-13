@@ -7,7 +7,7 @@ import { Macros } from 'src/app/shared/model/macros';
 import { format } from 'date-fns';
 
 @Component({
-  selector: 'graphs',
+  selector: 'ml-graphs',
   templateUrl: './graphs.component.html',
   styleUrls: ['./graphs.component.scss'],
 })

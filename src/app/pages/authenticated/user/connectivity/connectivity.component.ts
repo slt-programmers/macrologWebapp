@@ -4,7 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { environment } from '../../../../../environments/environment';
 
 @Component({
-  selector: 'connectivity',
+  selector: 'ml-connectivity',
   templateUrl: './connectivity.component.html',
   styleUrls: ['./connectivity.component.scss'],
 })

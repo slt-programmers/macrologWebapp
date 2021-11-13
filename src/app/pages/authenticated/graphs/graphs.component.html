@@ -69,12 +69,12 @@
             {{graphLabel}}
           </div>
 
-          <bargraph [colors]="['rgb(100, 149, 236)', 'rgb(60, 221, 234)', 'rgb(144, 238, 144)']"
+          <ml-bargraph [colors]="['rgb(100, 149, 236)', 'rgb(60, 221, 234)', 'rgb(144, 238, 144)']"
             [fillColors]="['rgba(100, 149, 236, 0.3)', 'rgba(60, 221, 234, 0.3)', 'rgba(144, 238, 144, 0.3)']"
             [markers]="markers" [datasets]="[proteinDataset, fatDataset, carbsDataset]"
             [xAxisStep]="1" [yAxisStep]="yAxisStep"
             class="graph__bargraph graph__bargraph--stacked">
-          </bargraph>
+          </ml-bargraph>
         </div>
 
         <div class="graph__bargraph-container" *ngIf="measurementOption === 'splitted'">
@@ -82,10 +82,10 @@
             {{proteinGraphLabel}}
           </div>
 
-          <bargraph [colors]="['rgb(100, 149, 236)']" [fillColors]="['rgba(100, 149, 236, 0.3)']"
+          <ml-bargraph [colors]="['rgb(100, 149, 236)']" [fillColors]="['rgba(100, 149, 236, 0.3)']"
             [markers]="[proteinMarker]" [datasets]="[proteinDataset]" [xAxisStep]="1"
             [yAxisStep]="yAxisStep" class="graph__bargraph graph__bargraph--protein">
-          </bargraph>
+          </ml-bargraph>
         </div>
 
         <div class="graph__bargraph-container" *ngIf="measurementOption === 'splitted'">
@@ -93,10 +93,10 @@
             {{fatGraphLabel}}
           </div>
 
-          <bargraph [colors]="['rgb(60, 221, 234)']" [fillColors]="['rgba(60, 221, 234, 0.3)']"
+          <ml-bargraph [colors]="['rgb(60, 221, 234)']" [fillColors]="['rgba(60, 221, 234, 0.3)']"
             [markers]="[fatMarker]" [datasets]="[fatDataset]" [xAxisStep]="1"
             [yAxisStep]="yAxisStep" class="graph__bargraph graph__bargraph--fat">
-          </bargraph>
+          </ml-bargraph>
         </div>
 
         <div class="graph__bargraph-container" *ngIf="measurementOption === 'splitted'">
@@ -104,10 +104,10 @@
             {{carbsGraphLabel}}
           </div>
 
-          <bargraph [colors]="['rgb(144, 238, 144)']" [fillColors]="['rgba(144, 238, 144, 0.3)']"
+          <ml-bargraph [colors]="['rgb(144, 238, 144)']" [fillColors]="['rgba(144, 238, 144, 0.3)']"
             [markers]="[carbsMarker]" [datasets]="[carbsDataset]" [xAxisStep]="1"
             [yAxisStep]="yAxisStep" class="graph__bargraph graph__bargraph--carbs">
-          </bargraph>
+          </ml-bargraph>
         </div>
 
         <div class="graph__bargraph-container" *ngIf="measurementOption === 'ratio'">
@@ -115,12 +115,12 @@
             {{ratioGraphLabel}}
           </div>
 
-          <bargraph [colors]="['rgb(100, 149, 236)', 'rgb(60, 221, 234)', 'rgb(144, 238, 144)']"
+          <ml-bargraph [colors]="['rgb(100, 149, 236)', 'rgb(60, 221, 234)', 'rgb(144, 238, 144)']"
             [fillColors]="['rgba(100, 149, 236, 0.3)', 'rgba(60, 221, 234, 0.3)', 'rgba(144, 238, 144, 0.3)']"
             [markers]="ratioMarkers"
             [datasets]="[proteinRatioDataset, fatRatioDataset, carbsRatioDataset]" [xAxisStep]="1"
             [yAxisStep]="10" class="graph__bargraph graph__bargraph--stacked">
-          </bargraph>
+          </ml-bargraph>
         </div>
       </div>
     </div>

@@ -17,7 +17,7 @@ import { ToastService } from '../../services/toast.service';
 import { Portion } from 'src/app/shared/model/portion';
 
 @Component({
-  selector: 'log-meal',
+  selector: 'ml-log-meal',
   templateUrl: './log-meal.component.html',
   styleUrls: ['./log-meal.component.scss'],
 })

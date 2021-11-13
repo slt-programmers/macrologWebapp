@@ -12,7 +12,7 @@ import { differenceInYears, isValid, parse } from 'date-fns';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
-  selector: 'app-onboarding',
+  selector: 'ml-onboarding',
   templateUrl: './onboarding.component.html',
   styleUrls: ['./onboarding.component.scss'],
 })

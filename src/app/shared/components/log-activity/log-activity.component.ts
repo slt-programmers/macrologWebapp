@@ -9,12 +9,11 @@ import {
   ElementRef,
   SimpleChanges,
 } from '@angular/core';
-import { DatePipe } from '@angular/common';
 import { Activity } from '../../model/activity';
 import { ActivityService } from '../../services/activity.service';
 
 @Component({
-  selector: 'log-activity',
+  selector: 'ml-log-activity',
   templateUrl: './log-activity.component.html',
 })
 export class LogActivityComponent implements OnInit, OnChanges {

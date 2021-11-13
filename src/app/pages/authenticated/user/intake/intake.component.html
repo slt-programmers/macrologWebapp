@@ -19,7 +19,7 @@
   </div>
 </div>
 
-<app-modal [title]="'Set your daily intake'" (close)="closeCalcModal()" *ngIf="showCalcModal">
+<ml-modal [title]="'Set your daily intake'" (close$)="closeCalcModal()" *ngIf="showCalcModal">
   <div class="calorie-box">
     <span class="calorie-box__title">{{calories | number : '1.0-0'}} Calories</span>
   </div>
@@ -40,8 +40,8 @@
         <div class="form-field">
           <div class="form-field__label form-field__label--small">Calories</div>
           <div class="form-field__element">
-            <slider [value]="calories" (valueChange)="changeCalories($event)" [upperBound]="3000"
-              [lowerBound]="1200" [markers]="markers"></slider>
+            <ml-slider [value]="calories" (valueChange)="changeCalories($event)" [upperBound]="3000"
+              [lowerBound]="1200" [markers]="markers"></ml-slider>
           </div>
         </div>
 
@@ -89,4 +89,4 @@
   <div class="button-wrapper">
     <button class="button button-primary" (click)="saveIntake()">Save</button>
   </div>
-</app-modal>
+</ml-modal>

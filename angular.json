@@ -7,7 +7,7 @@
       "root": "",
       "sourceRoot": "src",
       "projectType": "application",
-      "prefix": "app",
+      "prefix": "ml",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
@@ -22,7 +22,9 @@
               "src/assets",
               "src/google3bb89e24d542c3d5.html"
             ],
-            "styles": ["src/css/public.scss"],
+            "styles": [
+              "src/css/public.scss"
+            ],
             "scripts": [],
             "vendorChunk": true,
             "extractLicenses": false,
@@ -116,9 +118,14 @@
             "main": "src/test.ts",
             "polyfills": "src/polyfills.ts",
             "karmaConfig": "karma.conf.js",
-            "styles": ["src/css/public.scss"],
+            "styles": [
+              "src/css/public.scss"
+            ],
             "scripts": [],
-            "assets": ["src/favicon.ico", "src/assets"],
+            "assets": [
+              "src/favicon.ico",
+              "src/assets"
+            ],
             "tsConfig": "tsconfig.spec.json",
             "codeCoverage": true,
             "codeCoverageExclude": [
@@ -130,14 +137,12 @@
           }
         },
         "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
+          "builder": "@angular-eslint/builder:lint",
           "options": {
-            "tsConfig": [
-              "tsconfig.app.json",
-              "tsconfig.spec.json",
-              "e2e/tsconfig.json"
-            ],
-            "exclude": ["**/node_modules/**"]
+            "lintFilePatterns": [
+              "src/**/*.ts",
+              "src/**/*.html"
+            ]
           }
         },
         "e2e": {
@@ -159,6 +164,7 @@
   },
   "defaultProject": "macrolog-webapp",
   "cli": {
-    "analytics": "be3c8820-63e9-44ec-b7f7-d15f2eaa4756"
+    "analytics": "be3c8820-63e9-44ec-b7f7-d15f2eaa4756",
+    "defaultCollection": "@angular-eslint/schematics"
   }
 }

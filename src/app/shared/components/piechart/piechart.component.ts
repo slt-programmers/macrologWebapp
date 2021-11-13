@@ -10,7 +10,7 @@ import { Macros } from 'src/app/shared/model/macros';
 
 @Component({
   templateUrl: './piechart.component.html',
-  selector: 'piechart',
+  selector: 'ml-piechart',
   styleUrls: ['./piechart.component.scss'],
 })
 export class PiechartComponent implements OnInit, AfterViewInit {

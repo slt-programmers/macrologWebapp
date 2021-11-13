@@ -157,7 +157,7 @@
   </button>
 </div>
 
-<app-modal *ngIf="modalIsVisible" [title]="modalTitle" (close)="closeModal()">
+<ml-modal *ngIf="modalIsVisible" [title]="modalTitle" (close$)="closeModal()">
   <form #saveFoodForm="ngForm">
     <div class="form-field">
       <label class="form-field__label">Food</label>
@@ -227,4 +227,4 @@
         [disabled]="saveFoodForm.invalid">Save</button>
     </div>
   </form>
-</app-modal>
+</ml-modal>

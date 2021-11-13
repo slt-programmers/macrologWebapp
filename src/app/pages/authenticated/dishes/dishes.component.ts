@@ -8,7 +8,7 @@ import { FoodService } from 'src/app/shared/services/food.service';
 import { Food } from 'src/app/shared/model/food';
 
 @Component({
-  selector: 'app-dishes',
+  selector: 'ml-dishes',
   templateUrl: './dishes.component.html'
 })
 export class DishesComponent implements OnInit {

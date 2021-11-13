@@ -7,7 +7,7 @@ import { UserSettings } from 'src/app/shared/model/userSettings';
 import { format, parse } from 'date-fns';
 
 @Component({
-  selector: 'personal',
+  selector: 'ml-personal',
   styleUrls: ['./personal.component.scss'],
   templateUrl: './personal.component.html',
 })

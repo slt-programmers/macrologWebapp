@@ -5,7 +5,7 @@ import { AuthenticationService } from '../../shared/services/auth.service';
 import { HealthcheckService } from 'src/app/shared/services/healthcheck.service';
 
 @Component({
-  selector: 'authenticated',
+  selector: 'ml-authenticated',
   templateUrl: './authenticated.component.html'
 })
 export class AuthenticatedComponent implements OnInit {

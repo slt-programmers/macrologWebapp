@@ -6,7 +6,7 @@
       </div>
 
       <div class="stepper-wrapper">
-        <stepper [currentStep]="currentStep" [numberOfSteps]="4"></stepper>
+        <ml-stepper [currentStep]="currentStep" [numberOfSteps]="4"></ml-stepper>
       </div>
 
       <div class="content" #step1 *ngIf="currentStep === 1">
@@ -113,8 +113,8 @@
                   Calories
                 </div>
                 <div class="form-field__slider">
-                  <slider [value]="calories" (valueChange)="changeCalories($event)"
-                    [upperBound]="4000" [lowerBound]="1200" [markers]="markers"></slider>
+                  <ml-slider [value]="calories" (valueChange)="changeCalories($event)"
+                    [upperBound]="4000" [lowerBound]="1200" [markers]="markers"></ml-slider>
                 </div>
               </div>
 
@@ -256,8 +256,8 @@
               <span class="logday__header__macro">Carbs</span>
             </div>
 
-            <log-meal #breakfast [dummy]="true" [open]="breakfastOpen" [date]="displayDate"
-              [meal]="'Breakfast'" [logEntries]="[]" (dataChanged)="dummy()"></log-meal>
+            <ml-log-meal #breakfast [dummy]="true" [open]="breakfastOpen" [date]="displayDate"
+              [meal]="'Breakfast'" [logEntries]="[]" (dataChanged)="dummy()"></ml-log-meal>
           </div>
         </div>
 

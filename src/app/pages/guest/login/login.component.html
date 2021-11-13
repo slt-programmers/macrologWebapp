@@ -1,5 +1,5 @@
 <div class="page">
-  <app-navigation></app-navigation>
+  <ml-navigation></ml-navigation>
 
   <div class="container">
     <div class="flex col-gap-2 row-gap-2 flex-wrap justify-center align-start">
@@ -67,7 +67,7 @@
   </div>
 </div>
 
-<app-modal [title]="'Forgot your password?'" (close)="toggleForgotPwModal(false)" *ngIf="showForgotPwModal">
+<ml-modal [title]="'Forgot your password?'" (close$)="toggleForgotPwModal(false)" *ngIf="showForgotPwModal">
   <form #forgotForm="ngForm" class="mt-1">
     <p>Please enter your email so we can send a link to reset your password</p>
 
@@ -82,4 +82,4 @@
       </button>
     </div>
   </form>
-</app-modal>
+</ml-modal>

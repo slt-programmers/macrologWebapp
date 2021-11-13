@@ -41,7 +41,7 @@
   </div>
 </div>
 
-<app-modal *ngIf="modalOpen" [title]="'Delete account'" (close)="closeModal()">
+<ml-modal *ngIf="modalOpen" [title]="'Delete account'" (close$)="closeModal()">
   <div class="content">
     <p>Are you sure you want to delete your account?
       This action is irreversable.</p>
@@ -60,4 +60,4 @@
       </button>
     </div>
   </div>
-</app-modal>
+</ml-modal>

@@ -9,7 +9,7 @@ import {
 } from '@angular/core';
 
 @Component({
-  selector: 'linegraph',
+  selector: 'ml-linegraph',
   templateUrl: './linegraph.component.html',
   styleUrls: ['./linegraph.component.scss'],
 })

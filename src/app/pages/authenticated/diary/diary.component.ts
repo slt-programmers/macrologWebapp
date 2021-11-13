@@ -1,21 +1,22 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, HostListener, OnInit, ViewChild } from '@angular/core';
 import { DiaryService } from '../../../shared/services/diary.service';
 import { ActivityService } from '../../../shared/services/activity.service';
 import { UserService } from '../../../shared/services/user.service';
-import { FoodService } from '../../../shared/services/food.service';
-import { DishService } from '../../../shared/services/dish.service';
 import { Entry } from '../../../shared/model/entry';
 import { Activity } from '../../../shared/model/activity';
 import { DatePipe } from '@angular/common';
-import { ToastComponent } from 'src/app/shared/components/toast/toast.component';
 import { ToastService } from 'src/app/shared/services/toast.service';
 
 @Component({
-  selector: 'diary-page',
-  templateUrl: './diary.component.html',
-  host: { '(document: click)': 'documentClick($event)' },
+  selector: 'ml-diary-page',
+  templateUrl: './diary.component.html'
 })
 export class DiaryComponent implements OnInit {
+  @HostListener('document:click', ['$event.target']) 
+  onClick(target: HTMLElement) {
+    this.documentClick(target);
+  }
+
   @ViewChild('breakfast', { static: false }) breakfastEref: any;
   @ViewChild('lunch', { static: false }) lunchEref: any;
   @ViewChild('dinner', { static: false }) dinnerEref: any;
@@ -147,28 +148,28 @@ export class DiaryComponent implements OnInit {
     }
   }
 
-  private documentClick(event: any) {
+  private documentClick(target: HTMLElement) {
     if (
-      !event.target.classList.contains('autocomplete__option') &&
-      !event.target.classList.contains('trash') &&
-      !event.target.classList.contains('button--delete') &&
-      !event.target.classList.contains('activity__name--sync') &&
-      !event.target.classList.contains('activity__title--sync')
+      !target.classList.contains('autocomplete__option') &&
+      !target.classList.contains('trash') &&
+      !target.classList.contains('button--delete') &&
+      !target.classList.contains('activity__name--sync') &&
+      !target.classList.contains('activity__title--sync')
     ) {
       this.breakfastOpen = this.breakfastEref.logMealEref.nativeElement.contains(
-        event.target
+        target
       );
       this.lunchOpen = this.lunchEref.logMealEref.nativeElement.contains(
-        event.target
+        target
       );
       this.dinnerOpen = this.dinnerEref.logMealEref.nativeElement.contains(
-        event.target
+        target
       );
       this.snacksOpen = this.snacksEref.logMealEref.nativeElement.contains(
-        event.target
+        target
       );
       this.activitiesOpen = this.activitiesEref.logActivityEref.nativeElement.contains(
-        event.target
+        target
       );
     }
   }

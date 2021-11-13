@@ -4,7 +4,7 @@ import { ToastService } from '../../../../shared/services/toast.service';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'account',
+  selector: 'ml-account',
   templateUrl: './account.component.html',
 })
 export class AccountComponent {

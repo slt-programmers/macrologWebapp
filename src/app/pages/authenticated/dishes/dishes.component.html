@@ -11,7 +11,7 @@
         <h1>{{ dish.name }}</h1>
 
         <div class="dish-card__content__pie-chart">
-          <piechart [mealId]="dish.id" [macros]="getTotal(dish)"></piechart>
+          <ml-piechart [mealId]="dish.id" [macros]="getTotal(dish)"></ml-piechart>
         </div>
 
         <div class="flex align-center col-gap-1" *ngFor="let ingredient of dish.ingredients">
@@ -29,7 +29,7 @@
   </button>
 </div>
 
-<app-modal *ngIf="modalIsVisible" [title]="modalTitle" (close)="closeModal()">
+<ml-modal *ngIf="modalIsVisible" [title]="modalTitle" (close$)="closeModal()">
   <form #makeDishForm="ngForm">
     <div class="flex flex-col content">
 
@@ -47,7 +47,7 @@
 
             <!-- portion amount -->
             <option *ngFor="let portion of ingr.food.portions"
-              value="{{portion.description}}" [selected]="portion.id == ingr.portion?.id">
+              value="{{portion.description}}" [selected]="portion.id === ingr.portion?.id">
               {{portion.description}}
             </option>
           </select>
@@ -68,9 +68,9 @@
       </div>
 
       <div class="autocomplete-wrapper">
-        <autocomplete-food [placeholder]="'Search for food'"
-          (select)="addIngredient($event)">
-        </autocomplete-food>
+        <ml-autocomplete-food [placeholder]="'Search for food'"
+          (select$)="addIngredient($event)">
+        </ml-autocomplete-food>
       </div>
     </div>
 
@@ -81,4 +81,4 @@
         (click)="saveDish()">Save</button>
     </div>
   </form>
-</app-modal>
+</ml-modal>

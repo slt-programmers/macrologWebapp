@@ -1,4 +1,4 @@
-import { Component, Input, ViewChild, ElementRef, Output, EventEmitter } from '@angular/core';
+import { Component, Input, ViewChild, ElementRef, Output, EventEmitter, HostListener } from '@angular/core';
 import { FoodSearchable } from '../../model/foodSearchable';
 import { Food } from '../../model/food';
 import { FoodService } from '../../services/food.service';
@@ -8,12 +8,16 @@ import { Portion } from '../../model/portion';
 import { Macros } from '../../model/macros';
 
 @Component({
+  selector: 'ml-autocomplete-food',
   templateUrl: './autocomplete-food.component.html',
-  selector: 'autocomplete-food',
   styleUrls: ['./autocomplete-food.component.scss'],
-  host: { '(document: click)': 'closeAutoComplete($event)' },
 })
 export class AutocompleteFoodComponent {
+  @HostListener('document.click', ['$event.target']) 
+  onClick(target: ElementRef) {
+    this.closeAutoComplete(target);
+  }
+
   @ViewChild('newIngredient', { static: false })
   private newIngredientEref: ElementRef;
   @ViewChild('autoComplete', { static: false })
@@ -23,7 +27,7 @@ export class AutocompleteFoodComponent {
   @Input() placeholder = '';
   @Input() selectFn: Function;
   @Input() includeDishes = false;
-  @Output() select: EventEmitter<FoodSearchable> = new EventEmitter<FoodSearchable>();
+  @Output() select$: EventEmitter<FoodSearchable> = new EventEmitter<FoodSearchable>();
 
   public searchables: any[]
   public foodMatch = new Array();
@@ -41,41 +45,6 @@ export class AutocompleteFoodComponent {
       this.allDishes = it;
       this.getFoodSearchableList();
     });
-  }
-
-  private getFoodSearchableList(): void {
-    if(!this.dummy) {
-
-      if (!!this.allFood && !!this.allDishes) {
-        const searchList = [];
-        for (const item of this.allFood) {
-          const searchable: FoodSearchable = { food: item };
-          searchList.push(searchable);
-        }
-        if (this.includeDishes) {
-          for (const dish of this.allDishes) {
-            searchList.push({ dish: dish });
-          }
-        }
-        this.searchables = searchList;
-      }
-    } else {
-      const item: Food = { name: 'Apple', protein: 0.4, fat: 0.0, carbs: 12 };
-      item.portions = [];
-      const portion = new Portion();
-      const macros: Macros = {};
-      macros.protein = 0.8;
-      macros.fat = 0.0;
-      macros.carbs = 24;
-      portion.macros = macros;
-      portion.grams = 200;
-      portion.description = 'piece';
-      item.portions.push(portion);
-  
-      const searchable: FoodSearchable = { food: item };
-      this.searchables = [];
-      this.searchables.push(searchable);
-    }
   }
 
   public findFoodMatch(event: any) {
@@ -119,7 +88,49 @@ export class AutocompleteFoodComponent {
     if (this.selectFn) {
       this.selectFn(match)
     } else {
-      this.select.emit(match);
+      this.select$.emit(match);
+    }
+  }
+
+  public getDescription(foodSearchable: FoodSearchable) {
+    if (foodSearchable.dish) {
+      return foodSearchable.dish.name + ' (dish)';
+    }
+    return foodSearchable.food.name;
+  }
+
+  private getFoodSearchableList(): void {
+    if (!this.dummy) {
+
+      if (!!this.allFood && !!this.allDishes) {
+        const searchList = [];
+        for (const item of this.allFood) {
+          const searchable: FoodSearchable = { food: item };
+          searchList.push(searchable);
+        }
+        if (this.includeDishes) {
+          for (const dish of this.allDishes) {
+            searchList.push({ dish: dish });
+          }
+        }
+        this.searchables = searchList;
+      }
+    } else {
+      const item: Food = { name: 'Apple', protein: 0.4, fat: 0.0, carbs: 12 };
+      item.portions = [];
+      const portion = new Portion();
+      const macros: Macros = {};
+      macros.protein = 0.8;
+      macros.fat = 0.0;
+      macros.carbs = 24;
+      portion.macros = macros;
+      portion.grams = 200;
+      portion.description = 'piece';
+      item.portions.push(portion);
+
+      const searchable: FoodSearchable = { food: item };
+      this.searchables = [];
+      this.searchables.push(searchable);
     }
   }
 
@@ -171,19 +182,8 @@ export class AutocompleteFoodComponent {
     return +index;
   }
 
-  public getDescription(foodSearchable: FoodSearchable) {
-    if (foodSearchable.dish) {
-      return foodSearchable.dish.name + ' (dish)';
-    }
-    return foodSearchable.food.name;
-  }
-
-  public closeAutoComplete(event: any) {
-    // Event vuurt 4x door 4 log-meal-components
-    if (
-      this.newIngredientEref &&
-      !this.newIngredientEref.nativeElement.contains(event.target)
-    ) {
+  private closeAutoComplete(target: ElementRef) {
+    if (this.newIngredientEref && !this.newIngredientEref.nativeElement.contains(target)) {
       this.showAutoComplete = false;
       this.foodMatch = [];
     }

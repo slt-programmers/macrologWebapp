@@ -1,8 +1,8 @@
 import { Component, OnInit, OnChanges, Renderer2, Input, ViewChild, ElementRef, AfterViewInit, SimpleChanges } from '@angular/core';
 
 @Component({
+  selector: 'ml-stackdonut',
   templateUrl: './stackdonut.component.html',
-  selector: 'stackdonut',
   styleUrls: ['./stackdonut.component.scss']
 })
 export class StackDonutComponent implements OnInit, AfterViewInit, OnChanges {
