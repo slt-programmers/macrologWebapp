@@ -26,9 +26,9 @@ jobs:
       if: branch != release
       name: 'build'
       script: npm run build
-    # - script: npm run test
-      # name: 'unit-test and sonar scan'
-      # after_script: sonar-scanner -Dsonar.projectKey=slt-programmers_macrologWebapp
+    - script: npm run test
+      name: 'unit-test and sonar scan'
+      after_script: sonar-scanner -Dsonar.projectKey=slt-programmers_macrologWebapp
     - script: 'ng lint'
       name: 'lint'
 
