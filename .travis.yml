@@ -28,11 +28,11 @@ jobs:
       script: npm run build
     - script: npm run test
       name: 'unit-test'
+      after_script: sonar-scanner -Dsonar.projectKey=slt-programmers_macrologWebapp
     - script: 'ng lint'
       name: 'lint'
-      # after_script: sonar-scanner -Dsonar.projectKey=slt-programmers_macrologWebapp
-    - script: sonar-scanner -Dsonar.projectKey=slt-programmers_macrologWebapp
-      name: 'sonar scan'
+    # - script: sonar-scanner -Dsonar.projectKey=slt-programmers_macrologWebapp
+    #   name: 'sonar scan'
 
 
 addons:
