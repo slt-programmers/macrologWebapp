@@ -9,7 +9,7 @@
     "test": "ng test --code-coverage --watch=false",
     "test:local": "ng test --code-coverage --browsers=chrome",
     "lint": "ng lint",
-    "e2e": "ng e2e",
+    "cypress": "cypress open",
     "postinstall": "ng build --aot --configuration production",
     "analyze": "webpack-bundle-analyzer ./stats.json",
     "webpack-init": "webpack --profile --json > stats.json"

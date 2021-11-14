@@ -13,7 +13,6 @@ import { reducers } from './shared/store/reducers';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { EffectsModule } from '@ngrx/effects';
 import { FoodEffects } from './shared/store/effects/food.effects';
-import { environment } from 'src/environments/environment';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 @NgModule({

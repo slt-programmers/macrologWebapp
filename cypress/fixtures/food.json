@@ -1,0 +1,62 @@
+[
+  {
+    "id": 1,
+    "name": "Ei, gebakken",
+    "protein": 9.4,
+    "fat": 11.1,
+    "carbs": 2.2,
+    "portions": [
+      {
+        "id": 1,
+        "description": "stuk",
+        "grams": 50.0,
+        "macros": {
+          "protein": 4.7,
+          "fat": 5.55,
+          "carbs": 1.1,
+          "calories": 73.14999999999999
+        }
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "name": "Ontbijtspek",
+    "protein": 15.2,
+    "fat": 37.9,
+    "carbs": 0.4,
+    "portions": [
+      {
+        "id": 2,
+        "description": "2 plakjes",
+        "grams": 15.0,
+        "macros": {
+          "protein": 2.28,
+          "fat": 5.6850000000000005,
+          "carbs": 0.06,
+          "calories": 60.525000000000006
+        }
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "name": "Volle kwark",
+    "protein": 1.0,
+    "fat": 2.0,
+    "carbs": 5.0,
+    "portions": [
+      {
+        "id": 3,
+        "description": "bak",
+        "grams": 500.0,
+        "macros": {
+          "protein": 1.23,
+          "fat": 2.46,
+          "carbs": 6.15,
+          "calories": 51.660000000000004
+        }
+      }
+    ]
+  }
+]
