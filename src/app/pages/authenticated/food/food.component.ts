@@ -63,8 +63,6 @@ export class FoodComponent implements OnDestroy {
           foodMatch.push(this.percentageFood.filter(it => it.id === food.id)[0]);
         }
       }
-      console.log('FoodMatch');
-      console.log(foodMatch);
     }
     this.searchableFood = foodMatch;
     this.getPagedFood(0);

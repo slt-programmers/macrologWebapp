@@ -8,11 +8,11 @@ export interface AsyncActions<T> {
   failed: FunctionWithParametersType<[response: any], any> & TypedAction<string>,
 }
 
-export const  createAsyncActions = <T>(featureKey: string): AsyncActions<T> => {
+export const createAsyncActions = <T>(featureKey: string): AsyncActions<T> => {
   return {
-    get: createAction(`[${featureKey}] Get`, (params?: T) => ({params})),
-    post: createAction(`[${featureKey}] Post`, (body: T) => ({body})),
-    success: createAction(`[${featureKey}] Success`, (response: any) => ({response})),
-    failed: createAction(`[${featureKey}] Failed`, (response: any) => ({response}))
+    get: createAction(`[${featureKey}] Get`, (params?: T) => ({ params })),
+    post: createAction(`[${featureKey}] Post`, (body: T) => ({ body })),
+    success: createAction(`[${featureKey}] Success`, (response: any) => ({ response })),
+    failed: createAction(`[${featureKey}] Failed`, (response: any) => ({ response }))
   }
 }

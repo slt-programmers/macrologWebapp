@@ -9,7 +9,7 @@ const initialState: AsyncState<Food[]> = {
   loading: false,
   error: undefined,
   pagination: undefined,
-  parameters: undefined
+  params: undefined
 };
 
 export const foodReducer = createAsyncReducers<Food[]>(initialState, foodActions);

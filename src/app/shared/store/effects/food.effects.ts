@@ -37,7 +37,6 @@ export class FoodEffects {
           'Content-Type': 'application/json',
           'Access-Control-Allow-Origin': environment.origin,
         };
-        console.log(action);
         const options = { headers: headers };
         return this.http.post<Food>(this.backendUrl + '/', action.body, options).pipe(
           map(() => {
