@@ -14,8 +14,8 @@ install:
   - npm install
   - npm i -g webdriver-manager
   # - cd node_modules/protractor
-  - webdriver-manager clean
-  - webdriver-manager update --versions.chrome 77.0.3865.120
+  # - webdriver-manager clean
+  # - webdriver-manager update --versions.chrome 77.0.3865.120
   # - cd ../..
 
 jobs:
@@ -26,9 +26,9 @@ jobs:
       if: branch != release
       name: 'build'
       script: npm run build
-    - script: npm run test
-      name: 'unit-test and sonar scan'
-      after_script: sonar-scanner -Dsonar.projectKey=slt-programmers_macrologWebapp
+    # - script: npm run test
+      # name: 'unit-test and sonar scan'
+      # after_script: sonar-scanner -Dsonar.projectKey=slt-programmers_macrologWebapp
     - script: 'ng lint'
       name: 'lint'
 
