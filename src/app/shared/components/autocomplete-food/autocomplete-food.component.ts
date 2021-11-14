@@ -13,7 +13,7 @@ import { Macros } from '../../model/macros';
   styleUrls: ['./autocomplete-food.component.scss'],
 })
 export class AutocompleteFoodComponent {
-  @HostListener('document.click', ['$event.target']) 
+  @HostListener('document.click', ['$event.target'])
   onClick(target: ElementRef) {
     this.closeAutoComplete(target);
   }
@@ -118,14 +118,15 @@ export class AutocompleteFoodComponent {
     } else {
       const item: Food = { name: 'Apple', protein: 0.4, fat: 0.0, carbs: 12 };
       item.portions = [];
-      const portion = new Portion();
       const macros: Macros = {};
       macros.protein = 0.8;
       macros.fat = 0.0;
       macros.carbs = 24;
-      portion.macros = macros;
-      portion.grams = 200;
-      portion.description = 'piece';
+      const portion = {
+        macros: macros,
+        grams: 200,
+        description: 'piece'
+      }
       item.portions.push(portion);
 
       const searchable: FoodSearchable = { food: item };

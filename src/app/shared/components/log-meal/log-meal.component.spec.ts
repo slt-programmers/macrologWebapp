@@ -79,7 +79,7 @@ describe('LogMealComponent', () => {
     const logEntry: Entry = {};
     logEntry.id = 1;
     const food = { name: 'food', protein: 1, fat: 2, carbs: 3 }
-    const portion = new Portion();
+    const portion = {} as Portion;
     portion.description = 'desc';
     const macros = { protein: 1, fat: 2, carbs: 3 };
     logEntry.food = food;
@@ -104,7 +104,7 @@ describe('LogMealComponent', () => {
   it('should set the multiplier on logentry', () => {
     const logEntry: Entry = {};
     logEntry.multiplier = 5;
-    const portion = new Portion();
+    const portion = {} as Portion;
     portion.description = 'desc';
     logEntry.portion = portion;
 
@@ -126,7 +126,7 @@ describe('LogMealComponent', () => {
 
     let result = component.getAmountValue(logEntry);
     expect(result).toEqual(500);
-    logEntry.portion = new Portion();
+    logEntry.portion = {} as Portion;
     result = component.getAmountValue(logEntry);
     expect(result).toEqual(5);
   });
@@ -136,7 +136,7 @@ describe('LogMealComponent', () => {
     const logEntry: Entry = {};
     logEntry.id = 1;
     const food = { name: 'food', protein: 1, fat: 2, carbs: 3 }
-    const portion = new Portion();
+    const portion = {} as Portion;
     portion.description = 'desc';
     const macros = { protein: 1, fat: 2, carbs: 3 };
     logEntry.food = food;
@@ -159,7 +159,7 @@ describe('LogMealComponent', () => {
     const logEntry: Entry = {};
     logEntry.multiplier = 3;
     const food = { name: 'name', protein: 1, fat: 2, carbs: 3 }
-    const portion = new Portion();
+    const portion = {} as Portion;
     portion.description = 'desc';
     portion.macros = { protein: 2, fat: 4, carbs: 6, calories: 8 };
     const macros = { protein: 0, fat: 0, carbs: 0, calories: 0 };
@@ -186,13 +186,13 @@ describe('LogMealComponent', () => {
     result = component.isGramsSelected(logEntry);
     expect(result).toEqual(true);
 
-    logEntry.portion = new Portion();
+    logEntry.portion = {} as Portion;
     result = component.isGramsSelected(logEntry);
     expect(result).toEqual(false);
   });
 
   it('should return whether unit is selected', () => {
-    const portion = new Portion();
+    const portion = {} as Portion;
     portion.description = 'desc';
     const logEntry: Entry = {};
     logEntry.portion = portion;
@@ -207,9 +207,9 @@ describe('LogMealComponent', () => {
   it('should get available portions', () => {
     const food: Food = { name: 'name', protein: 1, fat: 2, carbs: 3 }
     food.id = 5;
-    const portionOne = new Portion();
+    const portionOne = {} as Portion;
     portionOne.description = 'portionOne';
-    const portionTwo = new Portion();
+    const portionTwo = {} as Portion;
     portionTwo.description = 'portionTwo';
     food.portions = [portionOne, portionTwo];
 
@@ -231,14 +231,14 @@ describe('LogMealComponent', () => {
     const food: Food = { name: 'food', protein: 1, fat: 2, carbs: 3 }
     const portionOne = {} as Portion;
     portionOne.description = 'portionOne';
-    portionOne.macros =  { protein: 1, fat: 2, carbs: 4}
+    portionOne.macros = { protein: 1, fat: 2, carbs: 4 }
     const portionTwo = {} as Portion;
     portionTwo.description = 'portionTwo';
-    portionTwo.macros = { protein: 1, fat: 2, carbs: 5}
+    portionTwo.macros = { protein: 1, fat: 2, carbs: 5 }
 
     food.portions = [portionOne, portionTwo];
     logEntry.food = food;
-    const portion = new Portion();
+    const portion = {} as Portion;
     portion.description = 'stuk';
     logEntry.portion = portion;
     logEntry.multiplier = 100;
@@ -291,74 +291,74 @@ describe('LogMealComponent', () => {
     expect(component.logEntries).toEqual([
       {
         meal: 'DINNER', food: { protein: 1, fat: 2, carbs: 3 },
-        multiplier: 1, day: new Date(2020, 0, 1), macrosCalculated: { protein: 1, fat: 2, carbs: 3, calories: 34}
+        multiplier: 1, day: new Date(2020, 0, 1), macrosCalculated: { protein: 1, fat: 2, carbs: 3, calories: 34 }
       },
       {
-        meal: 'DINNER', food: { protein: 1, fat: 2, carbs: 4, portions: [{ id: 543, macros: { protein: 1, fat: 2, carbs: 3 }}] },
-        multiplier: 2, portion: { id: 543,  macros: { protein: 1, fat: 2, carbs: 3 } }, 
-        day: new Date(2020, 0, 1), macrosCalculated: {protein: 2, fat: 4, carbs: 6, calories: 68}
+        meal: 'DINNER', food: { protein: 1, fat: 2, carbs: 4, portions: [{ id: 543, macros: { protein: 1, fat: 2, carbs: 3 } }] },
+        multiplier: 2, portion: { id: 543, macros: { protein: 1, fat: 2, carbs: 3 } },
+        day: new Date(2020, 0, 1), macrosCalculated: { protein: 2, fat: 4, carbs: 6, calories: 68 }
       }
     ]);
-});
+  });
 
-it('should delete entry', () => {
-  spyOn(diaryService, 'deleteEntry').and.returnValue(of(1));
-  const entry: Entry = {
-    day: new Date(),
-    food: { name: 'food' }
-  }
-  component.dummy = true;
-  component.deleteLogEntry(entry);
-  expect(diaryService.deleteEntry).not.toHaveBeenCalled();
+  it('should delete entry', () => {
+    spyOn(diaryService, 'deleteEntry').and.returnValue(of(1));
+    const entry: Entry = {
+      day: new Date(),
+      food: { name: 'food' }
+    }
+    component.dummy = true;
+    component.deleteLogEntry(entry);
+    expect(diaryService.deleteEntry).not.toHaveBeenCalled();
 
-  component.dummy = false;
-  component.logEntries = [];
-  component.deleteLogEntry(entry);
-  expect(diaryService.deleteEntry).toHaveBeenCalledWith(entry);
+    component.dummy = false;
+    component.logEntries = [];
+    component.deleteLogEntry(entry);
+    expect(diaryService.deleteEntry).toHaveBeenCalledWith(entry);
 
-  component.logEntries = [entry];
-  component.deleteLogEntry(entry);
-  expect(diaryService.deleteEntry).toHaveBeenCalledWith(entry);
-});
+    component.logEntries = [entry];
+    component.deleteLogEntry(entry);
+    expect(diaryService.deleteEntry).toHaveBeenCalledWith(entry);
+  });
 
-it('should save and close', () => {
-  spyOn(component, 'close');
-  spyOn(component.dataChanged, 'emit');
-  spyOn(diaryService, 'addEntries').and.returnValue(of([]));
-  const logEntry: Entry = {};
-  logEntry.id = 1;
-  const food: Food = { name: 'food', protein: 1, fat: 2, carbs: 3 }
-  food.id = 123;
-  logEntry.food = food;
-  logEntry.multiplier = 5;
-  logEntry.day = new Date(2019, 0, 1);
-  logEntry.portion = { id: 1 }
-  component.meal = 'LUNCH';
-  component.logEntries = [logEntry, {
-    id: 2,
-    food: { id: 234 },
-    multiplier: 3,
-    day: new Date(2019, 0, 1),
-    meal: 'LUNCH'
-  }];
+  it('should save and close', () => {
+    spyOn(component, 'close');
+    spyOn(component.dataChanged, 'emit');
+    spyOn(diaryService, 'addEntries').and.returnValue(of([]));
+    const logEntry: Entry = {};
+    logEntry.id = 1;
+    const food: Food = { name: 'food', protein: 1, fat: 2, carbs: 3 }
+    food.id = 123;
+    logEntry.food = food;
+    logEntry.multiplier = 5;
+    logEntry.day = new Date(2019, 0, 1);
+    logEntry.portion = { id: 1 }
+    component.meal = 'LUNCH';
+    component.logEntries = [logEntry, {
+      id: 2,
+      food: { id: 234 },
+      multiplier: 3,
+      day: new Date(2019, 0, 1),
+      meal: 'LUNCH'
+    }];
 
-  const resultReuqest: StoreLogRequest = {};
-  resultReuqest.id = 1;
-  resultReuqest.portionId = 1;
-  resultReuqest.foodId = 123;
-  resultReuqest.multiplier = 5;
-  resultReuqest.day = '2019-01-01';
-  resultReuqest.meal = 'LUNCH';
+    const resultReuqest: StoreLogRequest = {};
+    resultReuqest.id = 1;
+    resultReuqest.portionId = 1;
+    resultReuqest.foodId = 123;
+    resultReuqest.multiplier = 5;
+    resultReuqest.day = '2019-01-01';
+    resultReuqest.meal = 'LUNCH';
 
-  const allEntries = [resultReuqest, { id: 2, foodId: 234, multiplier: 3, day: '2019-01-01', meal: 'LUNCH' }];
-  component.dummy = true;
-  component.saveAndClose();
-  expect(diaryService.addEntries).not.toHaveBeenCalled();
+    const allEntries = [resultReuqest, { id: 2, foodId: 234, multiplier: 3, day: '2019-01-01', meal: 'LUNCH' }];
+    component.dummy = true;
+    component.saveAndClose();
+    expect(diaryService.addEntries).not.toHaveBeenCalled();
 
-  component.dummy = false
-  component.saveAndClose();
-  expect(component.close).toHaveBeenCalled();
-  expect(diaryService.addEntries).toHaveBeenCalledWith(allEntries);
-  expect(component.dataChanged.emit).toHaveBeenCalledWith(true);
-});
+    component.dummy = false
+    component.saveAndClose();
+    expect(component.close).toHaveBeenCalled();
+    expect(diaryService.addEntries).toHaveBeenCalledWith(allEntries);
+    expect(component.dataChanged.emit).toHaveBeenCalledWith(true);
+  });
 });

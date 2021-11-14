@@ -135,14 +135,14 @@
 
       <div class="paginator flex flex-grow">
         <div class="previous flex-grow">
-          <div *ngIf="currentPage > 1" (click)="getPagedFood({pageIndex: currentPage - 2})">
+          <div *ngIf="currentPageIndex > 0" (click)="getPagedFood(currentPageIndex - 1)">
             <em class="fas fa-chevron-left"></em>
             Previous
           </div>
         </div>
 
         <div *ngIf="hasNextPage()" class="previous"
-          (click)="getPagedFood({pageIndex: currentPage})">
+          (click)="getPagedFood(currentPageIndex + 1)">
           Next
           <em class="fas fa-chevron-right"></em>
         </div>
@@ -157,6 +157,5 @@
   </button>
 </div>
 
-<ml-modal *ngIf="modalIsVisible" [title]="modalTitle" (close$)="closeModal()">
-  <ml-edit-food [selectedFood]="selectedFood" (close$)="closeModal()"></ml-edit-food>
-</ml-modal>
+<ml-edit-food *ngIf="modalIsVisible" [selectedFood]="selectedFood" (close$)="closeModal()">
+</ml-edit-food>

@@ -9,22 +9,12 @@ import { Observable, Subscription } from 'rxjs';
   templateUrl: './food.component.html'
 })
 export class FoodComponent implements OnDestroy {
-  // All food from database, don't overwrite
-  private allFood = new Array();
-
-  // All food but converted to percentages of macro's
-  public percentageFood = new Array();
-
-  // All food after search, sorted
-  public searchableFood = new Array();
 
   // Displayed on one page
-  public displayedFood = new Array();
-
+  public displayedFood: Food[] = [];
   public loading$: Observable<boolean>;
   public modalIsVisible = false;
-  public modalTitle = 'Add food';
-  public currentPage = 1;
+  public currentPageIndex = 0;
   public itemsPerPage = 15;
   public selectedFood: Food = null; // input voor modal popup
   public searchInput = '';
@@ -34,52 +24,57 @@ export class FoodComponent implements OnDestroy {
   public unitName = 'gram';
   public unitGrams = 100.0;
 
+  private allFood: Food[] = [];
+  private percentageFood: Food[] = []
+  private searchableFood: Food[] = [];
   private foodSubscription: Subscription;
 
-  constructor(private readonly store: Store) { 
+  constructor(private readonly store: Store) {
     this.foodSubscription = this.store.select(selectAllFood).subscribe(it => {
       this.allFood = it;
       this.percentageFood = this.calculatePercentages();
       this.searchableFood = this.allFood;
-      this.getPagedFood({ pageIndex: 0 });
+      this.getPagedFood(0);
     });
     this.loading$ = this.store.select(selectFoodLoading);
   }
 
   public hasNextPage(): boolean {
     return this.searchableFood
-      .slice((this.currentPage + 1) * this.itemsPerPage - this.itemsPerPage).length > 0;
+      .slice((this.currentPageIndex + 2) * this.itemsPerPage - this.itemsPerPage).length > 0;
   }
 
-  public getPagedFood(page: any): void {
-    this.currentPage = page.pageIndex + 1;
+  public getPagedFood(pageIndex: number): void {
+    this.currentPageIndex = pageIndex;
     this.displayedFood = this.searchableFood.slice(
-      (page.pageIndex + 1) * this.itemsPerPage - this.itemsPerPage,
-      (page.pageIndex + 2) * this.itemsPerPage - this.itemsPerPage
+      (pageIndex + 1) * this.itemsPerPage - this.itemsPerPage,
+      (pageIndex + 2) * this.itemsPerPage - this.itemsPerPage
     );
   }
 
   public findFoodMatch(): void {
     const foodMatch: Food[] = [];
     for (const food of this.allFood) {
-      const matchFoodName = food.name.toLowerCase().indexOf(this.searchInput.toLowerCase()) >= 0;
-      if (matchFoodName) {
-        foodMatch.push(food);
+      const isMatch = food.name.toLowerCase().indexOf(this.searchInput.toLowerCase()) >= 0;
+      if (isMatch) {
+        if (this.displayMode === 'grams') {
+          foodMatch.push(food);
+        } else {
+          foodMatch.push(this.percentageFood.filter(it => it.id === food.id)[0]);
+        }
       }
+      console.log('FoodMatch');
+      console.log(foodMatch);
     }
     this.searchableFood = foodMatch;
-    this.getPagedFood({ pageIndex: 0 });
+    this.getPagedFood(0);
   }
 
   public openModal(food: Food) {
     if (food) {
-      this.modalTitle = 'Edit food';
       this.selectedFood = JSON.parse(JSON.stringify(food)) as Food;
     } else {
-      this.modalTitle = 'Add food';
-      this.selectedFood = {
-        portions: []
-      }
+      this.selectedFood = { portions: [] }
     }
     this.modalIsVisible = true;
   }
@@ -91,16 +86,7 @@ export class FoodComponent implements OnDestroy {
   public clearSearch(): void {
     this.searchInput = '';
     this.searchableFood = this.allFood;
-    this.getPagedFood({ pageIndex: 0 });
-  }
-
-  private setReversed(header: string): void {
-    if (this.currentSortHeader === header) {
-      this.sortReverse = !this.sortReverse;
-    } else {
-      this.sortReverse = false;
-      this.currentSortHeader = header;
-    }
+    this.getPagedFood(0);
   }
 
   public sortBy(header: string): void {
@@ -121,11 +107,11 @@ export class FoodComponent implements OnDestroy {
     }
 
     this.searchableFood = sortedArray;
-    this.getPagedFood({pageIndex: this.currentPage -1});
+    this.getPagedFood(this.currentPageIndex);
   }
 
   public changeDisplay(mode: string): void {
-    this.currentPage = 1;
+    this.currentPageIndex = 0;
     this.displayMode = mode;
 
     if (this.displayMode === 'grams') {
@@ -135,11 +121,20 @@ export class FoodComponent implements OnDestroy {
     }
 
     this.findFoodMatch();
-    this.getPagedFood(this.currentPage);
+    this.getPagedFood(this.currentPageIndex);
+  }
+
+  private setReversed(header: string): void {
+    if (this.currentSortHeader === header) {
+      this.sortReverse = !this.sortReverse;
+    } else {
+      this.sortReverse = false;
+      this.currentSortHeader = header;
+    }
   }
 
   private calculatePercentages() {
-    const percentageFood = new Array();
+    const percentageFood: Food[] = [];
 
     for (const food of this.allFood) {
       const total = food.protein + food.fat + food.carbs;
@@ -148,6 +143,7 @@ export class FoodComponent implements OnDestroy {
       const newCarbs = (food.carbs / total) * 100;
 
       const newFood = {
+        id: food.id,
         name: food.name,
         protein: newProtein,
         fat: newFat,

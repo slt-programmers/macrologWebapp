@@ -1,15 +1,10 @@
 import { Macros } from './macros';
 
-export class Portion {
+export interface Portion {
 
-	public id?: number;
-	public grams?: number;
-	public description?: string;
-	public macros?: Macros;
+	id?: number;
+	grams?: number;
+	description?: string;
+	macros?: Macros;
 
-	constructor(grams?: number, description?: string, macros?: Macros) {
-		this.grams = grams;
-		this.description = description;
-		this.macros = macros;
-	}
 }
