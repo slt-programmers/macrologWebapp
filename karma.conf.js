@@ -38,7 +38,7 @@ module.exports = function (config) {
       sonarQubeVersion: 'LATEST',
       testPaths: ['./src/app'],
       testFilePattern: '.spec.ts',
-      outputDir: '../coverage',
+      outputDir: './coverage',
       outputFile: 'ut_report.xml'
     },
     reporters: ['progress', 'kjhtml', 'sonarqubeUnit'],
