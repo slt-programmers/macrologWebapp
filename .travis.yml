@@ -26,6 +26,8 @@ install:
       after_script: sonar-scanner -Dsonar.projectKey=slt-programmers_macrologWebapp
     - script: ng lint
       name: 'lint'
+    - stage: 'build'
+      if: branch == release
 
 addons:
   sonarcloud:
