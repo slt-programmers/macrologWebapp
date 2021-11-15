@@ -24,11 +24,15 @@ module.exports = function (config) {
       }
     },
     client: {
+      jasmine: {},
       clearContext: false // leave Jasmine Spec Runner output visible in browser
     },
+    jasmineHtmlReporter: {
+      suppressAll: true
+    },
     coverageReporter: {
-      dir: 'coverage',
-      subdir: '.',
+      dir: require('path').join(__dirname, './coverage'),
+      // subdir: '.',
       reporters: [
         { type: 'html', dir: 'coverage/' },
         { type: 'text-summary' }
@@ -38,7 +42,7 @@ module.exports = function (config) {
       sonarQubeVersion: 'LATEST',
       testPaths: ['./src/app'],
       testFilePattern: '.spec.ts',
-      outputDir: '../coverage',
+      outputDir: './coverage',
       outputFile: 'ut_report.xml'
     },
     reporters: ['progress', 'kjhtml', 'sonarqubeUnit'],
@@ -50,3 +54,5 @@ module.exports = function (config) {
     restartOnFileChange: true
   });
 };
+
+

@@ -3,7 +3,7 @@
     <div class="content">
       <div class="flex align-center">
         <label for="search" class="search-bar__label">Search</label>
-        <input id="seach" class="input search-bar__input" [(ngModel)]="searchInput"
+        <input id="search" class="input search-bar__input" [(ngModel)]="searchInput"
           (input)="findFoodMatch()" />
 
         <button class="button button--primary" (click)="clearSearch()">
@@ -25,13 +25,13 @@
         </div>
       </div>
 
-      <div class="spinner-wrapper" *ngIf="isLoading">
+      <div class="spinner-wrapper" *ngIf="loading$ | async">
         <div class="spinner">
           <em class="fas fa-spinner"></em>
         </div>
       </div>
 
-      <div *ngIf="!isLoading" class="food-table">
+      <div *ngIf="(loading$ | async) === false" class="food-table">
         <div class="table-header">
           <div class="table-header__name" (click)="sortBy('name')">Name</div>
 
@@ -135,14 +135,14 @@
 
       <div class="paginator flex flex-grow">
         <div class="previous flex-grow">
-          <div *ngIf="currentPage > 1" (click)="getPagedFood({pageIndex: currentPage - 2})">
+          <div *ngIf="currentPageIndex > 0" (click)="getPagedFood(currentPageIndex - 1)">
             <em class="fas fa-chevron-left"></em>
             Previous
           </div>
         </div>
 
         <div *ngIf="hasNextPage()" class="previous"
-          (click)="getPagedFood({pageIndex: currentPage})">
+          (click)="getPagedFood(currentPageIndex + 1)">
           Next
           <em class="fas fa-chevron-right"></em>
         </div>
@@ -157,74 +157,5 @@
   </button>
 </div>
 
-<ml-modal *ngIf="modalIsVisible" [title]="modalTitle" (close$)="closeModal()">
-  <form #saveFoodForm="ngForm">
-    <div class="form-field">
-      <label class="form-field__label">Food</label>
-      <div class="form-field__element">
-        <input class="input" [(ngModel)]="selectedFood.name" #foodField name="name"
-          placeholder="e.g. 'Pasta', 'Apple'" required>
-      </div>
-    </div>
-
-    <div class="form-field">
-      <label class="form-field__label">Protein</label>
-      <div class="form-field__element">
-        <input class="input" #proteinField [(ngModel)]="selectedFood.protein" value="protein" name="protein"
-          type="number" placeholder="0.0" step="0.1" required>
-      </div>
-    </div>
-
-    <div class="form-field">
-      <label class="form-field__label">Fat</label>
-      <div class="form-field__element">
-        <input class="input" #fatField [(ngModel)]="selectedFood.fat" name="fat" type="number" placeholder="0.0"
-          step="0.1" required>
-      </div>
-    </div>
-
-    <div class="form-field">
-      <label class="form-field__label">Carbs</label>
-      <div class="form-field__element">
-        <input class="input" #carbsField [(ngModel)]="selectedFood.carbs" name="carbs" type="number"
-          placeholder="0.0" step="0.1" required>
-      </div>
-    </div>
-
-    <label class="">Frequently used portions (optional)</label>
-
-    <div class="flex col-gap-2" *ngFor="let port of selectedFood.portions; index as i">
-      <div class="flex-col flex-grow">
-
-        <div class="form-field">
-          <label class="form-field__label">Description</label>
-          <input class="input" [(ngModel)]="port.description" name="portionDesc_{{i}}" type="text"
-          placeholder="e.g. 'Breakfast', 'Plate'" required>
-        </div>
-        
-        <div class="form-field">
-          <label class="form-field__label">Grams</label>
-          <input class="input" [(ngModel)]="port.grams" placeholder="0,0" name="portionGrams_{{i}}"
-          type="number" step="1" required>
-        </div>
-      </div>
-
-      <button class="icon-button" (click)="removePortion(i)" *ngIf="isNewPortion(port)">
-        <em class="fas fa-minus"></em>
-      </button>
-    </div>
-
-    <div>
-      <button class="icon-button" (click)="addNewPortion()">
-        <em class="fas fa-plus"></em>
-      </button>
-    </div>
-
-    <div class="flex justify-end col-gap-1">
-      <button class="button" (click)="closeModal()">Cancel</button>
-
-      <button class="button button--primary" (click)="saveFood()"
-        [disabled]="saveFoodForm.invalid">Save</button>
-    </div>
-  </form>
-</ml-modal>
+<ml-edit-food *ngIf="modalIsVisible" [selectedFood]="selectedFood" (close$)="closeModal()">
+</ml-edit-food>

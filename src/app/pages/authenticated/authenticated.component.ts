@@ -3,6 +3,9 @@ import { Router } from '@angular/router';
 import { ScrollBehaviourService } from '../../shared/services/scroll-behaviour.service';
 import { AuthenticationService } from '../../shared/services/auth.service';
 import { HealthcheckService } from 'src/app/shared/services/healthcheck.service';
+import { foodActions } from 'src/app/shared/store/actions/food.actions';
+import { State } from 'src/app/shared/store/reducers';
+import { Store } from '@ngrx/store';
 
 @Component({
   selector: 'ml-authenticated',
@@ -18,6 +21,7 @@ export class AuthenticatedComponent implements OnInit {
     private readonly router: Router,
     private readonly healthcheckService: HealthcheckService,
     private readonly authService: AuthenticationService,
+    private readonly store: Store,
     private readonly scrollBehaviourService: ScrollBehaviourService
   ) {}
 
@@ -32,6 +36,7 @@ export class AuthenticatedComponent implements OnInit {
         }
       }
     );
+    this.store.dispatch(foodActions.get());
   }
 
   public stillSleeping(): boolean {

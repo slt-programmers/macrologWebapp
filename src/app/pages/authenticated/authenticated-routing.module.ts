@@ -20,6 +20,7 @@ import { StepperComponent } from 'src/app/shared/components/stepper/stepper.comp
 import { LogActivityComponent } from 'src/app/shared/components/log-activity/log-activity.component';
 import { StackDonutComponent } from 'src/app/shared/components/stackdonut/stackdonut.component';
 import { DatepickerComponent } from 'src/app/shared/components/datepicker/datepicker.component';
+import { EditFoodComponent } from './food/edit-food/edit-food.component';
 
 export const authenticatedRoutes: Routes = [
   {
@@ -84,6 +85,7 @@ export const authenticatedRoutes: Routes = [
     AdminComponent,
     OnboardingComponent,
     FoodComponent,
+    EditFoodComponent,
     DishesComponent,
     GraphsComponent,
     BargraphComponent,

@@ -8,6 +8,7 @@
 
 # IDEs and editors
 /.idea
+/.vscode
 .project
 .classpath
 .c9/
@@ -16,10 +17,9 @@
 *.sublime-workspace
 *.iml
 
-# IDE - VSCode
-/.vscode
 
 # misc
+/.angular/cache
 /.sass-cache
 /connect.lock
 /coverage
@@ -27,6 +27,7 @@
 npm-debug.log
 testem.log
 /typings
+sonar-project.local.properties
 
 # e2e
 /e2e/src/*.js
