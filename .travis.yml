@@ -5,31 +5,26 @@ node_js:
   - 'lts/*'
 
 stages:
-  - 'build and test'
+  - 'build, test and scan'
   - 'build'
   - 'unit test and scan'
   - 'integration test'
 
 install:
   - npm install
-  - npm i -g webdriver-manager
-  # - cd node_modules/protractor
-  # - webdriver-manager clean
-  # - webdriver-manager update --versions.chrome 77.0.3865.120
-  # - cd ../..
 
-jobs:
-  allow_failures:
-    - script: sonar-scanner -Dsonar.projectKey=slt-programmers_macrologWebapp
+  jobs:
+  # allow_failures:
+  #   - script: sonar-scanner -Dsonar.projectKey=slt-programmers_macrologWebapp
   include:
-    - stage: 'build and unit-test'
+    - stage: 'build, test and scan'
       if: branch != release
       name: 'build'
       script: npm run build
     - script: npm run test
-      name: 'unit-test and sonar scan'
+      name: 'unit test and sonar scan'
       after_script: sonar-scanner -Dsonar.projectKey=slt-programmers_macrologWebapp
-    - script: 'ng lint'
+    - script: ng lint
       name: 'lint'
 
 addons:
