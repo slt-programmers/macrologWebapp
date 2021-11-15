@@ -14,8 +14,8 @@ install:
   - npm install
 
   jobs:
-  # allow_failures:
-  #   - script: sonar-scanner -Dsonar.projectKey=slt-programmers_macrologWebapp
+  allow_failures:
+    - script: sonar-scanner -Dsonar.projectKey=slt-programmers_macrologWebapp
   include:
     - stage: 'build, test and scan'
       if: branch != release
