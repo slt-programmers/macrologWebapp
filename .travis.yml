@@ -12,12 +12,12 @@ stages:
 install:
   - npm install
 
-  jobs:
+jobs:
   allow_failures:
     - script: sonar-scanner -Dsonar.projectKey=slt-programmers_macrologWebapp
   include:
     - stage: 'build, test and scan'
-      # if: branch != release
+      if: branch != release
       name: 'build'
       script: npm run build
     - script: npm run test
@@ -27,10 +27,10 @@ install:
       name: 'lint'
     # - script: npm run cypress:ci
     #   name: 'integration test'
-    # - stage: 'build'
-    #   if: branch == release
-    #   name: 'build'
-    #   script: npm run build
+    - stage: 'build'
+      if: branch == release
+      name: 'build'
+      script: npm run build
 
 addons:
   sonarcloud:
