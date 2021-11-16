@@ -4,10 +4,10 @@ language: node_js
 node_js:
   - 'lts/*'
 
-# stages:
-#   - 'build, test and scan'
-#   - 'build'
-#   - 'integration test'
+stages:
+  - 'build, test and scan'
+  - 'build'
+  - 'integration test'
 
 install:
   - npm install
