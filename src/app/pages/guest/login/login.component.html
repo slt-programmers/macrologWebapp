@@ -39,24 +39,21 @@
           <form [formGroup]="registerForm">
             <h1 class="text-lg font-bold">Register</h1>
 
-            <label for="newUsername">
-              Username
+            <label for="newUsername"> Username
               <input id="usernameRegister" class="input" type="text" formControlName="username"
                 name="newUsername" />
               <p id="usernameRegisterRequired" class="error" *ngIf="registerForm.controls.username.touched && 
               registerForm.controls.username.invalid">Username is required</p>
             </label>
 
-            <label for="newEmal">
-              Email
+            <label for="newEmal"> Email
               <input id="email" class="input" type="email" formControlName="email"
                 name="newEmail" />
               <p id="emailRequired" class="error" *ngIf="registerForm.controls.email.touched && 
               registerForm.controls.email.invalid">Email is required</p>
             </label>
 
-            <label for="newPassword">
-              Password
+            <label for="newPassword"> Password
               <input id="passwordRegister" class="input" type="password" formControlName="password"
                 name="newPassword" (keyup.enter)="register()" />
               <p id="passwordRegisterRequired" class="error" *ngIf="registerForm.controls.password.touched && 
