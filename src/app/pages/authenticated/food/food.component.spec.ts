@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from "@angular/core/testing"
-import { of } from "rxjs";
 import { FoodComponent } from "./food.component"
 import { MockStore, provideMockStore } from "@ngrx/store/testing"
 import { selectAllFood, selectFoodLoading } from "src/app/shared/store/selectors/food.selectors";

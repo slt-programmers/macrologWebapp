@@ -1,14 +1,15 @@
 /// <reference types="cypress" />
 
+
 describe('Food', () => {
-  const backendUrl = Cypress.config.backendUrl;
 
   beforeEach(() => {
-    cy.intercept('**/healthcheck', (req) => {
-      req.reply({ statusCode: 200, body: true })
-    }).as('healthcheck');
+    const backendUrl = Cypress.env('backendUrl');
 
-    cy.intercept(`${backendUrl}/food`, { fixure: 'food.json' });
+    cy.stubHealthcheck();
+    
+    cy.intercept('GET', `${backendUrl}/food`,
+      (req) => { req.reply({ statusCode: 200, fixture: 'food.json' }) }).as('food');
 
     cy.visit('localhost:4200/dashboard/food', {
       onBeforeLoad: function (window) {

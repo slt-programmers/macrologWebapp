@@ -6,7 +6,7 @@ import {
 } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { LoginComponent } from './login.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { of, throwError } from 'rxjs';
@@ -25,6 +25,7 @@ describe('LoginComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
+      imports: [FormsModule, ReactiveFormsModule, RouterTestingModule],
       declarations: [
         LoginComponent,
         MockComponent(NavigationComponent),
@@ -33,10 +34,6 @@ describe('LoginComponent', () => {
       providers: [
         MockProvider(AuthenticationService),
         MockProvider(ToastService)
-      ],
-      imports: [
-        FormsModule,
-        RouterTestingModule,
       ]
     }).compileComponents();
     fixture = TestBed.createComponent(LoginComponent);
@@ -51,114 +48,91 @@ describe('LoginComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should log in', fakeAsync(() => {
-    const loginSpy = spyOn(authService, 'login').and.returnValue(of(undefined));
+  it('should log in', () => {
+    spyOn(authService, 'login').and.returnValue(of(undefined));
     spyOn(router, 'navigate');
-    component.usernameOrEmail = 'username';
-    component.password = 'password';
 
-    const loginButton = fixture.debugElement.query(By.css('#loginBtn'));
-    loginButton.nativeElement.click();
-    tick();
-    fixture.detectChanges();
+    component.login();
+    expect(authService.login).not.toHaveBeenCalled();
 
+    component.loginForm.patchValue({
+      username: 'username',
+      password: 'password'
+    });
+    component.login();
     expect(authService.login).toHaveBeenCalledWith('username', 'password');
     expect(router.navigate).toHaveBeenCalledWith(['dashboard']);
     expect(component.loginError).toEqual('');
+  });
 
-    loginSpy.and.returnValue(throwError({ status: 404 }));
-    loginButton.nativeElement.click();
-    tick();
-    fixture.detectChanges();
-
-    expect(authService.login).toHaveBeenCalledWith('username', 'password');
-    expect(component.loginError).toEqual('Username or password incorrect');
-  }));
-
-  it('should register new user', fakeAsync(() => {
-    const registerSpy = spyOn(authService, 'register').and.returnValue(of({}));
-    const loginSpy = spyOn(authService, 'login').and.returnValue(of(undefined));
+  it('should error on log in', () => {
+    spyOn(authService, 'login').and.returnValue(throwError({status: 500}));
     spyOn(router, 'navigate');
-    component.newUsername = 'username';
-    component.newEmail = 'email@email.com';
-    component.newPassword = 'password';
+    component.loginForm.patchValue({
+      username: 'username',
+      password: 'password'
+    });
+    component.login();
+    expect(router.navigate).not.toHaveBeenCalledWith(['dashboard']);
+    expect(component.loginError).toEqual('Username or password incorrect');
+  });
 
-    // register and login
-    const registerButton = fixture.debugElement.query(By.css('#registerBtn'));
-    registerButton.nativeElement.click();
-    tick();
-    fixture.detectChanges();
-    expect(authService.register).toHaveBeenCalledWith(
-      'username',
-      'email@email.com',
-      'password'
-    );
-    tick();
-    fixture.detectChanges();
-    expect(authService.login).toHaveBeenCalledWith('username', 'password');
-    expect(component.newUsername).toEqual('');
-    expect(component.newEmail).toEqual('');
-    expect(component.newPassword).toEqual('');
-    tick();
-    fixture.detectChanges();
+  it('should register new user', () => {
+    spyOn(authService, 'register').and.returnValue(of({}));
+    spyOn(authService, 'login').and.returnValue(of(undefined));
+    spyOn(router, 'navigate');
+
+    component.register();
+    expect(authService.register).not.toHaveBeenCalled();
+
+    component.registerForm.patchValue({
+      username: 'name',
+      email: 'email@email.com',
+      password: 'secret'
+    });
+    component.register();
+
     expect(router.navigate).toHaveBeenCalledWith(['dashboard', 'onboarding']);
+  });
 
-    // register but failed login
-    registerSpy.and.returnValue(of({}));
-    loginSpy.and.returnValue(throwError({ status: 404 }));
-    component.newUsername = 'username';
-    component.newEmail = 'email@email.com';
-    component.newPassword = 'password';
+  it('should error on register', () => {
+    spyOn(authService, 'register').and.returnValue(throwError({ status: 500 }));
+    spyOn(router, 'navigate');
+    component.registerForm.patchValue({
+      username: 'name',
+      email: 'email@email.com',
+      password: 'secret'
+    });
+    component.register();
+    expect(router.navigate).not.toHaveBeenCalledWith(['dashboard', 'onboarding']);
+    expect(component.registerError).toEqual('Unknown error during registration.');
+  });
 
-    registerButton.nativeElement.click();
-    tick();
-    fixture.detectChanges();
-    expect(authService.register).toHaveBeenCalledWith(
-      'username',
-      'email@email.com',
-      'password'
-    );
-    tick();
-    fixture.detectChanges();
-    expect(authService.login).toHaveBeenCalledWith('username', 'password');
-    tick();
-    fixture.detectChanges();
-    expect(component.registerError).toEqual(
-      'Error on login after registration.'
-    );
+  it('should error on register', () => {
+    spyOn(authService, 'register').and.returnValue(throwError({ status: 401, error: 'Some other error' }));
+    spyOn(router, 'navigate');
+    component.registerForm.patchValue({
+      username: 'name',
+      email: 'email@email.com',
+      password: 'secret'
+    });
+    component.register();
+    expect(router.navigate).not.toHaveBeenCalledWith(['dashboard', 'onboarding']);
+    expect(component.registerError).toEqual('Unknown error during registration.');
+  });
 
-    // username in use
-    component.newUsername = 'username';
-    component.newEmail = 'email@email.com';
-    component.newPassword = 'password';
-    registerSpy.and.returnValue(
-      throwError({ status: 401, error: 'Username or email already in use' })
-    );
-    registerButton.nativeElement.click();
-    tick();
-    fixture.detectChanges();
-    expect(component.registerError).toEqual(
-      "Username or email is already in use. Please try a different username or use 'Forgot password' to retrieve a new password."
-    );
-
-    // other error 401
-    registerSpy.and.returnValue(throwError({ status: 401, error: 'Error' }));
-    registerButton.nativeElement.click();
-    tick();
-    fixture.detectChanges();
-    expect(component.registerError).toEqual(
-      'Unknown error during registration.'
-    );
-
-    // other error
-    registerSpy.and.returnValue(throwError({ status: 404 }));
-    registerButton.nativeElement.click();
-    tick();
-    fixture.detectChanges();
-    expect(component.registerError).toEqual(
-      'Unknown error during registration.'
-    );
-  }));
+  it('should error on register if account allready exists', () => {
+    spyOn(authService, 'register').and.returnValue(throwError({ status: 401, error: 'Username or email already in use' }));
+    spyOn(router, 'navigate');
+    component.registerForm.patchValue({
+      username: 'name',
+      email: 'email@email.com',
+      password: 'secret'
+    });
+    component.register();
+    expect(router.navigate).not.toHaveBeenCalledWith(['dashboard', 'onboarding']);
+    expect(component.registerError).toEqual('Username or email is already in use. Please try a different username or use \'Forgot password\' to retrieve a new password.');
+  });
 
   it('should toggle forgot password modal', () => {
     const forgotLink = fixture.debugElement.query(By.css('#forgotLink'));

@@ -11,7 +11,7 @@
     "sonar": "sonar-scanner -Dproject.properties=./sonar-project.properties",
     "sonar:local": "sonar-scanner -Dproject.properties=./sonar-project.local.properties",
     "lint": "ng lint",
-    "cypress": "cypress open",
+    "cypress:local": "cypress open --config-file ./cypress.local.json",
     "postinstall": "ng build --aot --configuration production",
     "analyze": "webpack-bundle-analyzer ./stats.json",
     "webpack-init": "webpack --profile --json > stats.json"

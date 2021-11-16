@@ -10,9 +10,12 @@
 //
 //
 // -- This is a parent command --
-// Cypress.Commands.add('login', () => {
-//   cy.request({'POST'})
-// })
+Cypress.Commands.add('stubHealthcheck', () => {
+  const backendUrl = Cypress.env('backendUrl')
+  cy.intercept('GET', `${backendUrl}/healthcheck`, (req) => {
+    req.reply({ statusCode: 200, body: true })
+  }).as('healthcheck');
+});
 //
 //
 // -- This is a child command --

@@ -1,3 +1,4 @@
 {
-  "backendUrl": "localhost:8090"
+  "backendUrl": "https://macrolog-backend.herokuapp.com",
+  "baseUrl": "https://macrolog.herokuapp.com"
 }
