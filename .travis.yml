@@ -7,7 +7,6 @@ node_js:
 stages:
   - 'build, test and scan'
   - 'build'
-  - 'unit test and scan'
   - 'integration test'
 
 install:
@@ -26,6 +25,12 @@ install:
       after_script: sonar-scanner -Dsonar.projectKey=slt-programmers_macrologWebapp
     - script: ng lint
       name: 'lint'
+    # - script: npm run cypress:ci
+    #   name: 'integration test'
+    - stage: 'build'
+      if: branch == release
+      name: 'build'
+      script: npm run build
 
 addons:
   sonarcloud:

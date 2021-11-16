@@ -32,7 +32,7 @@ module.exports = function (config) {
     },
     coverageReporter: {
       dir: require('path').join(__dirname, './coverage'),
-      // subdir: '.',
+      subdir: '.',
       reporters: [
         { type: 'html', dir: 'coverage/' },
         { type: 'text-summary' }
