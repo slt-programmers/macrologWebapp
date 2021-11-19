@@ -14,7 +14,7 @@ install:
 
 jobs:
   allow_failures:
-    - script: sonar-scanner -Dsonar.projectKey=slt-programmers_macrologWebapp
+    - script: sonar-scanner -Dproject.settings=./sonar-project.properties
   include:
     # features develop master
     - stage: 'build, test and scan'
@@ -24,7 +24,7 @@ jobs:
     - script: npm run test
       if: branch != release
       name: 'unit test and sonar scan'
-      after_script: sonar-scanner -Dsonar.projectKey=slt-programmers_macrologWebapp
+      after_script: sonar-scanner -Dproject.settings=./sonar-project.properties
     - script: ng lint
       if: branch != release
       name: 'lint'
