@@ -16,17 +16,21 @@ jobs:
   allow_failures:
     - script: sonar-scanner -Dsonar.projectKey=slt-programmers_macrologWebapp
   include:
+    # features develop master
     - stage: 'build, test and scan'
       if: branch != release
       name: 'build'
       script: npm run build
     - script: npm run test
+      if: branch != release
       name: 'unit test and sonar scan'
       after_script: sonar-scanner -Dsonar.projectKey=slt-programmers_macrologWebapp
     - script: ng lint
+      if: branch != release
       name: 'lint'
     # - script: npm run cypress:ci
     #   name: 'integration test'
+    # release
     - stage: 'build'
       if: branch == release
       name: 'build'
