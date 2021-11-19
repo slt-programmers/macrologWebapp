@@ -10,7 +10,7 @@ stages:
   - 'integration test'
 
 install:
-  - npm install
+  - npm ci
 
 jobs:
   allow_failures:

@@ -1,6 +1,6 @@
 {
   "env": {
-    "backendUrl": "https://macrolog-backend.herokuapp.com",
+    "backendUrl": "http://macrolog-backend.herokuapp.com",
     "baseUrl": "http://localhost:4200"
   }
 }
