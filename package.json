@@ -13,9 +13,9 @@
     "lint": "ng lint",
     "cypress:open": "cypress open --config-file ./cypress.local.json",
     "cypress:local": "cypress run --config-file ./cypress.local.json",
-    "cypress:ci": "cypress run --config-file ./cypress.json",
+    "cypress:integration": "cypress run --config-file ./cypress.integration.json",
     "start-server": "angular-http-server --path ./dist -p 4200",
-    "integration": "start-server-and-test start-server http://localhost:4200 cypress:local",
+    "integration": "start-server-and-test start-server http://localhost:4200 cypress:integration",
     "postinstall": "ng build --aot --configuration production",
     "analyze": "webpack-bundle-analyzer ./stats.json",
     "webpack-init": "webpack --profile --json > stats.json"
