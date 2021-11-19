@@ -2,5 +2,6 @@
   "env": {
     "backendUrl": "http://localhost:8090",
     "baseUrl": "http://localhost:4200"
-  }
+  }, 
+  "video": false
 }

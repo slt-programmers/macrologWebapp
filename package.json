@@ -11,7 +11,7 @@
     "sonar": "sonar-scanner -Dproject.properties=./sonar-project.properties",
     "sonar:local": "sonar-scanner -Dproject.properties=./sonar-project.local.properties",
     "lint": "ng lint",
-    "cypress:open": "cypress open --config-file ./cypress.integration.json",
+    "cypress:open": "cypress open --config-file ./cypress.local.json",
     "cypress:local": "cypress run --config-file ./cypress.local.json",
     "cypress:integration": "cypress run --config-file ./cypress.integration.json",
     "start-server": "angular-http-server --path ./dist -p 4200",

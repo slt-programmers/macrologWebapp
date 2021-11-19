@@ -2,5 +2,6 @@
   "env": {
     "backendUrl": "http://macrolog-backend.herokuapp.com",
     "baseUrl": "http://localhost:4200"
-  }
+  }, 
+  "video": false
 }
