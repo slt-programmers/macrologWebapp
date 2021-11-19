@@ -37,14 +37,14 @@ export class DatepickerComponent implements AfterViewInit {
   }
 
   ngAfterViewInit() {
-    // this.dayRefs.changes.subscribe((querylist) => {
+    this.dayRefs.changes.subscribe((querylist) => {
     //   console.log('In changes');
     //   console.log(querylist)
     //   querylist.toArray().forEach((item: ElementRef) => {
     //     this.removeMark(item);
     //     this.markIfToday(item);
     //   });
-    // });
+    });
   }
 
   public toggleOpen() {
