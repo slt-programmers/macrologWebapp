@@ -28,8 +28,9 @@ jobs:
     - script: ng lint
       if: branch != release
       name: 'lint'
-    # - script: npm run cypress:ci
-    #   name: 'integration test'
+    - script: npm run integration
+      if: branch == develop
+      name: 'integration test'
     # release
     - stage: 'build'
       if: branch == release
