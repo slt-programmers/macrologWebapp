@@ -16,15 +16,12 @@ import {
   styleUrls: ['./slider.component.scss'],
 })
 export class SliderComponent implements AfterViewInit, OnChanges {
-  @ViewChild('slider', { static: false }) private sliderElement: ElementRef;
-  @ViewChild('sliderHandle', { static: false })
-  private handleElement: ElementRef;
-  @ViewChild('trackFill', { static: false }) private trackElement: ElementRef;
-  @ViewChild('lowerMark', { static: false })
-  private lowerMarkElement: ElementRef;
-  @ViewChild('baseMark', { static: false }) private baseMarkElement: ElementRef;
-  @ViewChild('upperMark', { static: false })
-  private upperMarkElement: ElementRef;
+  @ViewChild('slider', { static: false }) sliderElement: ElementRef;
+  @ViewChild('sliderHandle', { static: false }) handleElement: ElementRef;
+  @ViewChild('trackFill', { static: false }) trackElement: ElementRef;
+  @ViewChild('lowerMark', { static: false }) lowerMarkElement: ElementRef;
+  @ViewChild('baseMark', { static: false }) baseMarkElement: ElementRef;
+  @ViewChild('upperMark', { static: false }) upperMarkElement: ElementRef;
 
   @Input() value: number;
   @Input() upperBound: number;

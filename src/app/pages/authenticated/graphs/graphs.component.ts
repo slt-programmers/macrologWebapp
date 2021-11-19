@@ -59,7 +59,8 @@ export class GraphsComponent implements OnInit {
   //    Splitted total calories per day per macro -- done
   //    Percentage/ratio calories per macro per day (streched bars)
 
-  constructor(private logService: DiaryService, private userService: UserService,
+  constructor(private logService: DiaryService, 
+    private userService: UserService,
     private ref: ChangeDetectorRef) { }
 
   ngOnInit() {

@@ -1,10 +1,9 @@
-import { Component, Input, ViewChild, ElementRef, Output, EventEmitter, HostListener } from '@angular/core';
+import { Component, Input, ViewChild, ElementRef, Output, EventEmitter, HostListener, OnInit } from '@angular/core';
 import { FoodSearchable } from '../../model/foodSearchable';
 import { Food } from '../../model/food';
 import { FoodService } from '../../services/food.service';
 import { DishService } from '../../services/dish.service';
 import { Dish } from '../../model/dish';
-import { Portion } from '../../model/portion';
 import { Macros } from '../../model/macros';
 
 @Component({

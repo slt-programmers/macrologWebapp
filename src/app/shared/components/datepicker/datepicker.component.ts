@@ -37,12 +37,14 @@ export class DatepickerComponent implements AfterViewInit {
   }
 
   ngAfterViewInit() {
-    this.dayRefs.changes.subscribe((changes) => {
-      changes.toArray().forEach((item: ElementRef) => {
-        this.removeMark(item);
-        this.markIfToday(item);
-      });
-    });
+    // this.dayRefs.changes.subscribe((querylist) => {
+    //   console.log('In changes');
+    //   console.log(querylist)
+    //   querylist.toArray().forEach((item: ElementRef) => {
+    //     this.removeMark(item);
+    //     this.markIfToday(item);
+    //   });
+    // });
   }
 
   public toggleOpen() {
@@ -133,17 +135,17 @@ export class DatepickerComponent implements AfterViewInit {
     }
   }
 
-  private markIfToday(item: ElementRef) {
-    if (this.selectedDate.getMonth() === this.today.getMonth()) {
-      if (item.nativeElement.textContent === this.selectedDate.getDate()) {
-        this.renderer.addClass(item.nativeElement, 'picker__day--today');
-      }
-    }
-  }
+  // private markIfToday(item: ElementRef) {
+  //   if (this.selectedDate.getMonth() === this.today.getMonth()) {
+  //     if (item.nativeElement.textContent === this.selectedDate.getDate()) {
+  //       this.renderer.addClass(item.nativeElement, 'picker__day--today');
+  //     }
+  //   }
+  // }
 
-  private removeMark(item: ElementRef) {
-    if (item.nativeElement.classList.contains('picker__day--today')) {
-      this.renderer.removeClass(item.nativeElement, 'picker__day--today');
-    }
-  }
+  // private removeMark(item: ElementRef) {
+  //   if (item.nativeElement.classList.contains('picker__day--today')) {
+  //     this.renderer.removeClass(item.nativeElement, 'picker__day--today');
+  //   }
+  // }
 }

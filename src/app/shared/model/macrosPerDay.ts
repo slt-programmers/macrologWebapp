@@ -3,6 +3,6 @@ import { Macros } from './macros';
 export interface MacrosPerDay {
 
   macro?: Macros;
-  day?: Date | undefined;
+  day?: Date | string | undefined;
 
 }
