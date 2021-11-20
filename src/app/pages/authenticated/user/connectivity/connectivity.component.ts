@@ -17,10 +17,7 @@ export class ConnectivityComponent implements OnInit {
   private scope: string;
   private clientId: number;
 
-  constructor(
-    private userService: UserService,
-    private route: ActivatedRoute
-  ) {}
+  constructor(private userService: UserService, private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.getSyncSettings();
@@ -79,7 +76,7 @@ export class ConnectivityComponent implements OnInit {
   private setStravaUrl() {
     const stravaUrl =
       'http://www.strava.com/oauth/authorize?approval_prompt=force&scope=activity:read_all&response_type=code&state=STRAVACONNECT';
-    const redirectUrl = environment.origin + '/user/connectivity';
+    const redirectUrl = environment.origin + '/dashboard/user/connectivity';
     this.stravaConnectUrl =
       stravaUrl +
       '&client_id=' +

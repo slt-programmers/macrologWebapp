@@ -43,13 +43,11 @@ export class UserService {
       catchError(error => { return of<any>(); }));
   }
 
-  // TODO map Synced Account DTO
   public getSyncSettings(key: string): Observable<any> {
     return this.http.get<any>(this.macrologBackendUrl + '/connectivity/' + key).pipe(
       catchError(error => { return of<any>(); }));
   }
 
-  // TODO map SyncedAccount DTO
   public storeSyncSettings(syncWith: string, code: string): Observable<any> {
     const headers = {
       'Content-Type': 'application/json',
