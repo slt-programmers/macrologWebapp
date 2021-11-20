@@ -15,15 +15,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 export class OnboardingComponent implements OnInit {
   @ViewChild('breakfast', { static: false }) private breakfastEref: any;
 
-  // Step 1
-  public name: string;
-  public birthday: string; // D-M-YYYY
-  public gender: Gender;
-  public height: number;
-  public weight: number;
-  public activity: number;
-
-  // Step 1
+  // Step 2
   public protein: number;
   public fat: number;
   public carbs: number;
@@ -44,14 +36,14 @@ export class OnboardingComponent implements OnInit {
   public breakfastOpen = false;
   public foodSearchables = new Array();
 
-  public intakeForm: FormGroup;
+  public userForm: FormGroup;
   public currentStep: number;
 
   constructor(private userService: UserService, private router: Router) {
-    this.intakeForm = new FormGroup({
+    this.userForm = new FormGroup({
       name: new FormControl('', Validators.required),
       birthday: new FormControl('', Validators.required),
-      gender: new FormControl('', Validators.required),
+      gender: new FormControl('MALE', Validators.required),
       height: new FormControl('', Validators.required),
       weight: new FormControl('', Validators.required),
       activity: new FormControl('', Validators.required)
@@ -60,7 +52,6 @@ export class OnboardingComponent implements OnInit {
 
   ngOnInit() {
     this.currentStep = 1;
-    this.gender = Gender.Male;
   }
 
   nextStep() {
@@ -77,8 +68,9 @@ export class OnboardingComponent implements OnInit {
   }
 
   initStepTwo() {
-    this.protein = this.weight * 1.8;
-    this.fat = this.weight * 0.8;
+    const data = this.userForm.value;
+    this.protein = data.weight * 1.8;
+    this.fat = data.weight * 0.8;
     this.calcCalories();
   }
 
@@ -91,11 +83,12 @@ export class OnboardingComponent implements OnInit {
 
   calcTDEE(): void {
     let age: number;
-    const birthdayDate = parse(this.birthday, 'dd-MM-yyyy', new Date());
+    const data = this.userForm.value;
+    const birthdayDate = parse(data.birthday, 'dd-MM-yyyy', new Date());
     if (isValid(birthdayDate)) {
       age = differenceInYears(new Date(), birthdayDate);
-      const bmr = calculateTDEE(this.gender, this.weight, this.height, age);
-      this.tdee = bmr * this.activity;
+      const bmr = calculateTDEE(data.gender, data.weight, data.height, age);
+      this.tdee = bmr * data.activity;
     }
   }
 
@@ -136,9 +129,9 @@ export class OnboardingComponent implements OnInit {
   }
 
   public saveUserSettings(): void {
-    this.intakeForm.markAllAsTouched();
-    if (this.intakeForm.valid) {
-      const data = this.intakeForm.value;
+    this.userForm.markAllAsTouched();
+    if (this.userForm.valid) {
+      const data = this.userForm.value;
       forkJoin([
         this.userService.addUserSetting('name', data.name),
         this.userService.addUserSetting('birthday', data.birthday.toString()),
@@ -148,12 +141,6 @@ export class OnboardingComponent implements OnInit {
         this.userService.addUserSetting('activity', data.activity.toString()),
       ]).subscribe(
         () => { 
-          this.name = data.name;
-          this.birthday = data.birthday;
-          this.gender = data.gender;
-          this.height = data.height;
-          this.weight = data.weight;
-          this.activity = data.activity;
           this.nextStep()
         },
         (error) => console.error(error)
