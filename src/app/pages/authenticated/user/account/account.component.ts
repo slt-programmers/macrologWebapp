@@ -67,9 +67,7 @@ export class AccountComponent {
       (err) => {
         if (err.status === 401) {
           this.errorMessage = 'Password is incorrect';
-        } else {
-          // TODO
-        }
+        } 
       }
     );
   }

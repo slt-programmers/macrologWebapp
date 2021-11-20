@@ -18,14 +18,14 @@
     z-index: 1;
 
     &__text {
-      @media (min-width: $phone) {
+      @media (min-width: $xs) {
         font-size: 18px;
       }
       font-size: 14px;
     }
 
     &__subtext {
-      @media (min-width: $phone) {
+      @media (min-width: $xs) {
         font-size: 14px;
       }
       font-size: 12px;
@@ -33,7 +33,7 @@
   }
 
   &__circle {
-    @media (min-width: $phone) {
+    @media (min-width: $xs) {
       stroke-width: 8px;
     }
     stroke-dashoffset: 0;

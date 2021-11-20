@@ -12,7 +12,7 @@
 }
 
 .tabs-content {
-  @media (min-width: $phone) {
+  @media (min-width: $xs) {
     padding: $gutter;
   }
   border: 1px solid $smoke;

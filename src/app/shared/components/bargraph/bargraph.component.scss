@@ -1,6 +1,6 @@
 @import '../../../../css/variables.scss';
 
-@media (min-width: $phone) {
+@media (min-width: $xs) {
   $yAxisWidth: 50px;
   $xAxisHeight: 50px;
 }

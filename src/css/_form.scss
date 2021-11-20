@@ -15,7 +15,7 @@ form, .form {
 // form-field horizontal (on big and small screen)
 
 .form-field {
-  @media (min-width: $phone) {
+  @media (min-width: $xs) {
     flex-direction: row;
     align-items: center;
   }
@@ -38,14 +38,14 @@ form, .form {
   }
 
   &--slider {
-    @media (min-width: $tablet) {
+    @media (min-width: $md) {
       flex-direction: row;
     }
     flex-direction: column;
   }
 
   &__label {
-    @media (min-width: $phone) {
+    @media (min-width: $xs) {
       flex-basis: 40%;
       margin-bottom: 0;
 
@@ -79,7 +79,7 @@ form, .form {
     flex-grow: 1;
 
     &--column {
-      @media (min-width: $tablet) {
+      @media (min-width: $md) {
         align-items: flex-start;
         flex-direction: column;
         margin-bottom: 0;
@@ -93,7 +93,7 @@ form, .form {
     }
 
     &--end {
-      @media (min-width: $phone) {
+      @media (min-width: $xs) {
         align-self: flex-end;
       }
     }
@@ -105,7 +105,7 @@ form, .form {
   }
 
   &__slider {
-    @media (min-width: $tablet) {
+    @media (min-width: $md) {
       flex-basis: 100%;
       flex-shrink: 1;
     }

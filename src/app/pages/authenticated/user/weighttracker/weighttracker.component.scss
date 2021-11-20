@@ -1,7 +1,7 @@
 @import "../../../../../css/variables.scss";
 
 .weightgraph-wrapper {
-  @media (min-width: $phone) {
+  @media (min-width: $xs) {
     padding: 0;
   }
   padding-left: 10px;
@@ -9,10 +9,10 @@
 }
 
 .weightgraph {
-  @media (min-width: $phone) {
+  @media (min-width: $xs) {
     height: 350px;
   }
-  @media (min-width: $tablet) {
+  @media (min-width: $md) {
     height: 500px;
   }
   width: 100%; 

@@ -46,9 +46,6 @@ export class ConnectivityComponent implements OnInit {
         if (!this.isConnected()) {
           this.checkRegistrationResponse();
         }
-      },
-      () => {
-        // TODO handle error
       }
     );
   }

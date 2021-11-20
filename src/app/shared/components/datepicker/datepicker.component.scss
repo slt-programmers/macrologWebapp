@@ -13,7 +13,7 @@
   display: flex;
 
   &__selected-day {
-    @media (min-width: $phone) {
+    @media (min-width: $xs) {
       font-size: 16px;
     }
     font-size: 14px;

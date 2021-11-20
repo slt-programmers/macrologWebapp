@@ -11,7 +11,7 @@
 		padding: 15px;
 
 		&:hover {
-			@media(min-width: $phone) {
+			@media(min-width: $xs) {
 			  border-bottom: 2px solid $smoke;
 			}
 		}

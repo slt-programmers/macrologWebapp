@@ -9,7 +9,7 @@
     "test": "ng test --code-coverage --watch=false",
     "test:local": "ng test --code-coverage --browsers=chrome",
     "sonar": "sonar-scanner -Dproject.properties=./sonar-project.properties",
-    "sonar:local": "sonar-scanner -Dsonar.login=8e18219cd696ebee5bbf081af9f8162e668a8ec4",
+    "sonar:local": "sonar-scanner -Dproject.properties=./sonar-project.local.properties",
     "lint": "ng lint",
     "cypress:open": "cypress open --config-file ./cypress.local.json",
     "cypress:local": "cypress run --config-file ./cypress.local.json",

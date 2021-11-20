@@ -1,5 +1,5 @@
 .macro-box {
-	@media (min-width: $phone) {
+	@media (min-width: $xs) {
 		flex-direction: row;
 		align-items: start;
 	}

@@ -63,7 +63,7 @@
 }
 
 .phone-image {
-  @media (min-width: $desktop) {
+  @media (min-width: $lg) {
     display: block;
   }
   display: none;
