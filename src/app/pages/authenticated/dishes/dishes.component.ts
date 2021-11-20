@@ -4,7 +4,6 @@ import { Dish } from '../../../shared/model/dish';
 import { DishService } from '../../../shared/services/dish.service';
 import { Portion } from 'src/app/shared/model/portion';
 import { FoodSearchable } from 'src/app/shared/model/foodSearchable';
-import { FoodService } from 'src/app/shared/services/food.service';
 import { Food } from 'src/app/shared/model/food';
 
 @Component({
@@ -16,7 +15,7 @@ export class DishesComponent implements OnInit {
   public selectedDish: Dish;
   public modalIsVisible = false;
 
-  public modalTitle: String;
+  public modalTitle: string;
   public dishName = '';
   public ingredients: Ingredient[] = [];
 
@@ -26,7 +25,7 @@ export class DishesComponent implements OnInit {
 
   private unitGrams = 100.0;
 
-  constructor(private dishService: DishService, private readonly foodService: FoodService) { }
+  constructor(private dishService: DishService) { }
 
   ngOnInit() {
     this.getAllDishes();
@@ -87,13 +86,13 @@ export class DishesComponent implements OnInit {
     this.selectedDish.ingredients.push(ingredient);
   }
 
-  public saveDish() {
+  public saveDish(): void {
     this.dishService.addDish(this.selectedDish).subscribe(it => {
       this.closeModal();
     });
   }
 
-  public removeIngredient(index: number) {
+  public removeIngredient(index: number): void {
     this.selectedDish.ingredients.splice(index, 1);
   }
 
@@ -113,7 +112,7 @@ export class DishesComponent implements OnInit {
     ingredient.multiplier = 1;
   }
 
-  public getStep(ingredient: Ingredient) {
+  public getStep(ingredient: Ingredient): number {
     if (ingredient.portion === undefined) {
       return 1;
     } else {
@@ -121,7 +120,7 @@ export class DishesComponent implements OnInit {
     }
   }
 
-  public calculateMultiplier(event: any, ingredient: Ingredient) {
+  public calculateMultiplier(event: any, ingredient: Ingredient): void {
     if (ingredient.portion === undefined) {
       ingredient.multiplier = event.target.value / this.unitGrams;
     } else {
@@ -129,7 +128,7 @@ export class DishesComponent implements OnInit {
     }
   }
 
-  public getValue(ingredient: Ingredient) {
+  public getValue(ingredient: Ingredient): number {
     if (ingredient.portion === undefined) {
       return Math.round(this.unitGrams * ingredient.multiplier);
     } else {
@@ -137,7 +136,7 @@ export class DishesComponent implements OnInit {
     }
   }
 
-  public deleteDish() {
+  public deleteDish(): void{
     this.dishService.deleteDish(this.selectedDish).subscribe(it => {
       this.closeModal();
     })

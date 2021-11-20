@@ -28,6 +28,7 @@ npm-debug.log
 testem.log
 /typings
 sonar-project.local.properties
+.scannerwork
 
 # e2e
 /cypress/screenshots

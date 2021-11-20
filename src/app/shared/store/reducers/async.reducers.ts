@@ -2,11 +2,11 @@ import { createReducer, on } from "@ngrx/store";
 import { AsyncActions } from "../actions/async.actions";
 
 export interface AsyncState<T> {
-  data?: T | undefined,
+  data?: T,
   loading?: boolean,
-  error?: any | undefined,
-  pagination?: any | undefined,
-  params?: any | undefined
+  error?: any,
+  pagination?: any,
+  params?: any
 }
 
 export const createAsyncReducers = <T>(initialState: AsyncState<T>, actions: AsyncActions<T>) => {

@@ -34,8 +34,6 @@ export class BargraphComponent implements OnChanges, AfterViewInit {
   xAxisHeight: number;
   markerHeights: number[];
 
-  constructor() {}
-
   ngAfterViewInit() {
     this.yAxisHeight = this.yAxisElement.nativeElement.clientHeight;
     this.xAxisWidth = this.xAxisElement.nativeElement.clientWidth;
@@ -56,7 +54,7 @@ export class BargraphComponent implements OnChanges, AfterViewInit {
   }
 
   private determineYAxisPoints(): number[] {
-    const yAxisPoints = [];
+    const yAxisPoints: number[] = [];
     const yValues = [];
     for (let i = 0; i < this.datasets[0].length; i++) {
       let yValue = 0;
@@ -81,7 +79,7 @@ export class BargraphComponent implements OnChanges, AfterViewInit {
     }
 
     for (let j = 0; j < yValuesToAdd; j++) {
-      let value = yAxisPoints[j] as number;
+      let value = yAxisPoints[j];
       value += this.yAxisStep;
       yAxisPoints.push(value);
     }

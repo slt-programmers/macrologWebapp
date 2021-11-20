@@ -3,7 +3,6 @@ import { Router } from "@angular/router";
 import { RouterTestingModule } from "@angular/router/testing";
 import { MockComponent, MockProvider } from "ng-mocks"
 import { StepperComponent } from "src/app/shared/components/stepper/stepper.component";
-import { DishService } from "src/app/shared/services/dish.service"
 import { UserService } from "src/app/shared/services/user.service";
 import { OnboardingComponent } from "./onboarding.component"
 
@@ -34,6 +33,7 @@ describe('OnboardingComponent', () => {
   });
 
   it('should create', () => {
+    component.ngOnInit();
     expect(component).toBeTruthy();
   });
   

@@ -20,7 +20,6 @@ export class DishService {
   }
 
   public addDish(dish: Dish): Observable<Dish> {
-    // TODO refactor with backend
     const dishDto = {
       id: dish.id,
       name: dish.name,

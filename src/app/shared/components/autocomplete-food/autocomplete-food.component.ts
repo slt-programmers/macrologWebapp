@@ -4,7 +4,6 @@ import { Food } from '../../model/food';
 import { FoodService } from '../../services/food.service';
 import { DishService } from '../../services/dish.service';
 import { Dish } from '../../model/dish';
-import { Portion } from '../../model/portion';
 import { Macros } from '../../model/macros';
 
 @Component({
@@ -172,7 +171,7 @@ export class AutocompleteFoodComponent {
 
   private getCurrentOptionIndex(): number {
     const activeElement = document.activeElement;
-    const classList: String[] = []
+    const classList: string[] = []
     activeElement.classList.forEach(it => {
       if (it.startsWith('option-')) {
         classList.push(it);

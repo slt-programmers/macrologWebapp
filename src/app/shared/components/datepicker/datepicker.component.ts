@@ -1,10 +1,7 @@
 import {
   Component,
-  AfterViewInit,
   Output,
-  Renderer2,
   EventEmitter,
-  ElementRef,
   ViewChildren,
   QueryList,
 } from '@angular/core';
@@ -14,7 +11,7 @@ import {
   templateUrl: './datepicker.component.html',
   styleUrls: ['./datepicker.component.scss'],
 })
-export class DatepickerComponent implements AfterViewInit {
+export class DatepickerComponent {
   @ViewChildren('dayRef') dayRefs: QueryList<any>;
 
   @Output() change$ = new EventEmitter<Date>();
@@ -28,21 +25,12 @@ export class DatepickerComponent implements AfterViewInit {
   public placeholders = new Array();
   public isOpen = false;
 
-  constructor(private renderer: Renderer2) {
+  constructor() {
     this.today = new Date();
     this.selectedDate = this.today;
     this.setDaysInMonthArray();
     this.setWeekdays();
     this.getWeekdayPlaceholders();
-  }
-
-  ngAfterViewInit() {
-    this.dayRefs.changes.subscribe((changes) => {
-      changes.toArray().forEach((item: ElementRef) => {
-        this.removeMark(item);
-        this.markIfToday(item);
-      });
-    });
   }
 
   public toggleOpen() {
@@ -79,7 +67,6 @@ export class DatepickerComponent implements AfterViewInit {
     );
     this.setDaysInMonthArray();
     this.getWeekdayPlaceholders();
-    this.ngAfterViewInit();
   }
 
   public previousMonth() {
@@ -90,7 +77,6 @@ export class DatepickerComponent implements AfterViewInit {
     );
     this.setDaysInMonthArray();
     this.getWeekdayPlaceholders();
-    this.ngAfterViewInit();
   }
 
   public selectDay(day: number) {
@@ -130,20 +116,6 @@ export class DatepickerComponent implements AfterViewInit {
 
     for (let i = 0; i < dayOfWeek; i++) {
       this.placeholders.push(i);
-    }
-  }
-
-  private markIfToday(item: ElementRef) {
-    if (this.selectedDate.getMonth() === this.today.getMonth()) {
-      if (item.nativeElement.textContent === this.selectedDate.getDate()) {
-        this.renderer.addClass(item.nativeElement, 'picker__day--today');
-      }
-    }
-  }
-
-  private removeMark(item: ElementRef) {
-    if (item.nativeElement.classList.contains('picker__day--today')) {
-      this.renderer.removeClass(item.nativeElement, 'picker__day--today');
     }
   }
 }

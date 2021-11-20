@@ -1,27 +1,24 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { PiechartComponent } from './piechart.component';
-import { NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 describe('PiechartComponent', () => {
   let component: PiechartComponent;
   let fixture: ComponentFixture<PiechartComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [PiechartComponent],
-      schemas: [NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA]
     })
       .compileComponents();
-  }));
 
-  beforeEach(() => {
     fixture = TestBed.createComponent(PiechartComponent);
     component = fixture.componentInstance;
+    component.macros = {protein: 1, fat: 2, carbs: 3};
     fixture.detectChanges();
   });
 
-  // it('should create piechart', () => {
-  //   expect(component).toBeTruthy();
-  // });
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
 
 });

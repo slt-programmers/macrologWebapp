@@ -1,10 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { UserService } from '../../../shared/services/user.service';
 import { Gender } from '../../../shared/model/gender';
-import { Food } from '../../../shared/model/food';
-import { Portion } from '../../../shared/model/portion';
-import { Macros } from '../../../shared/model/macros';
-import { FoodSearchable } from '../../../shared/model/foodSearchable';
 import { Router } from '@angular/router';
 import { forkJoin } from 'rxjs';
 import { calculateTDEE } from 'src/app/util/functions';
@@ -187,7 +183,9 @@ export class OnboardingComponent implements OnInit {
     }
   }
 
-  dummy() { }
+  dummy() { 
+    // Intentionally empty
+  }
 
   finish() {
     this.router.navigate(['/dashboard']);
