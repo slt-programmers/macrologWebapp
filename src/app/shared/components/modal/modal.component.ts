@@ -10,8 +10,6 @@ export class ModalComponent {
   @Input() title: String;
   @Output() close$: EventEmitter<any> = new EventEmitter<any>();
 
-  constructor() { }
-
   public closeModal() {
     this.close$.emit();
   }

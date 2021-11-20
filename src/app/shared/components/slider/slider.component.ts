@@ -45,8 +45,6 @@ export class SliderComponent implements AfterViewInit, OnChanges {
   private sliderOffsetRight: number;
   private sliderWidth: number;
 
-  constructor() {}
-
   ngAfterViewInit() {
     this.slider = this.sliderElement.nativeElement;
     this.sliderHandle = this.handleElement.nativeElement;

@@ -78,22 +78,24 @@ export class StackDonutComponent implements OnInit, AfterViewInit, OnChanges {
       // reset both delays
       this.renderer.setStyle(this.innerCircle.nativeElement, 'transition-delay', '0s');
       this.renderer.setStyle(this.outerCircle.nativeElement, 'transition-delay', '0s');
-
-      if (valOuter === 0) {
-        // wait until the animation to remove outer circle has finished
-        if (outerCircleWasPresent) {
-          this.renderer.setStyle(this.innerCircle.nativeElement, 'transition-delay', '0.35s');
-        }
-        this.renderer.setStyle(this.outerCircle.nativeElement, 'strokeDashoffset', pctOuter);
-      } else {
-        // wait until the animation to complete inner circle has finished
-        if (!outerCircleWasPresent) {
-          this.renderer.setStyle(this.outerCircle.nativeElement, 'transition-delay', '0.5s');
-        }
-        this.renderer.setStyle(this.outerCircle.nativeElement, 'strokeDashoffset', pctOuter);
-      }
-
+      this.timeAnimations(valOuter, outerCircleWasPresent, pctOuter);
       this.renderer.setStyle(this.innerCircle.nativeElement, 'strokeDashoffset', pctInner);
+    }
+  }
+
+  timeAnimations(valOuter: number, outerCircleWasPresent: boolean, pctOuter: number) {
+    if (valOuter === 0) {
+      // wait until the animation to remove outer circle has finished
+      if (outerCircleWasPresent) {
+        this.renderer.setStyle(this.innerCircle.nativeElement, 'transition-delay', '0.35s');
+      }
+      this.renderer.setStyle(this.outerCircle.nativeElement, 'strokeDashoffset', pctOuter);
+    } else {
+      // wait until the animation to complete inner circle has finished
+      if (!outerCircleWasPresent) {
+        this.renderer.setStyle(this.outerCircle.nativeElement, 'transition-delay', '0.5s');
+      }
+      this.renderer.setStyle(this.outerCircle.nativeElement, 'strokeDashoffset', pctOuter);
     }
   }
 
