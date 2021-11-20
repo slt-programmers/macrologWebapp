@@ -50,7 +50,7 @@ describe('ConnectivityComponent', () => {
     tick();
     expect(component.syncError).toEqual('');
     expect(component.stravaConnectUrl).toEqual(
-      'http://www.strava.com/oauth/authorize?approval_prompt=force&scope=activity:read_all&response_type=code&state=STRAVACONNECT&client_id=43&redirect_uri=https://localhost:4200/user/connectivity'
+      'http://www.strava.com/oauth/authorize?approval_prompt=force&scope=activity:read_all&response_type=code&state=STRAVACONNECT&client_id=43&redirect_uri=https://localhost:4200/dashboard/user/connectivity'
     );
   }));
 
