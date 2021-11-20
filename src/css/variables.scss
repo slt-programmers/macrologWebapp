@@ -77,3 +77,13 @@ $xxl: 1536px; // 96rem
     display: none;
   }
 }
+.sm-only {
+  @media (min-width: $sm) {
+    display: none
+  }
+}
+.sm {
+  @media (max-width: ($sm - 1)) {
+    display: none;
+  }
+}

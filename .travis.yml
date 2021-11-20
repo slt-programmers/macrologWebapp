@@ -1,13 +1,12 @@
-dist: trusty
+dist: xenial
 sudo: false
 language: node_js
 node_js:
   - 'lts/*'
 
 stages:
-  - 'build, test and scan'
+  - 'build, lint, test and scan'
   - 'build'
-  - 'integration test'
 
 install:
   - npm ci
@@ -16,24 +15,24 @@ jobs:
   allow_failures:
     - script: sonar-scanner -Dproject.settings=./sonar-project.properties
   include:
-    # features develop master
-    - stage: 'build, test and scan'
-      if: branch != release
+    # develop: build lint and test scan integration
+    - stage: 'build, lint, test and scan'
+      if: branch == develop
       name: 'build'
       script: npm run build
     - script: npm run test
-      if: branch != release
+      if: branch == develop
       name: 'unit test and sonar scan'
       after_script: sonar-scanner -Dproject.settings=./sonar-project.properties
     - script: ng lint
-      if: branch != release
+      if: branch == develop
       name: 'lint'
     - script: npm run integration
       if: branch == develop
       name: 'integration test'
-    # release
+    # features master release: build and test
     - stage: 'build'
-      if: branch == release
+      if: branch != develop
       name: 'build'
       script: npm run build
 
