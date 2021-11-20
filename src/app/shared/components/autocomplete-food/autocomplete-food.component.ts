@@ -1,4 +1,4 @@
-import { Component, Input, ViewChild, ElementRef, Output, EventEmitter, HostListener, OnInit } from '@angular/core';
+import { Component, Input, ViewChild, ElementRef, Output, EventEmitter, HostListener } from '@angular/core';
 import { FoodSearchable } from '../../model/foodSearchable';
 import { Food } from '../../model/food';
 import { FoodService } from '../../services/food.service';
@@ -171,7 +171,7 @@ export class AutocompleteFoodComponent {
 
   private getCurrentOptionIndex(): number {
     const activeElement = document.activeElement;
-    const classList: String[] = []
+    const classList: string[] = []
     activeElement.classList.forEach(it => {
       if (it.startsWith('option-')) {
         classList.push(it);

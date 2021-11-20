@@ -12,8 +12,6 @@ export class StepperComponent implements OnInit {
 
 	public steps: Array<number>;
 
-	constructor() { }
-
 	ngOnInit() {
 		this.steps = new Array<number>();
 		for (let i = 1; i <= this.numberOfSteps; i++) {

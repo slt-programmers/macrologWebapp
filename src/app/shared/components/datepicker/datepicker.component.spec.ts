@@ -21,18 +21,15 @@ describe('DatepickerComponent', () => {
   });
 
   it('should create datepicker', () => {
-    component.ngAfterViewInit();
     expect(component).toBeTruthy();
   });
 
   it('should open', () => {
-    component.ngAfterViewInit();
     component.toggleOpen();
     expect(component.isOpen).toBeTrue();
   });
 
   it('should set next day', () => {
-    component.ngAfterViewInit();
     component.toggleOpen();
     component.nextDay();
     expect(component).toBeTruthy();

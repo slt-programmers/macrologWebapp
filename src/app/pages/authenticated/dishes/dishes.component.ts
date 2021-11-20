@@ -4,7 +4,6 @@ import { Dish } from '../../../shared/model/dish';
 import { DishService } from '../../../shared/services/dish.service';
 import { Portion } from 'src/app/shared/model/portion';
 import { FoodSearchable } from 'src/app/shared/model/foodSearchable';
-import { FoodService } from 'src/app/shared/services/food.service';
 import { Food } from 'src/app/shared/model/food';
 
 @Component({
@@ -16,7 +15,7 @@ export class DishesComponent implements OnInit {
   public selectedDish: Dish;
   public modalIsVisible = false;
 
-  public modalTitle: String;
+  public modalTitle: string;
   public dishName = '';
   public ingredients: Ingredient[] = [];
 

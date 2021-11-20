@@ -12,9 +12,6 @@ export class DateValidator implements Validator {
 
   public validDate = true;
 
-  constructor() {
-  }
-
   validate(c: AbstractControl): { [key: string]: any } {
     const value = c.value;
     if (value !== null && value !== undefined && value !== '') {

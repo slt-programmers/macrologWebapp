@@ -4,7 +4,6 @@ import { ScrollBehaviourService } from '../../shared/services/scroll-behaviour.s
 import { AuthenticationService } from '../../shared/services/auth.service';
 import { HealthcheckService } from 'src/app/shared/services/healthcheck.service';
 import { foodActions } from 'src/app/shared/store/actions/food.actions';
-import { State } from 'src/app/shared/store/reducers';
 import { Store } from '@ngrx/store';
 
 @Component({

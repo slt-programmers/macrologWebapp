@@ -12,10 +12,10 @@ export class UserService {
 
   constructor(private readonly http: HttpClient, private readonly toastService: ToastService) { }
 
-  public getSetting(key: string, date: string): Observable<String> {
-    return this.http.get<String>(this.macrologBackendUrl + '/' + key,
+  public getSetting(key: string, date: string): Observable<string> {
+    return this.http.get<string>(this.macrologBackendUrl + '/' + key,
       { params: { date: date } }).pipe(
-        catchError(error => { return of<String>(); }));
+        catchError(error => { return of<string>(); }));
   }
 
   public getUserSettings(): Observable<UserSettings> {
@@ -23,7 +23,7 @@ export class UserService {
       catchError(error => { return of<UserSettings>(); }));
   }
 
-  public getUserGoalStats(date: string): Observable<String[]> {
+  public getUserGoalStats(date: string): Observable<string[]> {
     return forkJoin([
       this.getSetting('goalProtein', date),
       this.getSetting('goalFat', date),
