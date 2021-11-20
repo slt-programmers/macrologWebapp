@@ -67,25 +67,13 @@ export class LinegraphComponent implements AfterViewInit, OnChanges {
       if (graphPoint.height !== undefined) {
         if (xPosition === 0) {
           xPosition = this.xAxisPointWidth * i + xStartOffset;
-          this.svgPath +=
-            ' L' + xPosition + ' ' + (this.yAxisHeight - graphPoint.height);
+          this.svgPath += ' L' + xPosition + ' ' + (this.yAxisHeight - graphPoint.height);
         } else {
           xPosition = this.xAxisPointWidth * i + xStartOffset;
-          const previousXPosition =
-            this.xAxisPointWidth * i + xStartOffset - this.xAxisPointWidth;
+          const previousXPosition = this.xAxisPointWidth * i + xStartOffset - this.xAxisPointWidth;
+
           const x1 = previousXPosition + 20;
-          let previousYPosition: number;
-          let j = i - 1;
-          while (j >= 0) {
-            if (this.graphPoints[j].height !== undefined) {
-              previousYPosition = this.yAxisHeight - this.graphPoints[j].height;
-              break;
-            }
-            j--;
-          }
-
-          const y1 = previousYPosition;
-
+          const y1 = this.calcPreviousYPosition(i)
           const x2 = xPosition - 20;
           const y2 = this.yAxisHeight - graphPoint.height;
 
@@ -115,6 +103,19 @@ export class LinegraphComponent implements AfterViewInit, OnChanges {
       ' ' +
       this.yAxisHeight +
       ' Z';
+  }
+
+  private calcPreviousYPosition(i: number) {
+    let previousYPosition: number;
+    let j = i - 1;
+    while (j >= 0) {
+      if (this.graphPoints[j].height !== undefined) {
+        previousYPosition = this.yAxisHeight - this.graphPoints[j].height;
+        break;
+      }
+      j--;
+    }
+    return previousYPosition;
   }
 
   calculateTrend() {
@@ -213,7 +214,7 @@ export class LinegraphComponent implements AfterViewInit, OnChanges {
         yValues.push(this.dataset[i].y);
       }
     }
-    yValues.sort();
+    yValues.sort((a, b) => a > b ? 1 : -1);
 
     const highest = yValues[yValues.length - 1];
     const lowest = yValues[0];
