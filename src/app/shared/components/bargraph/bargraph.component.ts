@@ -34,8 +34,6 @@ export class BargraphComponent implements OnChanges, AfterViewInit {
   xAxisHeight: number;
   markerHeights: number[];
 
-  constructor() {}
-
   ngAfterViewInit() {
     this.yAxisHeight = this.yAxisElement.nativeElement.clientHeight;
     this.xAxisWidth = this.xAxisElement.nativeElement.clientWidth;

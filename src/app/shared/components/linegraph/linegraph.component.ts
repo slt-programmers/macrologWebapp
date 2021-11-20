@@ -28,11 +28,10 @@ export class LinegraphComponent implements AfterViewInit, OnChanges {
   public svgPath: string;
   public trendPath: string;
 
-  yAxisHeight: number;
+  public yAxisHeight: number;
+
   private xAxisWidth: number;
   private xAxisPointWidth: number;
-
-  constructor() {}
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes['dataset'] && this.dataset !== undefined) {
