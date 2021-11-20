@@ -34,8 +34,7 @@ module.exports = function (config) {
       dir: require('path').join(__dirname, './coverage'),
       subdir: '.',
       reporters: [
-        { type: 'html', dir: 'coverage/' },
-        { type: 'text-summary' }
+        { type: 'lcov', dir: 'coverage/' }
       ],
     },
     sonarQubeExecutionReporter: {
