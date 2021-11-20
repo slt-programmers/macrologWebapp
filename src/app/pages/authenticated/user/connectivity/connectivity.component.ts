@@ -74,8 +74,7 @@ export class ConnectivityComponent implements OnInit {
   }
 
   private setStravaUrl() {
-    const stravaUrl =
-      'http://www.strava.com/oauth/authorize?approval_prompt=force&scope=activity:read_all&response_type=code&state=STRAVACONNECT';
+    const stravaUrl = environment.stravaUrl;
     const redirectUrl = environment.origin + '/dashboard/user/connectivity';
     this.stravaConnectUrl =
       stravaUrl +
