@@ -75,30 +75,6 @@ form, .form {
     }
   }
 
-  &__element {
-    flex-grow: 1;
-
-    &--column {
-      @media (min-width: $md) {
-        align-items: flex-start;
-        flex-direction: column;
-        margin-bottom: 0;
-        width: auto;
-      }
-      align-items: center;
-      flex-direction: row;
-      margin-right: 10px;
-      margin-bottom: 10px;
-      width: 100%;
-    }
-
-    &--end {
-      @media (min-width: $xs) {
-        align-self: flex-end;
-      }
-    }
-  }
-
   &__text {
     font-weight: 500;
     min-width: 30px;

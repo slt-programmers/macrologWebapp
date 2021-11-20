@@ -23,39 +23,36 @@
 
       <div class="graph__options ">
         <div class="graph__options__group">
-          <div class="graph__options__option__label">Measurement</div>
-
-          <!-- TODO fix switch -->
-          <div class="flex flex-col" (click)="switchMeasurement()">
-            <div class="flex align-center">
-              <input type="radio" id="grams" [(ngModel)]="measurement" value="calories"
-                (onChange)="switchMeasurement()">
+          <div class="flex flex-col">
+            <div class="graph__options__option__label">Measurement</div>
+            
+            <div class="flex align-center" (click)="switchMeasurement('calories')">
+              <input type="radio" id="grams" [(ngModel)]="measurement" value="calories">
               <label for="grams">Calories</label>
             </div>
 
-            <div class="flex align-center">
-              <input type="radio" id="percentage" [(ngModel)]="measurement" value="grams"
-                (onChange)="switchMeasurement()">
+            <div class="flex align-center" (click)="switchMeasurement('grams')">
+              <input type="radio" id="percentage" [(ngModel)]="measurement" value="grams">
               <label for="percentage">Grams</label>
             </div>
           </div>
         </div>
 
         <div class="graph__options__group mt-2">
-          <div class="graph__options__option__label">Option</div>
-
-          <!-- TODO fix switch -->
-          <div class="flex flex-col" (click)="switchOption()">
-            <div class="flex align-center">
+          <div class="flex flex-col">
+            <div class="graph__options__option__label">Option</div>
+          
+            <div class="flex align-center" (click)="switchOption('total')">
               <input type="radio" id="total" [(ngModel)]="measurementOption" value="total">
               <label for="total">Total</label>
             </div>
 
-            <div class="flex align-center">
+            <div class="flex align-center" (click)="switchOption('splitted')">
               <input type="radio" id="splitted" [(ngModel)]="measurementOption" value="splitted">
               <label for="splitted">Split per macro</label>
             </div>
-            <div class="flex align-center">
+
+            <div class="flex align-center" (click)="switchOption('ratio')">
               <input type="radio" id="ratio" [(ngModel)]="measurementOption" value="ratio">
               <label for="ratio">Ratio</label>
             </div>

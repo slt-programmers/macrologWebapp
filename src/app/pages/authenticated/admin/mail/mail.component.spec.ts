@@ -40,7 +40,7 @@ describe('MailComponent', () => {
     expect(googleService.getStatus).toHaveBeenCalled();
     expect(component.isConnected).toBeTrue();
     expect(component.googleConnectUrl).toEqual(
-      'https://accounts.google.com/o/oauth2/auth?response_type=code&approval_prompt=force&scope=https://www.googleapis.com/auth/gmail.send&state=GMAILCONNECT&access_type=offline&client_id=test&redirect_uri=http://localhost:4200/admin/mail');
+      'https://accounts.google.com/o/oauth2/auth?response_type=code&approval_prompt=force&scope=https://www.googleapis.com/auth/gmail.send&state=GMAILCONNECT&access_type=offline&client_id=test&redirect_uri=http://localhost:4200/dashboard/admin/mail');
   });
 
   it('should init component and check registration response', () => {

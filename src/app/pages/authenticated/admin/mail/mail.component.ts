@@ -73,7 +73,7 @@ export class MailComponent implements OnInit {
   private setGoogleUrl() {
     const googleUrl =
       'https://accounts.google.com/o/oauth2/auth?response_type=code&approval_prompt=force&scope=https://www.googleapis.com/auth/gmail.send&state=GMAILCONNECT&access_type=offline';
-    const redirectUrl = environment.origin + '/admin/mail';
+    const redirectUrl = environment.origin + '/dashboard/admin/mail';
     this.googleConnectUrl =
       googleUrl +
       '&client_id=' +

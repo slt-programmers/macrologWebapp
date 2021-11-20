@@ -59,9 +59,7 @@ export class GraphsComponent implements OnInit {
   //    Splitted total calories per day per macro -- done
   //    Percentage/ratio calories per macro per day (streched bars)
 
-  constructor(private logService: DiaryService, 
-    private userService: UserService,
-    private ref: ChangeDetectorRef) { }
+  constructor(private logService: DiaryService, private userService: UserService) { }
 
   ngOnInit() {
     this.dateTo = new Date();
@@ -71,7 +69,9 @@ export class GraphsComponent implements OnInit {
     this.getLogData();
   }
 
-  public switchMeasurement() {
+  public switchMeasurement(measurement: string) {
+    console.log('switch');
+    this.measurement = measurement;
     if (this.measurement === 'grams') {
       this.getDatasetsForType('grams');
       this.graphLabel = 'Total grams per day grouped by macronutrient';
@@ -91,8 +91,8 @@ export class GraphsComponent implements OnInit {
     }
   }
 
-  public switchOption() {
-    this.ref.detectChanges();
+  public switchOption(option: string) {
+    this.measurementOption = option;
   }
 
   public monthBack() {

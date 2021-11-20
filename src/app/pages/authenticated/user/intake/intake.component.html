@@ -39,7 +39,7 @@
       <div *ngIf="showCalories">
         <div class="form-field">
           <div class="form-field__label form-field__label--small">Calories</div>
-          <div class="form-field__element">
+          <div class="">
             <ml-slider [value]="calories" (valueChange)="changeCalories($event)" [upperBound]="3000"
               [lowerBound]="1200" [markers]="markers"></ml-slider>
           </div>
@@ -59,27 +59,21 @@
       <div *ngIf="showMacros">
         <div class="form">
           <div class="form-field">
-            <label class="form-field__label">Protein</label>
-            <div class="form-field__element">
-              <input class="input form-field__input" (change)="calcCaloriesManual()"
-                [(ngModel)]="proteinManual" type="number">
-            </div>
+            <label for="protein" class="form-field__label">Protein</label>
+            <input name="protein" class="input form-field__input" (change)="calcCaloriesManual()"
+              [(ngModel)]="proteinManual" type="number">
           </div>
 
           <div class="form-field">
-            <label class="form-field__label">Fat</label>
-            <div class="form-field__element">
-              <input class="input form-field__input" (change)="calcCaloriesManual()"
-                [(ngModel)]="fatManual" type="number">
-            </div>
+            <label for="fat" class="form-field__label">Fat</label>
+            <input name="fat" class="input form-field__input" (change)="calcCaloriesManual()"
+              [(ngModel)]="fatManual" type="number">
           </div>
 
           <div class="form-field">
-            <label class="form-field__label">Carbs</label>
-            <div class="form-field__element">
-              <input class="input form-field__input" (change)="calcCaloriesManual()"
-                [(ngModel)]="carbsManual" type="number">
-            </div>
+            <label for="carbs" class="form-field__label">Carbs</label>
+            <input name="carbs" class="input form-field__input" (change)="calcCaloriesManual()"
+              [(ngModel)]="carbsManual" type="number">
           </div>
         </div>
       </div>

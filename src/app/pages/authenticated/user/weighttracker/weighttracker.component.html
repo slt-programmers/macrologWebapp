@@ -8,25 +8,19 @@
 
   <form #weightForm="ngForm">
     <div class="form-field">
-      <label class="form-field__label">Measurement date</label>
-      <div class="form-field__element">
-        <input required class="input" validDate placeholder="DD-MM-YYYY" name="birthday"
-          [(ngModel)]="measurementDate" />
-      </div>
+      <label for="measurementDate" class="form-field__label">Measurement date</label>
+      <input required class="input" validDate placeholder="DD-MM-YYYY" name="measurementDate"
+        [(ngModel)]="measurementDate" />
     </div>
 
     <div class="form-field">
-      <label class="form-field__label">Weight (kg)</label>
-      <div class="form-field__element">
-        <input required class="input" name="weight" type="number" [(ngModel)]="weight" step="0.1" />
-      </div>
+      <label for="weight" class="form-field__label">Weight (kg)</label>
+      <input required class="input" name="weight" type="number" [(ngModel)]="weight" step="0.1" />
     </div>
 
     <div class="form-field">
-      <label class="form-field__label">Remark</label>
-      <div class="form-field__element">
-        <input class="input" name="remark" type="text" [(ngModel)]="remark" />
-      </div>
+      <label for="remark" class="form-field__label">Remark</label>
+      <input class="input" name="remark" type="text" [(ngModel)]="remark" />
     </div>
 
     <div class=" button-wrapper">
@@ -59,16 +53,19 @@
       <div class="p-1" *ngIf="logWeight.editable">
         <div class="flex flex-grow col-gap-1 items-center">
           <div class="">
+            <label for="date">Date</label>
             <input name="date" required class="input" validDate placeholder="DD-MM-YYYY"
               [(ngModel)]="logWeight.day" />
           </div>
 
           <div class="">
+            <label for="weight">Weight</label>
             <input class="input" name="weight" type="number" [(ngModel)]="logWeight.weight"
               step="0.1" />
           </div>
 
           <div class="flex flex-grow">
+            <label for="remark">Remark</label>
             <input required class="input" placeholder="Remark" name="remark" type="text"
               [(ngModel)]="logWeight.remark" [required]="false" />
           </div>

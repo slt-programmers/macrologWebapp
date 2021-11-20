@@ -8,21 +8,19 @@
           <form [formGroup]="loginForm">
             <h1 class="text-lg font-bold">Log in</h1>
 
-            <label for="usernameOrEmail">
-              Username or email
-              <input id="username" class="input" type="text" formControlName="username"
-                name="usernameOrEmail" />
-              <p id="usernameRequired" class="error" *ngIf="loginForm.controls.username.touched && 
-                loginForm.controls.username.invalid">Username is required</p>
-            </label>
+            <label for="usernameOrEmail"> Username or email </label>
+            <input id="username" class="input" type="text" formControlName="username"
+              name="usernameOrEmail" />
 
-            <label for="password">
-              Password
-              <input id="password" class="input" type="password" formControlName="password"
-                (keyup.enter)="login()" name="password" />
-              <p id="passwordRequired" class="error" *ngIf="loginForm.controls.password.touched && 
+            <p id="usernameRequired" class="error" *ngIf="loginForm.controls.username.touched && 
+                loginForm.controls.username.invalid">Username is required</p>
+
+            <label for="password"> Password </label>
+            <input id="password" class="input" type="password" formControlName="password"
+              (keyup.enter)="login()" name="password" />
+
+            <p id="passwordRequired" class="error" *ngIf="loginForm.controls.password.touched && 
                 loginForm.controls.password.invalid">Password is required</p>
-            </label>
 
             <p id="loginError" class="error" *ngIf="loginError">{{loginError}}</p>
 
@@ -39,26 +37,25 @@
           <form [formGroup]="registerForm">
             <h1 class="text-lg font-bold">Register</h1>
 
-            <label for="newUsername"> Username
-              <input id="usernameRegister" class="input" type="text" formControlName="username"
-                name="newUsername" />
-              <p id="usernameRegisterRequired" class="error" *ngIf="registerForm.controls.username.touched && 
+            <label for="newUsername">Username</label>
+            <input id="usernameRegister" class="input" type="text" formControlName="username"
+              name="newUsername" />
+
+            <p id="usernameRegisterRequired" class="error" *ngIf="registerForm.controls.username.touched && 
               registerForm.controls.username.invalid">Username is required</p>
-            </label>
 
-            <label for="newEmal"> Email
-              <input id="email" class="input" type="email" formControlName="email"
-                name="newEmail" />
-              <p id="emailRequired" class="error" *ngIf="registerForm.controls.email.touched && 
+            <label for="newEmal">Email</label>
+            <input id="email" class="input" type="email" formControlName="email" name="newEmail" />
+
+            <p id="emailRequired" class="error" *ngIf="registerForm.controls.email.touched && 
               registerForm.controls.email.invalid">Email is required</p>
-            </label>
 
-            <label for="newPassword"> Password
-              <input id="passwordRegister" class="input" type="password" formControlName="password"
-                name="newPassword" (keyup.enter)="register()" />
-              <p id="passwordRegisterRequired" class="error" *ngIf="registerForm.controls.password.touched && 
+            <label for="newPassword">Password</label>
+            <input id="passwordRegister" class="input" type="password" formControlName="password"
+              name="newPassword" (keyup.enter)="register()" />
+
+            <p id="passwordRegisterRequired" class="error" *ngIf="registerForm.controls.password.touched && 
                 registerForm.controls.password.invalid">Password is required</p>
-            </label>
 
             <p id="registerError" class="error" *ngIf="registerError">{{registerError}}</p>
 
@@ -77,6 +74,7 @@
   <form #forgotForm="ngForm" class="mt-1">
     <p>Please enter your email so we can send a link to reset your password</p>
 
+    <label for="forgotEmail">Email</label>
     <input class="input" placeholder="Email" type="email" #forgotEmailField
       [(ngModel)]="forgotEmail" name="forgotEmail" />
 

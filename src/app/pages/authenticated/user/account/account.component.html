@@ -3,21 +3,19 @@
     <h3 class="form-description">Change password</h3>
 
     <div class="form-field">
-      <label class="form-field__label">Old password</label>
+      <label for="oldPassword"  class="form-field__label">Old password</label>
       <input class="input form-field__input" type="password" [(ngModel)]="oldPassword"
         name="oldPassword" required />
     </div>
 
     <div class="form-field">
-      <label class="form-field__label">New password</label>
-
+      <label for="newPassword" class="form-field__label">New password</label>
       <input class="input form-field__input" type="password" [(ngModel)]="newPassword"
         name="newPassword" required />
     </div>
 
     <div class="form-field">
-      <label class="form-field__label">Confirm new password</label>
-
+      <label for="confirmPassword" class="form-field__label">Confirm new password</label>
       <input class="input form-field__input" type="password" [(ngModel)]="confirmPassword"
         name="confirmPassword" required />
     </div>
@@ -48,6 +46,7 @@
 
     <p>If you are, please enter your password</p>
 
+    <label for="password" >Password</label>
     <input class="input" placeholder="Password" type="password" #usernameField
       [(ngModel)]="password" name="password" required />
 

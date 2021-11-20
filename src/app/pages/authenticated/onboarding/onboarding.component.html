@@ -19,19 +19,19 @@
 
         <form [formGroup]="userForm">
           <div class="form-field">
-            <label class="form-field__label">Name</label>
+            <label for="name" class="form-field__label">Name</label>
             <input class="input form-field__input" name="name" type="text" formControlName="name"
               required />
           </div>
 
           <div class="form-field">
-            <label class="form-field__label">Date of birth</label>
+            <label for="birthday" class="form-field__label">Date of birth</label>
             <input class="input form-field__input" required validDate
               placeholder="DD-MM-YYYY, eg 26-3-1989" name="birthday" formControlName="birthday" />
           </div>
 
           <div class="flex col-gap-1">
-            <label class="form-field__label">Gender</label>
+            <div class="form-field__label">Gender</div>
 
             <div class="flex align-center">
               <input type="radio" id="male" formControlName="gender" value="MALE">
@@ -45,19 +45,19 @@
           </div>
 
           <div class="form-field">
-            <label class="form-field__label">Height (cm)</label>
+            <label for="height" class="form-field__label">Height (cm)</label>
             <input class="input form-field__input" name="height" type="number"
               formControlName="height" required />
           </div>
 
           <div class="form-field">
-            <label class="form-field__label">Start weight (kg)</label>
+            <label for="weight" class="form-field__label">Start weight (kg)</label>
             <input class="input form-field__input" name="weight" type="number"
               formControlName="weight" step="0.1" required />
           </div>
 
           <div class="form-field">
-            <label class="form-field__label">Activity level</label>
+            <label for="activity" class="form-field__label">Activity level</label>
             <select class="form-field__input" name="activity" formControlName="activity" required>
               <option value="1.2">Sedentary</option>
               <option value="1.375">Lightly active</option>
@@ -137,27 +137,21 @@
             <div *ngIf="showMacros">
               <div class="form">
                 <div class="form-field">
-                  <label class="form-field__label">Protein</label>
-                  <div class="form-field__element">
-                    <input class="input form-field__input" (change)="calcCaloriesManual()"
-                      [(ngModel)]="proteinManual" type="number" />
-                  </div>
+                  <label for="protein" class="form-field__label">Protein</label>
+                  <input name="protein" class="input form-field__input" (change)="calcCaloriesManual()"
+                    [(ngModel)]="proteinManual" type="number" />
                 </div>
 
                 <div class="form-field">
-                  <label class="form-field__label">Fat</label>
-                  <div class="form-field__element">
-                    <input class="input form-field__input" (change)="calcCaloriesManual()"
-                      [(ngModel)]="fatManual" type="number" />
-                  </div>
+                  <label for="fat" class="form-field__label">Fat</label>
+                  <input name="fat" class="input form-field__input" (change)="calcCaloriesManual()"
+                    [(ngModel)]="fatManual" type="number" />
                 </div>
 
                 <div class="form-field">
-                  <label class="form-field__label">Carbs</label>
-                  <div class="form-field__element">
-                    <input class="input form-field__input" (change)="calcCaloriesManual()"
-                      [(ngModel)]="carbsManual" type="number" />
-                  </div>
+                  <label for="carbs" class="form-field__label">Carbs</label>
+                  <input name="carbs" class="input form-field__input" (change)="calcCaloriesManual()"
+                    [(ngModel)]="carbsManual" type="number" />
                 </div>
               </div>
             </div>
