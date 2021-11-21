@@ -10,7 +10,7 @@
       </div>
 
       <div class="content" #step1 *ngIf="currentStep === 1">
-        <h3 class="form-description">Personal details</h3>
+        <h3 class="font-bold">Personal details</h3>
 
         <p>
           To calculate how much energy you need in a day, we need to know a few
@@ -76,7 +76,7 @@
       </div>
 
       <div class="content" #step2 *ngIf="currentStep === 2">
-        <h3 class="form-description">Set your intake goal</h3>
+        <h3 class="font-bold">Set your intake goal</h3>
 
         <p>
           This is the amount of calories you need to maintain your current
@@ -112,7 +112,8 @@
                 <div class="form-field__label form-field__label--slider">
                   Calories
                 </div>
-                <div class="form-field__slider">
+
+                <div class="">
                   <ml-slider [value]="calories" (valueChange)="changeCalories($event)"
                     [upperBound]="4000" [lowerBound]="1200" [markers]="markers"></ml-slider>
                 </div>
@@ -135,11 +136,11 @@
 
             <!--Macros-->
             <div *ngIf="showMacros">
-              <div class="form">
+              <div class="content">
                 <div class="form-field">
                   <label for="protein" class="form-field__label">Protein</label>
-                  <input name="protein" class="input form-field__input" (change)="calcCaloriesManual()"
-                    [(ngModel)]="proteinManual" type="number" />
+                  <input name="protein" class="input form-field__input"
+                    (change)="calcCaloriesManual()" [(ngModel)]="proteinManual" type="number" />
                 </div>
 
                 <div class="form-field">
@@ -150,8 +151,8 @@
 
                 <div class="form-field">
                   <label for="carbs" class="form-field__label">Carbs</label>
-                  <input name="carbs" class="input form-field__input" (change)="calcCaloriesManual()"
-                    [(ngModel)]="carbsManual" type="number" />
+                  <input name="carbs" class="input form-field__input"
+                    (change)="calcCaloriesManual()" [(ngModel)]="carbsManual" type="number" />
                 </div>
               </div>
             </div>
@@ -171,7 +172,7 @@
       </div>
 
       <div class="content" #step3 *ngIf="currentStep === 3">
-        <h3 class="form-description">Adding food</h3>
+        <h3 class="font-bold">Adding food</h3>
 
         <p>
           The first step is to add food to your database. You do this by using
@@ -182,7 +183,7 @@
           <em class="fas fa-plus"></em>
         </button>
 
-        <h3 class="form-description">Portions</h3>
+        <h3 class="font-bold">Portions</h3>
 
         <p>
           To make diary entries easier you can add portions that you regularly
@@ -234,7 +235,7 @@
       </div>
 
       <div #step4 *ngIf="currentStep === 4">
-        <h3 class="form-description">Filling your diary</h3>
+        <h3 class="font-bold">Filling your diary</h3>
 
         <p>
           Clicking on <strong>Breakfast</strong> will enable you to add food to

@@ -94,6 +94,12 @@
 .w-8 {
   width: 8rem;
 }
+.min-w-24 {
+  @media (min-width: $xs) {
+    min-width: 24rem;
+  }
+  min-width: 100%;
+}
 
 
 // Margins
@@ -151,6 +157,12 @@
 }
 .text-white {
   color: white;
+}
+.text-primary {
+  color: $primary;
+}
+.text-secondary {
+  color: $secondary;
 }
 .font-semibold {
   font-weight: 600;

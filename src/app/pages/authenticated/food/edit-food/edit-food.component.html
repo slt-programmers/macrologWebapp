@@ -1,64 +1,64 @@
 <ml-modal [title]="title" (close$)="close$.emit(false)">
-  <form #saveFoodForm="ngForm">
+  <form class="form min-w-24" #saveFoodForm="ngForm">
+    <h1 class="font-semibold text-secondary">Food</h1>
+
     <div class="form-field">
-      <label class="form-field__label">Food</label>
-      <input class="input" [(ngModel)]="selectedFood.name" #foodField name="name"
-        placeholder="e.g. 'Pasta', 'Apple'" required>
+      <label class="form-field__label">Name</label>
+      <input class="input" [(ngModel)]="selectedFood.name" #foodField name="name" required>
     </div>
 
     <div class="form-field">
       <label for="protein" class="form-field__label">Protein</label>
       <input class="input" #proteinField [(ngModel)]="selectedFood.protein" value="protein"
-        name="protein" type="number" placeholder="0.0" step="0.1" required>
+        name="protein" type="number" step="0.1" required>
     </div>
 
     <div class="form-field">
       <label for="fat" class="form-field__label">Fat</label>
       <input class="input" #fatField [(ngModel)]="selectedFood.fat" name="fat" type="number"
-        placeholder="0.0" step="0.1" required>
+        step="0.1" required>
     </div>
 
     <div class="form-field">
       <label for="carbs" class="form-field__label">Carbs</label>
       <input class="input" #carbsField [(ngModel)]="selectedFood.carbs" name="carbs" type="number"
-        placeholder="0.0" step="0.1" required>
-
+        step="0.1" required>
     </div>
 
-    <label class="">Frequently used portions (optional)</label>
+    <h1 class="font-semibold text-secondary">Frequently used portions (optional)</h1>
 
-    <div class="flex col-gap-2" *ngFor="let port of selectedFood.portions; index as i">
-      <div class="flex-col flex-grow">
-
+    <ng-container *ngFor="let port of selectedFood.portions; index as i">
+      <!-- <div class="flex-col flex-grow"> -->
         <div class="form-field">
           <label for="portionDesc_{{i}}" class="form-field__label">Description</label>
           <input class="input" [(ngModel)]="port.description" name="portionDesc_{{i}}" type="text"
-            placeholder="e.g. 'Breakfast', 'Plate'" required>
+            required>
         </div>
 
         <div class="form-field">
           <label for="portionGrams_{{i}}" class="form-field__label">Grams</label>
-          <input class="input" [(ngModel)]="port.grams" placeholder="0,0" name="portionGrams_{{i}}"
-            type="number" step="1" required>
+          <input class="input" [(ngModel)]="port.grams" name="portionGrams_{{i}}" type="number"
+            step="1" required>
         </div>
-      </div>
 
-      <button class="icon-button" (click)="removePortion(i)" *ngIf="isNewPortion(port)">
-        <em class="fas fa-minus"></em>
-      </button>
-    </div>
-
-    <div>
-      <button class="icon-button" (click)="addNewPortion()">
-        <em class="fas fa-plus"></em>
-      </button>
-    </div>
-
-    <div class="flex justify-end col-gap-1">
-      <button class="button" (click)="close$.emit(false)">Cancel</button>
-
-      <button class="button button--primary" (click)="saveFood()"
-        [disabled]="saveFoodForm.invalid">Save</button>
-    </div>
+        <button class="icon-button" (click)="removePortion(i)" *ngIf="isNewPortion(port)">
+          <em class="fas fa-minus"></em>
+        </button>
+      <!-- </div> -->
+    </ng-container>
   </form>
+
+  <div>
+    <button class="icon-button" (click)="addNewPortion()">
+      <em class="fas fa-plus"></em>
+    </button>
+  </div>
+
+  <div class="flex justify-end col-gap-1">
+    <button class="button" (click)="close$.emit(false)">Cancel</button>
+
+    <button class="button button--primary" (click)="saveFood()"
+      [disabled]="saveFoodForm.invalid">Save</button>
+  </div>
+
 </ml-modal>
