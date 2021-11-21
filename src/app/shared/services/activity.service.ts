@@ -4,7 +4,6 @@ import { Activity } from '../model/activity';
 import { environment } from '../../../environments/environment';
 import { Observable, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import { DatePipe } from '@angular/common';
 
 @Injectable()
 export class ActivityService {
@@ -23,17 +22,13 @@ export class ActivityService {
       .pipe(catchError(error => of<any>()));
   }
 
-  public addActivities(activities: Activity[]): Observable<Activity[]> {
+  public addActivities(date: string, activities: Activity[]): Observable<Activity[]> {
     const headers = {
       'Content-Type': 'application/json',
       'Access-Control-Allow-Origin': environment.origin,
     };
-    const pipe = new DatePipe('en-US');
-    const request = activities.map(act => {
-      act.day = pipe.transform(act.day, 'yyyy-MM-dd') as any;
-    })
     const options = { headers: headers };
-    return this.http.post<Activity[]>(this.macrologBackendUrl + '/', request, options)
+    return this.http.post<Activity[]>(this.macrologBackendUrl + '/day/' + date, activities, options)
       .pipe(catchError(error => of<any>()))
   }
 

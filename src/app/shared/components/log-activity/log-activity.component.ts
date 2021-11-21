@@ -1,24 +1,15 @@
-import {
-  Component,
-  OnInit,
-  OnChanges,
-  Input,
-  Output,
-  EventEmitter,
-  ViewChild,
-  ElementRef,
-  SimpleChanges,
-} from '@angular/core';
+import { Component, OnChanges, Input, Output, EventEmitter, ViewChild, ElementRef, SimpleChanges } from '@angular/core';
+import { format } from 'date-fns';
 import { Activity } from '../../model/activity';
 import { ActivityService } from '../../services/activity.service';
 
 @Component({
   selector: 'ml-log-activity',
   templateUrl: './log-activity.component.html',
+  styleUrls: ['./log-activity.component.scss']
 })
-export class LogActivityComponent implements OnInit, OnChanges {
-  @ViewChild('logActivity', { static: false })
-  private logActivityEref: ElementRef;
+export class LogActivityComponent implements OnChanges {
+  @ViewChild('logActivity', { static: false }) private logActivityEref: ElementRef;
 
   @Input() logActivities: Activity[];
   @Input() date: Date;
@@ -30,15 +21,10 @@ export class LogActivityComponent implements OnInit, OnChanges {
 
   public editable: boolean;
   public newActivityName: string;
-  public addActivityCallBack: Function;
   public syncing = false;
 
   constructor(private activityService: ActivityService) {
     this.editable = false;
-  }
-
-  ngOnInit() {
-    this.addActivityCallBack = this.addActivity.bind(this);
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -76,6 +62,7 @@ export class LogActivityComponent implements OnInit, OnChanges {
         calories: 0,
       });
     }
+    console.log(this.logActivities)
     this.newActivityName = null;
   }
 
@@ -89,8 +76,9 @@ export class LogActivityComponent implements OnInit, OnChanges {
   }
 
   public saveAndClose() {
+    console.log(this.logActivities);
     this.close();
-    this.activityService.addActivities(this.logActivities).subscribe(it => {
+    this.activityService.addActivities(format(this.date, 'yyyy-MM-dd'), this.logActivities).subscribe(it => {
       this.dataChanged.emit(true);
     });
   }

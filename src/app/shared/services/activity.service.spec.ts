@@ -62,7 +62,7 @@ describe('ActivityService', () => {
   it('should add activities', async () => {
     spyOn(http, 'post').and.returnValue(of([{}]));
     const service = TestBed.inject(ActivityService);
-    const result = await service.addActivities([{}]).toPromise();
+    const result = await service.addActivities('2021-01-01', [{}]).toPromise();
     expect(result).toEqual([{} as Activity]);
     expect(http.post).toHaveBeenCalledWith('//' + environment.backend + '/activities/', [undefined],
       {
@@ -76,7 +76,7 @@ describe('ActivityService', () => {
   it('should handle error on add activities', async () => {
     spyOn(http, 'post').and.returnValue(throwError({ status: 404 }));
     const service = TestBed.inject(ActivityService);
-    const result = await service.addActivities([{}]).toPromise();
+    const result = await service.addActivities('2021-01-01', [{}]).toPromise();
     expect(result).toEqual(undefined);
     expect(http.post).toHaveBeenCalledWith('//' + environment.backend + '/activities/', [undefined],
       {

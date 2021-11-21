@@ -41,7 +41,7 @@
 
       <div class="flex align-center col-gap-1" *ngFor="let ingr of selectedDish.ingredients; index as i">
         <div class="flex-2">
-          <select (change)="portionChange(ingr, $event.target)">
+          <select aria-label="portion" (change)="portionChange(ingr, $event.target)">
             <!-- 100 grams -->
             <option>{{unitName}}</option>
 
@@ -54,7 +54,7 @@
         </div>
 
         <div class="flex-1">
-          <input class="input" name="ingrAmount" type="number" [value]="getValue(ingr)"
+          <input aria-label="amount" class="input" name="ingrAmount" type="number" [value]="getValue(ingr)"
             (input)="calculateMultiplier($event, ingr)" step="{{getStep(ingr)}}" min="0">
         </div>
 
