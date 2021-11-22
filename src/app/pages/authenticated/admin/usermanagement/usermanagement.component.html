@@ -34,11 +34,9 @@
     </p>
 
     <form #deleteForm="ngForm">
-      <label for="username">
-        Enter the name of the user
-        <input class="input" placeholder="Username" type="text" #usernameField
-          [(ngModel)]="userName" name="username" required />
-      </label>
+      <label for="username"> Enter the name of the user </label>
+      <input class="input" placeholder="Username" type="text" #usernameField [(ngModel)]="userName"
+        name="username" required />
 
       <div class="flex justify-end col-gap-1">
         <button class="button" (click)="closeModal()">No</button>

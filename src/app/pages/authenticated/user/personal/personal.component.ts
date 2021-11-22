@@ -8,7 +8,6 @@ import { format, parse } from 'date-fns';
 
 @Component({
   selector: 'ml-personal',
-  styleUrls: ['./personal.component.scss'],
   templateUrl: './personal.component.html',
 })
 export class PersonalComponent implements OnInit {

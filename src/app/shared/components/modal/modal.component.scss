@@ -1,4 +1,6 @@
-// Sets the backdrop for the modal and prevents scrolling page 
+@import "../../../../css/variables.scss";
+
+// Sets the backdrop for the modal and prevents scrolling page
 .modal-wrapper {
   display: flex;
   align-items: flex-start;
@@ -14,18 +16,22 @@
 
 // card-like but with margins to position it properly
 .modal {
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: 2rem;
-  margin-bottom: 2rem;
-  background-color: white;
-  border-radius: 1rem;
-  display: flex;
+  @media (min-width: $sm) {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    max-width: 800px; // TODO depends on content and screen size
+    // min-width: 36rem; // TODO depends on content and screen size
+  }
   flex-direction: column;
-  max-width: 800px;
-  min-width: 36rem;
+  display: flex;
   padding: 2rem;
-  
+  border-radius: 1rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  margin-right: auto;
+  margin-left: auto;
+  background-color: white;
+
   &__header {
     display: flex;
     &__title {

@@ -10,55 +10,57 @@
       </div>
 
       <div class="content" #step1 *ngIf="currentStep === 1">
-        <h3 class="form-description">Personal details</h3>
+        <h3 class="font-bold">Personal details</h3>
 
         <p>
           To calculate how much energy you need in a day, we need to know a few
           things about you.
         </p>
 
-        <form [formGroup]="userForm">
+        <form [formGroup]="userForm" class="form">
           <div class="form-field">
-            <label class="form-field__label">Name</label>
-            <input class="input form-field__input" name="name" type="text" formControlName="name"
+            <label for="name" >Name</label>
+            <input class="input" name="name" type="text" formControlName="name"
               required />
           </div>
 
           <div class="form-field">
-            <label class="form-field__label">Date of birth</label>
-            <input class="input form-field__input" required validDate
+            <label for="birthday">Date of birth</label>
+            <input class="input" required validDate
               placeholder="DD-MM-YYYY, eg 26-3-1989" name="birthday" formControlName="birthday" />
           </div>
 
-          <div class="flex col-gap-1">
-            <label class="form-field__label">Gender</label>
+          <div class="form-field">
+            <div class="form-field__label">Gender</div>
 
-            <div class="flex align-center">
-              <input type="radio" id="male" formControlName="gender" value="MALE">
-              <label for="male">Male</label>
-            </div>
+            <div class="form-field__radio-group">
+              <div class="flex align-center">
+                <input type="radio" id="male" formControlName="gender" value="MALE">
+                <label for="male">Male</label>
+              </div>
 
-            <div class="flex align-center">
-              <input type="radio" id="female" formControlName="gender" value="FEMALE">
-              <label for="female">Female</label>
+              <div class="flex align-center">
+                <input type="radio" id="female" formControlName="gender" value="FEMALE">
+                <label for="female">Female</label>
+              </div>
             </div>
           </div>
 
           <div class="form-field">
-            <label class="form-field__label">Height (cm)</label>
-            <input class="input form-field__input" name="height" type="number"
+            <label for="height" >Height (cm)</label>
+            <input class="input" name="height" type="number"
               formControlName="height" required />
           </div>
 
           <div class="form-field">
-            <label class="form-field__label">Start weight (kg)</label>
-            <input class="input form-field__input" name="weight" type="number"
+            <label for="weight">Start weight (kg)</label>
+            <input class="input" name="weight" type="number"
               formControlName="weight" step="0.1" required />
           </div>
 
           <div class="form-field">
-            <label class="form-field__label">Activity level</label>
-            <select class="form-field__input" name="activity" formControlName="activity" required>
+            <label for="activity">Activity level</label>
+            <select name="activity" formControlName="activity" required>
               <option value="1.2">Sedentary</option>
               <option value="1.375">Lightly active</option>
               <option value="1.55">Moderately active</option>
@@ -76,7 +78,7 @@
       </div>
 
       <div class="content" #step2 *ngIf="currentStep === 2">
-        <h3 class="form-description">Set your intake goal</h3>
+        <h3 class="font-bold">Set your intake goal</h3>
 
         <p>
           This is the amount of calories you need to maintain your current
@@ -98,9 +100,10 @@
               Adjust macro's
             </div>
           </div>
+
           <div class="tabs-content">
             <!--Calories-->
-            <div *ngIf="showCalories">
+            <div class="content" *ngIf="showCalories">
               <p>
                 The light-blue markers show a surplus or deficit of 200
                 calories. We suggest this because we think slow progress
@@ -108,11 +111,12 @@
                 preferences.
               </p>
 
-              <div class="form-field form-field--slider">
-                <div class="form-field__label form-field__label--slider">
+              <div class="flex col-gap-1 align-center">
+                <div class="flex">
                   Calories
                 </div>
-                <div class="form-field__slider">
+
+                <div class="flex-grow">
                   <ml-slider [value]="calories" (valueChange)="changeCalories($event)"
                     [upperBound]="4000" [lowerBound]="1200" [markers]="markers"></ml-slider>
                 </div>
@@ -135,29 +139,23 @@
 
             <!--Macros-->
             <div *ngIf="showMacros">
-              <div class="form">
+              <div class="content">
                 <div class="form-field">
-                  <label class="form-field__label">Protein</label>
-                  <div class="form-field__element">
-                    <input class="input form-field__input" (change)="calcCaloriesManual()"
-                      [(ngModel)]="proteinManual" type="number" />
-                  </div>
+                  <label for="protein">Protein</label>
+                  <input name="protein" class="input"
+                    (change)="calcCaloriesManual()" [(ngModel)]="proteinManual" type="number" />
                 </div>
 
                 <div class="form-field">
-                  <label class="form-field__label">Fat</label>
-                  <div class="form-field__element">
-                    <input class="input form-field__input" (change)="calcCaloriesManual()"
-                      [(ngModel)]="fatManual" type="number" />
-                  </div>
+                  <label for="fat">Fat</label>
+                  <input name="fat" class="input" (change)="calcCaloriesManual()"
+                    [(ngModel)]="fatManual" type="number" />
                 </div>
 
                 <div class="form-field">
-                  <label class="form-field__label">Carbs</label>
-                  <div class="form-field__element">
-                    <input class="input form-field__input" (change)="calcCaloriesManual()"
-                      [(ngModel)]="carbsManual" type="number" />
-                  </div>
+                  <label for="carbs" >Carbs</label>
+                  <input name="carbs" class="inputt"
+                    (change)="calcCaloriesManual()" [(ngModel)]="carbsManual" type="number" />
                 </div>
               </div>
             </div>
@@ -177,7 +175,7 @@
       </div>
 
       <div class="content" #step3 *ngIf="currentStep === 3">
-        <h3 class="form-description">Adding food</h3>
+        <h3 class="font-bold">Adding food</h3>
 
         <p>
           The first step is to add food to your database. You do this by using
@@ -188,7 +186,7 @@
           <em class="fas fa-plus"></em>
         </button>
 
-        <h3 class="form-description">Portions</h3>
+        <h3 class="font-bold">Portions</h3>
 
         <p>
           To make diary entries easier you can add portions that you regularly
@@ -239,8 +237,8 @@
         </div>
       </div>
 
-      <div #step4 *ngIf="currentStep === 4">
-        <h3 class="form-description">Filling your diary</h3>
+      <div #step4 *ngIf="currentStep === 4" class="content">
+        <h3 class="font-bold">Filling your diary</h3>
 
         <p>
           Clicking on <strong>Breakfast</strong> will enable you to add food to

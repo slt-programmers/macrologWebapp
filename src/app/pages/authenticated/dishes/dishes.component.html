@@ -30,46 +30,50 @@
 </div>
 
 <ml-modal *ngIf="modalIsVisible" [title]="modalTitle" (close$)="closeModal()">
-  <form #makeDishForm="ngForm">
+  <form #makeDishForm="ngForm" class="form">
     <div class="flex flex-col content">
 
-      <div class="flex align-center">
+      <div class="form-field">
         <label for="dishName">Name</label>
         <input class="input" [(ngModel)]="selectedDish.name" type="text" name="dishName"
           id="dishName" required>
       </div>
 
-      <div class="flex align-center col-gap-1" *ngFor="let ingr of selectedDish.ingredients; index as i">
+      <h1 class="font-semibold text-secondary">Ingredients</h1>
+
+      <div class="flex align-center col-gap-1"
+        *ngFor="let ingr of selectedDish.ingredients; index as i">
+        <p class="flex-3">{{ingr.food.name}}</p>
+
         <div class="flex-2">
-          <select (change)="portionChange(ingr, $event.target)">
+          <select aria-label="portion" (change)="portionChange(ingr, $event.target)">
             <!-- 100 grams -->
             <option>{{unitName}}</option>
 
             <!-- portion amount -->
-            <option *ngFor="let portion of ingr.food.portions"
-              value="{{portion.description}}" [selected]="portion.id === ingr.portion?.id">
+            <option *ngFor="let portion of ingr.food.portions" value="{{portion.description}}"
+              [selected]="portion.id === ingr.portion?.id">
               {{portion.description}}
             </option>
           </select>
         </div>
 
         <div class="flex-1">
-          <input class="input" name="ingrAmount" type="number" [value]="getValue(ingr)"
-            (input)="calculateMultiplier($event, ingr)" step="{{getStep(ingr)}}" min="0">
+          <input aria-label="amount" class="input" name="ingrAmount" type="number"
+            [value]="getValue(ingr)" (input)="calculateMultiplier($event, ingr)"
+            step="{{getStep(ingr)}}" min="0">
         </div>
-
-        <p class="flex-3">{{ingr.food.name}}</p>
 
         <div class="flex justify-end">
           <button class="icon-button" (click)="removeIngredient(i)">
-            <em class="fas fa-minus"></em>
+            <em class="fas fa-trash"></em>
           </button>
         </div>
       </div>
 
+      <h1 class="text-secondary font-semibold">Add ingredients</h1>
       <div class="autocomplete-wrapper">
-        <ml-autocomplete-food [placeholder]="'Search for food'"
-          (select$)="addIngredient($event)">
+        <ml-autocomplete-food [placeholder]="'Search for food'" (select$)="addIngredient($event)">
         </ml-autocomplete-food>
       </div>
     </div>

@@ -6,10 +6,10 @@
   <div class="flex flex-col content" *ngIf="isConnected">
     <p class="strong font-bold">GMail is connected</p>
 
-    <label for="emailAddress">Email address
-      <input id="emailAddress" class="input" [(ngModel)]="emailAddress" #foodField
-        name="emailAddress" required />
-    </label>
+    <div>
+      <label for="emailAddress">Email address</label>
+      <input id="emailAddress" class="input" [(ngModel)]="emailAddress" name="emailAddress" />
+    </div>
 
     <div>
       <button id="testMail" class="button button--warning" (click)="sendTestMail()">

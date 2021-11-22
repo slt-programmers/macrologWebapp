@@ -12,16 +12,18 @@
       </div>
 
       <div class="flex col-gap-1 align-center">
-        <label>Display in</label>
+        <div>Display in</div>
 
-        <div class="flex align-center">
-          <input type="radio" id="grams" [(ngModel)]="displayMode" value="grams">
-          <label for="grams">Grams</label>
-        </div>
+        <div class="flex col-gap-1">
+          <div class="flex align-center">
+            <input type="radio" id="grams" [(ngModel)]="displayMode" value="grams">
+            <label for="grams">Grams</label>
+          </div>
 
-        <div class="flex align-center">
-          <input type="radio" id="percentage" [(ngModel)]="displayMode" value="percentage">
-          <label for="percentage">Percentage</label>
+          <div class="flex align-center">
+            <input type="radio" id="percentage" [(ngModel)]="displayMode" value="percentage">
+            <label for="percentage">Percentage</label>
+          </div>
         </div>
       </div>
 
@@ -141,8 +143,7 @@
           </div>
         </div>
 
-        <div *ngIf="hasNextPage()" class="previous"
-          (click)="getPagedFood(currentPageIndex + 1)">
+        <div *ngIf="hasNextPage()" class="previous" (click)="getPagedFood(currentPageIndex + 1)">
           Next
           <em class="fas fa-chevron-right"></em>
         </div>

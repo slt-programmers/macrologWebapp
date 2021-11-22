@@ -1,49 +1,53 @@
-<div #logActivity class="log-activity" [ngClass]="{'log-activity--grow': editable}">
-	<div class="activity" *ngIf="!editable">
-		<span class="activity__title">Activities <i *ngIf="showSync()" (click)="forceSync()" title="Synchronize with external sources." class="fa fa-sync-alt activity__title--sync"> </i>
-		</span>
+<div #logActivity class="activity p-1" [ngClass]="{'log-activity--grow': editable}">
+  <div class="content-sm" *ngIf="!editable">
+    <div class="flex col-gap-1 align-center">
+      <span class="font-bold">Activities </span>
 
-		<div class="activity__display">
-			<div *ngFor="let logActivity of logActivities" class="activity__line">
-				<span class="activity__name">{{logActivity.name}}
-					<A class="activity__name--sync" *ngIf="logActivity.syncedWith === 'STRAVA'" target="_blank" href="https://www.strava.com/activities/{{logActivity.syncedId}}">(View on Strava)</A>
-				</span>
-				<span class="activity__calories">{{logActivity.calories| number:'1.0-0'}} kcal</span>
-			</div>
-		</div>
-	</div>
+      <button class="icon-button">
+        <em *ngIf="showSync()" (click)="forceSync()" title="Synchronize with external sources."
+          class="fas fa-sync-alt primary">
+        </em>
+      </button>
+    </div>
 
-	<div class="activity" *ngIf="editable">
-		<span class="activity__title">Activities
-		</span>
+    <div *ngFor="let logActivity of logActivities" class="flex col-gap-1">
+      <span class="flex-8">{{logActivity.name}}
+        <a *ngIf="logActivity.syncedWith === 'STRAVA'" target="_blank"
+          href="https://www.strava.com/activities/{{logActivity.syncedId}}">(View
+          on Strava)</a>
+      </span>
 
-		<div *ngFor="let logActivity of logActivities" class="activity__edit-activity">
-			<div class="activity__edit-activity__name">
-				<input class="input" [(ngModel)]="logActivity.name">
-			</div>
-			<div class="activity__edit-activity__filler"></div>
-			<div class="activity__edit-activity__calories">
-				<input class="input" type=number [(ngModel)]="logActivity.calories">
-			</div>
-			<div class=" activity__edit-activity__delete">
-				<button class="icon-button" (click)="deleteLogActivity(logActivity)">
-          <em class="fas fa-trash"></em>
-				</button>
-			</div>
-		</div>
+      <span class="flex-1">{{logActivity.calories| number:'1.0-0'}} kcal</span>
+    </div>
+  </div>
 
-		<div class="activity__new-activity">
-			<div class="activity__new-activity__name">
-				<input class="input" (change)="addActivity()" [(ngModel)]="newActivityName" placeholder="What did you do?">
-			</div>
+  <div class="content" *ngIf="editable">
+    <span class="font-bold">Activities</span>
 
-			<div class="activity__new-activity__filler"></div>
+    <div *ngFor="let logActivity of logActivities" class="flex flex-grow col-gap-1 align-center">
+      <div class="flex-1">
+        <input aria-label="activity name" class="input" [(ngModel)]="logActivity.name">
+      </div>
 
-			<div class=" meal__new-ingredient__close">
-				<button class="icon-button" (click)="close()">
-          <em class="fas fa-check"></em>
-				</button>
-			</div>
-		</div>
-	</div>
+      <div>
+        <input aria-label="calories burned" class="input" type=number
+          [(ngModel)]="logActivity.calories">
+      </div>
+
+      <button class="icon-button" (click)="deleteLogActivity(logActivity)">
+        <em class="fas fa-trash"></em>
+      </button>
+    </div>
+
+    <div class="flex flex-grow align-center col-gap-1">
+      <div class="flex-1">
+        <input aria-label="activity name" class="input" (change)="addActivity()"
+          [(ngModel)]="newActivityName" placeholder="What did you do?">
+      </div>
+
+      <button class="icon-button" (click)="close()">
+        <em class="fas fa-check"></em>
+      </button>
+    </div>
+  </div>
 </div>

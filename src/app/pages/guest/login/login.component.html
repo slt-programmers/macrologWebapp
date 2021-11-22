@@ -5,24 +5,26 @@
     <div class="flex col-gap-2 row-gap-2 flex-wrap justify-center align-start">
       <div class="card login-form">
         <div class="flex-col">
-          <form [formGroup]="loginForm">
+          <form [formGroup]="loginForm" class="form form--vertical">
             <h1 class="text-lg font-bold">Log in</h1>
 
-            <label for="usernameOrEmail">
-              Username or email
+            <div class="form-field">
+              <label for="usernameOrEmail"> Username or email </label>
               <input id="username" class="input" type="text" formControlName="username"
                 name="usernameOrEmail" />
-              <p id="usernameRequired" class="error" *ngIf="loginForm.controls.username.touched && 
-                loginForm.controls.username.invalid">Username is required</p>
-            </label>
+            </div>
 
-            <label for="password">
-              Password
+            <p id="usernameRequired" class="error" *ngIf="loginForm.controls.username.touched && 
+                loginForm.controls.username.invalid">Username is required</p>
+
+            <div class="form-field">
+              <label for="password"> Password </label>
               <input id="password" class="input" type="password" formControlName="password"
                 (keyup.enter)="login()" name="password" />
-              <p id="passwordRequired" class="error" *ngIf="loginForm.controls.password.touched && 
+            </div>
+
+            <p id="passwordRequired" class="error" *ngIf="loginForm.controls.password.touched && 
                 loginForm.controls.password.invalid">Password is required</p>
-            </label>
 
             <p id="loginError" class="error" *ngIf="loginError">{{loginError}}</p>
 
@@ -36,29 +38,35 @@
 
       <div class="card register-form">
         <div class="flex-col">
-          <form [formGroup]="registerForm">
+          <form [formGroup]="registerForm" class="form form--vertical">
             <h1 class="text-lg font-bold">Register</h1>
 
-            <label for="newUsername"> Username
+            <div class="form-field">
+              <label for="newUsername">Username</label>
               <input id="usernameRegister" class="input" type="text" formControlName="username"
                 name="newUsername" />
-              <p id="usernameRegisterRequired" class="error" *ngIf="registerForm.controls.username.touched && 
-              registerForm.controls.username.invalid">Username is required</p>
-            </label>
+            </div>
 
-            <label for="newEmal"> Email
+            <p id="usernameRegisterRequired" class="error" *ngIf="registerForm.controls.username.touched && 
+              registerForm.controls.username.invalid">Username is required</p>
+
+            <div class="form-field">
+              <label for="newEmal">Email</label>
               <input id="email" class="input" type="email" formControlName="email"
                 name="newEmail" />
-              <p id="emailRequired" class="error" *ngIf="registerForm.controls.email.touched && 
-              registerForm.controls.email.invalid">Email is required</p>
-            </label>
+            </div>
 
-            <label for="newPassword"> Password
+            <p id="emailRequired" class="error" *ngIf="registerForm.controls.email.touched && 
+              registerForm.controls.email.invalid">Email is required</p>
+
+            <div class="form-field">
+              <label for="newPassword">Password</label>
               <input id="passwordRegister" class="input" type="password" formControlName="password"
                 name="newPassword" (keyup.enter)="register()" />
-              <p id="passwordRegisterRequired" class="error" *ngIf="registerForm.controls.password.touched && 
+            </div>
+
+            <p id="passwordRegisterRequired" class="error" *ngIf="registerForm.controls.password.touched && 
                 registerForm.controls.password.invalid">Password is required</p>
-            </label>
 
             <p id="registerError" class="error" *ngIf="registerError">{{registerError}}</p>
 
@@ -74,11 +82,14 @@
 
 <ml-modal [title]="'Forgot your password?'" (close$)="toggleForgotPwModal(false)"
   *ngIf="showForgotPwModal">
-  <form #forgotForm="ngForm" class="mt-1">
+  <form #forgotForm="ngForm" class="form">
     <p>Please enter your email so we can send a link to reset your password</p>
 
-    <input class="input" placeholder="Email" type="email" #forgotEmailField
-      [(ngModel)]="forgotEmail" name="forgotEmail" />
+    <div class="form-field">
+      <label for="forgotEmail">Email</label>
+      <input class="input" placeholder="Email" type="email" #forgotEmailField
+        [(ngModel)]="forgotEmail" name="forgotEmail" />
+    </div>
 
     <p class="error" *ngIf="forgotError">{{forgotError}}</p>
 

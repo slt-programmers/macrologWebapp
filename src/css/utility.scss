@@ -11,6 +11,13 @@
 .flex-3 {
   flex: 3;
 }
+.flex-5 {
+  flex: 5;
+}
+.flex-8 {
+  flex: 8;
+}
+
 .flex-col {
   display: flex;
   flex-direction: column;
@@ -87,6 +94,18 @@
 .w-8 {
   width: 8rem;
 }
+.min-w-24 {
+  @media (min-width: $xs) {
+    min-width: 24rem;
+  }
+  min-width: 100%;
+}
+.min-w-32 {
+  @media (min-width: $sm) {
+    min-width: 32rem;
+  }
+  min-width: 100%;
+}
 
 
 // Margins
@@ -144,6 +163,12 @@
 }
 .text-white {
   color: white;
+}
+.text-primary {
+  color: $primary;
+}
+.text-secondary {
+  color: $secondary;
 }
 .font-semibold {
   font-weight: 600;

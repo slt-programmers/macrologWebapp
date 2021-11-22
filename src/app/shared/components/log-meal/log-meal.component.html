@@ -1,6 +1,6 @@
 <div #logMeal class="log-meal" [ngClass]="{'logmeal--grow': editable}">
-  <div class="p-1" *ngIf="!editable">
-    <span class="font-semibold">{{meal}}</span>
+  <div class="content-sm p-1" *ngIf="!editable">
+    <span class="font-bold">{{meal}}</span>
 
     <div *ngFor="let logEntry of logEntries" class="flex flex-grow">
       <div class="flex-3">
@@ -41,8 +41,8 @@
   </div>
 
   <div class="p-1 content" *ngIf="editable">
-    <div class="flex col-gap-1">
-      <span class="font-semibold">{{meal}}</span>
+    <div class="flex col-gap-1 align-center">
+      <span class="font-bold">{{meal}}</span>
 
       <i class="icon-button fas fa-file-import"
         title="Copy {{meal.toLowerCase()}} from previous day" (click)="copyPrevious()"></i>
@@ -56,11 +56,11 @@
 
         <div class="flex-1">
           <div class="meal__edit-ingredient__amount__input">
-            <input id="portionAmountInput" class="input" type="number" step="0.1"
+            <input aria-label="amount of portions" id="portionAmountInput" class="input" type="number" step="0.1"
               *ngIf="logEntry.portion" (keyup)="amountChange(logEntry)"
               [value]="getAmountValue(logEntry)" (input)="setLogEntryMultiplier($event, logEntry)">
 
-            <input id="gramsAmountInput" class="input" type="number" step="1"
+            <input aria-label="amount of grams" id="gramsAmountInput" class="input" type="number" step="1"
               *ngIf="!logEntry.portion" (keyup)="amountChange(logEntry)"
               [value]="getAmountValue(logEntry)" (input)="setLogEntryMultiplier($event, logEntry)">
           </div>
@@ -68,7 +68,7 @@
 
         <div class="flex-2">
           <div class="meal__edit-ingredient__measurement__input">
-            <select (change)="portionChange(logEntry, $event)">
+            <select aria-label="portion" name="portion" (change)="portionChange(logEntry, $event)">
               <!-- 100 grams -->
               <option [selected]="isGramsSelected(logEntry)">{{unitName}}</option>
 

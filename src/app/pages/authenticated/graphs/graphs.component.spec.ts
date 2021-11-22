@@ -24,7 +24,6 @@ describe('GraphsComponent', () => {
       providers: [
         MockProvider(DiaryService),
         MockProvider(UserService),
-        MockProvider(ChangeDetectorRef)
       ]
     }).compileComponents();
 

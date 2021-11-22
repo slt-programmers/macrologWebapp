@@ -1,24 +1,22 @@
-<div>
-  <form #updateForm="ngForm">
-    <h3 class="form-description">Change password</h3>
+<div class="content">
+  <form #updateForm="ngForm" class="form">
+    <h3 class="font-bold">Change password</h3>
 
     <div class="form-field">
-      <label class="form-field__label">Old password</label>
-      <input class="input form-field__input" type="password" [(ngModel)]="oldPassword"
+      <label for="oldPassword">Old password</label>
+      <input class="input" type="password" [(ngModel)]="oldPassword"
         name="oldPassword" required />
     </div>
 
     <div class="form-field">
-      <label class="form-field__label">New password</label>
-
-      <input class="input form-field__input" type="password" [(ngModel)]="newPassword"
+      <label for="newPassword">New password</label>
+      <input class="input" type="password" [(ngModel)]="newPassword"
         name="newPassword" required />
     </div>
 
     <div class="form-field">
-      <label class="form-field__label">Confirm new password</label>
-
-      <input class="input form-field__input" type="password" [(ngModel)]="confirmPassword"
+      <label for="confirmPassword" >Confirm new password</label>
+      <input class="input" type="password" [(ngModel)]="confirmPassword"
         name="confirmPassword" required />
     </div>
 
@@ -33,7 +31,7 @@
   </div>
 
   <div>
-    <h3 class="form-description">Delete account</h3>
+    <h3 class="font-bold">Delete account</h3>
 
     <div class="button-wrapper">
       <button class="button button--warning" (click)="openModal()">Delete</button>
@@ -48,6 +46,7 @@
 
     <p>If you are, please enter your password</p>
 
+    <label for="password" >Password</label>
     <input class="input" placeholder="Password" type="password" #usernameField
       [(ngModel)]="password" name="password" required />
 
