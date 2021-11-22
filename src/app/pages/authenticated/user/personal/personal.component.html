@@ -1,20 +1,20 @@
 <div class="">
-  <form #personalForm="ngForm">
+  <form #personalForm="ngForm" class="form">
     <div class="form-field">
-      <label for="name" class="form-field__label">Name</label>
+      <label for="name">Name</label>
       <input required class="input" name="name" type="text" [(ngModel)]="name">
     </div>
 
     <div class="form-field">
-      <label for="birthday" class="form-field__label">Date of birth</label>
+      <label for="birthday" >Date of birth</label>
       <input required class="input" validDate placeholder="DD-MM-YYYY, eg 26-3-1989" name="birthday"
         [(ngModel)]="birthday">
     </div>
 
     <div class="form-field">
-      <div class="flex col-gap-1">
-        <div class="form-field__label">Gender</div>
-      
+      <div class="form-field__label">Gender</div>
+
+      <div class="form-field__radio-group">
         <div class="flex align-center">
           <input type="radio" id="male" [(ngModel)]="gender" value="MALE">
           <label for="male">Male</label>
@@ -28,17 +28,17 @@
     </div>
 
     <div class="form-field">
-      <label for="height" class="form-field__label">Height (cm)</label>
+      <label for="height">Height (cm)</label>
       <input required class="input" name="height" type="number" [(ngModel)]="height">
     </div>
 
     <div class="form-field">
-      <label for="weight" class="form-field__label">Weight (kg)</label>
+      <label for="weight">Weight (kg)</label>
       <input required class="input" name="weight" type="number" [(ngModel)]="weight" step="0.1">
     </div>
 
     <div class="form-field">
-      <label for="activity" class="form-field__label">Activity level</label>
+      <label for="activity">Activity level</label>
       <select name="activity" [(ngModel)]="activity">
         <option value="1.2">Sedentary</option>
         <option value="1.375">Lightly active</option>

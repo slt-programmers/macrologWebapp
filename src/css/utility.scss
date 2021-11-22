@@ -100,6 +100,12 @@
   }
   min-width: 100%;
 }
+.min-w-32 {
+  @media (min-width: $sm) {
+    min-width: 32rem;
+  }
+  min-width: 100%;
+}
 
 
 // Margins
