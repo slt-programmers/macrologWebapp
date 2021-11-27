@@ -1,7 +1,7 @@
 <div>
   <table class="users" *ngIf="allUsers">
     <thead>
-      <tr>
+      <tr class="table-header">
         <th>Id</th>
         <th>Name</th>
         <th>Email</th>
@@ -33,7 +33,7 @@
       <strong>{{ selectedUser.userName }}</strong>'s account? This action is irreversable.
     </p>
 
-    <form #deleteForm="ngForm">
+    <form #deleteForm="ngForm" class="form">
       <label for="username"> Enter the name of the user </label>
       <input class="input" placeholder="Username" type="text" #usernameField [(ngModel)]="userName"
         name="username" required />

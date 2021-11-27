@@ -1,10 +1,9 @@
 .logday {
   &__date {
     align-items: center;
-    border-bottom: 1px solid $cloud;
     display: flex;
     flex-direction: row;
-    padding: $halfGutter;
+    padding: 1rem;
     justify-content: center;
   }
 

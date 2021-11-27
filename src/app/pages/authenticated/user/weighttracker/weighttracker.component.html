@@ -6,7 +6,7 @@
     </div>
   </div>
 
-  <form #weightForm="ngForm">
+  <form #weightForm="ngForm" class="form">
     <div class="form-field">
       <label for="measurementDate">Measurement date</label>
       <input required class="input" validDate placeholder="DD-MM-YYYY" name="measurementDate"
@@ -23,7 +23,7 @@
       <input class="input" name="remark" type="text" [(ngModel)]="remark" />
     </div>
 
-    <div class=" button-wrapper">
+    <div class="button-wrapper">
       <button class="button button--primary" (click)="saveNewWeight(weightForm)"
         [disabled]="weightForm.invalid">
         Save
@@ -33,38 +33,38 @@
 
   <div class="table-wrapper">
     <div class="table">
-      <div class="weight-table-header">
-        <div class="weight-table-header__day">Date</div>
-        <div class="weight-table-header__remark">Remark</div>
-        <div class="weight-table-header__weight">Weight</div>
+      <div class="table-header flex">
+        <div class="table-cell flex-2">Date</div>
+        <div class="table-cell flex-5">Remark</div>
+        <div class="table-cell flex-2">Weight</div>
       </div>
     </div>
 
-    <div class="table-row" *ngFor="let logWeight of trackedWeights" (click)="editWeight(logWeight)">
-      <div class="weight" *ngIf="!logWeight.editable">
-        <div class="weight__day">{{ logWeight.day | date: 'dd-MM-yyyy' }}</div>
-        <div class="weight__remark">{{ logWeight.remark }}</div>
-        <div class="weight__weight">
+    <div class="table-row flex" *ngFor="let logWeight of trackedWeights" (click)="editWeight(logWeight)">
+      <ng-container *ngIf="!logWeight.editable">
+        <div class="table-cell flex-2">{{ logWeight.day | date: 'dd-MM-yyyy' }}</div>
+        <div class="table-cell flex-5">{{ logWeight.remark }}</div>
+        <div class="table-cell flex-2">
           {{ logWeight.weight | number: '1.1-1' }}
         </div>
         <div class="weight__hiddenbuttons"></div>
-      </div>
+      </ng-container>
 
-      <div class="p-1" *ngIf="logWeight.editable">
-        <div class="flex flex-grow col-gap-1 items-center">
-          <div class="">
+      <ng-container *ngIf="logWeight.editable">
+        <div class="table-cell flex flex-grow col-gap-1 items-center">
+          <div class="flex-col">
             <label for="date">Date</label>
             <input name="date" required class="input" validDate placeholder="DD-MM-YYYY"
               [(ngModel)]="logWeight.day" />
           </div>
 
-          <div class="">
+          <div class="flex-col">
             <label for="weight">Weight</label>
             <input class="input" name="weight" type="number" [(ngModel)]="logWeight.weight"
               step="0.1" />
           </div>
 
-          <div class="flex flex-grow">
+          <div class="flex-col flex-grow">
             <label for="comment">Comment</label>
             <input required class="input" name="comment" type="text"
               [(ngModel)]="logWeight.remark" [required]="false" />
@@ -82,7 +82,7 @@
             </button>
           </div>
         </div>
-      </div>
+      </ng-container>
     </div>
   </div>
 </div>

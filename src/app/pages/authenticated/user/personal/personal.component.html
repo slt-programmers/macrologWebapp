@@ -1,5 +1,7 @@
 <div class="">
   <form #personalForm="ngForm" class="form">
+    <h3 class="font-semibold">Personal information</h3>
+
     <div class="form-field">
       <label for="name">Name</label>
       <input required class="input" name="name" type="text" [(ngModel)]="name">
@@ -51,6 +53,26 @@
     <div class=" button-wrapper">
       <button class="button button--primary" (click)="saveUserSettings()"
         [disabled]="isInputUnchanged() || personalForm.invalid">Save</button>
+    </div>
+  </form>
+
+  <form class="form">
+    <h3 class="font-semibold">Theme settings</h3>
+
+    <div class="form-field">
+      <div class="form-field__label">Theme</div>
+
+      <div class="form-field__radio-group">
+        <div class="flex align-center">
+          <input type="radio" id="light" [ngModel]="theme" value="light" (ngModelChange)="setTheme($event)">
+          <label for="light">Light</label>
+        </div>
+
+        <div class="flex align-center">
+          <input type="radio" id="dark" [ngModel]="theme" value="dark" (ngModelChange)="setTheme($event)">
+          <label for="dark">Dark</label>
+        </div>
+      </div>
     </div>
   </form>
 </div>

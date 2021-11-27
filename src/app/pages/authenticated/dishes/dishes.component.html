@@ -8,16 +8,15 @@
   <div class="flex flex-wrap justify-center col-gap-1 row-gap-1" *ngIf="allDishes.length !== 0">
     <div class="card" *ngFor="let dish of allDishes" (click)="openModal(dish)">
       <div class="content">
-        <h1>{{ dish.name }}</h1>
+        <h1 class="font-bold">{{ dish.name }}</h1>
 
         <div class="dish-card__content__pie-chart">
           <ml-piechart [mealId]="dish.id" [macros]="getTotal(dish)"></ml-piechart>
         </div>
 
-        <div class="flex align-center col-gap-1" *ngFor="let ingredient of dish.ingredients">
-          <i class="fas fa-chevron-right"></i>
-          <p> {{ getIngredientDescription(ingredient) }} {{ ingredient.food.name }} </p>
-        </div>
+        <ul class="flex align-center col-gap-1" *ngFor="let ingredient of dish.ingredients">
+          <li> {{ getIngredientDescription(ingredient) }} {{ ingredient.food.name }} </li>
+        </ul>
       </div>
     </div>
   </div>

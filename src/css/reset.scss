@@ -39,7 +39,6 @@ h6 {
 
 p {
   line-height: 1.5;
-  // margin-bottom: 1rem;
 }
 
 a {
@@ -62,15 +61,11 @@ table {
   border-collapse: collapse;
 }
 
-table th,
-table td {
+th,
+td {
   vertical-align: middle;
 }
 
 ul {
-  list-style: none;
-}
-
-fieldset {
-  border: none;;
+  list-style: inside;
 }

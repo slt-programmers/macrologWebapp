@@ -1,0 +1,110 @@
+body.theme--dark {
+  color: white;
+  background-color: #1a1a1a;
+
+  a,
+  .icon-button {
+    color: $secondary;
+  }
+
+  .navbar {
+    color: #cccccc;
+    background-color: #282828;
+  }
+
+  .page {
+    background-color: #1a1a1a;
+  }
+
+  .card {
+    background-color: #282828;
+  }
+
+  .subnav {
+    border-bottom-color: $secondary;
+    &__item:hover {
+      border-bottom-color: $secondary;
+    }
+  }
+
+  input {
+    color: white;
+    background-color: #1a1a1a;
+    border: 1px solid $secondary;
+  }
+
+  select {
+    color: white;
+    background-color: #1a1a1a;
+    border: 1px solid $secondary;
+  }
+
+  .bargraph {
+    color: white;
+  }
+
+  .log-meal,
+  .activity {
+    border-bottom-color: #000000;
+  }
+
+  .modal {
+    background-color: #282828;
+  }
+
+  .autocomplete__option {
+    background-color: #282828;
+    &:focus {
+      background-color: #1a1a1a;
+    }
+  }
+
+  .table-header {
+    background-color: #1a1a1a;
+  }
+
+  .table-row,
+  tr {
+    border-bottom-color: #000000;
+    &:hover {
+      background-color: #1a1a1a;
+    }
+  }
+
+  .date {
+    background-color: $secondary;
+  }
+
+  .picker {
+    background-color: #282828;
+    &__button {
+      background-color: $secondary;
+    }
+  }
+
+  .donut-chart::after {
+    background-color: #1a1a1a;
+    color: white;
+  }
+
+  .linegraph,
+  .bargraph {
+    .axes {
+      .y-axis {
+        border-right-color: white;
+      }
+      .x-axis {
+        border-top-color: white;
+      }
+    }
+  }
+  .stackdonut {
+    &__circle {
+      stroke: #1a1a1a;
+      &--inner,
+      &--outer {
+        stroke: $secondary;
+      }
+    }
+  }
+}

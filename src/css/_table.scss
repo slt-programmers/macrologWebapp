@@ -1,11 +1,21 @@
 table, .table {
-  th, td {
-    padding: 0.5rem;
-  }
-
-  tr:nth-child(even), th {
-    background-color: $lightIndigo;
-  }
-
   width: 100%;
+}
+th {
+  font-weight: 600;
+}
+th, td, .table-cell {
+  padding: 0.5rem;
+}
+
+tr, .table-row {
+  border-bottom: 1px solid $mist;
+  &:hover {
+    background-color: $cloud;
+  }
+}
+.table-header {
+  background-color: $mist;
+  border-bottom: none;
+  font-weight: 600;
 }
