@@ -20,8 +20,12 @@ describe('StepperComponent', () => {
     fixture.detectChanges();
   });
 
-  // it('should create piechart', () => {
-  //   expect(component).toBeTruthy();
-  // });
+  it('should create', () => {
+    component.currentStep = 1;
+    component.numberOfSteps = 2;
+    component.ngOnInit();
+    expect(component).toBeTruthy();
+    expect(component.steps).toEqual([1, 2]);
+  });
 
 });

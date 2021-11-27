@@ -72,7 +72,7 @@ describe('AccountComponent', () => {
     component.changePassword();
     tick();
     expect(toastService.setMessage).toHaveBeenCalledWith(
-      'Your password has changed'
+      'Your password has changed', false, 'Success!'
     );
     expect(component.oldPassword).toEqual('');
     expect(component.newPassword).toEqual('');

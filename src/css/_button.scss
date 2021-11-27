@@ -78,6 +78,11 @@
 .icon-button {
   color: $primary;
   border: none;
-  width: 1rem;
+  width: 3rem;
+  height: 3rem;
+  margin: -1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   background: none;
 }

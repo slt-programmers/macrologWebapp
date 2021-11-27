@@ -21,14 +21,8 @@ export class OnboardingComponent implements OnInit {
   public carbs: number;
   public calories: number;
   public tdee: number;
-  public markers: any[];
-  public proteinManual: number;
-  public fatManual: number;
-  public carbsManual: number;
 
   // Step 3
-  public showCalories = false;
-  public showMacros = false;
   public expandMoreInfo = false;
 
   // Step 4
@@ -68,16 +62,15 @@ export class OnboardingComponent implements OnInit {
   }
 
   initStepTwo() {
-    const data = this.userForm.value;
-    this.protein = data.weight * 1.8;
-    this.fat = data.weight * 0.8;
-    this.calcCalories();
+    this.calcTDEE();
+    this.fillStandard();
   }
 
-  calcCalories(): void {
-    this.calcTDEE();
-    this.setMarkers();
-    this.calories = this.tdee;
+  public fillStandard() {
+    this.calories = Math.round(this.tdee);
+    const data = this.userForm.value;
+    this.protein = Math.round(data.weight * 1.8);
+    this.fat = Math.round(data.weight * 0.8);
     this.calcCarbs();
   }
 
@@ -92,40 +85,12 @@ export class OnboardingComponent implements OnInit {
     }
   }
 
-  setMarkers() {
-    this.markers = [
-      { title: 'deficit', value: this.tdee - 200 },
-      { title: 'baseline', value: this.tdee },
-      { title: 'surplus', value: this.tdee + 200 },
-    ];
-  }
-
   calcCarbs(): void {
     this.carbs = (this.calories - this.protein * 4.0 - this.fat * 9.0) / 4.0;
   }
 
-  changeCalories(event: any) {
-    this.calories = event;
-    this.calcCarbs();
-  }
-
-  calcCaloriesManual(): void {
-    this.calories =
-      this.proteinManual * 4 + this.fatManual * 9 + this.carbsManual * 4;
-  }
-
-  showCaloriesTab() {
-    this.showCalories = true;
-    this.showMacros = false;
-  }
-
-  showMacrosTab() {
-    this.showCalories = false;
-    this.showMacros = true;
-
-    this.proteinManual = Math.round(this.protein);
-    this.fatManual = Math.round(this.fat);
-    this.carbsManual = Math.round(this.carbs);
+  calcCalories(): void {
+    this.calories = this.protein * 4 + this.fat * 9 + this.carbs * 4;
   }
 
   public saveUserSettings(): void {
@@ -140,7 +105,7 @@ export class OnboardingComponent implements OnInit {
         this.userService.addUserSetting('weight', data.weight.toString()),
         this.userService.addUserSetting('activity', data.activity.toString()),
       ]).subscribe(
-        () => { 
+        () => {
           this.nextStep()
         },
         (error) => console.error(error)
@@ -149,28 +114,17 @@ export class OnboardingComponent implements OnInit {
   }
 
   public saveIntake() {
-    if (this.showMacros) {
-      forkJoin([
-        this.userService.addUserSetting('goalProtein', Math.round(this.proteinManual).toString()),
-        this.userService.addUserSetting('goalFat', Math.round(this.fatManual).toString()),
-        this.userService.addUserSetting('goalCarbs', Math.round(this.carbsManual).toString()),
-      ]).subscribe(
-        () => { this.nextStep(); },
-        (error) => console.error(error)
-      );
-    } else {
-      forkJoin([
-        this.userService.addUserSetting('goalProtein', Math.round(this.protein).toString()),
-        this.userService.addUserSetting('goalFat', Math.round(this.fat).toString()),
-        this.userService.addUserSetting('goalCarbs', Math.round(this.carbs).toString()),
-      ]).subscribe(
-        () => { this.nextStep(); },
-        (error) => console.error(error)
-      );
-    }
+    forkJoin([
+      this.userService.addUserSetting('goalProtein', Math.round(this.protein).toString()),
+      this.userService.addUserSetting('goalFat', Math.round(this.fat).toString()),
+      this.userService.addUserSetting('goalCarbs', Math.round(this.carbs).toString()),
+    ]).subscribe(
+      () => { this.nextStep(); },
+      (error) => console.error(error)
+    );
   }
 
-  dummy() { 
+  dummy() {
     // Intentionally empty
   }
 

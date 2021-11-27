@@ -59,7 +59,7 @@ export class PersonalComponent implements OnInit {
       this.userService.addUserSetting('weight', this.weight?.toString()),
       this.userService.addUserSetting('activity', this.activity?.toString()),
     ]).subscribe(
-      (data) => this.toastService.setMessage('Your data is saved!'),
+      (data) => this.toastService.setMessage('Your data is saved!', false, 'Success!'),
       (error) => console.error(error)
     );
   }

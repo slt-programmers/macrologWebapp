@@ -37,7 +37,7 @@ export class AccountComponent {
         .subscribe(
           (data) => {
             if (data.status === 200) {
-              this.toastService.setMessage('Your password has changed');
+              this.toastService.setMessage('Your password has changed', false, 'Success!');
               this.oldPassword = '';
               this.newPassword = '';
               this.confirmPassword = '';
