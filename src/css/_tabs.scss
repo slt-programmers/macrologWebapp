@@ -2,7 +2,7 @@
   display: flex;
   flex-direction: column;
   width: 100%;
-  margin-bottom: $gutter;
+  margin-bottom: 2rem;
   cursor: pointer;
 }
 
@@ -13,16 +13,16 @@
 
 .tabs-content {
   @media (min-width: $xs) {
-    padding: $gutter;
+    padding: 2rem;
   }
   border: 1px solid $smoke;
-  padding: $halfGutter;
+  padding: 1rem;
 }
 
 .tab {
   background-color: $smoke;
   border-right: 1px solid $platinum;
-  padding: $halfGutter;
+  padding: 1rem;
   font-weight: 400;
   flex-grow: 1;
   text-align: center;

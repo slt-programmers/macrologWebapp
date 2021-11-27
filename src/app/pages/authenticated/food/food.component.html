@@ -33,106 +33,88 @@
         </div>
       </div>
 
-      <div *ngIf="(loading$ | async) === false" class="food-table">
-        <div class="table-header">
-          <div class="table-header__name" (click)="sortBy('name')">Name</div>
+      <div *ngIf="(loading$ | async) === false" class="table flex-col">
+        <div class="table-header flex">
+          <div class="table-cell flex-3" (click)="sortBy('name')">Name</div>
 
-          <div class="table-header__amount" *ngIf="displayMode === 'grams'">
+          <div class="table-cell flex-2" *ngIf="displayMode === 'grams'">
             Amount
           </div>
 
-          <div class="table-header__protein" [ngClass]="{
+          <div class="table-cell flex-1" [ngClass]="{
                 'table-header__protein--percent': displayMode === 'percentage'
               }" (click)="sortBy('protein')">
             Protein
           </div>
 
-          <div class="table-header__fat" [ngClass]="{
+          <div class="table-cell flex-1" [ngClass]="{
                 'table-header__fat--percent': displayMode === 'percentage'
               }" (click)="sortBy('fat')">
             Fat
           </div>
 
-          <div class="table-header__carbs" [ngClass]="{
+          <div class="table-cell flex-1" [ngClass]="{
                 'table-header__carbs--percent': displayMode === 'percentage'
               }" (click)="sortBy('carbs')">
             Carbs
           </div>
-
-          <div class="table-header__protein--mobile" [ngClass]="{
-                'table-header__protein--percent': displayMode === 'percentage'
-              }" (click)="sortBy('protein')">
-            P
-          </div>
-
-          <div class="table-header__fat--mobile" [ngClass]="{
-                'table-header__fat--percent': displayMode === 'percentage'
-              }" (click)="sortBy('fat')">
-            F
-          </div>
-
-          <div class="table-header__carbs--mobile" [ngClass]="{
-                'table-header__carbs--percent': displayMode === 'percentage'
-              }" (click)="sortBy('carbs')">
-            C
-          </div>
         </div>
 
-        <div *ngIf="displayedFood">
+        <ng-container *ngIf="displayedFood">
           <div class="table-row" *ngFor="let food of displayedFood" (click)="openModal(food)">
-            <div class="food">
-              <div class="food__name">{{ food.name }}</div>
+            <div class="food flex">
+              <div class="table-cell flex-3">{{ food.name }}</div>
 
-              <div class="food__amount" *ngIf="displayMode === 'grams'">
+              <div class="table-cell flex-2" *ngIf="displayMode === 'grams'">
                 {{ unitGrams }} {{ unitName }}
               </div>
 
-              <div class="food__protein" [ngClass]="{
+              <div class="table-cell flex-1" [ngClass]="{
                     'food__protein--percent': displayMode === 'percentage'
                   }">
                 {{ food.protein | number: '1.1-1' }}
               </div>
 
-              <div class="food__fat" [ngClass]="{
+              <div class="table-cell flex-1" [ngClass]="{
                     'food__fat--percent': displayMode === 'percentage'
                   }">
                 {{ food.fat | number: '1.1-1' }}
               </div>
 
-              <div class="food__carbs" [ngClass]="{
+              <div class="table-cell flex-1" [ngClass]="{
                     'food__carbs--percent': displayMode === 'percentage'
                   }">
                 {{ food.carbs | number: '1.1-1' }}
               </div>
             </div>
 
-            <div class="portions" *ngIf="displayMode === 'grams'">
-              <div class="portion" *ngFor="let portion of food.portions">
-                <div class="portion__description">
+            <div class="portions flex-col" *ngIf="displayMode === 'grams'">
+              <div class="portion flex" *ngFor="let portion of food.portions">
+                <div class="table-cell flex-3">
                   <div class="portion__description--padded">
                     {{ portion.description }}
                   </div>
                 </div>
 
-                <div class="portion__amount" *ngIf="displayMode === 'grams'">
+                <div class="table-cell flex-2" *ngIf="displayMode === 'grams'">
                   {{ portion.grams }} {{ unitName }}
                 </div>
 
-                <div class="portion__protein">
+                <div class="table-cell flex-1">
                   {{ portion.macros.protein | number: '1.1-1' }}
                 </div>
 
-                <div class="portion__fat">
+                <div class="table-cell flex-1">
                   {{ portion.macros.fat | number: '1.1-1' }}
                 </div>
 
-                <div class="portion__carbs">
+                <div class="table-cell flex-1">
                   {{ portion.macros.carbs | number: '1.1-1' }}
                 </div>
               </div>
             </div>
           </div>
-        </div>
+        </ng-container>
       </div>
 
       <div class="paginator flex flex-grow">

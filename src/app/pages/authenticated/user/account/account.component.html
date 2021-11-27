@@ -40,15 +40,18 @@
 </div>
 
 <ml-modal *ngIf="modalOpen" [title]="'Delete account'" (close$)="closeModal()">
-  <div class="content">
-    <p>Are you sure you want to delete your account?
-      This action is irreversable.</p>
+  <div class="content min-w-24">
+    <p>Enter your password to delete your account.</p>
 
-    <p>If you are, please enter your password</p>
+    <p>This action is irreversable.</p>
 
-    <label for="password" >Password</label>
-    <input class="input" placeholder="Password" type="password" #usernameField
-      [(ngModel)]="password" name="password" required />
+    <form class="form form--vertical">
+      <div class="form-field">
+        <label for="password" >Password</label>
+        <input class="input" placeholder="Password" type="password" #usernameField
+        [(ngModel)]="password" name="password" required />
+      </div>
+    </form>
 
     <p class="error" *ngIf="errorMessage">Password incorrect</p>
 

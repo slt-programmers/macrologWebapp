@@ -1,6 +1,7 @@
 // Reset default styles
 @import "reset";
 
+
 // Style components
 @import "utility";
 
@@ -9,13 +10,11 @@
 @import "card";
 @import "container";
 @import "content";
-@import "food-table";
 @import "form";
 @import "icon";
 @import "input";
 @import "loading-overlay";
 @import "logday";
-@import "log-weight";
 @import "macro-box";
 @import "main-backdrop";
 @import "page";
@@ -25,3 +24,6 @@
 @import "table";
 @import "tabs";
 
+
+// Theme
+@import "theme";

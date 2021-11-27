@@ -66,15 +66,9 @@ export class PiechartComponent implements OnInit, AfterViewInit {
     this.cumulativePercent = 0;
     this.svgEl = this.piechartRef.nativeElement;
     const slices = [
-      {
-        percent: this.proteinPercent - 0.007,
-        color: 'rgba(100, 149, 236, 0.5)',
-      },
-      { percent: 0.007, color: 'white' },
-      { percent: this.fatPercent - 0.007, color: 'rgba(60, 221, 234, 0.5)' },
-      { percent: 0.007, color: 'white' },
-      { percent: this.carbsPercent - 0.007, color: 'rgba(144, 238, 144, 0.5)' },
-      { percent: 0.007, color: 'white' },
+      { percent: this.proteinPercent, color: '#1460e5' },
+      { percent: this.fatPercent, color: '#25e2f1' },
+      { percent: this.carbsPercent, color: '#22f122' },
     ];
 
     slices.forEach((slice) => {

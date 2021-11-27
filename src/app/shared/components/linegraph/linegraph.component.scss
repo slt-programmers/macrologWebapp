@@ -33,12 +33,11 @@ $xAxisHeight: 30px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    border-right: 1px solid $silver;
+    border-right: 1px solid $coal;
   }
 
   .y-axis-point {
     text-align: end;
-    color: $iron;
     font-size: 12px;
     padding-right: 4px;
   }
@@ -127,7 +126,7 @@ $xAxisHeight: 30px;
     display: flex;
     flex-grow: 1;
     height: $xAxisHeight;
-    border-top: 1px solid $silver;
+    border-top: 1px solid $storm;
     justify-content: space-around;
   }
 
@@ -139,7 +138,6 @@ $xAxisHeight: 30px;
 
   .x-axis-point-text {
     position: absolute;
-    color: $iron;
     font-size: 12px;
     align-self: center;
   }

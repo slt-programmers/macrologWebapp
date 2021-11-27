@@ -2,7 +2,7 @@
 
 .stepper {
   display: flex;
-  margin-bottom: $gutter;
+  margin-bottom: 2rem;
 }
 
 .step-wrapper {
@@ -13,8 +13,8 @@
 .step {
   @media (min-width: $md) {
     padding: 5px;
-    width: $gutter;
-    height: $gutter;
+    width: 2rem;
+    height: 2rem;
   }
 
   display: flex;
@@ -23,8 +23,8 @@
   border: 1px solid $secondary;
   color: $primary;
   padding: 3px;
-  width: $halfGutter;
-  height: $halfGutter;
+  width: 1rem;
+  height: 1rem;
   justify-content: center;
   align-items: center;
   font-weight: 400;

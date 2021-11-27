@@ -21,7 +21,13 @@ export class PersonalComponent implements OnInit {
   public activity?: number;
   public newWeight?: number;
 
-  constructor(private userService: UserService, private toastService: ToastService) { }
+  public theme = 'light';
+
+  constructor(private userService: UserService, private toastService: ToastService) {
+    const theme = localStorage.getItem('theme');
+    this.theme = theme ? theme : 'light';
+    this.setThemeToDocument();
+  }
 
   ngOnInit() {
     this.userService.getUserSettings().subscribe(
@@ -36,6 +42,12 @@ export class PersonalComponent implements OnInit {
         this.newWeight = this.weight;
       }
     );
+  }
+
+  public setTheme(theme: string) {
+    this.theme = theme;
+    localStorage.setItem('theme', this.theme);
+    this.setThemeToDocument();
   }
 
   public saveUserSettings(): void {
@@ -66,5 +78,13 @@ export class PersonalComponent implements OnInit {
       }
     }
     return false;
+  }
+
+  private setThemeToDocument() {
+    if (this.theme === 'light') {
+      document.getElementsByTagName('body')[0].classList.remove('theme--dark');
+    } else {
+      document.getElementsByTagName('body')[0].classList.add('theme--dark');
+    }
   }
 }

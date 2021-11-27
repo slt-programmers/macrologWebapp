@@ -22,8 +22,8 @@
     left: 50%;
     transform: translate(-50%, -50%);
     border-radius: 50%;
-    width: 60px;
-    height: 60px;
+    width: 4.5rem;
+    height: 4.5rem;
     background: $white;
   }
 
@@ -32,7 +32,6 @@
     text-align: center;
     position: absolute;
     display: block;
-    color: #373737;
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
@@ -50,9 +49,7 @@
 .legend {
   display: flex;
   flex-direction: column;
-  font-family: 'Assistant', sans-serif;
-  font-size: 14px;
-  margin-left: 16px;
+  margin-left: 1rem;
 
   &__line {
     align-content: center;
@@ -67,15 +64,15 @@
       height: 18px;
 
       &--protein {
-        background-color: rgba(100, 149, 236, 0.5);
+        background-color: #1460e5;
       }
 
       &--fat {
-        background-color: rgba(60, 221, 234, 0.5);
+        background-color: #25e2f1;
       }
 
       &--carbs {
-        background-color: rgba(144, 238, 144, 0.5);
+        background-color: #22f122;
       }
     }
 
