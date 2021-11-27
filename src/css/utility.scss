@@ -136,8 +136,14 @@
 .p-2 {
   padding: 2rem;
 }
+.p-3 {
+  padding: 3rem;
+}
 .p-4 {
   padding: 4rem;
+}
+.px-1 {
+  padding: 0 1rem;
 }
 
 // Z index
@@ -177,7 +183,16 @@
 .strong {
   font-weight: 700;
 }
+.overflow-hidden {
+  overflow: hidden;
+  overflow-wrap: break-word;
+}
 
 .pointer {
   cursor: pointer;
+}
+
+// visibility
+.hidden {
+  opacity: 0;
 }

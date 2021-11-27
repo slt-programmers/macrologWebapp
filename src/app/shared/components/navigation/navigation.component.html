@@ -14,7 +14,8 @@
       </div>
     </div>
 
-    <div class="navbar__mobile-menu sm-only flex-col" *ngIf="menuOpen">
+    <div class="overlay" *ngIf="menuOpen" (click)="toggleMenu()"></div>
+    <div class="navbar__mobile-menu sm-only flex-col" *ngIf="menuOpen" (click)="toggleMenu()">
       <a class="navbar__item" [routerLink]="['/about']">About</a>
       <ng-container *ngIf="isLoggedIn()">
         <a class="navbar__item" [routerLink]="['/dashboard']">Diary</a>

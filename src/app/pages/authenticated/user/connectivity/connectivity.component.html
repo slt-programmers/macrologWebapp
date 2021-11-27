@@ -1,9 +1,6 @@
 <div class="connectivity">
   <div class="connectivity__logo">
-    <img
-      alt="powered by Strava"
-      src="../assets/api_logo_pwrdBy_strava_stack_light.png"
-    />
+    <img alt="powered by Strava" src="../assets/api_logo_pwrdBy_strava_stack_light.png" />
   </div>
 
   <div class="connectivity__info" *ngIf="!isConnected()">
@@ -23,41 +20,29 @@
 
   <div class="connectivity__connection" *ngIf="!isConnected()">
     <a href="{{ stravaConnectUrl }}">
-      <img
-        alt="connect to Strava"
-        src="../assets/btn_strava_connectwith_light.png"
-      />
+      <img alt="connect to Strava" src="../assets/btn_strava_connectwith_light.png" />
     </a>
   </div>
 
-  <div class="connectivity__info" *ngIf="isConnected()">
+  <div class="connectivity__info content" *ngIf="isConnected()">
     <p class="connectivity__info__text connectivity__info__text--bold">
-      You have connected Strava to Macrolog!
+      You have connected Strava to Macrolog! The activities from Strava will be automatically added
+      to Macrolog.
     </p>
 
     <p class="connectivity__info__text">
-      The activities from Strava will be automatically added to Macrolog.
-    </p>
-
-    <p class="connectivity__info__text">
-      Number of activities synced with Strava:
-      {{ connection.numberActivitiesSynced }}
+      Number of activities synced:
+      <span class="font-bold"> {{ connection.numberActivitiesSynced }} </span>
     </p>
   </div>
 
-  <div class="connectivity__connection" *ngIf="isConnected()">
-    <img
-      alt="strava profile picture"
-      class="connectivity__connection__profile-pic"
-      src="{{ connection.image }}"
-    />
+  <div class="connectivity__connection content" *ngIf="isConnected()">
+    <img alt="strava profile picture" class="connectivity__connection__profile-pic"
+      src="{{ connection.image }}" />
 
     <p class="connectivity__connection__link">
-      <a
-        target="_blank"
-        href="https://www.strava.com/athletes/{{ connection.syncedAccountId }}"
-        >{{ connection.name }}</a
-      >
+      <a target="_blank" href="https://www.strava.com/athletes/{{ connection.syncedAccountId }}">{{
+        connection.name }}</a>
     </p>
 
     <div class=" button-wrapper">

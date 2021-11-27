@@ -35,17 +35,19 @@
   top: 0;
   width: 100%;
   z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .picker {
   background-color: $white;
+  border-radius: 4px;
   padding: 10px;
-  position: absolute;
-  top: 45px;
-  right: calc(50% - 160px);
+  position: relative;
   width: 300px;
   z-index: 2;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
 
   &__header {
     display: flex;

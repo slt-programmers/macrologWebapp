@@ -9,7 +9,7 @@
   }
   
   &__item {
-    margin: 0.5rem;
+    padding: 0.5rem;
   }
 
   &__mobile-menu {
@@ -19,17 +19,20 @@
     background-color: white;  
     min-width: 100px;
     padding: 1rem;
-    border-bottom-left-radius: 2px;
+    border-bottom-left-radius: 4px;
+    box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.1);
+    .navbar__item {
+      padding: 0.75rem 0.5rem;
+    }
   }
 
   height: 4rem;
   background-color: white;  
-  box-shadow: 0px 1px 5px rgb(0 0 0 / 5%);
+  box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.1);
 }
 
 .navbar-placeholder {
   height: 4rem;
-  box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.05);
 }
 
 .logo {
