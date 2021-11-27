@@ -19,15 +19,14 @@
 
         <form [formGroup]="userForm" class="form">
           <div class="form-field">
-            <label for="name" >Name</label>
-            <input class="input" name="name" type="text" formControlName="name"
-              required />
+            <label for="name">Name</label>
+            <input class="input" name="name" type="text" formControlName="name" required />
           </div>
 
           <div class="form-field">
             <label for="birthday">Date of birth</label>
-            <input class="input" required validDate
-              placeholder="DD-MM-YYYY, eg 26-3-1989" name="birthday" formControlName="birthday" />
+            <input class="input" required validDate placeholder="DD-MM-YYYY"
+              name="birthday" formControlName="birthday" />
           </div>
 
           <div class="form-field">
@@ -47,15 +46,14 @@
           </div>
 
           <div class="form-field">
-            <label for="height" >Height (cm)</label>
-            <input class="input" name="height" type="number"
-              formControlName="height" required />
+            <label for="height">Height (cm)</label>
+            <input class="input" name="height" type="number" formControlName="height" required />
           </div>
 
           <div class="form-field">
             <label for="weight">Start weight (kg)</label>
-            <input class="input" name="weight" type="number"
-              formControlName="weight" step="0.1" required />
+            <input class="input" name="weight" type="number" formControlName="weight" step="0.1"
+              required />
           </div>
 
           <div class="form-field">
@@ -86,80 +84,32 @@
           gain or lose weight. Do this by adjusting the calories or the macro's.
         </p>
 
-        <div class="calorie-box">
-          <span class="calorie-box__title">{{ calories | number: '1.0-0' }} Calories</span>
-        </div>
-
-        <div class="tabs">
-          <div class="tabs-header">
-            <div class="tab" (click)="showCaloriesTab()"
-              [ngClass]="{ 'tab--active': showCalories }">
-              Adjust calories
-            </div>
-            <div class="tab" (click)="showMacrosTab()" [ngClass]="{ 'tab--active': showMacros }">
-              Adjust macro's
-            </div>
+        <div class="content">
+          <div class="form-field">
+            <label for="protein">Protein</label>
+            <input name="protein" class="input" (ngModelChange)="protein = $event; calcCalories()"
+              [ngModel]="protein" type="number">
           </div>
 
-          <div class="tabs-content">
-            <!--Calories-->
-            <div class="content" *ngIf="showCalories">
-              <p>
-                The light-blue markers show a surplus or deficit of 200
-                calories. We suggest this because we think slow progress
-                prevents yoyo-ing. Feel free to adjust according to your own
-                preferences.
-              </p>
-
-              <div class="flex col-gap-1 align-center">
-                <div class="flex">
-                  Calories
-                </div>
-
-                <div class="flex-grow">
-                  <ml-slider [value]="calories" (valueChange)="changeCalories($event)"
-                    [upperBound]="4000" [lowerBound]="1200" [markers]="markers"></ml-slider>
-                </div>
-              </div>
-
-              <p>This results in the following macros:</p>
-
-              <div class="macro-box">
-                <p class="macro-box__macro">
-                  <strong>Protein: {{ protein | number: '1.0-0' }} gr</strong>
-                </p>
-                <p class="macro-box__macro">
-                  <strong>Fat: {{ fat | number: '1.0-0' }} gr</strong>
-                </p>
-                <p class="macro-box__macro">
-                  <strong>Carbs: {{ carbs | number: '1.0-0' }} gr</strong>
-                </p>
-              </div>
-            </div>
-
-            <!--Macros-->
-            <div *ngIf="showMacros">
-              <div class="content">
-                <div class="form-field">
-                  <label for="protein">Protein</label>
-                  <input name="protein" class="input"
-                    (change)="calcCaloriesManual()" [(ngModel)]="proteinManual" type="number" />
-                </div>
-
-                <div class="form-field">
-                  <label for="fat">Fat</label>
-                  <input name="fat" class="input" (change)="calcCaloriesManual()"
-                    [(ngModel)]="fatManual" type="number" />
-                </div>
-
-                <div class="form-field">
-                  <label for="carbs" >Carbs</label>
-                  <input name="carbs" class="inputt"
-                    (change)="calcCaloriesManual()" [(ngModel)]="carbsManual" type="number" />
-                </div>
-              </div>
-            </div>
+          <div class="form-field">
+            <label for="fat">Fat</label>
+            <input name="fat" class="input" [ngModel]="fat"
+              (ngModelChange)="fat = $event; calcCalories()" type="number">
           </div>
+
+          <div class="form-field">
+            <label for="carbs">Carbs</label>
+            <input name="carbs" class="input" [ngModel]="carbs"
+              (ngModelChange)="carbs = $event; calcCalories()" type="number">
+          </div>
+
+          <div class="flex col-gap-1">
+            <label class="flex-2">Calories</label>
+            <p class="flex-4">{{calories}}</p>
+          </div>
+
+          <button class="button button--primary" (click)="fillStandard()">Fill with standard
+            ratios</button>
         </div>
 
         <div class="button-wrapper button-wrapper--space-between">
@@ -167,8 +117,7 @@
             Previous
           </button>
 
-          <button class="button button--primary" (click)="saveIntake()"
-            [disabled]="showCalories === false && showMacros === false">
+          <button class="button button--primary" (click)="saveIntake()">
             Next
           </button>
         </div>
