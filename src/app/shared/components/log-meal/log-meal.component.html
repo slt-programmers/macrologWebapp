@@ -2,7 +2,7 @@
   <div class="content-sm p-1" *ngIf="!editable">
     <span class="font-bold">{{meal}}</span>
 
-    <div *ngFor="let logEntry of logEntries" class="flex flex-grow">
+    <div *ngFor="let logEntry of logEntries" class="flex col-gap-1">
       <div class="flex-3">
         <span class="">{{logEntry.food.name}}</span>
       </div>
@@ -17,6 +17,8 @@
         <span class="">{{unitGrams *
           logEntry.multiplier | number:'1.0-2'}} {{unitName}}</span>
       </div>
+
+      <div class="flex-1"></div>
 
       <div class="flex-1">
         <span class="">{{logEntry.macrosCalculated.protein |
@@ -35,12 +37,12 @@
 
       <div class="flex-1">
         <span class="">{{logEntry.macrosCalculated.calories |
-          number:'1.0-0'}} kcal</span>
+          number:'1.0-0'}}</span>
       </div>
     </div>
   </div>
 
-  <div class="p-1 content" *ngIf="editable">
+  <div class="p-1 content-sm" *ngIf="editable">
     <div class="flex col-gap-1 align-center">
       <span class="font-bold">{{meal}}</span>
 
@@ -49,25 +51,23 @@
     </div>
 
     <div class="flex flex-col content">
-      <div *ngFor="let logEntry of logEntries" class="flex flex-grow align-center col-gap-1">
+      <div *ngFor="let logEntry of logEntries" class="entry flex-grow row-gap-1 col-gap-1">
         <div class="flex-3">
           {{logEntry.food.name}}
         </div>
 
-        <div class="flex-1">
-          <div class="meal__edit-ingredient__amount__input">
-            <input aria-label="amount of portions" id="portionAmountInput" class="input" type="number" step="0.1"
-              *ngIf="logEntry.portion" (keyup)="amountChange(logEntry)"
+        <div class="flex flex-3 col-gap-1">
+          <div class="flex-1">
+            <input aria-label="amount of portions" id="portionAmountInput" class="input"
+              type="number" step="0.1" *ngIf="logEntry.portion" (keyup)="amountChange(logEntry)"
               [value]="getAmountValue(logEntry)" (input)="setLogEntryMultiplier($event, logEntry)">
 
-            <input aria-label="amount of grams" id="gramsAmountInput" class="input" type="number" step="1"
-              *ngIf="!logEntry.portion" (keyup)="amountChange(logEntry)"
+            <input aria-label="amount of grams" id="gramsAmountInput" class="input" type="number"
+              step="1" *ngIf="!logEntry.portion" (keyup)="amountChange(logEntry)"
               [value]="getAmountValue(logEntry)" (input)="setLogEntryMultiplier($event, logEntry)">
           </div>
-        </div>
 
-        <div class="flex-2">
-          <div class="meal__edit-ingredient__measurement__input">
+          <div class="flex-2">
             <select aria-label="portion" name="portion" (change)="portionChange(logEntry, $event)">
               <!-- 100 grams -->
               <option [selected]="isGramsSelected(logEntry)">{{unitName}}</option>
@@ -82,26 +82,28 @@
           </div>
         </div>
 
-        <div class="flex-1">
-          {{logEntry.macrosCalculated.protein | number:'1.1-1'}}
-        </div>
+        <div class="flex flex-5 col-gap-1">
+          <div class="flex-1">
+            {{logEntry.macrosCalculated.protein | number:'1.1-1'}} <span class="sm-only">P</span>
+          </div>
 
-        <div class="flex-1">
-          {{logEntry.macrosCalculated.fat | number:'1.1-1'}}
-        </div>
+          <div class="flex-1">
+            {{logEntry.macrosCalculated.fat | number:'1.1-1'}} <span class="sm-only">F</span>
+          </div>
 
-        <div class="flex-1">
-          {{logEntry.macrosCalculated.carbs | number:'1.1-1'}}
-        </div>
+          <div class="flex-1">
+            {{logEntry.macrosCalculated.carbs | number:'1.1-1'}} <span class="sm-only">C</span>
+          </div>
 
-        <div class="flex-1">
-          {{logEntry.macrosCalculated.calories | number:'1.0-0'}} kcal
-        </div>
-
-        <div class="">
-          <button class="icon-button" (click)="deleteLogEntry(logEntry)">
-            <em class="fas fa-trash"></em>
-          </button>
+          <div class="flex-1 flex">
+            <span class="flex-grow">
+              {{logEntry.macrosCalculated.calories | number:'1.0-0'}} <span
+                class="sm-only">kcal</span>
+            </span>
+            <button class="icon-button" (click)="deleteLogEntry(logEntry)">
+              <em class="fas fa-trash"></em>
+            </button>
+          </div>
         </div>
       </div>
 

@@ -6,8 +6,14 @@ body.theme--dark {
   .icon-button {
     color: $secondary;
   }
+  .download-button {
+    color: white;
+  }
 
   .navbar {
+    &__mobile-menu {
+      background-color: #282828;
+    }
     color: #cccccc;
     background-color: #282828;
   }
@@ -80,13 +86,16 @@ body.theme--dark {
     &__button {
       background-color: $secondary;
     }
+    &__day:hover {
+      background-color: #1a1a1a;
+    }
   }
-
+  
   .donut-chart::after {
     background-color: #1a1a1a;
     color: white;
   }
-
+  
   .linegraph,
   .bargraph {
     .axes {
@@ -106,5 +115,10 @@ body.theme--dark {
         stroke: $secondary;
       }
     }
+  }
+  
+  .toast {
+    background-color: #282828;
+    color: white;
   }
 }

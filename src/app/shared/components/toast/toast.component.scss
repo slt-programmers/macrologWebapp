@@ -1,4 +1,9 @@
+@import '../../../../css/variables.scss';
+
 .toast {
+  @media (min-width: $sm) {
+    max-width: 20rem;
+  }
   display: block;
   margin-bottom: 1rem;
   background-color: white;
@@ -9,7 +14,7 @@
   padding: 1rem;
 
   min-height: 4rem;
-  max-width: 20rem;
+  max-width: calc(100vw - 4rem);
   width: 20rem;
   
   transition: margin-top 0.2s;
@@ -44,9 +49,13 @@
 }
 
 .toast-holder {
+  @media(min-width: $sm) {
+    top: 2rem;
+    right: 2rem;
+  }
   display: block;
   position: fixed;
-  top: 2rem;
-  right: 2rem;
+  top: 1rem;
+  right: 1rem;
   z-index: 24;
 }
