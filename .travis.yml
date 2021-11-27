@@ -17,22 +17,22 @@ jobs:
   include:
     # develop: build lint and test scan integration
     - stage: 'build, lint, test and scan'
-      if: branch == develop
+      if: branch = develop
       name: 'build'
       script: npm run build
     - script: npm run test
-      if: branch == develop
+      if: branch = develop
       name: 'unit test and sonar scan'
       after_script: sonar-scanner -Dproject.settings=./sonar-project.properties
     - script: ng lint
-      if: branch == develop
+      if: branch = develop
       name: 'lint'
     - script: npm run integration
-      if: branch == develop
+      if: branch = develop
       name: 'integration test'
     # features master release: build and test
     - stage: 'build'
-      if: branch != develop
+      if: NOT branch = develop
       name: 'build'
       script: npm run build
 
