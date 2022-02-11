@@ -1,10 +1,11 @@
 import { Component, Input, ViewChild, ElementRef, Output, EventEmitter, HostListener } from '@angular/core';
 import { FoodSearchable } from '../../model/foodSearchable';
 import { Food } from '../../model/food';
-import { FoodService } from '../../services/food.service';
 import { DishService } from '../../services/dish.service';
 import { Dish } from '../../model/dish';
 import { Macros } from '../../model/macros';
+import { Store } from '@ngrx/store';
+import { selectAllFood } from '../../store/selectors/food.selectors';
 
 @Component({
   selector: 'ml-autocomplete-food',
@@ -35,8 +36,8 @@ export class AutocompleteFoodComponent {
   public allFood: Food[];
   public allDishes: Dish[];
 
-  constructor(private readonly foodService: FoodService, private readonly dishService: DishService) {
-    this.foodService.getAllFood().subscribe(it => {
+  constructor(private readonly store: Store, private readonly dishService: DishService) {
+    this.store.select(selectAllFood).subscribe(it => {
       this.allFood = it;
       this.getFoodSearchableList();
     });

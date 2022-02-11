@@ -8,7 +8,7 @@ import { ModalComponent } from './modal/modal.component';
 @NgModule({
   declarations: [
     NavigationComponent,
-    ModalComponent
+    ModalComponent,
   ],
   imports: [
     RouterModule,

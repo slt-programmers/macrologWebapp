@@ -4,7 +4,6 @@ import { of } from "rxjs";
 import { Ingredient } from "src/app/shared/model/ingredient";
 import { Portion } from "src/app/shared/model/portion";
 import { DishService } from "src/app/shared/services/dish.service"
-import { FoodService } from "src/app/shared/services/food.service";
 import { DishesComponent } from "./dishes.component"
 
 
@@ -12,7 +11,6 @@ describe('DishesComponent', () => {
   let fixture: ComponentFixture<DishesComponent>;
   let component: DishesComponent;
   let dishService: DishService;
-  let foodService: FoodService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -20,13 +18,11 @@ describe('DishesComponent', () => {
         DishesComponent
       ],
       providers: [
-        MockProvider(DishService),
-        MockProvider(FoodService)
+        MockProvider(DishService)
       ]
     }).compileComponents();
 
     dishService = TestBed.inject(DishService);
-    foodService = TestBed.inject(FoodService);
     fixture = TestBed.createComponent(DishesComponent);
     component = fixture.componentInstance;
   });
@@ -36,7 +32,6 @@ describe('DishesComponent', () => {
   });
 
   it('should init component', () => {
-    spyOn(foodService, 'getAllFood').and.returnValue(of([]));
     spyOn(dishService, 'getAllDishes').and.returnValue(of([{ name: 'dish2' }, { name: 'dish1' }]));
     component.ngOnInit();
     expect(component.allDishes).toEqual([{ name: 'dish1' }, { name: 'dish2' }]);

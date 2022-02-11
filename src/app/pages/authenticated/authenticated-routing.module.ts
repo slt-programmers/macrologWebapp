@@ -95,7 +95,7 @@ export const authenticatedRoutes: Routes = [
     StepperComponent,
     LogActivityComponent,
     StackDonutComponent,
-    DatepickerComponent
+    DatepickerComponent,
   ],
   providers: [
     AuthGuard

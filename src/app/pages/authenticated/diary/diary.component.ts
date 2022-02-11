@@ -151,7 +151,7 @@ export class DiaryComponent implements OnInit {
   private documentClick(target: HTMLElement) {
     if (
       !target.classList.contains('autocomplete__option') &&
-      !target.classList.contains('trash') &&
+      !target.classList.contains('fa-trash') &&
       !target.classList.contains('button--delete') &&
       !target.classList.contains('activity__name--sync') &&
       !target.classList.contains('activity__title--sync')

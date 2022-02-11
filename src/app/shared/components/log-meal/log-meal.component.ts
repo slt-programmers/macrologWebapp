@@ -55,6 +55,7 @@ export class LogMealComponent implements OnChanges {
   }
 
   public close() {
+    console.log('close');
     this.editable = false;
   }
 
@@ -210,11 +211,12 @@ export class LogMealComponent implements OnChanges {
       if (index !== -1) {
         this.logEntries.splice(index, 1);
       }
-      this.diaryService.deleteEntry(logEntry).subscribe()
+      this.diaryService.deleteEntry(logEntry).subscribe();
     }
   }
 
   public saveAndClose() {
+    console.log('save and close')
     this.close();
     const allEntries = [];
     for (const logEntry of this.logEntries) {

@@ -15,7 +15,7 @@ describe('FoodService', () => {
     TestBed.configureTestingModule({
       providers: [FoodService,
         MockProvider(HttpClient),
-        MockProvider(ToastService)
+        MockProvider(ToastService),
       ],
     });
     service = TestBed.inject(FoodService);

@@ -173,8 +173,8 @@ describe('DiaryComponent', () => {
     expect(component.activitiesOpen).toBeTrue();
 
     component.breakfastOpen = false;
-    document.getElementsByClassName('card')[0].setAttribute('class', 'trash');
-    const trash = fixture.debugElement.nativeElement.querySelector('.trash');
+    document.getElementsByClassName('card')[0].setAttribute('class', 'fa-trash');
+    const trash = fixture.debugElement.nativeElement.querySelector('.fa-trash');
     trash.click();
     expect(component.breakfastOpen).toBeFalse();
   });
