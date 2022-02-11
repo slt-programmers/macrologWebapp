@@ -8,7 +8,7 @@ import { DatePipe } from '@angular/common';
 import { ToastService } from 'src/app/shared/services/toast.service';
 
 @Component({
-  selector: 'ml-diary-page',
+  selector: 'ml-diary',
   templateUrl: './diary.component.html'
 })
 export class DiaryComponent implements OnInit {

@@ -1,9 +1,5 @@
-import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
-import { ComponentsModule } from 'src/app/shared/components/components.module';
-
 import { AboutComponent } from './about/about.component';
 import { GuestGuard } from './guest.guard';
 import { HomeComponent } from './home/home.component';
@@ -26,20 +22,8 @@ export const guestRoutes: Routes = [
 ];
 
 @NgModule({
-  imports: [
-    CommonModule,
-    FormsModule,
-    ReactiveFormsModule,
-    ComponentsModule,
-    RouterModule.forChild(guestRoutes)],
+  imports: [RouterModule.forChild(guestRoutes)],
   providers: [GuestGuard],
-  declarations: [
-    HomeComponent,
-    AboutComponent,
-    LoginComponent
-  ],
-  exports: [
-    RouterModule
-  ]
+  exports: [RouterModule]
 })
 export class GuestRoutingModule { }

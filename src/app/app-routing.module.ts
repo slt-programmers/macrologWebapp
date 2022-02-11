@@ -6,13 +6,12 @@ export const routes: Routes = [
   {
     path: '',
     loadChildren: () =>
-      import('./pages/guest/guest.module').then((m) => m.GuestModule),
+      import('./pages/guest/guest.module').then(m => m.GuestModule),
   },
   {
     path: 'dashboard',
     loadChildren: () =>
-      import('./pages/authenticated/authenticated.module').then(
-        (m) => m.AuthenticatedModule),
+      import('./pages/authenticated/authenticated.module').then(m => m.AuthenticatedModule),
   },
   {
     path: '**',
@@ -20,14 +19,7 @@ export const routes: Routes = [
   }
 ];
 @NgModule({
-  imports: [
-    RouterModule.forRoot(routes)
-  ],
-  exports: [
-    RouterModule
-  ],
-  declarations: [
-    PageNotFoundComponent
-  ]
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule]
 })
 export class AppRoutingModule { }

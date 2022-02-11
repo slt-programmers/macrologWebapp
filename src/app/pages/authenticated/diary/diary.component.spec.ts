@@ -3,14 +3,14 @@ import { ComponentFixture, TestBed } from "@angular/core/testing"
 import { MockComponent, MockProvider } from "ng-mocks"
 import { of } from "rxjs"
 import { DatepickerComponent } from "src/app/shared/components/datepicker/datepicker.component"
-import { LogActivityComponent } from "src/app/shared/components/log-activity/log-activity.component"
-import { LogMealComponent } from "src/app/shared/components/log-meal/log-meal.component"
+import { LogActivityComponent } from "src/app/pages/authenticated/diary/log-activity/log-activity.component"
 import { StackDonutComponent } from "src/app/shared/components/stackdonut/stackdonut.component"
 import { ActivityService } from "src/app/shared/services/activity.service"
 import { DiaryService } from "src/app/shared/services/diary.service"
 import { ToastService } from "src/app/shared/services/toast.service"
 import { UserService } from "src/app/shared/services/user.service"
 import { DiaryComponent } from "./diary.component"
+import { LogMealComponent } from "./log-meal/log-meal.component"
 
 class MockWindow {
   private _innerWidth: number;

@@ -1,7 +1,7 @@
 import { Component, OnChanges, Input, Output, EventEmitter, ViewChild, ElementRef, SimpleChanges } from '@angular/core';
 import { format } from 'date-fns';
-import { Activity } from '../../model/activity';
-import { ActivityService } from '../../services/activity.service';
+import { Activity } from '../../../../shared/model/activity';
+import { ActivityService } from '../../../../shared/services/activity.service';
 
 @Component({
   selector: 'ml-log-activity',

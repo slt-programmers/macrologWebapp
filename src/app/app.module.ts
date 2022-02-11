@@ -14,20 +14,18 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { EffectsModule } from '@ngrx/effects';
 import { FoodEffects } from './shared/store/effects/food.effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-// import { DiaryPageComponent } from './shared/components/diary-page/diary-page.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ToastComponent,
-    // DiaryPageComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     ServicesModule,
-    AppRoutingModule,
     ComponentsModule,
+    AppRoutingModule,
     StoreModule.forRoot(reducers),
     StoreDevtoolsModule.instrument(),
     EffectsModule.forRoot([FoodEffects]),

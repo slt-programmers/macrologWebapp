@@ -9,12 +9,12 @@ import {
   SimpleChanges,
 } from '@angular/core';
 import { DatePipe } from '@angular/common';
-import { Entry } from '../../model/entry';
-import { StoreLogRequest } from '../../model/storeLogRequest';
-import { DiaryService } from '../../services/diary.service';
-import { FoodSearchable } from '../../model/foodSearchable';
-import { ToastService } from '../../services/toast.service';
 import { Portion } from 'src/app/shared/model/portion';
+import { Entry } from 'src/app/shared/model/entry';
+import { FoodSearchable } from 'src/app/shared/model/foodSearchable';
+import { StoreLogRequest } from 'src/app/shared/model/storeLogRequest';
+import { DiaryService } from 'src/app/shared/services/diary.service';
+import { ToastService } from 'src/app/shared/services/toast.service';
 
 @Component({
   selector: 'ml-log-meal',

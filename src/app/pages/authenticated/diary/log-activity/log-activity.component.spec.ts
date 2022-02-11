@@ -2,8 +2,8 @@ import { async, TestBed, ComponentFixture } from '@angular/core/testing';
 import { NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { LogActivityComponent } from './log-activity.component';
-import { ToastService } from '../../services/toast.service';
-import { ActivityService } from '../../services/activity.service';
+import { ToastService } from '../../../../shared/services/toast.service';
+import { ActivityService } from '../../../../shared/services/activity.service';
 
 describe('LogActivityComponent', () => {
   let component: LogActivityComponent;

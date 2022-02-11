@@ -48,6 +48,8 @@
       <div class="flex-1 font-bold overflow-hidden">Calories</div>
     </div>
 
+    <ml-diary-page></ml-diary-page>
+
     <ml-log-meal id="breakfast" #breakfast [open]="breakfastOpen" [date]="displayDate"
       [meal]="'Breakfast'" [logEntries]="breakfastLogs" (dataChanged)="refresh()"></ml-log-meal>
     <ml-log-meal #lunch [open]="lunchOpen" [date]="displayDate" [meal]="'Lunch'"
