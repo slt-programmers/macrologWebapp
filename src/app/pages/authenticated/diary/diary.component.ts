@@ -12,9 +12,8 @@ import { Macros } from 'src/app/shared/model/macros';
 })
 export class DiaryComponent implements OnInit {
 
-  public displayDate: string;
+  public date: string;
   public totals$: Observable<Macros>;
-  public activititiesSync = false;
   public intakeGoals: any[];
   public goalCal: number;
   public circleRadius = 60;
@@ -26,12 +25,12 @@ export class DiaryComponent implements OnInit {
     private readonly store: Store,
     private readonly window: Window) {
       this.pipe = new DatePipe('en-US');
-      this.displayDate = this.pipe.transform(new Date(), 'yyyy-MM-dd');
-      this.totals$ = this.store.select(selectTotalsForDate(this.displayDate));
+      this.date = this.pipe.transform(new Date(), 'yyyy-MM-dd');
+      this.totals$ = this.store.select(selectTotalsForDate(this.date));
   }
 
   ngOnInit() {
-    this.getUserGoals(this.displayDate);
+    this.getUserGoals(this.date);
     if (this.window.innerWidth < 480) {
       this.circleRadius = 40;
       this.strokeWidth = 5;
@@ -39,9 +38,9 @@ export class DiaryComponent implements OnInit {
   }
 
   public changeDate(event: any) {
-    this.displayDate = event;
-    this.getUserGoals(this.displayDate);
-    this.totals$ = this.store.select(selectTotalsForDate(this.displayDate));
+    this.date = event;
+    this.getUserGoals(this.date);
+    this.totals$ = this.store.select(selectTotalsForDate(this.date));
   }
 
   private getUserGoals(date: string): void {

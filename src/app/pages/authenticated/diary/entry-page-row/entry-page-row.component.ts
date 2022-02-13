@@ -14,8 +14,8 @@ import { clone } from 'src/app/util/functions';
 })
 export class EntryPageRowComponent implements OnChanges, OnDestroy {
 
-  @Input('meal') meal: string;
-  @Input('date') date: string;
+  @Input() meal: string;
+  @Input() date: string;
 
   public entries: Entry[];
   public modalEntries: Entry[];

@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { Macros } from 'src/app/shared/model/macros';
@@ -10,16 +10,13 @@ import { selectTotalsForDate } from 'src/app/shared/store/selectors/entries.sele
   selector: 'ml-diary-page',
   templateUrl: './diary-page.component.html'
 })
-export class DiaryPageComponent implements OnInit, OnChanges {
+export class DiaryPageComponent implements OnChanges {
 
   @Input() date: string;
 
   public totals$: Observable<Macros>;
   
   constructor(private readonly store: Store) {
-  }
-
-  ngOnInit(): void {
   }
 
   ngOnChanges(changes: SimpleChanges): void {

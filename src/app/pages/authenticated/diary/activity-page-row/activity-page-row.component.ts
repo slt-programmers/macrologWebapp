@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Component, Input, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserService } from 'src/app/shared/services/user.service';
 import { clone } from 'src/app/util/functions';
@@ -13,9 +13,9 @@ import { activitiesActions } from 'src/app/shared/store/actions/activities.actio
   templateUrl: './activity-page-row.component.html',
   styleUrls: ['./activity-page-row.component.scss']
 })
-export class ActivityPageRowComponent implements OnInit, OnChanges {
+export class ActivityPageRowComponent implements OnInit, OnChanges, OnDestroy{
 
-  @Input('date') date: string;
+  @Input() date: string;
 
   public canSync = false;
   public activities: Activity[] = [];

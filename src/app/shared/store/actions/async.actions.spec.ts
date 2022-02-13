@@ -13,15 +13,15 @@ describe('Async Actions', () => {
   it('should call get action', () => {
     const actions = createAsyncActions<any>('TestActions');
     expect(actions.get.type).toEqual('[TestActions] Get');
-    const result = actions.get({id: 1});
-    expect(result).toEqual({params: {id: 1}, type: '[TestActions] Get'});
+    const result = actions.get(false, {id: 1});
+    expect(result).toEqual({force: false, params: {id: 1}, type: '[TestActions] Get'});
   });
 
   it('should call post action', () => {
     const actions = createAsyncActions<any>('TestActions');
     expect(actions.post.type).toEqual('[TestActions] Post');
     const result = actions.post({ id: 1 });
-    expect(result).toEqual({body: {id: 1}, type: '[TestActions] Post'});
+    expect(result).toEqual({body: {id: 1}, params: undefined, type: '[TestActions] Post'});
   });
   
   it('should call success action', () => {

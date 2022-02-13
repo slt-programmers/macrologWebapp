@@ -1,7 +1,7 @@
 import { DatePipe } from "@angular/common";
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { createEffect, Actions, ofType } from "@ngrx/effects";
+import { createEffect, Actions, ofType, concatLatestFrom } from "@ngrx/effects";
 import { Store } from "@ngrx/store";
 import { of } from "rxjs";
 import { concatMap, catchError, map, withLatestFrom } from "rxjs/operators";
@@ -19,7 +19,7 @@ export class EntriesEffects {
   getEntriesForDate$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(entriesActions.get),
-      withLatestFrom(this.store.select(selectEntries)),
+      concatLatestFrom(() => this.store.select(selectEntries)),
       concatMap(([action, state]) => {
         const hasEntriesForDate = state?.filter(epd => epd.date === action.params)[0];
         if (!state || !hasEntriesForDate || action.force) {
@@ -41,7 +41,7 @@ export class EntriesEffects {
   postEntriesForDate$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(entriesActions.post),
-      withLatestFrom(this.store.select(selectEntries)),
+      concatLatestFrom(() => this.store.select(selectEntries)),
       concatMap(([action, state]) => {
         const headers = {
           'Content-Type': 'application/json',

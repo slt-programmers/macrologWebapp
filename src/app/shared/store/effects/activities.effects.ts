@@ -1,6 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { Actions, createEffect, ofType } from "@ngrx/effects";
+import { Actions, createEffect, ofType, concatLatestFrom } from "@ngrx/effects";
 import { Store } from "@ngrx/store";
 import { of } from "rxjs";
 import { catchError, concatMap, map, withLatestFrom } from "rxjs/operators";
@@ -17,7 +17,7 @@ export class ActivitiesEffects {
   getActivitiesForDate$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(activitiesActions.get),
-      withLatestFrom(this.store.select(selectActivities)),
+      concatLatestFrom(() => this.store.select(selectActivities)),
       concatMap(([action, state]) => {        
         const hasActivitiesForDate = state?.filter(apd => apd.date === action.params.date)[0];
         if (!state || !hasActivitiesForDate || action.force) {
@@ -40,7 +40,7 @@ export class ActivitiesEffects {
   postActivitiesForDate$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(activitiesActions.post),
-      withLatestFrom(this.store.select(selectActivities)),
+      concatLatestFrom(() => this.store.select(selectActivities)),
       concatMap(([action, state]) => {
         const headers = {
           'Content-Type': 'application/json',
