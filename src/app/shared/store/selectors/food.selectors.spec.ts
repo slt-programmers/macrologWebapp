@@ -1,4 +1,4 @@
-import { foodFeatureKey } from "../reducers/food.reducer";
+import { foodFeatureKey } from "../reducers/food.reducers";
 import { selectAllFood, selectFoodLoading, selectFoodState } from "./food.selectors";
 
 describe('Food Selectors', () => {

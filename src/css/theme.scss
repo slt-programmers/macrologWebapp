@@ -16,6 +16,7 @@ body.theme--dark {
     }
     color: #cccccc;
     background-color: #282828;
+    box-shadow: $boxShadowDark, $boxShadowWideDark;
   }
 
   .page {
@@ -24,6 +25,7 @@ body.theme--dark {
 
   .card {
     background-color: #282828;
+    box-shadow: $boxShadowDark;
   }
 
   .subnav {
@@ -53,11 +55,19 @@ body.theme--dark {
   .activity {
     border-bottom-color: #000000;
   }
+  .selectable {
+    &:hover {
+      background-color: $storm;
+    }
+  }
 
   .modal {
     background-color: #282828;
   }
 
+  .autocomplete {
+    box-shadow: $boxShadowDark;
+  }
   .autocomplete__option {
     background-color: #282828;
     &:focus {
@@ -83,6 +93,7 @@ body.theme--dark {
 
   .picker {
     background-color: #282828;
+    box-shadow: $boxShadowDark;
     &__button {
       background-color: $secondary;
     }

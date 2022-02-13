@@ -1,7 +1,7 @@
 import { createFeatureSelector, createSelector } from "@ngrx/store";
 import { Food } from "../../model/food";
 import { AsyncState } from "../reducers/async.reducers";
-import { foodFeatureKey } from "../reducers/food.reducer";
+import { foodFeatureKey } from "../reducers/food.reducers";
 
 export const selectFoodState = createFeatureSelector<AsyncState<Food[]>>(foodFeatureKey);
 

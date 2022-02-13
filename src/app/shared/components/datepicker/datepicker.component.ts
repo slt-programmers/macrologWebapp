@@ -1,3 +1,4 @@
+import { DatePipe } from '@angular/common';
 import {
   Component,
   Output,
@@ -14,7 +15,7 @@ import {
 export class DatepickerComponent {
   @ViewChildren('dayRef') dayRefs: QueryList<any>;
 
-  @Output() change$ = new EventEmitter<Date>();
+  @Output() change$ = new EventEmitter<string>();
 
   public dateformat = 'dd-MM-yyyy';
   public today: Date;
@@ -24,6 +25,8 @@ export class DatepickerComponent {
   public weekdays = new Array();
   public placeholders = new Array();
   public isOpen = false;
+
+  private pipe = new DatePipe('en-US');
 
   constructor() {
     this.today = new Date();
@@ -51,7 +54,7 @@ export class DatepickerComponent {
     );
     this.setDaysInMonthArray();
     this.getWeekdayPlaceholders();
-    this.change$.emit(this.selectedDate);
+    this.change$.emit(this.pipe.transform(this.selectedDate, 'yyyy-MM-dd'));
   }
 
   public previousDay() {
@@ -62,7 +65,7 @@ export class DatepickerComponent {
     );
     this.setDaysInMonthArray();
     this.getWeekdayPlaceholders();
-    this.change$.emit(this.selectedDate);
+    this.change$.emit(this.pipe.transform(this.selectedDate, 'yyyy-MM-dd'));
   }
 
   public nextMonth() {
@@ -92,7 +95,7 @@ export class DatepickerComponent {
       day
     );
     this.isOpen = false;
-    this.change$.emit(this.selectedDate);
+    this.change$.emit(this.pipe.transform(this.selectedDate, 'yyyy-MM-dd'));
   }
 
   private setDaysInMonthArray() {

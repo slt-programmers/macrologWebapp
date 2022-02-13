@@ -1,4 +1,4 @@
-@import '../../../../css/variables.scss';
+@import "../../../../css/variables.scss";
 
 .navbar {
   &__hamburger-line {
@@ -7,7 +7,7 @@
     width: 1.25rem;
     margin: 0.25rem;
   }
-  
+
   &__item {
     padding: 0.5rem;
   }
@@ -16,19 +16,19 @@
     position: absolute;
     top: 0;
     right: 0;
-    background-color: white;  
+    background-color: white;
     min-width: 100px;
     padding: 1rem;
     border-bottom-left-radius: 4px;
-    box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.1);
+    box-shadow: $boxShadow, $boxShadowWide;
     .navbar__item {
       padding: 0.75rem 0.5rem;
     }
   }
 
   height: 4rem;
-  background-color: white;  
-  box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.1);
+  background-color: white;
+  box-shadow: $boxShadow, $boxShadowWide;
 }
 
 .navbar-placeholder {

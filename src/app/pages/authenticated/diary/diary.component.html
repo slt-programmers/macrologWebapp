@@ -1,28 +1,28 @@
 <div class="content">
   <div class="card">
-    <div class="flex flex-col align-center" *ngIf="intakeGoals">
+    <div class="flex flex-col align-center" *ngIf="intakeGoals && (totals$ | async)">
       <div class="flex">
         <div class="stackdonut-wrapper">
           <ml-stackdonut [goal]="intakeGoals[0]" [circleRadius]="circleRadius"
-            [strokeWidth]="strokeWidth" [text]="'Protein'" [achieved]="getTotal('protein')">
+            [strokeWidth]="strokeWidth" [text]="'Protein'" [achieved]="(totals$ | async).protein">
           </ml-stackdonut>
         </div>
 
         <div class="stackdonut-wrapper">
           <ml-stackdonut [goal]="intakeGoals[1]" [circleRadius]="circleRadius"
-            [strokeWidth]="strokeWidth" [text]="'Fat'" [achieved]="getTotal('fat')">
+            [strokeWidth]="strokeWidth" [text]="'Fat'" [achieved]="(totals$ | async).fat">
           </ml-stackdonut>
         </div>
 
         <div class="stackdonut-wrapper">
           <ml-stackdonut [goal]="intakeGoals[2]" [circleRadius]="circleRadius"
-            [strokeWidth]="strokeWidth" [text]="'Carbs'" [achieved]="getTotal('carbs')">
+            [strokeWidth]="strokeWidth" [text]="'Carbs'" [achieved]="(totals$ | async).carbs">
           </ml-stackdonut>
         </div>
       </div>
 
       <div class="flex">
-        <p>{{ getTotal('calories') | number: '1.0-0' }}/{{ goalCal }}
+        <p>{{ (totals$ | async).calories | number: '1.0-0' }}/{{ goalCal }}
           <span class="">Calories</span>
         </p>
       </div>
@@ -35,47 +35,10 @@
 
   <div class="logday card">
     <div class="logday__date">
-      <ml-datepicker (change$)="getDifferentDay($event)"></ml-datepicker>
+      <ml-datepicker (change$)="changeDate($event)"></ml-datepicker>
     </div>
 
-    <div class="flex px-1 col-gap-1">
-      <div class="flex-3"></div>
-      <div class="flex-2"></div>
-      <div class="flex-1"></div>
-      <div class="flex-1 font-bold overflow-hidden">Protein</div>
-      <div class="flex-1 font-bold overflow-hidden">Fat</div>
-      <div class="flex-1 font-bold overflow-hidden">Carbs</div>
-      <div class="flex-1 font-bold overflow-hidden">Calories</div>
-    </div>
+    <ml-diary-page [date]="displayDate"></ml-diary-page>
 
-    <ml-diary-page></ml-diary-page>
-
-    <ml-log-meal id="breakfast" #breakfast [open]="breakfastOpen" [date]="displayDate"
-      [meal]="'Breakfast'" [logEntries]="breakfastLogs" (dataChanged)="refresh()"></ml-log-meal>
-    <ml-log-meal #lunch [open]="lunchOpen" [date]="displayDate" [meal]="'Lunch'"
-      [logEntries]="lunchLogs" (dataChanged)="refresh()"></ml-log-meal>
-    <ml-log-meal #dinner [open]="dinnerOpen" [date]="displayDate" [meal]="'Dinner'"
-      [logEntries]="dinnerLogs" (dataChanged)="refresh()"></ml-log-meal>
-    <ml-log-meal #snacks [open]="snacksOpen" [date]="displayDate" [meal]="'Snacks'"
-      [logEntries]="snacksLogs" (dataChanged)="refresh()"></ml-log-meal>
-    <ml-log-activity #activities [open]="activitiesOpen" [date]="displayDate"
-      [logActivities]="activitiesLogs" [syncAvailable]="activititiesSync" (dataChanged)="refresh()"
-      (forced)="forceSync()"></ml-log-activity>
-
-    <div class="flex font-bold p-1">
-      <span class="flex-3">Daily total</span>
-      <span class="flex-2"></span>
-      <span class="flex-1"></span>
-      <span class="flex-1">{{
-        getTotal('protein') | number: '1.1-1'
-        }}</span>
-      <span class="flex-1">{{
-        getTotal('fat') | number: '1.1-1'
-        }}</span>
-      <span class="flex-1">{{
-        getTotal('carbs') | number: '1.1-1'
-        }}</span>
-      <span class="flex-1">{{ getTotal('calories') | number: '1.0-0' }}</span>
-    </div>
   </div>
 </div>

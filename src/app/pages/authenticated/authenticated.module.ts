@@ -7,14 +7,14 @@ import { AuthenticatedRoutingModule } from "./authenticated-routing.module";
 import { AuthenticatedComponent } from "./authenticated.component";
 import { DiaryPageComponent } from "./diary/diary-page/diary-page.component";
 import { DiaryComponent } from "./diary/diary.component";
-import { LogActivityComponent } from "./diary/log-activity/log-activity.component";
-import { LogMealComponent } from "./diary/log-meal/log-meal.component";
 import { DishesComponent } from "./dishes/dishes.component";
 import { EditFoodComponent } from "./food/edit-food/edit-food.component";
 import { FoodComponent } from "./food/food.component";
 import { GraphsComponent } from "./graphs/graphs.component";
 import { OnboardingComponent } from "./onboarding/onboarding.component";
 import { UserComponent } from "./user/user.component";
+import { EntryPageRowComponent } from './diary/entry-page-row/entry-page-row.component';
+import { ActivityPageRowComponent } from './diary/activity-page-row/activity-page-row.component';
 
 @NgModule({
   imports: [
@@ -34,9 +34,9 @@ import { UserComponent } from "./user/user.component";
     EditFoodComponent,
     DishesComponent,
     GraphsComponent,
-    LogMealComponent,
-    LogActivityComponent,
-    DiaryPageComponent
+    DiaryPageComponent,
+    EntryPageRowComponent,
+    ActivityPageRowComponent
   ],
   exports: [
   ]

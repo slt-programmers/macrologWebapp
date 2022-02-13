@@ -9,7 +9,7 @@
   align-items: center;
   background-color: $primary;
   border-radius: 2px;
-  color: $ghost;
+  color: $white;
   display: flex;
 
   &__selected-day {
@@ -47,7 +47,7 @@
   position: relative;
   width: 300px;
   z-index: 2;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0 10px rgb(156, 169, 185);
 
   &__header {
     display: flex;
@@ -86,7 +86,7 @@
     }
 
     &:hover {
-      background-color: $mist;
+      background-color: $lightBlue;
     }
   }
 }

@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ActivityService } from './services/activity.service';
 import { AdminService } from './services/admin.service';
 import { DiaryService } from './services/diary.service';
 import { DishService } from './services/dish.service';
@@ -18,7 +17,6 @@ import { WeightService } from './services/weight.service';
   ], 
   providers: [
     AdminService,
-    ActivityService,
     FoodService,
     DiaryService,
     UserService,

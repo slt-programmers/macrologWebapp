@@ -1,11 +1,11 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { UserService } from '../../../shared/services/user.service';
-import { Gender } from '../../../shared/model/gender';
 import { Router } from '@angular/router';
 import { forkJoin } from 'rxjs';
 import { calculateTDEE } from 'src/app/util/functions';
 import { differenceInYears, isValid, parse } from 'date-fns';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'ml-onboarding',
@@ -26,7 +26,8 @@ export class OnboardingComponent implements OnInit {
   public expandMoreInfo = false;
 
   // Step 4
-  public displayDate = new Date();
+  public displayDate;
+  public datePipe = new DatePipe('en-US');
   public breakfastOpen = false;
   public foodSearchables = new Array();
 
@@ -34,6 +35,7 @@ export class OnboardingComponent implements OnInit {
   public currentStep: number;
 
   constructor(private userService: UserService, private router: Router) {
+    this.displayDate = this.datePipe.transform(new Date(), 'yyyy-MM-dd');
     this.userForm = new FormGroup({
       name: new FormControl('', Validators.required),
       birthday: new FormControl('', Validators.required),

@@ -203,8 +203,7 @@
               <span class="logday__header__macro">Carbs</span>
             </div>
 
-            <ml-log-meal #breakfast [dummy]="true" [open]="breakfastOpen" [date]="displayDate"
-              [meal]="'Breakfast'" [logEntries]="[]" (dataChanged)="dummy()"></ml-log-meal>
+            <ml-entry-page-row [date]="displayDate" [meal]="'Breakfast'"></ml-entry-page-row>
           </div>
         </div>
 

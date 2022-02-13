@@ -1,0 +1,10 @@
+@import "../../../../../css/variables.scss";
+
+.selectable {
+  cursor: pointer;
+  border-radius: 0.25rem;
+  
+  &:hover {
+    background-color: $lightBlue;
+  }
+}

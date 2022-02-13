@@ -1,0 +1,74 @@
+<div class="content-sm p-1 selectable" (click)="openModal()">
+  <div class="flex col-gap-1 align-center">
+    <span class="font-bold">Activities </span>
+
+    <button class="icon-button z-2" (click)="syncActivities()">
+      <em *ngIf="showSync()" title="Synchronize with external sources."
+        class="fas fa-sync-alt primary">
+      </em>
+    </button>
+  </div>
+
+  <div *ngFor="let activity of activities" class="flex col-gap-1">
+    <span class="flex-8">{{activity.name}}
+      <a *ngIf="activity.syncedWith === 'STRAVA'" target="_blank"
+        href="https://www.strava.com/activities/{{activity.syncedId}}">(View on Strava)</a>
+    </span>
+
+    <span class="flex-1">{{activity.calories | number:'1.0-0'}} kcal</span>
+  </div>
+</div>
+
+<ml-modal *ngIf="showModal" [title]="'Edit activities'" (close$)="showModal = false">
+  <div class="content min-w-32">
+    <div *ngIf="!modalActivities || modalActivities.length === 0">Add activities to your diary.
+    </div>
+
+    <div *ngIf="modalActivities && modalActivities.length > 0" class="flex col-gap-1">
+      <div class="flex-4 font-bold">Activity name</div>
+      <div class="flex-2 font-bold">Calories burned</div>
+      <div class="flex-1"></div>
+    </div>
+
+    <div *ngFor="let activity of modalActivities; index as index"
+      class="flex col-gap-1 align-center">
+      <div class="flex-4">
+        <input class="input" value="{{activity.name}}" (keyup)="changeName($event, index)">
+      </div>
+
+      <div class="flex-2">
+        <input class="input" value="{{activity.calories}}" step="1" type="number"
+        (keyup)="changeCalories($event, index)">
+      </div>
+
+      <div class="flex flex-1 justify-end">
+        <button class="icon-button fas fa-trash" (click)="deleteActivity(index)"></button>
+      </div>
+    </div>
+
+    <form [formGroup]="activityForm">
+      <div class="content mt-2">
+        <div class="flex align-center">
+          <label for="name" class="flex-1">Activity name</label>
+          <input formControlName="name" class="input flex-2" name="name">
+        </div>
+
+        <div class="flex align-center">
+          <label for="calories" class="flex-1">Calories burned</label>
+          <input formControlName="calories" class="input flex-2" name="calories" type="number"
+            step="1">
+        </div>
+
+        <div>
+          <button class="button button--primary" (click)="addActivity()">Add</button>
+        </div>
+      </div>
+    </form>
+
+    <div>
+      <div class="button-wrapper">
+        <button class="button button--primary" (click)="saveActivities()">Save</button>
+      </div>
+    </div>
+  </div>
+</ml-modal>
