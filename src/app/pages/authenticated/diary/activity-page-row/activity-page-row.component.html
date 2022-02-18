@@ -10,12 +10,16 @@
   </div>
 
   <div *ngFor="let activity of activities" class="flex col-gap-1">
-    <span class="flex-8">{{activity.name}}
+    <div class="flex-3">{{activity.name}}
       <a *ngIf="activity.syncedWith === 'STRAVA'" target="_blank"
         href="https://www.strava.com/activities/{{activity.syncedId}}">(View on Strava)</a>
-    </span>
-
-    <span class="flex-1">{{activity.calories | number:'1.0-0'}} kcal</span>
+    </div>
+    <div class="flex-2"></div>
+    <div class="flex-1"></div>
+    <div class="flex-1"></div>
+    <div class="flex-1"></div>
+    <div class="flex-1"></div>
+    <div class="flex-1">{{activity.calories | number:'1.0-0'}}</div>
   </div>
 </div>
 
@@ -38,7 +42,7 @@
 
       <div class="flex-2">
         <input class="input" value="{{activity.calories}}" step="1" type="number"
-        (keyup)="changeCalories($event, index)">
+          (keyup)="changeCalories($event, index)">
       </div>
 
       <div class="flex flex-1 justify-end">

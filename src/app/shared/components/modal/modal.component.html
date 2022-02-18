@@ -3,15 +3,14 @@
     <div class="flex flex-grow">
       <h3 class="text-lg font-bold flex-grow">{{title}}</h3>
 
-      <button id="forgotClose" class="icon-button" aria-label="Close"
-        (click)="closeModal()">
+      <button id="forgotClose" class="icon-button" aria-label="Close" (click)="closeModal()">
         <em class="fas fa-times"></em>
       </button>
     </div>
 
     <div>
       <div class="mt-1">
-        <ng-content ></ng-content>
+        <ng-content></ng-content>
       </div>
     </div>
   </div>

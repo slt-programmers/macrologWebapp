@@ -1,6 +1,17 @@
 @import "../../../../css/variables.scss";
 
 .navbar {
+  @media (min-width: $sm) {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+  }
+
+  height: 4rem;
+  background-color: white;
+  box-shadow: $boxShadow, $boxShadowWide;
+
   &__hamburger-line {
     background-color: $secondary;
     height: 3px;
@@ -25,14 +36,13 @@
       padding: 0.75rem 0.5rem;
     }
   }
-
-  height: 4rem;
-  background-color: white;
-  box-shadow: $boxShadow, $boxShadowWide;
 }
 
 .navbar-placeholder {
-  height: 4rem;
+  @media (min-width: $sm) {
+    height: 4rem;
+  }
+  height: 1rem;
 }
 
 .logo {

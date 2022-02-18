@@ -2,15 +2,9 @@
 $black: #000000;
 $coal: #191919;
 $storm: #333333;
-// $concrete: #4c4c4c;
-// $iron: #666666;
-// $grey: #7f7f7f;
-// $silver: #999999;
 $platinum: #b1bcc9;
 $smoke: #c8d0d9;
 $mist: #dcdee3;
-// $cloud: #f8f8f8;
-// $ghost: #fbfbfb;
 $white: #ffffff;
 
 $primary: #3f51b5;
@@ -59,6 +53,16 @@ li::marker {
 }
 .sm {
   @media (max-width: ($sm - 1)) {
+    display: none;
+  }
+}
+.lg-only {
+  @media (min-width: $lg) {
+    display: none;
+  }
+}
+.lg {
+  @media (max-width: ($lg - 1)) {
     display: none;
   }
 }
