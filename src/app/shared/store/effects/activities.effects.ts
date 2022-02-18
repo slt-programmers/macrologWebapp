@@ -3,7 +3,7 @@ import { Injectable } from "@angular/core";
 import { Actions, createEffect, ofType, concatLatestFrom } from "@ngrx/effects";
 import { Store } from "@ngrx/store";
 import { of } from "rxjs";
-import { catchError, concatMap, map, withLatestFrom } from "rxjs/operators";
+import { catchError, concatMap, map } from "rxjs/operators";
 import { environment } from "src/environments/environment";
 import { Activity } from "../../model/activity";
 import { activitiesActions } from "../actions/activities.actions";
@@ -19,12 +19,17 @@ export class ActivitiesEffects {
       ofType(activitiesActions.get),
       concatLatestFrom(() => this.store.select(selectActivities)),
       concatMap(([action, state]) => {        
-        const hasActivitiesForDate = state?.filter(apd => apd.date === action.params.date)[0];
+        const hasActivitiesForDate = state.filter(apd => apd.date === action.params.date)[0];
         if (!state || !hasActivitiesForDate || action.force) {
           const syncUrl = action.params.sync ? '?forceSync=true' : ''
           return this.http.get<Activity[]>(this.backendUrl + '/day/' + action.params.date + syncUrl).pipe(
             map(response => {
-              state.push({ date: action.params.date, activities: response });
+              const dateInState = state.filter(epd => epd.date === action.params.date)[0]
+              if (!dateInState) {
+                state.push({date: action.params.date, activities: response})
+              } else {
+                dateInState.activities = response;
+              }
               return activitiesActions.success(state);
             }),
             catchError(error => {
@@ -50,7 +55,11 @@ export class ActivitiesEffects {
         return this.http.post<Activity[]>(this.backendUrl + '/day/' + action.params, action.body, options).pipe(
           map(response => {
             const dateInState = state.filter(epd => epd.date === action.params)[0]
-            !dateInState ? state.push({ date: action.date, activities: response }) : dateInState.activities = response;
+            if (!dateInState) {
+              state.push({date: action.params, activities: response})
+            } else {
+              dateInState.activities = response;
+            }
             return activitiesActions.success(state)
           }),
           catchError(

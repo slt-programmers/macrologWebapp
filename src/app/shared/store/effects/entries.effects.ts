@@ -1,10 +1,9 @@
-import { DatePipe } from "@angular/common";
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { createEffect, Actions, ofType, concatLatestFrom } from "@ngrx/effects";
 import { Store } from "@ngrx/store";
 import { of } from "rxjs";
-import { concatMap, catchError, map, withLatestFrom } from "rxjs/operators";
+import { concatMap, catchError, map } from "rxjs/operators";
 import { environment } from "src/environments/environment";
 import { Entry } from "../../model/entry";
 import { entriesActions } from "../actions/entries.actions";
@@ -51,7 +50,12 @@ export class EntriesEffects {
         return this.http.post<Entry[]>(this.backendUrl + '/day/' + action.params, action.body, options).pipe(
           map(response => {
             const dateInState = state.filter(epd => epd.date === action.params)[0]
-            !dateInState ? state.push({ date: action.date, entries: response }) : dateInState.entries = response;
+            if (!dateInState) {
+              state.push({ date: action.date, entries: response })
+            }
+            else {
+              dateInState.entries = response;
+            }
             return entriesActions.success(state)
           }),
           catchError(

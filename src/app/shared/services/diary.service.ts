@@ -1,7 +1,5 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { StoreLogRequest } from '../model/storeLogRequest';
-import { Entry } from '../model/entry';
 import { environment } from '../../../environments/environment';
 import { MacrosPerDay } from '../model/macrosPerDay';
 import { catchError } from 'rxjs/operators';

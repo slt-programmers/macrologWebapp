@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { DiaryService } from '../../../shared/services/diary.service';
 import { UserService } from '../../../shared/services/user.service';
 import { DataPoint } from 'src/app/shared/components/linegraph/linegraph.component';

@@ -36,6 +36,7 @@ describe('Food Effects', () => {
     const result = await effects.getAllFood$.toPromise();
     expect(result).toEqual(foodActions.success([]));
   });
+  
   it('should handle error on get all food', async () => {
     actions$ = of(foodActions.get);
     spyOn(http, 'get').and.returnValue(throwError({ status: 404 }))

@@ -3,6 +3,7 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { MockComponent, MockProvider } from "ng-mocks"
 import { of } from "rxjs";
 import { StepperComponent } from "src/app/shared/components/stepper/stepper.component";
+import { Gender } from "src/app/shared/model/gender";
 import { ToastService } from "src/app/shared/services/toast.service";
 import { UserService } from "src/app/shared/services/user.service";
 import { PersonalComponent } from "./personal.component"
@@ -34,7 +35,7 @@ describe('PersonalComponent', () => {
   it('should create', () => {
     spyOn(userService, 'getUserSettings').and.returnValue(of({
       name: "C",
-      gender: "FEMALE",
+      gender: Gender.Female,
       age: 32,
       birthday: "1989-03-26",
       height: 166,
