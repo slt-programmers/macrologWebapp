@@ -20,11 +20,16 @@ export class EntriesEffects {
       ofType(entriesActions.get),
       concatLatestFrom(() => this.store.select(selectEntries)),
       concatMap(([action, state]) => {
-        const hasEntriesForDate = state?.filter(epd => epd.date === action.params)[0];
+        const hasEntriesForDate = state.filter(epd => epd.date === action.params)[0];
         if (!state || !hasEntriesForDate || action.force) {
           return this.http.get<Entry[]>(this.backendUrl + '/day/' + action.params).pipe(
             map(response => {
-              state.push({ date: action.params, entries: response });
+              if (!hasEntriesForDate) {
+                state.push({ date: action.params, entries: response })
+              }
+              else {
+                hasEntriesForDate.entries = response;
+              }
               return entriesActions.success(state);
             }),
             catchError(error => {
@@ -51,7 +56,7 @@ export class EntriesEffects {
           map(response => {
             const dateInState = state.filter(epd => epd.date === action.params)[0]
             if (!dateInState) {
-              state.push({ date: action.date, entries: response })
+              state.push({ date: action.params, entries: response })
             }
             else {
               dateInState.entries = response;

@@ -24,11 +24,10 @@ export class ActivitiesEffects {
           const syncUrl = action.params.sync ? '?forceSync=true' : ''
           return this.http.get<Activity[]>(this.backendUrl + '/day/' + action.params.date + syncUrl).pipe(
             map(response => {
-              const dateInState = state.filter(epd => epd.date === action.params.date)[0]
-              if (!dateInState) {
+              if (!hasActivitiesForDate) {
                 state.push({date: action.params.date, activities: response})
               } else {
-                dateInState.activities = response;
+                hasActivitiesForDate.activities = response;
               }
               return activitiesActions.success(state);
             }),
