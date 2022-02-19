@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { HealthcheckService } from './shared/services/healthcheck.service';
 
 @Component({
@@ -11,7 +10,8 @@ export class AppComponent implements OnInit {
   private asleep = true;
   private theme: string;
 
-  constructor(public router: Router, private healthcheckService: HealthcheckService) { }
+  constructor(private readonly healthcheckService: HealthcheckService,
+    private readonly document: Document) { }
 
   ngOnInit(): void {
     this.healthcheck();
@@ -21,7 +21,7 @@ export class AppComponent implements OnInit {
   private setTheme() {
     const theme = localStorage.getItem('theme');
     if (theme === 'dark') {
-      document.getElementsByTagName('body')[0].classList.add('theme--dark');
+      this.document.getElementsByTagName('body')[0].classList.add('theme--dark');
     }
   }
 

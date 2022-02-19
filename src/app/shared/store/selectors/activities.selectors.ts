@@ -3,8 +3,7 @@ import { Activity } from "../../model/activity";
 import { activitiesFeatureKey } from "../reducers/activities.reducers";
 import { AsyncState } from "../reducers/async.reducers";
 
-export const selectActivitiesState =
-  createFeatureSelector<AsyncState<{ date: string, activities: Activity[] }[]>>(activitiesFeatureKey);
+export const selectActivitiesState = createFeatureSelector<AsyncState<{ date: string, activities: Activity[] }[]>>(activitiesFeatureKey);
 
 export const selectActivitiesLoading = createSelector(selectActivitiesState, (state) => {
   if (state) {

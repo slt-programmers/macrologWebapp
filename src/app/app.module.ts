@@ -35,6 +35,7 @@ import { ActivitiesEffects } from './shared/store/effects/activities.effects';
   ],
   providers: [
     { provide: Window, useValue: window},
+    { provide: Document, useValue: document},
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
   ],
