@@ -1,6 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
+import { Store } from "@ngrx/store";
 import { of } from "rxjs";
 import { concatMap, catchError, map } from "rxjs/operators";
 import { environment } from "src/environments/environment";
@@ -28,5 +29,50 @@ export class DishesEffects {
     )
   });
 
-  constructor(private readonly actions$: Actions, private readonly http: HttpClient) {}
+  postDish$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(dishesActions.post),
+      concatMap((action) => {
+        const headers = {
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': environment.origin,
+        };
+        const options = { headers: headers };
+        console.log(action.body)
+        return this.http.post<Dish>(this.backendUrl, action.body, options).pipe(
+          map((response) => {
+            this.store.dispatch(dishesActions.get());
+            return dishesActions.success(response);
+          }),
+          catchError(error => {
+            return of(dishesActions.failed({response: error}));
+          }));
+      })
+    );
+  });
+
+  deleteDish$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(dishesActions.delete),
+      concatMap((action) => {
+        const headers = {
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': environment.origin,
+        };
+        const options = { headers: headers };
+        return this.http.delete<number>(this.backendUrl + '/' + action.params, options).pipe(
+          map(response => {
+            this.store.dispatch(dishesActions.get());
+            return dishesActions.success(response);
+          }),
+          catchError(error => {
+            return of(dishesActions.failed({response: error}));
+          })
+        )
+      })
+    )
+  })
+
+  constructor(private readonly actions$: Actions, private readonly http: HttpClient,
+    private readonly store: Store) { }
 }
