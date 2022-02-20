@@ -1,4 +1,4 @@
-import { Component, Input, ViewChild, ElementRef, Output, EventEmitter, HostListener, OnDestroy } from '@angular/core';
+import { Component, Input, ViewChild, ElementRef, Output, EventEmitter, HostListener, OnDestroy, OnInit } from '@angular/core';
 import { FoodSearchable } from '../../model/foodSearchable';
 import { Food } from '../../model/food';
 import { Dish } from '../../model/dish';
@@ -13,7 +13,7 @@ import { selectAllDishes } from '../../store/selectors/dishes.selectors';
   templateUrl: './autocomplete-food.component.html',
   styleUrls: ['./autocomplete-food.component.scss'],
 })
-export class AutocompleteFoodComponent implements OnDestroy {
+export class AutocompleteFoodComponent implements OnInit, OnDestroy {
   @HostListener('document.click', ['$event.target'])
   onClick(target: ElementRef) {
     this.closeAutoComplete(target);
@@ -40,7 +40,9 @@ export class AutocompleteFoodComponent implements OnDestroy {
   private foodSubscription: Subscription;
   private dishesSubscription: Subscription;
 
-  constructor(private readonly store: Store) {
+  constructor(private readonly store: Store) { }
+
+  ngOnInit(): void {
     this.foodSubscription = this.store.select(selectAllFood).subscribe(it => {
       this.allFood = it;
       this.getFoodSearchableList();
@@ -114,19 +116,24 @@ export class AutocompleteFoodComponent implements OnDestroy {
 
   private getFoodSearchableList(): void {
     if (!this.dummy) {
-
+      console.log(this.allFood);
+      console.log(this.allDishes)
       if (!!this.allFood && !!this.allDishes) {
         const searchList = [];
         for (const item of this.allFood) {
           const searchable: FoodSearchable = { food: item };
           searchList.push(searchable);
         }
+        console.log(this.includeDishes);
         if (this.includeDishes) {
+          console.log('here')
           for (const dish of this.allDishes) {
+            console.log(dish)
             searchList.push({ dish: dish });
           }
         }
         this.searchables = searchList;
+        console.log(this.searchables);
       }
     } else {
       const item: Food = { name: 'Apple', protein: 0.4, fat: 0.0, carbs: 12 };

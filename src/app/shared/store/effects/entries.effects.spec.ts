@@ -50,7 +50,7 @@ describe('Entries Effects', () => {
 
   it('should get entries for date with previous state and force', async () => {
     store.overrideSelector(selectEntries, [{ date: '2022-01-01', entries: [{ food: {} } as Entry] }])
-    actions$ = of(entriesActions.get(true, '2022-01-01' ));
+    actions$ = of(entriesActions.get(true, '2022-01-01'));
     spyOn(http, 'get').and.returnValue(of([{ food: {} } as Entry, { food: {} } as Entry]))
     const result = await effects.getEntriesForDate$.toPromise();
     expect(result).toEqual(entriesActions.success([{ date: '2022-01-01', entries: [{ food: {} }, { food: {} }] }]));
@@ -65,7 +65,7 @@ describe('Entries Effects', () => {
 
   it('should post entries for date without previous state', async () => {
     store.overrideSelector(selectEntries, []);
-    actions$ = of(entriesActions.post([{ food: {} }], '2022-01-01'));
+    actions$ = of(entriesActions.post([{ food: {} }], { date: '2022-01-01', meal: 'BREAKFAST' }));
     spyOn(http, 'post').and.returnValue(of([{ food: {} }]))
     const result = await effects.postEntriesForDate$.toPromise();
     expect(result).toEqual(entriesActions.success([{ date: '2022-01-01', entries: [{ food: {} }] }]));
@@ -73,14 +73,14 @@ describe('Entries Effects', () => {
 
   it('should post entries for date with previous state', async () => {
     store.overrideSelector(selectEntries, [{ date: '2022-01-01', entries: [] }]);
-    actions$ = of(entriesActions.post([{ food: {} }], '2022-01-01'));
+    actions$ = of(entriesActions.post([{ food: {} }], { date: '2022-01-01', meal: 'BREAKFAST' }));
     spyOn(http, 'post').and.returnValue(of([{ food: {} }]))
     const result = await effects.postEntriesForDate$.toPromise();
     expect(result).toEqual(entriesActions.success([{ date: '2022-01-01', entries: [{ food: {} }] }]));
   });
 
   it('should handle error on posting entries', async () => {
-    actions$ = of(entriesActions.post([], '2022-01-01'));
+    actions$ = of(entriesActions.post([], { date: '2022-01-01', meal: 'BREAKFAST' }));
     spyOn(http, 'post').and.returnValue(throwError({ status: 400 }))
     const result = await effects.postEntriesForDate$.toPromise();
     expect(result).toEqual(entriesActions.failed({ response: { status: 400 } }));

@@ -5,6 +5,7 @@ import { AuthenticationService } from '../../shared/services/auth.service';
 import { HealthcheckService } from 'src/app/shared/services/healthcheck.service';
 import { foodActions } from 'src/app/shared/store/actions/food.actions';
 import { Store } from '@ngrx/store';
+import { dishesActions } from 'src/app/shared/store/actions/dishes.actions';
 
 @Component({
   selector: 'ml-authenticated',
@@ -36,6 +37,7 @@ export class AuthenticatedComponent implements OnInit {
       }
     );
     this.store.dispatch(foodActions.get());
+    this.store.dispatch(dishesActions.get())
   }
 
   public stillSleeping(): boolean {
