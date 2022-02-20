@@ -89,7 +89,7 @@ export class EntryPageRowComponent implements OnChanges, OnDestroy {
       }
     }
     if (!missingInput) {
-      this.store.dispatch(entriesActions.post(this.modalEntries, this.date));
+      this.store.dispatch(entriesActions.post(this.modalEntries, {date: this.date, meal: this.meal}));
       this.showModal = false;
       this.modalEntries = undefined;
     }

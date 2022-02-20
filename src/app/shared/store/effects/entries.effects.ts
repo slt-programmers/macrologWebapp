@@ -52,11 +52,11 @@ export class EntriesEffects {
           'Access-Control-Allow-Origin': environment.origin,
         };
         const options = { headers: headers };
-        return this.http.post<Entry[]>(this.backendUrl + '/day/' + action.params, action.body, options).pipe(
+        return this.http.post<Entry[]>(this.backendUrl + '/day/' + action.params.date + '/' + action.params.meal, action.body, options).pipe(
           map(response => {
-            const dateInState = state.filter(epd => epd.date === action.params)[0]
+            const dateInState = state.filter(epd => epd.date === action.params.date)[0]
             if (!dateInState) {
-              state.push({ date: action.params, entries: response })
+              state.push({ date: action.paramsdate, entries: response })
             }
             else {
               dateInState.entries = response;
