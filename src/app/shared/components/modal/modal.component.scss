@@ -17,7 +17,7 @@
 // card-like but with margins to position it properly
 .modal {
   @media (min-width: $sm) {
-    margin-top: 2rem;
+    margin-top: 4rem;
     margin-bottom: 2rem;
     max-width: 800px; // TODO depends on content and screen size
     // min-width: 36rem; // TODO depends on content and screen size

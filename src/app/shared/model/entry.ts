@@ -1,4 +1,5 @@
 import { Food } from './food';
+import { Macros } from './macros';
 import { Portion } from './portion';
 
 export interface Entry {
@@ -8,7 +9,7 @@ export interface Entry {
   food?: Food;
   portion?: Portion;
   multiplier?: number;
-  day?: Date;
-  macrosCalculated?: any;
+  day?: string;
+  macrosCalculated?: Macros;
 
 }

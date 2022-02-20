@@ -22,14 +22,13 @@
   background-color: white;
   border: 1px solid $secondary;
   border-radius: 50px;
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
   text-transform: capitalize;
   font-size: 1rem;
   font-family: "Assistant", sans-serif;
+  cursor: pointer;
 
   &:hover {
     text-decoration: none;
-    cursor: pointer;
   }
 
   &--primary {
@@ -48,7 +47,6 @@
     color: white;
     background-color: transparent;
     border: 1px solid white;
-    box-shadow: none;
   }
 
   &--large {
@@ -72,7 +70,7 @@
   border-radius: 50px;
   height: 55px;
   width: 55px;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  cursor: pointer;
 }
 
 .icon-button {
@@ -85,4 +83,5 @@
   align-items: center;
   justify-content: center;
   background: none;
+  cursor: pointer;
 }

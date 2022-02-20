@@ -1,107 +1,46 @@
-import { Component, HostListener, OnInit, ViewChild } from '@angular/core';
-import { DiaryService } from '../../../shared/services/diary.service';
-import { ActivityService } from '../../../shared/services/activity.service';
+import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../../shared/services/user.service';
-import { Entry } from '../../../shared/model/entry';
-import { Activity } from '../../../shared/model/activity';
 import { DatePipe } from '@angular/common';
-import { ToastService } from 'src/app/shared/services/toast.service';
+import { Store } from '@ngrx/store';
+import { selectTotalsForDate } from 'src/app/shared/store/selectors/entries.selectors';
+import { Observable } from 'rxjs';
+import { Macros } from 'src/app/shared/model/macros';
 
 @Component({
-  selector: 'ml-diary-page',
+  selector: 'ml-diary',
   templateUrl: './diary.component.html'
 })
 export class DiaryComponent implements OnInit {
-  @HostListener('document:click', ['$event.target']) 
-  onClick(target: HTMLElement) {
-    this.documentClick(target);
-  }
 
-  @ViewChild('breakfast', { static: false }) breakfastEref: any;
-  @ViewChild('lunch', { static: false }) lunchEref: any;
-  @ViewChild('dinner', { static: false }) dinnerEref: any;
-  @ViewChild('snacks', { static: false }) snacksEref: any;
-  @ViewChild('activities', { static: false }) activitiesEref: any;
-
-  public modalIsVisible = false;
-  public isLogMealOpen: boolean;
-  public allLogs: Entry[];
-  public displayDate: Date;
-  private pipe: DatePipe;
-
-  public breakfastLogs = new Array<Entry>();
-  public lunchLogs = new Array<Entry>();
-  public dinnerLogs = new Array<Entry>();
-  public snacksLogs = new Array<Entry>();
-  public activitiesLogs = new Array<Activity>();
-
-  public breakfastOpen = false;
-  public lunchOpen = false;
-  public dinnerOpen = false;
-  public snacksOpen = false;
-  public activitiesOpen = false;
-
-  public activititiesSync = false;
+  public date: string;
+  public totals$: Observable<Macros>;
   public intakeGoals: any[];
   public goalCal: number;
   public circleRadius = 60;
   public strokeWidth = 8;
+  
+  private pipe: DatePipe;
 
-  constructor(private userService: UserService, private readonly toastService: ToastService,
-    private logService: DiaryService, private activityService: ActivityService,
+  constructor(private readonly userService: UserService,
+    private readonly store: Store,
     private readonly window: Window) {
-    this.displayDate = new Date();
-    this.pipe = new DatePipe('en-US');
+      this.pipe = new DatePipe('en-US');
+      this.date = this.pipe.transform(new Date(), 'yyyy-MM-dd');
+      this.totals$ = this.store.select(selectTotalsForDate(this.date));
   }
 
   ngOnInit() {
-    this.getSyncSettings();
-    this.getUserGoals(this.pipe.transform(this.displayDate, 'yyyy-MM-dd'));
-    this.getLogEntries(this.pipe.transform(this.displayDate, 'yyyy-MM-dd'));
+    this.getUserGoals(this.date);
     if (this.window.innerWidth < 480) {
       this.circleRadius = 40;
       this.strokeWidth = 5;
     }
   }
 
-  public refresh() {
-    this.getLogEntries(this.pipe.transform(this.displayDate, 'yyyy-MM-dd'));
-  }
-
-  public forceSync() {
-    this.activitiesLogs = [];
-    this.activityService.getActivitiesForDateForced(
-      this.pipe.transform(this.displayDate, 'yyyy-MM-dd')).subscribe(it => {
-        this.activitiesLogs = it;
-      });
-  }
-
-  public getTotal(macro: string): number {
-    let total = 0.0;
-    for (const logentry of this.breakfastLogs) {
-      total += +logentry.macrosCalculated[macro];
-    }
-    for (const logentry of this.lunchLogs) {
-      total += +logentry.macrosCalculated[macro];
-    }
-    for (const logentry of this.dinnerLogs) {
-      total += +logentry.macrosCalculated[macro];
-    }
-    for (const logentry of this.snacksLogs) {
-      total += +logentry.macrosCalculated[macro];
-    }
-    return total;
-  }
-
-  public getDifferentDay(event: any) {
-    this.displayDate = event;
-    this.breakfastOpen = false;
-    this.lunchOpen = false;
-    this.dinnerOpen = false;
-    this.snacksOpen = false;
-    this.activitiesOpen = false;
-    this.getUserGoals(this.pipe.transform(this.displayDate, 'yyyy-MM-dd'));
-    this.getLogEntries(this.pipe.transform(this.displayDate, 'yyyy-MM-dd'));
+  public changeDate(event: any) {
+    this.date = event;
+    this.getUserGoals(this.date);
+    this.totals$ = this.store.select(selectTotalsForDate(this.date));
   }
 
   private getUserGoals(date: string): void {
@@ -109,33 +48,6 @@ export class DiaryComponent implements OnInit {
     this.userService.getUserGoalStats(date).subscribe(it => {
       this.intakeGoals = it
       this.setGoalCal();
-    });
-  }
-
-  private getSyncSettings(): void {
-    this.userService.getSyncSettings('STRAVA').subscribe((result) => {
-      if (result.syncedAccountId) {
-        this.activititiesSync = true; // TODO --> GET THIS TO ACTIVITIES PAGE TO ENABLE SYNC BUTTON
-      }
-    });
-  }
-
-  private getLogEntries(date: string) {
-    this.allLogs = [];
-    this.breakfastLogs = [];
-    this.lunchLogs = [];
-    this.snacksLogs = [];
-    this.activitiesLogs = [];
-    this.logService.getLogsForDate(date).subscribe(it => {
-      this.allLogs = it;
-      this.breakfastLogs = this.allLogs.filter((entry) => entry.meal === 'BREAKFAST');
-      this.lunchLogs = this.allLogs.filter((entry) => entry.meal === 'LUNCH');
-      this.dinnerLogs = this.allLogs.filter((entry) => entry.meal === 'DINNER');
-      this.snacksLogs = this.allLogs.filter((entry) => entry.meal === 'SNACKS');
-    });
-
-    this.activityService.getActivitiesForDate(date).subscribe(it => {
-      this.activitiesLogs = it;
     });
   }
 
@@ -148,29 +60,4 @@ export class DiaryComponent implements OnInit {
     }
   }
 
-  private documentClick(target: HTMLElement) {
-    if (
-      !target.classList.contains('autocomplete__option') &&
-      !target.classList.contains('trash') &&
-      !target.classList.contains('button--delete') &&
-      !target.classList.contains('activity__name--sync') &&
-      !target.classList.contains('activity__title--sync')
-    ) {
-      this.breakfastOpen = this.breakfastEref.logMealEref.nativeElement.contains(
-        target
-      );
-      this.lunchOpen = this.lunchEref.logMealEref.nativeElement.contains(
-        target
-      );
-      this.dinnerOpen = this.dinnerEref.logMealEref.nativeElement.contains(
-        target
-      );
-      this.snacksOpen = this.snacksEref.logMealEref.nativeElement.contains(
-        target
-      );
-      this.activitiesOpen = this.activitiesEref.logActivityEref.nativeElement.contains(
-        target
-      );
-    }
-  }
 }

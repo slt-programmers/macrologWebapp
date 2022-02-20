@@ -12,7 +12,7 @@ describe('Async Reducers', () => {
   })
 
   it('should reduce get action', () => {
-    const result = reducers(undefined, actions.get({ id: 1 }));
+    const result = reducers(undefined, actions.get(false, { id: 1 }));
     expect(result).toEqual({
       params: { id: 1 },
       loading: true,

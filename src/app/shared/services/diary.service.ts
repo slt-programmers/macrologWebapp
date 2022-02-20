@@ -1,7 +1,5 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { StoreLogRequest } from '../model/storeLogRequest';
-import { Entry } from '../model/entry';
 import { environment } from '../../../environments/environment';
 import { MacrosPerDay } from '../model/macrosPerDay';
 import { catchError } from 'rxjs/operators';
@@ -13,36 +11,10 @@ export class DiaryService {
 
   constructor(private http: HttpClient) { }
 
-  public getLogsForDate(date: string): Observable<Entry[]> {
-    return this.http.get<Entry[]>(this.macrologBackendUrl + '/day/' + date).pipe(
-      catchError(error => {
-        return of<any>()
-      }));
-  }
-
   public getMacrosPerDay(dateFrom: string, dateTo: string): Observable<MacrosPerDay[]> {
     return this.http.get<MacrosPerDay[]>(this.macrologBackendUrl + '/macros',
       { params: { from: dateFrom, to: dateTo } })
       .pipe(catchError(error => { return of<any>() }));
   }
 
-  public addEntries(storeLogEntryRequest: StoreLogRequest[]): Observable<Entry[]> {
-    const headers = {
-      'Content-Type': 'application/json',
-      'Access-Control-Allow-Origin': environment.origin,
-    };
-    const options = { headers: headers };
-    return this.http.post<StoreLogRequest[]>(this.macrologBackendUrl + '/', storeLogEntryRequest, options)
-      .pipe(catchError(error => { return of<any>() }));
-  }
-
-  public deleteEntry(logEntry: Entry): Observable<number> {
-    const headers = {
-      'Content-Type': 'application/json',
-      'Access-Control-Allow-Origin': environment.origin,
-    };
-    const options = { headers: headers };
-    return this.http.delete<number>(this.macrologBackendUrl + '/' + logEntry.id, options)
-      .pipe(catchError(error => { return of<any>() }));
-  }
 }

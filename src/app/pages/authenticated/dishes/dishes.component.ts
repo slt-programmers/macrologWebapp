@@ -1,16 +1,19 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Ingredient } from '../../../shared/model/ingredient';
 import { Dish } from '../../../shared/model/dish';
-import { DishService } from '../../../shared/services/dish.service';
 import { Portion } from 'src/app/shared/model/portion';
 import { FoodSearchable } from 'src/app/shared/model/foodSearchable';
 import { Food } from 'src/app/shared/model/food';
+import { Store } from '@ngrx/store';
+import { dishesActions } from 'src/app/shared/store/actions/dishes.actions';
+import { selectAllDishes } from 'src/app/shared/store/selectors/dishes.selectors';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'ml-dishes',
   templateUrl: './dishes.component.html'
 })
-export class DishesComponent implements OnInit {
+export class DishesComponent implements OnInit, OnDestroy {
   public allDishes: Dish[] = [];
   public selectedDish: Dish;
   public modalIsVisible = false;
@@ -24,11 +27,14 @@ export class DishesComponent implements OnInit {
   public unitName = 'grams';
 
   private unitGrams = 100.0;
-
-  constructor(private dishService: DishService) { }
+  private subscription: Subscription;
+  constructor(private readonly store: Store) { }
 
   ngOnInit() {
-    this.getAllDishes();
+    this.store.dispatch(dishesActions.get());
+    this.subscription = this.store.select(selectAllDishes).subscribe(it => {
+      this.allDishes = it;
+    });
   }
 
   public openModal(dish: Dish): void {
@@ -38,7 +44,7 @@ export class DishesComponent implements OnInit {
       for (let ingredient of dish.ingredients) {
         ingredients.push({
           ...ingredient,
-          portion: this.getPortion(ingredient, ingredient.portionId)
+          portion: this.getPortion(ingredient, ingredient.portion.id)
         });
       }
       this.selectedDish = { ...dish, ingredients: ingredients };
@@ -55,7 +61,6 @@ export class DishesComponent implements OnInit {
   public closeModal(): void {
     this.modalIsVisible = false;
     this.selectedDish = undefined;
-    this.getAllDishes();
   }
 
   public getPortion(ingredient: Ingredient, portionId: number): Portion {
@@ -68,8 +73,8 @@ export class DishesComponent implements OnInit {
   }
 
   public getIngredientDescription(ingredient: Ingredient): string {
-    if (ingredient.portionId) {
-      const usedPortion = this.getPortion(ingredient, ingredient.portionId);
+    if (ingredient.portion.id) {
+      const usedPortion = this.getPortion(ingredient, ingredient.portion.id);
       return ingredient.multiplier + ' ' + usedPortion.description;
     } else {
       return ingredient.multiplier * 100 + ' gram';
@@ -87,9 +92,8 @@ export class DishesComponent implements OnInit {
   }
 
   public saveDish(): void {
-    this.dishService.addDish(this.selectedDish).subscribe(it => {
-      this.closeModal();
-    });
+    this.store.dispatch(dishesActions.post(this.selectedDish));
+    this.closeModal();
   }
 
   public removeIngredient(index: number): void {
@@ -99,12 +103,10 @@ export class DishesComponent implements OnInit {
   public portionChange(ingredient: Ingredient, eventTarget: any) {
     if (eventTarget.value === this.unitName) {
       ingredient.portion = undefined;
-      ingredient.portionId = undefined;
     } else {
       for (const portion of ingredient.food.portions) {
         if (portion.description === eventTarget.value) {
           ingredient.portion = portion;
-          ingredient.portionId = portion.id;
           break;
         }
       }
@@ -136,16 +138,14 @@ export class DishesComponent implements OnInit {
     }
   }
 
-  public deleteDish(): void{
-    this.dishService.deleteDish(this.selectedDish).subscribe(it => {
-      this.closeModal();
-    })
+  public deleteDish(): void {
+    this.store.dispatch(dishesActions.delete(this.selectedDish.id));
+    this.closeModal();
   }
 
-  private getAllDishes(): void {
-    this.dishService.getAllDishes().subscribe(it => {
-      this.allDishes = it;
-      this.allDishes.sort((a, b) => a.name.localeCompare(b.name));
-    });
+  ngOnDestroy(): void {
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
   }
 }

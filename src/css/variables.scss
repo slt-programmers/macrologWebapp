@@ -2,25 +2,24 @@
 $black: #000000;
 $coal: #191919;
 $storm: #333333;
-$concrete: #4c4c4c;
-$iron: #666666;
-$grey: #7f7f7f;
-$silver: #999999;
-$platinum: #b2b2b2;
-$smoke: #e5e5e5;
-$mist: #f1f1f1;
-$cloud: #f8f8f8;
-$ghost: #fbfbfb;
+$platinum: #b1bcc9;
+$smoke: #c8d0d9;
+$mist: #dcdee3;
 $white: #ffffff;
 
 $primary: #3f51b5;
 $primaryDark: #283593;
 $secondary: #2196f3;
-$lightIndigo: #e8eaf6;
-$warning: #ff9800; 
+$lightBlue: #e1e6f1;
+$warning: #030303;
 $error: #dd3f00;
 
 $transparent: #ffffffff;
+
+$boxShadow: 0 0 5px rgb(183, 193, 206);
+$boxShadowDark: 0 0 5px rgb(0, 0, 0);
+$boxShadowWide: 0 0 20px rgb(183, 193, 206);
+$boxShadowWideDark: 0 0 20px rgb(0, 0, 0);
 
 // Gradients
 $backgroundGradient: linear-gradient(to bottom, $primary, $secondary);
@@ -31,7 +30,7 @@ $sm: 640px; // 40rem
 $md: 768px; // 48rem
 $lg: 1024px; // 64rem
 $xl: 1280px; // 80rem
-$xxl: 1536px; // 96rem 
+$xxl: 1536px; // 96rem
 
 li::marker {
   color: $secondary;
@@ -39,7 +38,7 @@ li::marker {
 
 .xs-only {
   @media (min-width: $xs) {
-    display: none
+    display: none;
   }
 }
 .xs {
@@ -49,11 +48,21 @@ li::marker {
 }
 .sm-only {
   @media (min-width: $sm) {
-    display: none
+    display: none;
   }
 }
 .sm {
   @media (max-width: ($sm - 1)) {
+    display: none;
+  }
+}
+.lg-only {
+  @media (min-width: $lg) {
+    display: none;
+  }
+}
+.lg {
+  @media (max-width: ($lg - 1)) {
     display: none;
   }
 }

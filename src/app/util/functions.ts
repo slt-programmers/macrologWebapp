@@ -13,3 +13,8 @@ export function calculateTDEE(
     return 10 * weight + 6.25 * height - 5 * age - 161;
   }
 }
+
+export function clone<T>(array: T[]): T[] {
+  if (!array) return array;
+  return JSON.parse(JSON.stringify(array));
+}

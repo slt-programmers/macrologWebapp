@@ -1,13 +1,24 @@
-@import '../../../../css/variables.scss';
+@import "../../../../css/variables.scss";
 
 .navbar {
+  @media (min-width: $sm) {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+  }
+
+  height: 4rem;
+  background-color: white;
+  box-shadow: $boxShadow, $boxShadowWide;
+
   &__hamburger-line {
     background-color: $secondary;
     height: 3px;
     width: 1.25rem;
     margin: 0.25rem;
   }
-  
+
   &__item {
     padding: 0.5rem;
   }
@@ -16,23 +27,22 @@
     position: absolute;
     top: 0;
     right: 0;
-    background-color: white;  
+    background-color: white;
     min-width: 100px;
     padding: 1rem;
     border-bottom-left-radius: 4px;
-    box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.1);
+    box-shadow: $boxShadow, $boxShadowWide;
     .navbar__item {
       padding: 0.75rem 0.5rem;
     }
   }
-
-  height: 4rem;
-  background-color: white;  
-  box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.1);
 }
 
 .navbar-placeholder {
-  height: 4rem;
+  @media (min-width: $sm) {
+    height: 4rem;
+  }
+  height: 1rem;
 }
 
 .logo {

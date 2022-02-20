@@ -9,9 +9,9 @@ th, td, .table-cell {
 }
 
 tr, .table-row {
-  border-bottom: 1px solid $mist;
+  border-bottom: 1px solid $lightBlue;
   &:hover {
-    background-color: $cloud;
+    background-color: $lightBlue;
   }
 }
 .table-header {

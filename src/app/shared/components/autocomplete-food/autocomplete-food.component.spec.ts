@@ -3,42 +3,42 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { Dish } from 'src/app/shared/model/dish';
 import { Food } from 'src/app/shared/model/food';
-import { MockProvider } from 'ng-mocks';
-import { FoodService } from '../../services/food.service';
-import { DishService } from '../../services/dish.service';
-import { of } from 'rxjs';
 import { FormsModule } from '@angular/forms';
+import { provideMockStore } from '@ngrx/store/testing';
+import { selectAllFood } from '../../store/selectors/food.selectors';
+import { selectAllDishes } from '../../store/selectors/dishes.selectors';
 
 describe('AutocompleteFoodComponent', () => {
   let component: AutocompleteFoodComponent;
   let fixture: ComponentFixture<AutocompleteFoodComponent>;
-  let foodService: FoodService;
-  let dishService: DishService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [FormsModule],
       declarations: [AutocompleteFoodComponent],
       providers: [
-        MockProvider(FoodService),
-        MockProvider(DishService)
+        provideMockStore({
+          selectors: [
+            {
+              selector: selectAllFood, value: [
+                { id: 1, name: 'food1', protein: 1, fat: 2, carbs: 3 },
+                { id: 2, name: 'food2', protein: 4, fat: 5, carbs: 6 }
+              ]
+            }, {
+              selector: selectAllDishes, value: [
+                {
+                  name: 'dish1', ingredients: [
+                    { food: { id: 1, name: 'food1', protein: 1, fat: 2, carbs: 3 } },
+                    { food: { id: 2, name: 'food2', protein: 4, fat: 5, carbs: 6 } },
+                  ]
+                }
+              ]
+            }
+          ]
+        }),
       ]
     }).compileComponents();
 
-    foodService = TestBed.inject(FoodService);
-    dishService = TestBed.inject(DishService);
-    spyOn(foodService, 'getAllFood').and.returnValue(of([
-      { id: 1, name: 'food1', protein: 1, fat: 2, carbs: 3 },
-      { id: 2, name: 'food2', protein: 4, fat: 5, carbs: 6 }
-    ]));
-    spyOn(dishService, 'getAllDishes').and.returnValue(of([
-      {
-        name: 'dish1', ingredients: [
-          { food: { id: 1, name: 'food1', protein: 1, fat: 2, carbs: 3 } },
-          { food: { id: 2, name: 'food2', protein: 4, fat: 5, carbs: 6 } },
-        ]
-      }
-    ]));
     fixture = TestBed.createComponent(AutocompleteFoodComponent);
     component = fixture.componentInstance;
   });

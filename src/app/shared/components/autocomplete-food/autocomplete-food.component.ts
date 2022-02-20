@@ -1,17 +1,19 @@
-import { Component, Input, ViewChild, ElementRef, Output, EventEmitter, HostListener } from '@angular/core';
+import { Component, Input, ViewChild, ElementRef, Output, EventEmitter, HostListener, OnDestroy } from '@angular/core';
 import { FoodSearchable } from '../../model/foodSearchable';
 import { Food } from '../../model/food';
-import { FoodService } from '../../services/food.service';
-import { DishService } from '../../services/dish.service';
 import { Dish } from '../../model/dish';
 import { Macros } from '../../model/macros';
+import { Store } from '@ngrx/store';
+import { selectAllFood } from '../../store/selectors/food.selectors';
+import { Subscription } from 'rxjs';
+import { selectAllDishes } from '../../store/selectors/dishes.selectors';
 
 @Component({
   selector: 'ml-autocomplete-food',
   templateUrl: './autocomplete-food.component.html',
   styleUrls: ['./autocomplete-food.component.scss'],
 })
-export class AutocompleteFoodComponent {
+export class AutocompleteFoodComponent implements OnDestroy {
   @HostListener('document.click', ['$event.target'])
   onClick(target: ElementRef) {
     this.closeAutoComplete(target);
@@ -35,12 +37,15 @@ export class AutocompleteFoodComponent {
   public allFood: Food[];
   public allDishes: Dish[];
 
-  constructor(private readonly foodService: FoodService, private readonly dishService: DishService) {
-    this.foodService.getAllFood().subscribe(it => {
+  private foodSubscription: Subscription;
+  private dishesSubscription: Subscription;
+
+  constructor(private readonly store: Store) {
+    this.foodSubscription = this.store.select(selectAllFood).subscribe(it => {
       this.allFood = it;
       this.getFoodSearchableList();
     });
-    this.dishService.getAllDishes().subscribe(it => {
+    this.dishesSubscription = this.store.select(selectAllDishes).subscribe(it => {
       this.allDishes = it;
       this.getFoodSearchableList();
     });
@@ -96,6 +101,15 @@ export class AutocompleteFoodComponent {
       return foodSearchable.dish.name + ' (dish)';
     }
     return foodSearchable.food.name;
+  }
+
+  ngOnDestroy(): void {
+    if (this.foodSubscription) {
+      this.foodSubscription.unsubscribe();
+    }
+    if (this.dishesSubscription) {
+      this.dishesSubscription.unsubscribe();
+    }
   }
 
   private getFoodSearchableList(): void {
