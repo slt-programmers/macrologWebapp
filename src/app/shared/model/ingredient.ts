@@ -5,7 +5,7 @@ export interface Ingredient {
 
   food?: Food;
   portion?: Portion; // makedish model
-  portionId?: number; // dish page
+  // portionId?: number; // dish page
   multiplier?: number;
 
 }

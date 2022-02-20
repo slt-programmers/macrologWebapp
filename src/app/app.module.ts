@@ -16,6 +16,7 @@ import { FoodEffects } from './shared/store/effects/food.effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { EntriesEffects } from './shared/store/effects/entries.effects';
 import { ActivitiesEffects } from './shared/store/effects/activities.effects';
+import { DishesEffects } from './shared/store/effects/dishes.effects';
 
 @NgModule({
   declarations: [
@@ -30,12 +31,17 @@ import { ActivitiesEffects } from './shared/store/effects/activities.effects';
     AppRoutingModule,
     StoreModule.forRoot(reducers),
     StoreDevtoolsModule.instrument(),
-    EffectsModule.forRoot([FoodEffects, EntriesEffects, ActivitiesEffects]),
+    EffectsModule.forRoot([
+      FoodEffects,
+      DishesEffects,
+      EntriesEffects,
+      ActivitiesEffects
+    ]),
     FontAwesomeModule,
   ],
   providers: [
-    { provide: Window, useValue: window},
-    { provide: Document, useValue: document},
+    { provide: Window, useValue: window },
+    { provide: Document, useValue: document },
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
   ],

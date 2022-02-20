@@ -38,7 +38,7 @@ export class DishesComponent implements OnInit {
       for (let ingredient of dish.ingredients) {
         ingredients.push({
           ...ingredient,
-          portion: this.getPortion(ingredient, ingredient.portionId)
+          portion: this.getPortion(ingredient, ingredient.portion.id)
         });
       }
       this.selectedDish = { ...dish, ingredients: ingredients };
@@ -68,8 +68,8 @@ export class DishesComponent implements OnInit {
   }
 
   public getIngredientDescription(ingredient: Ingredient): string {
-    if (ingredient.portionId) {
-      const usedPortion = this.getPortion(ingredient, ingredient.portionId);
+    if (ingredient.portion.id) {
+      const usedPortion = this.getPortion(ingredient, ingredient.portion.id);
       return ingredient.multiplier + ' ' + usedPortion.description;
     } else {
       return ingredient.multiplier * 100 + ' gram';
@@ -99,12 +99,12 @@ export class DishesComponent implements OnInit {
   public portionChange(ingredient: Ingredient, eventTarget: any) {
     if (eventTarget.value === this.unitName) {
       ingredient.portion = undefined;
-      ingredient.portionId = undefined;
+      // ingredient.portion.id = undefined;
     } else {
       for (const portion of ingredient.food.portions) {
         if (portion.description === eventTarget.value) {
           ingredient.portion = portion;
-          ingredient.portionId = portion.id;
+          // ingredient.portionId = portion.id;
           break;
         }
       }

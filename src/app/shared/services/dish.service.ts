@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { ToastService } from './toast.service';
 import { Dish } from '../model/dish';
 import { environment } from '../../../environments/environment';
 import { catchError } from 'rxjs/operators';
@@ -10,7 +9,7 @@ import { Observable, of } from 'rxjs';
 export class DishService {
   private macrologBackendUrl = '//' + environment.backend + '/dishes';
 
-  constructor(private http: HttpClient, private toastService: ToastService) { }
+  constructor(private http: HttpClient) { }
 
   public getAllDishes(): Observable<Dish[]> {
     return this.http.get<Dish[]>(this.macrologBackendUrl).pipe(
@@ -27,7 +26,6 @@ export class DishService {
         return {
           food: ingr.food,
           portion: ingr.portion,
-          portionId: ingr.portionId,
           multiplier: ingr.multiplier
         }
       })
