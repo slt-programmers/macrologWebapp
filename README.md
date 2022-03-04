@@ -25,3 +25,12 @@ Dit opent een browser waarin je snel kan zien welke tests precies falen en waaro
 npm run test
 ```
 Deze draait headless
+
+
+# Sonar scanner lokaal draaien
+Om sonar lokaal te draaien kan je het sonar:local script in package.json aan te passen met een login token: 
+```
+-Dsonar.login=[token-hier]
+
+```
+Check dit token niet in!
