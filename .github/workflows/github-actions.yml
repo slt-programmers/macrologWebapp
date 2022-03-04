@@ -17,6 +17,8 @@ jobs:
       - run: npm run lint
       - run: npm run test
 #      - run: npm run integration
-      - name: Sonar
+      - name: Setup sonarqube
+        uses: warchant/setup-sonar-scanner@v3
+      - name: Run sonarqube
         run: sonar-scanner -Dproject.settings=./sonar-project.properties
 
