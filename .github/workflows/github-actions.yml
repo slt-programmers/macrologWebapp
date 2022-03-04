@@ -16,11 +16,6 @@ jobs:
       - run: npm run build
       - run: npm run lint
       - run: npm run test
-#      - run: npm run integration
-#      - name: Setup sonarqube
-#        uses: warchant/setup-sonar-scanner@v3
-#      - name: Run sonarqube
-#        run: sonar-scanner -Dproject.settings=./sonar-project.properties
       - name: Analyze with SonarCloud
         uses: sonarsource/sonarcloud-github-action@master
         env:
