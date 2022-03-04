@@ -8,7 +8,6 @@ import { ToastService } from 'src/app/shared/services/toast.service';
 import { UserService } from 'src/app/shared/services/user.service';
 import { MockProvider } from 'ng-mocks';
 import { DiaryService } from 'src/app/shared/services/diary.service';
-import { DishService } from 'src/app/shared/services/dish.service';
 import { of } from 'rxjs';
 
 describe('GraphsComponent', () => {
