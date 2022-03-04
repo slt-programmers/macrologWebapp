@@ -14,9 +14,9 @@ jobs:
           node-version: '16.13'
       - run: npm install
       - run: npm run build
-      - run: npm run test
-      - run: npm run integration
       - run: ng lint
+      - run: npm run test
+#      - run: npm run integration
       - name: Sonar
         run: sonar-scanner -Dproject.settings=./sonar-project.properties
 
