@@ -1,5 +1,6 @@
 name: BuildFlow
 # BuildFlow runs on all branches
+# Contains build, test, integration and lint
 on: [push]
 jobs:
   Build:
@@ -12,10 +13,10 @@ jobs:
         with:
           node-version: '16.13'
       - run: npm install
-      - name: build
-        run: npm run build
-      - name: build
-        run: npm run test
-      - name: lint
-        run: ng lint
+      - run: npm run build
+      - run: npm run test
+      - run: npm run integration
+      - run: ng lint
+      - name: Sonar
+      - run: sonar-scanner -Dproject.settings=./sonar-project.properties
 
