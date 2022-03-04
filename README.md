@@ -15,11 +15,22 @@ https://medium.com/@hellotunmbi/how-to-deploy-angular-application-to-heroku-1d56
 npm install express path --save
 
 
-<!-- *** Protractor *** 
-At first running protractor failed because the current version only supports chrome driver -v 75. 
-To update this I had to: 
-- npm i -g webdriver-manager (a dependency of protractor)
-- cd node_modules/protractor
-- webdriver-manager clean 
-- webdriver-manager update --versions.chrome 77.0.3865.120 (which is the chrome version on my mac)
-After that I was able to run e2e test with `ng e2e -c acc` -->
+# Lokaal testen
+Om lokaal te testen kan je het volgende commando gebruiken:
+```
+npm run test:local
+```
+Dit opent een browser waarin je snel kan zien welke tests precies falen en waarom, in tegenstelling tot het commando wat in de pipeline gebruikt wordt. 
+```
+npm run test
+```
+Deze draait headless
+
+
+# Sonar scanner lokaal draaien
+Om sonar lokaal te draaien kan je het sonar:local script in package.json aan te passen met een login token: 
+```
+-Dsonar.login=[token-hier]
+
+```
+Check dit token niet in!

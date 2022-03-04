@@ -70,7 +70,6 @@ export class GraphsComponent implements OnInit {
   }
 
   public switchMeasurement(measurement: string) {
-    console.log('switch');
     this.measurement = measurement;
     if (this.measurement === 'grams') {
       this.getDatasetsForType('grams');

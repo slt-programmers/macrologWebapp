@@ -1,10 +1,5 @@
 import { TestBed, ComponentFixture } from '@angular/core/testing';
-import { RouterTestingModule } from '@angular/router/testing';
-import { HttpClient, HttpHandler } from '@angular/common/http';
-import { Router } from '@angular/router';
-import { ChangeDetectorRef, NO_ERRORS_SCHEMA } from '@angular/core';
 import { GraphsComponent } from './graphs.component';
-import { ToastService } from 'src/app/shared/services/toast.service';
 import { UserService } from 'src/app/shared/services/user.service';
 import { MockProvider } from 'ng-mocks';
 import { DiaryService } from 'src/app/shared/services/diary.service';

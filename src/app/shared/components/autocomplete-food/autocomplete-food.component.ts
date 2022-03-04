@@ -116,24 +116,18 @@ export class AutocompleteFoodComponent implements OnInit, OnDestroy {
 
   private getFoodSearchableList(): void {
     if (!this.dummy) {
-      console.log(this.allFood);
-      console.log(this.allDishes)
       if (!!this.allFood && !!this.allDishes) {
         const searchList = [];
         for (const item of this.allFood) {
           const searchable: FoodSearchable = { food: item };
           searchList.push(searchable);
         }
-        console.log(this.includeDishes);
         if (this.includeDishes) {
-          console.log('here')
           for (const dish of this.allDishes) {
-            console.log(dish)
             searchList.push({ dish: dish });
           }
         }
         this.searchables = searchList;
-        console.log(this.searchables);
       }
     } else {
       const item: Food = { name: 'Apple', protein: 0.4, fat: 0.0, carbs: 12 };

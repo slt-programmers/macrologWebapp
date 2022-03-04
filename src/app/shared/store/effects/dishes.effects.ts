@@ -38,7 +38,6 @@ export class DishesEffects {
           'Access-Control-Allow-Origin': environment.origin,
         };
         const options = { headers: headers };
-        console.log(action.body)
         return this.http.post<Dish>(this.backendUrl, action.body, options).pipe(
           map((response) => {
             this.store.dispatch(dishesActions.get());
