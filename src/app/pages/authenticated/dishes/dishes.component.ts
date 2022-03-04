@@ -44,7 +44,7 @@ export class DishesComponent implements OnInit, OnDestroy {
       for (let ingredient of dish.ingredients) {
         ingredients.push({
           ...ingredient,
-          portion: this.getPortion(ingredient, ingredient.portion.id)
+          portion: ingredient.portion? this.getPortion(ingredient, ingredient.portion.id) : {}
         });
       }
       this.selectedDish = { ...dish, ingredients: ingredients };
@@ -73,7 +73,8 @@ export class DishesComponent implements OnInit, OnDestroy {
   }
 
   public getIngredientDescription(ingredient: Ingredient): string {
-    if (ingredient.portion.id) {
+    console.log(ingredient.portion)
+    if (ingredient.portion) {
       const usedPortion = this.getPortion(ingredient, ingredient.portion.id);
       return ingredient.multiplier + ' ' + usedPortion.description;
     } else {
