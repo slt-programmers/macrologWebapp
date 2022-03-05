@@ -1,7 +1,7 @@
 export interface Activity {
 
   id?: number;
-  day?: Date;
+  day?: string;
   name?: string;
   calories?: number;
   syncedWith?: string;

@@ -56,7 +56,7 @@ export class EntriesEffects {
           map(response => {
             const dateInState = state.filter(epd => epd.date === action.params.date)[0]
             if (!dateInState) {
-              state.push({ date: action.paramsdate, entries: response })
+              state.push({ date: action.params.date, entries: response })
             }
             else {
               dateInState.entries = response;

@@ -1,0 +1,26 @@
+name: BuildFlow
+# BuildFlow runs on all branches
+# Contains build, test, integration and lint
+on: [push]
+jobs:
+  Build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16.13'
+      - run: npm install
+      - run: npm run build
+      - run: npm run lint
+      - run: npm run test
+      - name: Analyze with SonarCloud
+        uses: sonarsource/sonarcloud-github-action@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        with:
+          args: >
+            -Dproject.settings=./sonar-project.properties

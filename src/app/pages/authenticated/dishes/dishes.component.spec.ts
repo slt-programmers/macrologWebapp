@@ -1,16 +1,14 @@
 import { ComponentFixture, TestBed } from "@angular/core/testing"
-import { MockProvider } from "ng-mocks"
-import { of } from "rxjs";
 import { Ingredient } from "src/app/shared/model/ingredient";
 import { Portion } from "src/app/shared/model/portion";
-import { DishService } from "src/app/shared/services/dish.service"
 import { DishesComponent } from "./dishes.component"
-
+import { MockStore, provideMockStore } from "@ngrx/store/testing"
+import { selectAllDishes } from 'src/app/shared/store/selectors/dishes.selectors';
 
 describe('DishesComponent', () => {
   let fixture: ComponentFixture<DishesComponent>;
   let component: DishesComponent;
-  let dishService: DishService;
+  let store: MockStore;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -18,11 +16,15 @@ describe('DishesComponent', () => {
         DishesComponent
       ],
       providers: [
-        MockProvider(DishService)
+        provideMockStore({
+          selectors: [
+            { selector: selectAllDishes, value: [{ name: 'dish1' }, { name: 'dish2' }] }
+          ]
+        })
       ]
     }).compileComponents();
 
-    dishService = TestBed.inject(DishService);
+    store = TestBed.inject(MockStore);
     fixture = TestBed.createComponent(DishesComponent);
     component = fixture.componentInstance;
   });
@@ -32,14 +34,11 @@ describe('DishesComponent', () => {
   });
 
   it('should init component', () => {
-    spyOn(dishService, 'getAllDishes').and.returnValue(of([{ name: 'dish2' }, { name: 'dish1' }]));
     component.ngOnInit();
     expect(component.allDishes).toEqual([{ name: 'dish1' }, { name: 'dish2' }]);
-    expect(dishService.getAllDishes).toHaveBeenCalled();
   });
 
   it('should open and close modal', () => {
-    spyOn(dishService, 'getAllDishes').and.returnValue(of([]));
     component.openModal(null);
     expect(component.modalIsVisible).toBeTrue();
     component.closeModal();
@@ -51,8 +50,7 @@ describe('DishesComponent', () => {
         food: {
           id: 1, name: 'name', protein: 1, fat: 2, carbs: 3,
           portions: [{ id: 1, description: 'desc', grams: 50 }]
-        },
-        portionId: 1
+        }
       }]
     });
     expect(component.modalTitle).toEqual('Edit dish');
@@ -61,10 +59,10 @@ describe('DishesComponent', () => {
       name: 'dish',
       ingredients: [{
         food: {
-          id: 1, name: 'name', protein: 1, fat: 2, carbs: 3, portions: [{ id: 1, description: 'desc', grams: 50 }]
-        },
-        portion: { id: 1, description: 'desc', grams: 50 },
-        portionId: 1
+          id: 1, name: 'name', protein: 1, fat: 2, carbs: 3, 
+          portions: [{ id: 1, description: 'desc', grams: 50 }]
+        }, 
+        portion: {}
       }]
     });
   });
@@ -79,7 +77,6 @@ describe('DishesComponent', () => {
 
   it('should get description', () => {
     const ingredient: Ingredient = {
-      portionId: 1,
       portion: { id: 1, description: 'portionDesc' },
       multiplier: 1,
       food: {
@@ -90,7 +87,6 @@ describe('DishesComponent', () => {
     let result = component.getIngredientDescription(ingredient);
     expect(result).toEqual('1 portionDesc');
     ingredient.portion = undefined;
-    ingredient.portionId = undefined;
     result = component.getIngredientDescription(ingredient);
     expect(result).toEqual('100 gram');
   });
@@ -114,7 +110,6 @@ describe('DishesComponent', () => {
 
   it('should save dish', () => {
     spyOn(component, 'closeModal');
-    spyOn(dishService, 'addDish').and.returnValue(of({}));
     const dish = {
       name: 'dish', ingredients: [{
         multiplier: 1,
@@ -123,7 +118,6 @@ describe('DishesComponent', () => {
     }
     component.selectedDish = dish
     component.saveDish();
-    expect(dishService.addDish).toHaveBeenCalledWith(dish);
     expect(component.closeModal).toHaveBeenCalled();
   });
 
@@ -148,16 +142,13 @@ describe('DishesComponent', () => {
         ] as Portion[]
       },
       portion: { id: 1, description: 'portion', grams: 50 },
-      portionId: 1
     }
     component.portionChange(ingredient, { value: 'grams' });
     expect(ingredient.portion).toBeUndefined();
-    expect(ingredient.portionId).toBeUndefined();
     expect(ingredient.multiplier).toEqual(1);
 
     component.portionChange(ingredient, { value: 'portion' });
     expect(ingredient.portion).toEqual({ id: 1, description: 'portion', grams: 50 });
-    expect(ingredient.portionId).toEqual(1);
   });
 
   it('should get step for portion input', () => {
@@ -169,7 +160,6 @@ describe('DishesComponent', () => {
         ] as Portion[]
       },
       portion: { id: 1, description: 'portion', grams: 50 },
-      portionId: 1
     }
     let result = component.getStep(ingredient);
     expect(result).toEqual(0.1);
@@ -187,7 +177,6 @@ describe('DishesComponent', () => {
         ] as Portion[]
       },
       portion: { id: 1, description: 'portion', grams: 50 },
-      portionId: 1
     }
     component.calculateMultiplier({ target: { value: 2 } }, ingredient);
     expect(ingredient.multiplier).toEqual(2);
@@ -205,7 +194,6 @@ describe('DishesComponent', () => {
         ] as Portion[]
       },
       portion: { id: 1, description: 'portion', grams: 50 },
-      portionId: 1
     }
     let result = component.getValue(ingredient);
     expect(result).toEqual(2);
@@ -215,7 +203,6 @@ describe('DishesComponent', () => {
   });
 
   it('should delete dish', () => {
-    spyOn(dishService, 'deleteDish').and.returnValue(of(1));
     spyOn(component, 'closeModal');
     const dish = {
       name: 'dish',
@@ -223,7 +210,6 @@ describe('DishesComponent', () => {
     };
     component.selectedDish = dish;
     component.deleteDish();
-    expect(dishService.deleteDish).toHaveBeenCalledWith(dish);
     expect(component.closeModal).toHaveBeenCalled();
   });
 
