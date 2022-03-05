@@ -20,6 +20,8 @@ export const selectActivities = createSelector(selectActivitiesState, (state) =>
 });
 
 export const selectActivitiesDate = (date: string) => createSelector(selectActivitiesState, (state) => {
+  console.log('here');
+  console.log(state)
   if (state && state.data) {
     const array = state.data.filter(apd => apd.date === date)
     return array[0]?.activities;

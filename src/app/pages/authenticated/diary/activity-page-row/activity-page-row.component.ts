@@ -13,7 +13,7 @@ import { activitiesActions } from 'src/app/shared/store/actions/activities.actio
   templateUrl: './activity-page-row.component.html',
   styleUrls: ['./activity-page-row.component.scss']
 })
-export class ActivityPageRowComponent implements OnInit, OnChanges, OnDestroy{
+export class ActivityPageRowComponent implements OnInit, OnChanges, OnDestroy {
 
   @Input() date: string;
 
@@ -50,7 +50,7 @@ export class ActivityPageRowComponent implements OnInit, OnChanges, OnDestroy{
   }
 
   syncActivities(): void {
-    this.store.dispatch(activitiesActions.get(true, {date: this.date, sync: true}));
+    this.store.dispatch(activitiesActions.get(true, { date: this.date, sync: true }));
   }
 
   showSync(): boolean {
@@ -93,9 +93,7 @@ export class ActivityPageRowComponent implements OnInit, OnChanges, OnDestroy{
 
   ngOnDestroy(): void {
     for (const sub of this.subscriptions) {
-      if (sub) {
-        sub.unsubscribe();
-      }
+      sub.unsubscribe();
     }
     if (this.loadingSubscription) {
       this.loadingSubscription.unsubscribe();

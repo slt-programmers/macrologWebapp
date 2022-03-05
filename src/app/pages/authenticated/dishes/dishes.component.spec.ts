@@ -84,7 +84,6 @@ describe('DishesComponent', () => {
           { id: 1, description: 'portionDesc' }]
       }
     };
-    console.log(ingredient);
     let result = component.getIngredientDescription(ingredient);
     expect(result).toEqual('1 portionDesc');
     ingredient.portion = undefined;

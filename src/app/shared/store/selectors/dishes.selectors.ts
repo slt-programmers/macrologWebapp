@@ -12,6 +12,6 @@ export const selectAllDishes = createSelector(selectDishesState, (state) => {
   return [];
 });
 
-export const selectFoodLoading = createSelector(selectDishesState, (state) => {
+export const selectDishesLoading = createSelector(selectDishesState, (state) => {
   return state.loading;
 });

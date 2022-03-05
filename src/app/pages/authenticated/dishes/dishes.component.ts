@@ -73,7 +73,6 @@ export class DishesComponent implements OnInit, OnDestroy {
   }
 
   public getIngredientDescription(ingredient: Ingredient): string {
-    console.log(ingredient.portion)
     if (ingredient.portion) {
       const usedPortion = this.getPortion(ingredient, ingredient.portion.id);
       return ingredient.multiplier + ' ' + usedPortion.description;
