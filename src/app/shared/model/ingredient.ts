@@ -4,7 +4,7 @@ import { Portion } from './portion';
 export interface Ingredient {
 
   food?: Food;
-  portion?: Portion; // makedish model
+  portion?: Portion; 
   multiplier?: number;
 
 }

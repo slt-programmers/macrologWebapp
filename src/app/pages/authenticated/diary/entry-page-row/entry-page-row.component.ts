@@ -47,9 +47,9 @@ export class EntryPageRowComponent implements OnChanges, OnDestroy {
 
   changeMultiplier(event: any, index: number) {
     if (!this.modalEntries[index].portion) {
-      this.modalEntries[index].multiplier = event.target.value / 100;
+      this.modalEntries[index].multiplier = +event.target.value / 100;
     } else {
-      this.modalEntries[index].multiplier = event.target.value;
+      this.modalEntries[index].multiplier = +event.target.value;
     }
   }
 
@@ -60,8 +60,8 @@ export class EntryPageRowComponent implements OnChanges, OnDestroy {
           food: ingredient.food,
           meal: this.meal.toUpperCase(),
           day: this.date,
-          portion: ingredient.portionId ? ingredient.food.portions
-            .filter((p: Portion) => p.id === ingredient.portionId)[0] : undefined,
+          portion: ingredient.portion ? ingredient.food.portions
+            .filter((p: Portion) => p.id === ingredient.portion.id)[0] : undefined,
           multiplier: ingredient.multiplier
         });
       }
@@ -89,7 +89,7 @@ export class EntryPageRowComponent implements OnChanges, OnDestroy {
       }
     }
     if (!missingInput) {
-      this.store.dispatch(entriesActions.post(this.modalEntries, {date: this.date, meal: this.meal}));
+      this.store.dispatch(entriesActions.post(this.modalEntries, { date: this.date, meal: this.meal }));
       this.showModal = false;
       this.modalEntries = undefined;
     }
@@ -97,9 +97,7 @@ export class EntryPageRowComponent implements OnChanges, OnDestroy {
 
   ngOnDestroy(): void {
     for (const sub of this.subscriptions) {
-      if (sub) {
-        sub.unsubscribe();
-      }
+      sub.unsubscribe();
     }
   }
 }
