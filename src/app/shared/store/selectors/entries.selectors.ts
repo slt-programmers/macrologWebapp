@@ -32,20 +32,19 @@ export const selectEntriesDateMeal = (date: string, meal: string) => createSelec
 });
 
 export const selectTotalsForDate = (date: string) => createSelector(selectEntriesDate(date), (entries) => {
+  const totalMacros: Macros = {
+    protein: 0,
+    fat: 0,
+    carbs: 0,
+    calories: 0
+  }
   if (entries) {
-    const totalMacros: Macros = {
-      protein: 0,
-      fat: 0,
-      carbs: 0,
-      calories: 0
-    }
     for (const entry of entries) {
       totalMacros.protein += entry.macrosCalculated.protein;
       totalMacros.fat += entry.macrosCalculated.fat;
       totalMacros.carbs += entry.macrosCalculated.carbs;
       totalMacros.calories += entry.macrosCalculated.calories
     }
-    return totalMacros;
   }
-  return undefined;
+  return totalMacros;
 });
