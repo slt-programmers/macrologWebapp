@@ -16,7 +16,7 @@ jobs:
       - run: npm run build
       - run: npm run lint
       - run: npm run test
-      - run: npm run cypress:local
+#       - run: npm run cypress:local
       - name: Analyze with SonarCloud
         uses: sonarsource/sonarcloud-github-action@master
         env:
