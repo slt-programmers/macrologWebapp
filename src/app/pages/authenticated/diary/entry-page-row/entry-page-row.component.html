@@ -1,5 +1,5 @@
 <div class="content-sm p-1 selectable" (click)="openModal()">
-  <span class="font-bold">{{meal}}</span>
+  <span class="font-bold">{{meal | titlecase}}</span>
 
   <div *ngFor="let entry of entries" class="flex col-gap-1">
     <div class="flex-3">

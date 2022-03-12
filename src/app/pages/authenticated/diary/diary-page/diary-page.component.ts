@@ -2,6 +2,7 @@ import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { Macros } from 'src/app/shared/model/macros';
+import { Meal } from 'src/app/shared/model/meal';
 import { activitiesActions } from 'src/app/shared/store/actions/activities.actions';
 import { entriesActions } from 'src/app/shared/store/actions/entries.actions';
 import { selectTotalsForDate } from 'src/app/shared/store/selectors/entries.selectors';
@@ -13,6 +14,11 @@ import { selectTotalsForDate } from 'src/app/shared/store/selectors/entries.sele
 export class DiaryPageComponent implements OnChanges {
 
   @Input() date: string;
+
+  public breakfast = Meal.Breakfast;
+  public lunch = Meal.Lunch;
+  public diner = Meal.Dinner;
+  public snacks = Meal.Snacks;
 
   public totals$: Observable<Macros>;
   

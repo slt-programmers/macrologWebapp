@@ -6,6 +6,9 @@ describe('Login', () => {
     const backendUrl = Cypress.env('backendUrl');
 
     cy.stubHealthcheck();
+    cy.stubGoals();
+    cy.stubFood();
+    cy.stubDishes();
     cy.intercept('POST', `${backendUrl}/api/authenticate`, (req) => {
       req.reply({ statusCode: 200, fixture: 'authenticate.json' })
     }).as('authenticate');
@@ -18,6 +21,8 @@ describe('Login', () => {
 
   it('should log in', () => {
     cy.get('#menuLogin').click();
+    cy.get('#menuAbout').should('be.visible');
+    cy.get('#menuDiary').should('not.exist');
     cy.get('#loginButton').click();
     cy.get('#usernameRequired').should('be.visible');
     cy.get('#passwordRequired').should('be.visible');
@@ -25,20 +30,8 @@ describe('Login', () => {
     cy.get('#password').type('thisIsSecret');
     cy.get('#loginButton').click();
     cy.get('#menuDiary').should('be.visible');
-  });
-
-  it('should register user', () => {
-    cy.get('#menuRegister').click();
-    cy.get('#registerButton').click();
-    cy.get('#usernameRegisterRequired').should('be.visible');
-    cy.get('#emailRequired').should('be.visible');
-    cy.get('#passwordRegisterRequired').should('be.visible');
-    cy.get('#usernameRegister').type('username');
-    cy.get('#email').type('email@email.com');
-    cy.get('#passwordRegister').type('thisIsSecret');
-    cy.get('#registerButton').click();
-    cy.get('#menuDiary').should('be.visible');
-    cy.get('#onboardingTitle').should('be.visible');
+    cy.get('#stackdonuts').should('be.visible');
+    cy.get('#diaryPage').should('be.visible');
   });
 
 });

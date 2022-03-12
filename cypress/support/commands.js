@@ -11,10 +11,48 @@
 //
 // -- This is a parent command --
 Cypress.Commands.add('stubHealthcheck', () => {
-  const backendUrl = Cypress.env('backendUrl')
+  const backendUrl = Cypress.env('backendUrl');
   cy.intercept('GET', `${backendUrl}/healthcheck`, (req) => {
     req.reply({ statusCode: 200, body: true })
   }).as('healthcheck');
+});
+
+Cypress.Commands.add('stubGoals', () => {
+  cy.intercept('GET', '**/goalProtein?date=*', (req) => {
+    req.reply({ statusCode: 200, body: 120 })
+  }).as('goalProtein');
+  cy.intercept('GET', '**/goalFat?date=*', (req) => {
+    req.reply({ statusCode: 200, body: 130 })
+  }).as('goalFat');
+  cy.intercept('GET', '**/goalCarbs?date=*', (req) => {
+    req.reply({ statusCode: 200, body: 50 })
+  }).as('goalCarbs');
+});
+
+Cypress.Commands.add('stubFood', () => {
+  const backendUrl = Cypress.env('backendUrl')
+  cy.intercept('GET', `${backendUrl}/food`, (req) => {
+    req.reply({ statusCode: 200, fixture: 'food.json' })
+  }).as('food')
+});
+Cypress.Commands.add('stubEmptyFood', () => {
+  const backendUrl = Cypress.env('backendUrl')
+  cy.intercept('GET', `${backendUrl}/food`, (req) => {
+    req.reply({ statusCode: 200, body: [] })
+  }).as('food')
+});
+
+Cypress.Commands.add('stubDishes', () => {
+  const backendUrl = Cypress.env('backendUrl')
+  cy.intercept('GET', `${backendUrl}/dishes`, (req) => {
+    req.reply({ statusCode: 200, fixture: 'dishes.json' })
+  }).as('dishes')
+});
+Cypress.Commands.add('stubEmptyDishes', () => {
+  const backendUrl = Cypress.env('backendUrl')
+  cy.intercept('GET', `${backendUrl}/dishes`, (req) => {
+    req.reply({ statusCode: 200, body: [] })
+  }).as('dishes')
 });
 //
 //

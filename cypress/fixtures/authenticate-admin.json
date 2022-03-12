@@ -3,5 +3,5 @@
   "token": "sometoken",
   "userName": "CarmenScholte",
   "email": "test@test.nl",
-  "admin": false
+  "admin": true
 }

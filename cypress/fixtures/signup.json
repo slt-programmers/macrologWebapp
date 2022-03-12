@@ -1,6 +1,6 @@
 {
   "id": 1,
-  "token": "sometoken",
+  "token": "someToken",
   "userName": "CarmenScholte",
   "email": "test@test.nl",
   "admin": false

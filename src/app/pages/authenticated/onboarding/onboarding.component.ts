@@ -6,6 +6,7 @@ import { calculateTDEE } from 'src/app/util/functions';
 import { differenceInYears, isValid, parse } from 'date-fns';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { DatePipe } from '@angular/common';
+import { Meal } from 'src/app/shared/model/meal';
 
 @Component({
   selector: 'ml-onboarding',
@@ -29,6 +30,7 @@ export class OnboardingComponent implements OnInit {
   public displayDate;
   public datePipe = new DatePipe('en-US');
   public breakfastOpen = false;
+  public breakfast = Meal.Breakfast;
   public foodSearchables = new Array();
 
   public userForm: FormGroup;

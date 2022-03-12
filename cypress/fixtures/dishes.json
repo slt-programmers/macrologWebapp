@@ -1,0 +1,1739 @@
+[
+  {
+    "id": 5,
+    "name": "Worst, spek en noten",
+    "ingredients": [
+      {
+        "id": 230,
+        "multiplier": 1.0,
+        "food": {
+          "id": 41,
+          "name": "Groninger droge worst",
+          "protein": 25.0,
+          "fat": 38.0,
+          "carbs": 1.0,
+          "portions": [
+            {
+              "id": 14,
+              "description": "kwart",
+              "grams": 37.5,
+              "macros": {
+                "protein": 9.375,
+                "fat": 14.25,
+                "carbs": 0.375,
+                "calories": 167.25
+              }
+            },
+            {
+              "id": 15,
+              "description": "halve",
+              "grams": 75.0,
+              "macros": {
+                "protein": 18.75,
+                "fat": 28.5,
+                "carbs": 0.75,
+                "calories": 334.5
+              }
+            }
+          ]
+        },
+        "portion": {
+          "id": 14,
+          "description": "kwart",
+          "grams": 37.5,
+          "macros": {
+            "protein": 9.375,
+            "fat": 14.25,
+            "carbs": 0.375,
+            "calories": 167.25
+          }
+        }
+      },
+      {
+        "id": 231,
+        "multiplier": 1.0,
+        "food": {
+          "id": 3,
+          "name": "Macadamia noten",
+          "protein": 9.0,
+          "fat": 74.5,
+          "carbs": 6.5,
+          "portions": [
+            {
+              "id": 2,
+              "description": "8 nootjes",
+              "grams": 20.0,
+              "macros": {
+                "protein": 1.7999999999999998,
+                "fat": 14.9,
+                "carbs": 1.3,
+                "calories": 146.49999999999997
+              }
+            }
+          ]
+        },
+        "portion": {
+          "id": 2,
+          "description": "8 nootjes",
+          "grams": 20.0,
+          "macros": {
+            "protein": 1.7999999999999998,
+            "fat": 14.9,
+            "carbs": 1.3,
+            "calories": 146.49999999999997
+          }
+        }
+      },
+      {
+        "id": 232,
+        "multiplier": 1.0,
+        "food": {
+          "id": 373,
+          "name": "Ontbijtspek",
+          "protein": 15.2,
+          "fat": 37.9,
+          "carbs": 0.4,
+          "portions": [
+            {
+              "id": 161,
+              "description": "4 plakjes",
+              "grams": 25.0,
+              "macros": {
+                "protein": 3.8,
+                "fat": 9.475,
+                "carbs": 0.1,
+                "calories": 100.875
+              }
+            },
+            {
+              "id": 300,
+              "description": "2 plakjes",
+              "grams": 13.0,
+              "macros": {
+                "protein": 1.976,
+                "fat": 4.927,
+                "carbs": 0.052000000000000005,
+                "calories": 52.455
+              }
+            }
+          ]
+        },
+        "portion": {
+          "id": 300,
+          "description": "2 plakjes",
+          "grams": 13.0,
+          "macros": {
+            "protein": 1.976,
+            "fat": 4.927,
+            "carbs": 0.052000000000000005,
+            "calories": 52.455
+          }
+        }
+      }
+    ],
+    "macrosCalculated": {
+      "protein": 13.151,
+      "fat": 34.077,
+      "carbs": 1.727,
+      "calories": 366.205
+    }
+  },
+  {
+    "id": 6,
+    "name": "Ei met spek",
+    "ingredients": [
+      {
+        "id": 193,
+        "multiplier": 2.0,
+        "food": {
+          "id": 1,
+          "name": "Ei, gebakken",
+          "protein": 11.7,
+          "fat": 15.0,
+          "carbs": 0.0,
+          "portions": [
+            {
+              "id": 170,
+              "description": "stuk",
+              "grams": 60.0,
+              "macros": {
+                "protein": 7.02,
+                "fat": 9.0,
+                "carbs": 0.0,
+                "calories": 109.08
+              }
+            }
+          ]
+        },
+        "portion": {
+          "id": 170,
+          "description": "stuk",
+          "grams": 60.0,
+          "macros": {
+            "protein": 7.02,
+            "fat": 9.0,
+            "carbs": 0.0,
+            "calories": 109.08
+          }
+        }
+      },
+      {
+        "id": 194,
+        "multiplier": 1.0,
+        "food": {
+          "id": 373,
+          "name": "Ontbijtspek",
+          "protein": 15.2,
+          "fat": 37.9,
+          "carbs": 0.4,
+          "portions": [
+            {
+              "id": 161,
+              "description": "4 plakjes",
+              "grams": 25.0,
+              "macros": {
+                "protein": 3.8,
+                "fat": 9.475,
+                "carbs": 0.1,
+                "calories": 100.875
+              }
+            },
+            {
+              "id": 300,
+              "description": "2 plakjes",
+              "grams": 13.0,
+              "macros": {
+                "protein": 1.976,
+                "fat": 4.927,
+                "carbs": 0.052000000000000005,
+                "calories": 52.455
+              }
+            }
+          ]
+        },
+        "portion": {
+          "id": 300,
+          "description": "2 plakjes",
+          "grams": 13.0,
+          "macros": {
+            "protein": 1.976,
+            "fat": 4.927,
+            "carbs": 0.052000000000000005,
+            "calories": 52.455
+          }
+        }
+      }
+    ],
+    "macrosCalculated": {
+      "protein": 16.016,
+      "fat": 22.927,
+      "carbs": 0.052000000000000005,
+      "calories": 270.615
+    }
+  },
+  {
+    "id": 7,
+    "name": "Kip rode pesto",
+    "ingredients": [
+      {
+        "id": 85,
+        "multiplier": 2.0,
+        "food": {
+          "id": 25,
+          "name": "Kipfilet",
+          "protein": 22.8,
+          "fat": 0.9,
+          "carbs": 0.0,
+          "portions": []
+        }
+      },
+      {
+        "id": 86,
+        "multiplier": 0.5,
+        "food": {
+          "id": 5,
+          "name": "Paprika",
+          "protein": 1.0,
+          "fat": 0.27,
+          "carbs": 6.0,
+          "portions": [
+            {
+              "id": 173,
+              "description": "stuk",
+              "grams": 150.0,
+              "macros": {
+                "protein": 1.5,
+                "fat": 0.405,
+                "carbs": 9.0,
+                "calories": 45.645
+              }
+            }
+          ]
+        },
+        "portion": {
+          "id": 173,
+          "description": "stuk",
+          "grams": 150.0,
+          "macros": {
+            "protein": 1.5,
+            "fat": 0.405,
+            "carbs": 9.0,
+            "calories": 45.645
+          }
+        }
+      },
+      {
+        "id": 87,
+        "multiplier": 0.5,
+        "food": {
+          "id": 33,
+          "name": "Rode ui",
+          "protein": 1.09,
+          "fat": 0.09,
+          "carbs": 9.09,
+          "portions": [
+            {
+              "id": 178,
+              "description": "stuk",
+              "grams": 110.0,
+              "macros": {
+                "protein": 1.199,
+                "fat": 0.09899999999999999,
+                "carbs": 9.998999999999999,
+                "calories": 45.68299999999999
+              }
+            }
+          ]
+        },
+        "portion": {
+          "id": 178,
+          "description": "stuk",
+          "grams": 110.0,
+          "macros": {
+            "protein": 1.199,
+            "fat": 0.09899999999999999,
+            "carbs": 9.998999999999999,
+            "calories": 45.68299999999999
+          }
+        }
+      },
+      {
+        "id": 88,
+        "multiplier": 1.0,
+        "food": {
+          "id": 14,
+          "name": "Courgette",
+          "protein": 1.2,
+          "fat": 0.3,
+          "carbs": 3.1,
+          "portions": [
+            {
+              "id": 4,
+              "description": "kwart",
+              "grams": 75.0,
+              "macros": {
+                "protein": 0.9,
+                "fat": 0.225,
+                "carbs": 2.325,
+                "calories": 14.925
+              }
+            }
+          ]
+        },
+        "portion": {
+          "id": 4,
+          "description": "kwart",
+          "grams": 75.0,
+          "macros": {
+            "protein": 0.9,
+            "fat": 0.225,
+            "carbs": 2.325,
+            "calories": 14.925
+          }
+        }
+      },
+      {
+        "id": 89,
+        "multiplier": 2.0,
+        "food": {
+          "id": 7,
+          "name": "Bosui",
+          "protein": 2.0,
+          "fat": 0.0,
+          "carbs": 7.33,
+          "portions": [
+            {
+              "id": 174,
+              "description": "stuk",
+              "grams": 15.0,
+              "macros": {
+                "protein": 0.3,
+                "fat": 0.0,
+                "carbs": 1.0995000000000001,
+                "calories": 5.598000000000001
+              }
+            }
+          ]
+        },
+        "portion": {
+          "id": 174,
+          "description": "stuk",
+          "grams": 15.0,
+          "macros": {
+            "protein": 0.3,
+            "fat": 0.0,
+            "carbs": 1.0995000000000001,
+            "calories": 5.598000000000001
+          }
+        }
+      },
+      {
+        "id": 90,
+        "multiplier": 1.0,
+        "food": {
+          "id": 390,
+          "name": "Rode pesto",
+          "protein": 2.9,
+          "fat": 17.3,
+          "carbs": 7.7,
+          "portions": [
+            {
+              "id": 169,
+              "description": "portie",
+              "grams": 90.0,
+              "macros": {
+                "protein": 2.61,
+                "fat": 15.570000000000002,
+                "carbs": 6.93,
+                "calories": 178.29000000000002
+              }
+            }
+          ]
+        },
+        "portion": {
+          "id": 169,
+          "description": "portie",
+          "grams": 90.0,
+          "macros": {
+            "protein": 2.61,
+            "fat": 15.570000000000002,
+            "carbs": 6.93,
+            "calories": 178.29000000000002
+          }
+        }
+      }
+    ],
+    "macrosCalculated": {
+      "protein": 51.0595,
+      "fat": 17.847,
+      "carbs": 20.9535,
+      "calories": 448.675
+    }
+  },
+  {
+    "id": 8,
+    "name": "Chili",
+    "ingredients": [
+      {
+        "id": 91,
+        "multiplier": 2.0,
+        "food": {
+          "id": 379,
+          "name": "Gemengd gehakt",
+          "protein": 17.5,
+          "fat": 20.6,
+          "carbs": 0.0,
+          "portions": []
+        }
+      },
+      {
+        "id": 92,
+        "multiplier": 0.5,
+        "food": {
+          "id": 5,
+          "name": "Paprika",
+          "protein": 1.0,
+          "fat": 0.27,
+          "carbs": 6.0,
+          "portions": [
+            {
+              "id": 173,
+              "description": "stuk",
+              "grams": 150.0,
+              "macros": {
+                "protein": 1.5,
+                "fat": 0.405,
+                "carbs": 9.0,
+                "calories": 45.645
+              }
+            }
+          ]
+        },
+        "portion": {
+          "id": 173,
+          "description": "stuk",
+          "grams": 150.0,
+          "macros": {
+            "protein": 1.5,
+            "fat": 0.405,
+            "carbs": 9.0,
+            "calories": 45.645
+          }
+        }
+      },
+      {
+        "id": 93,
+        "multiplier": 0.5,
+        "food": {
+          "id": 33,
+          "name": "Rode ui",
+          "protein": 1.09,
+          "fat": 0.09,
+          "carbs": 9.09,
+          "portions": [
+            {
+              "id": 178,
+              "description": "stuk",
+              "grams": 110.0,
+              "macros": {
+                "protein": 1.199,
+                "fat": 0.09899999999999999,
+                "carbs": 9.998999999999999,
+                "calories": 45.68299999999999
+              }
+            }
+          ]
+        },
+        "portion": {
+          "id": 178,
+          "description": "stuk",
+          "grams": 110.0,
+          "macros": {
+            "protein": 1.199,
+            "fat": 0.09899999999999999,
+            "carbs": 9.998999999999999,
+            "calories": 45.68299999999999
+          }
+        }
+      },
+      {
+        "id": 94,
+        "multiplier": 0.5,
+        "food": {
+          "id": 428,
+          "name": "Mais",
+          "protein": 3.5,
+          "fat": 1.0,
+          "carbs": 22.5,
+          "portions": []
+        }
+      },
+      {
+        "id": 95,
+        "multiplier": 1.0,
+        "food": {
+          "id": 449,
+          "name": "Chili bonen",
+          "protein": 3.2,
+          "fat": 0.5,
+          "carbs": 14.6,
+          "portions": [
+            {
+              "id": 219,
+              "description": "half blik",
+              "grams": 200.0,
+              "macros": {
+                "protein": 6.4,
+                "fat": 1.0,
+                "carbs": 29.2,
+                "calories": 151.4
+              }
+            }
+          ]
+        },
+        "portion": {
+          "id": 219,
+          "description": "half blik",
+          "grams": 200.0,
+          "macros": {
+            "protein": 6.4,
+            "fat": 1.0,
+            "carbs": 29.2,
+            "calories": 151.4
+          }
+        }
+      },
+      {
+        "id": 96,
+        "multiplier": 1.0,
+        "food": {
+          "id": 451,
+          "name": "Gepelde tomaat",
+          "protein": 1.2,
+          "fat": 0.5,
+          "carbs": 3.0,
+          "portions": [
+            {
+              "id": 221,
+              "description": "half blik",
+              "grams": 200.0,
+              "macros": {
+                "protein": 2.4,
+                "fat": 1.0,
+                "carbs": 6.0,
+                "calories": 42.6
+              }
+            }
+          ]
+        },
+        "portion": {
+          "id": 221,
+          "description": "half blik",
+          "grams": 200.0,
+          "macros": {
+            "protein": 2.4,
+            "fat": 1.0,
+            "carbs": 6.0,
+            "calories": 42.6
+          }
+        }
+      }
+    ],
+    "macrosCalculated": {
+      "protein": 46.899499999999996,
+      "fat": 43.952000000000005,
+      "carbs": 55.9495,
+      "calories": 806.9639999999999
+    }
+  },
+  {
+    "id": 9,
+    "name": "Groentenmix",
+    "ingredients": [
+      {
+        "id": 97,
+        "multiplier": 0.5,
+        "food": {
+          "id": 5,
+          "name": "Paprika",
+          "protein": 1.0,
+          "fat": 0.27,
+          "carbs": 6.0,
+          "portions": [
+            {
+              "id": 173,
+              "description": "stuk",
+              "grams": 150.0,
+              "macros": {
+                "protein": 1.5,
+                "fat": 0.405,
+                "carbs": 9.0,
+                "calories": 45.645
+              }
+            }
+          ]
+        },
+        "portion": {
+          "id": 173,
+          "description": "stuk",
+          "grams": 150.0,
+          "macros": {
+            "protein": 1.5,
+            "fat": 0.405,
+            "carbs": 9.0,
+            "calories": 45.645
+          }
+        }
+      },
+      {
+        "id": 98,
+        "multiplier": 1.0,
+        "food": {
+          "id": 14,
+          "name": "Courgette",
+          "protein": 1.2,
+          "fat": 0.3,
+          "carbs": 3.1,
+          "portions": [
+            {
+              "id": 4,
+              "description": "kwart",
+              "grams": 75.0,
+              "macros": {
+                "protein": 0.9,
+                "fat": 0.225,
+                "carbs": 2.325,
+                "calories": 14.925
+              }
+            }
+          ]
+        },
+        "portion": {
+          "id": 4,
+          "description": "kwart",
+          "grams": 75.0,
+          "macros": {
+            "protein": 0.9,
+            "fat": 0.225,
+            "carbs": 2.325,
+            "calories": 14.925
+          }
+        }
+      },
+      {
+        "id": 99,
+        "multiplier": 1.0,
+        "food": {
+          "id": 7,
+          "name": "Bosui",
+          "protein": 2.0,
+          "fat": 0.0,
+          "carbs": 7.33,
+          "portions": [
+            {
+              "id": 174,
+              "description": "stuk",
+              "grams": 15.0,
+              "macros": {
+                "protein": 0.3,
+                "fat": 0.0,
+                "carbs": 1.0995000000000001,
+                "calories": 5.598000000000001
+              }
+            }
+          ]
+        },
+        "portion": {
+          "id": 174,
+          "description": "stuk",
+          "grams": 15.0,
+          "macros": {
+            "protein": 0.3,
+            "fat": 0.0,
+            "carbs": 1.0995000000000001,
+            "calories": 5.598000000000001
+          }
+        }
+      },
+      {
+        "id": 100,
+        "multiplier": 1.0,
+        "food": {
+          "id": 6,
+          "name": "Champignons",
+          "protein": 3.1,
+          "fat": 0.3,
+          "carbs": 3.3,
+          "portions": []
+        }
+      },
+      {
+        "id": 101,
+        "multiplier": 0.5,
+        "food": {
+          "id": 33,
+          "name": "Rode ui",
+          "protein": 1.09,
+          "fat": 0.09,
+          "carbs": 9.09,
+          "portions": [
+            {
+              "id": 178,
+              "description": "stuk",
+              "grams": 110.0,
+              "macros": {
+                "protein": 1.199,
+                "fat": 0.09899999999999999,
+                "carbs": 9.998999999999999,
+                "calories": 45.68299999999999
+              }
+            }
+          ]
+        },
+        "portion": {
+          "id": 178,
+          "description": "stuk",
+          "grams": 110.0,
+          "macros": {
+            "protein": 1.199,
+            "fat": 0.09899999999999999,
+            "carbs": 9.998999999999999,
+            "calories": 45.68299999999999
+          }
+        }
+      }
+    ],
+    "macrosCalculated": {
+      "protein": 5.6495,
+      "fat": 0.777,
+      "carbs": 16.223999999999997,
+      "calories": 94.48699999999998
+    }
+  },
+  {
+    "id": 10,
+    "name": "Linzen salade",
+    "ingredients": [
+      {
+        "id": 188,
+        "multiplier": 2.0,
+        "food": {
+          "id": 30,
+          "name": "Linzen",
+          "protein": 9.0,
+          "fat": 0.4,
+          "carbs": 20.0,
+          "portions": []
+        }
+      },
+      {
+        "id": 189,
+        "multiplier": 1.0,
+        "food": {
+          "id": 21,
+          "name": "Rucola",
+          "protein": 1.3,
+          "fat": 0.2,
+          "carbs": 1.0,
+          "portions": []
+        }
+      },
+      {
+        "id": 190,
+        "multiplier": 1.0,
+        "food": {
+          "id": 370,
+          "name": "Apetina Feta",
+          "protein": 16.0,
+          "fat": 29.0,
+          "carbs": 0.6,
+          "portions": []
+        }
+      },
+      {
+        "id": 191,
+        "multiplier": 1.0,
+        "food": {
+          "id": 384,
+          "name": "Komkommer",
+          "protein": 0.6,
+          "fat": 0.2,
+          "carbs": 2.2,
+          "portions": []
+        }
+      },
+      {
+        "id": 192,
+        "multiplier": 2.0,
+        "food": {
+          "id": 533,
+          "name": "Cashewnoten",
+          "protein": 18.5,
+          "fat": 45.0,
+          "carbs": 22.5,
+          "portions": [
+            {
+              "id": 268,
+              "description": "handje",
+              "grams": 15.0,
+              "macros": {
+                "protein": 2.775,
+                "fat": 6.75,
+                "carbs": 3.375,
+                "calories": 85.35
+              }
+            }
+          ]
+        },
+        "portion": {
+          "id": 268,
+          "description": "handje",
+          "grams": 15.0,
+          "macros": {
+            "protein": 2.775,
+            "fat": 6.75,
+            "carbs": 3.375,
+            "calories": 85.35
+          }
+        }
+      }
+    ],
+    "macrosCalculated": {
+      "protein": 41.449999999999996,
+      "fat": 43.7,
+      "carbs": 50.550000000000004,
+      "calories": 761.3
+    }
+  },
+  {
+    "id": 11,
+    "name": "Brood met ei",
+    "ingredients": [
+      {
+        "id": 181,
+        "multiplier": 2.0,
+        "food": {
+          "id": 402,
+          "name": "Volkorenbrood ",
+          "protein": 13.0,
+          "fat": 3.4,
+          "carbs": 41.0,
+          "portions": [
+            {
+              "id": 190,
+              "description": "boterham",
+              "grams": 35.0,
+              "macros": {
+                "protein": 4.55,
+                "fat": 1.1900000000000002,
+                "carbs": 14.35,
+                "calories": 86.31
+              }
+            }
+          ]
+        },
+        "portion": {
+          "id": 190,
+          "description": "boterham",
+          "grams": 35.0,
+          "macros": {
+            "protein": 4.55,
+            "fat": 1.1900000000000002,
+            "carbs": 14.35,
+            "calories": 86.31
+          }
+        }
+      },
+      {
+        "id": 182,
+        "multiplier": 2.0,
+        "food": {
+          "id": 1,
+          "name": "Ei, gebakken",
+          "protein": 11.7,
+          "fat": 15.0,
+          "carbs": 0.0,
+          "portions": [
+            {
+              "id": 170,
+              "description": "stuk",
+              "grams": 60.0,
+              "macros": {
+                "protein": 7.02,
+                "fat": 9.0,
+                "carbs": 0.0,
+                "calories": 109.08
+              }
+            }
+          ]
+        },
+        "portion": {
+          "id": 170,
+          "description": "stuk",
+          "grams": 60.0,
+          "macros": {
+            "protein": 7.02,
+            "fat": 9.0,
+            "carbs": 0.0,
+            "calories": 109.08
+          }
+        }
+      }
+    ],
+    "macrosCalculated": {
+      "protein": 23.14,
+      "fat": 20.38,
+      "carbs": 28.7,
+      "calories": 390.78
+    }
+  },
+  {
+    "id": 13,
+    "name": "Oma soep",
+    "ingredients": [
+      {
+        "id": 204,
+        "multiplier": 2.0,
+        "food": {
+          "id": 368,
+          "name": "Wortel",
+          "protein": 0.9,
+          "fat": 0.2,
+          "carbs": 10.0,
+          "portions": []
+        }
+      },
+      {
+        "id": 205,
+        "multiplier": 2.0,
+        "food": {
+          "id": 50,
+          "name": "Prei",
+          "protein": 1.5,
+          "fat": 0.3,
+          "carbs": 14.0,
+          "portions": []
+        }
+      },
+      {
+        "id": 206,
+        "multiplier": 2.0,
+        "food": {
+          "id": 596,
+          "name": "Bleekselderij ",
+          "protein": 0.7,
+          "fat": 0.1,
+          "carbs": 3.5,
+          "portions": []
+        }
+      },
+      {
+        "id": 207,
+        "multiplier": 0.8,
+        "food": {
+          "id": 598,
+          "name": "Vermicelli",
+          "protein": 12.0,
+          "fat": 1.5,
+          "carbs": 72.0,
+          "portions": []
+        }
+      },
+      {
+        "id": 208,
+        "multiplier": 1.0,
+        "food": {
+          "id": 597,
+          "name": "Soepballetjes jumbo",
+          "protein": 8.1,
+          "fat": 13.1,
+          "carbs": 0.1,
+          "portions": [
+            {
+              "id": 317,
+              "description": "blikje",
+              "grams": 200.0,
+              "macros": {
+                "protein": 16.2,
+                "fat": 26.200000000000003,
+                "carbs": 0.2,
+                "calories": 301.40000000000003
+              }
+            }
+          ]
+        },
+        "portion": {
+          "id": 317,
+          "description": "blikje",
+          "grams": 200.0,
+          "macros": {
+            "protein": 16.2,
+            "fat": 26.200000000000003,
+            "carbs": 0.2,
+            "calories": 301.40000000000003
+          }
+        }
+      }
+    ],
+    "macrosCalculated": {
+      "protein": 32.0,
+      "fat": 28.6,
+      "carbs": 112.8,
+      "calories": 836.6
+    }
+  },
+  {
+    "id": 14,
+    "name": "Pasta carbonara ",
+    "ingredients": [
+      {
+        "id": 237,
+        "multiplier": 0.33,
+        "food": {
+          "id": 600,
+          "name": "Pancetta",
+          "protein": 37.0,
+          "fat": 42.0,
+          "carbs": 1.4,
+          "portions": []
+        }
+      },
+      {
+        "id": 238,
+        "multiplier": 0.5,
+        "food": {
+          "id": 599,
+          "name": "Spaghetti",
+          "protein": 11.8,
+          "fat": 1.5,
+          "carbs": 72.0,
+          "portions": []
+        }
+      },
+      {
+        "id": 239,
+        "multiplier": 0.6,
+        "food": {
+          "id": 46,
+          "name": "Ei, gekookt",
+          "protein": 14.0,
+          "fat": 12.0,
+          "carbs": 0.0,
+          "portions": [
+            {
+              "id": 179,
+              "description": "stuk",
+              "grams": 50.0,
+              "macros": {
+                "protein": 7.000000000000001,
+                "fat": 6.0,
+                "carbs": 0.0,
+                "calories": 82.0
+              }
+            }
+          ]
+        },
+        "portion": {
+          "id": 179,
+          "description": "stuk",
+          "grams": 50.0,
+          "macros": {
+            "protein": 7.000000000000001,
+            "fat": 6.0,
+            "carbs": 0.0,
+            "calories": 82.0
+          }
+        }
+      },
+      {
+        "id": 240,
+        "multiplier": 0.33,
+        "food": {
+          "id": 601,
+          "name": "Parmezaanse kaas",
+          "protein": 38.0,
+          "fat": 29.0,
+          "carbs": 4.1,
+          "portions": []
+        }
+      }
+    ],
+    "macrosCalculated": {
+      "protein": 34.85,
+      "fat": 27.78,
+      "carbs": 37.815000000000005,
+      "calories": 540.6800000000001
+    }
+  },
+  {
+    "id": 15,
+    "name": "Lasagne",
+    "ingredients": [
+      {
+        "id": 246,
+        "multiplier": 1.0,
+        "food": {
+          "id": 609,
+          "name": "Lasagne Saus Honig met Bechamel",
+          "protein": 9.8,
+          "fat": 5.8,
+          "carbs": 63.0,
+          "portions": [
+            {
+              "id": 320,
+              "description": "plakje",
+              "grams": 125.0,
+              "macros": {
+                "protein": 12.25,
+                "fat": 7.249999999999999,
+                "carbs": 78.75,
+                "calories": 429.25
+              }
+            }
+          ]
+        },
+        "portion": {
+          "id": 320,
+          "description": "plakje",
+          "grams": 125.0,
+          "macros": {
+            "protein": 12.25,
+            "fat": 7.249999999999999,
+            "carbs": 78.75,
+            "calories": 429.25
+          }
+        }
+      },
+      {
+        "id": 247,
+        "multiplier": 2.0,
+        "food": {
+          "id": 610,
+          "name": "Lasagne bladen",
+          "protein": 12.4,
+          "fat": 1.8,
+          "carbs": 72.0,
+          "portions": [
+            {
+              "id": 321,
+              "description": "pakje",
+              "grams": 250.0,
+              "macros": {
+                "protein": 31.0,
+                "fat": 4.500000000000001,
+                "carbs": 180.0,
+                "calories": 884.5
+              }
+            }
+          ]
+        }
+      },
+      {
+        "id": 248,
+        "multiplier": 3.0,
+        "food": {
+          "id": 581,
+          "name": "Rundergehakt ",
+          "protein": 14.6,
+          "fat": 19.0,
+          "carbs": 0.8,
+          "portions": []
+        }
+      },
+      {
+        "id": 249,
+        "multiplier": 1.0,
+        "food": {
+          "id": 612,
+          "name": "Tomatenblokjes ",
+          "protein": 1.2,
+          "fat": 0.5,
+          "carbs": 3.0,
+          "portions": [
+            {
+              "id": 322,
+              "description": "blik",
+              "grams": 400.0,
+              "macros": {
+                "protein": 4.8,
+                "fat": 2.0,
+                "carbs": 12.0,
+                "calories": 85.2
+              }
+            }
+          ]
+        },
+        "portion": {
+          "id": 322,
+          "description": "blik",
+          "grams": 400.0,
+          "macros": {
+            "protein": 4.8,
+            "fat": 2.0,
+            "carbs": 12.0,
+            "calories": 85.2
+          }
+        }
+      },
+      {
+        "id": 250,
+        "multiplier": 1.0,
+        "food": {
+          "id": 5,
+          "name": "Paprika",
+          "protein": 1.0,
+          "fat": 0.27,
+          "carbs": 6.0,
+          "portions": [
+            {
+              "id": 173,
+              "description": "stuk",
+              "grams": 150.0,
+              "macros": {
+                "protein": 1.5,
+                "fat": 0.405,
+                "carbs": 9.0,
+                "calories": 45.645
+              }
+            }
+          ]
+        },
+        "portion": {
+          "id": 173,
+          "description": "stuk",
+          "grams": 150.0,
+          "macros": {
+            "protein": 1.5,
+            "fat": 0.405,
+            "carbs": 9.0,
+            "calories": 45.645
+          }
+        }
+      },
+      {
+        "id": 251,
+        "multiplier": 1.0,
+        "food": {
+          "id": 33,
+          "name": "Rode ui",
+          "protein": 1.09,
+          "fat": 0.09,
+          "carbs": 9.09,
+          "portions": [
+            {
+              "id": 178,
+              "description": "stuk",
+              "grams": 110.0,
+              "macros": {
+                "protein": 1.199,
+                "fat": 0.09899999999999999,
+                "carbs": 9.998999999999999,
+                "calories": 45.68299999999999
+              }
+            }
+          ]
+        },
+        "portion": {
+          "id": 178,
+          "description": "stuk",
+          "grams": 110.0,
+          "macros": {
+            "protein": 1.199,
+            "fat": 0.09899999999999999,
+            "carbs": 9.998999999999999,
+            "calories": 45.68299999999999
+          }
+        }
+      },
+      {
+        "id": 252,
+        "multiplier": 2.5,
+        "food": {
+          "id": 6,
+          "name": "Champignons",
+          "protein": 3.1,
+          "fat": 0.3,
+          "carbs": 3.3,
+          "portions": []
+        }
+      },
+      {
+        "id": 253,
+        "multiplier": 3.0,
+        "food": {
+          "id": 611,
+          "name": "Halfvolle melk",
+          "protein": 3.4,
+          "fat": 1.5,
+          "carbs": 4.6,
+          "portions": []
+        }
+      }
+    ],
+    "macrosCalculated": {
+      "protein": 106.29899999999999,
+      "fat": 75.604,
+      "carbs": 278.199,
+      "calories": 2218.428
+    }
+  },
+  {
+    "id": 16,
+    "name": "Salade appel geitenkaas",
+    "ingredients": [
+      {
+        "id": 220,
+        "multiplier": 1.0,
+        "food": {
+          "id": 399,
+          "name": "Geitenkaas",
+          "protein": 22.0,
+          "fat": 30.0,
+          "carbs": 0.1,
+          "portions": []
+        }
+      },
+      {
+        "id": 221,
+        "multiplier": 1.0,
+        "food": {
+          "id": 20,
+          "name": "Appel",
+          "protein": 0.28,
+          "fat": 0.2,
+          "carbs": 14.0,
+          "portions": [
+            {
+              "id": 176,
+              "description": "stuk",
+              "grams": 180.0,
+              "macros": {
+                "protein": 0.5040000000000001,
+                "fat": 0.36,
+                "carbs": 25.200000000000003,
+                "calories": 106.05600000000001
+              }
+            }
+          ]
+        },
+        "portion": {
+          "id": 176,
+          "description": "stuk",
+          "grams": 180.0,
+          "macros": {
+            "protein": 0.5040000000000001,
+            "fat": 0.36,
+            "carbs": 25.200000000000003,
+            "calories": 106.05600000000001
+          }
+        }
+      },
+      {
+        "id": 222,
+        "multiplier": 1.0,
+        "food": {
+          "id": 5,
+          "name": "Paprika",
+          "protein": 1.0,
+          "fat": 0.27,
+          "carbs": 6.0,
+          "portions": [
+            {
+              "id": 173,
+              "description": "stuk",
+              "grams": 150.0,
+              "macros": {
+                "protein": 1.5,
+                "fat": 0.405,
+                "carbs": 9.0,
+                "calories": 45.645
+              }
+            }
+          ]
+        },
+        "portion": {
+          "id": 173,
+          "description": "stuk",
+          "grams": 150.0,
+          "macros": {
+            "protein": 1.5,
+            "fat": 0.405,
+            "carbs": 9.0,
+            "calories": 45.645
+          }
+        }
+      },
+      {
+        "id": 223,
+        "multiplier": 2.0,
+        "food": {
+          "id": 384,
+          "name": "Komkommer",
+          "protein": 0.6,
+          "fat": 0.2,
+          "carbs": 2.2,
+          "portions": []
+        }
+      },
+      {
+        "id": 224,
+        "multiplier": 1.0,
+        "food": {
+          "id": 36,
+          "name": "Augurk",
+          "protein": 1.1,
+          "fat": 0.0,
+          "carbs": 2.0,
+          "portions": []
+        }
+      }
+    ],
+    "macrosCalculated": {
+      "protein": 26.304000000000002,
+      "fat": 31.165,
+      "carbs": 40.7,
+      "calories": 548.501
+    }
+  },
+  {
+    "id": 17,
+    "name": "Knackebrod met kaas",
+    "ingredients": [
+      {
+        "id": 233,
+        "multiplier": 1.0,
+        "food": {
+          "id": 572,
+          "name": "Knackebrod",
+          "protein": 9.0,
+          "fat": 2.0,
+          "carbs": 60.0,
+          "portions": [
+            {
+              "id": 299,
+              "description": "stuk",
+              "grams": 13.0,
+              "macros": {
+                "protein": 1.17,
+                "fat": 0.26,
+                "carbs": 7.8,
+                "calories": 38.22
+              }
+            }
+          ]
+        },
+        "portion": {
+          "id": 299,
+          "description": "stuk",
+          "grams": 13.0,
+          "macros": {
+            "protein": 1.17,
+            "fat": 0.26,
+            "carbs": 7.8,
+            "calories": 38.22
+          }
+        }
+      },
+      {
+        "id": 234,
+        "multiplier": 0.8,
+        "food": {
+          "id": 378,
+          "name": "Oude kaas ",
+          "protein": 24.5,
+          "fat": 32.0,
+          "carbs": 0.0,
+          "portions": [
+            {
+              "id": 163,
+              "description": "30 gram",
+              "grams": 30.0,
+              "macros": {
+                "protein": 7.35,
+                "fat": 9.6,
+                "carbs": 0.0,
+                "calories": 115.79999999999998
+              }
+            }
+          ]
+        },
+        "portion": {
+          "id": 163,
+          "description": "30 gram",
+          "grams": 30.0,
+          "macros": {
+            "protein": 7.35,
+            "fat": 9.6,
+            "carbs": 0.0,
+            "calories": 115.79999999999998
+          }
+        }
+      }
+    ],
+    "macrosCalculated": {
+      "protein": 7.05,
+      "fat": 7.9399999999999995,
+      "carbs": 7.8,
+      "calories": 130.85999999999999
+    }
+  },
+  {
+    "id": 18,
+    "name": "Ikea hotdog",
+    "ingredients": [
+      {
+        "id": 235,
+        "multiplier": 1.5,
+        "food": {
+          "id": 636,
+          "name": "Knakworst unox",
+          "protein": 13.0,
+          "fat": 16.0,
+          "carbs": 6.4,
+          "portions": [
+            {
+              "id": 337,
+              "description": "worstje",
+              "grams": 20.0,
+              "macros": {
+                "protein": 2.6,
+                "fat": 3.2,
+                "carbs": 1.28,
+                "calories": 44.32
+              }
+            },
+            {
+              "id": 338,
+              "description": "blik",
+              "grams": 220.0,
+              "macros": {
+                "protein": 28.6,
+                "fat": 35.2,
+                "carbs": 14.08,
+                "calories": 487.52
+              }
+            }
+          ]
+        },
+        "portion": {
+          "id": 337,
+          "description": "worstje",
+          "grams": 20.0,
+          "macros": {
+            "protein": 2.6,
+            "fat": 3.2,
+            "carbs": 1.28,
+            "calories": 44.32
+          }
+        }
+      },
+      {
+        "id": 236,
+        "multiplier": 1.0,
+        "food": {
+          "id": 637,
+          "name": "Wit puntje bolletje",
+          "protein": 9.8,
+          "fat": 1.3,
+          "carbs": 48.0,
+          "portions": [
+            {
+              "id": 339,
+              "description": "stuk",
+              "grams": 50.0,
+              "macros": {
+                "protein": 4.9,
+                "fat": 0.65,
+                "carbs": 24.0,
+                "calories": 121.44999999999999
+              }
+            }
+          ]
+        },
+        "portion": {
+          "id": 339,
+          "description": "stuk",
+          "grams": 50.0,
+          "macros": {
+            "protein": 4.9,
+            "fat": 0.65,
+            "carbs": 24.0,
+            "calories": 121.44999999999999
+          }
+        }
+      }
+    ],
+    "macrosCalculated": {
+      "protein": 8.8,
+      "fat": 5.450000000000001,
+      "carbs": 25.92,
+      "calories": 187.93
+    }
+  },
+  {
+    "id": 19,
+    "name": "Pizza homemade ",
+    "ingredients": [
+      {
+        "id": 242,
+        "multiplier": 1.25,
+        "food": {
+          "id": 656,
+          "name": "Patentbloem",
+          "protein": 10.0,
+          "fat": 1.0,
+          "carbs": 76.0,
+          "portions": []
+        }
+      },
+      {
+        "id": 243,
+        "multiplier": 2.0,
+        "food": {
+          "id": 556,
+          "name": "Olijfolie",
+          "protein": 0.0,
+          "fat": 99.0,
+          "carbs": 0.0,
+          "portions": [
+            {
+              "id": 285,
+              "description": "eetlepel",
+              "grams": 15.0,
+              "macros": {
+                "protein": 0.0,
+                "fat": 14.85,
+                "carbs": 0.0,
+                "calories": 133.65
+              }
+            }
+          ]
+        },
+        "portion": {
+          "id": 285,
+          "description": "eetlepel",
+          "grams": 15.0,
+          "macros": {
+            "protein": 0.0,
+            "fat": 14.85,
+            "carbs": 0.0,
+            "calories": 133.65
+          }
+        }
+      },
+      {
+        "id": 244,
+        "multiplier": 1.0,
+        "food": {
+          "id": 31,
+          "name": "Tomaat",
+          "protein": 1.0,
+          "fat": 0.2,
+          "carbs": 2.9,
+          "portions": []
+        }
+      },
+      {
+        "id": 245,
+        "multiplier": 1.0,
+        "food": {
+          "id": 657,
+          "name": "Shalot",
+          "protein": 2.5,
+          "fat": 0.1,
+          "carbs": 17.0,
+          "portions": [
+            {
+              "id": 351,
+              "description": "stuk",
+              "grams": 25.0,
+              "macros": {
+                "protein": 0.625,
+                "fat": 0.025,
+                "carbs": 4.25,
+                "calories": 19.725
+              }
+            }
+          ]
+        },
+        "portion": {
+          "id": 351,
+          "description": "stuk",
+          "grams": 25.0,
+          "macros": {
+            "protein": 0.625,
+            "fat": 0.025,
+            "carbs": 4.25,
+            "calories": 19.725
+          }
+        }
+      }
+    ],
+    "macrosCalculated": {
+      "protein": 14.125,
+      "fat": 31.174999999999997,
+      "carbs": 102.15,
+      "calories": 745.675
+    }
+  }
+]

@@ -33,19 +33,19 @@
     <div class="flex align-center sm">
       <ng-container *ngIf="isLoggedIn()">
         <a id="menuDiary" class="navbar__item" [routerLink]="['/dashboard']">Diary</a>
-        <a class="navbar__item" [routerLink]="['/dashboard', 'food']">Food</a>
-        <a class="navbar__item" [routerLink]="['/dashboard', 'dishes']">Dishes</a>
-        <a class="navbar__item" [routerLink]="['/dashboard', 'graphs']">Graphs</a>
+        <a id="menuFood" class="navbar__item" [routerLink]="['/dashboard', 'food']">Food</a>
+        <a id="menuDishes" class="navbar__item" [routerLink]="['/dashboard', 'dishes']">Dishes</a>
+        <a id="menuGraphs" class="navbar__item" [routerLink]="['/dashboard', 'graphs']">Graphs</a>
       </ng-container>
       
-      <a class="navbar__item" [routerLink]="['/about']">About</a>
+      <a id="menuAbout" class="navbar__item" [routerLink]="['/about']">About</a>
     </div>
 
     <div class="flex align-center align-right sm">
       <div *ngIf="isLoggedIn()" class="navbar__item">
         <a id="menuProfile" class="navbar__item" [routerLink]="['/dashboard', 'user']">Profile</a>
-        <a class="navbar__item" *ngIf="isAdmin()" [routerLink]="['/dashboard', 'admin']">Admin</a>
-        <a class="navbar__item" (click)="logOut()">Log out</a>
+        <a id="menuAdmin" class="navbar__item" *ngIf="isAdmin()" [routerLink]="['/dashboard', 'admin']">Admin</a>
+        <a id="menuLogout" class="navbar__item" (click)="logOut()">Log out</a>
       </div>
 
       <div *ngIf="!isLoggedIn()" class="navbar__item">

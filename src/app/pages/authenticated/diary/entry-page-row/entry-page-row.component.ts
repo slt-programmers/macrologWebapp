@@ -2,6 +2,7 @@ import { Component, Input, OnChanges, OnDestroy, SimpleChanges } from '@angular/
 import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
 import { Entry } from 'src/app/shared/model/entry';
+import { Meal } from 'src/app/shared/model/meal';
 import { Portion } from 'src/app/shared/model/portion';
 import { entriesActions } from 'src/app/shared/store/actions/entries.actions';
 import { selectEntriesDateMeal } from 'src/app/shared/store/selectors/entries.selectors';
@@ -14,7 +15,7 @@ import { clone } from 'src/app/util/functions';
 })
 export class EntryPageRowComponent implements OnChanges, OnDestroy {
 
-  @Input() meal: string;
+  @Input() meal: Meal;
   @Input() date: string;
 
   public entries: Entry[];
@@ -58,7 +59,7 @@ export class EntryPageRowComponent implements OnChanges, OnDestroy {
       for (const ingredient of entry.dish.ingredients) {
         this.modalEntries.push({
           food: ingredient.food,
-          meal: this.meal.toUpperCase(),
+          meal: this.meal,
           day: this.date,
           portion: ingredient.portion ? ingredient.food.portions
             .filter((p: Portion) => p.id === ingredient.portion.id)[0] : undefined,
@@ -68,7 +69,7 @@ export class EntryPageRowComponent implements OnChanges, OnDestroy {
     } else {
       this.modalEntries.push({
         food: entry.food,
-        meal: this.meal.toUpperCase(),
+        meal: this.meal,
         day: this.date,
         portion: entry.food.portions ? entry.food.portions[0] : undefined,
         multiplier: 1

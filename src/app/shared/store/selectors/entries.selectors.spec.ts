@@ -38,23 +38,23 @@ describe('Entries Selectors', () => {
       [entriesFeatureKey]: {
         data: [{
           date: '2022-01-01', entries: [
-            { meal: 'BREAKFAST', food: { id: 123 } },
-            { meal: 'LUNCH', food: { id: 234 } }
+            { meal: Meal.Breakfast, food: { id: 123 } },
+            { meal: Meal.Lunch, food: { id: 234 } }
           ]
         }]
       }
     });
-    expect(result).toEqual([{ meal: 'BREAKFAST', food: { id: 123 } }]);
+    expect(result).toEqual([{ meal: Meal.Breakfast, food: { id: 123 } }]);
     result = selectEntriesDateMeal('2022-01-01', Meal.Breakfast)({[entriesFeatureKey]: {
       data: undefined
     }});
     expect(result).toBeUndefined();
     result = selectEntriesDateMeal('2022-01-01', Meal.Breakfast)({[entriesFeatureKey]: {
-      data: [{date: '2022-01-02', entries: [{meal: 'BREAKFAST', food: {id: 123}}]}]
+      data: [{date: '2022-01-02', entries: [{meal: Meal.Breakfast, food: {id: 123}}]}]
     }});
     expect(result).toBeUndefined();
     result = selectEntriesDateMeal('2022-01-01', Meal.Breakfast)({[entriesFeatureKey]: {
-      data: [{date: '2022-01-01', entries: [{meal: 'LUNCH', food: {id: 123}}]}]
+      data: [{date: '2022-01-01', entries: [{meal: Meal.Lunch, food: {id: 123}}]}]
     }});
     expect(result).toEqual([]);
   });
@@ -67,6 +67,11 @@ describe('Entries Selectors', () => {
       ]}]
     }});
     expect(result).toEqual({protein: 3, fat: 5, carbs:7, calories: 300});
+
+    result = selectTotalsForDate('2022-01-01')({[entriesFeatureKey]: {
+      data: undefined
+    }});
+    expect(result).toEqual({protein: 0, fat: 0, carbs: 0, calories: 0});
   });
 
 });
