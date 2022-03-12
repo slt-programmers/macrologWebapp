@@ -9,7 +9,7 @@ import { AdminService } from 'src/app/shared/services/admin.service';
 export class UserManagementComponent implements OnInit {
   public allUsers: UserAccount[] = []
   public isModalVisible = false;
-  public userName: string = '';
+  public userName: string = undefined;
 
   public selectedUser: UserAccount | undefined;
 
@@ -39,6 +39,7 @@ export class UserManagementComponent implements OnInit {
       this.adminService.deleteUser(this.selectedUser).subscribe(it => {
         this.getAllUsers();
         this.selectedUser = undefined;
+        this.userName = undefined;
         this.closeModal();
       });
     }
