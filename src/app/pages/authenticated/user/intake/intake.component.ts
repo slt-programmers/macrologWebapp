@@ -65,7 +65,7 @@ export class IntakeComponent implements OnInit {
   public fillStandard() {
     this.calories = Math.round(this.tdee);
     this.protein = Math.round(this.weight * 1.8);
-    this.fat = Math.round(this.weight * 0.8)
+    this.fat = Math.round(this.weight * 0.8);
     this.calcCarbs();
   }
 

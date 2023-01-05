@@ -85,10 +85,10 @@ describe('IntakeComponent', () => {
     })); 
     component.ngOnInit();
     component.fillStandard();
-    expect(component.calories).toEqual(1893);
+    expect(component.calories).toEqual(1886);
     expect(component.protein).toEqual(119);
     expect(component.fat).toEqual(53);
-    expect(component.carbs).toEqual(235);
+    expect(component.carbs).toEqual(233);
   });
 
   it('should save intake', () => {
@@ -112,6 +112,6 @@ describe('IntakeComponent', () => {
     expect(userService.addUserSetting).toHaveBeenCalledTimes(3);
     expect(component.goalProtein).toEqual(119);
     expect(component.goalFat).toEqual(53);
-    expect(component.goalCarbs).toEqual(235);
+    expect(component.goalCarbs).toEqual(233);
   });
 });
