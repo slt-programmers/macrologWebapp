@@ -2,7 +2,7 @@ import { Macros } from './macros';
 
 export interface MacrosPerDay {
 
-  macro?: Macros;
+  macros?: Macros;
   day?: Date | string;
 
 }
