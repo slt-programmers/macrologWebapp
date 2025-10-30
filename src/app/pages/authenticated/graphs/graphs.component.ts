@@ -116,14 +116,14 @@ export class GraphsComponent implements OnInit {
     this.loading = true;
     this.allMacros = [];
     this.logService.getMacrosPerDay(format(this.dateFrom, 'yyyy-MM-dd'), format(this.dateTo, 'yyyy-MM-dd')).subscribe(
-        (data) => {
-          this.allMacros = data;
-          this.getGoals();
-        },
-        () => {
-          this.allMacros = [];
-        }
-      );
+      (data) => {
+        this.allMacros = data;
+        this.getGoals();
+      },
+      () => {
+        this.allMacros = [];
+      }
+    );
   }
 
   private getGoals() {
@@ -291,11 +291,11 @@ export class GraphsComponent implements OnInit {
   private getMacroForDay(date: Date, numberOfValues: number, macro: string) {
     let indexMax = Math.min(numberOfValues, this.allMacros.length);
     for (let i = 0; i < indexMax; i++) {
-      const macrosPerDay = this.allMacros[i];
+      const macrosPerDay = this.allMacros[i]; 
       const macrosString = format(new Date(macrosPerDay.day), 'yyyy-MM-dd');
       const dateString = format(date, 'yyyy-MM-dd');
       if (macrosPerDay && macrosString === dateString) {
-        return Math.round(macrosPerDay.macro[macro as keyof Macros]);
+        return Math.round(macrosPerDay.macroDto[macro as keyof Macros]);
       }
     }
     return undefined;

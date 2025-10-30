@@ -1,0 +1,20 @@
+{
+  "authenticate": {
+    "id": 1,
+    "userName": "CarmenScholte",
+    "token": "eyy",
+    "email": "carmenscholte@gmail.com",
+    "admin": true
+  }, 
+  "user": {},
+  "dishes": [],
+  "food": [],
+  "goalProtein": 120,
+  "goalFat": 100,
+  "goalCarbs": 40,
+  "logs": [],
+  "macros": [],
+  "activities": [],
+  "strava": {},
+  "weight": []
+}
