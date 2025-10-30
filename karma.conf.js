@@ -10,7 +10,6 @@ module.exports = function (config) {
       require('karma-jasmine-html-reporter'),
       require('karma-coverage'),
       require('@angular-devkit/build-angular/plugins/karma'),
-      require('karma-sonarqube-execution-reporter')
     ],
     browsers: ['headless'],
     customLaunchers: {
@@ -38,14 +37,7 @@ module.exports = function (config) {
         { type: 'text-summary' }
       ],
     },
-    sonarQubeExecutionReporter: {
-      sonarQubeVersion: 'LATEST',
-      testPaths: ['./src/app'],
-      testFilePattern: '.spec.ts',
-      outputDir: './coverage',
-      outputFile: 'ut_report.xml'
-    },
-    reporters: ['progress', 'kjhtml', 'sonarqubeUnit'],
+    reporters: ['progress', 'kjhtml'],
     port: 9876,
     colors: true,
     logLevel: config.LOG_INFO,
