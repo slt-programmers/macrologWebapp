@@ -295,7 +295,7 @@ export class GraphsComponent implements OnInit {
       const macrosString = format(new Date(macrosPerDay.day), 'yyyy-MM-dd');
       const dateString = format(date, 'yyyy-MM-dd');
       if (macrosPerDay && macrosString === dateString) {
-        return Math.round(macrosPerDay.macroDto[macro as keyof Macros]);
+        return Math.round(macrosPerDay.macros[macro as keyof Macros]);
       }
     }
     return undefined;
