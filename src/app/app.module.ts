@@ -13,7 +13,6 @@ import { reducers } from './shared/store/reducers';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { EffectsModule } from '@ngrx/effects';
 import { FoodEffects } from './shared/store/effects/food.effects';
-import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { EntriesEffects } from './shared/store/effects/entries.effects';
 import { ActivitiesEffects } from './shared/store/effects/activities.effects';
 import { DishesEffects } from './shared/store/effects/dishes.effects';
@@ -30,7 +29,6 @@ import { DishesEffects } from './shared/store/effects/dishes.effects';
     ComponentsModule,
     AppRoutingModule,
     StoreModule.forRoot(reducers),
-    StoreDevtoolsModule.instrument(),
     EffectsModule.forRoot([
       FoodEffects,
       DishesEffects,
