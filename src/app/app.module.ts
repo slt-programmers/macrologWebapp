@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { JwtInterceptor } from './shared/interceptors/jwt.interceptor';
@@ -17,32 +17,26 @@ import { EntriesEffects } from './shared/store/effects/entries.effects';
 import { ActivitiesEffects } from './shared/store/effects/activities.effects';
 import { DishesEffects } from './shared/store/effects/dishes.effects';
 
-@NgModule({
-  declarations: [
-    AppComponent,
-    ToastComponent,
-  ],
-  imports: [
-    BrowserModule,
-    HttpClientModule,
-    ServicesModule,
-    ComponentsModule,
-    AppRoutingModule,
-    StoreModule.forRoot(reducers),
-    EffectsModule.forRoot([
-      FoodEffects,
-      DishesEffects,
-      EntriesEffects,
-      ActivitiesEffects
-    ]),
-    FontAwesomeModule,
-  ],
-  providers: [
-    { provide: Window, useValue: window },
-    { provide: Document, useValue: document },
-    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
-    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
-  ],
-  bootstrap: [AppComponent]
-})
+@NgModule({ declarations: [
+        AppComponent,
+        ToastComponent,
+    ],
+    bootstrap: [AppComponent], imports: [BrowserModule,
+        ServicesModule,
+        ComponentsModule,
+        AppRoutingModule,
+        StoreModule.forRoot(reducers),
+        EffectsModule.forRoot([
+            FoodEffects,
+            DishesEffects,
+            EntriesEffects,
+            ActivitiesEffects
+        ]),
+        FontAwesomeModule], providers: [
+        { provide: Window, useValue: window },
+        { provide: Document, useValue: document },
+        { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+        { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+        provideHttpClient(withInterceptorsFromDi()),
+    ] })
 export class AppModule { }

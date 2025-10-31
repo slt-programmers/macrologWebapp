@@ -16,7 +16,7 @@ export class FoodEffects {
   getAllFood$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(foodActions.get),
-      concatMap((action) => {
+      concatMap(() => {
         return this.http.get<Food[]>(this.backendUrl).pipe(
           map(response => {
             return foodActions.success(response);

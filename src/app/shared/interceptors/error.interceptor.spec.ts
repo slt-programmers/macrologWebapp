@@ -1,8 +1,6 @@
 import { TestBed, tick, fakeAsync } from '@angular/core/testing';
 import { ErrorInterceptor } from './error.interceptor';
-import {
-  HTTP_INTERCEPTORS,
-} from '@angular/common/http';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { throwError, of } from 'rxjs';
 import { AuthenticationService } from '../services/auth.service';
 import { MockProvider } from 'ng-mocks';

@@ -4,7 +4,12 @@ import { AsyncState, createAsyncReducers } from "./async.reducers";
 
 export const entriesFeatureKey = 'entries';
 
-const initialState: AsyncState<{date: string, entries: Entry[]}[]> = {
+export type EntriesState  = {
+  date: string,
+  entries: Entry[]
+}
+
+const initialState: AsyncState<EntriesState[]> = {
   data: undefined,
   loading: false,
   error: undefined,
@@ -12,4 +17,4 @@ const initialState: AsyncState<{date: string, entries: Entry[]}[]> = {
   params: undefined
 };
 
-export const entriesReducer = createAsyncReducers<{date: string, entries: Entry[]}[]>(initialState, entriesActions);
+export const entriesReducer = createAsyncReducers<EntriesState[]>(initialState, entriesActions);

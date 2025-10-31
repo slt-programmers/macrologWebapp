@@ -1,6 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { createEffect, Actions, ofType, concatLatestFrom } from "@ngrx/effects";
+import { createEffect, Actions, ofType } from "@ngrx/effects";
+import { concatLatestFrom} from "@ngrx/operators";
 import { Store } from "@ngrx/store";
 import { of } from "rxjs";
 import { concatMap, catchError, map } from "rxjs/operators";
@@ -8,6 +9,7 @@ import { environment } from "src/environments/environment";
 import { Entry } from "../../model/entry";
 import { entriesActions } from "../actions/entries.actions";
 import { selectEntries } from "../selectors/entries.selectors";
+import { EntriesState } from "../reducers/entries.reducers";
 
 
 @Injectable()
@@ -20,7 +22,7 @@ export class EntriesEffects {
       ofType(entriesActions.get),
       concatLatestFrom(() => this.store.select(selectEntries)),
       concatMap(([action, state]) => {
-        const hasEntriesForDate = state.filter(epd => epd.date === action.params)[0];
+        const hasEntriesForDate = state.filter((epd: EntriesState) => epd.date === action.params)[0];
         if (!state || !hasEntriesForDate || action.force) {
           return this.http.get<Entry[]>(this.backendUrl + '/day/' + action.params).pipe(
             map(response => {
@@ -54,7 +56,7 @@ export class EntriesEffects {
         const options = { headers: headers };
         return this.http.post<Entry[]>(this.backendUrl + '/day/' + action.params.date + '/' + action.params.meal, action.body, options).pipe(
           map(response => {
-            const dateInState = state.filter(epd => epd.date === action.params.date)[0]
+            const dateInState = state.filter((epd: EntriesState) => epd.date === action.params.date)[0]
             if (!dateInState) {
               state.push({ date: action.params.date, entries: response })
             }

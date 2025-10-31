@@ -1,6 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { Actions, createEffect, ofType, concatLatestFrom } from "@ngrx/effects";
+import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { Store } from "@ngrx/store";
 import { of } from "rxjs";
 import { catchError, concatMap, map } from "rxjs/operators";
@@ -8,6 +8,7 @@ import { environment } from "src/environments/environment";
 import { Activity } from "../../model/activity";
 import { activitiesActions } from "../actions/activities.actions";
 import { selectActivities } from "../selectors/activities.selectors";
+import { concatLatestFrom } from "@ngrx/operators";
 
 @Injectable()
 export class ActivitiesEffects {

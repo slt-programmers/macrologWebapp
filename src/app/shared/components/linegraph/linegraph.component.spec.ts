@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { LinegraphComponent, DataPoint, GraphPoint } from './linegraph.component';
 import { SimpleChange } from '@angular/core';
 
@@ -7,12 +7,12 @@ describe('LinegraphComponent', () => {
   let fixture: ComponentFixture<LinegraphComponent>;
   let datapoints: DataPoint[];
 
-  beforeEach(async(() => {
+  beforeEach(async() => {
     TestBed.configureTestingModule({
       declarations: [LinegraphComponent]
     })
       .compileComponents();
-  }));
+  });
 
   beforeEach(() => {
     fixture = TestBed.createComponent(LinegraphComponent);

@@ -4,7 +4,12 @@ import { AsyncState, createAsyncReducers } from "./async.reducers";
 
 export const activitiesFeatureKey = 'activities';
 
-const initialState: AsyncState<{ date: string, activities: Activity[]}[]> = {
+export type ActivitiesState = {
+  date: string,
+  activities: Activity[],
+}
+
+const initialState: AsyncState<ActivitiesState[]> = {
   data: undefined,
   loading: false,
   error: undefined,
@@ -13,4 +18,4 @@ const initialState: AsyncState<{ date: string, activities: Activity[]}[]> = {
 };
 
 export const activitiesReducer =
-  createAsyncReducers<{ date: string, activities: Activity[]}[]>(initialState, activitiesActions);
+  createAsyncReducers<ActivitiesState[]>(initialState, activitiesActions);

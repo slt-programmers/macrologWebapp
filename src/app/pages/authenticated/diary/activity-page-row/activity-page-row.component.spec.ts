@@ -4,7 +4,6 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
 import { MockProvider } from 'ng-mocks';
 import { of } from 'rxjs';
-import { Activity } from 'src/app/shared/model/activity';
 import { UserService } from 'src/app/shared/services/user.service';
 import { activitiesActions } from 'src/app/shared/store/actions/activities.actions';
 import { selectActivitiesDate, selectActivitiesLoading, selectActivitiesState } from 'src/app/shared/store/selectors/activities.selectors';

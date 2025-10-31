@@ -16,7 +16,7 @@ export class DishesEffects {
   getAllDishes$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(dishesActions.get),
-      concatMap((action) => {
+      concatMap(() => {
         return this.http.get<Dish[]>(this.backendUrl).pipe(
           map(response => {
             return dishesActions.success(response);
