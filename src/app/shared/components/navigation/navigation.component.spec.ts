@@ -1,9 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { RouterTestingModule } from '@angular/router/testing';
+import { provideRouter, Router, RouterLink, RouterOutlet } from '@angular/router';
+import { MockProvider } from 'node_modules/ng-mocks';
 import { AuthenticationService } from '../../services/auth.service';
 import { NavigationComponent } from './navigation.component';
-import { MockProvider } from 'node_modules/ng-mocks';
-import { Router } from '@angular/router';
 
 describe('NavigationComponent', () => {
   let component: NavigationComponent;
@@ -13,9 +12,10 @@ describe('NavigationComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [RouterTestingModule],
+      imports: [RouterOutlet, RouterLink],
       declarations: [NavigationComponent],
       providers: [
+        provideRouter([]),
         MockProvider(AuthenticationService)]
     }).compileComponents();
 

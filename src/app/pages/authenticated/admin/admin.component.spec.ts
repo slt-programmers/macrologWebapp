@@ -1,11 +1,10 @@
-import { TestBed, ComponentFixture } from '@angular/core/testing';
-import { RouterTestingModule } from '@angular/router/testing';
-import { AdminComponent } from './admin.component';
 import { HttpClient } from '@angular/common/http';
-import { Router } from '@angular/router';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { provideRouter, Router, RouterOutlet } from '@angular/router';
+import { MockProvider } from 'ng-mocks';
 import { ToastService } from 'src/app/shared/services/toast.service';
 import { UserService } from 'src/app/shared/services/user.service';
-import { MockProvider } from 'ng-mocks';
+import { AdminComponent } from './admin.component';
 
 describe('AdminComponent', () => {
   let component: AdminComponent;
@@ -15,11 +14,12 @@ describe('AdminComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [RouterTestingModule.withRoutes([])],
       declarations: [AdminComponent],
+      imports: [RouterOutlet],
       providers: [
-        MockProvider(ToastService), 
-        MockProvider(UserService), 
+        provideRouter([]),
+        MockProvider(ToastService),
+        MockProvider(UserService),
         MockProvider(HttpClient)],
       schemas: [],
     }).compileComponents();
@@ -35,10 +35,10 @@ describe('AdminComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
-  }); 
+  });
 
   it('should check if admin', () => {
-    localStorage.setItem('currentUser', JSON.stringify({admin: true}));
+    localStorage.setItem('currentUser', JSON.stringify({ admin: true }));
     const result = component.isAdmin();
     expect(result).toBeTrue();
   });

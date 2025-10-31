@@ -4,11 +4,10 @@ import {
   tick,
   fakeAsync,
 } from '@angular/core/testing';
-import { RouterTestingModule } from '@angular/router/testing';
 import { LoginComponent } from './login.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
-import { Router } from '@angular/router';
+import { provideRouter, Router } from '@angular/router';
 import { of, throwError } from 'rxjs';
 import { AuthenticationService } from 'src/app/shared/services/auth.service';
 import { ToastService } from 'src/app/shared/services/toast.service';
@@ -25,7 +24,7 @@ describe('LoginComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [FormsModule, ReactiveFormsModule, RouterTestingModule],
+      imports: [FormsModule, ReactiveFormsModule],
       declarations: [
         LoginComponent,
         MockComponent(NavigationComponent),
@@ -33,7 +32,8 @@ describe('LoginComponent', () => {
       ],
       providers: [
         MockProvider(AuthenticationService),
-        MockProvider(ToastService)
+        MockProvider(ToastService),
+        provideRouter([])
       ]
     }).compileComponents();
     fixture = TestBed.createComponent(LoginComponent);

@@ -1,18 +1,18 @@
+import { HttpClient, HttpHandler } from '@angular/common/http';
+import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
 import {
-  TestBed,
   ComponentFixture,
   fakeAsync,
+  TestBed,
   tick,
 } from '@angular/core/testing';
-import { HttpClient, HttpHandler } from '@angular/common/http';
-import { NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { AccountComponent } from './account.component';
-import { throwError, of } from 'rxjs';
 import { FormsModule } from '@angular/forms';
-import { RouterTestingModule } from '@angular/router/testing';
-import { Router } from '@angular/router';
+import { provideRouter, Router } from '@angular/router';
+import { MockProvider } from 'ng-mocks';
+import { of, throwError } from 'rxjs';
 import { AuthenticationService } from 'src/app/shared/services/auth.service';
 import { ToastService } from 'src/app/shared/services/toast.service';
+import { AccountComponent } from './account.component';
 
 describe('AccountComponent', () => {
   let component: AccountComponent;
@@ -23,11 +23,16 @@ describe('AccountComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [FormsModule, RouterTestingModule],
+      imports: [FormsModule],
       declarations: [AccountComponent],
-      providers: [AuthenticationService, ToastService, HttpClient, HttpHandler],
+      providers: [
+        provideRouter([]),
+        MockProvider(AuthenticationService),
+        MockProvider(ToastService), 
+        MockProvider(HttpClient)],
       schemas: [NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
+
     fixture = TestBed.createComponent(AccountComponent);
     component = fixture.componentInstance;
     authService = TestBed.inject(AuthenticationService);

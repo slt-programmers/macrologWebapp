@@ -1,10 +1,9 @@
-import { TestBed, ComponentFixture } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ActivatedRoute, provideRouter } from '@angular/router';
 import { MockProvider } from 'ng-mocks';
-import { of, scheduled, Scheduler } from 'rxjs';
-import { MailComponent } from './mail.component';
+import { of } from 'rxjs';
 import { GoogleService } from 'src/app/shared/services/google.service';
-import { ActivatedRoute } from '@angular/router';
-import { RouterTestingModule } from '@angular/router/testing';
+import { MailComponent } from './mail.component';
 
 describe('MailComponent', () => {
   let component: MailComponent;
@@ -14,11 +13,11 @@ describe('MailComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [RouterTestingModule],
       declarations: [MailComponent],
       providers: [
         MockProvider(GoogleService),
-        MockProvider(ActivatedRoute)
+        MockProvider(ActivatedRoute),
+        provideRouter([])
       ]
     }).compileComponents();
 

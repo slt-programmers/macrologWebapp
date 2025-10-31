@@ -1,17 +1,17 @@
+import { HttpClient } from '@angular/common/http';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 import {
-  TestBed,
   ComponentFixture,
   fakeAsync,
+  TestBed,
   tick,
 } from '@angular/core/testing';
-import { RouterTestingModule } from '@angular/router/testing';
-import { HttpClient, HttpHandler } from '@angular/common/http';
-import { Router, ActivatedRoute } from '@angular/router';
-import { NO_ERRORS_SCHEMA } from '@angular/core';
-import { ConnectivityComponent } from './connectivity.component';
+import { ActivatedRoute, provideRouter, Router } from '@angular/router';
+import { MockProvider } from 'ng-mocks';
 import { of } from 'rxjs';
 import { ToastService } from 'src/app/shared/services/toast.service';
 import { UserService } from 'src/app/shared/services/user.service';
+import { ConnectivityComponent } from './connectivity.component';
 
 describe('ConnectivityComponent', () => {
   let component: ConnectivityComponent;
@@ -22,9 +22,12 @@ describe('ConnectivityComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [RouterTestingModule.withRoutes([])],
       declarations: [ConnectivityComponent],
-      providers: [ToastService, UserService, HttpClient, HttpHandler],
+      providers: [
+        provideRouter([]),
+        MockProvider(ToastService),
+        MockProvider(UserService),
+        MockProvider(HttpClient)],
       schemas: [NO_ERRORS_SCHEMA],
     }).compileComponents();
     fixture = TestBed.createComponent(ConnectivityComponent);

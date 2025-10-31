@@ -1,19 +1,18 @@
 import {
-  TestBed,
   ComponentFixture,
   fakeAsync,
+  TestBed,
   tick,
 } from '@angular/core/testing';
-import { RouterTestingModule } from '@angular/router/testing';
-import { AuthenticatedComponent } from './authenticated.component';
-import { ScrollBehaviourService } from '../../shared/services/scroll-behaviour.service';
-import { HealthcheckService } from '../../shared/services/healthcheck.service';
-import { of, throwError } from 'rxjs';
-import { Router } from '@angular/router';
-import { NavigationComponent } from 'src/app/shared/components/navigation/navigation.component';
-import { MockComponent, MockProvider } from 'ng-mocks';
-import { AuthenticationService } from 'src/app/shared/services/auth.service';
+import { provideRouter, Router, RouterOutlet } from '@angular/router';
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
+import { MockComponent, MockProvider } from 'ng-mocks';
+import { of, throwError } from 'rxjs';
+import { NavigationComponent } from 'src/app/shared/components/navigation/navigation.component';
+import { AuthenticationService } from 'src/app/shared/services/auth.service';
+import { HealthcheckService } from '../../shared/services/healthcheck.service';
+import { ScrollBehaviourService } from '../../shared/services/scroll-behaviour.service';
+import { AuthenticatedComponent } from './authenticated.component';
 
 describe('AuthenticatedComponent', () => {
   let component: AuthenticatedComponent;
@@ -26,13 +25,12 @@ describe('AuthenticatedComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [
-        RouterTestingModule.withRoutes([{ path: 'user', redirectTo: '' }])
-      ],
+      imports: [RouterOutlet],
       declarations: [
         AuthenticatedComponent,
         MockComponent(NavigationComponent)],
       providers: [
+        provideRouter([]),
         provideMockStore(),
         MockProvider(HealthcheckService),
         MockProvider(ScrollBehaviourService),

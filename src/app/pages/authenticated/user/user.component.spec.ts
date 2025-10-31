@@ -1,8 +1,6 @@
-import { TestBed, ComponentFixture } from '@angular/core/testing';
-import { Router } from '@angular/router';
-import { RouterTestingModule } from '@angular/router/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { provideRouter, Router, RouterOutlet } from '@angular/router';
 import { UserComponent } from './user.component';
-
 
 describe('UserComponent', () => {
   let component: UserComponent;
@@ -11,8 +9,9 @@ describe('UserComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [RouterTestingModule.withRoutes([])],
+      imports: [RouterOutlet],
       declarations: [UserComponent],
+      providers: [provideRouter([])]
     }).compileComponents();
 
     router = TestBed.inject(Router);

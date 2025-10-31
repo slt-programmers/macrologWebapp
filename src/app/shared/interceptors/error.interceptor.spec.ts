@@ -1,7 +1,5 @@
 import { TestBed, tick, fakeAsync } from '@angular/core/testing';
 import { ErrorInterceptor } from './error.interceptor';
-import { RouterTestingModule } from '@angular/router/testing';
-import { Router } from '@angular/router';
 import {
   HTTP_INTERCEPTORS,
 } from '@angular/common/http';
@@ -12,12 +10,10 @@ import { ToastService } from '../services/toast.service';
 
 describe('AuthService', () => {
   let interceptor: ErrorInterceptor;
-  let router: Router;
   let authService: AuthenticationService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [RouterTestingModule],
       providers: [
         ErrorInterceptor,
         MockProvider(ToastService),
