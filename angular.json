@@ -148,9 +148,10 @@
       }
     }
   },
-  "defaultProject": "macrolog-webapp",
   "cli": {
     "analytics": "be3c8820-63e9-44ec-b7f7-d15f2eaa4756",
-    "defaultCollection": "@angular-eslint/schematics"
+    "schematicCollections": [
+      "@angular-eslint/schematics"
+    ]
   }
 }
