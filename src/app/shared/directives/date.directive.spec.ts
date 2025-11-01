@@ -4,13 +4,12 @@ import { Component, DebugElement } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { FormControl, FormsModule } from '@angular/forms';
 
-
 @Component({
-    template: `
+  template: `
   <form>
     <input validDate>
   </form>`,
-    imports: [FormsModule]
+  imports: [FormsModule]
 })
 class TestComponent {
 }
@@ -22,9 +21,8 @@ describe('Directive: valid date', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-    imports: [FormsModule, TestComponent],
-    declarations: [DateValidator],
-});
+      imports: [DateValidator, FormsModule, TestComponent],
+    });
     fixture = TestBed.createComponent(TestComponent);
     component = fixture.componentInstance;
     inputEl = fixture.debugElement.query(By.css('input'));
@@ -33,7 +31,7 @@ describe('Directive: valid date', () => {
   it('should create', () => {
     const dateDirective = new DateValidator();
     expect(dateDirective).toBeTruthy();
-  }); 
+  });
 
   it('should validate date', () => {
     const dateDirective = new DateValidator();
@@ -42,7 +40,7 @@ describe('Directive: valid date', () => {
     result = dateDirective.validate(new FormControl(''));
     expect(result).toBeNull();
     result = dateDirective.validate(new FormControl('32-4-2021'));
-    expect(result).toEqual({'DateValidator': true});
+    expect(result).toEqual({ 'DateValidator': true });
   });
 
 });

@@ -91,7 +91,6 @@ export class LoginComponent implements OnInit {
 
   public toggleForgotPwModal(toggle: boolean) {
     this.showForgotPwModal.set(toggle);
-    console.log('toggled')
   }
 
   public resetPassword() {
