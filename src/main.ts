@@ -37,5 +37,4 @@ bootstrapApplication(AppComponent, {
         { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
         provideHttpClient(withInterceptorsFromDi())
     ]
-})
-  .catch((err) => {});
+}).catch((err) => {});
