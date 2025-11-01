@@ -1,5 +1,5 @@
 import { HttpClient } from "@angular/common/http";
-import { Injectable } from "@angular/core";
+import { Injectable, inject } from "@angular/core";
 import { createEffect, Actions, ofType } from "@ngrx/effects";
 import { concatLatestFrom} from "@ngrx/operators";
 import { Store } from "@ngrx/store";
@@ -14,6 +14,10 @@ import { EntriesState } from "../reducers/entries.reducers";
 
 @Injectable()
 export class EntriesEffects {
+  private readonly actions$ = inject(Actions);
+  private readonly http = inject(HttpClient);
+  private readonly store = inject(Store);
+
 
   private backendUrl = '//' + environment.backend + '/logs'
 
@@ -71,11 +75,6 @@ export class EntriesEffects {
       })
     )
   });
-
-  constructor(private readonly actions$: Actions, private readonly http: HttpClient,
-    private readonly store: Store) {
-
-  }
 
 }
 

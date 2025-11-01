@@ -1,4 +1,4 @@
-import { Component, OnInit, OnChanges, Renderer2, Input, ViewChild, ElementRef, AfterViewInit, SimpleChanges } from '@angular/core';
+import { Component, OnInit, OnChanges, Renderer2, Input, ViewChild, ElementRef, AfterViewInit, SimpleChanges, inject } from '@angular/core';
 import { DecimalPipe } from '@angular/common';
 
 @Component({
@@ -8,6 +8,8 @@ import { DecimalPipe } from '@angular/common';
     imports: [DecimalPipe]
 })
 export class StackDonutComponent implements OnInit, AfterViewInit, OnChanges {
+  private renderer = inject(Renderer2);
+
 
   @ViewChild('innerCircle', { static: false }) innerCircle: ElementRef;
   @ViewChild('innerBackgroundCircle', { static: false }) innerBackgroundCircle: ElementRef;
@@ -22,8 +24,6 @@ export class StackDonutComponent implements OnInit, AfterViewInit, OnChanges {
 
   public height: number;
   public width: number;
-
-  constructor(private renderer: Renderer2) { }
 
   ngOnInit() {
     this.height = (this.circleRadius + (this.strokeWidth * 2) + 1) * 2;

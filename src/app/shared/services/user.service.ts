@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 import { forkJoin, Observable, of } from 'rxjs';
@@ -8,9 +8,10 @@ import { ToastService } from './toast.service';
 
 @Injectable()
 export class UserService {
-  private macrologBackendUrl = '//' + environment.backend + '/settings';
+  private readonly http = inject(HttpClient);
+  private readonly toastService = inject(ToastService);
 
-  constructor(private readonly http: HttpClient, private readonly toastService: ToastService) { }
+  private macrologBackendUrl = '//' + environment.backend + '/settings';
 
   public getSetting(key: string, date: string): Observable<string> {
     return this.http.get<string>(this.macrologBackendUrl + '/' + key,

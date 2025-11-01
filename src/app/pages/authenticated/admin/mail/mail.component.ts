@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { GoogleService } from 'src/app/shared/services/google.service';
 import { environment } from '../../../../../environments/environment';
@@ -11,6 +11,9 @@ import { FormsModule } from '@angular/forms';
     imports: [FormsModule]
 })
 export class MailComponent implements OnInit {
+  private readonly googleService = inject(GoogleService);
+  private readonly route = inject(ActivatedRoute);
+
   public googleConnectUrl: string = '';
   public isConnected = false;
   public syncError: string = '';
@@ -20,8 +23,6 @@ export class MailComponent implements OnInit {
   private clientId: string = '';
   private code: string | null = null;
   private scope: string | null = null;
-
-  constructor(private readonly googleService: GoogleService, private readonly route: ActivatedRoute) { }
 
   ngOnInit() {
     this.retrieveStatus();

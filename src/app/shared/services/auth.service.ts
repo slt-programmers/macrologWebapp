@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { catchError, map } from 'rxjs/operators';
 import { environment } from '../../../environments/environment';
@@ -7,10 +7,10 @@ import { Observable, of, throwError } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class AuthenticationService {
+  private http = inject(HttpClient);
+
 
   private readonly macrologBackendUrl = '//' + environment.backend + '/api';
-
-  constructor(private http: HttpClient) { }
 
   public isAuthenticated(): boolean {
     const user = localStorage.getItem('currentUser');

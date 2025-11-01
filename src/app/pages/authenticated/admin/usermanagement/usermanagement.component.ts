@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { UserAccount } from 'src/app/shared/model/userAccount';
 import { AdminService } from 'src/app/shared/services/admin.service';
 
@@ -11,13 +11,13 @@ import { FormsModule } from '@angular/forms';
     imports: [ModalComponent, FormsModule]
 })
 export class UserManagementComponent implements OnInit {
+  private adminService = inject(AdminService);
+
   public allUsers: UserAccount[] = []
   public isModalVisible = false;
   public userName: string = undefined;
 
   public selectedUser: UserAccount | undefined;
-
-  constructor(private adminService: AdminService) { }
 
   ngOnInit() {
     this.getAllUsers();

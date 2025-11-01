@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { Router, RouterLink, RouterOutlet } from '@angular/router';
 import { NgClass } from '@angular/common';
 
@@ -8,8 +8,7 @@ import { NgClass } from '@angular/common';
     styleUrls: ['./user.component.scss'],
     imports: [NgClass, RouterLink, RouterOutlet]
 })
-export class UserComponent {
+export class UserComponent {	router = inject(Router);
 
-	constructor(public router: Router) {}
 
 }

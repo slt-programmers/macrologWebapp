@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, inject } from '@angular/core';
 import { UserService } from '../../../shared/services/user.service';
 import { Router } from '@angular/router';
 import { forkJoin } from 'rxjs';
@@ -17,6 +17,9 @@ import { EntryPageRowComponent } from '../diary/entry-page-row/entry-page-row.co
     imports: [StepperComponent, FormsModule, ReactiveFormsModule, EntryPageRowComponent]
 })
 export class OnboardingComponent implements OnInit {
+  private userService = inject(UserService);
+  private router = inject(Router);
+
   @ViewChild('breakfast', { static: false }) private breakfastEref: any;
 
   // Step 2
@@ -39,7 +42,7 @@ export class OnboardingComponent implements OnInit {
   public userForm: FormGroup;
   public currentStep: number;
 
-  constructor(private userService: UserService, private router: Router) {
+  constructor() {
     this.displayDate = this.datePipe.transform(new Date(), 'yyyy-MM-dd');
     this.userForm = new FormGroup({
       name: new FormControl('', Validators.required),

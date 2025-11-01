@@ -1,4 +1,4 @@
-import { Component, Input, ViewChild, ElementRef, Output, EventEmitter, HostListener, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input, ViewChild, ElementRef, Output, EventEmitter, HostListener, OnDestroy, OnInit, inject } from '@angular/core';
 import { FoodSearchable } from '../../model/foodSearchable';
 import { Food } from '../../model/food';
 import { Dish } from '../../model/dish';
@@ -17,6 +17,8 @@ import { NgClass } from '@angular/common';
     imports: [FormsModule, NgClass]
 })
 export class AutocompleteFoodComponent implements OnInit, OnDestroy {
+  private readonly store = inject(Store);
+
   @HostListener('document.click', ['$event.target'])
   onClick(target: ElementRef) {
     this.closeAutoComplete(target);
@@ -42,8 +44,6 @@ export class AutocompleteFoodComponent implements OnInit, OnDestroy {
 
   private foodSubscription: Subscription;
   private dishesSubscription: Subscription;
-
-  constructor(private readonly store: Store) { }
 
   ngOnInit(): void {
     this.foodSubscription = this.store.select(selectAllFood).subscribe(it => {

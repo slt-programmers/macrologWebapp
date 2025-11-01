@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { UserService } from '../../../../shared/services/user.service';
 import { Gender } from '../../../../shared/model/gender';
 import { ToastService } from '../../../../shared/services/toast.service';
@@ -13,6 +13,9 @@ import { FormsModule } from '@angular/forms';
     imports: [FormsModule]
 })
 export class PersonalComponent implements OnInit {
+  private userService = inject(UserService);
+  private toastService = inject(ToastService);
+
   private originalResult?: UserSettings;
 
   public name?: string;
@@ -25,7 +28,7 @@ export class PersonalComponent implements OnInit {
 
   public theme = 'light';
 
-  constructor(private userService: UserService, private toastService: ToastService) {
+  constructor() {
     const theme = localStorage.getItem('theme');
     this.theme = theme ? theme : 'light';
     this.setThemeToDocument();

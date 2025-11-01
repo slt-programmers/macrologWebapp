@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { UserService } from '../../../../shared/services/user.service';
 import { ActivatedRoute } from '@angular/router';
 import { environment } from '../../../../../environments/environment';
@@ -11,6 +11,9 @@ import { environment } from '../../../../../environments/environment';
     imports: []
 })
 export class ConnectivityComponent implements OnInit {
+  private userService = inject(UserService);
+  private route = inject(ActivatedRoute);
+
   public syncError: string;
   public stravaConnectUrl: string;
   public connection: any;
@@ -18,8 +21,6 @@ export class ConnectivityComponent implements OnInit {
   private code: string;
   private scope: string;
   private clientId: number;
-
-  constructor(private userService: UserService, private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.getSyncSettings();

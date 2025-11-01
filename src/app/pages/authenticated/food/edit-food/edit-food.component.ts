@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
+import { Component, EventEmitter, Input, OnInit, Output, inject } from "@angular/core";
 import { Store } from "@ngrx/store";
 import { Food } from "src/app/shared/model/food";
 import { Portion } from "src/app/shared/model/portion";
@@ -13,13 +13,13 @@ import { FormsModule } from "@angular/forms";
     imports: [ModalComponent, FormsModule]
 })
 export class EditFoodComponent implements OnInit {
+  private readonly store = inject(Store);
+
 
   @Input() selectedFood: Food;
   @Output() close$ = new EventEmitter<boolean>();
 
   public title = 'Add food';
-
-  constructor(private readonly store: Store) { }
 
   ngOnInit() {
     if (!!this.selectedFood.id) {

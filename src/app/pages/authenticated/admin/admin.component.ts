@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { Router, RouterLink, RouterOutlet } from '@angular/router';
 import { NgClass } from '@angular/common';
 
@@ -9,8 +9,8 @@ import { NgClass } from '@angular/common';
     imports: [NgClass, RouterLink, RouterOutlet]
 })
 export class AdminComponent {
+	router = inject(Router);
 
-	constructor(public router: Router) {}
 
   public isAdmin(): boolean {
 		const currentUser = JSON.parse(localStorage.getItem('currentUser'));

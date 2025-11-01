@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { UserService } from '../../../shared/services/user.service';
 import { DatePipe, AsyncPipe, DecimalPipe } from '@angular/common';
 import { Store } from '@ngrx/store';
@@ -15,6 +15,10 @@ import { DiaryPageComponent } from './diary-page/diary-page.component';
     imports: [StackDonutComponent, DatepickerComponent, DiaryPageComponent, AsyncPipe, DecimalPipe]
 })
 export class DiaryComponent implements OnInit {
+  private readonly userService = inject(UserService);
+  private readonly store = inject(Store);
+  private readonly window = inject(Window);
+
 
   public date: string;
   public totals$: Observable<Macros>;
@@ -25,9 +29,7 @@ export class DiaryComponent implements OnInit {
   
   private pipe: DatePipe;
 
-  constructor(private readonly userService: UserService,
-    private readonly store: Store,
-    private readonly window: Window) {
+  constructor() {
       this.pipe = new DatePipe('en-US');
       this.date = this.pipe.transform(new Date(), 'yyyy-MM-dd');
       this.totals$ = this.store.select(selectTotalsForDate(this.date));

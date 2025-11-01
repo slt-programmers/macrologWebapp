@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { DiaryService } from '../../../shared/services/diary.service';
 import { UserService } from '../../../shared/services/user.service';
 import { DataPoint } from 'src/app/shared/components/linegraph/linegraph.component';
@@ -16,6 +16,9 @@ import { BargraphComponent } from '../../../shared/components/bargraph/bargraph.
     imports: [FormsModule, BargraphComponent, DatePipe]
 })
 export class GraphsComponent implements OnInit {
+  private logService = inject(DiaryService);
+  private userService = inject(UserService);
+
 
   public measurement = 'calories';
   public measurementOption = 'total';
@@ -53,17 +56,6 @@ export class GraphsComponent implements OnInit {
   public ratioMarkers: any[] = [];
 
   private numberOfValues = 30;
-  // Types of graphs:
-  // Grams
-  //    Total grams per day grouped by macros -- done
-  //    Splitted total grams per day per macro -- done
-  //    Percentage/ratio gramps per marco per day
-  // Energy (calories)
-  //    Total calories per day grouped by macros -- done
-  //    Splitted total calories per day per macro -- done
-  //    Percentage/ratio calories per macro per day (streched bars)
-
-  constructor(private logService: DiaryService, private userService: UserService) { }
 
   ngOnInit() {
     this.dateTo = new Date();

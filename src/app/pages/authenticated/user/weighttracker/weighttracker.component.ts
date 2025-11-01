@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { DatePipe, DecimalPipe } from '@angular/common';
 import { WeightService } from '../../../../shared/services/weight.service';
 import { Weight } from '../../../../shared/model/weight';
@@ -14,6 +14,8 @@ import { LinegraphComponent } from '../../../../shared/components/linegraph/line
     imports: [LinegraphComponent, FormsModule, DecimalPipe, DatePipe]
 })
 export class WeightTrackerComponent implements OnInit {
+  private readonly weightService = inject(WeightService);
+
   public trackedWeights = new Array<Weight>();
   public measurementDate?: string;
   public weight?: number;
@@ -25,7 +27,7 @@ export class WeightTrackerComponent implements OnInit {
 
   private pipe: DatePipe;
 
-  constructor(private readonly weightService: WeightService) {
+  constructor() {
     this.pipe = new DatePipe('en-US');
   }
 

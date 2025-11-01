@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChanges, inject } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { Macros } from 'src/app/shared/model/macros';
@@ -16,6 +16,8 @@ import { AsyncPipe, DecimalPipe } from '@angular/common';
     imports: [EntryPageRowComponent, ActivityPageRowComponent, AsyncPipe, DecimalPipe]
 })
 export class DiaryPageComponent implements OnChanges {
+  private readonly store = inject(Store);
+
 
   @Input() date: string;
 
@@ -25,9 +27,6 @@ export class DiaryPageComponent implements OnChanges {
   public snacks = Meal.Snacks;
 
   public totals$: Observable<Macros>;
-  
-  constructor(private readonly store: Store) {
-  }
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.date) {

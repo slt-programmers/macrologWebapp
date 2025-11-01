@@ -1,5 +1,5 @@
 
-import { Component, OnInit, signal } from '@angular/core';
+import { Component, OnInit, signal, inject } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ModalComponent } from '../../../shared/components/modal/modal.component';
@@ -13,6 +13,11 @@ import { ToastService } from '../../../shared/services/toast.service';
   imports: [NavigationComponent, FormsModule, ReactiveFormsModule, ModalComponent]
 })
 export class LoginComponent implements OnInit {
+  private route = inject(ActivatedRoute);
+  private router = inject(Router);
+  private authService = inject(AuthenticationService);
+  private toastService = inject(ToastService);
+
   private returnUrl: string;
 
   public loginForm: FormGroup;
@@ -24,12 +29,7 @@ export class LoginComponent implements OnInit {
 
   showForgotPwModal = signal(false);
 
-  constructor(
-    private route: ActivatedRoute,
-    private router: Router,
-    private authService: AuthenticationService,
-    private toastService: ToastService
-  ) {
+  constructor() {
     this.loginForm = new FormGroup({
       username: new FormControl('', Validators.required),
       password: new FormControl('', Validators.required)

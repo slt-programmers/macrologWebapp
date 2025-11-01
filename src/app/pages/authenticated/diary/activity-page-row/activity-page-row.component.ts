@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
+import { Component, Input, OnChanges, OnDestroy, OnInit, SimpleChanges, inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { UserService } from 'src/app/shared/services/user.service';
 import { clone } from 'src/app/util/functions';
@@ -17,6 +17,10 @@ import { ModalComponent } from '../../../../shared/components/modal/modal.compon
     imports: [ModalComponent, FormsModule, ReactiveFormsModule, DecimalPipe]
 })
 export class ActivityPageRowComponent implements OnInit, OnChanges, OnDestroy {
+  private readonly userService = inject(UserService);
+  private readonly store = inject(Store);
+  private readonly formBuilder = inject(FormBuilder);
+
 
   @Input() date: string;
 
@@ -30,9 +34,7 @@ export class ActivityPageRowComponent implements OnInit, OnChanges, OnDestroy {
   private subscriptions: Subscription[] = [];
   private loadingSubscription: Subscription;
 
-  constructor(private readonly userService: UserService,
-    private readonly store: Store,
-    private readonly formBuilder: FormBuilder) {
+  constructor() {
     this.activityForm = this.formBuilder.group({
       name: ['', Validators.required],
       calories: [undefined, Validators.required]

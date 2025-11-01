@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, inject } from '@angular/core';
 import { Ingredient } from '../../../shared/model/ingredient';
 import { Dish } from '../../../shared/model/dish';
 import { Portion } from 'src/app/shared/model/portion';
@@ -20,6 +20,8 @@ import { AutocompleteFoodComponent } from '../../../shared/components/autocomple
     imports: [PiechartComponent, ModalComponent, FormsModule, AutocompleteFoodComponent]
 })
 export class DishesComponent implements OnInit, OnDestroy {
+  private readonly store = inject(Store);
+
   public allDishes: Dish[] = [];
   public selectedDish: Dish;
   public modalIsVisible = false;
@@ -34,7 +36,6 @@ export class DishesComponent implements OnInit, OnDestroy {
 
   private unitGrams = 100.0;
   private subscription: Subscription;
-  constructor(private readonly store: Store) { }
 
   ngOnInit() {
     this.store.dispatch(dishesActions.get());

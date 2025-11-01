@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { Toast } from '../../model/toast';
 import { ToastService } from '../../services/toast.service';
 
@@ -10,10 +10,12 @@ import { ToastService } from '../../services/toast.service';
     imports: []
 })
 export class ToastComponent {
+  private toastService = inject(ToastService);
+
 
   public toasts: Toast[] = [];
 
-  constructor(private toastService: ToastService) {
+  constructor() {
     this.toastService.messageObservable.subscribe(it => {
       this.toasts.push({
         title: it.title,

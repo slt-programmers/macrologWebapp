@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { AuthenticationService } from '../../../../shared/services/auth.service';
 import { ToastService } from '../../../../shared/services/toast.service';
 import { Router } from '@angular/router';
@@ -12,6 +12,10 @@ import { ModalComponent } from '../../../../shared/components/modal/modal.compon
     imports: [FormsModule, ModalComponent]
 })
 export class AccountComponent {
+  private authService = inject(AuthenticationService);
+  private toastService = inject(ToastService);
+  private router = inject(Router);
+
   public message = '';
   public oldPassword: string;
   public newPassword: string;
@@ -19,12 +23,6 @@ export class AccountComponent {
   public modalOpen = false;
   public password: string;
   public errorMessage: string;
-
-  constructor(
-    private authService: AuthenticationService,
-    private toastService: ToastService,
-    private router: Router
-  ) {}
 
   public changePassword() {
     this.message = '';

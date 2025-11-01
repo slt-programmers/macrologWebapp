@@ -1,4 +1,4 @@
-import { Component, OnDestroy } from '@angular/core';
+import { Component, OnDestroy, inject } from '@angular/core';
 import { Food } from '../../../shared/model/food';
 import { Store } from '@ngrx/store';
 import { selectAllFood, selectFoodLoading } from 'src/app/shared/store/selectors/food.selectors';
@@ -13,6 +13,8 @@ import { EditFoodComponent } from './edit-food/edit-food.component';
     imports: [FormsModule, NgClass, EditFoodComponent, AsyncPipe, DecimalPipe]
 })
 export class FoodComponent implements OnDestroy {
+  private readonly store = inject(Store);
+
 
   // Displayed on one page
   public displayedFood: Food[] = [];
@@ -33,7 +35,7 @@ export class FoodComponent implements OnDestroy {
   private searchableFood: Food[] = [];
   private foodSubscription: Subscription;
 
-  constructor(private readonly store: Store) {
+  constructor() {
     this.foodSubscription = this.store.select(selectAllFood).subscribe(it => {
       this.allFood = it;
       this.percentageFood = this.calculatePercentages();

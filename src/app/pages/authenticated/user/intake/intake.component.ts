@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { UserService } from '../../../../shared/services/user.service';
 import { Gender } from '../../../../shared/model/gender';
 import { differenceInYears, parse } from 'date-fns';
@@ -14,6 +14,8 @@ import { FormsModule } from '@angular/forms';
     imports: [ModalComponent, FormsModule]
 })
 export class IntakeComponent implements OnInit {
+  private userService = inject(UserService);
+
   public goalProtein: number;
   public goalFat: number;
   public goalCarbs: number;
@@ -33,8 +35,6 @@ export class IntakeComponent implements OnInit {
   public showModal = false;
 
   private tdee: number;
-
-  constructor(private userService: UserService) { }
 
   ngOnInit(): void {
     this.userService.getUserSettings().subscribe((result) => {

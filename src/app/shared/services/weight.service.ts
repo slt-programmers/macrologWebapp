@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Weight } from '../model/weight';
 import { environment } from '../../../environments/environment';
@@ -7,10 +7,10 @@ import { Observable, of } from 'rxjs';
 
 @Injectable()
 export class WeightService {
+  private http = inject(HttpClient);
+
   macrologBackendUrl = '//' + environment.backend + '/weight';
   activities = new Array();
-
-  constructor(private http: HttpClient) { }
 
   public getAllWeights() {
     return this.http.get<Weight[]>(this.macrologBackendUrl).pipe(

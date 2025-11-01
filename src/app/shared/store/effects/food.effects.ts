@@ -1,5 +1,5 @@
 import { HttpClient } from "@angular/common/http";
-import { Injectable } from "@angular/core";
+import { Injectable, inject } from "@angular/core";
 import { createEffect, ofType, Actions } from "@ngrx/effects";
 import { of } from "rxjs";
 import { map, catchError, concatMap } from "rxjs/operators";
@@ -10,6 +10,9 @@ import { foodActions } from "../actions/food.actions";
 
 @Injectable()
 export class FoodEffects {
+  private readonly actions$ = inject(Actions);
+  private readonly http = inject(HttpClient);
+
 
   private backendUrl = '//' + environment.backend + '/food'
 
@@ -48,7 +51,5 @@ export class FoodEffects {
       })
     );
   })
-
-  constructor(private readonly actions$: Actions, private readonly http: HttpClient) { }
 
 }

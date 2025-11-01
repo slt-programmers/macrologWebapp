@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { AuthenticationService } from '../../services/auth.service';
 
@@ -10,10 +10,11 @@ import { AuthenticationService } from '../../services/auth.service';
     imports: [RouterLink]
 })
 export class NavigationComponent{
+  private readonly authService = inject(AuthenticationService);
+  private readonly router = inject(Router);
+
 
   public menuOpen = false;
-
-  constructor(private readonly authService: AuthenticationService, private readonly router: Router) { }
 
   public toggleMenu() {
     this.menuOpen = !this.menuOpen;

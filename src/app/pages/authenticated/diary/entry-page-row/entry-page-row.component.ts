@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, OnDestroy, SimpleChanges } from '@angular/core';
+import { Component, Input, OnChanges, OnDestroy, SimpleChanges, inject } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
 import { Entry } from 'src/app/shared/model/entry';
@@ -19,6 +19,8 @@ import { AutocompleteFoodComponent } from '../../../../shared/components/autocom
     imports: [ModalComponent, FormsModule, AutocompleteFoodComponent, DecimalPipe, TitleCasePipe]
 })
 export class EntryPageRowComponent implements OnChanges, OnDestroy {
+  private readonly store = inject(Store);
+
 
   @Input() meal: Meal;
   @Input() date: string;
@@ -28,8 +30,6 @@ export class EntryPageRowComponent implements OnChanges, OnDestroy {
   public showModal = false;
 
   private subscriptions: Subscription[] = [];
-
-  constructor(private readonly store: Store) { }
 
   ngOnChanges(changes: SimpleChanges): void {
     this.subscriptions.push(this.store.select(selectEntriesDateMeal(this.date, this.meal)).subscribe(it => {

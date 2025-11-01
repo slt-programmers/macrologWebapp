@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 import { WebhookStatus } from '../model/webhookStatus';
@@ -7,9 +7,9 @@ import { of } from 'rxjs';
 
 @Injectable()
 export class WebhookService {
-  private macrologBackendUrl = '//' + environment.backend + '/webhooks';
+  private readonly http = inject(HttpClient);
 
-  constructor(private readonly http: HttpClient) { }
+  private macrologBackendUrl = '//' + environment.backend + '/webhooks';
 
   public getWebhookStatus(connectedApp: string) {
     return this.http.get<WebhookStatus>(this.macrologBackendUrl + '/' + connectedApp).pipe(

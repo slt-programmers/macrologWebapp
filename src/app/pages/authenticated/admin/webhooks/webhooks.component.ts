@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { WebhookStatus } from 'src/app/shared/model/webhookStatus';
 import { WebhookService } from 'src/app/shared/services/webhook.service';
 
@@ -9,7 +9,8 @@ import { WebhookService } from 'src/app/shared/services/webhook.service';
     imports: []
 })
 export class WebhooksComponent implements OnInit {
-  constructor(private readonly webhookService: WebhookService) { }
+  private readonly webhookService = inject(WebhookService);
+
 
   public allWebhooks: any[] = [];
 
