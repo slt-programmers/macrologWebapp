@@ -14,15 +14,12 @@ describe('IntakeComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [
-        IntakeComponent,
-        MockComponent(StepperComponent)
-      ],
-      providers: [
+    imports: [IntakeComponent,
+        MockComponent(StepperComponent)],
+    providers: [
         MockProvider(UserService),
-
-      ]
-    }).compileComponents();
+    ]
+}).compileComponents();
 
     userService = TestBed.inject(UserService);
     fixture = TestBed.createComponent(IntakeComponent);

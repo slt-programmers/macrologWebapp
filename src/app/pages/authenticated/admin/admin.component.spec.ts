@@ -14,15 +14,15 @@ describe('AdminComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [AdminComponent],
-      imports: [RouterOutlet],
-      providers: [
+    imports: [RouterOutlet, AdminComponent],
+    providers: [
         provideRouter([]),
         MockProvider(ToastService),
         MockProvider(UserService),
-        MockProvider(HttpClient)],
-      schemas: [],
-    }).compileComponents();
+        MockProvider(HttpClient)
+    ],
+    schemas: [],
+}).compileComponents();
     fixture = TestBed.createComponent(AdminComponent);
     component = fixture.componentInstance;
     toastService = TestBed.inject(ToastService);

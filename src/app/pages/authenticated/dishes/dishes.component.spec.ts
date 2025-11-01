@@ -12,17 +12,15 @@ describe('DishesComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [
-        DishesComponent
-      ],
-      providers: [
+    imports: [DishesComponent],
+    providers: [
         provideMockStore({
-          selectors: [
-            { selector: selectAllDishes, value: [{ name: 'dish1' }, { name: 'dish2' }] }
-          ]
+            selectors: [
+                { selector: selectAllDishes, value: [{ name: 'dish1' }, { name: 'dish2' }] }
+            ]
         })
-      ]
-    }).compileComponents();
+    ]
+}).compileComponents();
 
     store = TestBed.inject(MockStore);
     fixture = TestBed.createComponent(DishesComponent);

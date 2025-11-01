@@ -1,13 +1,16 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AuthenticationService } from '../../../shared/services/auth.service';
 import { ToastService } from '../../../shared/services/toast.service';
+import { NavigationComponent } from '../../../shared/components/navigation/navigation.component';
+import { NgIf } from '@angular/common';
+import { ModalComponent } from '../../../shared/components/modal/modal.component';
 
 @Component({
     templateUrl: 'login.component.html',
     styleUrls: ['./login.component.scss'],
-    standalone: false
+    imports: [NavigationComponent, FormsModule, ReactiveFormsModule, NgIf, ModalComponent]
 })
 export class LoginComponent implements OnInit {
   private returnUrl: string;

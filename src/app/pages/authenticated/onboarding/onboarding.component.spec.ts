@@ -16,16 +16,13 @@ describe('OnboardingComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [FormsModule, ReactiveFormsModule],
-      declarations: [
-        OnboardingComponent,
-        MockComponent(StepperComponent)
-      ],
-      providers: [
+    imports: [FormsModule, ReactiveFormsModule, OnboardingComponent,
+        MockComponent(StepperComponent)],
+    providers: [
         provideRouter([]),
         MockProvider(UserService),
-      ]
-    }).compileComponents();
+    ]
+}).compileComponents();
 
     userService = TestBed.inject(UserService);
     router = TestBed.inject(Router);

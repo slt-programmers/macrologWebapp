@@ -8,9 +8,9 @@ describe('StepperComponent', () => {
 
   beforeEach(async () => {
     TestBed.configureTestingModule({
-      declarations: [StepperComponent],
-      schemas: [NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA]
-    })
+    imports: [StepperComponent],
+    schemas: [NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA]
+})
       .compileComponents();
   });
 

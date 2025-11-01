@@ -22,14 +22,15 @@ describe('ConnectivityComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [ConnectivityComponent],
-      providers: [
+    imports: [ConnectivityComponent],
+    providers: [
         provideRouter([]),
         MockProvider(ToastService),
         MockProvider(UserService),
-        MockProvider(HttpClient)],
-      schemas: [NO_ERRORS_SCHEMA],
-    }).compileComponents();
+        MockProvider(HttpClient)
+    ],
+    schemas: [NO_ERRORS_SCHEMA],
+}).compileComponents();
     fixture = TestBed.createComponent(ConnectivityComponent);
     component = fixture.componentInstance;
     toastService = TestBed.inject(ToastService);

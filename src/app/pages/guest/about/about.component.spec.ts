@@ -9,9 +9,9 @@ describe('AboutComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [AboutComponent,
+    imports: [AboutComponent,
         MockComponent(NavigationComponent)]
-    }).compileComponents();
+}).compileComponents();
 
     fixture = TestBed.createComponent(AboutComponent);
     component = fixture.componentInstance;

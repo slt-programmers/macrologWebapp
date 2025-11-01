@@ -5,12 +5,15 @@ import { DataPoint } from 'src/app/shared/components/linegraph/linegraph.compone
 import { MacrosPerDay } from 'src/app/shared/model/macrosPerDay';
 import { Macros } from 'src/app/shared/model/macros';
 import { format } from 'date-fns';
+import { NgIf, DatePipe } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { BargraphComponent } from '../../../shared/components/bargraph/bargraph.component';
 
 @Component({
     selector: 'ml-graphs',
     templateUrl: './graphs.component.html',
     styleUrls: ['./graphs.component.scss'],
-    standalone: false
+    imports: [NgIf, FormsModule, BargraphComponent, DatePipe]
 })
 export class GraphsComponent implements OnInit {
 

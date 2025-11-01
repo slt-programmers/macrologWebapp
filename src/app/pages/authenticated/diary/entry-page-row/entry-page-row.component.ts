@@ -7,12 +7,16 @@ import { Portion } from 'src/app/shared/model/portion';
 import { entriesActions } from 'src/app/shared/store/actions/entries.actions';
 import { selectEntriesDateMeal } from 'src/app/shared/store/selectors/entries.selectors';
 import { clone } from 'src/app/util/functions';
+import { NgFor, NgIf, DecimalPipe, TitleCasePipe } from '@angular/common';
+import { ModalComponent } from '../../../../shared/components/modal/modal.component';
+import { FormsModule } from '@angular/forms';
+import { AutocompleteFoodComponent } from '../../../../shared/components/autocomplete-food/autocomplete-food.component';
 
 @Component({
     selector: 'ml-entry-page-row',
     templateUrl: './entry-page-row.component.html',
     styleUrls: ['./entry-page-row.component.scss'],
-    standalone: false
+    imports: [NgFor, NgIf, ModalComponent, FormsModule, AutocompleteFoodComponent, DecimalPipe, TitleCasePipe]
 })
 export class EntryPageRowComponent implements OnChanges, OnDestroy {
 

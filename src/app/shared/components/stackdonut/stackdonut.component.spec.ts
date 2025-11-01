@@ -9,11 +9,11 @@ describe('StackDonutComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [StackDonutComponent],
-      providers: [
+    imports: [StackDonutComponent],
+    providers: [
         MockProvider(Renderer2)
-      ]
-    })
+    ]
+})
       .compileComponents();
 
     fixture = TestBed.createComponent(StackDonutComponent);

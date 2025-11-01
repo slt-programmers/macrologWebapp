@@ -9,10 +9,9 @@ describe('UserComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [RouterOutlet],
-      declarations: [UserComponent],
-      providers: [provideRouter([])]
-    }).compileComponents();
+    imports: [RouterOutlet, UserComponent],
+    providers: [provideRouter([])]
+}).compileComponents();
 
     router = TestBed.inject(Router);
     fixture = TestBed.createComponent(UserComponent);

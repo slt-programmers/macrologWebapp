@@ -9,8 +9,8 @@ describe('BargraphComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [BargraphComponent],
-    }).compileComponents();
+    imports: [BargraphComponent],
+}).compileComponents();
     fixture = TestBed.createComponent(BargraphComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

@@ -18,22 +18,21 @@ describe('DiaryPageComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [DiaryPageComponent,
+    imports: [DiaryPageComponent,
         MockComponent(EntryPageRowComponent),
-        MockComponent(ActivityPageRowComponent)
-      ],
-      providers: [
+        MockComponent(ActivityPageRowComponent)],
+    providers: [
         provideMockStore({
-          selectors: [
-            {
-              selector: selectEntries, value: [{ date: '2021-01-01', entries: [] },
-              { date: '2020-01-02', entries: [{ protein: 123, fat: 123, carbs: 123, calories: 123 }] }]
-            }
-            // {selector: selectTotalsForDate('2020-01-02'), value: {protein: 123, fat: 123, carbs: 123, calories: 123}}
-          ]
+            selectors: [
+                {
+                    selector: selectEntries, value: [{ date: '2021-01-01', entries: [] },
+                        { date: '2020-01-02', entries: [{ protein: 123, fat: 123, carbs: 123, calories: 123 }] }]
+                }
+                // {selector: selectTotalsForDate('2020-01-02'), value: {protein: 123, fat: 123, carbs: 123, calories: 123}}
+            ]
         })
-      ]
-    }).compileComponents();
+    ]
+}).compileComponents();
   });
 
   beforeEach(() => {

@@ -10,9 +10,9 @@ describe('DatepickerComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [DatepickerComponent],
-      schemas: [NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA]
-    })
+    imports: [DatepickerComponent],
+    schemas: [NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA]
+})
       .compileComponents();
     fixture = TestBed.createComponent(DatepickerComponent);
     component = fixture.componentInstance;

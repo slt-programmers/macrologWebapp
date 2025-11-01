@@ -7,8 +7,8 @@ describe('PiechartComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [PiechartComponent],
-    })
+    imports: [PiechartComponent],
+})
       .compileComponents();
 
     fixture = TestBed.createComponent(PiechartComponent);

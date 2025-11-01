@@ -1,10 +1,11 @@
 import { Component, OnInit, OnChanges, Renderer2, Input, ViewChild, ElementRef, AfterViewInit, SimpleChanges } from '@angular/core';
+import { DecimalPipe } from '@angular/common';
 
 @Component({
     selector: 'ml-stackdonut',
     templateUrl: './stackdonut.component.html',
     styleUrls: ['./stackdonut.component.scss'],
-    standalone: false
+    imports: [DecimalPipe]
 })
 export class StackDonutComponent implements OnInit, AfterViewInit, OnChanges {
 

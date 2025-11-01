@@ -16,17 +16,14 @@ describe('WeighttrackerComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [FormsModule, ReactiveFormsModule],
-      declarations: [
-        WeightTrackerComponent,
+    imports: [FormsModule, ReactiveFormsModule, WeightTrackerComponent,
         MockComponent(StepperComponent),
-        MockComponent(LinegraphComponent)
-      ],
-      providers: [
+        MockComponent(LinegraphComponent)],
+    providers: [
         MockProvider(WeightService),
         MockProvider(ToastService)
-      ]
-    }).compileComponents();
+    ]
+}).compileComponents();
 
     weightService = TestBed.inject(WeightService);
     fixture = TestBed.createComponent(WeightTrackerComponent);

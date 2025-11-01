@@ -14,17 +14,15 @@ describe('EditFoodComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [
-        FormsModule, ReactiveFormsModule
-      ],
-      declarations: [
+    imports: [
+        FormsModule, ReactiveFormsModule,
         EditFoodComponent,
         MockComponent(ModalComponent)
-      ],
-      providers: [
+    ],
+    providers: [
         provideMockStore({})
-      ]
-    }).compileComponents();
+    ]
+}).compileComponents();
 
     store = TestBed.inject(MockStore);
     fixture = TestBed.createComponent(EditFoodComponent);

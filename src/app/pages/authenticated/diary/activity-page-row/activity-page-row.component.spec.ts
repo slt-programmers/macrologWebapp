@@ -18,18 +18,17 @@ describe('ActivityPageRowComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ReactiveFormsModule],
-      declarations: [ActivityPageRowComponent],
-      providers: [
+    imports: [ReactiveFormsModule, ActivityPageRowComponent],
+    providers: [
         MockProvider(UserService),
         provideMockStore({
-          selectors: [
-            { selector: selectActivitiesState, value: { data: [{ date: '2020-01-02', activities: [{ name: 'run', calories: 123 }] }] } },
-            { selector: selectActivitiesDate('2020-01-01'), value: [{ name: 'run', calories: 123 }] }
-          ]
+            selectors: [
+                { selector: selectActivitiesState, value: { data: [{ date: '2020-01-02', activities: [{ name: 'run', calories: 123 }] }] } },
+                { selector: selectActivitiesDate('2020-01-01'), value: [{ name: 'run', calories: 123 }] }
+            ]
         })
-      ]
-    })
+    ]
+})
       .compileComponents();
   });
 

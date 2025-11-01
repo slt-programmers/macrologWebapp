@@ -36,9 +36,9 @@ describe('UserManagementComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [UserManagementComponent],
-      providers: [MockProvider(AdminService)],
-    }).compileComponents();
+    imports: [UserManagementComponent],
+    providers: [MockProvider(AdminService)],
+}).compileComponents();
 
     adminService = TestBed.inject(AdminService);
 

@@ -12,12 +12,12 @@ describe('NavigationComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [RouterOutlet, RouterLink],
-      declarations: [NavigationComponent],
-      providers: [
+    imports: [RouterOutlet, RouterLink, NavigationComponent],
+    providers: [
         provideRouter([]),
-        MockProvider(AuthenticationService)]
-    }).compileComponents();
+        MockProvider(AuthenticationService)
+    ]
+}).compileComponents();
 
     authService = TestBed.inject(AuthenticationService);
     router = TestBed.inject(Router);

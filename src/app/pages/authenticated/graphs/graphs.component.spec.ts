@@ -13,13 +13,12 @@ describe('GraphsComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [],
-      declarations: [GraphsComponent],
-      providers: [
+    imports: [GraphsComponent],
+    providers: [
         MockProvider(DiaryService),
         MockProvider(UserService),
-      ]
-    }).compileComponents();
+    ]
+}).compileComponents();
 
     diaryService = TestBed.inject(DiaryService);
     userService = TestBed.inject(UserService);

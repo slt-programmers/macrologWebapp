@@ -11,11 +11,11 @@ describe('WebhooksComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [WebhooksComponent],
-      providers: [
+    imports: [WebhooksComponent],
+    providers: [
         MockProvider(WebhookService),
-      ]
-    }).compileComponents();
+    ]
+}).compileComponents();
 
     webhookService = TestBed.inject(WebhookService);
   });

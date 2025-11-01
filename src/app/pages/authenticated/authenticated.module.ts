@@ -1,7 +1,7 @@
 import { CommonModule } from "@angular/common";
 import { NgModule } from "@angular/core";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
-import { ComponentsModule } from "src/app/shared/components/components.module";
+
 import { AdminComponent } from "./admin/admin.component";
 import { AuthenticatedRoutingModule } from "./authenticated-routing.module";
 import { AuthenticatedComponent } from "./authenticated.component";
@@ -17,14 +17,11 @@ import { EntryPageRowComponent } from './diary/entry-page-row/entry-page-row.com
 import { ActivityPageRowComponent } from './diary/activity-page-row/activity-page-row.component';
 
 @NgModule({
-  imports: [
+    imports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    ComponentsModule,
     AuthenticatedRoutingModule,
-  ],
-  declarations: [
     AuthenticatedComponent,
     DiaryComponent,
     UserComponent,
@@ -36,9 +33,8 @@ import { ActivityPageRowComponent } from './diary/activity-page-row/activity-pag
     GraphsComponent,
     DiaryPageComponent,
     EntryPageRowComponent,
-    ActivityPageRowComponent
-  ],
-  exports: [
-  ]
+    ActivityPageRowComponent,
+],
+    exports: []
 })
 export class AuthenticatedModule { }

@@ -1,15 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../../shared/services/user.service';
-import { DatePipe } from '@angular/common';
+import { DatePipe, NgIf, AsyncPipe, DecimalPipe } from '@angular/common';
 import { Store } from '@ngrx/store';
 import { selectTotalsForDate } from 'src/app/shared/store/selectors/entries.selectors';
 import { Observable } from 'rxjs';
 import { Macros } from 'src/app/shared/model/macros';
+import { StackDonutComponent } from '../../../shared/components/stackdonut/stackdonut.component';
+import { DatepickerComponent } from '../../../shared/components/datepicker/datepicker.component';
+import { DiaryPageComponent } from './diary-page/diary-page.component';
 
 @Component({
     selector: 'ml-diary',
     templateUrl: './diary.component.html',
-    standalone: false
+    imports: [NgIf, StackDonutComponent, DatepickerComponent, DiaryPageComponent, AsyncPipe, DecimalPipe]
 })
 export class DiaryComponent implements OnInit {
 

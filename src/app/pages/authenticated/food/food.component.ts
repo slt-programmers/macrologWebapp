@@ -3,11 +3,14 @@ import { Food } from '../../../shared/model/food';
 import { Store } from '@ngrx/store';
 import { selectAllFood, selectFoodLoading } from 'src/app/shared/store/selectors/food.selectors';
 import { Observable, Subscription } from 'rxjs';
+import { FormsModule } from '@angular/forms';
+import { NgIf, NgClass, NgFor, AsyncPipe, DecimalPipe } from '@angular/common';
+import { EditFoodComponent } from './edit-food/edit-food.component';
 
 @Component({
     selector: 'ml-food',
     templateUrl: './food.component.html',
-    standalone: false
+    imports: [FormsModule, NgIf, NgClass, NgFor, EditFoodComponent, AsyncPipe, DecimalPipe]
 })
 export class FoodComponent implements OnDestroy {
 

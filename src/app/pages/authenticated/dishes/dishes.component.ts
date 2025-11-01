@@ -8,11 +8,16 @@ import { Store } from '@ngrx/store';
 import { dishesActions } from 'src/app/shared/store/actions/dishes.actions';
 import { selectAllDishes } from 'src/app/shared/store/selectors/dishes.selectors';
 import { Subscription } from 'rxjs';
+import { NgIf, NgFor } from '@angular/common';
+import { PiechartComponent } from '../../../shared/components/piechart/piechart.component';
+import { ModalComponent } from '../../../shared/components/modal/modal.component';
+import { FormsModule } from '@angular/forms';
+import { AutocompleteFoodComponent } from '../../../shared/components/autocomplete-food/autocomplete-food.component';
 
 @Component({
     selector: 'ml-dishes',
     templateUrl: './dishes.component.html',
-    standalone: false
+    imports: [NgIf, NgFor, PiechartComponent, ModalComponent, FormsModule, AutocompleteFoodComponent]
 })
 export class DishesComponent implements OnInit, OnDestroy {
   public allDishes: Dish[] = [];

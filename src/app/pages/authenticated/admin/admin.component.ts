@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, RouterLink, RouterOutlet } from '@angular/router';
+import { NgIf, NgClass } from '@angular/common';
 
 @Component({
     selector: 'ml-admin-page',
     templateUrl: './admin.component.html',
     styleUrls: ['./admin.component.scss'],
-    standalone: false
+    imports: [NgIf, NgClass, RouterLink, RouterOutlet]
 })
 export class AdminComponent {
 

@@ -23,15 +23,15 @@ describe('AccountComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [FormsModule],
-      declarations: [AccountComponent],
-      providers: [
+    imports: [FormsModule, AccountComponent],
+    providers: [
         provideRouter([]),
         MockProvider(AuthenticationService),
-        MockProvider(ToastService), 
-        MockProvider(HttpClient)],
-      schemas: [NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA],
-    }).compileComponents();
+        MockProvider(ToastService),
+        MockProvider(HttpClient)
+    ],
+    schemas: [NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA],
+}).compileComponents();
 
     fixture = TestBed.createComponent(AccountComponent);
     component = fixture.componentInstance;

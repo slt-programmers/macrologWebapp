@@ -8,12 +8,13 @@ import {
   AfterViewInit,
 } from '@angular/core';
 import { DataPoint, GraphPoint } from '../linegraph/linegraph.component';
+import { NgFor, NgIf, NgClass } from '@angular/common';
 
 @Component({
     selector: 'ml-bargraph',
     templateUrl: './bargraph.component.html',
     styleUrls: ['./bargraph.component.scss'],
-    standalone: false
+    imports: [NgFor, NgIf, NgClass]
 })
 export class BargraphComponent implements OnChanges, AfterViewInit {
   @ViewChild('yAxis', { static: false }) public yAxisElement: ElementRef;

@@ -31,19 +31,17 @@ describe('DiaryComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [
+    imports: [DiaryComponent,
+        MockComponent(StackDonutComponent),
+        MockComponent(DatepickerComponent),
+        MockComponent(DiaryPageComponent)],
+    providers: [
         MockProvider(UserService),
         provideMockStore({}),
         MockProvider(MockWindow),
         { provide: Window, useValue: new MockWindow() }
-      ],
-      declarations: [
-        DiaryComponent,
-        MockComponent(StackDonutComponent),
-        MockComponent(DatepickerComponent),
-        MockComponent(DiaryPageComponent)
-      ]
-    }).compileComponents();
+    ]
+}).compileComponents();
 
     userService = TestBed.inject(UserService);
     window = TestBed.inject(Window);

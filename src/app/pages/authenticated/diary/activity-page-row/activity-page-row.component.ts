@@ -1,5 +1,5 @@
 import { Component, Input, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { UserService } from 'src/app/shared/services/user.service';
 import { clone } from 'src/app/util/functions';
 import { Activity } from 'src/app/shared/model/activity';
@@ -7,12 +7,14 @@ import { Subscription } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { selectActivitiesDate, selectActivitiesLoading } from 'src/app/shared/store/selectors/activities.selectors';
 import { activitiesActions } from 'src/app/shared/store/actions/activities.actions';
+import { NgIf, NgFor, DecimalPipe } from '@angular/common';
+import { ModalComponent } from '../../../../shared/components/modal/modal.component';
 
 @Component({
     selector: 'ml-activity-page-row',
     templateUrl: './activity-page-row.component.html',
     styleUrls: ['./activity-page-row.component.scss'],
-    standalone: false
+    imports: [NgIf, NgFor, ModalComponent, FormsModule, ReactiveFormsModule, DecimalPipe]
 })
 export class ActivityPageRowComponent implements OnInit, OnChanges, OnDestroy {
 

@@ -5,11 +5,12 @@ import { ToastService } from '../../../../shared/services/toast.service';
 import { forkJoin } from 'rxjs';
 import { UserSettings } from 'src/app/shared/model/userSettings';
 import { format, parse } from 'date-fns';
+import { FormsModule } from '@angular/forms';
 
 @Component({
     selector: 'ml-personal',
     templateUrl: './personal.component.html',
-    standalone: false
+    imports: [FormsModule]
 })
 export class PersonalComponent implements OnInit {
   private originalResult?: UserSettings;

@@ -2,12 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../../../shared/services/user.service';
 import { ActivatedRoute } from '@angular/router';
 import { environment } from '../../../../../environments/environment';
+import { NgIf } from '@angular/common';
 
 @Component({
     selector: 'ml-connectivity',
     templateUrl: './connectivity.component.html',
     styleUrls: ['./connectivity.component.scss'],
-    standalone: false
+    imports: [NgIf]
 })
 export class ConnectivityComponent implements OnInit {
   public syncError: string;

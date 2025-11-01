@@ -14,30 +14,29 @@ describe('AutocompleteFoodComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [FormsModule],
-      declarations: [AutocompleteFoodComponent],
-      providers: [
+    imports: [FormsModule, AutocompleteFoodComponent],
+    providers: [
         provideMockStore({
-          selectors: [
-            {
-              selector: selectAllFood, value: [
-                { id: 1, name: 'food1', protein: 1, fat: 2, carbs: 3 },
-                { id: 2, name: 'food2', protein: 4, fat: 5, carbs: 6 }
-              ]
-            }, {
-              selector: selectAllDishes, value: [
+            selectors: [
                 {
-                  name: 'dish1', ingredients: [
-                    { food: { id: 1, name: 'food1', protein: 1, fat: 2, carbs: 3 } },
-                    { food: { id: 2, name: 'food2', protein: 4, fat: 5, carbs: 6 } },
-                  ]
+                    selector: selectAllFood, value: [
+                        { id: 1, name: 'food1', protein: 1, fat: 2, carbs: 3 },
+                        { id: 2, name: 'food2', protein: 4, fat: 5, carbs: 6 }
+                    ]
+                }, {
+                    selector: selectAllDishes, value: [
+                        {
+                            name: 'dish1', ingredients: [
+                                { food: { id: 1, name: 'food1', protein: 1, fat: 2, carbs: 3 } },
+                                { food: { id: 2, name: 'food2', protein: 4, fat: 5, carbs: 6 } },
+                            ]
+                        }
+                    ]
                 }
-              ]
-            }
-          ]
+            ]
         }),
-      ]
-    }).compileComponents();
+    ]
+}).compileComponents();
 
     fixture = TestBed.createComponent(AutocompleteFoodComponent);
     component = fixture.componentInstance;

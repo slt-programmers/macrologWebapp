@@ -14,21 +14,21 @@ describe('EntryPageRowComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [EntryPageRowComponent],
-      providers: [
+    imports: [EntryPageRowComponent],
+    providers: [
         provideMockStore({
-          selectors: [{
-            selector: selectEntriesState,
-            value: {
-              data: [{
-                date: '2020-01-01',
-                entries: [{ food: { id: 1 }, portion: { id: 2 }, multiplier: 1, meal: Meal.Breakfast }]
-              }]
-            }
-          }]
+            selectors: [{
+                    selector: selectEntriesState,
+                    value: {
+                        data: [{
+                                date: '2020-01-01',
+                                entries: [{ food: { id: 1 }, portion: { id: 2 }, multiplier: 1, meal: Meal.Breakfast }]
+                            }]
+                    }
+                }]
         })
-      ]
-    })
+    ]
+})
       .compileComponents();
   });
 

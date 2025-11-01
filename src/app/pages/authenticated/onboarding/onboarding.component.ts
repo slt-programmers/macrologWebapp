@@ -4,15 +4,17 @@ import { Router } from '@angular/router';
 import { forkJoin } from 'rxjs';
 import { calculateTDEE } from 'src/app/util/functions';
 import { differenceInYears, isValid, parse } from 'date-fns';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { DatePipe } from '@angular/common';
+import { FormControl, FormGroup, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { DatePipe, NgIf } from '@angular/common';
 import { Meal } from 'src/app/shared/model/meal';
+import { StepperComponent } from '../../../shared/components/stepper/stepper.component';
+import { EntryPageRowComponent } from '../diary/entry-page-row/entry-page-row.component';
 
 @Component({
     selector: 'ml-onboarding',
     templateUrl: './onboarding.component.html',
     styleUrls: ['./onboarding.component.scss'],
-    standalone: false
+    imports: [StepperComponent, NgIf, FormsModule, ReactiveFormsModule, EntryPageRowComponent]
 })
 export class OnboardingComponent implements OnInit {
   @ViewChild('breakfast', { static: false }) private breakfastEref: any;

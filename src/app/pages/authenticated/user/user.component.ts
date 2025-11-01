@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, RouterLink, RouterOutlet } from '@angular/router';
+import { NgClass } from '@angular/common';
 
 @Component({
     selector: 'ml-user-page',
     templateUrl: './user.component.html',
     styleUrls: ['./user.component.scss'],
-    standalone: false
+    imports: [NgClass, RouterLink, RouterOutlet]
 })
 export class UserComponent {
 

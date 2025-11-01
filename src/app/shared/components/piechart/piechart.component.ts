@@ -7,12 +7,13 @@ import {
   AfterViewInit,
 } from '@angular/core';
 import { Macros } from 'src/app/shared/model/macros';
+import { DecimalPipe } from '@angular/common';
 
 @Component({
     templateUrl: './piechart.component.html',
     selector: 'ml-piechart',
     styleUrls: ['./piechart.component.scss'],
-    standalone: false
+    imports: [DecimalPipe]
 })
 export class PiechartComponent implements OnInit, AfterViewInit {
   @ViewChild('pieChart', { static: false }) piechartRef: ElementRef;

@@ -9,8 +9,8 @@ describe('LinegraphComponent', () => {
 
   beforeEach(async() => {
     TestBed.configureTestingModule({
-      declarations: [LinegraphComponent]
-    })
+    imports: [LinegraphComponent]
+})
       .compileComponents();
   });
 

@@ -10,7 +10,7 @@ import { FormControl, FormsModule } from '@angular/forms';
   <form>
     <input validDate>
   </form>`,
-    standalone: false
+    imports: [FormsModule]
 })
 class TestComponent {
 }
@@ -22,9 +22,9 @@ describe('Directive: valid date', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [FormsModule],
-      declarations: [DateValidator, TestComponent],
-    });
+    imports: [FormsModule, TestComponent],
+    declarations: [DateValidator],
+});
     fixture = TestBed.createComponent(TestComponent);
     component = fixture.componentInstance;
     inputEl = fixture.debugElement.query(By.css('input'));

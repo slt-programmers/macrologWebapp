@@ -24,18 +24,15 @@ describe('LoginComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [FormsModule, ReactiveFormsModule],
-      declarations: [
-        LoginComponent,
+    imports: [FormsModule, ReactiveFormsModule, LoginComponent,
         MockComponent(NavigationComponent),
-        MockComponent(ModalComponent)
-      ],
-      providers: [
+        MockComponent(ModalComponent)],
+    providers: [
         MockProvider(AuthenticationService),
         MockProvider(ToastService),
         provideRouter([])
-      ]
-    }).compileComponents();
+    ]
+}).compileComponents();
     fixture = TestBed.createComponent(LoginComponent);
     component = fixture.componentInstance;
     authService = TestBed.inject(AuthenticationService);

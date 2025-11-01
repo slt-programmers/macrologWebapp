@@ -14,19 +14,17 @@ describe('FoodComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [
-        FoodComponent,
-        MockComponent(EditFoodComponent)
-      ],
-      providers: [
+    imports: [FoodComponent,
+        MockComponent(EditFoodComponent)],
+    providers: [
         provideMockStore({
-          selectors: [
-            { selector: selectAllFood, value: [{ name: 'name', protein: 1, fat: 2, carbs: 3 } as Food] },
-            { selector: selectFoodLoading, value: false }
-          ]
+            selectors: [
+                { selector: selectAllFood, value: [{ name: 'name', protein: 1, fat: 2, carbs: 3 } as Food] },
+                { selector: selectFoodLoading, value: false }
+            ]
         })
-      ]
-    }).compileComponents();
+    ]
+}).compileComponents();
 
     store = TestBed.inject(MockStore);
     fixture = TestBed.createComponent(FoodComponent);

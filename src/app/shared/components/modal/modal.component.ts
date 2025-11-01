@@ -3,8 +3,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 @Component({
     selector: 'ml-modal',
     templateUrl: './modal.component.html',
-    styleUrls: ['./modal.component.scss'],
-    standalone: false
+    styleUrls: ['./modal.component.scss']
 })
 export class ModalComponent {
 

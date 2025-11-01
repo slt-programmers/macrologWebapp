@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { HealthcheckService } from './shared/services/healthcheck.service';
+import { RouterOutlet } from '@angular/router';
+import { ToastComponent } from './shared/components/toast/toast.component';
 
 @Component({
     selector: 'ml-root',
     templateUrl: './app.component.html',
-    standalone: false
+    imports: [RouterOutlet, ToastComponent]
 })
 export class AppComponent implements OnInit {
 

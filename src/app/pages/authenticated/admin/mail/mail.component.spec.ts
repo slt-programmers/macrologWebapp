@@ -13,13 +13,13 @@ describe('MailComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [MailComponent],
-      providers: [
+    imports: [MailComponent],
+    providers: [
         MockProvider(GoogleService),
         MockProvider(ActivatedRoute),
         provideRouter([])
-      ]
-    }).compileComponents();
+    ]
+}).compileComponents();
 
     googleService = TestBed.inject(GoogleService);
     route = TestBed.inject(ActivatedRoute);

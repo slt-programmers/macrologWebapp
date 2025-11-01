@@ -24,17 +24,13 @@ describe('AppComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [
-        AppComponent,
-        MockComponent(ToastComponent)
-      ],
-      imports: [RouterOutlet],
-      providers: [
+    imports: [RouterOutlet, MockComponent(ToastComponent), AppComponent],
+    providers: [
         provideRouter([]),
         { provide: Document, useValue: new MockDocument() },
         MockProvider(HealthcheckService)
-      ]
-    }).compileComponents();
+    ]
+}).compileComponents();
 
     document = TestBed.inject(Document);
     healthcheckService = TestBed.inject(HealthcheckService);

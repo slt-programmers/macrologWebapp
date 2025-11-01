@@ -25,18 +25,16 @@ describe('AuthenticatedComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [RouterOutlet],
-      declarations: [
-        AuthenticatedComponent,
+    imports: [RouterOutlet, AuthenticatedComponent,
         MockComponent(NavigationComponent)],
-      providers: [
+    providers: [
         provideRouter([]),
         provideMockStore(),
         MockProvider(HealthcheckService),
         MockProvider(ScrollBehaviourService),
         MockProvider(AuthenticationService),
-      ],
-    }).compileComponents();
+    ],
+}).compileComponents();
 
     store = TestBed.inject(MockStore);
     fixture = TestBed.createComponent(AuthenticatedComponent);

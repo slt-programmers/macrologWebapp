@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { WebhookStatus } from 'src/app/shared/model/webhookStatus';
 import { WebhookService } from 'src/app/shared/services/webhook.service';
+import { NgIf } from '@angular/common';
 
 @Component({
     selector: 'ml-webhooks',
     templateUrl: './webhooks.component.html',
-    standalone: false
+    imports: [NgIf]
 })
 export class WebhooksComponent implements OnInit {
   constructor(private readonly webhookService: WebhookService) { }
