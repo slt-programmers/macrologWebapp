@@ -133,10 +133,10 @@ describe('LoginComponent', () => {
 
   it('should toggle forgot password modal', () => {
     const forgotLink = fixture.debugElement.query(By.css('#forgotLink'));
-    expect(component.showForgotPwModal).toBeFalsy();
+    expect(component.showForgotPwModal()).toBeFalsy();
     forgotLink.nativeElement.click();
     fixture.detectChanges();
-    expect(component.showForgotPwModal).toBeTruthy();
+    expect(component.showForgotPwModal()).toBeTruthy();
   });
 
   it('should reset password', fakeAsync(() => {
@@ -158,7 +158,7 @@ describe('LoginComponent', () => {
     tick();
     fixture.detectChanges();
     expect(toastService.setMessage).toHaveBeenCalled();
-    expect(component.showForgotPwModal).toBeFalsy();
+    expect(component.showForgotPwModal()).toBeFalsy();
 
     resetSpy.and.returnValue(throwError({ status: 404 }));
     forgotLink.nativeElement.click();

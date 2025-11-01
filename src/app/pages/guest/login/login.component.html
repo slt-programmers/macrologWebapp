@@ -80,23 +80,24 @@
   </div>
 </div>
 
-<ml-modal [title]="'Forgot your password?'" (close$)="toggleForgotPwModal(false)"
-  *ngIf="showForgotPwModal">
+@if(showForgotPwModal()) {
+<ml-modal [title]="'Forgot your password?'" (close$)="toggleForgotPwModal(false)">
   <form #forgotForm="ngForm" class="form">
     <p>Please enter your email so we can send a link to reset your password</p>
-
+    
     <div class="form-field">
       <label for="forgotEmail">Email</label>
       <input class="input" type="email" #forgotEmailField
-        [(ngModel)]="forgotEmail" name="forgotEmail" />
+      [(ngModel)]="forgotEmail" name="forgotEmail" />
     </div>
-
+    
     <p class="error" *ngIf="forgotError">{{forgotError}}</p>
-
+    
     <div class="button-wrapper button-wrapper--left">
-      <button id="resetBtn" class="button button--primary" [disabled]="forgotForm.invalid"
-        (click)="resetPassword()">Send
-      </button>
-    </div>
-  </form>
+      <button id="resetBtn" class="resetBtn button button--primary" [disabled]="forgotForm.invalid"
+      (click)="resetPassword()">Send
+    </button>
+  </div>
+</form>
 </ml-modal>
+}

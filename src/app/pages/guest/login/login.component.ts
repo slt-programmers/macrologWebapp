@@ -1,16 +1,16 @@
-import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { Router, ActivatedRoute } from '@angular/router';
+import { NgIf } from '@angular/common';
+import { Component, OnInit, signal } from '@angular/core';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ModalComponent } from '../../../shared/components/modal/modal.component';
+import { NavigationComponent } from '../../../shared/components/navigation/navigation.component';
 import { AuthenticationService } from '../../../shared/services/auth.service';
 import { ToastService } from '../../../shared/services/toast.service';
-import { NavigationComponent } from '../../../shared/components/navigation/navigation.component';
-import { NgIf } from '@angular/common';
-import { ModalComponent } from '../../../shared/components/modal/modal.component';
 
 @Component({
-    templateUrl: 'login.component.html',
-    styleUrls: ['./login.component.scss'],
-    imports: [NavigationComponent, FormsModule, ReactiveFormsModule, NgIf, ModalComponent]
+  templateUrl: 'login.component.html',
+  styleUrls: ['./login.component.scss'],
+  imports: [NavigationComponent, FormsModule, ReactiveFormsModule, NgIf, ModalComponent]
 })
 export class LoginComponent implements OnInit {
   private returnUrl: string;
@@ -22,7 +22,7 @@ export class LoginComponent implements OnInit {
   public forgotEmail: string;
   public forgotError: string;
 
-  public showForgotPwModal = false;
+  showForgotPwModal = signal(false);
 
   constructor(
     private route: ActivatedRoute,
@@ -90,7 +90,8 @@ export class LoginComponent implements OnInit {
   }
 
   public toggleForgotPwModal(toggle: boolean) {
-    this.showForgotPwModal = toggle;
+    this.showForgotPwModal.set(toggle);
+    console.log('toggled')
   }
 
   public resetPassword() {
