@@ -3,9 +3,10 @@ import { Toast } from '../../model/toast';
 import { ToastService } from '../../services/toast.service';
 
 @Component({
-  selector: 'ml-toast',
-  templateUrl: './toast.component.html',
-  styleUrls: ['./toast.component.scss'],
+    selector: 'ml-toast',
+    templateUrl: './toast.component.html',
+    styleUrls: ['./toast.component.scss'],
+    standalone: false
 })
 export class ToastComponent {
 

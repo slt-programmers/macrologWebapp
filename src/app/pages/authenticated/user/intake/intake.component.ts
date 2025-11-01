@@ -6,8 +6,9 @@ import { forkJoin } from 'rxjs';
 import { calculateTDEE } from 'src/app/util/functions';
 
 @Component({
-  selector: 'ml-intake',
-  templateUrl: './intake.component.html',
+    selector: 'ml-intake',
+    templateUrl: './intake.component.html',
+    standalone: false
 })
 export class IntakeComponent implements OnInit {
   public goalProtein: number;

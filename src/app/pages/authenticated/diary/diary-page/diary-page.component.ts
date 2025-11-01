@@ -8,8 +8,9 @@ import { entriesActions } from 'src/app/shared/store/actions/entries.actions';
 import { selectTotalsForDate } from 'src/app/shared/store/selectors/entries.selectors';
 
 @Component({
-  selector: 'ml-diary-page',
-  templateUrl: './diary-page.component.html'
+    selector: 'ml-diary-page',
+    templateUrl: './diary-page.component.html',
+    standalone: false
 })
 export class DiaryPageComponent implements OnChanges {
 

@@ -10,8 +10,9 @@ import { selectAllDishes } from 'src/app/shared/store/selectors/dishes.selectors
 import { Subscription } from 'rxjs';
 
 @Component({
-  selector: 'ml-dishes',
-  templateUrl: './dishes.component.html'
+    selector: 'ml-dishes',
+    templateUrl: './dishes.component.html',
+    standalone: false
 })
 export class DishesComponent implements OnInit, OnDestroy {
   public allDishes: Dish[] = [];

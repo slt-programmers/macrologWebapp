@@ -2,8 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { HealthcheckService } from './shared/services/healthcheck.service';
 
 @Component({
-  selector: 'ml-root',
-  templateUrl: './app.component.html',
+    selector: 'ml-root',
+    templateUrl: './app.component.html',
+    standalone: false
 })
 export class AppComponent implements OnInit {
 

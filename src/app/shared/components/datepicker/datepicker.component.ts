@@ -8,9 +8,10 @@ import {
 } from '@angular/core';
 
 @Component({
-  selector: 'ml-datepicker',
-  templateUrl: './datepicker.component.html',
-  styleUrls: ['./datepicker.component.scss'],
+    selector: 'ml-datepicker',
+    templateUrl: './datepicker.component.html',
+    styleUrls: ['./datepicker.component.scss'],
+    standalone: false
 })
 export class DatepickerComponent {
   @ViewChildren('dayRef') dayRefs: QueryList<any>;

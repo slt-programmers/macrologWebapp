@@ -3,9 +3,10 @@ import { Router } from '@angular/router';
 import { AuthenticationService } from '../../services/auth.service';
 
 @Component({
-  selector: 'ml-navigation',
-  templateUrl: './navigation.component.html',
-  styleUrls: ['./navigation.component.scss']
+    selector: 'ml-navigation',
+    templateUrl: './navigation.component.html',
+    styleUrls: ['./navigation.component.scss'],
+    standalone: false
 })
 export class NavigationComponent{
 

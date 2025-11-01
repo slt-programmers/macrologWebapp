@@ -7,9 +7,10 @@ import { NgForm } from '@angular/forms';
 import { format, isAfter, isBefore, parse } from 'date-fns';
 
 @Component({
-  selector: 'ml-weighttracker',
-  templateUrl: './weighttracker.component.html',
-  styleUrls: ['./weighttracker.component.scss'],
+    selector: 'ml-weighttracker',
+    templateUrl: './weighttracker.component.html',
+    styleUrls: ['./weighttracker.component.scss'],
+    standalone: false
 })
 export class WeightTrackerComponent implements OnInit {
   public trackedWeights = new Array<Weight>();

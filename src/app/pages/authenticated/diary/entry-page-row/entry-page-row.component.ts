@@ -9,9 +9,10 @@ import { selectEntriesDateMeal } from 'src/app/shared/store/selectors/entries.se
 import { clone } from 'src/app/util/functions';
 
 @Component({
-  selector: 'ml-entry-page-row',
-  templateUrl: './entry-page-row.component.html',
-  styleUrls: ['./entry-page-row.component.scss']
+    selector: 'ml-entry-page-row',
+    templateUrl: './entry-page-row.component.html',
+    styleUrls: ['./entry-page-row.component.scss'],
+    standalone: false
 })
 export class EntryPageRowComponent implements OnChanges, OnDestroy {
 

@@ -5,8 +5,9 @@ import { AuthenticationService } from '../../../shared/services/auth.service';
 import { ToastService } from '../../../shared/services/toast.service';
 
 @Component({
-  templateUrl: 'login.component.html',
-  styleUrls: ['./login.component.scss'],
+    templateUrl: 'login.component.html',
+    styleUrls: ['./login.component.scss'],
+    standalone: false
 })
 export class LoginComponent implements OnInit {
   private returnUrl: string;

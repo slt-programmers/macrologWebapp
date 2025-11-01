@@ -9,9 +9,10 @@ import {
 } from '@angular/core';
 
 @Component({
-  selector: 'ml-linegraph',
-  templateUrl: './linegraph.component.html',
-  styleUrls: ['./linegraph.component.scss'],
+    selector: 'ml-linegraph',
+    templateUrl: './linegraph.component.html',
+    styleUrls: ['./linegraph.component.scss'],
+    standalone: false
 })
 export class LinegraphComponent implements AfterViewInit, OnChanges {
   @ViewChild('yAxis', { static: false }) public yAxisElement: ElementRef;

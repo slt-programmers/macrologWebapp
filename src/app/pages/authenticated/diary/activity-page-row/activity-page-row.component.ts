@@ -9,9 +9,10 @@ import { selectActivitiesDate, selectActivitiesLoading } from 'src/app/shared/st
 import { activitiesActions } from 'src/app/shared/store/actions/activities.actions';
 
 @Component({
-  selector: 'ml-activity-page-row',
-  templateUrl: './activity-page-row.component.html',
-  styleUrls: ['./activity-page-row.component.scss']
+    selector: 'ml-activity-page-row',
+    templateUrl: './activity-page-row.component.html',
+    styleUrls: ['./activity-page-row.component.scss'],
+    standalone: false
 })
 export class ActivityPageRowComponent implements OnInit, OnChanges, OnDestroy {
 

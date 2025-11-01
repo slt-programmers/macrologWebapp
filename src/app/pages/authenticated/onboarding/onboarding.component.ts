@@ -9,9 +9,10 @@ import { DatePipe } from '@angular/common';
 import { Meal } from 'src/app/shared/model/meal';
 
 @Component({
-  selector: 'ml-onboarding',
-  templateUrl: './onboarding.component.html',
-  styleUrls: ['./onboarding.component.scss'],
+    selector: 'ml-onboarding',
+    templateUrl: './onboarding.component.html',
+    styleUrls: ['./onboarding.component.scss'],
+    standalone: false
 })
 export class OnboardingComponent implements OnInit {
   @ViewChild('breakfast', { static: false }) private breakfastEref: any;

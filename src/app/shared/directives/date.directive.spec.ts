@@ -6,10 +6,11 @@ import { FormControl, FormsModule } from '@angular/forms';
 
 
 @Component({
-  template: `
+    template: `
   <form>
     <input validDate>
-  </form>`
+  </form>`,
+    standalone: false
 })
 class TestComponent {
 }

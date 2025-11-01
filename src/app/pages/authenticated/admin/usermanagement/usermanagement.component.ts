@@ -3,8 +3,9 @@ import { UserAccount } from 'src/app/shared/model/userAccount';
 import { AdminService } from 'src/app/shared/services/admin.service';
 
 @Component({
-  selector: 'ml-usermanagement',
-  templateUrl: './usermanagement.component.html'
+    selector: 'ml-usermanagement',
+    templateUrl: './usermanagement.component.html',
+    standalone: false
 })
 export class UserManagementComponent implements OnInit {
   public allUsers: UserAccount[] = []

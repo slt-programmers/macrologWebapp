@@ -5,8 +5,9 @@ import { Portion } from "src/app/shared/model/portion";
 import { foodActions } from "src/app/shared/store/actions/food.actions";
 
 @Component({
-  selector: 'ml-edit-food',
-  templateUrl: './edit-food.component.html'
+    selector: 'ml-edit-food',
+    templateUrl: './edit-food.component.html',
+    standalone: false
 })
 export class EditFoodComponent implements OnInit {
 

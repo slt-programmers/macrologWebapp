@@ -7,8 +7,9 @@ import { UserSettings } from 'src/app/shared/model/userSettings';
 import { format, parse } from 'date-fns';
 
 @Component({
-  selector: 'ml-personal',
-  templateUrl: './personal.component.html',
+    selector: 'ml-personal',
+    templateUrl: './personal.component.html',
+    standalone: false
 })
 export class PersonalComponent implements OnInit {
   private originalResult?: UserSettings;

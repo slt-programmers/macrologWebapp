@@ -8,8 +8,9 @@ import { Store } from '@ngrx/store';
 import { dishesActions } from 'src/app/shared/store/actions/dishes.actions';
 
 @Component({
-  selector: 'ml-authenticated',
-  templateUrl: './authenticated.component.html'
+    selector: 'ml-authenticated',
+    templateUrl: './authenticated.component.html',
+    standalone: false
 })
 export class AuthenticatedComponent implements OnInit {
 

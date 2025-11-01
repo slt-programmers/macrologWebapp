@@ -7,9 +7,10 @@ import { Macros } from 'src/app/shared/model/macros';
 import { format } from 'date-fns';
 
 @Component({
-  selector: 'ml-graphs',
-  templateUrl: './graphs.component.html',
-  styleUrls: ['./graphs.component.scss'],
+    selector: 'ml-graphs',
+    templateUrl: './graphs.component.html',
+    styleUrls: ['./graphs.component.scss'],
+    standalone: false
 })
 export class GraphsComponent implements OnInit {
 

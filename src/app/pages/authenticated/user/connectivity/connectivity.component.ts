@@ -4,9 +4,10 @@ import { ActivatedRoute } from '@angular/router';
 import { environment } from '../../../../../environments/environment';
 
 @Component({
-  selector: 'ml-connectivity',
-  templateUrl: './connectivity.component.html',
-  styleUrls: ['./connectivity.component.scss'],
+    selector: 'ml-connectivity',
+    templateUrl: './connectivity.component.html',
+    styleUrls: ['./connectivity.component.scss'],
+    standalone: false
 })
 export class ConnectivityComponent implements OnInit {
   public syncError: string;

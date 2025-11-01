@@ -3,10 +3,11 @@ import { Validator, AbstractControl, NG_VALIDATORS } from '@angular/forms';
 import { parse, isValid } from 'date-fns';
 
 @Directive({
-  selector: '[validDate]',
-  providers: [
-    { provide: NG_VALIDATORS, useExisting: forwardRef(() => DateValidator), multi: true }
-  ]
+    selector: '[validDate]',
+    providers: [
+        { provide: NG_VALIDATORS, useExisting: forwardRef(() => DateValidator), multi: true }
+    ],
+    standalone: false
 })
 export class DateValidator implements Validator {
 

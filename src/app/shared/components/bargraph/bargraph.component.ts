@@ -10,9 +10,10 @@ import {
 import { DataPoint, GraphPoint } from '../linegraph/linegraph.component';
 
 @Component({
-  selector: 'ml-bargraph',
-  templateUrl: './bargraph.component.html',
-  styleUrls: ['./bargraph.component.scss'],
+    selector: 'ml-bargraph',
+    templateUrl: './bargraph.component.html',
+    styleUrls: ['./bargraph.component.scss'],
+    standalone: false
 })
 export class BargraphComponent implements OnChanges, AfterViewInit {
   @ViewChild('yAxis', { static: false }) public yAxisElement: ElementRef;

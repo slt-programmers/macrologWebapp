@@ -7,8 +7,9 @@ import { Observable } from 'rxjs';
 import { Macros } from 'src/app/shared/model/macros';
 
 @Component({
-  selector: 'ml-diary',
-  templateUrl: './diary.component.html'
+    selector: 'ml-diary',
+    templateUrl: './diary.component.html',
+    standalone: false
 })
 export class DiaryComponent implements OnInit {
 

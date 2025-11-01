@@ -2,9 +2,10 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
-	selector: 'ml-admin-page',
-	templateUrl: './admin.component.html',
-	styleUrls:['./admin.component.scss']
+    selector: 'ml-admin-page',
+    templateUrl: './admin.component.html',
+    styleUrls: ['./admin.component.scss'],
+    standalone: false
 })
 export class AdminComponent {
 

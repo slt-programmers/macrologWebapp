@@ -5,8 +5,9 @@ import { selectAllFood, selectFoodLoading } from 'src/app/shared/store/selectors
 import { Observable, Subscription } from 'rxjs';
 
 @Component({
-  selector: 'ml-food',
-  templateUrl: './food.component.html'
+    selector: 'ml-food',
+    templateUrl: './food.component.html',
+    standalone: false
 })
 export class FoodComponent implements OnDestroy {
 

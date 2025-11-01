@@ -4,8 +4,9 @@ import { GoogleService } from 'src/app/shared/services/google.service';
 import { environment } from '../../../../../environments/environment';
 
 @Component({
-  selector: 'ml-mail',
-  templateUrl: './mail.component.html'
+    selector: 'ml-mail',
+    templateUrl: './mail.component.html',
+    standalone: false
 })
 export class MailComponent implements OnInit {
   public googleConnectUrl: string = '';

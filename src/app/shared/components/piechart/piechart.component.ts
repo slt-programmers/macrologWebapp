@@ -9,9 +9,10 @@ import {
 import { Macros } from 'src/app/shared/model/macros';
 
 @Component({
-  templateUrl: './piechart.component.html',
-  selector: 'ml-piechart',
-  styleUrls: ['./piechart.component.scss'],
+    templateUrl: './piechart.component.html',
+    selector: 'ml-piechart',
+    styleUrls: ['./piechart.component.scss'],
+    standalone: false
 })
 export class PiechartComponent implements OnInit, AfterViewInit {
   @ViewChild('pieChart', { static: false }) piechartRef: ElementRef;

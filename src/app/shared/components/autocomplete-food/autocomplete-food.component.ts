@@ -9,9 +9,10 @@ import { Subscription } from 'rxjs';
 import { selectAllDishes } from '../../store/selectors/dishes.selectors';
 
 @Component({
-  selector: 'ml-autocomplete-food',
-  templateUrl: './autocomplete-food.component.html',
-  styleUrls: ['./autocomplete-food.component.scss'],
+    selector: 'ml-autocomplete-food',
+    templateUrl: './autocomplete-food.component.html',
+    styleUrls: ['./autocomplete-food.component.scss'],
+    standalone: false
 })
 export class AutocompleteFoodComponent implements OnInit, OnDestroy {
   @HostListener('document.click', ['$event.target'])
