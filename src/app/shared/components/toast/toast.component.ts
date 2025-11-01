@@ -1,13 +1,13 @@
 import { Component } from '@angular/core';
 import { Toast } from '../../model/toast';
 import { ToastService } from '../../services/toast.service';
-import { NgFor } from '@angular/common';
+
 
 @Component({
     selector: 'ml-toast',
     templateUrl: './toast.component.html',
     styleUrls: ['./toast.component.scss'],
-    imports: [NgFor]
+    imports: []
 })
 export class ToastComponent {
 

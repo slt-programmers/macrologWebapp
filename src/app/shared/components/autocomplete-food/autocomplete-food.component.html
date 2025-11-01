@@ -2,12 +2,14 @@
   <input aria-label="search for something" id="autoInput" class="input autocomplete__input" placeholder="{{placeholder}}"
     (input)="findFoodMatch($event)" [(ngModel)]="foodName" (focus)="showAutoComplete = true">
 
-  <div id="autoDropdown" #autoComplete class="autocomplete" *ngIf="showAutoComplete">
-    <ng-container *ngFor="let match of foodMatch; index as idx">
-      <div id="autoOption" ngClass="option-{{idx}}" class="autocomplete__option"
-        (click)="selectMatch(match)" tabindex="{{idx}}">
-        {{getDescription(match)}}
+    @if (showAutoComplete) {
+      <div id="autoDropdown" #autoComplete class="autocomplete">
+        @for (match of foodMatch; track match; let idx = $index) {
+          <div id="autoOption" ngClass="option-{{idx}}" class="autocomplete__option"
+            (click)="selectMatch(match)" tabindex="{{idx}}">
+            {{getDescription(match)}}
+          </div>
+        }
       </div>
-    </ng-container>
+    }
   </div>
-</div>

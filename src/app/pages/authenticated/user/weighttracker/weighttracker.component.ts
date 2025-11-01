@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { DatePipe, NgFor, NgIf, DecimalPipe } from '@angular/common';
+import { DatePipe, DecimalPipe } from '@angular/common';
 import { WeightService } from '../../../../shared/services/weight.service';
 import { Weight } from '../../../../shared/model/weight';
 import { DataPoint } from 'src/app/shared/components/linegraph/linegraph.component';
@@ -11,7 +11,7 @@ import { LinegraphComponent } from '../../../../shared/components/linegraph/line
     selector: 'ml-weighttracker',
     templateUrl: './weighttracker.component.html',
     styleUrls: ['./weighttracker.component.scss'],
-    imports: [LinegraphComponent, FormsModule, NgFor, NgIf, DecimalPipe, DatePipe]
+    imports: [LinegraphComponent, FormsModule, DecimalPipe, DatePipe]
 })
 export class WeightTrackerComponent implements OnInit {
   public trackedWeights = new Array<Weight>();

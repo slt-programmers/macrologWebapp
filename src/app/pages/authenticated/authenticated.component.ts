@@ -6,13 +6,13 @@ import { HealthcheckService } from 'src/app/shared/services/healthcheck.service'
 import { foodActions } from 'src/app/shared/store/actions/food.actions';
 import { Store } from '@ngrx/store';
 import { dishesActions } from 'src/app/shared/store/actions/dishes.actions';
-import { NgIf } from '@angular/common';
+
 import { NavigationComponent } from '../../shared/components/navigation/navigation.component';
 
 @Component({
     selector: 'ml-authenticated',
     templateUrl: './authenticated.component.html',
-    imports: [NgIf, NavigationComponent, RouterOutlet]
+    imports: [NavigationComponent, RouterOutlet]
 })
 export class AuthenticatedComponent implements OnInit {
 

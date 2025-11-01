@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { UserAccount } from 'src/app/shared/model/userAccount';
 import { AdminService } from 'src/app/shared/services/admin.service';
-import { NgIf, NgFor } from '@angular/common';
+
 import { ModalComponent } from '../../../../shared/components/modal/modal.component';
 import { FormsModule } from '@angular/forms';
 
 @Component({
     selector: 'ml-usermanagement',
     templateUrl: './usermanagement.component.html',
-    imports: [NgIf, NgFor, ModalComponent, FormsModule]
+    imports: [ModalComponent, FormsModule]
 })
 export class UserManagementComponent implements OnInit {
   public allUsers: UserAccount[] = []

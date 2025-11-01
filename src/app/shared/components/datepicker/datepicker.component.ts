@@ -1,4 +1,4 @@
-import { DatePipe, NgIf, NgFor } from '@angular/common';
+import { DatePipe } from '@angular/common';
 import {
   Component,
   Output,
@@ -11,7 +11,7 @@ import {
     selector: 'ml-datepicker',
     templateUrl: './datepicker.component.html',
     styleUrls: ['./datepicker.component.scss'],
-    imports: [NgIf, NgFor, DatePipe]
+    imports: [DatePipe]
 })
 export class DatepickerComponent {
   @ViewChildren('dayRef') dayRefs: QueryList<any>;

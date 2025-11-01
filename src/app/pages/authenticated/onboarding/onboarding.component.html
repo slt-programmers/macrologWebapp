@@ -9,214 +9,191 @@
         <ml-stepper [currentStep]="currentStep" [numberOfSteps]="4"></ml-stepper>
       </div>
 
-      <div class="content" #step1 *ngIf="currentStep === 1">
-        <h3 class="font-bold">Personal details</h3>
-
-        <p>
-          To calculate how much energy you need in a day, we need to know a few
-          things about you.
-        </p>
-
-        <form [formGroup]="userForm" class="form">
-          <div class="form-field">
-            <label for="name">Name</label>
-            <input class="input" name="name" type="text" formControlName="name" required />
-          </div>
-
-          <div class="form-field">
-            <label for="birthday">Date of birth</label>
-            <input class="input" required validDate placeholder="DD-MM-YYYY"
-              name="birthday" formControlName="birthday" />
-          </div>
-
-          <div class="form-field">
-            <div class="form-field__label">Gender</div>
-
-            <div class="form-field__radio-group">
-              <div class="flex align-center">
-                <input type="radio" id="male" formControlName="gender" value="MALE">
-                <label for="male">Male</label>
+      @if (currentStep === 1) {
+        <div class="content" #step1>
+          <h3 class="font-bold">Personal details</h3>
+          <p>
+            To calculate how much energy you need in a day, we need to know a few
+            things about you.
+          </p>
+          <form [formGroup]="userForm" class="form">
+            <div class="form-field">
+              <label for="name">Name</label>
+              <input class="input" name="name" type="text" formControlName="name" required />
+            </div>
+            <div class="form-field">
+              <label for="birthday">Date of birth</label>
+              <input class="input" required validDate placeholder="DD-MM-YYYY"
+                name="birthday" formControlName="birthday" />
               </div>
+              <div class="form-field">
+                <div class="form-field__label">Gender</div>
+                <div class="form-field__radio-group">
+                  <div class="flex align-center">
+                    <input type="radio" id="male" formControlName="gender" value="MALE">
+                    <label for="male">Male</label>
+                  </div>
+                  <div class="flex align-center">
+                    <input type="radio" id="female" formControlName="gender" value="FEMALE">
+                    <label for="female">Female</label>
+                  </div>
+                </div>
+              </div>
+              <div class="form-field">
+                <label for="height">Height (cm)</label>
+                <input class="input" name="height" type="number" formControlName="height" required />
+              </div>
+              <div class="form-field">
+                <label for="weight">Start weight (kg)</label>
+                <input class="input" name="weight" type="number" formControlName="weight" step="0.1"
+                  required />
+                </div>
+                <div class="form-field">
+                  <label for="activity">Activity level</label>
+                  <select name="activity" formControlName="activity" required>
+                    <option value="1.2">Sedentary</option>
+                    <option value="1.375">Lightly active</option>
+                    <option value="1.55">Moderately active</option>
+                    <option value="1.725">Very active</option>
+                    <option value="1.9">Extremely active</option>
+                  </select>
+                </div>
+              </form>
+              <div class="button-wrapper">
+                <button class="button button--primary" (click)="saveUserSettings()">
+                  Next
+                </button>
+              </div>
+            </div>
+          }
 
-              <div class="flex align-center">
-                <input type="radio" id="female" formControlName="gender" value="FEMALE">
-                <label for="female">Female</label>
+          @if (currentStep === 2) {
+            <div class="content" #step2>
+              <h3 class="font-bold">Set your intake goal</h3>
+              <p>
+                This is the amount of calories you need to maintain your current
+                weight. Increase or decrease the amount of calories to respectively
+                gain or lose weight. Do this by adjusting the calories or the macro's.
+              </p>
+              <div class="content">
+                <div class="form-field">
+                  <label for="protein">Protein</label>
+                  <input name="protein" class="input" (ngModelChange)="protein = $event; calcCalories()"
+                    [ngModel]="protein" type="number">
+                  </div>
+                  <div class="form-field">
+                    <label for="fat">Fat</label>
+                    <input name="fat" class="input" [ngModel]="fat"
+                      (ngModelChange)="fat = $event; calcCalories()" type="number">
+                    </div>
+                    <div class="form-field">
+                      <label for="carbs">Carbs</label>
+                      <input name="carbs" class="input" [ngModel]="carbs"
+                        (ngModelChange)="carbs = $event; calcCalories()" type="number">
+                      </div>
+                      <div class="flex col-gap-1">
+                        <label class="flex-2">Calories</label>
+                        <p class="flex-4">{{calories}}</p>
+                      </div>
+                      <button class="button button--primary" (click)="fillStandard()">Fill with standard
+                      ratios</button>
+                    </div>
+                    <div class="button-wrapper button-wrapper--space-between">
+                      <button class="button button--primary" (click)="previousStep()">
+                        Previous
+                      </button>
+                      <button class="button button--primary" (click)="saveIntake()">
+                        Next
+                      </button>
+                    </div>
+                  </div>
+                }
+
+                @if (currentStep === 3) {
+                  <div class="content" #step3>
+                    <h3 class="font-bold">Adding food</h3>
+                    <p>
+                      The first step is to add food to your database. You do this by using
+                      the floating plus-button in the bottom right corner on the diary page.
+                    </p>
+                    <button class="floating-action-button">
+                      <em class="fas fa-plus"></em>
+                    </button>
+                    <h3 class="font-bold">Portions</h3>
+                    <p>
+                      To make diary entries easier you can add portions that you regularly
+                      use. This is entirely optional. You add a portion by clicking on the
+                      plus sign.
+                    </p>
+                    <button class="icon-button">
+                      <em class="fas fa-plus"></em>
+                    </button>
+                    <div class="more-info">
+                      <a (click)="expandMoreInfo = !expandMoreInfo">More on this setup</a>
+                    </div>
+                    @if (expandMoreInfo) {
+                      <div>
+                        <p>
+                          Macrolog is not hooked up to an existing food database. This has two
+                          reasons. First, a shared database is likely to have a multitude of
+                          variations of the food you are trying to find, including different
+                          brands and different portions. This may feel overwhelming and it's
+                          easy to pick something that may not be representative of what you
+                          actually ate. Second, it forces you to look up the nutrients of your
+                          food. By adding it to your own personal database manually you
+                          actively increase your knowledge of what your food consists of,
+                          instead of passively copying numbers.
+                        </p>
+                        <p>
+                          This choice does have a trade off. In the beginning it may take some
+                          time to fill up your database. We know when an app requires a lot of
+                          tedious action you will stop using it all together, so we try to
+                          make the daily use of it as easy and fast as possible. We think it's
+                          best to invest a little time at the start, and once it's set up
+                          don't spend a second longer on it than you have to. Your time is
+                          valuable.
+                        </p>
+                      </div>
+                    }
+                    <div class="button-wrapper button-wrapper--space-between">
+                      <button class="button button--primary" (click)="previousStep()">
+                        Previous
+                      </button>
+                      <button class="button button--primary" (click)="nextStep()">
+                        Next
+                      </button>
+                    </div>
+                  </div>
+                }
+
+                @if (currentStep === 4) {
+                  <div #step4 class="content">
+                    <h3 class="font-bold">Filling your diary</h3>
+                    <p>
+                      Clicking on <strong>Breakfast</strong> will enable you to add food to
+                      it. Try adding an <strong>Apple</strong>.
+                    </p>
+                    <div class="logday-wrapper" (click)="breakfastOpen = true">
+                      <div class="logday">
+                        <div class="logday__header">
+                          <span class="logday__header__macro"></span>
+                          <span class="logday__header__macro">Protein</span>
+                          <span class="logday__header__macro">Fat</span>
+                          <span class="logday__header__macro">Carbs</span>
+                        </div>
+                        <ml-entry-page-row [date]="displayDate" [meal]="breakfast"></ml-entry-page-row>
+                      </div>
+                    </div>
+                    <div class="button-wrapper button-wrapper--space-between">
+                      <button class="button button--primary" (click)="previousStep()">
+                        Previous
+                      </button>
+                      <button class="button button--primary" (click)="finish()">
+                        Done
+                      </button>
+                    </div>
+                  </div>
+                }
               </div>
             </div>
           </div>
-
-          <div class="form-field">
-            <label for="height">Height (cm)</label>
-            <input class="input" name="height" type="number" formControlName="height" required />
-          </div>
-
-          <div class="form-field">
-            <label for="weight">Start weight (kg)</label>
-            <input class="input" name="weight" type="number" formControlName="weight" step="0.1"
-              required />
-          </div>
-
-          <div class="form-field">
-            <label for="activity">Activity level</label>
-            <select name="activity" formControlName="activity" required>
-              <option value="1.2">Sedentary</option>
-              <option value="1.375">Lightly active</option>
-              <option value="1.55">Moderately active</option>
-              <option value="1.725">Very active</option>
-              <option value="1.9">Extremely active</option>
-            </select>
-          </div>
-        </form>
-
-        <div class="button-wrapper">
-          <button class="button button--primary" (click)="saveUserSettings()">
-            Next
-          </button>
-        </div>
-      </div>
-
-      <div class="content" #step2 *ngIf="currentStep === 2">
-        <h3 class="font-bold">Set your intake goal</h3>
-
-        <p>
-          This is the amount of calories you need to maintain your current
-          weight. Increase or decrease the amount of calories to respectively
-          gain or lose weight. Do this by adjusting the calories or the macro's.
-        </p>
-
-        <div class="content">
-          <div class="form-field">
-            <label for="protein">Protein</label>
-            <input name="protein" class="input" (ngModelChange)="protein = $event; calcCalories()"
-              [ngModel]="protein" type="number">
-          </div>
-
-          <div class="form-field">
-            <label for="fat">Fat</label>
-            <input name="fat" class="input" [ngModel]="fat"
-              (ngModelChange)="fat = $event; calcCalories()" type="number">
-          </div>
-
-          <div class="form-field">
-            <label for="carbs">Carbs</label>
-            <input name="carbs" class="input" [ngModel]="carbs"
-              (ngModelChange)="carbs = $event; calcCalories()" type="number">
-          </div>
-
-          <div class="flex col-gap-1">
-            <label class="flex-2">Calories</label>
-            <p class="flex-4">{{calories}}</p>
-          </div>
-
-          <button class="button button--primary" (click)="fillStandard()">Fill with standard
-            ratios</button>
-        </div>
-
-        <div class="button-wrapper button-wrapper--space-between">
-          <button class="button button--primary" (click)="previousStep()">
-            Previous
-          </button>
-
-          <button class="button button--primary" (click)="saveIntake()">
-            Next
-          </button>
-        </div>
-      </div>
-
-      <div class="content" #step3 *ngIf="currentStep === 3">
-        <h3 class="font-bold">Adding food</h3>
-
-        <p>
-          The first step is to add food to your database. You do this by using
-          the floating plus-button in the bottom right corner on the diary page.
-        </p>
-
-        <button class="floating-action-button">
-          <em class="fas fa-plus"></em>
-        </button>
-
-        <h3 class="font-bold">Portions</h3>
-
-        <p>
-          To make diary entries easier you can add portions that you regularly
-          use. This is entirely optional. You add a portion by clicking on the
-          plus sign.
-        </p>
-
-        <button class="icon-button">
-          <em class="fas fa-plus"></em>
-        </button>
-
-        <div class="more-info">
-          <a (click)="expandMoreInfo = !expandMoreInfo">More on this setup</a>
-        </div>
-
-        <div *ngIf="expandMoreInfo">
-          <p>
-            Macrolog is not hooked up to an existing food database. This has two
-            reasons. First, a shared database is likely to have a multitude of
-            variations of the food you are trying to find, including different
-            brands and different portions. This may feel overwhelming and it's
-            easy to pick something that may not be representative of what you
-            actually ate. Second, it forces you to look up the nutrients of your
-            food. By adding it to your own personal database manually you
-            actively increase your knowledge of what your food consists of,
-            instead of passively copying numbers.
-          </p>
-
-          <p>
-            This choice does have a trade off. In the beginning it may take some
-            time to fill up your database. We know when an app requires a lot of
-            tedious action you will stop using it all together, so we try to
-            make the daily use of it as easy and fast as possible. We think it's
-            best to invest a little time at the start, and once it's set up
-            don't spend a second longer on it than you have to. Your time is
-            valuable.
-          </p>
-        </div>
-
-        <div class="button-wrapper button-wrapper--space-between">
-          <button class="button button--primary" (click)="previousStep()">
-            Previous
-          </button>
-
-          <button class="button button--primary" (click)="nextStep()">
-            Next
-          </button>
-        </div>
-      </div>
-
-      <div #step4 *ngIf="currentStep === 4" class="content">
-        <h3 class="font-bold">Filling your diary</h3>
-
-        <p>
-          Clicking on <strong>Breakfast</strong> will enable you to add food to
-          it. Try adding an <strong>Apple</strong>.
-        </p>
-
-        <div class="logday-wrapper" (click)="breakfastOpen = true">
-          <div class="logday">
-            <div class="logday__header">
-              <span class="logday__header__macro"></span>
-              <span class="logday__header__macro">Protein</span>
-              <span class="logday__header__macro">Fat</span>
-              <span class="logday__header__macro">Carbs</span>
-            </div>
-
-            <ml-entry-page-row [date]="displayDate" [meal]="breakfast"></ml-entry-page-row>
-          </div>
-        </div>
-
-        <div class="button-wrapper button-wrapper--space-between">
-          <button class="button button--primary" (click)="previousStep()">
-            Previous
-          </button>
-
-          <button class="button button--primary" (click)="finish()">
-            Done
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>

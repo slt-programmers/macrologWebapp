@@ -3,31 +3,33 @@
     <img alt="powered by GMail" src="../assets/logo_gmail.png" />
   </div>
 
-  <div class="flex flex-col content" *ngIf="isConnected">
-    <p class="strong font-bold">GMail is connected</p>
-
-    <div>
-      <label for="emailAddress">Email address</label>
-      <input id="emailAddress" class="input" [(ngModel)]="emailAddress" name="emailAddress" />
+  @if (isConnected) {
+    <div class="flex flex-col content">
+      <p class="strong font-bold">GMail is connected</p>
+      <div>
+        <label for="emailAddress">Email address</label>
+        <input id="emailAddress" class="input" [(ngModel)]="emailAddress" name="emailAddress" />
+      </div>
+      <div>
+        <button id="testMail" class="button button--warning" (click)="sendTestMail()">
+          Send testmail
+        </button>
+      </div>
     </div>
+  }
 
-    <div>
-      <button id="testMail" class="button button--warning" (click)="sendTestMail()">
-        Send testmail
-      </button>
-    </div>
+  @if (!isConnected) {
+    <div class="flex flex-col justify-center content">
+      <p class="strong font-bold"> GMail is not connected </p>
+      @if (syncError) {
+        <p class="error">
+          Unable to proceed with connecting to GMAIL. {{ syncError }}
+        </p>
+      }
+      <a href="{{ googleConnectUrl }}">
+        <img alt="connect to GMail" src="../assets/sign-in-with-google-icon.png"
+          style="width: 200px" />
+        </a>
+      </div>
+    }
   </div>
-
-  <div class="flex flex-col justify-center content" *ngIf="!isConnected">
-    <p class="strong font-bold"> GMail is not connected </p>
-
-    <p class="error" *ngIf="syncError">
-      Unable to proceed with connecting to GMAIL. {{ syncError }}
-    </p>
-
-    <a href="{{ googleConnectUrl }}">
-      <img alt="connect to GMail" src="../assets/sign-in-with-google-icon.png"
-        style="width: 200px" />
-    </a>
-  </div>
-</div>

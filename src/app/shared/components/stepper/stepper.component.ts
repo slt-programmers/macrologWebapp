@@ -1,11 +1,11 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { NgFor, NgClass } from '@angular/common';
+import { NgClass } from '@angular/common';
 
 @Component({
     selector: 'ml-stepper',
     templateUrl: './stepper.component.html',
     styleUrls: ['./stepper.component.scss'],
-    imports: [NgFor, NgClass]
+    imports: [NgClass]
 })
 export class StepperComponent implements OnInit {
 

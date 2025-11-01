@@ -7,13 +7,13 @@ import {
   SimpleChanges,
   OnChanges,
 } from '@angular/core';
-import { NgFor } from '@angular/common';
+
 
 @Component({
     selector: 'ml-linegraph',
     templateUrl: './linegraph.component.html',
     styleUrls: ['./linegraph.component.scss'],
-    imports: [NgFor]
+    imports: []
 })
 export class LinegraphComponent implements AfterViewInit, OnChanges {
   @ViewChild('yAxis', { static: false }) public yAxisElement: ElementRef;

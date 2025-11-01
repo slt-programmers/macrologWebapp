@@ -4,14 +4,14 @@ import { Gender } from '../../../../shared/model/gender';
 import { differenceInYears, parse } from 'date-fns';
 import { forkJoin } from 'rxjs';
 import { calculateTDEE } from 'src/app/util/functions';
-import { NgIf } from '@angular/common';
+
 import { ModalComponent } from '../../../../shared/components/modal/modal.component';
 import { FormsModule } from '@angular/forms';
 
 @Component({
     selector: 'ml-intake',
     templateUrl: './intake.component.html',
-    imports: [NgIf, ModalComponent, FormsModule]
+    imports: [ModalComponent, FormsModule]
 })
 export class IntakeComponent implements OnInit {
   public goalProtein: number;

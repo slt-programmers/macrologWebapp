@@ -3,13 +3,13 @@ import { AuthenticationService } from '../../../../shared/services/auth.service'
 import { ToastService } from '../../../../shared/services/toast.service';
 import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
-import { NgIf } from '@angular/common';
+
 import { ModalComponent } from '../../../../shared/components/modal/modal.component';
 
 @Component({
     selector: 'ml-account',
     templateUrl: './account.component.html',
-    imports: [FormsModule, NgIf, ModalComponent]
+    imports: [FormsModule, ModalComponent]
 })
 export class AccountComponent {
   public message = '';

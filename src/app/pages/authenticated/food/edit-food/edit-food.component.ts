@@ -5,12 +5,12 @@ import { Portion } from "src/app/shared/model/portion";
 import { foodActions } from "src/app/shared/store/actions/food.actions";
 import { ModalComponent } from "../../../../shared/components/modal/modal.component";
 import { FormsModule } from "@angular/forms";
-import { NgFor, NgIf } from "@angular/common";
+
 
 @Component({
     selector: 'ml-edit-food',
     templateUrl: './edit-food.component.html',
-    imports: [ModalComponent, FormsModule, NgFor, NgIf]
+    imports: [ModalComponent, FormsModule]
 })
 export class EditFoodComponent implements OnInit {
 

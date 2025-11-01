@@ -1,4 +1,4 @@
-import { NgIf } from '@angular/common';
+
 import { Component, OnInit, signal } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -10,7 +10,7 @@ import { ToastService } from '../../../shared/services/toast.service';
 @Component({
   templateUrl: 'login.component.html',
   styleUrls: ['./login.component.scss'],
-  imports: [NavigationComponent, FormsModule, ReactiveFormsModule, NgIf, ModalComponent]
+  imports: [NavigationComponent, FormsModule, ReactiveFormsModule, ModalComponent]
 })
 export class LoginComponent implements OnInit {
   private returnUrl: string;

@@ -11,24 +11,29 @@
     </div>
   </div>
 
-  <div class="overlay" *ngIf="isOpen" (click)="toggleOpen($event)">
-    <div class="picker" *ngIf="isOpen">
-      <div class="picker__header">
-        <button class="picker__button" (click)="previousMonth()">Previous</button>
-
-        <span>{{selectedDate | date: 'MMMM'}}</span>
-
-        <button class="picker__button" (click)="nextMonth()">Next</button>
-      </div>
-
-      <div class="picker__days">
-        <div class="picker__weekday" *ngFor="let weekday of weekdays">{{weekday}}</div>
-
-        <div class="picker__day" *ngFor="let placeholder of placeholders"></div>
-
-        <div #dayRef class="picker__day" *ngFor="let day of daysInMonthArray"
-          (click)="selectDay(day)">{{day}}</div>
-      </div>
+  @if (isOpen) {
+    <div class="overlay" (click)="toggleOpen($event)">
+      @if (isOpen) {
+        <div class="picker">
+          <div class="picker__header">
+            <button class="picker__button" (click)="previousMonth()">Previous</button>
+            <span>{{selectedDate | date: 'MMMM'}}</span>
+            <button class="picker__button" (click)="nextMonth()">Next</button>
+          </div>
+          <div class="picker__days">
+            @for (weekday of weekdays; track weekday) {
+              <div class="picker__weekday">{{weekday}}</div>
+            }
+            @for (placeholder of placeholders; track placeholder) {
+              <div class="picker__day"></div>
+            }
+            @for (day of daysInMonthArray; track day) {
+              <div #dayRef class="picker__day"
+              (click)="selectDay(day)">{{day}}</div>
+            }
+          </div>
+        </div>
+      }
     </div>
-  </div>
+  }
 </div>

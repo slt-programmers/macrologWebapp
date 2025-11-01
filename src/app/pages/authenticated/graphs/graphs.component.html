@@ -1,25 +1,27 @@
 <div class="content">
   <div class="card">
     <div class="graph">
-      <div *ngIf="loading" class="graph__spinner-wrapper">
-        <div class="spinner">
-          <em class="fas fa-spinner"></em>
+      @if (loading) {
+        <div class="graph__spinner-wrapper">
+          <div class="spinner">
+            <em class="fas fa-spinner"></em>
+          </div>
         </div>
-      </div>
+      }
 
-      <div class="month-picker" *ngIf="!loading">
-        <button class="icon-button" [disabled]="loading" (click)="monthBack()">
-          <em class="fas fa-chevron-left"></em>
-        </button>
-
-        <div class="month-picker__datelabel">{{dateFrom | date:'dd MMMM yyyy'}} -
-          {{dateTo | date:'dd MMMM yyyy'}}
+      @if (!loading) {
+        <div class="month-picker">
+          <button class="icon-button" [disabled]="loading" (click)="monthBack()">
+            <em class="fas fa-chevron-left"></em>
+          </button>
+          <div class="month-picker__datelabel">{{dateFrom | date:'dd MMMM yyyy'}} -
+            {{dateTo | date:'dd MMMM yyyy'}}
+          </div>
+          <button class="icon-button" [disabled]="loading" (click)="monthForward()">
+            <em class="fas fa-chevron-right"></em>
+          </button>
         </div>
-
-        <button class="icon-button" [disabled]="loading" (click)="monthForward()">
-          <em class="fas fa-chevron-right"></em>
-        </button>
-      </div>
+      }
 
       <div class="graph__wrapper content">
         <div class="graph__options">
@@ -61,68 +63,71 @@
           </div>
         </div>
 
-        <div *ngIf="!loading" class="graph__graphs-container">
-          <div class="graph__bargraph-container" *ngIf="measurementOption === 'total'">
-            <div class="font-semibold"> {{graphLabel}} </div>
-
-            <ml-bargraph
-              [colors]="['rgb(100, 149, 236)', 'rgb(60, 221, 234)', 'rgb(144, 238, 144)']"
-              [fillColors]="['rgba(100, 149, 236, 0.3)', 'rgba(60, 221, 234, 0.3)', 'rgba(144, 238, 144, 0.3)']"
-              [markers]="markers" [datasets]="[proteinDataset, fatDataset, carbsDataset]"
-              [xAxisStep]="1" [yAxisStep]="yAxisStep"
-              class="graph__bargraph graph__bargraph--stacked">
-            </ml-bargraph>
+        @if (!loading) {
+          <div class="graph__graphs-container">
+            @if (measurementOption === 'total') {
+              <div class="graph__bargraph-container">
+                <div class="font-semibold"> {{graphLabel}} </div>
+                <ml-bargraph
+                  [colors]="['rgb(100, 149, 236)', 'rgb(60, 221, 234)', 'rgb(144, 238, 144)']"
+                  [fillColors]="['rgba(100, 149, 236, 0.3)', 'rgba(60, 221, 234, 0.3)', 'rgba(144, 238, 144, 0.3)']"
+                  [markers]="markers" [datasets]="[proteinDataset, fatDataset, carbsDataset]"
+                  [xAxisStep]="1" [yAxisStep]="yAxisStep"
+                  class="graph__bargraph graph__bargraph--stacked">
+                </ml-bargraph>
+              </div>
+            }
+            @if (measurementOption === 'splitted') {
+              <div class="graph__bargraph-container">
+                <div class="font-semibold">
+                  {{proteinGraphLabel}}
+                </div>
+                <ml-bargraph [colors]="['rgb(100, 149, 236)']"
+                  [fillColors]="['rgba(100, 149, 236, 0.3)']" [markers]="[proteinMarker]"
+                  [datasets]="[proteinDataset]" [xAxisStep]="1" [yAxisStep]="yAxisStep"
+                  class="graph__bargraph graph__bargraph--protein">
+                </ml-bargraph>
+              </div>
+            }
+            @if (measurementOption === 'splitted') {
+              <div class="graph__bargraph-container">
+                <div class="font-semibold">
+                  {{fatGraphLabel}}
+                </div>
+                <ml-bargraph [colors]="['rgb(60, 221, 234)']" [fillColors]="['rgba(60, 221, 234, 0.3)']"
+                  [markers]="[fatMarker]" [datasets]="[fatDataset]" [xAxisStep]="1"
+                  [yAxisStep]="yAxisStep" class="graph__bargraph graph__bargraph--fat">
+                </ml-bargraph>
+              </div>
+            }
+            @if (measurementOption === 'splitted') {
+              <div class="graph__bargraph-container">
+                <div class="font-semibold">
+                  {{carbsGraphLabel}}
+                </div>
+                <ml-bargraph [colors]="['rgb(144, 238, 144)']"
+                  [fillColors]="['rgba(144, 238, 144, 0.3)']" [markers]="[carbsMarker]"
+                  [datasets]="[carbsDataset]" [xAxisStep]="1" [yAxisStep]="yAxisStep"
+                  class="graph__bargraph graph__bargraph--carbs">
+                </ml-bargraph>
+              </div>
+            }
+            @if (measurementOption === 'ratio') {
+              <div class="graph__bargraph-container">
+                <div class="font-semibold">
+                  {{ratioGraphLabel}}
+                </div>
+                <ml-bargraph
+                  [colors]="['rgb(100, 149, 236)', 'rgb(60, 221, 234)', 'rgb(144, 238, 144)']"
+                  [fillColors]="['rgba(100, 149, 236, 0.3)', 'rgba(60, 221, 234, 0.3)', 'rgba(144, 238, 144, 0.3)']"
+                  [markers]="ratioMarkers"
+                  [datasets]="[proteinRatioDataset, fatRatioDataset, carbsRatioDataset]" [xAxisStep]="1"
+                  [yAxisStep]="10" class="graph__bargraph graph__bargraph--stacked">
+                </ml-bargraph>
+              </div>
+            }
           </div>
-
-          <div class="graph__bargraph-container" *ngIf="measurementOption === 'splitted'">
-            <div class="font-semibold">
-              {{proteinGraphLabel}}
-            </div>
-
-            <ml-bargraph [colors]="['rgb(100, 149, 236)']"
-              [fillColors]="['rgba(100, 149, 236, 0.3)']" [markers]="[proteinMarker]"
-              [datasets]="[proteinDataset]" [xAxisStep]="1" [yAxisStep]="yAxisStep"
-              class="graph__bargraph graph__bargraph--protein">
-            </ml-bargraph>
-          </div>
-
-          <div class="graph__bargraph-container" *ngIf="measurementOption === 'splitted'">
-            <div class="font-semibold">
-              {{fatGraphLabel}}
-            </div>
-
-            <ml-bargraph [colors]="['rgb(60, 221, 234)']" [fillColors]="['rgba(60, 221, 234, 0.3)']"
-              [markers]="[fatMarker]" [datasets]="[fatDataset]" [xAxisStep]="1"
-              [yAxisStep]="yAxisStep" class="graph__bargraph graph__bargraph--fat">
-            </ml-bargraph>
-          </div>
-
-          <div class="graph__bargraph-container" *ngIf="measurementOption === 'splitted'">
-            <div class="font-semibold">
-              {{carbsGraphLabel}}
-            </div>
-
-            <ml-bargraph [colors]="['rgb(144, 238, 144)']"
-              [fillColors]="['rgba(144, 238, 144, 0.3)']" [markers]="[carbsMarker]"
-              [datasets]="[carbsDataset]" [xAxisStep]="1" [yAxisStep]="yAxisStep"
-              class="graph__bargraph graph__bargraph--carbs">
-            </ml-bargraph>
-          </div>
-
-          <div class="graph__bargraph-container" *ngIf="measurementOption === 'ratio'">
-            <div class="font-semibold">
-              {{ratioGraphLabel}}
-            </div>
-
-            <ml-bargraph
-              [colors]="['rgb(100, 149, 236)', 'rgb(60, 221, 234)', 'rgb(144, 238, 144)']"
-              [fillColors]="['rgba(100, 149, 236, 0.3)', 'rgba(60, 221, 234, 0.3)', 'rgba(144, 238, 144, 0.3)']"
-              [markers]="ratioMarkers"
-              [datasets]="[proteinRatioDataset, fatRatioDataset, carbsRatioDataset]" [xAxisStep]="1"
-              [yAxisStep]="10" class="graph__bargraph graph__bargraph--stacked">
-            </ml-bargraph>
-          </div>
-        </div>
+        }
       </div>
     </div>
   </div>

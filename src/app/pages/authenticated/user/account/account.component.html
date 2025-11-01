@@ -6,60 +6,61 @@
       <label for="oldPassword">Old password</label>
       <input class="input" type="password" [(ngModel)]="oldPassword"
         name="oldPassword" required />
-    </div>
-
-    <div class="form-field">
-      <label for="newPassword">New password</label>
-      <input class="input" type="password" [(ngModel)]="newPassword"
-        name="newPassword" required />
-    </div>
-
-    <div class="form-field">
-      <label for="confirmPassword" >Confirm new password</label>
-      <input class="input" type="password" [(ngModel)]="confirmPassword"
-        name="confirmPassword" required />
-    </div>
-
-    <p *ngIf="message">{{message}}</p>
-  </form>
-
-  <div class="button-wrapper">
-    <button class="button button--primary" [disabled]="updateForm.invalid"
-      (click)="changePassword()">Change
-      password
-    </button>
-  </div>
-
-  <div>
-    <h3 class="font-bold">Delete account</h3>
-
-    <div class="button-wrapper">
-      <button class="button button--warning" (click)="openModal()">Delete</button>
-    </div>
-  </div>
-</div>
-
-<ml-modal *ngIf="modalOpen" [title]="'Delete account'" (close$)="closeModal()">
-  <div class="content min-w-24">
-    <p>Enter your password to delete your account.</p>
-
-    <p>This action is irreversable.</p>
-
-    <form class="form form--vertical">
-      <div class="form-field">
-        <label for="password" >Password</label>
-        <input class="input" type="password" #usernameField
-        [(ngModel)]="password" name="password" required />
       </div>
-    </form>
 
-    <p class="error" *ngIf="errorMessage">Password incorrect</p>
+      <div class="form-field">
+        <label for="newPassword">New password</label>
+        <input class="input" type="password" [(ngModel)]="newPassword"
+          name="newPassword" required />
+        </div>
 
-    <div class="flex justify-end col-gap-1">
-      <button class="button" (click)="closeModal()">No</button>
+        <div class="form-field">
+          <label for="confirmPassword" >Confirm new password</label>
+          <input class="input" type="password" [(ngModel)]="confirmPassword"
+            name="confirmPassword" required />
+          </div>
 
-      <button [disabled]="!password" class="button button--warning" (click)="deleteAccount()">Yes
-      </button>
-    </div>
-  </div>
-</ml-modal>
+          @if (message) {
+            <p>{{message}}</p>
+          }
+        </form>
+
+        <div class="button-wrapper">
+          <button class="button button--primary" [disabled]="updateForm.invalid"
+            (click)="changePassword()">Change
+            password
+          </button>
+        </div>
+
+        <div>
+          <h3 class="font-bold">Delete account</h3>
+
+          <div class="button-wrapper">
+            <button class="button button--warning" (click)="openModal()">Delete</button>
+          </div>
+        </div>
+      </div>
+
+      @if (modalOpen) {
+        <ml-modal [title]="'Delete account'" (close$)="closeModal()">
+          <div class="content min-w-24">
+            <p>Enter your password to delete your account.</p>
+            <p>This action is irreversable.</p>
+            <form class="form form--vertical">
+              <div class="form-field">
+                <label for="password" >Password</label>
+                <input class="input" type="password" #usernameField
+                  [(ngModel)]="password" name="password" required />
+                </div>
+              </form>
+              @if (errorMessage) {
+                <p class="error">Password incorrect</p>
+              }
+              <div class="flex justify-end col-gap-1">
+                <button class="button" (click)="closeModal()">No</button>
+                <button [disabled]="!password" class="button button--warning" (click)="deleteAccount()">Yes
+                </button>
+              </div>
+            </div>
+          </ml-modal>
+        }

@@ -1,13 +1,13 @@
 import { Component } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { AuthenticationService } from '../../services/auth.service';
-import { NgIf } from '@angular/common';
+
 
 @Component({
     selector: 'ml-navigation',
     templateUrl: './navigation.component.html',
     styleUrls: ['./navigation.component.scss'],
-    imports: [RouterLink, NgIf]
+    imports: [RouterLink]
 })
 export class NavigationComponent{
 

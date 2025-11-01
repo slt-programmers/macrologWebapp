@@ -24,17 +24,17 @@ if (environment.production) {
 }
 
 bootstrapApplication(AppComponent, {
-    providers: [
-        importProvidersFrom(BrowserModule, ServicesModule, AppRoutingModule, StoreModule.forRoot(reducers), EffectsModule.forRoot([
-            FoodEffects,
-            DishesEffects,
-            EntriesEffects,
-            ActivitiesEffects
-        ]), FontAwesomeModule),
-        { provide: Window, useValue: window },
-        { provide: Document, useValue: document },
-        { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
-        { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
-        provideHttpClient(withInterceptorsFromDi())
-    ]
-}).catch((err) => {});
+  providers: [
+    importProvidersFrom(BrowserModule, ServicesModule, AppRoutingModule, StoreModule.forRoot(reducers), EffectsModule.forRoot([
+      FoodEffects,
+      DishesEffects,
+      EntriesEffects,
+      ActivitiesEffects
+    ]), FontAwesomeModule),
+    { provide: Window, useValue: window },
+    { provide: Document, useValue: document },
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+    provideHttpClient(withInterceptorsFromDi())
+  ]
+}).catch((err) => console.error(err));

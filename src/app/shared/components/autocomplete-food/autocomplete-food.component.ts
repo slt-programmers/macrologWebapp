@@ -8,13 +8,13 @@ import { selectAllFood } from '../../store/selectors/food.selectors';
 import { Subscription } from 'rxjs';
 import { selectAllDishes } from '../../store/selectors/dishes.selectors';
 import { FormsModule } from '@angular/forms';
-import { NgIf, NgFor, NgClass } from '@angular/common';
+import { NgClass } from '@angular/common';
 
 @Component({
     selector: 'ml-autocomplete-food',
     templateUrl: './autocomplete-food.component.html',
     styleUrls: ['./autocomplete-food.component.scss'],
-    imports: [FormsModule, NgIf, NgFor, NgClass]
+    imports: [FormsModule, NgClass]
 })
 export class AutocompleteFoodComponent implements OnInit, OnDestroy {
   @HostListener('document.click', ['$event.target'])

@@ -8,12 +8,12 @@ import { entriesActions } from 'src/app/shared/store/actions/entries.actions';
 import { selectTotalsForDate } from 'src/app/shared/store/selectors/entries.selectors';
 import { EntryPageRowComponent } from '../entry-page-row/entry-page-row.component';
 import { ActivityPageRowComponent } from '../activity-page-row/activity-page-row.component';
-import { NgIf, AsyncPipe, DecimalPipe } from '@angular/common';
+import { AsyncPipe, DecimalPipe } from '@angular/common';
 
 @Component({
     selector: 'ml-diary-page',
     templateUrl: './diary-page.component.html',
-    imports: [EntryPageRowComponent, ActivityPageRowComponent, NgIf, AsyncPipe, DecimalPipe]
+    imports: [EntryPageRowComponent, ActivityPageRowComponent, AsyncPipe, DecimalPipe]
 })
 export class DiaryPageComponent implements OnChanges {
 

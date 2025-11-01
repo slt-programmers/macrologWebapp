@@ -7,14 +7,14 @@ import { Subscription } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { selectActivitiesDate, selectActivitiesLoading } from 'src/app/shared/store/selectors/activities.selectors';
 import { activitiesActions } from 'src/app/shared/store/actions/activities.actions';
-import { NgIf, NgFor, DecimalPipe } from '@angular/common';
+import { DecimalPipe } from '@angular/common';
 import { ModalComponent } from '../../../../shared/components/modal/modal.component';
 
 @Component({
     selector: 'ml-activity-page-row',
     templateUrl: './activity-page-row.component.html',
     styleUrls: ['./activity-page-row.component.scss'],
-    imports: [NgIf, NgFor, ModalComponent, FormsModule, ReactiveFormsModule, DecimalPipe]
+    imports: [ModalComponent, FormsModule, ReactiveFormsModule, DecimalPipe]
 })
 export class ActivityPageRowComponent implements OnInit, OnChanges, OnDestroy {
 

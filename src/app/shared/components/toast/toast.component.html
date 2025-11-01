@@ -1,5 +1,5 @@
 <div class="toast-holder">
-  <ng-container *ngFor="let toast of toasts; index as index">
+  @for (toast of toasts; track toast; let index = $index) {
     <div class="relative">
       <div class="toast-border" [class.toast-border--error]="toast.isError"></div>
       <div class="toast" [class.toast--error]="toast.isError">
@@ -8,15 +8,13 @@
             <div class="font-bold flex-grow">
               {{ toast.title || 'An error has occurred' }}
             </div>
-            
             <div class="" (click)="closeToast(index)">
               <em class="fas fa-times"></em>
             </div>
           </div>
-          
           <div class="flex-grow"> {{ toast.message }} </div>
         </div>
       </div>
     </div>
-  </ng-container>
+  }
 </div>

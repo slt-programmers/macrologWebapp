@@ -2,13 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { GoogleService } from 'src/app/shared/services/google.service';
 import { environment } from '../../../../../environments/environment';
-import { NgIf } from '@angular/common';
+
 import { FormsModule } from '@angular/forms';
 
 @Component({
     selector: 'ml-mail',
     templateUrl: './mail.component.html',
-    imports: [NgIf, FormsModule]
+    imports: [FormsModule]
 })
 export class MailComponent implements OnInit {
   public googleConnectUrl: string = '';
