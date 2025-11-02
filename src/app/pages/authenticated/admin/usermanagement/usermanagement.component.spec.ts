@@ -1,9 +1,9 @@
-import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
-import { UserManagementComponent } from './usermanagement.component';
-import { of, throwError } from 'rxjs';
-import { AdminService } from 'src/app/shared/services/admin.service';
-import { UserAccount } from 'src/app/shared/model/userAccount';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MockProvider } from 'ng-mocks';
+import { of } from 'rxjs';
+import { UserAccount } from 'src/app/shared/model/userAccount';
+import { AdminService } from 'src/app/shared/services/admin.service';
+import { UserManagementComponent } from './usermanagement.component';
 
 describe('UserManagementComponent', () => {
   let component: UserManagementComponent;
@@ -36,9 +36,9 @@ describe('UserManagementComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-    imports: [UserManagementComponent],
-    providers: [MockProvider(AdminService)],
-}).compileComponents();
+      imports: [UserManagementComponent],
+      providers: [MockProvider(AdminService)],
+    }).compileComponents();
 
     adminService = TestBed.inject(AdminService);
 
@@ -67,7 +67,7 @@ describe('UserManagementComponent', () => {
     expect(component.isModalVisible).toBeFalse();
   });
 
-  it('should delete user', fakeAsync(() => {
+  it('should delete user', () => {
     spyOn(adminService, 'getAllUsers').and.returnValue(of(allUsers));
     spyOn(adminService, 'deleteUser').and.returnValue(of({}));
     const userAccount: UserAccount = {} as UserAccount;
@@ -75,12 +75,11 @@ describe('UserManagementComponent', () => {
     component.selectedUser = userAccount;
     component.deleteUser();
     expect(adminService.deleteUser).toHaveBeenCalledWith(userAccount);
-    tick();
     fixture.detectChanges();
     expect(component.selectedUser).toBeUndefined();
     expect(adminService.getAllUsers).toHaveBeenCalled();
     expect(component.isModalVisible).toBeFalse();
-  }));
+  });
 
   it('should not delete user when none selected', () => {
     spyOn(adminService, 'getAllUsers').and.returnValue(of(allUsers));

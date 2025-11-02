@@ -1,10 +1,10 @@
-import { TestBed, tick, fakeAsync } from '@angular/core/testing';
-import { ErrorInterceptor } from './error.interceptor';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
-import { throwError, of } from 'rxjs';
-import { AuthenticationService } from '../services/auth.service';
+import { TestBed } from '@angular/core/testing';
 import { MockProvider } from 'ng-mocks';
+import { of, throwError } from 'rxjs';
+import { AuthenticationService } from '../services/auth.service';
 import { ToastService } from '../services/toast.service';
+import { ErrorInterceptor } from './error.interceptor';
 
 describe('AuthService', () => {
   let interceptor: ErrorInterceptor;
@@ -31,7 +31,7 @@ describe('AuthService', () => {
     expect(interceptor).toBeTruthy();
   });
 
-  it('should intercept forbidden status', fakeAsync(() => {
+  it('should intercept forbidden status', () => {
     spyOn(authService, 'logout');
     const httpRequestSpy = jasmine.createSpyObj('HttpRequest', [
       'doesNotMatter',
@@ -40,15 +40,14 @@ describe('AuthService', () => {
     httpHandlerSpy.handle.and.returnValue(throwError({ status: 403 }));
 
     interceptor.intercept(httpRequestSpy, httpHandlerSpy).subscribe(
-      () => {},
+      () => { },
       (err) => {
         expect(authService.logout).toHaveBeenCalled();
       }
     );
-    tick();
-  }));
+  });
 
-  it('should not intercept other error status', fakeAsync(() => {
+  it('should not intercept other error status', () => {
     spyOn(authService, 'logout');
     const httpRequestSpy = jasmine.createSpyObj('HttpRequest', [
       'doesNotMatter',
@@ -57,15 +56,14 @@ describe('AuthService', () => {
     httpHandlerSpy.handle.and.returnValue(throwError({ status: 401 }));
 
     interceptor.intercept(httpRequestSpy, httpHandlerSpy).subscribe(
-      () => {},
+      () => { },
       (err) => {
         expect(authService.logout).not.toHaveBeenCalled();
       }
     );
-    tick();
-  }));
+  });
 
-  it('should not intercept valid requests', fakeAsync(() => {
+  it('should not intercept valid requests', () => {
     spyOn(authService, 'logout');
     const httpRequestSpy = jasmine.createSpyObj('HttpRequest', [
       'doesNotMatter',
@@ -76,6 +74,5 @@ describe('AuthService', () => {
     interceptor.intercept(httpRequestSpy, httpHandlerSpy).subscribe(() => {
       expect(authService.logout).not.toHaveBeenCalled();
     });
-    tick();
-  }));
+  });
 });

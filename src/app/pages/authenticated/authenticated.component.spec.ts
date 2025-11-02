@@ -1,8 +1,6 @@
 import {
   ComponentFixture,
-  fakeAsync,
-  TestBed,
-  tick,
+  TestBed
 } from '@angular/core/testing';
 import { provideRouter, Router, RouterOutlet } from '@angular/router';
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
@@ -25,16 +23,16 @@ describe('AuthenticatedComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-    imports: [RouterOutlet, AuthenticatedComponent,
+      imports: [RouterOutlet, AuthenticatedComponent,
         MockComponent(NavigationComponent)],
-    providers: [
+      providers: [
         provideRouter([]),
         provideMockStore(),
         MockProvider(HealthcheckService),
         MockProvider(ScrollBehaviourService),
         MockProvider(AuthenticationService),
-    ],
-}).compileComponents();
+      ],
+    }).compileComponents();
 
     store = TestBed.inject(MockStore);
     fixture = TestBed.createComponent(AuthenticatedComponent);
@@ -53,14 +51,13 @@ describe('AuthenticatedComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should init the app component', fakeAsync(() => {
+  it('should init the app component', () => {
     const healthSpy = spyOn(healthcheckService, 'checkState').and.returnValue(
       of(true)
     );
     let result = component.stillSleeping();
     expect(result).toBeTruthy();
     component.ngOnInit();
-    tick();
     fixture.detectChanges();
     expect(healthcheckService.checkState).toHaveBeenCalled();
     result = component.stillSleeping();
@@ -68,7 +65,6 @@ describe('AuthenticatedComponent', () => {
 
     healthSpy.and.returnValue(throwError({ status: 403 }));
     component.ngOnInit();
-    tick();
     fixture.detectChanges();
     result = component.stillSleeping();
     expect(result).toBeFalsy();
@@ -78,11 +74,10 @@ describe('AuthenticatedComponent', () => {
     expect(result).toBeTruthy();
     healthSpy.and.returnValue(throwError({ status: 404 }));
     component.ngOnInit();
-    tick();
     fixture.detectChanges();
     result = component.stillSleeping();
     expect(result).toBeTruthy();
-  }));
+  });
 
   it('should open menu', () => {
     spyOn(scrollBehaviourService, 'preventScrolling');

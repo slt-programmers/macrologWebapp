@@ -1,19 +1,17 @@
 import {
   ComponentFixture,
-  TestBed,
-  tick,
-  fakeAsync,
+  TestBed
 } from '@angular/core/testing';
-import { LoginComponent } from './login.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
 import { provideRouter, Router } from '@angular/router';
+import { MockComponent, MockProvider } from 'ng-mocks';
 import { of, throwError } from 'rxjs';
+import { ModalComponent } from 'src/app/shared/components/modal/modal.component';
+import { NavigationComponent } from 'src/app/shared/components/navigation/navigation.component';
 import { AuthenticationService } from 'src/app/shared/services/auth.service';
 import { ToastService } from 'src/app/shared/services/toast.service';
-import { NavigationComponent } from 'src/app/shared/components/navigation/navigation.component';
-import { MockComponent, MockProvider } from 'ng-mocks';
-import { ModalComponent } from 'src/app/shared/components/modal/modal.component';
+import { LoginComponent } from './login.component';
 
 describe('LoginComponent', () => {
   let component: LoginComponent;
@@ -24,15 +22,15 @@ describe('LoginComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-    imports: [FormsModule, ReactiveFormsModule, LoginComponent,
+      imports: [FormsModule, ReactiveFormsModule, LoginComponent,
         MockComponent(NavigationComponent),
         MockComponent(ModalComponent)],
-    providers: [
+      providers: [
         MockProvider(AuthenticationService),
         MockProvider(ToastService),
         provideRouter([])
-    ]
-}).compileComponents();
+      ]
+    }).compileComponents();
     fixture = TestBed.createComponent(LoginComponent);
     component = fixture.componentInstance;
     authService = TestBed.inject(AuthenticationService);
@@ -63,7 +61,7 @@ describe('LoginComponent', () => {
   });
 
   it('should error on log in', () => {
-    spyOn(authService, 'login').and.returnValue(throwError({status: 500}));
+    spyOn(authService, 'login').and.returnValue(throwError({ status: 500 }));
     spyOn(router, 'navigate');
     component.loginForm.patchValue({
       username: 'username',
@@ -139,7 +137,7 @@ describe('LoginComponent', () => {
     expect(component.showForgotPwModal()).toBeTruthy();
   });
 
-  it('should reset password', fakeAsync(() => {
+  it('should reset password', () => {
     const resetSpy = spyOn(authService, 'resetPassword').and.returnValue(
       of({})
     );
@@ -155,7 +153,6 @@ describe('LoginComponent', () => {
     resetBtn.nativeElement.click();
     expect(resetSpy).toHaveBeenCalledWith('email@email.com');
     expect(component.forgotError).toEqual('');
-    tick();
     fixture.detectChanges();
     expect(toastService.setMessage).toHaveBeenCalled();
     expect(component.showForgotPwModal()).toBeFalsy();
@@ -166,8 +163,7 @@ describe('LoginComponent', () => {
     resetBtn = fixture.debugElement.query(By.css('#resetBtn'));
     // the button was gone when the model was closed
     resetBtn.nativeElement.click();
-    tick();
     fixture.detectChanges();
     expect(component.forgotError).toEqual('The email adress was not found');
-  }));
+  });
 });

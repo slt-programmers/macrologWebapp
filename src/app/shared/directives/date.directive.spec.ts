@@ -1,8 +1,8 @@
-import { TestBed, ComponentFixture, fakeAsync } from '@angular/core/testing';
-import { DateValidator } from './date.directive';
 import { Component, DebugElement } from '@angular/core';
-import { By } from '@angular/platform-browser';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormControl, FormsModule } from '@angular/forms';
+import { By } from '@angular/platform-browser';
+import { DateValidator } from './date.directive';
 
 @Component({
   template: `
