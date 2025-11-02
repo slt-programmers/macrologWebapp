@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, inject } from '@angular/core';
+import { Component, OnInit, inject, viewChild } from '@angular/core';
 import { UserService } from '../../../shared/services/user.service';
 import { Router } from '@angular/router';
 import { forkJoin } from 'rxjs';
@@ -20,7 +20,7 @@ export class OnboardingComponent implements OnInit {
   private userService = inject(UserService);
   private router = inject(Router);
 
-  @ViewChild('breakfast', { static: false }) private breakfastEref: any;
+  private readonly breakfastEref = viewChild<any>('breakfast');
 
   // Step 2
   public protein: number;

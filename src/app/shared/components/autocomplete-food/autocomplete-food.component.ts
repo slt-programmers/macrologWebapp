@@ -1,4 +1,4 @@
-import { Component, ViewChild, ElementRef, HostListener, OnDestroy, OnInit, inject, input, output } from '@angular/core';
+import { Component, ElementRef, HostListener, OnDestroy, OnInit, inject, input, output, viewChild } from '@angular/core';
 import { FoodSearchable } from '../../model/foodSearchable';
 import { Food } from '../../model/food';
 import { Dish } from '../../model/dish';
@@ -24,10 +24,8 @@ export class AutocompleteFoodComponent implements OnInit, OnDestroy {
     this.closeAutoComplete(target);
   }
 
-  @ViewChild('newIngredient', { static: false })
-  private newIngredientEref: ElementRef;
-  @ViewChild('autoComplete', { static: false })
-  private autoCompleteEref: ElementRef;
+  private readonly newIngredientEref = viewChild<ElementRef>('newIngredient');
+  private readonly autoCompleteEref = viewChild<ElementRef>('autoComplete');
 
   readonly dummy = input(false);
   readonly placeholder = input('');
@@ -74,7 +72,7 @@ export class AutocompleteFoodComponent implements OnInit, OnDestroy {
   }
 
   public onKeyDown(event: any) {
-    if (this.autoCompleteEref) {
+    if (this.autoCompleteEref()) {
       if (event.key === 'ArrowDown') {
         event.preventDefault();
         this.handleArrowDown();
@@ -196,7 +194,8 @@ export class AutocompleteFoodComponent implements OnInit, OnDestroy {
   }
 
   private closeAutoComplete(target: ElementRef) {
-    if (this.newIngredientEref && !this.newIngredientEref.nativeElement.contains(target)) {
+    const newIngredientEref = this.newIngredientEref();
+    if (newIngredientEref && !newIngredientEref.nativeElement.contains(target)) {
       this.showAutoComplete = false;
       this.foodMatch = [];
     }

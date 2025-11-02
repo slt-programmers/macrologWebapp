@@ -5,7 +5,7 @@ import {
   ElementRef,
   input,
   OnInit,
-  ViewChild
+  viewChild
 } from '@angular/core';
 import { Macros } from 'src/app/shared/model/macros';
 
@@ -16,7 +16,7 @@ import { Macros } from 'src/app/shared/model/macros';
   imports: [DecimalPipe]
 })
 export class PiechartComponent implements OnInit, AfterViewInit {
-  @ViewChild('pieChart', { static: false }) piechartRef: ElementRef;
+  readonly piechartRef = viewChild<ElementRef>('pieChart');
 
   readonly mealId = input.required<number>();
   readonly macros = input.required<Macros>();
@@ -60,7 +60,7 @@ export class PiechartComponent implements OnInit, AfterViewInit {
 
   public calculatePie() {
     this.cumulativePercent = 0;
-    this.svgEl = this.piechartRef.nativeElement;
+    this.svgEl = this.piechartRef().nativeElement;
     const slices = [
       { percent: this.proteinPercent, color: '#1460e5' },
       { percent: this.fatPercent, color: '#25e2f1' },

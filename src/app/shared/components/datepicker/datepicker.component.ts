@@ -1,9 +1,8 @@
 import { DatePipe } from '@angular/common';
 import {
   Component,
-  ViewChildren,
-  QueryList,
-  output
+  output,
+  viewChildren
 } from '@angular/core';
 
 @Component({
@@ -13,7 +12,7 @@ import {
     imports: [DatePipe]
 })
 export class DatepickerComponent {
-  @ViewChildren('dayRef') dayRefs: QueryList<any>;
+  readonly dayRefs = viewChildren<any>('dayRef');
 
   readonly change$ = output<string>();
 

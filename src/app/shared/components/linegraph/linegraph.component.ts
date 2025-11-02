@@ -1,10 +1,10 @@
 import {
   Component,
   ElementRef,
-  ViewChild,
   afterRenderEffect,
   effect,
-  input
+  input,
+  viewChild
 } from '@angular/core';
 
 @Component({
@@ -14,8 +14,8 @@ import {
   imports: []
 })
 export class LinegraphComponent {
-  @ViewChild('yAxis', { static: false }) public yAxisElement: ElementRef;
-  @ViewChild('xAxis', { static: false }) public xAxisElement: ElementRef;
+  public readonly yAxisElement = viewChild<ElementRef>('yAxis');
+  public readonly xAxisElement = viewChild<ElementRef>('xAxis');
 
   readonly dataset = input.required<DataPoint[]>();
   readonly yAxisStep = input.required<number>();
@@ -45,8 +45,8 @@ export class LinegraphComponent {
     });
 
     afterRenderEffect(() => {
-      this.yAxisHeight = this.yAxisElement.nativeElement.clientHeight;
-      this.xAxisWidth = this.xAxisElement.nativeElement.clientWidth;
+      this.yAxisHeight = this.yAxisElement().nativeElement.clientHeight;
+      this.xAxisWidth = this.xAxisElement().nativeElement.clientWidth;
 
       if (this.dataset() !== undefined) {
         this.graphPoints = this.convertDatasetToPoints();

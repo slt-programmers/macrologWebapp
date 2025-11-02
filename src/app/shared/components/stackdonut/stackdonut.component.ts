@@ -1,5 +1,5 @@
 import { DecimalPipe } from '@angular/common';
-import { Component, ElementRef, OnInit, Renderer2, ViewChild, afterRenderEffect, effect, inject, input } from '@angular/core';
+import { Component, ElementRef, OnInit, Renderer2, afterRenderEffect, effect, inject, input, viewChild } from '@angular/core';
 
 @Component({
   selector: 'ml-stackdonut',
@@ -10,9 +10,9 @@ import { Component, ElementRef, OnInit, Renderer2, ViewChild, afterRenderEffect,
 export class StackDonutComponent implements OnInit {
   private renderer = inject(Renderer2);
 
-  @ViewChild('innerCircle', { static: false }) innerCircle: ElementRef;
-  @ViewChild('innerBackgroundCircle', { static: false }) innerBackgroundCircle: ElementRef;
-  @ViewChild('outerCircle', { static: false }) outerCircle: ElementRef;
+  readonly innerCircle = viewChild<ElementRef>('innerCircle');
+  readonly innerBackgroundCircle = viewChild<ElementRef>('innerBackgroundCircle');
+  readonly outerCircle = viewChild<ElementRef>('outerCircle');
 
   readonly goal = input.required<number>();
   readonly achieved = input.required<number>();
@@ -30,15 +30,18 @@ export class StackDonutComponent implements OnInit {
 
     afterRenderEffect(() => {
       const circleRadius = this.circleRadius();
-      this.renderer.setAttribute(this.innerCircle.nativeElement, 'stroke-dasharray', '' + this.getCircleLength(circleRadius));
-      this.renderer.setAttribute(this.innerCircle.nativeElement, 'r', '' + circleRadius);
+      const innerCircle = this.innerCircle();
+      this.renderer.setAttribute(innerCircle.nativeElement, 'stroke-dasharray', '' + this.getCircleLength(circleRadius));
+      this.renderer.setAttribute(innerCircle.nativeElement, 'r', '' + circleRadius);
 
-      this.renderer.setAttribute(this.innerBackgroundCircle.nativeElement, 'stroke-dasharray', '' + (this.getCircleLength(circleRadius)));
-      this.renderer.setAttribute(this.innerBackgroundCircle.nativeElement, 'r', '' + (circleRadius));
+      const innerBackgroundCircle = this.innerBackgroundCircle();
+      this.renderer.setAttribute(innerBackgroundCircle.nativeElement, 'stroke-dasharray', '' + (this.getCircleLength(circleRadius)));
+      this.renderer.setAttribute(innerBackgroundCircle.nativeElement, 'r', '' + (circleRadius));
 
       const strokeWidth = this.strokeWidth();
-      this.renderer.setAttribute(this.outerCircle.nativeElement, 'stroke-dasharray', '' + this.getCircleLength(circleRadius + strokeWidth + 1));
-      this.renderer.setAttribute(this.outerCircle.nativeElement, 'r', (circleRadius + strokeWidth + 1) + '');
+      const outerCircle = this.outerCircle();
+      this.renderer.setAttribute(outerCircle.nativeElement, 'stroke-dasharray', '' + this.getCircleLength(circleRadius + strokeWidth + 1));
+      this.renderer.setAttribute(outerCircle.nativeElement, 'r', (circleRadius + strokeWidth + 1) + '');
 
       this.drawProgressCircle(0);
     })
@@ -50,10 +53,12 @@ export class StackDonutComponent implements OnInit {
   }
 
   private drawProgressCircle(oldValue: number) {
-    if (this.innerCircle && this.outerCircle) {
+    const innerCircle = this.innerCircle();
+    const outerCircle = this.outerCircle();
+    if (innerCircle && outerCircle) {
       const val = (this.achieved() * 100) / this.goal();
-      const radiusInner = this.innerCircle.nativeElement.getAttribute('r');
-      const radiusOuter = this.outerCircle.nativeElement.getAttribute('r');
+      const radiusInner = innerCircle.nativeElement.getAttribute('r');
+      const radiusOuter = outerCircle.nativeElement.getAttribute('r');
 
       let valInner = val;
       let valOuter = 0;
@@ -72,10 +77,10 @@ export class StackDonutComponent implements OnInit {
       const outerCircleWasPresent = oldValue !== undefined && oldValue > this.goal();
 
       // reset both delays
-      this.renderer.setStyle(this.innerCircle.nativeElement, 'transition-delay', '0s');
-      this.renderer.setStyle(this.outerCircle.nativeElement, 'transition-delay', '0s');
+      this.renderer.setStyle(innerCircle.nativeElement, 'transition-delay', '0s');
+      this.renderer.setStyle(outerCircle.nativeElement, 'transition-delay', '0s');
       this.timeAnimations(valOuter, outerCircleWasPresent, pctOuter);
-      this.renderer.setStyle(this.innerCircle.nativeElement, 'strokeDashoffset', pctInner);
+      this.renderer.setStyle(innerCircle.nativeElement, 'strokeDashoffset', pctInner);
     }
   }
 
@@ -83,15 +88,16 @@ export class StackDonutComponent implements OnInit {
     if (valOuter === 0) {
       // wait until the animation to remove outer circle has finished
       if (outerCircleWasPresent) {
-        this.renderer.setStyle(this.innerCircle.nativeElement, 'transition-delay', '0.35s');
+        this.renderer.setStyle(this.innerCircle().nativeElement, 'transition-delay', '0.35s');
       }
-      this.renderer.setStyle(this.outerCircle.nativeElement, 'strokeDashoffset', pctOuter);
+      this.renderer.setStyle(this.outerCircle().nativeElement, 'strokeDashoffset', pctOuter);
     } else {
       // wait until the animation to complete inner circle has finished
+      const outerCircle = this.outerCircle();
       if (!outerCircleWasPresent) {
-        this.renderer.setStyle(this.outerCircle.nativeElement, 'transition-delay', '0.5s');
+        this.renderer.setStyle(outerCircle.nativeElement, 'transition-delay', '0.5s');
       }
-      this.renderer.setStyle(this.outerCircle.nativeElement, 'strokeDashoffset', pctOuter);
+      this.renderer.setStyle(outerCircle.nativeElement, 'strokeDashoffset', pctOuter);
     }
   }
 

@@ -5,7 +5,7 @@ import {
   effect,
   ElementRef,
   input,
-  ViewChild
+  viewChild
 } from '@angular/core';
 import { DataPoint, GraphPoint } from '../linegraph/linegraph.component';
 
@@ -16,8 +16,8 @@ import { DataPoint, GraphPoint } from '../linegraph/linegraph.component';
   imports: [NgClass]
 })
 export class BargraphComponent {
-  @ViewChild('yAxis', { static: false }) public yAxisElement: ElementRef;
-  @ViewChild('xAxis', { static: false }) public xAxisElement: ElementRef;
+  public readonly yAxisElement = viewChild<ElementRef>('yAxis');
+  public readonly xAxisElement = viewChild<ElementRef>('xAxis');
 
   readonly datasets = input.required<DataPoint[][]>();
   readonly yAxisStep = input.required<number>();
@@ -42,9 +42,9 @@ export class BargraphComponent {
       this.graphPoints = this.convertDatasetToPoints();
     });
     afterRenderEffect(() => {
-      this.yAxisHeight = this.yAxisElement.nativeElement.clientHeight;
-      this.xAxisWidth = this.xAxisElement.nativeElement.clientWidth;
-      this.xAxisHeight = this.xAxisElement.nativeElement.clientHeight;
+      this.yAxisHeight = this.yAxisElement().nativeElement.clientHeight;
+      this.xAxisWidth = this.xAxisElement().nativeElement.clientWidth;
+      this.xAxisHeight = this.xAxisElement().nativeElement.clientHeight;
       if (this.datasets()) {
         this.yAxisPoints = this.determineYAxisPoints();
         this.xAxisPoints = this.determineXAxisPoints();
