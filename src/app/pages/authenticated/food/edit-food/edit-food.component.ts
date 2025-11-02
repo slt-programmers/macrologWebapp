@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output, inject, input } from "@angular/core";
+import { Component, OnInit, inject, input, output } from "@angular/core";
 import { Store } from "@ngrx/store";
 import { Food } from "src/app/shared/model/food";
 import { Portion } from "src/app/shared/model/portion";
@@ -16,7 +16,7 @@ export class EditFoodComponent implements OnInit {
   private readonly store = inject(Store);
 
   readonly selectedFood = input.required<Food>();
-  @Output() close$ = new EventEmitter<boolean>();
+  readonly close$ = output<boolean>();
 
   public title = 'Add food';
 

@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output, input } from '@angular/core';
+import { Component, input, output } from '@angular/core';
 
 @Component({
     selector: 'ml-modal',
@@ -8,7 +8,7 @@ import { Component, EventEmitter, Output, input } from '@angular/core';
 export class ModalComponent {
 
   readonly title = input.required<string>();
-  @Output() close$: EventEmitter<any> = new EventEmitter<any>();
+  readonly close$ = output<void>();
 
   public closeModal() {
     this.close$.emit();

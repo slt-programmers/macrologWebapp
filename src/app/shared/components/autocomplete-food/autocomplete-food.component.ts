@@ -1,4 +1,4 @@
-import { Component, ViewChild, ElementRef, Output, EventEmitter, HostListener, OnDestroy, OnInit, inject, input } from '@angular/core';
+import { Component, ViewChild, ElementRef, HostListener, OnDestroy, OnInit, inject, input, output } from '@angular/core';
 import { FoodSearchable } from '../../model/foodSearchable';
 import { Food } from '../../model/food';
 import { Dish } from '../../model/dish';
@@ -32,7 +32,7 @@ export class AutocompleteFoodComponent implements OnInit, OnDestroy {
   readonly dummy = input(false);
   readonly placeholder = input('');
   readonly includeDishes = input(false);
-  @Output() select$: EventEmitter<FoodSearchable> = new EventEmitter<FoodSearchable>();
+  readonly select$ = output<FoodSearchable>();
 
   public searchables: any[]
   public foodMatch = new Array();

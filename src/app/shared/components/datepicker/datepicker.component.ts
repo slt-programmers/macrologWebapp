@@ -1,10 +1,9 @@
 import { DatePipe } from '@angular/common';
 import {
   Component,
-  Output,
-  EventEmitter,
   ViewChildren,
   QueryList,
+  output
 } from '@angular/core';
 
 @Component({
@@ -16,7 +15,7 @@ import {
 export class DatepickerComponent {
   @ViewChildren('dayRef') dayRefs: QueryList<any>;
 
-  @Output() change$ = new EventEmitter<string>();
+  readonly change$ = output<string>();
 
   public dateformat = 'dd-MM-yyyy';
   public today: Date;
