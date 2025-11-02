@@ -16,7 +16,7 @@ describe('DatepickerComponent', () => {
     
     fixture = TestBed.createComponent(DatepickerComponent);
     component = fixture.componentInstance;
-    component.dayRefs = { changes: of([]) as any } as QueryList<any>;
+    // component.dayRefs = { changes: of([]) as any } as QueryList<any>;
     fixture.detectChanges();
   });
 

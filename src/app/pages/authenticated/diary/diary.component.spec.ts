@@ -4,10 +4,7 @@ import { MockComponent, MockProvider } from "ng-mocks"
 import { of } from "rxjs"
 import { DatepickerComponent } from "src/app/shared/components/datepicker/datepicker.component"
 import { StackDonutComponent } from "src/app/shared/components/stackdonut/stackdonut.component"
-import { DiaryService } from "src/app/shared/services/diary.service"
-import { ToastService } from "src/app/shared/services/toast.service"
 import { UserService } from "src/app/shared/services/user.service"
-import { selectTotalsForDate } from "src/app/shared/store/selectors/entries.selectors"
 import { DiaryPageComponent } from "./diary-page/diary-page.component"
 import { DiaryComponent } from "./diary.component"
 
@@ -31,17 +28,17 @@ describe('DiaryComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-    imports: [DiaryComponent,
+      imports: [DiaryComponent,
+        DatepickerComponent,
         MockComponent(StackDonutComponent),
-        MockComponent(DatepickerComponent),
         MockComponent(DiaryPageComponent)],
-    providers: [
+      providers: [
         MockProvider(UserService),
         provideMockStore({}),
         MockProvider(MockWindow),
         { provide: Window, useValue: new MockWindow() }
-    ]
-}).compileComponents();
+      ]
+    }).compileComponents();
 
     userService = TestBed.inject(UserService);
     window = TestBed.inject(Window);

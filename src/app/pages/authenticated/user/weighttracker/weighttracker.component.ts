@@ -25,11 +25,7 @@ export class WeightTrackerComponent implements OnInit {
   public dataset?: DataPoint[];
   public hasOffgridValue?: boolean;
 
-  private pipe: DatePipe;
-
-  constructor() {
-    this.pipe = new DatePipe('en-US');
-  }
+  private pipe = new DatePipe('en-US');
 
   ngOnInit() {
     this.getAllWeights();
