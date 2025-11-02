@@ -7,7 +7,7 @@ import { Component, EventEmitter, Output, input } from '@angular/core';
 })
 export class ModalComponent {
 
-  readonly title = input<string>();
+  readonly title = input.required<string>();
   @Output() close$: EventEmitter<any> = new EventEmitter<any>();
 
   public closeModal() {

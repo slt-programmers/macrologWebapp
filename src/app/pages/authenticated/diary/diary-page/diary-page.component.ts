@@ -17,7 +17,7 @@ import { EntryPageRowComponent } from '../entry-page-row/entry-page-row.componen
 })
 export class DiaryPageComponent {
   private readonly store = inject(Store);
-  readonly date = input<string>();
+  readonly date = input.required<string>();
 
   public breakfast = Meal.Breakfast;
   public lunch = Meal.Lunch;

@@ -33,6 +33,7 @@ describe('ActivityPageRowComponent', () => {
     store = TestBed.inject(MockStore);
     userService = TestBed.inject(UserService);
     fixture = TestBed.createComponent(ActivityPageRowComponent);
+    fixture.componentRef.setInput('date', '2020-01-01')
     component = fixture.componentInstance;
   });
 
@@ -53,7 +54,6 @@ describe('ActivityPageRowComponent', () => {
   it('should sync activities', () => {
     spyOn(store, 'dispatch');
     spyOn(userService, 'getSyncSettings').and.returnValue(of());
-    fixture.componentRef.setInput('date', '2020-01-01')
     fixture.detectChanges();
     component.syncActivities();
     expect(store.dispatch).toHaveBeenCalledWith(activitiesActions.get(true, { date: '2020-01-01', sync: true }));

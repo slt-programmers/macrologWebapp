@@ -20,8 +20,8 @@ export class BargraphComponent {
   @ViewChild('xAxis', { static: false }) public xAxisElement: ElementRef;
 
   readonly datasets = input.required<DataPoint[][]>();
-  readonly yAxisStep = input<number>();
-  readonly xAxisStep = input<number>();
+  readonly yAxisStep = input.required<number>();
+  readonly xAxisStep = input.required<number>();
   readonly markers = input<number[]>([]);
   readonly colors = input<string[]>([]);
   readonly fillColors = input<string[]>([]);

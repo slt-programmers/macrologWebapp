@@ -9,8 +9,8 @@ import { NgClass } from '@angular/common';
 })
 export class StepperComponent implements OnInit {
 
-	readonly currentStep = input<number>();
-	readonly numberOfSteps = input<number>();
+	readonly currentStep = input.required<number>();
+	readonly numberOfSteps = input.required<number>();
 
 	public steps: Array<number>;
 

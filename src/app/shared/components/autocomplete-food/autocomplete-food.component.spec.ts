@@ -134,26 +134,6 @@ describe('AutocompleteFoodComponent', () => {
     expect(component.getDescription).toHaveBeenCalled();
   });
 
-  // it('should handle click on autocomplete option', () => {
-  //   fixture.componentRef.setInput('selectFn', () => { });
-  //   fixture.detectChanges();
-  //   component.foodName = 'Test';
-  //   component.showAutoComplete = true;
-  //   spyOn(component, 'selectFn');
-  //   component.showAutoComplete = true;
-  //   component.foodMatch = [
-  //     { food: { name: 'Abc', protein: 1, fat: 2, carbs: 3 }, dish: undefined },
-  //     { food: { name: 'Cde', protein: 1, fat: 2, carbs: 3 }, dish: undefined },
-  //   ];
-  //   fixture.detectChanges();
-  //   const result = fixture.debugElement.query(By.css('#autoOption'));
-  //   expect(result).not.toEqual(null);
-  //   result.nativeElement.click();
-  //   expect(component.selectFn()).toHaveBeenCalled();
-  //   expect(component.foodName).toEqual('');
-  //   expect(component.showAutoComplete).toBeFalsy();
-  // });
-
   it('should get food or dish description', () => {
     const dish = { name: 'Somedish' };
     let result = component.getDescription({ food: undefined, dish: dish });

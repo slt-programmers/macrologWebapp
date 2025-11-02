@@ -11,10 +11,10 @@ import { FormsModule } from '@angular/forms';
 import { NgClass } from '@angular/common';
 
 @Component({
-    selector: 'ml-autocomplete-food',
-    templateUrl: './autocomplete-food.component.html',
-    styleUrls: ['./autocomplete-food.component.scss'],
-    imports: [FormsModule, NgClass]
+  selector: 'ml-autocomplete-food',
+  templateUrl: './autocomplete-food.component.html',
+  styleUrls: ['./autocomplete-food.component.scss'],
+  imports: [FormsModule, NgClass]
 })
 export class AutocompleteFoodComponent implements OnInit, OnDestroy {
   private readonly store = inject(Store);
@@ -31,7 +31,6 @@ export class AutocompleteFoodComponent implements OnInit, OnDestroy {
 
   readonly dummy = input(false);
   readonly placeholder = input('');
-  readonly selectFn = input<Function>();
   readonly includeDishes = input(false);
   @Output() select$: EventEmitter<FoodSearchable> = new EventEmitter<FoodSearchable>();
 
@@ -94,12 +93,7 @@ export class AutocompleteFoodComponent implements OnInit, OnDestroy {
   public selectMatch(match: FoodSearchable) {
     this.foodName = '';
     this.showAutoComplete = false
-    const selectFn = this.selectFn();
-    if (selectFn) {
-      selectFn(match)
-    } else {
-      this.select$.emit(match);
-    }
+    this.select$.emit(match);
   }
 
   public getDescription(foodSearchable: FoodSearchable) {

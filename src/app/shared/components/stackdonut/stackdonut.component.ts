@@ -14,9 +14,9 @@ export class StackDonutComponent implements OnInit {
   @ViewChild('innerBackgroundCircle', { static: false }) innerBackgroundCircle: ElementRef;
   @ViewChild('outerCircle', { static: false }) outerCircle: ElementRef;
 
-  readonly goal = input<number>();
-  readonly achieved = input<number>();
-  readonly text = input<string>();
+  readonly goal = input.required<number>();
+  readonly achieved = input.required<number>();
+  readonly text = input.required<string>();
   readonly circleRadius = input(60);
   readonly strokeWidth = input(8);
 

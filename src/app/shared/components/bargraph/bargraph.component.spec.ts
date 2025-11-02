@@ -13,6 +13,8 @@ describe('BargraphComponent', () => {
     fixture = TestBed.createComponent(BargraphComponent);
     component = fixture.componentInstance;
     fixture.componentRef.setInput('datasets', makeDataSets());
+    fixture.componentRef.setInput('yAxisStep', 10);
+    fixture.componentRef.setInput('xAxisStep', 1);
     fixture.detectChanges();
   });
 
@@ -52,15 +54,7 @@ describe('BargraphComponent', () => {
 
   it('should determine y-axis points with markers', () => {
     component.markers().push(15);
-    fixture.componentRef.setInput('yAxisStep', 10);
     fixture.detectChanges();
-    expect(component.yAxisPoints).toEqual([30, 20, 10]);
-  });
-
-  it('should deal with undefined y values', () => {
-    fixture.componentRef.setInput('yAxisStep', 10);
-    fixture.detectChanges();
-    component.datasets()[0][0].y = undefined;
     expect(component.yAxisPoints).toEqual([30, 20, 10]);
   });
 

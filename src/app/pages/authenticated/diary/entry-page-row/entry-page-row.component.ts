@@ -21,8 +21,8 @@ import { ModalComponent } from '../../../../shared/components/modal/modal.compon
 export class EntryPageRowComponent implements OnDestroy {
   private readonly store = inject(Store);
 
-  readonly meal = input<Meal>();
-  readonly date = input<string>();
+  readonly meal = input.required<Meal>();
+  readonly date = input.required<string>();
 
   public entries: Entry[];
   public modalEntries: Entry[];

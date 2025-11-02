@@ -1,27 +1,25 @@
+import { DecimalPipe } from '@angular/common';
 import {
-  Component,
-  OnInit,
-  ViewChild,
-  ElementRef,
   AfterViewInit,
-  input
+  Component,
+  ElementRef,
+  input,
+  OnInit,
+  ViewChild
 } from '@angular/core';
 import { Macros } from 'src/app/shared/model/macros';
-import { DecimalPipe } from '@angular/common';
 
 @Component({
-    templateUrl: './piechart.component.html',
-    selector: 'ml-piechart',
-    styleUrls: ['./piechart.component.scss'],
-    imports: [DecimalPipe]
+  templateUrl: './piechart.component.html',
+  selector: 'ml-piechart',
+  styleUrls: ['./piechart.component.scss'],
+  imports: [DecimalPipe]
 })
 export class PiechartComponent implements OnInit, AfterViewInit {
   @ViewChild('pieChart', { static: false }) piechartRef: ElementRef;
 
-  readonly mealId = input<number>();
-  readonly macros = input<Macros>();
-
-  public idstring: string;
+  readonly mealId = input.required<number>();
+  readonly macros = input.required<Macros>();
 
   public protein: number;
   public fat: number;
@@ -35,10 +33,6 @@ export class PiechartComponent implements OnInit, AfterViewInit {
 
   public svgEl: Element;
   public cumulativePercent = 0;
-
-  constructor() {
-    this.idstring = 'pie' + this.mealId();
-  }
 
   ngOnInit() {
     this.protein = this.macros().protein;
@@ -75,7 +69,6 @@ export class PiechartComponent implements OnInit, AfterViewInit {
 
     slices.forEach((slice) => {
       // destructuring assignment sets the two variables at once
-
       const [startX, startY] = this.getCoordinatesForPercent(
         this.cumulativePercent
       );

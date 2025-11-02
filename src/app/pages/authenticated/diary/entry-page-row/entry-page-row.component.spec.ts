@@ -5,6 +5,7 @@ import { entriesActions } from 'src/app/shared/store/actions/entries.actions';
 import { selectEntriesState } from 'src/app/shared/store/selectors/entries.selectors';
 
 import { EntryPageRowComponent } from './entry-page-row.component';
+import { Entry } from 'src/app/shared/model/entry';
 
 describe('EntryPageRowComponent', () => {
   let component: EntryPageRowComponent;
@@ -21,7 +22,10 @@ describe('EntryPageRowComponent', () => {
             value: {
               data: [{
                 date: '2020-01-01',
-                entries: [{ food: { id: 1 }, portion: { id: 2 }, multiplier: 1, meal: Meal.Breakfast }]
+                entries: [{
+                  food: { id: 1 }, portion: { id: 2 }, multiplier: 1, meal: Meal.Breakfast,
+                  macrosCalculated: { protein: 1, fat: 2, carbs: 3, calories: 4 }
+                } as Entry]
               }]
             }
           }]
@@ -31,11 +35,13 @@ describe('EntryPageRowComponent', () => {
 
     store = TestBed.inject(MockStore);
     fixture = TestBed.createComponent(EntryPageRowComponent);
+    fixture.componentRef.setInput('meal', Meal.Breakfast);
+    fixture.componentRef.setInput('date', '2020-01-01');
     component = fixture.componentInstance;
+    fixture.detectChanges();
   });
 
   it('should create', () => {
-    fixture.detectChanges();
     expect(component).toBeTruthy();
   });
 

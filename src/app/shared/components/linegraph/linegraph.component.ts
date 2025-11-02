@@ -17,9 +17,9 @@ export class LinegraphComponent {
   @ViewChild('yAxis', { static: false }) public yAxisElement: ElementRef;
   @ViewChild('xAxis', { static: false }) public xAxisElement: ElementRef;
 
-  readonly dataset = input<DataPoint[]>();
-  readonly yAxisStep = input<number>();
-  readonly xAxisStep = input<number>();
+  readonly dataset = input.required<DataPoint[]>();
+  readonly yAxisStep = input.required<number>();
+  readonly xAxisStep = input.required<number>();
   readonly hasOffgridValue = input<boolean>();
 
   public graphPoints: GraphPoint[];

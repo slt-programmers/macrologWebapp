@@ -21,7 +21,7 @@ export class ActivityPageRowComponent implements OnInit, OnDestroy {
   private readonly store = inject(Store);
   private readonly formBuilder = inject(FormBuilder);
 
-  readonly date = input<string>();
+  readonly date = input.required<string>();
 
   public canSync = false;
   public activities: Activity[] = [];

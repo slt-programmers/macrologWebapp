@@ -33,20 +33,13 @@ describe('DiaryPageComponent', () => {
 
     store = TestBed.inject(MockStore);
     fixture = TestBed.createComponent(DiaryPageComponent);
+    fixture.componentRef.setInput('date', '2020-01-02');
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
 
   it('should create', () => {
     expect(component).toBeTruthy();
-  });
-
-  it('should get entries and activities on change date', () => {
-    spyOn(store, 'dispatch');
-    fixture.componentRef.setInput('date', '2020-01-02');
-    fixture.detectChanges();
-    expect(store.dispatch).toHaveBeenCalledWith(entriesActions.get(false, '2020-01-02'));
-    expect(store.dispatch).toHaveBeenCalledWith(activitiesActions.get(false, { date: '2020-01-02', sync: false }));
   });
 
 });

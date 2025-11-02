@@ -15,8 +15,7 @@ import { FormsModule } from "@angular/forms";
 export class EditFoodComponent implements OnInit {
   private readonly store = inject(Store);
 
-
-  readonly selectedFood = input<Food>();
+  readonly selectedFood = input.required<Food>();
   @Output() close$ = new EventEmitter<boolean>();
 
   public title = 'Add food';
