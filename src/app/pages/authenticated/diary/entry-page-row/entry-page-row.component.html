@@ -1,5 +1,5 @@
 <div class="content-sm p-1 selectable" (click)="openModal()">
-  <span class="font-bold">{{meal | titlecase}}</span>
+  <span class="font-bold">{{meal() | titlecase}}</span>
 
   @for (entry of entries; track entry) {
     <div class="flex col-gap-1">
@@ -42,7 +42,7 @@
 </div>
 
 @if (showModal) {
-  <ml-modal [title]="'Edit ' + meal" (close$)="showModal = false">
+  <ml-modal [title]="'Edit ' + meal()" (close$)="showModal = false">
     <div class="content min-w-32">
       @if (!modalEntries || modalEntries.length === 0) {
         <div>Search for food to add entries to your

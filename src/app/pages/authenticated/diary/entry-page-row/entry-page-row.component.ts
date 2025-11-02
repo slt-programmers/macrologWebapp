@@ -1,4 +1,6 @@
-import { Component, Input, OnChanges, OnDestroy, SimpleChanges, inject } from '@angular/core';
+import { DecimalPipe, TitleCasePipe } from '@angular/common';
+import { Component, OnDestroy, effect, inject, input } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
 import { Entry } from 'src/app/shared/model/entry';
@@ -7,23 +9,20 @@ import { Portion } from 'src/app/shared/model/portion';
 import { entriesActions } from 'src/app/shared/store/actions/entries.actions';
 import { selectEntriesDateMeal } from 'src/app/shared/store/selectors/entries.selectors';
 import { clone } from 'src/app/util/functions';
-import { DecimalPipe, TitleCasePipe } from '@angular/common';
-import { ModalComponent } from '../../../../shared/components/modal/modal.component';
-import { FormsModule } from '@angular/forms';
 import { AutocompleteFoodComponent } from '../../../../shared/components/autocomplete-food/autocomplete-food.component';
+import { ModalComponent } from '../../../../shared/components/modal/modal.component';
 
 @Component({
-    selector: 'ml-entry-page-row',
-    templateUrl: './entry-page-row.component.html',
-    styleUrls: ['./entry-page-row.component.scss'],
-    imports: [ModalComponent, FormsModule, AutocompleteFoodComponent, DecimalPipe, TitleCasePipe]
+  selector: 'ml-entry-page-row',
+  templateUrl: './entry-page-row.component.html',
+  styleUrls: ['./entry-page-row.component.scss'],
+  imports: [ModalComponent, FormsModule, AutocompleteFoodComponent, DecimalPipe, TitleCasePipe]
 })
-export class EntryPageRowComponent implements OnChanges, OnDestroy {
+export class EntryPageRowComponent implements OnDestroy {
   private readonly store = inject(Store);
 
-
-  @Input() meal: Meal;
-  @Input() date: string;
+  readonly meal = input<Meal>();
+  readonly date = input<string>();
 
   public entries: Entry[];
   public modalEntries: Entry[];
@@ -31,10 +30,13 @@ export class EntryPageRowComponent implements OnChanges, OnDestroy {
 
   private subscriptions: Subscription[] = [];
 
-  ngOnChanges(changes: SimpleChanges): void {
-    this.subscriptions.push(this.store.select(selectEntriesDateMeal(this.date, this.meal)).subscribe(it => {
-      this.entries = clone(it);
-    }));
+  constructor() {
+    effect(() => {
+      this.subscriptions.push(
+        this.store.select(selectEntriesDateMeal(this.date(), this.meal())).subscribe(it => {
+        this.entries = clone(it);
+      }));
+    })
   }
 
   openModal(): void {
@@ -64,8 +66,8 @@ export class EntryPageRowComponent implements OnChanges, OnDestroy {
       for (const ingredient of entry.dish.ingredients) {
         this.modalEntries.push({
           food: ingredient.food,
-          meal: this.meal,
-          day: this.date,
+          meal: this.meal(),
+          day: this.date(),
           portion: ingredient.portion ? ingredient.food.portions
             .filter((p: Portion) => p.id === ingredient.portion.id)[0] : undefined,
           multiplier: ingredient.multiplier
@@ -74,8 +76,8 @@ export class EntryPageRowComponent implements OnChanges, OnDestroy {
     } else {
       this.modalEntries.push({
         food: entry.food,
-        meal: this.meal,
-        day: this.date,
+        meal: this.meal(),
+        day: this.date(),
         portion: entry.food.portions ? entry.food.portions[0] : undefined,
         multiplier: 1
       });
@@ -95,7 +97,7 @@ export class EntryPageRowComponent implements OnChanges, OnDestroy {
       }
     }
     if (!missingInput) {
-      this.store.dispatch(entriesActions.post(this.modalEntries, { date: this.date, meal: this.meal }));
+      this.store.dispatch(entriesActions.post(this.modalEntries, { date: this.date(), meal: this.meal() }));
       this.showModal = false;
       this.modalEntries = undefined;
     }

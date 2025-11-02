@@ -1,28 +1,27 @@
-import { Component, Input, OnChanges, OnDestroy, OnInit, SimpleChanges, inject } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { UserService } from 'src/app/shared/services/user.service';
-import { clone } from 'src/app/util/functions';
-import { Activity } from 'src/app/shared/model/activity';
-import { Subscription } from 'rxjs';
-import { Store } from '@ngrx/store';
-import { selectActivitiesDate, selectActivitiesLoading } from 'src/app/shared/store/selectors/activities.selectors';
-import { activitiesActions } from 'src/app/shared/store/actions/activities.actions';
 import { DecimalPipe } from '@angular/common';
+import { Component, OnDestroy, OnInit, effect, inject, input } from '@angular/core';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Store } from '@ngrx/store';
+import { Subscription } from 'rxjs';
+import { Activity } from 'src/app/shared/model/activity';
+import { UserService } from 'src/app/shared/services/user.service';
+import { activitiesActions } from 'src/app/shared/store/actions/activities.actions';
+import { selectActivitiesDate, selectActivitiesLoading } from 'src/app/shared/store/selectors/activities.selectors';
+import { clone } from 'src/app/util/functions';
 import { ModalComponent } from '../../../../shared/components/modal/modal.component';
 
 @Component({
-    selector: 'ml-activity-page-row',
-    templateUrl: './activity-page-row.component.html',
-    styleUrls: ['./activity-page-row.component.scss'],
-    imports: [ModalComponent, FormsModule, ReactiveFormsModule, DecimalPipe]
+  selector: 'ml-activity-page-row',
+  templateUrl: './activity-page-row.component.html',
+  styleUrls: ['./activity-page-row.component.scss'],
+  imports: [ModalComponent, FormsModule, ReactiveFormsModule, DecimalPipe]
 })
-export class ActivityPageRowComponent implements OnInit, OnChanges, OnDestroy {
+export class ActivityPageRowComponent implements OnInit, OnDestroy {
   private readonly userService = inject(UserService);
   private readonly store = inject(Store);
   private readonly formBuilder = inject(FormBuilder);
 
-
-  @Input() date: string;
+  readonly date = input<string>();
 
   public canSync = false;
   public activities: Activity[] = [];
@@ -39,6 +38,12 @@ export class ActivityPageRowComponent implements OnInit, OnChanges, OnDestroy {
       name: ['', Validators.required],
       calories: [undefined, Validators.required]
     });
+
+    effect(() => {
+      this.subscriptions.push(this.store.select(selectActivitiesDate(this.date())).subscribe(it => {
+        this.activities = clone(it);
+      }));
+    })
   }
 
   ngOnInit(): void {
@@ -48,14 +53,8 @@ export class ActivityPageRowComponent implements OnInit, OnChanges, OnDestroy {
     });
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
-    this.subscriptions.push(this.store.select(selectActivitiesDate(this.date)).subscribe(it => {
-      this.activities = clone(it);
-    }));
-  }
-
   syncActivities(): void {
-    this.store.dispatch(activitiesActions.get(true, { date: this.date, sync: true }));
+    this.store.dispatch(activitiesActions.get(true, { date: this.date(), sync: true }));
   }
 
   showSync(): boolean {
@@ -85,13 +84,13 @@ export class ActivityPageRowComponent implements OnInit, OnChanges, OnDestroy {
     this.activityForm.markAllAsTouched();
     if (this.activityForm.valid) {
       const data = this.activityForm.value;
-      this.modalActivities.push({ ...data, day: this.date });
+      this.modalActivities.push({ ...data, day: this.date() });
       this.activityForm.reset();
     }
   }
 
   saveActivities() {
-    this.store.dispatch(activitiesActions.post(this.modalActivities, this.date));
+    this.store.dispatch(activitiesActions.post(this.modalActivities, this.date()));
     this.showModal = false;
     this.modalActivities = undefined;
   }

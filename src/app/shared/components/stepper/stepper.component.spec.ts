@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { StepperComponent } from './stepper.component';
 
 describe('StepperComponent', () => {
@@ -8,21 +7,16 @@ describe('StepperComponent', () => {
 
   beforeEach(async () => {
     TestBed.configureTestingModule({
-    imports: [StepperComponent],
-    schemas: [NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA]
-})
-      .compileComponents();
-  });
-
-  beforeEach(() => {
+      imports: [StepperComponent],
+    }).compileComponents();
     fixture = TestBed.createComponent(StepperComponent);
+    fixture.componentRef.setInput('currentStep', 1)
+    fixture.componentRef.setInput('numberOfSteps', 2)
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
 
   it('should create', () => {
-    component.currentStep = 1;
-    component.numberOfSteps = 2;
     component.ngOnInit();
     expect(component).toBeTruthy();
     expect(component.steps).toEqual([1, 2]);

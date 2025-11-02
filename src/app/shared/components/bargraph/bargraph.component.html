@@ -11,9 +11,9 @@
         </div>
 
         <div class="graph-content">
-          @for (marker of markers; track marker; let index = $index) {
+          @for (marker of markers(); track marker; let index = $index) {
             <div class="graph-marker" [style.height.px]="markerHeights[index]"
-              [style.border-top-color]="colors[index]">
+              [style.border-top-color]="colors()[index]">
             </div>
           }
 
@@ -23,8 +23,8 @@
                 >
                 @for (set of graphPoints; track set; let setIndex = $index) {
                   <div class="graph-point"
-                    [style.border-color]="colors[setIndex]"
-                    [style.background-color]="fillColors[setIndex]"
+                    [style.border-color]="colors()[setIndex]"
+                    [style.background-color]="fillColors()[setIndex]"
                     [style.height.px]="graphPoints[setIndex][pointIndex].height"
                     [ngClass]="{'graph-point--empty': !graphPoints[setIndex][pointIndex].height}">
                   </div>
@@ -35,9 +35,9 @@
         </div>
 
         <div class="graph-marker-numbers">
-          @for (marker of markers; track marker; let index = $index) {
+          @for (marker of markers(); track marker; let index = $index) {
             <div class="graph-marker graph-marker--narrow" [style.height.px]="markerHeights[index]"
-              [style.border-top-color]="colors[index]">
+              [style.border-top-color]="colors()[index]">
               <div class="graph-marker__text">{{marker}}</div>
             </div>
           }

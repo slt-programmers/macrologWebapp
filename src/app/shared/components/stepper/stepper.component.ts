@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, input } from '@angular/core';
 import { NgClass } from '@angular/common';
 
 @Component({
@@ -9,14 +9,14 @@ import { NgClass } from '@angular/common';
 })
 export class StepperComponent implements OnInit {
 
-	@Input() currentStep: number;
-	@Input() numberOfSteps: number;
+	readonly currentStep = input<number>();
+	readonly numberOfSteps = input<number>();
 
 	public steps: Array<number>;
 
 	ngOnInit() {
 		this.steps = new Array<number>();
-		for (let i = 1; i <= this.numberOfSteps; i++) {
+		for (let i = 1; i <= this.numberOfSteps(); i++) {
 			this.steps.push(i);
 		}
 	}

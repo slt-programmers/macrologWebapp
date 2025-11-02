@@ -1,10 +1,10 @@
-import { ComponentFixture, TestBed } from "@angular/core/testing"
-import { FoodComponent } from "./food.component"
-import { MockStore, provideMockStore } from "@ngrx/store/testing"
-import { selectAllFood, selectFoodLoading } from "src/app/shared/store/selectors/food.selectors";
-import { Food } from "src/app/shared/model/food";
+import { ComponentFixture, TestBed } from "@angular/core/testing";
+import { MockStore, provideMockStore } from "@ngrx/store/testing";
 import { MockComponent } from "ng-mocks";
+import { Food } from "src/app/shared/model/food";
+import { selectAllFood, selectFoodLoading } from "src/app/shared/store/selectors/food.selectors";
 import { EditFoodComponent } from "./edit-food/edit-food.component";
+import { FoodComponent } from "./food.component";
 
 
 describe('FoodComponent', () => {
@@ -14,17 +14,17 @@ describe('FoodComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-    imports: [FoodComponent,
+      imports: [FoodComponent,
         MockComponent(EditFoodComponent)],
-    providers: [
+      providers: [
         provideMockStore({
-            selectors: [
-                { selector: selectAllFood, value: [{ name: 'name', protein: 1, fat: 2, carbs: 3 } as Food] },
-                { selector: selectFoodLoading, value: false }
-            ]
+          selectors: [
+            { selector: selectAllFood, value: [{ name: 'name', protein: 1, fat: 2, carbs: 3 } as Food] },
+            { selector: selectFoodLoading, value: false }
+          ]
         })
-    ]
-}).compileComponents();
+      ]
+    }).compileComponents();
 
     store = TestBed.inject(MockStore);
     fixture = TestBed.createComponent(FoodComponent);

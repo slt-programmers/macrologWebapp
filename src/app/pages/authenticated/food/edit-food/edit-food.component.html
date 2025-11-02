@@ -6,30 +6,30 @@
 
       <div class="form-field">
         <label for="name">Name</label>
-        <input class="input" [(ngModel)]="selectedFood.name" #foodField name="name" required>
+        <input class="input" [(ngModel)]="selectedFood().name" #foodField name="name" required>
       </div>
 
       <div class="form-field">
         <label for="protein">Protein</label>
-        <input class="input" #proteinField [(ngModel)]="selectedFood.protein" value="protein"
+        <input class="input" #proteinField [(ngModel)]="selectedFood().protein" value="protein"
           name="protein" type="number" step="0.1" required>
         </div>
 
         <div class="form-field">
           <label for="fat">Fat</label>
-          <input class="input" #fatField [(ngModel)]="selectedFood.fat" name="fat" type="number"
+          <input class="input" #fatField [(ngModel)]="selectedFood().fat" name="fat" type="number"
             step="0.1" required>
           </div>
 
           <div class="form-field">
             <label for="carbs">Carbs</label>
-            <input class="input" #carbsField [(ngModel)]="selectedFood.carbs" name="carbs" type="number"
+            <input class="input" #carbsField [(ngModel)]="selectedFood().carbs" name="carbs" type="number"
               step="0.1" required>
             </div>
 
             <h1 class="font-semibold text-secondary">Frequently used portions (optional)</h1>
 
-            @for (port of selectedFood.portions; track port; let i = $index) {
+            @for (port of selectedFood().portions; track port; let i = $index) {
               <div class="form-field">
                 <label for="portionDesc_{{i}}">Description</label>
                 <input class="input" [(ngModel)]="port.description" name="portionDesc_{{i}}" type="text"

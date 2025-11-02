@@ -1,5 +1,4 @@
-import { SimpleChanges } from '@angular/core';
-import { ComponentFixture, ComponentFixtureAutoDetect, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
 import { MockProvider } from 'ng-mocks';
@@ -18,21 +17,19 @@ describe('ActivityPageRowComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-    imports: [ReactiveFormsModule, ActivityPageRowComponent],
-    providers: [
+      imports: [ReactiveFormsModule, ActivityPageRowComponent],
+      providers: [
         MockProvider(UserService),
         provideMockStore({
-            selectors: [
-                { selector: selectActivitiesState, value: { data: [{ date: '2020-01-02', activities: [{ name: 'run', calories: 123 }] }] } },
-                { selector: selectActivitiesDate('2020-01-01'), value: [{ name: 'run', calories: 123 }] }
-            ]
+          selectors: [
+            { selector: selectActivitiesLoading, value: false },
+            { selector: selectActivitiesState, value: { data: [{ date: '2020-01-02', activities: [{ name: 'run', calories: 123 }] }] } },
+            { selector: selectActivitiesDate('2020-01-01'), value: [{ name: 'run', calories: 123 }] }
+          ]
         })
-    ]
-})
-      .compileComponents();
-  });
+      ]
+    }).compileComponents();
 
-  beforeEach(() => {
     store = TestBed.inject(MockStore);
     userService = TestBed.inject(UserService);
     fixture = TestBed.createComponent(ActivityPageRowComponent);
@@ -53,21 +50,11 @@ describe('ActivityPageRowComponent', () => {
     expect(component.canSync).toBeFalse();
   });
 
-  it('should subscribe to activities for date on date change', () => {
-    spyOn(userService, 'getSyncSettings').and.returnValue(of());
-    component.date = '2020-01-02';
-    component.ngOnChanges({
-      date: {
-        previousValue: '2020-01-01',
-        currentValue: '2020-01-02', isFirstChange: () => false, firstChange: false
-      }
-    });
-    expect(component.activities).toEqual([{ name: 'run', calories: 123 }])
-  });
-
   it('should sync activities', () => {
     spyOn(store, 'dispatch');
-    component.date = '2020-01-01';
+    spyOn(userService, 'getSyncSettings').and.returnValue(of());
+    fixture.componentRef.setInput('date', '2020-01-01')
+    fixture.detectChanges();
     component.syncActivities();
     expect(store.dispatch).toHaveBeenCalledWith(activitiesActions.get(true, { date: '2020-01-01', sync: true }));
   });
@@ -124,8 +111,10 @@ describe('ActivityPageRowComponent', () => {
   });
 
   it('should add activity to modal', () => {
+    spyOn(userService, 'getSyncSettings').and.returnValue(of());
     component.modalActivities = [];
-    component.date = '2020-01-01';
+    fixture.componentRef.setInput('date', '2020-01-01')
+    fixture.detectChanges();
     component.activityForm.patchValue({ name: 'run', calories: 123 });
     component.addActivity();
     expect(component.modalActivities).toEqual([{ name: 'run', calories: 123, day: '2020-01-01' }]);
@@ -138,8 +127,10 @@ describe('ActivityPageRowComponent', () => {
   });
 
   it('should save activities', () => {
+    spyOn(userService, 'getSyncSettings').and.returnValue(of());
     spyOn(store, 'dispatch');
-    component.date = '2020-01-01';
+    fixture.componentRef.setInput('date', '2020-01-01')
+    fixture.detectChanges();
     component.modalActivities = [{ name: 'run' }];
     component.showModal = true;
     component.saveActivities();

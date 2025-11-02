@@ -1,5 +1,5 @@
 <div id="autoWrapper" class="autocomplete-wrapper" #newIngredient (keydown)="onKeyDown($event)">
-  <input aria-label="search for something" id="autoInput" class="input autocomplete__input" placeholder="{{placeholder}}"
+  <input aria-label="search for something" id="autoInput" class="input autocomplete__input" placeholder="{{placeholder()}}"
     (input)="findFoodMatch($event)" [(ngModel)]="foodName" (focus)="showAutoComplete = true">
 
     @if (showAutoComplete) {

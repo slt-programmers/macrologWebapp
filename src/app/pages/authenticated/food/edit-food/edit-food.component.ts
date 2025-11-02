@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output, inject } from "@angular/core";
+import { Component, EventEmitter, OnInit, Output, inject, input } from "@angular/core";
 import { Store } from "@ngrx/store";
 import { Food } from "src/app/shared/model/food";
 import { Portion } from "src/app/shared/model/portion";
@@ -16,35 +16,36 @@ export class EditFoodComponent implements OnInit {
   private readonly store = inject(Store);
 
 
-  @Input() selectedFood: Food;
+  readonly selectedFood = input<Food>();
   @Output() close$ = new EventEmitter<boolean>();
 
   public title = 'Add food';
 
   ngOnInit() {
-    if (!!this.selectedFood.id) {
+    if (!!this.selectedFood().id) {
       this.title = 'Edit food';
     }
   }
 
   public saveFood(): void {
     const newFood: Food = {
-      name: this.selectedFood.name,
-      protein: this.selectedFood.protein,
-      fat: this.selectedFood.fat,
-      carbs: this.selectedFood.carbs
+      name: this.selectedFood().name,
+      protein: this.selectedFood().protein,
+      fat: this.selectedFood().fat,
+      carbs: this.selectedFood().carbs
     };
 
-    if (this.selectedFood) {
-      newFood.id = this.selectedFood.id;
+    const selectedFood = this.selectedFood();
+    if (selectedFood) {
+      newFood.id = selectedFood.id;
     }
-    newFood.portions = this.selectedFood.portions;
+    newFood.portions = selectedFood.portions;
     this.store.dispatch(foodActions.post(newFood));
     this.close$.emit(true);
   }
 
   public removePortion(index: number): void {
-    this.selectedFood.portions.splice(index, 1);
+    this.selectedFood().portions.splice(index, 1);
   }
 
   public isNewPortion(portion: Portion): boolean {
@@ -55,7 +56,7 @@ export class EditFoodComponent implements OnInit {
   }
 
   public addNewPortion(): void {
-    this.selectedFood.portions.push({});
+    this.selectedFood().portions.push({});
   }
 
 

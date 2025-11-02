@@ -1,10 +1,10 @@
 import {
   Component,
   OnInit,
-  Input,
   ViewChild,
   ElementRef,
   AfterViewInit,
+  input
 } from '@angular/core';
 import { Macros } from 'src/app/shared/model/macros';
 import { DecimalPipe } from '@angular/common';
@@ -18,8 +18,8 @@ import { DecimalPipe } from '@angular/common';
 export class PiechartComponent implements OnInit, AfterViewInit {
   @ViewChild('pieChart', { static: false }) piechartRef: ElementRef;
 
-  @Input() mealId: number;
-  @Input() macros: Macros;
+  readonly mealId = input<number>();
+  readonly macros = input<Macros>();
 
   public idstring: string;
 
@@ -37,13 +37,13 @@ export class PiechartComponent implements OnInit, AfterViewInit {
   public cumulativePercent = 0;
 
   constructor() {
-    this.idstring = 'pie' + this.mealId;
+    this.idstring = 'pie' + this.mealId();
   }
 
   ngOnInit() {
-    this.protein = this.macros.protein;
-    this.fat = this.macros.fat;
-    this.carbs = this.macros.carbs;
+    this.protein = this.macros().protein;
+    this.fat = this.macros().fat;
+    this.carbs = this.macros().carbs;
 
     this.total = this.protein + this.fat + this.carbs;
     this.centerText =

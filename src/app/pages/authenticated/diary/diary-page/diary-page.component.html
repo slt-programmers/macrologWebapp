@@ -15,15 +15,15 @@
     <div class="lg-only flex-1 font-bold overflow-hidden">kcal</div>
   </div>
 
-  <ml-entry-page-row [meal]="breakfast" [date]="date"></ml-entry-page-row>
+  <ml-entry-page-row [meal]="breakfast" [date]="date()"></ml-entry-page-row>
 
-  <ml-entry-page-row [meal]="lunch" [date]="date"></ml-entry-page-row>
+  <ml-entry-page-row [meal]="lunch" [date]="date()"></ml-entry-page-row>
 
-  <ml-entry-page-row [meal]="diner" [date]="date"></ml-entry-page-row>
+  <ml-entry-page-row [meal]="diner" [date]="date()"></ml-entry-page-row>
 
-  <ml-entry-page-row [meal]="snacks" [date]="date"></ml-entry-page-row>
+  <ml-entry-page-row [meal]="snacks" [date]="date()"></ml-entry-page-row>
 
-  <ml-activity-page-row [date]="date"></ml-activity-page-row>
+  <ml-activity-page-row [date]="date()"></ml-activity-page-row>
 
   <div class="flex font-bold p-1">
     <span class="flex-3">Daily total</span>

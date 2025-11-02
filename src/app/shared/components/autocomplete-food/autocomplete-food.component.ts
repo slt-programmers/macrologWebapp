@@ -1,4 +1,4 @@
-import { Component, Input, ViewChild, ElementRef, Output, EventEmitter, HostListener, OnDestroy, OnInit, inject } from '@angular/core';
+import { Component, ViewChild, ElementRef, Output, EventEmitter, HostListener, OnDestroy, OnInit, inject, input } from '@angular/core';
 import { FoodSearchable } from '../../model/foodSearchable';
 import { Food } from '../../model/food';
 import { Dish } from '../../model/dish';
@@ -29,10 +29,10 @@ export class AutocompleteFoodComponent implements OnInit, OnDestroy {
   @ViewChild('autoComplete', { static: false })
   private autoCompleteEref: ElementRef;
 
-  @Input() dummy = false;
-  @Input() placeholder = '';
-  @Input() selectFn: Function;
-  @Input() includeDishes = false;
+  readonly dummy = input(false);
+  readonly placeholder = input('');
+  readonly selectFn = input<Function>();
+  readonly includeDishes = input(false);
   @Output() select$: EventEmitter<FoodSearchable> = new EventEmitter<FoodSearchable>();
 
   public searchables: any[]
@@ -94,8 +94,9 @@ export class AutocompleteFoodComponent implements OnInit, OnDestroy {
   public selectMatch(match: FoodSearchable) {
     this.foodName = '';
     this.showAutoComplete = false
-    if (this.selectFn) {
-      this.selectFn(match)
+    const selectFn = this.selectFn();
+    if (selectFn) {
+      selectFn(match)
     } else {
       this.select$.emit(match);
     }
@@ -118,14 +119,14 @@ export class AutocompleteFoodComponent implements OnInit, OnDestroy {
   }
 
   private getFoodSearchableList(): void {
-    if (!this.dummy) {
+    if (!this.dummy()) {
       if (!!this.allFood && !!this.allDishes) {
         const searchList = [];
         for (const item of this.allFood) {
           const searchable: FoodSearchable = { food: item };
           searchList.push(searchable);
         }
-        if (this.includeDishes) {
+        if (this.includeDishes()) {
           for (const dish of this.allDishes) {
             searchList.push({ dish: dish });
           }

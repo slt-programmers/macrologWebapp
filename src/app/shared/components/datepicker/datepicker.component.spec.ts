@@ -8,15 +8,15 @@ describe('DatepickerComponent', () => {
   let component: DatepickerComponent;
   let fixture: ComponentFixture<DatepickerComponent>;
 
-  beforeEach(() => {
-    TestBed.configureTestingModule({
-    imports: [DatepickerComponent],
-    schemas: [NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA]
-})
-      .compileComponents();
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      imports: [DatepickerComponent],
+      schemas: [NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA]
+    }).compileComponents();
+    
     fixture = TestBed.createComponent(DatepickerComponent);
     component = fixture.componentInstance;
-    component.dayRefs = {changes: of([]) as any} as QueryList<any>;
+    component.dayRefs = { changes: of([]) as any } as QueryList<any>;
     fixture.detectChanges();
   });
 
