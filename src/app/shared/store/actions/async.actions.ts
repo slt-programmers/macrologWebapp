@@ -1,5 +1,4 @@
-import { createAction } from "@ngrx/store"
-import { Action, FunctionWithParametersType } from "@ngrx/store/src/models"
+import { Action, createAction, FunctionWithParametersType } from "@ngrx/store"
 
 export interface AsyncActions<T> {
   get: FunctionWithParametersType<[force?: boolean, params?: any], any> & Action<`[${string}] Get`>,
