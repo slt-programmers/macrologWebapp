@@ -147,6 +147,5 @@
   </div>
 
   @if (modalIsVisible) {
-    <ml-edit-food [selectedFood]="selectedFood" (close$)="closeModal()">
-    </ml-edit-food>
+    <ml-edit-food [selectedFood]="selectedFood" (close$)="closeModal()" />
   }
