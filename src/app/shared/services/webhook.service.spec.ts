@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { of, throwError } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { WebhookService } from './webhook.service';
+import { WebhookStatus } from '../model/webhookStatus';
 
 describe('WebhookService', () => {
   let service: WebhookService;
@@ -24,9 +25,9 @@ describe('WebhookService', () => {
   });
 
   it('should get webhook status', async () => {
-    spyOn(http, 'get').and.returnValue(of([{}]));
+    spyOn(http, 'get').and.returnValue(of({}));
     const result = await service.getWebhookStatus('STRAVA').toPromise();
-    expect(result).toEqual([{}]);
+    expect(result).toEqual({} as WebhookStatus);
     expect(http.get).toHaveBeenCalledWith('//' + environment.backend + '/webhooks/STRAVA');
   });
 

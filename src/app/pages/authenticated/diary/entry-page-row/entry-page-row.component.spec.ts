@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { MockStore, provideMockStore } from '@ngrx/store/testing';
+import { provideMockStore } from '@ngrx/store/testing';
 import { Entry } from 'src/app/shared/model/entry';
 import { Meal } from 'src/app/shared/model/meal';
 import { selectEntriesState } from 'src/app/shared/store/selectors/entries.selectors';
@@ -30,7 +30,6 @@ describe('EntryPageRowComponent', () => {
       ]
     }).compileComponents();
 
-    store = TestBed.inject(MockStore);
     fixture = TestBed.createComponent(EntryPageRowComponent);
     fixture.componentRef.setInput('meal', Meal.Breakfast);
     fixture.componentRef.setInput('date', '2020-01-01');

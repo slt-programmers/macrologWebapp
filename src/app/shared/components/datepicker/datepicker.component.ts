@@ -20,9 +20,9 @@ export class DatepickerComponent {
   public today = new Date();
   public selectedDate = this.today;
   public daysInMonth = 30;
-  public daysInMonthArray = [];
+  public daysInMonthArray: number[] = [];
   public weekdays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-  public placeholders = [];
+  public placeholders: number[] = [];
   public isOpen = false;
 
   private pipe = new DatePipe('en-US');
