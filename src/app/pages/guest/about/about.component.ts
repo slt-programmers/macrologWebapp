@@ -4,7 +4,7 @@ import { NavigationComponent } from '../../../shared/components/navigation/navig
 @Component({
     selector: 'ml-about',
     templateUrl: './about.component.html',
-    styleUrls: ['./about.component.scss'],
+    styleUrls: ['./about.component.css'],
     imports: [NavigationComponent]
 })
 export class AboutComponent {

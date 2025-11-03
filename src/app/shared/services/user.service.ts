@@ -38,7 +38,7 @@ export class UserService {
 
     const setting = { name: key, value: value };
     const options = { headers: headers };
-    return this.http.put<any>(this.macrologBackendUrl + '/', setting, options).pipe(
+    return this.http.put<any>(this.macrologBackendUrl, setting, options).pipe(
       catchError(() => { return of(); }));
   }
 

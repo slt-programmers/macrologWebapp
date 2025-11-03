@@ -192,7 +192,6 @@ export class LinegraphComponent {
   }
 
   private determineYStartPosition(): number {
-    console.log(this.graphPoints)
     for (const graphpoint of this.graphPoints) {
       if (graphpoint.height !== undefined) {
         return this.yAxisHeight - graphpoint.height;
@@ -250,7 +249,6 @@ export class LinegraphComponent {
       const graphPoint = new GraphPoint(dataPoint.y, height);
       graphPoints.push(graphPoint);
     }
-    console.log(graphPoints)
     return graphPoints;
   }
 }

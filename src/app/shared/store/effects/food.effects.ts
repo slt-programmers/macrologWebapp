@@ -13,7 +13,6 @@ export class FoodEffects {
   private readonly actions$ = inject(Actions);
   private readonly http = inject(HttpClient);
 
-
   private backendUrl = '//' + environment.backend + '/food'
 
   getAllFood$ = createEffect(() => {
@@ -41,7 +40,7 @@ export class FoodEffects {
           'Access-Control-Allow-Origin': environment.origin,
         };
         const options = { headers: headers };
-        return this.http.post<Food>(this.backendUrl + '/', action.body, options).pipe(
+        return this.http.post<Food>(this.backendUrl, action.body, options).pipe(
           map(() => {
             return foodActions.get();
           }),

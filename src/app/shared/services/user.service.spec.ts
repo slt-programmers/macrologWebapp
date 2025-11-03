@@ -58,7 +58,7 @@ describe('UserService', () => {
     spyOn(http, 'put').and.returnValue(of({}));
     const result = await service.addUserSetting('name', 'tester').toPromise();
     expect(result).toEqual({});
-    expect(http.put).toHaveBeenCalledWith('//' + environment.backend + '/settings/', { name: 'name', value: 'tester' },
+    expect(http.put).toHaveBeenCalledWith('//' + environment.backend + '/settings', { name: 'name', value: 'tester' },
       {
         headers: {
           'Content-Type': 'application/json',
@@ -71,7 +71,7 @@ describe('UserService', () => {
     spyOn(http, 'put').and.returnValue(throwError({}));
     const result = await service.addUserSetting('name', 'tester').toPromise();
     expect(result).toEqual(undefined);
-    expect(http.put).toHaveBeenCalledWith('//' + environment.backend + '/settings/', { name: 'name', value: 'tester' },
+    expect(http.put).toHaveBeenCalledWith('//' + environment.backend + '/settings', { name: 'name', value: 'tester' },
       {
         headers: {
           'Content-Type': 'application/json',

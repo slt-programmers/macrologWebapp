@@ -9,7 +9,7 @@ import { ToastService } from '../../../shared/services/toast.service';
 
 @Component({
   templateUrl: 'login.component.html',
-  styleUrls: ['./login.component.scss'],
+  styleUrls: ['./login.component.css'],
   imports: [NavigationComponent, FormsModule, ReactiveFormsModule, ModalComponent]
 })
 export class LoginComponent implements OnInit {
