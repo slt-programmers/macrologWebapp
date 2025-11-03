@@ -1,11 +1,10 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing'
-import { MockComponent, MockProvider } from 'ng-mocks'
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { MockComponent, MockProvider } from 'ng-mocks';
 import { of } from 'rxjs';
 import { StepperComponent } from 'src/app/shared/components/stepper/stepper.component';
 import { Gender } from 'src/app/shared/model/gender';
 import { UserService } from 'src/app/shared/services/user.service';
-import { IntakeComponent } from './intake.component'
-
+import { IntakeComponent } from './intake.component';
 
 describe('IntakeComponent', () => {
   let fixture: ComponentFixture<IntakeComponent>;
@@ -14,12 +13,12 @@ describe('IntakeComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-    imports: [IntakeComponent,
+      imports: [IntakeComponent,
         MockComponent(StepperComponent)],
-    providers: [
+      providers: [
         MockProvider(UserService),
-    ]
-}).compileComponents();
+      ]
+    }).compileComponents();
 
     userService = TestBed.inject(UserService);
     fixture = TestBed.createComponent(IntakeComponent);
@@ -47,6 +46,7 @@ describe('IntakeComponent', () => {
     spyOn(userService, 'getUserSettings').and.returnValue(of({
       name: 'C',
       age: 32,
+      gender: Gender.Female,
       birthday: '1989-03-26',
       height: 166,
       currentWeight: 66.0,
@@ -79,7 +79,7 @@ describe('IntakeComponent', () => {
       goalProtein: 110,
       goalFat: 60,
       goalCarbs: 240
-    })); 
+    }));
     component.ngOnInit();
     component.fillStandard();
     expect(component.calories).toEqual(1865);
@@ -100,7 +100,7 @@ describe('IntakeComponent', () => {
       goalProtein: 110,
       goalFat: 60,
       goalCarbs: 236
-    })); 
+    }));
     spyOn(userService, 'addUserSetting').and.returnValue(of({}));
     component.ngOnInit();
     component.openModal();

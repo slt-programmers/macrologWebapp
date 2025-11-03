@@ -34,13 +34,13 @@ export class EntryPageRowComponent implements OnDestroy {
     effect(() => {
       this.subscriptions.push(
         this.store.select(selectEntriesDateMeal(this.date(), this.meal())).subscribe(it => {
-        this.entries = clone(it);
+        this.entries = clone(it)!;
       }));
     })
   }
 
   openModal(): void {
-    this.modalEntries = clone(this.entries);
+    this.modalEntries = clone(this.entries)!;
     this.showModal = true;
   }
 

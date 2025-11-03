@@ -1,9 +1,11 @@
-import { ComponentFixture, TestBed } from "@angular/core/testing"
+import { ComponentFixture, TestBed } from "@angular/core/testing";
+import { MockStore, provideMockStore } from "@ngrx/store/testing";
 import { Ingredient } from "src/app/shared/model/ingredient";
 import { Portion } from "src/app/shared/model/portion";
-import { DishesComponent } from "./dishes.component"
-import { MockStore, provideMockStore } from "@ngrx/store/testing"
 import { selectAllDishes } from 'src/app/shared/store/selectors/dishes.selectors';
+import { DishesComponent } from "./dishes.component";
+import { Dish } from "src/app/shared/model/dish";
+import { Food } from "src/app/shared/model/food";
 
 describe('DishesComponent', () => {
   let fixture: ComponentFixture<DishesComponent>;
@@ -12,15 +14,15 @@ describe('DishesComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-    imports: [DishesComponent],
-    providers: [
+      imports: [DishesComponent],
+      providers: [
         provideMockStore({
-            selectors: [
-                { selector: selectAllDishes, value: [{ name: 'dish1' }, { name: 'dish2' }] }
-            ]
+          selectors: [
+            { selector: selectAllDishes, value: [{ name: 'dish1' }, { name: 'dish2' }] }
+          ]
         })
-    ]
-}).compileComponents();
+      ]
+    }).compileComponents();
 
     store = TestBed.inject(MockStore);
     fixture = TestBed.createComponent(DishesComponent);
@@ -33,7 +35,7 @@ describe('DishesComponent', () => {
 
   it('should init component', () => {
     component.ngOnInit();
-    expect(component.allDishes).toEqual([{ name: 'dish1' }, { name: 'dish2' }]);
+    expect(component.allDishes).toEqual([{ name: 'dish1' } as unknown as Dish, { name: 'dish2' } as unknown as Dish]);
   });
 
   it('should open and close modal', () => {
@@ -57,16 +59,16 @@ describe('DishesComponent', () => {
       name: 'dish',
       ingredients: [{
         food: {
-          id: 1, name: 'name', protein: 1, fat: 2, carbs: 3, 
+          id: 1, name: 'name', protein: 1, fat: 2, carbs: 3,
           portions: [{ id: 1, description: 'desc', grams: 50 }]
-        }, 
+        },
         portion: {}
       }]
     });
   });
 
   it('should get portion', () => {
-    const ingredient: Ingredient = { food: { portions: [{ id: 1 }] } }
+    const ingredient: Ingredient = { food: { portions: [{ id: 1 } as Portion] } as unknown as Food }
     let result = component.getPortion(ingredient, 1);
     expect(result).toEqual({ id: 1 });
     result = component.getPortion(ingredient, 2);
@@ -80,8 +82,8 @@ describe('DishesComponent', () => {
       food: {
         portions: [
           { id: 1, description: 'portionDesc' }]
-      }
-    };
+      } as any
+    }; 
     let result = component.getIngredientDescription(ingredient);
     expect(result).toEqual('1 portionDesc');
     ingredient.portion = undefined;
@@ -90,7 +92,7 @@ describe('DishesComponent', () => {
   });
 
   it('should get total', () => {
-    const result = component.getTotal({ macrosCalculated: 123 });
+    const result = component.getTotal({ macrosCalculated: 123 } as any);
     expect(result).toEqual(123);
   });
 
@@ -158,7 +160,7 @@ describe('DishesComponent', () => {
         ] as Portion[]
       },
       portion: { id: 1, description: 'portion', grams: 50 },
-    }
+    } as any;
     let result = component.getStep(ingredient);
     expect(result).toEqual(0.1);
     ingredient.portion = undefined
@@ -175,7 +177,7 @@ describe('DishesComponent', () => {
         ] as Portion[]
       },
       portion: { id: 1, description: 'portion', grams: 50 },
-    }
+    } as any
     component.calculateMultiplier({ target: { value: 2 } }, ingredient);
     expect(ingredient.multiplier).toEqual(2);
     ingredient.portion = undefined;
@@ -192,7 +194,7 @@ describe('DishesComponent', () => {
         ] as Portion[]
       },
       portion: { id: 1, description: 'portion', grams: 50 },
-    }
+    } as any
     let result = component.getValue(ingredient);
     expect(result).toEqual(2);
     ingredient.portion = undefined;

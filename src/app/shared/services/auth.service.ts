@@ -18,8 +18,8 @@ export class AuthenticationService {
   }
 
   public isAdmin(): boolean {
-    const currentUser = JSON.parse(localStorage.getItem('currentUser') ?? '');
-    return !!currentUser && currentUser.admin;
+    const currentUser = localStorage.getItem('currentUser');
+    return !!currentUser && JSON.parse(currentUser).admin;
   }
 
   public login(usernameOrEmail: string, password: string): Observable<UserAccount | void> {

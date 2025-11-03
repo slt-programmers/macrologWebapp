@@ -55,7 +55,8 @@ describe('AccountComponent', () => {
     );
 
     component.confirmPassword = 'newpw';
-    const authSpy = spyOn(authService, 'changePassword').and.returnValue(
+    const authSpy = spyOn(authService, 'changePassword')
+    authSpy.and.returnValue(
       throwError({ status: 400, error: 'passwords do not match' })
     );
     component.changePassword();

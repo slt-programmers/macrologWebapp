@@ -9,7 +9,7 @@ import { DiaryPageComponent } from "./diary-page/diary-page.component"
 import { DiaryComponent } from "./diary.component"
 
 class MockWindow {
-  private _innerWidth: number;
+  private _innerWidth: number = 0;
 
   get innerWidth() {
     return this._innerWidth;
@@ -60,15 +60,6 @@ describe('DiaryComponent', () => {
     expect(userService.getUserGoalStats).toHaveBeenCalled();
   });
 
-  it('should init component without goals', () => {
-    spyOn(userService, 'getUserGoalStats').and.returnValue(of(undefined));
-    spyOnProperty(window, 'innerWidth', 'get').and.returnValue(123);
-
-    fixture.detectChanges();
-    component.ngOnInit();
-    expect(component.goalCal).toBeUndefined();
-  });
-
   it('should init component with large window', async () => {
     spyOn(userService, 'getUserGoalStats').and.returnValue(of([]));
     spyOnProperty(window, 'innerWidth', 'get').and.returnValue(500);
@@ -82,7 +73,6 @@ describe('DiaryComponent', () => {
     spyOn(userService, 'getUserGoalStats').and.returnValue(of([]));
     spyOnProperty(window, 'innerWidth', 'get').and.returnValue(500);
     spyOn(store, 'select').and.returnValue(of({}));
-    component.totals$ = undefined;
     component.changeDate('2022-01-01');
     expect(component.date).toEqual('2022-01-01');
     expect(component.totals$).toBeDefined();

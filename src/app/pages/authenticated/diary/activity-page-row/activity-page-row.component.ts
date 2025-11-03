@@ -41,7 +41,7 @@ export class ActivityPageRowComponent implements OnInit, OnDestroy {
 
     effect(() => {
       this.subscriptions.push(this.store.select(selectActivitiesDate(this.date())).subscribe(it => {
-        this.activities = clone(it);
+        this.activities = clone(it)!;
       }));
     })
   }
@@ -63,7 +63,7 @@ export class ActivityPageRowComponent implements OnInit, OnDestroy {
 
   openModal() {
     if (!this.loading) {
-      this.modalActivities = clone(this.activities);
+      this.modalActivities = clone(this.activities)!;
       this.showModal = true;
     }
   }

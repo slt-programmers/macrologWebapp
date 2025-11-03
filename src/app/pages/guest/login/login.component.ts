@@ -24,7 +24,7 @@ export class LoginComponent implements OnInit {
   public registerForm: FormGroup;
   public loginError = '';
   public registerError = '';
-  public forgotEmail = '';
+  public forgotEmail?: string;
   public forgotError = '';
 
   showForgotPwModal = signal(false);
@@ -94,14 +94,17 @@ export class LoginComponent implements OnInit {
   }
 
   public resetPassword() {
-    this.authService.resetPassword(this.forgotEmail).subscribe(
-      () => {
-        this.toastService.setMessage('We have send an email with your password!', false, 'Success!');
-        this.toggleForgotPwModal(false);
-      },
-      () => {
-        this.forgotError = 'The email adress was not found';
-      }
-    );
+    if (this.forgotEmail) {
+      this.authService.resetPassword(this.forgotEmail).subscribe(
+        () => {
+          this.toastService.setMessage('We have send an email with your password!', false, 'Success!');
+          this.toggleForgotPwModal(false);
+          this.forgotError = '';
+        },
+        () => {
+          this.forgotError = 'The email adress was not found';
+        }
+      );
+    }
   }
 }

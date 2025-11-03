@@ -25,8 +25,8 @@ describe('Util Functions', () => {
     let array2 = clone(array1);
     expect(array2).toEqual([{id: 123, someObj: {id: 234}}])
     array1[0].id = 567;
-    expect(array2[0].id).toEqual(123);
+    expect(array2![0].id).toEqual(123);
     array1[0].someObj.id = 567;
-    expect(array2[0].someObj.id).toEqual(234);
+    expect(array2![0].someObj.id).toEqual(234);
   });
 });

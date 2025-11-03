@@ -79,7 +79,7 @@ describe('ActivityPageRowComponent', () => {
     store.overrideSelector(selectActivitiesLoading, true);
     store.refreshState();
     fixture.detectChanges();
-    component.modalActivities = undefined;
+    component.modalActivities = [];
     component.activities = [];
     component.showModal = false;
     component.openModal();
@@ -136,7 +136,7 @@ describe('ActivityPageRowComponent', () => {
     component.saveActivities();
     expect(store.dispatch).toHaveBeenCalledWith(activitiesActions.post([{ name: 'run' }], '2020-01-01'));
     expect(component.showModal).toBeFalse();
-    expect(component.modalActivities).toBeUndefined();
+    expect(component.modalActivities).toEqual([]);
   });
 
 });

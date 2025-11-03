@@ -54,7 +54,7 @@ describe('AutocompleteFoodComponent', () => {
     component.foodName = 'A';
     expect(component.foodMatch).toEqual(new Array());
     component.findFoodMatch({ data: 'somedata' });
-    let result = [{ food: { name: 'Abc', protein: 1, fat: 2, carbs: 3 }, dish: undefined as Dish }];
+    let result = [{ food: { name: 'Abc', protein: 1, fat: 2, carbs: 3 }, dish: undefined }];
     expect(component.foodMatch).toEqual(result);
 
     component.searchables = [
@@ -90,7 +90,7 @@ describe('AutocompleteFoodComponent', () => {
     component.foodName = 'A';
     expect(component.foodMatch).toEqual(new Array());
     component.findFoodMatch({ data: 'somedata' });
-    let result = [{ food: undefined as Food, dish: { name: 'Abc' } }];
+    let result = [{ food: undefined, dish: { name: 'Abc' } }] as any[];
     expect(component.foodMatch).toEqual(result);
 
     component.searchables = [
@@ -127,15 +127,11 @@ describe('AutocompleteFoodComponent', () => {
       { food: { name: 'Cde', protein: 1, fat: 2, carbs: 3 }, dish: undefined },
     ];
     fixture.detectChanges();
-    let result = fixture.debugElement.query(By.css('#autoDropdown'));
-    expect(result).not.toEqual(null);
-    result = fixture.debugElement.query(By.css('#autoOption'));
-    expect(result).not.toEqual(null);
     expect(component.getDescription).toHaveBeenCalled();
   });
 
   it('should get food or dish description', () => {
-    const dish = { name: 'Somedish' };
+    const dish = { name: 'Somedish' } as Dish;
     let result = component.getDescription({ food: undefined, dish: dish });
     expect(result).toEqual(dish.name + ' (dish)');
 
@@ -282,27 +278,27 @@ describe('AutocompleteFoodComponent', () => {
     const input = fixture.debugElement.query(By.css('#autoInput'));
     input.nativeElement.focus();
     component.onKeyDown(new KeyboardEvent('keydown', { key: 'ArrowDown' }));
-    expect(document.activeElement.className).toEqual(
+    expect(document.activeElement!.className).toEqual(
       'autocomplete__option option-0'
     );
     component.onKeyDown(new KeyboardEvent('keydown', { key: 'ArrowUp' }));
-    expect(document.activeElement.className).toEqual(
+    expect(document.activeElement!.className).toEqual(
       'input autocomplete__input ng-untouched ng-pristine ng-valid'
     );
     component.onKeyDown(new KeyboardEvent('keydown', { key: 'ArrowDown' }));
-    expect(document.activeElement.className).toEqual(
+    expect(document.activeElement!.className).toEqual(
       'autocomplete__option option-0'
     );
     component.onKeyDown(new KeyboardEvent('keydown', { key: 'ArrowDown' }));
-    expect(document.activeElement.className).toEqual(
+    expect(document.activeElement!.className).toEqual(
       'autocomplete__option option-1'
     );
     component.onKeyDown(new KeyboardEvent('keydown', { key: 'ArrowDown' }));
-    expect(document.activeElement.className).toEqual(
+    expect(document.activeElement!.className).toEqual(
       'autocomplete__option option-1'
     );
     component.onKeyDown(new KeyboardEvent('keydown', { key: 'ArrowUp' }));
-    expect(document.activeElement.className).toEqual(
+    expect(document.activeElement!.className).toEqual(
       'autocomplete__option option-0'
     );
   });

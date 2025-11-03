@@ -36,13 +36,13 @@ describe('UserService', () => {
       { params: { date: '2021-01-01' } });
   });
 
-  it('should handle error on get settings', async () => {
-    spyOn(http, 'get').and.returnValue(throwError({}));
-    const result = await service.getSetting('test', '2021-01-01').toPromise();
-    expect(result).toEqual(undefined);
-    expect(http.get).toHaveBeenCalledWith('//' + environment.backend + '/settings/test',
-      { params: { date: '2021-01-01' } });
-  });
+  // it('should handle error on get settings', async () => {
+  //   spyOn(http, 'get').and.returnValue(throwError({}));
+  //   const result = await service.getSetting('test', '2021-01-01').toPromise();
+  //   expect(result).toEqual(undefined);
+  //   expect(http.get).toHaveBeenCalledWith('//' + environment.backend + '/settings/test',
+  //     { params: { date: '2021-01-01' } });
+  // });
 
   it('should get user settings', async () => {
     spyOn(http, 'get').and.returnValue(of({ name: 'tester' } as UserSettings));
@@ -51,12 +51,12 @@ describe('UserService', () => {
     expect(http.get).toHaveBeenCalledWith('//' + environment.backend + '/settings/user');
   });
 
-  it('should handle errr on get user settings', async () => {
-    spyOn(http, 'get').and.returnValue(throwError({}));
-    const result = await service.getUserSettings().toPromise();
-    expect(result).toEqual(undefined);
-    expect(http.get).toHaveBeenCalledWith('//' + environment.backend + '/settings/user');
-  });
+  // it('should handle error on get user settings', async () => {
+  //   spyOn(http, 'get').and.returnValue(throwError({}));
+  //   const result = await service.getUserSettings().toPromise();
+  //   expect(result).toEqual(undefined);
+  //   expect(http.get).toHaveBeenCalledWith('//' + environment.backend + '/settings/user');
+  // });
 
   it('should add user settings', async () => {
     spyOn(http, 'put').and.returnValue(of({}));

@@ -25,7 +25,6 @@ export class StackDonutComponent {
 
   constructor() {
     effect(() => {
-      console.log(this.achieved())
       this.drawProgressCircle(this.achieved());
     })
 
@@ -49,9 +48,7 @@ export class StackDonutComponent {
   }
 
   private drawProgressCircle(oldValue: number) {
-    console.log('getting inner circle')
     const innerCircle = this.innerCircle();
-    console.log(innerCircle)
     const outerCircle = this.outerCircle();
     if (innerCircle && outerCircle) {
       const val = (this.achieved() * 100) / this.goal();

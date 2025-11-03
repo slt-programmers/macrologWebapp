@@ -1,27 +1,25 @@
-import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { environment } from '../../../environments/environment';
+import { inject, Injectable } from '@angular/core';
 import { forkJoin, Observable, of } from 'rxjs';
-import { UserSettings } from '../model/userSettings';
 import { catchError } from 'rxjs/operators';
-import { ToastService } from './toast.service';
+import { environment } from '../../../environments/environment';
+import { UserSettings } from '../model/userSettings';
 
 @Injectable()
 export class UserService {
   private readonly http = inject(HttpClient);
-  private readonly toastService = inject(ToastService);
 
   private macrologBackendUrl = '//' + environment.backend + '/settings';
 
   public getSetting(key: string, date: string): Observable<string> {
     return this.http.get<string>(this.macrologBackendUrl + '/' + key,
       { params: { date: date } }).pipe(
-        catchError(error => { return of<string>(); }));
+        catchError(() => of<string>()));
   }
 
   public getUserSettings(): Observable<UserSettings> {
     return this.http.get<UserSettings>(this.macrologBackendUrl + '/user').pipe(
-      catchError(error => { return of<UserSettings>(); }));
+      catchError(() => of<UserSettings>()));
   }
 
   public getUserGoalStats(date: string): Observable<string[]> {

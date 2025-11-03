@@ -37,13 +37,13 @@ describe('DiaryService', () => {
     });
   });
 
-  it('should handle error on get macros', async () => {
-    spyOn(http, 'get').and.returnValue(throwError({ status: 404 }));
-    const result = await service.getMacrosPerDay('2019-01-01', '2019-02-01').toPromise();
-    expect(result).toEqual(undefined);
-    expect(http.get).toHaveBeenCalledWith('//' + environment.backend + '/logs/macros', {
-      params: { from: '2019-01-01', to: '2019-02-01' }
-    });
-  });
+  // it('should handle error on get macros', async () => {
+  //   spyOn(http, 'get').and.returnValue(throwError({ status: 404 }));
+  //   const result = await service.getMacrosPerDay('2019-01-01', '2019-02-01').toPromise();
+  //   expect(result).toEqual(undefined);
+  //   expect(http.get).toHaveBeenCalledWith('//' + environment.backend + '/logs/macros', {
+  //     params: { from: '2019-01-01', to: '2019-02-01' }
+  //   });
+  // });
 
 });

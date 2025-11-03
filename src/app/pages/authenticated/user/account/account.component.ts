@@ -29,12 +29,12 @@ export class AccountComponent {
     if (this.newPassword !== this.confirmPassword) {
       this.message =
         'The confirmation password does not match with the new password.';
-    } else if (this.oldPassword && this.newPassword && this.confirmPassword) {
+    } else  {
       this.authService
         .changePassword(
-          this.oldPassword,
-          this.newPassword,
-          this.confirmPassword
+          this.oldPassword!,
+          this.newPassword!,
+          this.confirmPassword!
         )
         .subscribe(
           (data) => {

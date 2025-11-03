@@ -65,12 +65,12 @@ describe('FoodComponent', () => {
   it('should open modal', () => {
     expect(component.modalIsVisible).toBeFalse();
     component.openModal(null);
-    expect(component.selectedFood).toEqual({ portions: [] });
+    expect(component.selectedFood).toEqual({ portions: [] } as unknown as Food);
     expect(component.modalIsVisible).toBeTrue();
 
     component.modalIsVisible = false;
-    component.openModal({ name: 'name', portions: [] });
-    expect(component.selectedFood).toEqual({ name: 'name', portions: [] });
+    component.openModal({ name: 'name', portions: [] } as unknown as Food);
+    expect(component.selectedFood).toEqual({ name: 'name', portions: [] } as unknown as Food);
     expect(component.modalIsVisible).toBeTrue();
   });
 

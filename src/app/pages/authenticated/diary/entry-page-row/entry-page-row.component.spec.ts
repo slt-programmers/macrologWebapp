@@ -1,11 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
 import { Meal } from 'src/app/shared/model/meal';
-import { entriesActions } from 'src/app/shared/store/actions/entries.actions';
 import { selectEntriesState } from 'src/app/shared/store/selectors/entries.selectors';
-
-import { EntryPageRowComponent } from './entry-page-row.component';
 import { Entry } from 'src/app/shared/model/entry';
+import { EntryPageRowComponent } from './entry-page-row.component';
 
 describe('EntryPageRowComponent', () => {
   let component: EntryPageRowComponent;
@@ -55,7 +53,7 @@ describe('EntryPageRowComponent', () => {
 
   it('should open modal', () => {
     component.showModal = false;
-    component.modalEntries = undefined;
+    component.modalEntries = [];
     component.entries = [];
     component.openModal();
     expect(component.showModal).toBeTrue();
@@ -63,19 +61,19 @@ describe('EntryPageRowComponent', () => {
   });
 
   it('should change portion on modal entry', () => {
-    component.modalEntries = [{ food: { id: 1, portions: [{ id: 1 }, { id: 2 }] }, portion: { id: 1 } }];
+    component.modalEntries = [{ food: { id: 1, portions: [{ id: 1 }, { id: 2 }] }, portion: { id: 1 } }] as any;
     component.changePortion({ target: { value: '2' } }, 0);
-    expect(component.modalEntries[0]).toEqual({ food: { id: 1, portions: [{ id: 1 }, { id: 2 }] }, portion: { id: 2 } });
+    expect(component.modalEntries[0]).toEqual({ food: { id: 1, portions: [{ id: 1 }, { id: 2 }] }, portion: { id: 2 } } as any);
     component.changePortion({ target: { value: 'grams' } }, 0);
-    expect(component.modalEntries[0]).toEqual({ food: { id: 1, portions: [{ id: 1 }, { id: 2 }] }, portion: undefined });
+    expect(component.modalEntries[0]).toEqual({ food: { id: 1, portions: [{ id: 1 }, { id: 2 }] }, portion: undefined } as any);
   });
 
   it('should change multiplier on modal entry', () => {
-    component.modalEntries = [{ food: { id: 1, portions: [{ id: 1 }, { id: 2 }] }, portion: { id: 1 }, multiplier: 1 }];
+    component.modalEntries = [{ food: { id: 1, portions: [{ id: 1 }, { id: 2 }] }, portion: { id: 1 }, multiplier: 1 }] as any;
     component.changeMultiplier({ target: { value: '2' } }, 0);
     expect(component.modalEntries[0].multiplier)
       .toEqual(2);
-    component.modalEntries = [{ food: { id: 1, portions: [{ id: 1 }, { id: 2 }] }, multiplier: 1 }];
+    component.modalEntries = [{ food: { id: 1, portions: [{ id: 1 }, { id: 2 }] }, multiplier: 1 }] as any;
     component.changeMultiplier({ target: { value: '120' } }, 0);
     expect(component.modalEntries[0].multiplier).toEqual(1.2);
   });
@@ -139,7 +137,7 @@ describe('EntryPageRowComponent', () => {
   // });
 
   it('should delete entry from modal', () => {
-    component.modalEntries = [{ food: { id: 1 } }];
+    component.modalEntries = [{ food: { id: 1 } }] as any;
     component.deleteEntry(0);
     expect(component.modalEntries).toEqual([]);
   });
