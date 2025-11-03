@@ -1,49 +1,46 @@
-import { Component, OnInit, inject, viewChild } from '@angular/core';
-import { UserService } from '../../../shared/services/user.service';
-import { Router } from '@angular/router';
-import { forkJoin } from 'rxjs';
-import { calculateTDEE } from 'src/app/util/functions';
-import { differenceInYears, isValid, parse } from 'date-fns';
-import { FormControl, FormGroup, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DatePipe } from '@angular/common';
+import { Component, inject } from '@angular/core';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { differenceInYears, isValid, parse } from 'date-fns';
+import { forkJoin } from 'rxjs';
 import { Meal } from 'src/app/shared/model/meal';
+import { calculateTDEE } from 'src/app/util/functions';
 import { StepperComponent } from '../../../shared/components/stepper/stepper.component';
+import { UserService } from '../../../shared/services/user.service';
 import { EntryPageRowComponent } from '../diary/entry-page-row/entry-page-row.component';
 
 @Component({
-    selector: 'ml-onboarding',
-    templateUrl: './onboarding.component.html',
-    styleUrls: ['./onboarding.component.scss'],
-    imports: [StepperComponent, FormsModule, ReactiveFormsModule, EntryPageRowComponent]
+  selector: 'ml-onboarding',
+  templateUrl: './onboarding.component.html',
+  styleUrls: ['./onboarding.component.scss'],
+  imports: [StepperComponent, FormsModule, ReactiveFormsModule, EntryPageRowComponent]
 })
-export class OnboardingComponent implements OnInit {
+export class OnboardingComponent {
   private userService = inject(UserService);
   private router = inject(Router);
 
-  private readonly breakfastEref = viewChild<any>('breakfast');
-
   // Step 2
-  public protein: number;
-  public fat: number;
-  public carbs: number;
-  public calories: number;
-  public tdee: number;
+  public protein =0;
+  public fat = 0;
+  public carbs = 0;
+  public calories = 0;
+  public tdee = 0;
 
   // Step 3
   public expandMoreInfo = false;
 
   // Step 4
-  public displayDate;
   public datePipe = new DatePipe('en-US');
+  public displayDate = this.datePipe.transform(new Date(), 'yyyy-MM-dd')!;
   public breakfastOpen = false;
   public breakfast = Meal.Breakfast;
   public foodSearchables = new Array();
 
   public userForm: FormGroup;
-  public currentStep: number;
+  public currentStep = 1;
 
   constructor() {
-    this.displayDate = this.datePipe.transform(new Date(), 'yyyy-MM-dd');
     this.userForm = new FormGroup({
       name: new FormControl('', Validators.required),
       birthday: new FormControl('', Validators.required),
@@ -52,10 +49,6 @@ export class OnboardingComponent implements OnInit {
       weight: new FormControl('', Validators.required),
       activity: new FormControl('', Validators.required)
     });
-  }
-
-  ngOnInit() {
-    this.currentStep = 1;
   }
 
   nextStep() {

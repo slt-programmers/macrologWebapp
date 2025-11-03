@@ -10,30 +10,23 @@ import { DatepickerComponent } from '../../../shared/components/datepicker/datep
 import { DiaryPageComponent } from './diary-page/diary-page.component';
 
 @Component({
-    selector: 'ml-diary',
-    templateUrl: './diary.component.html',
-    imports: [StackDonutComponent, DatepickerComponent, DiaryPageComponent, AsyncPipe, DecimalPipe]
+  selector: 'ml-diary',
+  templateUrl: './diary.component.html',
+  imports: [StackDonutComponent, DatepickerComponent, DiaryPageComponent, AsyncPipe, DecimalPipe]
 })
 export class DiaryComponent implements OnInit {
   private readonly userService = inject(UserService);
   private readonly store = inject(Store);
   private readonly window = inject(Window);
 
+  private pipe = new DatePipe('en-US');
 
-  public date: string;
-  public totals$: Observable<Macros>;
-  public intakeGoals: any[];
-  public goalCal: number;
+  public date = this.pipe.transform(new Date(), 'yyyy-MM-dd')!;
+  public totals$: Observable<Macros> = this.store.select(selectTotalsForDate(this.date));
+  public intakeGoals: any[] = []
+  public goalCal: number = 0;
   public circleRadius = 60;
   public strokeWidth = 8;
-  
-  private pipe: DatePipe;
-
-  constructor() {
-      this.pipe = new DatePipe('en-US');
-      this.date = this.pipe.transform(new Date(), 'yyyy-MM-dd');
-      this.totals$ = this.store.select(selectTotalsForDate(this.date));
-  }
 
   ngOnInit() {
     this.getUserGoals(this.date);

@@ -12,7 +12,7 @@ export class StepperComponent implements OnInit {
 	readonly currentStep = input.required<number>();
 	readonly numberOfSteps = input.required<number>();
 
-	public steps: Array<number>;
+	public steps: number[] = [];
 
 	ngOnInit() {
 		this.steps = new Array<number>();

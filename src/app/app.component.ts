@@ -12,9 +12,7 @@ export class AppComponent implements OnInit {
   private readonly healthcheckService = inject(HealthcheckService);
   private readonly document = inject(Document);
 
-
   private asleep = true;
-  private theme: string;
 
   ngOnInit(): void {
     this.healthcheck();

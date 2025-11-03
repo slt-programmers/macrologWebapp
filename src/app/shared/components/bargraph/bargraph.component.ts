@@ -16,8 +16,8 @@ import { DataPoint, GraphPoint } from '../linegraph/linegraph.component';
   imports: [NgClass]
 })
 export class BargraphComponent {
-  public readonly yAxisElement = viewChild<ElementRef>('yAxis');
-  public readonly xAxisElement = viewChild<ElementRef>('xAxis');
+  public readonly yAxisElement = viewChild.required<ElementRef>('yAxis');
+  public readonly xAxisElement = viewChild.required<ElementRef>('xAxis');
 
   readonly datasets = input.required<DataPoint[][]>();
   readonly yAxisStep = input.required<number>();
@@ -26,14 +26,14 @@ export class BargraphComponent {
   readonly colors = input<string[]>([]);
   readonly fillColors = input<string[]>([]);
 
-  public graphPoints: GraphPoint[][];
-  public yAxisPoints: number[];
-  public xAxisPoints: number[];
+  public graphPoints: GraphPoint[][] = []
+  public yAxisPoints: number[] = []
+  public xAxisPoints: number[] = []
 
-  yAxisHeight: number;
-  xAxisWidth: number;
-  xAxisHeight: number;
-  markerHeights: number[];
+  yAxisHeight: number = 0
+  xAxisWidth: number = 0
+  xAxisHeight: number = 0
+  markerHeights: number[] = []
 
   constructor() {
     effect(() => {
@@ -115,7 +115,7 @@ export class BargraphComponent {
     for (let i = 0; i < this.datasets().length; i++) {
       const graphPointSet = [];
       for (const dataPoint of this.datasets()[i]) {
-        let height: number;
+        let height = 0
         if (dataPoint.y !== undefined) {
           height =
             dataPoint.y * (this.yAxisHeight / differenceHighestLowestYValue);

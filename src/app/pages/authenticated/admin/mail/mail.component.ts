@@ -69,9 +69,11 @@ export class MailComponent implements OnInit {
   }
 
   private storeConnection() {
-    this.googleService.storeMailSyncSettings(this.code).subscribe(() => {
-      this.isConnected = true;
-    });
+    if (this.code) {
+      this.googleService.storeMailSyncSettings(this.code).subscribe(() => {
+        this.isConnected = true;
+      });
+    }
   }
 
   private setGoogleUrl() {

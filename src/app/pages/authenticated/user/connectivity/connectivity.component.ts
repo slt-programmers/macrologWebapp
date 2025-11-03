@@ -3,24 +3,23 @@ import { UserService } from '../../../../shared/services/user.service';
 import { ActivatedRoute } from '@angular/router';
 import { environment } from '../../../../../environments/environment';
 
-
 @Component({
-    selector: 'ml-connectivity',
-    templateUrl: './connectivity.component.html',
-    styleUrls: ['./connectivity.component.scss'],
-    imports: []
+  selector: 'ml-connectivity',
+  templateUrl: './connectivity.component.html',
+  styleUrls: ['./connectivity.component.scss'],
+  imports: []
 })
 export class ConnectivityComponent implements OnInit {
   private userService = inject(UserService);
   private route = inject(ActivatedRoute);
 
-  public syncError: string;
-  public stravaConnectUrl: string;
+  public syncError = ''
+  public stravaConnectUrl = ''
   public connection: any;
 
-  private code: string;
-  private scope: string;
-  private clientId: number;
+  private code?: string | null;
+  private scope?: string | null;
+  private clientId = 0;
 
   ngOnInit() {
     this.getSyncSettings();
@@ -69,11 +68,13 @@ export class ConnectivityComponent implements OnInit {
   }
 
   private storeConnection() {
-    this.userService
-      .storeSyncSettings('STRAVA', this.code)
-      .subscribe((result) => {
-        this.connection = result;
-      });
+    if (this.code) {
+      this.userService
+        .storeSyncSettings('STRAVA', this.code)
+        .subscribe((result) => {
+          this.connection = result;
+        });
+    }
   }
 
   private setStravaUrl() {

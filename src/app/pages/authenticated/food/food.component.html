@@ -101,13 +101,13 @@
                             </div>
                           }
                           <div id="proteinPortionCell--{{idx}}-{{pidx}}" class="table-cell flex-1">
-                            {{ portion.macros.protein | number: '1.1-1' }}
+                            {{ portion.macros!.protein | number: '1.1-1' }}
                           </div>
                           <div id="fatPortionCell--{{idx}}-{{pidx}}" class="table-cell flex-1">
-                            {{ portion.macros.fat | number: '1.1-1' }}
+                            {{ portion.macros!.fat | number: '1.1-1' }}
                           </div>
                           <div id="carbsPortionCell--{{idx}}-{{pidx}}" class="table-cell flex-1">
-                            {{ portion.macros.carbs | number: '1.1-1' }}
+                            {{ portion.macros!.carbs | number: '1.1-1' }}
                           </div>
                         </div>
                       }
@@ -146,6 +146,6 @@
     </button>
   </div>
 
-  @if (modalIsVisible) {
+  @if (modalIsVisible && selectedFood) {
     <ml-edit-food [selectedFood]="selectedFood" (close$)="closeModal()" />
   }

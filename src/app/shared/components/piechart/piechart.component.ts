@@ -16,22 +16,21 @@ import { Macros } from 'src/app/shared/model/macros';
   imports: [DecimalPipe]
 })
 export class PiechartComponent implements OnInit, AfterViewInit {
-  readonly piechartRef = viewChild<ElementRef>('pieChart');
+  readonly piechartRef = viewChild.required<ElementRef>('pieChart');
 
   readonly mealId = input.required<number>();
   readonly macros = input.required<Macros>();
 
-  public protein: number;
-  public fat: number;
-  public carbs: number;
-  public centerText: string;
+  public protein?: number;
+  public fat?: number;
+  public carbs?: number;
+  public centerText?: string;
 
-  private total: number;
-  private proteinPercent: number;
-  private fatPercent: number;
-  private carbsPercent: number;
+  private total?: number;
+  private proteinPercent?: number;
+  private fatPercent?: number;
+  private carbsPercent?: number;
 
-  public svgEl: Element;
   public cumulativePercent = 0;
 
   ngOnInit() {
@@ -60,7 +59,7 @@ export class PiechartComponent implements OnInit, AfterViewInit {
 
   public calculatePie() {
     this.cumulativePercent = 0;
-    this.svgEl = this.piechartRef().nativeElement;
+    const svgEl = this.piechartRef().nativeElement;
     const slices = [
       { percent: this.proteinPercent, color: '#1460e5' },
       { percent: this.fatPercent, color: '#25e2f1' },
@@ -74,14 +73,14 @@ export class PiechartComponent implements OnInit, AfterViewInit {
       );
 
       // each slice starts where the last slice ended, so keep a cumulative percent
-      this.cumulativePercent += slice.percent;
+      this.cumulativePercent += slice.percent!;
 
       const [endX, endY] = this.getCoordinatesForPercent(
         this.cumulativePercent
       );
 
       // if the slice is more than 50%, take the large arc (the long way around)
-      const largeArcFlag = slice.percent > 0.5 ? 1 : 0;
+      const largeArcFlag = slice.percent! > 0.5 ? 1 : 0;
 
       // create an array and join it just for code readability
       const pathData = [
@@ -97,7 +96,7 @@ export class PiechartComponent implements OnInit, AfterViewInit {
       );
       pathEl.setAttribute('d', pathData);
       pathEl.setAttribute('fill', slice.color);
-      this.svgEl.appendChild(pathEl);
+      svgEl.appendChild(pathEl);
     });
   }
 }

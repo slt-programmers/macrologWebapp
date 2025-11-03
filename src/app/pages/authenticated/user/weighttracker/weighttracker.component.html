@@ -1,8 +1,10 @@
 <div>
   <div class="weightgraph-wrapper">
     <div class="weightgraph">
+      @if(dataset) {
       <ml-linegraph [dataset]="dataset" [xAxisStep]="1" [yAxisStep]="0.5"
         [hasOffgridValue]="hasOffgridValue"></ml-linegraph>
+      }
     </div>
   </div>
 

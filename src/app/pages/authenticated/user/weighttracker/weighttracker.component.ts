@@ -16,7 +16,7 @@ import { LinegraphComponent } from '../../../../shared/components/linegraph/line
 export class WeightTrackerComponent implements OnInit {
   private readonly weightService = inject(WeightService);
 
-  public trackedWeights = new Array<Weight>();
+  public trackedWeights: Weight[] = [];
   public measurementDate?: string;
   public weight?: number;
   public remark?: string;

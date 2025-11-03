@@ -24,8 +24,8 @@ export class EntryPageRowComponent implements OnDestroy {
   readonly meal = input.required<Meal>();
   readonly date = input.required<string>();
 
-  public entries: Entry[];
-  public modalEntries: Entry[];
+  public entries: Entry[] = []
+  public modalEntries: Entry[] = [];
   public showModal = false;
 
   private subscriptions: Subscription[] = [];
@@ -49,7 +49,7 @@ export class EntryPageRowComponent implements OnDestroy {
       this.modalEntries[index].portion = undefined;
     } else {
       this.modalEntries[index].portion =
-        this.modalEntries[index].food.portions.filter(p => p.id === +event.target.value)[0];
+        this.modalEntries[index].food.portions!.filter(p => p.id === +event.target.value)[0];
     }
   }
 
@@ -71,7 +71,7 @@ export class EntryPageRowComponent implements OnDestroy {
           portion: ingredient.portion ? ingredient.food.portions
             .filter((p: Portion) => p.id === ingredient.portion.id)[0] : undefined,
           multiplier: ingredient.multiplier
-        });
+        } as Entry);
       }
     } else {
       this.modalEntries.push({
@@ -80,7 +80,7 @@ export class EntryPageRowComponent implements OnDestroy {
         day: this.date(),
         portion: entry.food.portions ? entry.food.portions[0] : undefined,
         multiplier: 1
-      });
+      } as Entry);
     }
   }
 
@@ -99,7 +99,7 @@ export class EntryPageRowComponent implements OnDestroy {
     if (!missingInput) {
       this.store.dispatch(entriesActions.post(this.modalEntries, { date: this.date(), meal: this.meal() }));
       this.showModal = false;
-      this.modalEntries = undefined;
+      this.modalEntries = [];
     }
   }
 

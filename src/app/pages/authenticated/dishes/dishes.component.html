@@ -14,7 +14,7 @@
           <div class="content">
             <h1 class="font-bold">{{ dish.name }}</h1>
             <div class="dish-card__content__pie-chart">
-              <ml-piechart [mealId]="dish.id" [macros]="getTotal(dish)"></ml-piechart>
+              <ml-piechart [mealId]="dish.id!" [macros]="getTotal(dish)"></ml-piechart>
             </div>
             @for (ingredient of dish.ingredients; track ingredient) {
               <ul class="flex align-center col-gap-1">
@@ -41,13 +41,13 @@
         <div class="flex flex-col content">
           <div class="form-field">
             <label for="dishName">Name</label>
-            <input class="input" [(ngModel)]="selectedDish.name" type="text" name="dishName"
+            <input class="input" [(ngModel)]="selectedDish!.name" type="text" name="dishName"
               id="dishName" required>
             </div>
-            @if (selectedDish.ingredients.length > 0) {
+            @if (selectedDish!.ingredients!.length > 0) {
               <h1 class="font-semibold text-secondary">Ingredients</h1>
             }
-            @for (ingr of selectedDish.ingredients; track ingr; let i = $index) {
+            @for (ingr of selectedDish!.ingredients!; track ingr; let i = $index) {
               <div class="flex align-center col-gap-1"
                 >
                 <p class="flex-3">{{ingr.food.name}}</p>

@@ -83,7 +83,7 @@
                   {{proteinGraphLabel}}
                 </div>
                 <ml-bargraph [colors]="['rgb(100, 149, 236)']"
-                  [fillColors]="['rgba(100, 149, 236, 0.3)']" [markers]="[proteinMarker]"
+                  [fillColors]="['rgba(100, 149, 236, 0.3)']" [markers]="proteinMarker ? [proteinMarker] : []"
                   [datasets]="[proteinDataset]" [xAxisStep]="1" [yAxisStep]="yAxisStep"
                   class="graph__bargraph graph__bargraph--protein">
                 </ml-bargraph>
@@ -95,7 +95,7 @@
                   {{fatGraphLabel}}
                 </div>
                 <ml-bargraph [colors]="['rgb(60, 221, 234)']" [fillColors]="['rgba(60, 221, 234, 0.3)']"
-                  [markers]="[fatMarker]" [datasets]="[fatDataset]" [xAxisStep]="1"
+                  [markers]="fatMarker ? [fatMarker] : []" [datasets]="[fatDataset]" [xAxisStep]="1"
                   [yAxisStep]="yAxisStep" class="graph__bargraph graph__bargraph--fat">
                 </ml-bargraph>
               </div>
@@ -106,7 +106,7 @@
                   {{carbsGraphLabel}}
                 </div>
                 <ml-bargraph [colors]="['rgb(144, 238, 144)']"
-                  [fillColors]="['rgba(144, 238, 144, 0.3)']" [markers]="[carbsMarker]"
+                  [fillColors]="['rgba(144, 238, 144, 0.3)']" [markers]="carbsMarker ? [carbsMarker] : []"
                   [datasets]="[carbsDataset]" [xAxisStep]="1" [yAxisStep]="yAxisStep"
                   class="graph__bargraph graph__bargraph--carbs">
                 </ml-bargraph>

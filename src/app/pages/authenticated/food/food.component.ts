@@ -6,6 +6,7 @@ import { Observable, Subscription } from 'rxjs';
 import { FormsModule } from '@angular/forms';
 import { NgClass, AsyncPipe, DecimalPipe } from '@angular/common';
 import { EditFoodComponent } from './edit-food/edit-food.component';
+import { Portion } from 'src/app/shared/model/portion';
 
 @Component({
     selector: 'ml-food',
@@ -22,7 +23,7 @@ export class FoodComponent implements OnDestroy {
   public modalIsVisible = false;
   public currentPageIndex = 0;
   public itemsPerPage = 15;
-  public selectedFood: Food = null; // input voor modal popup
+  public selectedFood: Food | null = null; // input voor modal popup
   public searchInput = '';
   public currentSortHeader = 'name';
   public sortReverse = false;
@@ -74,11 +75,11 @@ export class FoodComponent implements OnDestroy {
     this.getPagedFood(0);
   }
 
-  public openModal(food: Food) {
+  public openModal(food: Food | null) {
     if (food) {
       this.selectedFood = JSON.parse(JSON.stringify(food)) as Food;
     } else {
-      this.selectedFood = { portions: [] }
+      this.selectedFood = { portions: [] as Portion[]} as Food;
     }
     this.modalIsVisible = true;
   }
@@ -97,9 +98,9 @@ export class FoodComponent implements OnDestroy {
     this.setReversed(header);
     const sortedArray = this.searchableFood;
     sortedArray.sort((a: Food, b: Food) => {
-      if (a[header as keyof Food] < b[header as keyof Food]) {
+      if (a[header as keyof Food]! < b[header as keyof Food]!) { // TODO refactor
         return 1;
-      } else if (a[header as keyof Food] > b[header as keyof Food]) {
+      } else if (a[header as keyof Food]! > b[header as keyof Food]!) {
         return -1;
       } else {
         return 0;

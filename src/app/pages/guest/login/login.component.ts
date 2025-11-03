@@ -18,14 +18,14 @@ export class LoginComponent implements OnInit {
   private authService = inject(AuthenticationService);
   private toastService = inject(ToastService);
 
-  private returnUrl: string;
+  private returnUrl: string = 'dashboard';
 
   public loginForm: FormGroup;
   public registerForm: FormGroup;
   public loginError = '';
   public registerError = '';
-  public forgotEmail: string;
-  public forgotError: string;
+  public forgotEmail = '';
+  public forgotError = '';
 
   showForgotPwModal = signal(false);
 
@@ -94,7 +94,6 @@ export class LoginComponent implements OnInit {
   }
 
   public resetPassword() {
-    this.forgotError = '';
     this.authService.resetPassword(this.forgotEmail).subscribe(
       () => {
         this.toastService.setMessage('We have send an email with your password!', false, 'Success!');

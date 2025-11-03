@@ -44,7 +44,7 @@ export class EditFoodComponent implements OnInit {
   }
 
   public removePortion(index: number): void {
-    this.selectedFood().portions.splice(index, 1);
+    this.selectedFood().portions!.splice(index, 1);
   }
 
   public isNewPortion(portion: Portion): boolean {
@@ -55,7 +55,7 @@ export class EditFoodComponent implements OnInit {
   }
 
   public addNewPortion(): void {
-    this.selectedFood().portions.push({});
+    this.selectedFood().portions!.push({});
   }
 
 

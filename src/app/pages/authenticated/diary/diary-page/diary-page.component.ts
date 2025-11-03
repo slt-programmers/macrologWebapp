@@ -24,7 +24,7 @@ export class DiaryPageComponent {
   public diner = Meal.Dinner;
   public snacks = Meal.Snacks;
 
-  public totals$: Observable<Macros>;
+  public totals$?: Observable<Macros>;
 
   constructor() {
     effect(() => {
@@ -32,7 +32,7 @@ export class DiaryPageComponent {
       this.store.dispatch(entriesActions.get(false, date));
       this.store.dispatch(activitiesActions.get(false, { date: date, sync: false }));
       this.totals$ = this.store.select(selectTotalsForDate(date));
-    })
+    });
   }
 
 }

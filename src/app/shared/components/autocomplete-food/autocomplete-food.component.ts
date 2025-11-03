@@ -20,7 +20,7 @@ export class AutocompleteFoodComponent implements OnInit, OnDestroy {
   private readonly store = inject(Store);
 
   @HostListener('document.click', ['$event.target'])
-  onClick(target: ElementRef) {
+  onClick(target: EventTarget | null) {
     this.closeAutoComplete(target);
   }
 
@@ -32,15 +32,15 @@ export class AutocompleteFoodComponent implements OnInit, OnDestroy {
   readonly includeDishes = input(false);
   readonly select$ = output<FoodSearchable>();
 
-  public searchables: any[]
-  public foodMatch = new Array();
-  public foodName: string;
-  public showAutoComplete: boolean;
-  public allFood: Food[];
-  public allDishes: Dish[];
+  public searchables: any[] = []
+  public foodMatch: any[] = [];
+  public foodName: string = '';
+  public showAutoComplete: boolean = false
+  public allFood: Food[] = []
+  public allDishes: Dish[] = []
 
-  private foodSubscription: Subscription;
-  private dishesSubscription: Subscription;
+  private foodSubscription?: Subscription;
+  private dishesSubscription?: Subscription;
 
   ngOnInit(): void {
     this.foodSubscription = this.store.select(selectAllFood).subscribe(it => {
@@ -94,11 +94,11 @@ export class AutocompleteFoodComponent implements OnInit, OnDestroy {
     this.select$.emit(match);
   }
 
-  public getDescription(foodSearchable: FoodSearchable) {
+  public getDescription(foodSearchable: FoodSearchable): string {
     if (foodSearchable.dish) {
       return foodSearchable.dish.name + ' (dish)';
     }
-    return foodSearchable.food.name;
+    return foodSearchable.food?.name ?? '';
   }
 
   ngOnDestroy(): void {
@@ -128,10 +128,12 @@ export class AutocompleteFoodComponent implements OnInit, OnDestroy {
     } else {
       const item: Food = { name: 'Apple', protein: 0.4, fat: 0.0, carbs: 12 };
       item.portions = [];
-      const macros: Macros = {};
-      macros.protein = 0.8;
-      macros.fat = 0.0;
-      macros.carbs = 24;
+      const macros: Macros = {
+        protein: 0.8,
+        fat: 0.0,
+        carbs: 24,
+        calories: 99
+      }
       const portion = {
         macros: macros,
         grams: 200,
@@ -147,7 +149,7 @@ export class AutocompleteFoodComponent implements OnInit, OnDestroy {
 
   private handleArrowDown() {
     const activeElement = document.activeElement;
-    if (activeElement.classList.contains('autocomplete__input')) {
+    if (activeElement && activeElement.classList.contains('autocomplete__input')) {
       const element = document.getElementsByClassName('option-0')[0] as HTMLElement;
       if (element) {
         element.focus();
@@ -168,7 +170,7 @@ export class AutocompleteFoodComponent implements OnInit, OnDestroy {
 
   private handleArrowUp() {
     const activeElement = document.activeElement;
-    if (activeElement.classList.contains('autocomplete__option')) {
+    if (activeElement && activeElement.classList.contains('autocomplete__option')) {
       const index = this.getCurrentOptionIndex();
       if (index === 0) {
         const element = document.getElementsByClassName('autocomplete__input')[0] as HTMLElement;
@@ -183,19 +185,21 @@ export class AutocompleteFoodComponent implements OnInit, OnDestroy {
   private getCurrentOptionIndex(): number {
     const activeElement = document.activeElement;
     const classList: string[] = []
-    activeElement.classList.forEach(it => {
-      if (it.startsWith('option-')) {
-        classList.push(it);
-      }
-    });
+    if (activeElement) {
+      activeElement.classList.forEach(it => {
+        if (it.startsWith('option-')) {
+          classList.push(it);
+        }
+      });
+    }
     const className = classList[0];
     const index = className.charAt(className.length - 1);
     return +index;
   }
 
-  private closeAutoComplete(target: ElementRef) {
+  private closeAutoComplete(target: EventTarget | null) {
     const newIngredientEref = this.newIngredientEref();
-    if (newIngredientEref && !newIngredientEref.nativeElement.contains(target)) {
+    if (target && newIngredientEref && !newIngredientEref.nativeElement.contains(target)) {
       this.showAutoComplete = false;
       this.foodMatch = [];
     }

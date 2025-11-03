@@ -16,7 +16,7 @@
       @if (!entry.portion) {
         <div class="flex-2">
           <span class="">
-            {{100.0 * entry.multiplier | number:'1.0-2'}} grams
+            {{100.0 * entry.multiplier! | number:'1.0-2'}} grams
           </span>
         </div>
       }
@@ -72,7 +72,7 @@
           </div>
           <div class="flex-1">
             @if (!entry.portion) {
-              <input class="input" value="{{entry.multiplier * 100}}"
+              <input class="input" value="{{entry.multiplier! * 100}}"
                 (keyup)="changeMultiplier($event, index)">
             }
             @if (entry.portion) {

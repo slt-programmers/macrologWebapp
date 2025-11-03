@@ -14,24 +14,23 @@ import {
   imports: []
 })
 export class LinegraphComponent {
-  public readonly yAxisElement = viewChild<ElementRef>('yAxis');
-  public readonly xAxisElement = viewChild<ElementRef>('xAxis');
+  public readonly yAxisElement = viewChild.required<ElementRef>('yAxis');
+  public readonly xAxisElement = viewChild.required<ElementRef>('xAxis');
 
   readonly dataset = input.required<DataPoint[]>();
   readonly yAxisStep = input.required<number>();
   readonly xAxisStep = input.required<number>();
   readonly hasOffgridValue = input<boolean>();
 
-  public graphPoints: GraphPoint[];
-  public yAxisPoints: number[];
-  public xAxisPoints: number[];
-  public svgPath: string;
-  public trendPath: string;
+  public graphPoints: GraphPoint[] = [];
+  public yAxisPoints: number[] = [];
+  public xAxisPoints: number[] = [];
+  public svgPath: string = ''
+  public trendPath: string = ''
 
-  public yAxisHeight: number;
-
-  private xAxisWidth: number;
-  private xAxisPointWidth: number;
+  public yAxisHeight: number = 0;
+  private xAxisWidth: number = 0
+  private xAxisPointWidth: number = 0
 
   constructor() {
     effect(() => {
@@ -107,8 +106,8 @@ export class LinegraphComponent {
       ' Z';
   }
 
-  private calcPreviousYPosition(i: number) {
-    let previousYPosition: number;
+  private calcPreviousYPosition(i: number): number {
+    let previousYPosition: number = 0;
     let j = i - 1;
     while (j >= 0) {
       if (this.graphPoints[j].height !== undefined) {
@@ -248,7 +247,7 @@ export class LinegraphComponent {
     for (const dataPoint of this.dataset()) {
       const lowestYValue = this.yAxisPoints[this.yAxisPoints.length - 1];
       const differenceHighestLowestYValue = this.yAxisPoints[0] - lowestYValue;
-      let height: number;
+      let height: number = 0;
       if (dataPoint.y !== undefined) {
         height =
           (dataPoint.y - lowestYValue) *

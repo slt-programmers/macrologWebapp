@@ -7,9 +7,9 @@ import { FormsModule } from '@angular/forms';
 import { ModalComponent } from '../../../../shared/components/modal/modal.component';
 
 @Component({
-    selector: 'ml-account',
-    templateUrl: './account.component.html',
-    imports: [FormsModule, ModalComponent]
+  selector: 'ml-account',
+  templateUrl: './account.component.html',
+  imports: [FormsModule, ModalComponent]
 })
 export class AccountComponent {
   private authService = inject(AuthenticationService);
@@ -17,19 +17,19 @@ export class AccountComponent {
   private router = inject(Router);
 
   public message = '';
-  public oldPassword: string;
-  public newPassword: string;
-  public confirmPassword: string;
+  public oldPassword?: string;
+  public newPassword?: string;
+  public confirmPassword?: string;
   public modalOpen = false;
-  public password: string;
-  public errorMessage: string;
+  public password?: string;
+  public errorMessage?: string;
 
   public changePassword() {
     this.message = '';
     if (this.newPassword !== this.confirmPassword) {
       this.message =
         'The confirmation password does not match with the new password.';
-    } else {
+    } else if (this.oldPassword && this.newPassword && this.confirmPassword) {
       this.authService
         .changePassword(
           this.oldPassword,
@@ -61,17 +61,19 @@ export class AccountComponent {
   }
 
   public deleteAccount() {
-    this.authService.deleteAccount(this.password).subscribe(
-      () => {
-        localStorage.clear();
-        this.router.navigate(['/']);
-      },
-      (err) => {
-        if (err.status === 401) {
-          this.errorMessage = 'Password is incorrect';
-        } 
-      }
-    );
+    if (this.password) {
+      this.authService.deleteAccount(this.password).subscribe(
+        () => {
+          localStorage.clear();
+          this.router.navigate(['/']);
+        },
+        (err) => {
+          if (err.status === 401) {
+            this.errorMessage = 'Password is incorrect';
+          }
+        }
+      );
+    }
   }
 
   public openModal() {

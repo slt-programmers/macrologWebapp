@@ -28,7 +28,7 @@ export const selectEntriesDateMeal = (date: string, meal: string) => createSelec
       return entriesForDate.entries.filter(entry => entry.meal === meal.toUpperCase());
     }
   }
-  return undefined;
+  return [];
 });
 
 export const selectTotalsForDate = (date: string) => createSelector(selectEntriesDate(date), (entries) => {

@@ -5,22 +5,22 @@
         <div id="stackdonuts" class="flex">
           <div class="stackdonut-wrapper">
             <ml-stackdonut [goal]="intakeGoals[0]" [circleRadius]="circleRadius"
-              [strokeWidth]="strokeWidth" [text]="'Protein'" [achieved]="(totals$ | async).protein">
+              [strokeWidth]="strokeWidth" [text]="'Protein'" [achieved]="(totals$ | async)!.protein">
             </ml-stackdonut>
           </div>
           <div class="stackdonut-wrapper">
             <ml-stackdonut [goal]="intakeGoals[1]" [circleRadius]="circleRadius"
-              [strokeWidth]="strokeWidth" [text]="'Fat'" [achieved]="(totals$ | async).fat">
+              [strokeWidth]="strokeWidth" [text]="'Fat'" [achieved]="(totals$ | async)!.fat">
             </ml-stackdonut>
           </div>
           <div class="stackdonut-wrapper">
             <ml-stackdonut [goal]="intakeGoals[2]" [circleRadius]="circleRadius"
-              [strokeWidth]="strokeWidth" [text]="'Carbs'" [achieved]="(totals$ | async).carbs">
+              [strokeWidth]="strokeWidth" [text]="'Carbs'" [achieved]="(totals$ | async)!.carbs">
             </ml-stackdonut>
           </div>
         </div>
         <div id="caloriesText" class="flex">
-          <p>{{ (totals$ | async).calories | number: '1.0-0' }}/{{ goalCal }}
+          <p>{{ (totals$ | async)!.calories | number: '1.0-0' }}/{{ goalCal }}
             <span class="">Calories</span>
           </p>
         </div>

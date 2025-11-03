@@ -25,13 +25,13 @@ export class ActivityPageRowComponent implements OnInit, OnDestroy {
 
   public canSync = false;
   public activities: Activity[] = [];
-  public modalActivities: Activity[];
+  public modalActivities: Activity[] = []
   public showModal = false;
   public activityForm: FormGroup;
 
   private loading = false;
   private subscriptions: Subscription[] = [];
-  private loadingSubscription: Subscription;
+  private loadingSubscription?: Subscription;
 
   constructor() {
     this.activityForm = this.formBuilder.group({
@@ -92,7 +92,7 @@ export class ActivityPageRowComponent implements OnInit, OnDestroy {
   saveActivities() {
     this.store.dispatch(activitiesActions.post(this.modalActivities, this.date()));
     this.showModal = false;
-    this.modalActivities = undefined;
+    this.modalActivities = [];
   }
 
   ngOnDestroy(): void {

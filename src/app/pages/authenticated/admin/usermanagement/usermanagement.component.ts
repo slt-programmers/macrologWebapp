@@ -15,9 +15,9 @@ export class UserManagementComponent implements OnInit {
 
   public allUsers: UserAccount[] = []
   public isModalVisible = false;
-  public userName: string = undefined;
+  public userName?: string;
 
-  public selectedUser: UserAccount | undefined;
+  public selectedUser?: UserAccount;
 
   ngOnInit() {
     this.getAllUsers();

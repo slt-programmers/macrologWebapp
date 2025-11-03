@@ -57,14 +57,14 @@ export class PersonalComponent implements OnInit {
 
   public saveUserSettings(): void {
     forkJoin([
-      this.userService.addUserSetting('name', this.name),
-      this.userService.addUserSetting('birthday', this.birthday?.toString()),
-      this.userService.addUserSetting('gender', this.gender?.toString()),
-      this.userService.addUserSetting('height', this.height?.toString()),
-      this.userService.addUserSetting('weight', this.weight?.toString()),
-      this.userService.addUserSetting('activity', this.activity?.toString()),
+      this.userService.addUserSetting('name', this.name!),
+      this.userService.addUserSetting('birthday', this.birthday!.toString()),
+      this.userService.addUserSetting('gender', this.gender!.toString()),
+      this.userService.addUserSetting('height', this.height!.toString()),
+      this.userService.addUserSetting('weight', this.weight!.toString()),
+      this.userService.addUserSetting('activity', this.activity!.toString()),
     ]).subscribe(
-      (data) => this.toastService.setMessage('Your data is saved!', false, 'Success!'),
+      () => this.toastService.setMessage('Your data is saved!', false, 'Success!'),
       (error) => console.error(error)
     );
   }

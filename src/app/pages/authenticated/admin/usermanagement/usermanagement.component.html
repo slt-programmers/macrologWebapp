@@ -33,7 +33,7 @@
   }
 </div>
 
-@if (isModalVisible) {
+@if (isModalVisible && selectedUser) {
   <ml-modal [title]="'Delete user account'" (close$)="closeModal()">
     <div class="content">
       <p>

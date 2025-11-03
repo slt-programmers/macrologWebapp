@@ -1,5 +1,5 @@
 import { DecimalPipe } from '@angular/common';
-import { Component, ElementRef, OnInit, Renderer2, afterRenderEffect, effect, inject, input, viewChild } from '@angular/core';
+import { Component, ElementRef, Renderer2, afterRenderEffect, effect, inject, input, viewChild } from '@angular/core';
 
 @Component({
   selector: 'ml-stackdonut',
@@ -7,12 +7,12 @@ import { Component, ElementRef, OnInit, Renderer2, afterRenderEffect, effect, in
   styleUrls: ['./stackdonut.component.scss'],
   imports: [DecimalPipe]
 })
-export class StackDonutComponent implements OnInit {
+export class StackDonutComponent {
   private renderer = inject(Renderer2);
 
-  readonly innerCircle = viewChild<ElementRef>('innerCircle');
-  readonly innerBackgroundCircle = viewChild<ElementRef>('innerBackgroundCircle');
-  readonly outerCircle = viewChild<ElementRef>('outerCircle');
+  readonly innerCircle = viewChild.required<ElementRef>('innerCircle');
+  readonly innerBackgroundCircle = viewChild.required<ElementRef>('innerBackgroundCircle');
+  readonly outerCircle = viewChild.required<ElementRef>('outerCircle');
 
   readonly goal = input.required<number>();
   readonly achieved = input.required<number>();
@@ -20,11 +20,12 @@ export class StackDonutComponent implements OnInit {
   readonly circleRadius = input(60);
   readonly strokeWidth = input(8);
 
-  public height: number;
-  public width: number;
+  public height = (this.circleRadius() + (this.strokeWidth() * 2) + 1) * 2;
+  public width = this.height;
 
   constructor() {
     effect(() => {
+      console.log(this.achieved())
       this.drawProgressCircle(this.achieved());
     })
 
@@ -47,13 +48,10 @@ export class StackDonutComponent implements OnInit {
     })
   }
 
-  ngOnInit() {
-    this.height = (this.circleRadius() + (this.strokeWidth() * 2) + 1) * 2;
-    this.width = this.height;
-  }
-
   private drawProgressCircle(oldValue: number) {
+    console.log('getting inner circle')
     const innerCircle = this.innerCircle();
+    console.log(innerCircle)
     const outerCircle = this.outerCircle();
     if (innerCircle && outerCircle) {
       const val = (this.achieved() * 100) / this.goal();

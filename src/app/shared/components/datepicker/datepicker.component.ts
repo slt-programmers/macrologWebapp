@@ -6,36 +6,33 @@ import {
 } from '@angular/core';
 
 @Component({
-    selector: 'ml-datepicker',
-    templateUrl: './datepicker.component.html',
-    styleUrls: ['./datepicker.component.scss'],
-    imports: [DatePipe]
+  selector: 'ml-datepicker',
+  templateUrl: './datepicker.component.html',
+  styleUrls: ['./datepicker.component.scss'],
+  imports: [DatePipe]
 })
 export class DatepickerComponent {
   readonly dayRefs = viewChildren<any>('dayRef');
 
-  readonly change$ = output<string>();
+  readonly change$ = output<string | null>();
 
   public dateformat = 'dd-MM-yyyy';
-  public today: Date;
-  public selectedDate: Date;
-  public daysInMonth: number;
+  public today = new Date();
+  public selectedDate = this.today;
+  public daysInMonth = 30;
   public daysInMonthArray = new Array();
-  public weekdays = new Array();
+  public weekdays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
   public placeholders = new Array();
   public isOpen = false;
 
   private pipe = new DatePipe('en-US');
 
   constructor() {
-    this.today = new Date();
-    this.selectedDate = this.today;
     this.setDaysInMonthArray();
-    this.setWeekdays();
     this.getWeekdayPlaceholders();
   }
 
-  public toggleOpen(event?: any) {
+  public toggleOpen(event?: any): void {
     if (event) {
       if (event.target && event.target.classList.value === 'overlay') {
         this.isOpen = !this.isOpen;
@@ -107,10 +104,6 @@ export class DatepickerComponent {
     for (let i = 1; i <= this.daysInMonth; i++) {
       this.daysInMonthArray.push(i);
     }
-  }
-
-  private setWeekdays() {
-    this.weekdays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
   }
 
   private getWeekdayPlaceholders() {
