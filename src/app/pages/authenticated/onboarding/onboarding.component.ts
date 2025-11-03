@@ -13,7 +13,7 @@ import { EntryPageRowComponent } from '../diary/entry-page-row/entry-page-row.co
 @Component({
   selector: 'ml-onboarding',
   templateUrl: './onboarding.component.html',
-  styleUrls: ['./onboarding.component.scss'],
+  styleUrls: ['./onboarding.component.css'],
   imports: [StepperComponent, FormsModule, ReactiveFormsModule, EntryPageRowComponent]
 })
 export class OnboardingComponent {

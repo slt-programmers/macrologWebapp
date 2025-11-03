@@ -12,7 +12,7 @@ import { BargraphComponent } from '../../../shared/components/bargraph/bargraph.
 @Component({
     selector: 'ml-graphs',
     templateUrl: './graphs.component.html',
-    styleUrls: ['./graphs.component.scss'],
+    styleUrls: ['./graphs.component.css'],
     imports: [FormsModule, BargraphComponent, DatePipe]
 })
 export class GraphsComponent implements OnInit {

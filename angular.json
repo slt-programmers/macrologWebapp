@@ -26,7 +26,8 @@
               "src/google3bb89e24d542c3d5.html"
             ],
             "styles": [
-              "src/css/public.scss"
+              "src/css/public.scss",
+              "src/styles.css"
             ],
             "scripts": [],
             "extractLicenses": false,
@@ -118,7 +119,8 @@
               "src/polyfills.ts"
             ],
             "styles": [
-              "src/css/public.scss"
+              "src/css/public.scss",
+              "src/styles.css"
             ],
             "assets": [
               "src/favicon.ico",

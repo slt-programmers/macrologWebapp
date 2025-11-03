@@ -34,22 +34,16 @@ export class LinegraphComponent {
 
   constructor() {
     effect(() => {
-      if (this.dataset()) {
-        this.yAxisPoints = this.determineYAxisPoints();
-        this.xAxisPoints = this.determineXAxisPoints();
-        this.graphPoints = this.convertDatasetToPoints();
-        this.calculateGraph();
-        this.calculateTrend();
-      }
+      this.yAxisPoints = this.determineYAxisPoints();
+      this.xAxisPoints = this.determineXAxisPoints();
     });
 
     afterRenderEffect(() => {
       this.yAxisHeight = this.yAxisElement().nativeElement.clientHeight;
       this.xAxisWidth = this.xAxisElement().nativeElement.clientWidth;
-
-      if (this.dataset() !== undefined) {
-        this.graphPoints = this.convertDatasetToPoints();
-      }
+      this.graphPoints = this.convertDatasetToPoints();
+      this.calculateGraph();
+      this.calculateTrend();
     });
   }
 
@@ -198,6 +192,7 @@ export class LinegraphComponent {
   }
 
   private determineYStartPosition(): number {
+    console.log(this.graphPoints)
     for (const graphpoint of this.graphPoints) {
       if (graphpoint.height !== undefined) {
         return this.yAxisHeight - graphpoint.height;
@@ -255,6 +250,7 @@ export class LinegraphComponent {
       const graphPoint = new GraphPoint(dataPoint.y, height);
       graphPoints.push(graphPoint);
     }
+    console.log(graphPoints)
     return graphPoints;
   }
 }

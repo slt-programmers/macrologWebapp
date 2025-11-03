@@ -15,7 +15,7 @@ import { ModalComponent } from '../../../../shared/components/modal/modal.compon
 @Component({
   selector: 'ml-entry-page-row',
   templateUrl: './entry-page-row.component.html',
-  styleUrls: ['./entry-page-row.component.scss'],
+  styleUrls: ['./entry-page-row.component.css'],
   imports: [ModalComponent, FormsModule, AutocompleteFoodComponent, DecimalPipe, TitleCasePipe]
 })
 export class EntryPageRowComponent implements OnDestroy {

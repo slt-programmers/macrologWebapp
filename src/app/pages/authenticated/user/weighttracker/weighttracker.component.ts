@@ -8,10 +8,10 @@ import { format, isAfter, isBefore, parse } from 'date-fns';
 import { LinegraphComponent } from '../../../../shared/components/linegraph/linegraph.component';
 
 @Component({
-    selector: 'ml-weighttracker',
-    templateUrl: './weighttracker.component.html',
-    styleUrls: ['./weighttracker.component.scss'],
-    imports: [LinegraphComponent, FormsModule, DecimalPipe, DatePipe]
+  selector: 'ml-weighttracker',
+  templateUrl: './weighttracker.component.html',
+  styleUrls: ['./weighttracker.component.css'],
+  imports: [LinegraphComponent, FormsModule, DecimalPipe, DatePipe]
 })
 export class WeightTrackerComponent implements OnInit {
   private readonly weightService = inject(WeightService);

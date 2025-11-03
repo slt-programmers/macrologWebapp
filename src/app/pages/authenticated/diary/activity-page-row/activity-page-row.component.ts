@@ -13,7 +13,7 @@ import { ModalComponent } from '../../../../shared/components/modal/modal.compon
 @Component({
   selector: 'ml-activity-page-row',
   templateUrl: './activity-page-row.component.html',
-  styleUrls: ['./activity-page-row.component.scss'],
+  styleUrls: ['./activity-page-row.component.css'],
   imports: [ModalComponent, FormsModule, ReactiveFormsModule, DecimalPipe]
 })
 export class ActivityPageRowComponent implements OnInit, OnDestroy {

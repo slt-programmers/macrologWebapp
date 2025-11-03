@@ -6,7 +6,7 @@ import { environment } from '../../../../../environments/environment';
 @Component({
   selector: 'ml-connectivity',
   templateUrl: './connectivity.component.html',
-  styleUrls: ['./connectivity.component.scss'],
+  styleUrls: ['./connectivity.component.css'],
   imports: []
 })
 export class ConnectivityComponent implements OnInit {
