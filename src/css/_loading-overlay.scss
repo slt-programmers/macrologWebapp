@@ -1,8 +1,8 @@
 .loading-overlay {
 	align-items: center;
-	background-image: $backgroundGradient;
+	background-image: var(--backgroundGradient);
 	box-sizing: border-box;
-	color: $white;
+	color: var(--white);
 	display: flex;
 	flex-direction: column;
 	justify-content: center;

@@ -13,9 +13,9 @@ html {
 }
 
 body {
-  background-color: $white;
+  background-color: var(--white);
   box-sizing: border-box;
-  color: $storm;
+  color: var(--storm);
   font-family: "Assistant", sans-serif;
   font-weight: 400;
   position: static;
@@ -24,7 +24,7 @@ body {
 }
 
 *:focus {
-  outline: 1px solid $secondary
+  outline: 1px solid var(--secondary)
 }
 
 h1,
@@ -43,7 +43,7 @@ p {
 
 a {
   text-decoration: none;
-  color: $primary;
+  color: var(--primary);
   &:hover {
     cursor: pointer;
     text-decoration: underline;

@@ -4,7 +4,7 @@ body.theme--dark {
 
   a,
   .icon-button {
-    color: $secondary;
+    color: var(--secondary);
   }
   .download-button {
     color: white;
@@ -29,22 +29,22 @@ body.theme--dark {
   }
 
   .subnav {
-    border-bottom-color: $secondary;
+    border-bottom-color: var(--secondary);
     &__item:hover {
-      border-bottom-color: $secondary;
+      border-bottom-color: var(--secondary);
     }
   }
 
   input {
     color: white;
     background-color: #1a1a1a;
-    border: 1px solid $secondary;
+    border: 1px solid var(--secondary);
   }
 
   select {
     color: white;
     background-color: #1a1a1a;
-    border: 1px solid $secondary;
+    border: 1px solid var(--secondary);
   }
 
   .bargraph {
@@ -57,7 +57,7 @@ body.theme--dark {
   }
   .selectable {
     &:hover {
-      background-color: $storm;
+      background-color: var(--storm);
     }
   }
 
@@ -88,14 +88,14 @@ body.theme--dark {
   }
 
   .date {
-    background-color: $secondary;
+    background-color: var(--secondary);
   }
 
   .picker {
     background-color: #282828;
     box-shadow: $boxShadowDark;
     &__button {
-      background-color: $secondary;
+      background-color: var(--secondary);
     }
     &__day:hover {
       background-color: #1a1a1a;
@@ -123,7 +123,7 @@ body.theme--dark {
       stroke: #1a1a1a;
       &--inner,
       &--outer {
-        stroke: $secondary;
+        stroke: var(--secondary);
       }
     }
   }

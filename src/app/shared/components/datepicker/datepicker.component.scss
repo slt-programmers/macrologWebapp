@@ -7,13 +7,13 @@
 
 .date {
   align-items: center;
-  background-color: $primary;
+  background-color: var(--primary);
   border-radius: 2px;
-  color: $white;
+  color: var(--white);
   display: flex;
 
   &__selected-day {
-    @media (min-width: $xs) {
+    @media (min-width: 448px) {
       font-size: 16px;
     }
     font-size: 14px;
@@ -41,7 +41,7 @@
 }
 
 .picker {
-  background-color: $white;
+  background-color: var(--white);
   border-radius: 4px;
   padding: 10px;
   position: relative;
@@ -58,7 +58,7 @@
 
   &__button {
     border-radius: 2px;
-    background-color: $primary;
+    background-color: var(--primary);
     border: none;
     color: white;
     font-size: 1rem;
@@ -82,11 +82,11 @@
     text-align: right;
 
     &--today {
-      background-color: $smoke;
+      background-color: var(--smoke);
     }
 
     &:hover {
-      background-color: $lightBlue;
+      background-color: var(--lightBlue);
     }
   }
 }

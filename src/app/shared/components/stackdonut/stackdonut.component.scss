@@ -37,16 +37,16 @@
       stroke-width: 8px;
     }
     stroke-dashoffset: 0;
-    stroke: $lightBlue;
+    stroke: var(--lightBlue);
     stroke-width: 5px;
 
     &--inner {
       transition: stroke-dashoffset 0.5s linear;
-      stroke: $primary;
+      stroke: var(--primary);
     }
 
     &--outer {
-      stroke: $primary;
+      stroke: var(--primary);
       transition: stroke-dashoffset 0.2s linear;
       z-index: -1;
     }

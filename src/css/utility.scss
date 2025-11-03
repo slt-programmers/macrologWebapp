@@ -174,10 +174,10 @@
   color: white;
 }
 .text-primary {
-  color: $primary;
+  color: var(--primary);
 }
 .text-secondary {
-  color: $secondary;
+  color: var(--secondary);
 }
 .font-semibold {
   font-weight: 600;

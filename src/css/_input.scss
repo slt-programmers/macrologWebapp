@@ -3,23 +3,23 @@
   font-family: "Assistant", sans-serif;
   font-size: 1rem;
   font-weight: 400;
-  background-color: $white;
-  border: 1px solid $smoke;
+  background-color: var(--white);
+  border: 1px solid var(--smoke);
   border-radius: 6px;
   box-sizing: border-box;
   padding: 10px;
   width: 100%;
   height: 42px;
-  color: $storm;
+  color: var(--storm);
 
   &::placeholder {
-    color: $platinum;
+    color: var(--platinum);
     font-family: "Assistant", sans-serif;
     font-size: 1rem;
   }
 
   &.ng-touched.ng-invalid {
-    border-color: $error;
+    border-color: var(--error);
   }
 
   &--large {
