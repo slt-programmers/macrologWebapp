@@ -113,27 +113,18 @@
         "test": {
           "builder": "@angular/build:karma",
           "options": {
-            "main": "src/test.ts",
+            "tsConfig": "tsconfig.spec.json",
             "polyfills": [
               "src/polyfills.ts"
             ],
-            "karmaConfig": "karma.conf.js",
             "styles": [
               "src/css/public.scss"
             ],
-            "scripts": [],
             "assets": [
               "src/favicon.ico",
               "src/assets"
             ],
-            "tsConfig": "tsconfig.spec.json",
-            "codeCoverage": true,
-            "codeCoverageExclude": [
-              "src/test/**",
-              "src/app/app.module.ts",
-              "src/test/**/*.mock.ts",
-              "./test.ts"
-            ]
+            "codeCoverage": true
           }
         },
         "lint": {
