@@ -14,7 +14,7 @@ export class WeightService {
 
   public getAllWeights() {
     return this.http.get<Weight[]>(this.macrologBackendUrl).pipe(
-      catchError((error) => { return of([]); }));
+      catchError(() => { return of([]); }));
   }
 
   public addWeight(weight: Weight): Observable<any> {
@@ -24,7 +24,7 @@ export class WeightService {
     };
     const options = { headers: headers };
     return this.http.post<Weight>(this.macrologBackendUrl + '/', weight, options).pipe(
-      catchError((error) => { return of<any>(); }));
+      catchError(() => { return of<any>(); }));
   }
 
   public deleteWeight(weight: Weight): Observable<any> {
@@ -34,6 +34,6 @@ export class WeightService {
     };
     const options = { headers: headers };
     return this.http.delete<number>(this.macrologBackendUrl + '/' + weight.id, options).pipe(
-      catchError((error) => { return of<number>(); }));
+      catchError(() => { return of<number>(); }));
   }
 }

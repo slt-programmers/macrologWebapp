@@ -1,9 +1,9 @@
-import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Injectable, inject } from '@angular/core';
+import { Observable, of } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 import { environment } from '../../../environments/environment';
 import { UserAccount } from '../model/userAccount';
-import { catchError } from 'rxjs/operators';
-import { Observable, of } from 'rxjs';
 
 @Injectable()
 export class AdminService {
@@ -13,7 +13,7 @@ export class AdminService {
 
   public getAllUsers(): Observable<UserAccount[]> {
     return this.http.get<UserAccount[]>(this.macrologBackendUrl + '/getAllUsers').pipe(
-      catchError(error => of<any>()));
+      catchError(() => of()));
   }
 
   public deleteUser(user: UserAccount): Observable<any> {
@@ -26,6 +26,6 @@ export class AdminService {
       params: { userId: user.id.toString() },
     };
     return this.http.post<any>(this.macrologBackendUrl + '/deleteAccount', null, options).pipe(
-      catchError(error => of<any>()));
+      catchError(() => of()));
   }
 }

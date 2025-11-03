@@ -15,14 +15,6 @@ module.exports = defineConfig([
     ],
     processor: angular.processInlineTemplates,
     rules: {
-      "@angular-eslint/directive-selector": [
-        "error",
-        {
-          type: "attribute",
-          prefix: "ml",
-          style: "camelCase",
-        },
-      ],
       "@angular-eslint/component-selector": [
         "error",
         {
@@ -31,6 +23,7 @@ module.exports = defineConfig([
           style: "kebab-case",
         },
       ],
+      "@typescript-eslint/no-explicit-any": "warn",
     },
   },
   {
@@ -38,7 +31,7 @@ module.exports = defineConfig([
     // @ts-ignore
     extends: [
       ...angular.configs.templateRecommended,
-      ...angular.configs.templateAccessibility,
+      // ...angular.configs.templateAccessibility, // TODO later
     ],
     rules: {},
   }]

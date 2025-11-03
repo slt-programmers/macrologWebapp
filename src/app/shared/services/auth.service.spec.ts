@@ -75,7 +75,7 @@ describe('AuthService', () => {
     spyOn(http, 'post').and.returnValue(throwError({ status: 404 }));
     const service = TestBed.inject(AuthenticationService);
     service.login('username', 'password').subscribe(
-      () => { },
+      () => { console.log('dummy') },
       (error) => {
         expect(error).toEqual({ status: 404 });
       }
@@ -133,7 +133,7 @@ describe('AuthService', () => {
     spyOn(http, 'post').and.returnValue(throwError({ status: 404 }));
     const service = TestBed.inject(AuthenticationService);
     service.register('username', 'email@email.com', 'password').subscribe(
-      () => { },
+      () => {console.log('dummy') },
       (error) => {
         expect(error).toEqual({ status: 404 });
       }

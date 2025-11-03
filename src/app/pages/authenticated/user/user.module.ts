@@ -8,8 +8,6 @@ import { PersonalComponent } from './personal/personal.component';
 import { WeightTrackerComponent } from './weighttracker/weighttracker.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import { UserComponent } from './user.component';
-
 @NgModule({
     imports: [
     CommonModule,

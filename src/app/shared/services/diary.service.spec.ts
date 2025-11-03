@@ -1,11 +1,10 @@
-import { TestBed } from '@angular/core/testing';
-import { DiaryService } from './diary.service';
-import { Entry } from '../model/entry';
-import { of, throwError } from 'rxjs';
-import { MockProvider } from 'ng-mocks';
 import { HttpClient } from '@angular/common/http';
+import { TestBed } from '@angular/core/testing';
+import { MockProvider } from 'ng-mocks';
+import { of } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { MacrosPerDay } from '../model/macrosPerDay';
+import { DiaryService } from './diary.service';
 
 describe('DiaryService', () => {
   let service: DiaryService;

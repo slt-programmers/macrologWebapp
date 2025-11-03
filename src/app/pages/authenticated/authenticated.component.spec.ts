@@ -3,7 +3,7 @@ import {
   TestBed
 } from '@angular/core/testing';
 import { provideRouter, Router, RouterOutlet } from '@angular/router';
-import { MockStore, provideMockStore } from '@ngrx/store/testing';
+import { provideMockStore } from '@ngrx/store/testing';
 import { MockComponent, MockProvider } from 'ng-mocks';
 import { of, throwError } from 'rxjs';
 import { NavigationComponent } from 'src/app/shared/components/navigation/navigation.component';
@@ -19,7 +19,6 @@ describe('AuthenticatedComponent', () => {
   let scrollBehaviourService: ScrollBehaviourService;
   let authService: AuthenticationService;
   let router: Router;
-  let store: MockStore
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -34,7 +33,6 @@ describe('AuthenticatedComponent', () => {
       ],
     }).compileComponents();
 
-    store = TestBed.inject(MockStore);
     fixture = TestBed.createComponent(AuthenticatedComponent);
     component = fixture.componentInstance;
     healthcheckService = TestBed.inject(HealthcheckService);

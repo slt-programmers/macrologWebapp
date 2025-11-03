@@ -11,7 +11,7 @@ import { HealthcheckService } from './shared/services/healthcheck.service';
 
 
 class MockDocument {
-  getElementsByTagName(tag: string) { }
+  getElementsByTagName(tag: string) { console.log(tag)}
 }
 
 describe('AppComponent', () => {

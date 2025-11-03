@@ -198,10 +198,9 @@ export class LinegraphComponent {
   }
 
   private determineYStartPosition(): number {
-    for (let j = 0; j < this.graphPoints.length; j++) {
-      const dataPoint = this.graphPoints[j];
-      if (dataPoint.height !== undefined) {
-        return this.yAxisHeight - dataPoint.height;
+    for (const graphpoint of this.graphPoints) {
+      if (graphpoint.height !== undefined) {
+        return this.yAxisHeight - graphpoint.height;
       }
     }
     return 0;
@@ -236,8 +235,8 @@ export class LinegraphComponent {
 
   determineXAxisPoints() {
     const xAxisPoints = [];
-    for (let i = 0; i < this.dataset().length; i++) {
-      xAxisPoints.push(this.dataset()[i].x);
+    for (const datapoint of this.dataset()) {
+      xAxisPoints.push(datapoint.x);
     }
     return xAxisPoints;
   }

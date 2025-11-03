@@ -1,14 +1,13 @@
-import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Injectable, inject } from '@angular/core';
+import { Observable, of, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { environment } from '../../../environments/environment';
 import { UserAccount } from '../model/userAccount';
-import { Observable, of, throwError } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class AuthenticationService {
   private http = inject(HttpClient);
-
 
   private readonly macrologBackendUrl = '//' + environment.backend + '/api';
 
@@ -32,7 +31,7 @@ export class AuthenticationService {
           localStorage.setItem('currentUser', JSON.stringify(res));
         }
       }),
-      catchError(error => throwError(error))
+      catchError(error => throwError(() => error))
     );
   }
 
@@ -45,7 +44,7 @@ export class AuthenticationService {
       oldPassword: oldPassword,
       newPassword: newPassword,
       confirmPassword: confirmPassword,
-    }).pipe(catchError(error => of<any>()));
+    }).pipe(catchError(() => of()));
   }
 
   public register(username: string, email: string, password: string): Observable<any> {
@@ -53,13 +52,13 @@ export class AuthenticationService {
       username: username,
       email: email,
       password: password,
-    }).pipe(catchError(error => throwError(error)));
+    }).pipe(catchError(error => of(error)));
   }
 
   public resetPassword(email: string): Observable<any> {
     return this.http.post<any>(this.macrologBackendUrl + '/resetPassword', {
       email: email,
-    }).pipe(catchError(error => of<any>()));
+    }).pipe(catchError(() => of()));
   }
 
   public deleteAccount(password: string): Observable<any> {
@@ -72,6 +71,6 @@ export class AuthenticationService {
       this.macrologBackendUrl + '/deleteAccount',
       null,
       options
-    ).pipe(catchError(error => of<any>()));
+    ).pipe(catchError(() => of()));
   }
 }

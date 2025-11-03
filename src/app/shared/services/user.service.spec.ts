@@ -1,27 +1,23 @@
+import { HttpClient } from '@angular/common/http';
 import { TestBed } from '@angular/core/testing';
 import { MockProvider } from 'ng-mocks';
-import { HttpClient } from '@angular/common/http';
 import { of, throwError } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { UserService } from './user.service';
-import { ToastService } from './toast.service';
 import { UserSettings } from '../model/userSettings';
+import { UserService } from './user.service';
 
 describe('UserService', () => {
   let service: UserService;
   let http: HttpClient;
-  let toastService: ToastService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [UserService,
         MockProvider(HttpClient),
-        MockProvider(ToastService)
       ],
     });
     service = TestBed.inject(UserService);
     http = TestBed.inject(HttpClient);
-    toastService = TestBed.inject(ToastService);
   });
 
   it('should create', () => {

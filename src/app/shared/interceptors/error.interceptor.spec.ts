@@ -37,11 +37,11 @@ describe('AuthService', () => {
       'doesNotMatter',
     ]);
     const httpHandlerSpy = jasmine.createSpyObj('HttpHandler', ['handle']);
-    httpHandlerSpy.handle.and.returnValue(throwError({ status: 403 }));
+    httpHandlerSpy.handle.and.returnValue(throwError(() => ({ status: 403 })));
 
     interceptor.intercept(httpRequestSpy, httpHandlerSpy).subscribe(
-      () => { },
-      (err) => {
+      () => { console.log('dummy') },
+      () => {
         expect(authService.logout).toHaveBeenCalled();
       }
     );
@@ -56,8 +56,8 @@ describe('AuthService', () => {
     httpHandlerSpy.handle.and.returnValue(throwError({ status: 401 }));
 
     interceptor.intercept(httpRequestSpy, httpHandlerSpy).subscribe(
-      () => { },
-      (err) => {
+      () => { console.log('dummy') },
+      () => {
         expect(authService.logout).not.toHaveBeenCalled();
       }
     );

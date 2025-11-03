@@ -8,7 +8,7 @@
             <div class="font-bold flex-grow">
               {{ toast.title || 'An error has occurred' }}
             </div>
-            <div class="" (click)="closeToast(index)">
+            <div (click)="closeToast(index)" (keyup.esc)="closeToast(index)">
               <em class="fas fa-times"></em>
             </div>
           </div>

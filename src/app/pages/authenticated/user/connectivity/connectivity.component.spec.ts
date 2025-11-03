@@ -4,7 +4,7 @@ import {
   ComponentFixture,
   TestBed
 } from '@angular/core/testing';
-import { ActivatedRoute, provideRouter, Router } from '@angular/router';
+import { ActivatedRoute, provideRouter } from '@angular/router';
 import { MockProvider } from 'ng-mocks';
 import { of } from 'rxjs';
 import { ToastService } from 'src/app/shared/services/toast.service';
@@ -14,9 +14,7 @@ import { ConnectivityComponent } from './connectivity.component';
 describe('ConnectivityComponent', () => {
   let component: ConnectivityComponent;
   let fixture: ComponentFixture<ConnectivityComponent>;
-  let toastService: ToastService;
   let userService: UserService;
-  let router: Router;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -31,9 +29,7 @@ describe('ConnectivityComponent', () => {
     }).compileComponents();
     fixture = TestBed.createComponent(ConnectivityComponent);
     component = fixture.componentInstance;
-    toastService = TestBed.inject(ToastService);
     userService = TestBed.inject(UserService);
-    router = TestBed.inject(Router);
   });
 
   afterEach(() => {

@@ -9,20 +9,18 @@ describe('MailComponent', () => {
   let component: MailComponent;
   let fixture: ComponentFixture<MailComponent>;
   let googleService: GoogleService;
-  let route: ActivatedRoute;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-    imports: [MailComponent],
-    providers: [
+      imports: [MailComponent],
+      providers: [
         MockProvider(GoogleService),
         MockProvider(ActivatedRoute),
         provideRouter([])
-    ]
-}).compileComponents();
+      ]
+    }).compileComponents();
 
     googleService = TestBed.inject(GoogleService);
-    route = TestBed.inject(ActivatedRoute);
   });
 
   it('should create', () => {

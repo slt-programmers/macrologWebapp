@@ -40,7 +40,7 @@ export class UserManagementComponent implements OnInit {
 
   public deleteUser() {
     if (this.selectedUser) {
-      this.adminService.deleteUser(this.selectedUser).subscribe(it => {
+      this.adminService.deleteUser(this.selectedUser).subscribe(() => {
         this.getAllUsers();
         this.selectedUser = undefined;
         this.userName = undefined;

@@ -115,7 +115,7 @@ export class WeightTrackerComponent implements OnInit {
     newWeight.day = this.pipe.transform(date, 'yyyy-MM-dd') || undefined;
     newWeight.remark = this.remark;
 
-    this.weightService.addWeight(newWeight).subscribe(it => {
+    this.weightService.addWeight(newWeight).subscribe(() => {
       formUsed.reset();
       this.getAllWeights();
       this.init();
@@ -143,7 +143,7 @@ export class WeightTrackerComponent implements OnInit {
   }
 
   public deleteWeight(weight: Weight) {
-    this.weightService.deleteWeight(weight).subscribe(it => {
+    this.weightService.deleteWeight(weight).subscribe(() => {
       this.getAllWeights();
       this.openWeight = undefined;
     });
@@ -158,7 +158,7 @@ export class WeightTrackerComponent implements OnInit {
     newRequest.day = this.pipe.transform(date, 'yyyy-MM-dd') || undefined;
     newRequest.remark = weight.remark;
 
-    this.weightService.addWeight(newRequest).subscribe(it => {
+    this.weightService.addWeight(newRequest).subscribe(() => {
       this.getAllWeights();
       this.openWeight = undefined;
     });

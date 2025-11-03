@@ -1,12 +1,11 @@
-import { AutocompleteFoodComponent } from './autocomplete-food.component';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { By } from '@angular/platform-browser';
-import { Dish } from 'src/app/shared/model/dish';
-import { Food } from 'src/app/shared/model/food';
 import { FormsModule } from '@angular/forms';
+import { By } from '@angular/platform-browser';
 import { provideMockStore } from '@ngrx/store/testing';
-import { selectAllFood } from '../../store/selectors/food.selectors';
+import { Dish } from 'src/app/shared/model/dish';
 import { selectAllDishes } from '../../store/selectors/dishes.selectors';
+import { selectAllFood } from '../../store/selectors/food.selectors';
+import { AutocompleteFoodComponent } from './autocomplete-food.component';
 
 describe('AutocompleteFoodComponent', () => {
   let component: AutocompleteFoodComponent;

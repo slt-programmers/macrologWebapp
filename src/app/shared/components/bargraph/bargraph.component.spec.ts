@@ -59,7 +59,6 @@ describe('BargraphComponent', () => {
   });
 
   function makeDataSets() {
-    let datasets: DataPoint[][];
     const datasetOne = [
       new DataPoint(1, 15),
       new DataPoint(2, 14),
@@ -70,7 +69,6 @@ describe('BargraphComponent', () => {
       new DataPoint(2, 12),
       new DataPoint(3, 14),
     ];
-    datasets = [datasetOne, datasetTwo];
-    return datasets;
+    return [datasetOne, datasetTwo];
   }
 });

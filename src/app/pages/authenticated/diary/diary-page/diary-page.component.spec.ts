@@ -1,8 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { MockStore, provideMockStore } from '@ngrx/store/testing';
+import { provideMockStore } from '@ngrx/store/testing';
 import { MockComponent } from 'ng-mocks';
-import { activitiesActions } from 'src/app/shared/store/actions/activities.actions';
-import { entriesActions } from 'src/app/shared/store/actions/entries.actions';
 import { selectEntries } from 'src/app/shared/store/selectors/entries.selectors';
 import { ActivityPageRowComponent } from '../activity-page-row/activity-page-row.component';
 import { EntryPageRowComponent } from '../entry-page-row/entry-page-row.component';
@@ -12,7 +10,6 @@ import { DiaryPageComponent } from './diary-page.component';
 describe('DiaryPageComponent', () => {
   let component: DiaryPageComponent;
   let fixture: ComponentFixture<DiaryPageComponent>;
-  let store: MockStore;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -31,7 +28,6 @@ describe('DiaryPageComponent', () => {
       ]
     }).compileComponents();
 
-    store = TestBed.inject(MockStore);
     fixture = TestBed.createComponent(DiaryPageComponent);
     fixture.componentRef.setInput('date', '2020-01-02');
     component = fixture.componentInstance;

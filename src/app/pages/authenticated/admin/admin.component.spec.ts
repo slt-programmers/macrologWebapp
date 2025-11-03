@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { provideRouter, Router, RouterOutlet } from '@angular/router';
+import { provideRouter, RouterOutlet } from '@angular/router';
 import { MockProvider } from 'ng-mocks';
 import { ToastService } from 'src/app/shared/services/toast.service';
 import { UserService } from 'src/app/shared/services/user.service';
@@ -9,24 +9,20 @@ import { AdminComponent } from './admin.component';
 describe('AdminComponent', () => {
   let component: AdminComponent;
   let fixture: ComponentFixture<AdminComponent>;
-  let toastService: ToastService;
-  let router: Router;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-    imports: [RouterOutlet, AdminComponent],
-    providers: [
+      imports: [RouterOutlet, AdminComponent],
+      providers: [
         provideRouter([]),
         MockProvider(ToastService),
         MockProvider(UserService),
         MockProvider(HttpClient)
-    ],
-    schemas: [],
-}).compileComponents();
+      ],
+      schemas: [],
+    }).compileComponents();
     fixture = TestBed.createComponent(AdminComponent);
     component = fixture.componentInstance;
-    toastService = TestBed.inject(ToastService);
-    router = TestBed.inject(Router);
   });
 
   afterEach(() => {

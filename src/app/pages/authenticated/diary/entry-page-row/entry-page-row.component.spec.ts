@@ -1,14 +1,13 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
+import { Entry } from 'src/app/shared/model/entry';
 import { Meal } from 'src/app/shared/model/meal';
 import { selectEntriesState } from 'src/app/shared/store/selectors/entries.selectors';
-import { Entry } from 'src/app/shared/model/entry';
 import { EntryPageRowComponent } from './entry-page-row.component';
 
 describe('EntryPageRowComponent', () => {
   let component: EntryPageRowComponent;
   let fixture: ComponentFixture<EntryPageRowComponent>;
-  let store: MockStore;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({

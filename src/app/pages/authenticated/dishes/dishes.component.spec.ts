@@ -1,16 +1,15 @@
 import { ComponentFixture, TestBed } from "@angular/core/testing";
-import { MockStore, provideMockStore } from "@ngrx/store/testing";
+import { provideMockStore } from "@ngrx/store/testing";
+import { Dish } from "src/app/shared/model/dish";
+import { Food } from "src/app/shared/model/food";
 import { Ingredient } from "src/app/shared/model/ingredient";
 import { Portion } from "src/app/shared/model/portion";
 import { selectAllDishes } from 'src/app/shared/store/selectors/dishes.selectors';
 import { DishesComponent } from "./dishes.component";
-import { Dish } from "src/app/shared/model/dish";
-import { Food } from "src/app/shared/model/food";
 
 describe('DishesComponent', () => {
   let fixture: ComponentFixture<DishesComponent>;
   let component: DishesComponent;
-  let store: MockStore;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -24,7 +23,6 @@ describe('DishesComponent', () => {
       ]
     }).compileComponents();
 
-    store = TestBed.inject(MockStore);
     fixture = TestBed.createComponent(DishesComponent);
     component = fixture.componentInstance;
   });
@@ -83,7 +81,7 @@ describe('DishesComponent', () => {
         portions: [
           { id: 1, description: 'portionDesc' }]
       } as any
-    }; 
+    };
     let result = component.getIngredientDescription(ingredient);
     expect(result).toEqual('1 portionDesc');
     ingredient.portion = undefined;

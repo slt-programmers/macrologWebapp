@@ -103,8 +103,8 @@ export class BargraphComponent {
 
   private determineXAxisPoints(): number[] {
     const xAxisPoints = [];
-    for (let i = 0; i < this.datasets()[0].length; i++) {
-      xAxisPoints.push(this.datasets()[0][i].x);
+    for (const datapoint of this.datasets()[0]) {
+      xAxisPoints.push(datapoint.x);
     }
     return xAxisPoints;
   }
@@ -112,9 +112,9 @@ export class BargraphComponent {
   private convertDatasetToPoints(): GraphPoint[][] {
     const graphPoints = [];
     const differenceHighestLowestYValue = this.yAxisPoints[0];
-    for (let i = 0; i < this.datasets().length; i++) {
+    for (const dataset of this.datasets()) {
       const graphPointSet = [];
-      for (const dataPoint of this.datasets()[i]) {
+      for (const dataPoint of dataset) {
         let height = 0
         if (dataPoint.y !== undefined) {
           height =

@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from "@angular/core/testing";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
-import { provideRouter, Router } from "@angular/router";
+import { provideRouter } from "@angular/router";
 import { MockComponent, MockProvider } from "ng-mocks";
 import { of } from "rxjs";
 import { StepperComponent } from "src/app/shared/components/stepper/stepper.component";
@@ -12,20 +12,18 @@ describe('OnboardingComponent', () => {
   let fixture: ComponentFixture<OnboardingComponent>;
   let component: OnboardingComponent;
   let userService: UserService;
-  let router: Router;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-    imports: [FormsModule, ReactiveFormsModule, OnboardingComponent,
+      imports: [FormsModule, ReactiveFormsModule, OnboardingComponent,
         MockComponent(StepperComponent)],
-    providers: [
+      providers: [
         provideRouter([]),
         MockProvider(UserService),
-    ]
-}).compileComponents();
+      ]
+    }).compileComponents();
 
     userService = TestBed.inject(UserService);
-    router = TestBed.inject(Router);
     fixture = TestBed.createComponent(OnboardingComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
