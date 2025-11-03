@@ -12,7 +12,7 @@ import { DataPoint, GraphPoint } from '../linegraph/linegraph.component';
 @Component({
   selector: 'ml-bargraph',
   templateUrl: './bargraph.component.html',
-  styleUrls: ['./bargraph.component.scss'],
+  styleUrls: ['./bargraph.component.css'],
   imports: [NgClass]
 })
 export class BargraphComponent {

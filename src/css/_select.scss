@@ -1,6 +1,6 @@
 select {
-  background-color: $white;
-	border: 1px solid $smoke;
+  background-color: var(--white);
+	border: 1px solid var(--smoke);
 	border-radius: 5px;
 	box-sizing: border-box;
 	font-family: 'Assistant', sans-serif;
@@ -11,7 +11,7 @@ select {
 	height: 42px;
 
   &.ng-touched.ng-invalid {
-    border-color: $error;
+    border-color: var(--error);
   }
 }
 

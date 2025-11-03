@@ -1,6 +1,5 @@
 @import "../../../../css/variables.scss";
 
-// Sets the backdrop for the modal and prevents scrolling page
 .modal-wrapper {
   display: flex;
   align-items: flex-start;
@@ -14,7 +13,6 @@
   overflow-y: scroll;
 }
 
-// card-like but with margins to position it properly
 .modal {
   @media (min-width: $sm) {
     margin-top: 4rem;

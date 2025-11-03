@@ -13,7 +13,7 @@ import { NgClass } from '@angular/common';
 @Component({
   selector: 'ml-autocomplete-food',
   templateUrl: './autocomplete-food.component.html',
-  styleUrls: ['./autocomplete-food.component.scss'],
+  styleUrls: ['./autocomplete-food.component.css'],
   imports: [FormsModule, NgClass]
 })
 export class AutocompleteFoodComponent implements OnInit, OnDestroy {

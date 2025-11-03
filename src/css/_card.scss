@@ -1,11 +1,10 @@
-// adding padding, bordered white background and dropshadow
 .card {
-  @media (min-width: $sm) {
-    padding: 2rem;
-  }
-
-	background-color: white;
+  background-color: white;
 	border-radius: 0.5rem;
   box-shadow: $boxShadow;
   padding: 1rem;
+  
+  @media (min-width: 448px) {
+    padding: 2rem;
+  }
 }

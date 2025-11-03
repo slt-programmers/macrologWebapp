@@ -9,13 +9,14 @@ th, td, .table-cell {
 }
 
 tr, .table-row {
-  border-bottom: 1px solid $lightBlue;
+  border-bottom: 1px solid var(--lightBlue);
+
   &:hover {
-    background-color: $lightBlue;
+    background-color: var(--lightBlue);
   }
 }
 .table-header {
-  background-color: $mist;
+  background-color: var(--mist);
   border-bottom: none;
   font-weight: 600;
 }

@@ -1,7 +1,7 @@
-@import './variables.scss';
+@import '../styles.css';
 
 .page {
-  background: $lightBlue;
+  background: var(--lightBlue);
   min-height: 100vh;
 
   > *:last-child{
