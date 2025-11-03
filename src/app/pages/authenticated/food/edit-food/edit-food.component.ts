@@ -21,7 +21,7 @@ export class EditFoodComponent implements OnInit {
   public title = 'Add food';
 
   ngOnInit() {
-    if (!!this.selectedFood().id) {
+    if (this.selectedFood().id) {
       this.title = 'Edit food';
     }
   }
@@ -48,7 +48,7 @@ export class EditFoodComponent implements OnInit {
   }
 
   public isNewPortion(portion: Portion): boolean {
-    if (!!portion.id) {
+    if (portion.id) {
       return false;
     }
     return true;

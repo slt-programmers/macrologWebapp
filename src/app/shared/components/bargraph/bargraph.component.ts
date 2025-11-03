@@ -30,9 +30,9 @@ export class BargraphComponent {
   public yAxisPoints: number[] = []
   public xAxisPoints: number[] = []
 
-  yAxisHeight: number = 0
-  xAxisWidth: number = 0
-  xAxisHeight: number = 0
+  yAxisHeight = 0
+  xAxisWidth = 0
+  xAxisHeight = 0
   markerHeights: number[] = []
 
   constructor() {

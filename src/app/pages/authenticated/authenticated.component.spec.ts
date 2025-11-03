@@ -97,7 +97,7 @@ describe('AuthenticatedComponent', () => {
   });
 
   it('should determine if admin', () => {
-    let authspy = spyOn(authService, 'isAdmin')
+    const authspy = spyOn(authService, 'isAdmin')
     authspy.and.returnValue(false);
     let result = component.isAdmin();
     expect(result).toBeFalse();

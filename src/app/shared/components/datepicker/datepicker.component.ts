@@ -20,9 +20,9 @@ export class DatepickerComponent {
   public today = new Date();
   public selectedDate = this.today;
   public daysInMonth = 30;
-  public daysInMonthArray = new Array();
+  public daysInMonthArray = [];
   public weekdays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-  public placeholders = new Array();
+  public placeholders = [];
   public isOpen = false;
 
   private pipe = new DatePipe('en-US');
@@ -95,7 +95,7 @@ export class DatepickerComponent {
   }
 
   private setDaysInMonthArray() {
-    this.daysInMonthArray = new Array();
+    this.daysInMonthArray = [];
     this.daysInMonth = new Date(
       this.selectedDate.getFullYear(),
       this.selectedDate.getMonth() + 1,
@@ -107,7 +107,7 @@ export class DatepickerComponent {
   }
 
   private getWeekdayPlaceholders() {
-    this.placeholders = new Array();
+    this.placeholders = [];
     const firstOfMonth = new Date(
       this.selectedDate.getFullYear(),
       this.selectedDate.getMonth(),

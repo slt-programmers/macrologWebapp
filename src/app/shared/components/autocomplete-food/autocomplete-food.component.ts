@@ -34,8 +34,8 @@ export class AutocompleteFoodComponent implements OnInit, OnDestroy {
 
   public searchables: any[] = []
   public foodMatch: any[] = [];
-  public foodName: string = '';
-  public showAutoComplete: boolean = false
+  public foodName = '';
+  public showAutoComplete = false
   public allFood: Food[] = []
   public allDishes: Dish[] = []
 

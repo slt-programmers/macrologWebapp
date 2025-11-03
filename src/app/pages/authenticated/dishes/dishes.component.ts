@@ -25,7 +25,7 @@ export class DishesComponent implements OnInit, OnDestroy {
   public selectedDish?: Dish;
   public modalIsVisible = false;
 
-  public modalTitle: string = '';
+  public modalTitle = '';
   public dishName = '';
   public ingredients: Ingredient[] = [];
 
@@ -47,7 +47,7 @@ export class DishesComponent implements OnInit, OnDestroy {
     if (dish) {
       this.modalTitle = 'Edit dish';
       const ingredients = [];
-      for (let ingredient of dish.ingredients) {
+      for (const ingredient of dish.ingredients) {
         ingredients.push({
           ...ingredient,
           portion: ingredient.portion? this.getPortion(ingredient, ingredient.portion.id!) : {}

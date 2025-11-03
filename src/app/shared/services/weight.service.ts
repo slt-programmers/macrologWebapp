@@ -10,7 +10,7 @@ export class WeightService {
   private http = inject(HttpClient);
 
   macrologBackendUrl = '//' + environment.backend + '/weight';
-  activities = new Array();
+  activities = [];
 
   public getAllWeights() {
     return this.http.get<Weight[]>(this.macrologBackendUrl).pipe(

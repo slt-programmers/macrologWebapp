@@ -9,7 +9,7 @@ import { DiaryPageComponent } from "./diary-page/diary-page.component"
 import { DiaryComponent } from "./diary.component"
 
 class MockWindow {
-  private _innerWidth: number = 0;
+  private _innerWidth = 0;
 
   get innerWidth() {
     return this._innerWidth;

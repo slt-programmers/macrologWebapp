@@ -48,7 +48,7 @@ describe('FoodComponent', () => {
       { name: 'Something else', protein: 1, fat: 2, carbs: 3 }
     ]);
     store.refreshState();
-    let result = component.displayedFood;
+    const result = component.displayedFood;
     expect(result).toEqual([
       { name: 'Name', protein: 1, fat: 2, carbs: 3 },
       { name: 'Other name', protein: 1, fat: 2, carbs: 3 },

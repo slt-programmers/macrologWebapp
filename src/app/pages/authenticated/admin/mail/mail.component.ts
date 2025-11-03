@@ -14,13 +14,13 @@ export class MailComponent implements OnInit {
   private readonly googleService = inject(GoogleService);
   private readonly route = inject(ActivatedRoute);
 
-  public googleConnectUrl: string = '';
+  public googleConnectUrl = '';
   public isConnected = false;
-  public syncError: string = '';
+  public syncError = '';
   public emailAddress: string | null = null;
   public mailSend = false;
 
-  private clientId: string = '';
+  private clientId = '';
   private code: string | null = null;
   private scope: string | null = null;
 

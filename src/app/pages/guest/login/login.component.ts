@@ -18,7 +18,7 @@ export class LoginComponent implements OnInit {
   private authService = inject(AuthenticationService);
   private toastService = inject(ToastService);
 
-  private returnUrl: string = 'dashboard';
+  private returnUrl = 'dashboard';
 
   public loginForm: FormGroup;
   public registerForm: FormGroup;

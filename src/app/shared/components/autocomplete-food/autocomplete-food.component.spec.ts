@@ -52,7 +52,7 @@ describe('AutocompleteFoodComponent', () => {
       { food: { name: 'Def', protein: 1, fat: 2, carbs: 3 }, dish: undefined },
     ];
     component.foodName = 'A';
-    expect(component.foodMatch).toEqual(new Array());
+    expect(component.foodMatch).toEqual([]);
     component.findFoodMatch({ data: 'somedata' });
     let result = [{ food: { name: 'Abc', protein: 1, fat: 2, carbs: 3 }, dish: undefined }];
     expect(component.foodMatch).toEqual(result);
@@ -88,7 +88,7 @@ describe('AutocompleteFoodComponent', () => {
       { food: undefined, dish: { name: 'Def' } },
     ];
     component.foodName = 'A';
-    expect(component.foodMatch).toEqual(new Array());
+    expect(component.foodMatch).toEqual([]);
     component.findFoodMatch({ data: 'somedata' });
     let result = [{ food: undefined, dish: { name: 'Abc' } }] as any[];
     expect(component.foodMatch).toEqual(result);

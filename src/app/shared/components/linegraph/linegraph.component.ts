@@ -25,12 +25,12 @@ export class LinegraphComponent {
   public graphPoints: GraphPoint[] = [];
   public yAxisPoints: number[] = [];
   public xAxisPoints: number[] = [];
-  public svgPath: string = ''
-  public trendPath: string = ''
+  public svgPath = ''
+  public trendPath = ''
 
-  public yAxisHeight: number = 0;
-  private xAxisWidth: number = 0
-  private xAxisPointWidth: number = 0
+  public yAxisHeight = 0;
+  private xAxisWidth = 0
+  private xAxisPointWidth = 0
 
   constructor() {
     effect(() => {
@@ -107,7 +107,7 @@ export class LinegraphComponent {
   }
 
   private calcPreviousYPosition(i: number): number {
-    let previousYPosition: number = 0;
+    let previousYPosition = 0;
     let j = i - 1;
     while (j >= 0) {
       if (this.graphPoints[j].height !== undefined) {
@@ -247,7 +247,7 @@ export class LinegraphComponent {
     for (const dataPoint of this.dataset()) {
       const lowestYValue = this.yAxisPoints[this.yAxisPoints.length - 1];
       const differenceHighestLowestYValue = this.yAxisPoints[0] - lowestYValue;
-      let height: number = 0;
+      let height = 0;
       if (dataPoint.y !== undefined) {
         height =
           (dataPoint.y - lowestYValue) *

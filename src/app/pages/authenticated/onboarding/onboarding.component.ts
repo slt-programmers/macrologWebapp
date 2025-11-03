@@ -35,7 +35,7 @@ export class OnboardingComponent {
   public displayDate = this.datePipe.transform(new Date(), 'yyyy-MM-dd')!;
   public breakfastOpen = false;
   public breakfast = Meal.Breakfast;
-  public foodSearchables = new Array();
+  public foodSearchables = [];
 
   public userForm: FormGroup;
   public currentStep = 1;

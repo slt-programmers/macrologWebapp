@@ -44,7 +44,7 @@ export class WebhooksComponent implements OnInit {
 
   private retrieveStatus(connectedApp: string) {
     // delete old one. Only strava now, so delete all :p
-    this.allWebhooks = new Array();
+    this.allWebhooks = [];
     this.webhookService.getWebhookStatus(connectedApp).subscribe(it => {
       this.allWebhooks.push({ connectedApp: connectedApp, webhook: it });
     });

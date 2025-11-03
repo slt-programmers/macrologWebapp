@@ -285,7 +285,7 @@ export class GraphsComponent implements OnInit {
   }
 
   private getMacroForDay(date: Date, numberOfValues: number, macro: string): number {
-    let indexMax = Math.min(numberOfValues, this.allMacros.length);
+    const indexMax = Math.min(numberOfValues, this.allMacros.length);
     for (let i = 0; i < indexMax; i++) {
       const macrosPerDay = this.allMacros[i]; 
       const macrosString = format(new Date(macrosPerDay.day), 'yyyy-MM-dd');

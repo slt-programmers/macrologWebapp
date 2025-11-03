@@ -4,7 +4,7 @@ import { AsyncState, createAsyncReducers } from "./async.reducers";
 
 export const activitiesFeatureKey = 'activities';
 
-export type ActivitiesState = {
+export interface ActivitiesState {
   date: string,
   activities: Activity[],
 }
