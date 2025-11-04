@@ -1,5 +1,6 @@
 .autocomplete-wrapper {
 	position: relative;
+  display: flex;
 }
 
 .autocomplete {
@@ -29,4 +30,8 @@
 	&:first-child:last-child {
 		border-radius: 5px;
 	}
+}
+
+.autocomplete-input {
+  flex-grow: 1
 }

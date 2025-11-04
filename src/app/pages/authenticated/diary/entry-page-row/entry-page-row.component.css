@@ -11,6 +11,10 @@
   }
 }
 
+.col-start-1 {
+  grid-column-start: 1;
+}
+
 .col-span-1 {
   grid-column: span 1;
 }
@@ -23,6 +27,21 @@
   grid-column: span 3;
 }
 
+.col-span-4 {
+  grid-column: span 4;
+}
+
 .col-span-9 {
   grid-column: span 9;
+}
+
+.food-grid {
+  display: grid;
+  gap: 12px;
+  grid-template-columns: 1fr 1fr 1fr auto;
+  align-items: center;
+}
+
+.min-width-600 {
+  min-width: 600px;
 }

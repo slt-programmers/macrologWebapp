@@ -1,16 +1,14 @@
 <div class="card flex flex-col">
   @if (intakeGoals && (totals$ | async)) {
   <div class="flex justify-center">
-    <ml-stackdonut [goal]="intakeGoals[0]" [circleRadius]="circleRadius" [strokeWidth]="strokeWidth"
-      [text]="'Protein'" [achieved]="(totals$ | async)!.protein">
+    <ml-stackdonut [goal]="intakeGoals[0]" [text]="'Protein'"
+      [achieved]="(totals$ | async)!.protein">
     </ml-stackdonut>
 
-    <ml-stackdonut [goal]="intakeGoals[1]" [circleRadius]="circleRadius" [strokeWidth]="strokeWidth"
-      [text]="'Fat'" [achieved]="(totals$ | async)!.fat">
+    <ml-stackdonut [goal]="intakeGoals[1]" [text]="'Fat'" [achieved]="(totals$ | async)!.fat">
     </ml-stackdonut>
 
-    <ml-stackdonut [goal]="intakeGoals[2]" [circleRadius]="circleRadius" [strokeWidth]="strokeWidth"
-      [text]="'Carbs'" [achieved]="(totals$ | async)!.carbs">
+    <ml-stackdonut [goal]="intakeGoals[2]" [text]="'Carbs'" [achieved]="(totals$ | async)!.carbs">
     </ml-stackdonut>
   </div>
 

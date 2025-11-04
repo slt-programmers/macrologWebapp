@@ -37,8 +37,9 @@
 }
 
 .sm-only {
-	@media (min-width: 448px) {
+	@media (min-width: 640px) {
 		display: none;
 	}
 }
+
 

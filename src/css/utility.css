@@ -43,6 +43,10 @@
   justify-self: end;
 }
 
+.align-self-end {
+  align-self: end;
+}
+
 .grid {
   display: grid;
 }

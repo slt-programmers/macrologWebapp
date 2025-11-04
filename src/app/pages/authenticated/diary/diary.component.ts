@@ -38,15 +38,9 @@ export class DiaryComponent implements OnInit {
 	);
 	public intakeGoals: any[] = [];
 	public goalCal = 0;
-	public circleRadius = 60;
-	public strokeWidth = 8;
 
 	ngOnInit() {
 		this.getUserGoals(this.date);
-		if (this.window.innerWidth < 480) {
-			this.circleRadius = 40;
-			this.strokeWidth = 5;
-		}
 	}
 
 	public changeDate(event: any) {
