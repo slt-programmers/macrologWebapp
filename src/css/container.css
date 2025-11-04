@@ -1,21 +1,21 @@
 .container {
-  @media (min-width: $sm) {   
+  @media (min-width: 640px) {   
     margin-right: 2rem;
     margin-left: 2rem;
     max-width: 100%;
   }
   
-  @media (min-width: $md) {
+  @media (min-width: 768px) {
     max-width: 44rem;
     margin-left: auto;
     margin-right: auto;
   }
   
-  @media (min-width: $lg) {
+  @media (min-width: 1024px) {
     max-width: 60rem;
   }
   
-  @media (min-width: $xl) {
+  @media (min-width: 1536px) {
     max-width: 72rem;
   }
 

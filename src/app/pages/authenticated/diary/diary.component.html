@@ -1,56 +1,32 @@
-<div class="card">
-	@if (intakeGoals && (totals$ | async)) {
-	<div class="flex flex-col align-center">
-		<div id="stackdonuts" class="flex">
-			<div class="stackdonut-wrapper">
-				<ml-stackdonut
-					[goal]="intakeGoals[0]"
-					[circleRadius]="circleRadius"
-					[strokeWidth]="strokeWidth"
-					[text]="'Protein'"
-					[achieved]="(totals$ | async)!.protein"
-				>
-				</ml-stackdonut>
-			</div>
-			<div class="stackdonut-wrapper">
-				<ml-stackdonut
-					[goal]="intakeGoals[1]"
-					[circleRadius]="circleRadius"
-					[strokeWidth]="strokeWidth"
-					[text]="'Fat'"
-					[achieved]="(totals$ | async)!.fat"
-				>
-				</ml-stackdonut>
-			</div>
-			<div class="stackdonut-wrapper">
-				<ml-stackdonut
-					[goal]="intakeGoals[2]"
-					[circleRadius]="circleRadius"
-					[strokeWidth]="strokeWidth"
-					[text]="'Carbs'"
-					[achieved]="(totals$ | async)!.carbs"
-				>
-				</ml-stackdonut>
-			</div>
-		</div>
-		<div id="caloriesText" class="flex">
-			<p>
-				{{ (totals$ | async)!.calories | number : "1.0-0" }}/{{ goalCal }}
-				<span class="">Calories</span>
-			</p>
-		</div>
-	</div>
-	} @if (!intakeGoals) {
-	<div id="caloriesText" class="flex justify-center">
-		<p>You haven't set your goal intake yet!</p>
-	</div>
-	}
+<div class="card flex flex-col">
+  @if (intakeGoals && (totals$ | async)) {
+  <div class="flex justify-center">
+    <ml-stackdonut [goal]="intakeGoals[0]" [circleRadius]="circleRadius" [strokeWidth]="strokeWidth"
+      [text]="'Protein'" [achieved]="(totals$ | async)!.protein">
+    </ml-stackdonut>
+
+    <ml-stackdonut [goal]="intakeGoals[1]" [circleRadius]="circleRadius" [strokeWidth]="strokeWidth"
+      [text]="'Fat'" [achieved]="(totals$ | async)!.fat">
+    </ml-stackdonut>
+
+    <ml-stackdonut [goal]="intakeGoals[2]" [circleRadius]="circleRadius" [strokeWidth]="strokeWidth"
+      [text]="'Carbs'" [achieved]="(totals$ | async)!.carbs">
+    </ml-stackdonut>
+  </div>
+
+  <p class="self-center">
+    {{ (totals$ | async)!.calories | number : "1.0-0" }}/{{ goalCal }}
+    <span class="">Calories</span>
+  </p>
+  }
+
+  @if (!intakeGoals) {
+  <p class="self-center">You haven't set your goal intake yet!</p>
+  }
 </div>
 
-<div class="logday card">
-	<div class="logday__date">
-		<ml-datepicker (change$)="changeDate($event)"></ml-datepicker>
-	</div>
+<div class="card flex flex-col gap-4 items-center">
+  <ml-datepicker (change$)="changeDate($event)"></ml-datepicker>
 
-	<ml-diary-page [date]="date"></ml-diary-page>
+  <ml-diary-page [date]="date"></ml-diary-page>
 </div>

@@ -1,39 +1,43 @@
-<div class="datepicker-wrapper">
-  <div class="date">
-    <div class="date__button" (click)="previousDay()">
-      <em class="fas fa-chevron-left"></em>
+<div class="date">
+  <button type="button" class="date-button" (click)="previousDay()">
+    <em class=" fas fa-chevron-left"></em>
+  </button>
+
+  <div class="date-display" (click)="toggleOpen()">{{selectedDate | date: dateformat}}</div>
+
+  <button type="button" class="date-button" (click)="nextDay()">
+    <em class="fas fa-chevron-right"></em>
+  </button>
+</div>
+
+@if (isOpen) {
+<div class="overlay" (click)="toggleOpen($event)">
+  <div class="picker">
+    <div class="flex justify-between items-center">
+      <button class="picker-button" (click)="previousMonth()">
+        <em class=" fas fa-chevron-left"></em>
+      </button>
+
+      <span>{{selectedDate | date: 'MMMM'}}</span>
+
+      <button class="picker-button" (click)="nextMonth()">
+        <em class="fas fa-chevron-right"></em>
+      </button>
     </div>
 
-    <div class="date__selected-day" (click)="toggleOpen()">{{selectedDate | date: dateformat}}</div>
+    <div class="picker-days">
+      @for (weekday of weekdays; track weekday) {
+      <span class="picker-weekday">{{weekday}}</span>
+      }
 
-    <div class="date__button" (click)="nextDay()">
-      <em class="fas fa-chevron-right"></em>
-    </div>
-  </div>
+      @for (placeholder of placeholders; track placeholder) {
+      <span class="picker-day placeholder"></span>
+      }
 
-  @if (isOpen) {
-    <div class="overlay" (click)="toggleOpen($event)">
-      @if (isOpen) {
-        <div class="picker">
-          <div class="picker__header">
-            <button class="picker__button" (click)="previousMonth()">Previous</button>
-            <span>{{selectedDate | date: 'MMMM'}}</span>
-            <button class="picker__button" (click)="nextMonth()">Next</button>
-          </div>
-          <div class="picker__days">
-            @for (weekday of weekdays; track weekday) {
-              <div class="picker__weekday">{{weekday}}</div>
-            }
-            @for (placeholder of placeholders; track placeholder) {
-              <div class="picker__day"></div>
-            }
-            @for (day of daysInMonthArray; track day) {
-              <div #dayRef class="picker__day"
-              (click)="selectDay(day)">{{day}}</div>
-            }
-          </div>
-        </div>
+      @for (day of daysInMonthArray; track day) {
+      <span class="picker-day" (click)="selectDay(day)">{{day}}</span>
       }
     </div>
-  }
+  </div>
 </div>
+}

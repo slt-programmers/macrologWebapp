@@ -1,45 +1,43 @@
-<div id="diaryPage">
-  <div class="flex px-1 col-gap-1">
-    <div class="flex-3"></div>
-    <div class="flex-2"></div>
-    <div class="flex-1"></div>
+<div class="flex px-1 col-gap-1">
+  <div class="flex-3"></div>
+  <div class="flex-2"></div>
+  <div class="flex-1"></div>
 
-    <div class="lg flex-1 font-bold overflow-hidden">Protein</div>
-    <div class="lg flex-1 font-bold overflow-hidden">Fat</div>
-    <div class="lg flex-1 font-bold overflow-hidden">Carbs</div>
-    <div class="lg flex-1 font-bold overflow-hidden">Calories</div>
+  <div class="lg flex-1 font-bold overflow-hidden">Protein</div>
+  <div class="lg flex-1 font-bold overflow-hidden">Fat</div>
+  <div class="lg flex-1 font-bold overflow-hidden">Carbs</div>
+  <div class="lg flex-1 font-bold overflow-hidden">Calories</div>
 
-    <div class="lg-only flex-1 font-bold overflow-hidden">P</div>
-    <div class="lg-only flex-1 font-bold overflow-hidden">F</div>
-    <div class="lg-only flex-1 font-bold overflow-hidden">C</div>
-    <div class="lg-only flex-1 font-bold overflow-hidden">kcal</div>
-  </div>
+  <div class="lg-only flex-1 font-bold overflow-hidden">P</div>
+  <div class="lg-only flex-1 font-bold overflow-hidden">F</div>
+  <div class="lg-only flex-1 font-bold overflow-hidden">C</div>
+  <div class="lg-only flex-1 font-bold overflow-hidden">kcal</div>
+</div>
 
-  <ml-entry-page-row [meal]="breakfast" [date]="date()"></ml-entry-page-row>
+<ml-entry-page-row [meal]="breakfast" [date]="date()"></ml-entry-page-row>
 
-  <ml-entry-page-row [meal]="lunch" [date]="date()"></ml-entry-page-row>
+<ml-entry-page-row [meal]="lunch" [date]="date()"></ml-entry-page-row>
 
-  <ml-entry-page-row [meal]="diner" [date]="date()"></ml-entry-page-row>
+<ml-entry-page-row [meal]="diner" [date]="date()"></ml-entry-page-row>
 
-  <ml-entry-page-row [meal]="snacks" [date]="date()"></ml-entry-page-row>
+<ml-entry-page-row [meal]="snacks" [date]="date()"></ml-entry-page-row>
 
-  <ml-activity-page-row [date]="date()"></ml-activity-page-row>
+<ml-activity-page-row [date]="date()"></ml-activity-page-row>
 
-  <div class="flex font-bold p-1">
-    <span class="flex-3">Daily total</span>
-    <span class="flex-2"></span>
-    <span class="flex-1"></span>
-    @if (totals$ | async; as totals) {
-      <span class="flex-1">{{ totals.protein | number: '1.1-1' }}</span>
-    }
-    @if (totals$ | async; as totals) {
-      <span class="flex-1">{{ totals.fat | number: '1.1-1' }}</span>
-    }
-    @if (totals$ | async; as totals) {
-      <span class="flex-1">{{ totals.carbs | number: '1.1-1' }}</span>
-    }
-    @if (totals$ | async; as totals) {
-      <span class="flex-1">{{ totals.calories | number: '1.0-0' }}</span>
-    }
-  </div>
+<div class="flex font-bold p-1">
+  <span class="flex-3">Daily total</span>
+  <span class="flex-2"></span>
+  <span class="flex-1"></span>
+  @if (totals$ | async; as totals) {
+  <span class="flex-1">{{ totals.protein | number: '1.1-1' }}</span>
+  }
+  @if (totals$ | async; as totals) {
+  <span class="flex-1">{{ totals.fat | number: '1.1-1' }}</span>
+  }
+  @if (totals$ | async; as totals) {
+  <span class="flex-1">{{ totals.carbs | number: '1.1-1' }}</span>
+  }
+  @if (totals$ | async; as totals) {
+  <span class="flex-1">{{ totals.calories | number: '1.0-0' }}</span>
+  }
 </div>

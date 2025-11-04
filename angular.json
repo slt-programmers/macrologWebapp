@@ -26,7 +26,7 @@
               "src/google3bb89e24d542c3d5.html"
             ],
             "styles": [
-              "src/css/public.scss",
+              "src/css/public.css",
               "src/styles.css"
             ],
             "scripts": [],
@@ -119,7 +119,7 @@
               "src/polyfills.ts"
             ],
             "styles": [
-              "src/css/public.scss",
+              "src/css/public.css",
               "src/styles.css"
             ],
             "assets": [

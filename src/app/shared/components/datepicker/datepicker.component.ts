@@ -1,38 +1,29 @@
-import { DatePipe } from '@angular/common';
-import {
-  Component,
-  output,
-  viewChildren
-} from '@angular/core';
+import { DatePipe, formatDate } from '@angular/common';
+import { Component, output } from '@angular/core';
 
 @Component({
   selector: 'ml-datepicker',
   templateUrl: './datepicker.component.html',
-  styleUrls: ['./datepicker.component.scss'],
+  styleUrls: ['./datepicker.component.css'],
   imports: [DatePipe]
 })
 export class DatepickerComponent {
-  readonly dayRefs = viewChildren<any>('dayRef');
+  readonly change$ = output<string>();
 
-  readonly change$ = output<string | null>();
-
-  public dateformat = 'dd-MM-yyyy';
-  public today = new Date();
-  public selectedDate = this.today;
-  public daysInMonth = 30;
-  public daysInMonthArray: number[] = [];
-  public weekdays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-  public placeholders: number[] = [];
-  public isOpen = false;
-
-  private pipe = new DatePipe('en-US');
+  readonly dateformat = 'dd-MM-yyyy';
+  readonly weekdays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+  selectedDate = new Date();;
+  daysInMonth = 30;
+  daysInMonthArray: number[] = [];
+  placeholders: number[] = [];
+  isOpen = false;
 
   constructor() {
     this.setDaysInMonthArray();
     this.getWeekdayPlaceholders();
   }
 
-  public toggleOpen(event?: any): void {
+  toggleOpen(event?: any): void {
     if (event) {
       if (event.target && event.target.classList.value === 'overlay') {
         this.isOpen = !this.isOpen;
@@ -42,7 +33,7 @@ export class DatepickerComponent {
     }
   }
 
-  public nextDay() {
+  nextDay() {
     this.selectedDate = new Date(
       this.selectedDate.getFullYear(),
       this.selectedDate.getMonth(),
@@ -50,10 +41,10 @@ export class DatepickerComponent {
     );
     this.setDaysInMonthArray();
     this.getWeekdayPlaceholders();
-    this.change$.emit(this.pipe.transform(this.selectedDate, 'yyyy-MM-dd'));
+    this.change$.emit(formatDate(this.selectedDate, 'yyyy-MM-dd', 'en-US'));
   }
 
-  public previousDay() {
+  previousDay() {
     this.selectedDate = new Date(
       this.selectedDate.getFullYear(),
       this.selectedDate.getMonth(),
@@ -61,10 +52,10 @@ export class DatepickerComponent {
     );
     this.setDaysInMonthArray();
     this.getWeekdayPlaceholders();
-    this.change$.emit(this.pipe.transform(this.selectedDate, 'yyyy-MM-dd'));
+    this.change$.emit(formatDate(this.selectedDate, 'yyyy-MM-dd', 'en-US'));
   }
 
-  public nextMonth() {
+  nextMonth() {
     this.selectedDate = new Date(
       this.selectedDate.getFullYear(),
       this.selectedDate.getMonth() + 1,
@@ -74,7 +65,7 @@ export class DatepickerComponent {
     this.getWeekdayPlaceholders();
   }
 
-  public previousMonth() {
+  previousMonth() {
     this.selectedDate = new Date(
       this.selectedDate.getFullYear(),
       this.selectedDate.getMonth() - 1,
@@ -84,14 +75,14 @@ export class DatepickerComponent {
     this.getWeekdayPlaceholders();
   }
 
-  public selectDay(day: number) {
+  selectDay(day: number) {
     this.selectedDate = new Date(
       this.selectedDate.getFullYear(),
       this.selectedDate.getMonth(),
       day
     );
     this.isOpen = false;
-    this.change$.emit(this.pipe.transform(this.selectedDate, 'yyyy-MM-dd'));
+    this.change$.emit(formatDate(this.selectedDate, 'yyyy-MM-dd', 'en-US'));
   }
 
   private setDaysInMonthArray() {
