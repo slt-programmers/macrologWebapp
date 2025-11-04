@@ -4,7 +4,7 @@ import { Component, ElementRef, Renderer2, afterRenderEffect, effect, inject, in
 @Component({
   selector: 'ml-stackdonut',
   templateUrl: './stackdonut.component.html',
-  styleUrls: ['./stackdonut.component.scss'],
+  styleUrls: ['./stackdonut.component.css'],
   imports: [DecimalPipe]
 })
 export class StackDonutComponent {
@@ -17,10 +17,10 @@ export class StackDonutComponent {
   readonly goal = input.required<number>();
   readonly achieved = input.required<number>();
   readonly text = input.required<string>();
-  readonly circleRadius = input(60);
-  readonly strokeWidth = input(8);
+  readonly circleRadius = 60;
+  readonly strokeWidth = 8;
 
-  public height = (this.circleRadius() + (this.strokeWidth() * 2) + 1) * 2;
+  public height = (this.circleRadius + (this.strokeWidth * 2) + 1) * 2;
   public width = this.height;
 
   constructor() {
@@ -29,7 +29,7 @@ export class StackDonutComponent {
     })
 
     afterRenderEffect(() => {
-      const circleRadius = this.circleRadius();
+      const circleRadius = this.circleRadius;
       const innerCircle = this.innerCircle();
       this.renderer.setAttribute(innerCircle.nativeElement, 'stroke-dasharray', '' + this.getCircleLength(circleRadius));
       this.renderer.setAttribute(innerCircle.nativeElement, 'r', '' + circleRadius);
@@ -38,7 +38,7 @@ export class StackDonutComponent {
       this.renderer.setAttribute(innerBackgroundCircle.nativeElement, 'stroke-dasharray', '' + (this.getCircleLength(circleRadius)));
       this.renderer.setAttribute(innerBackgroundCircle.nativeElement, 'r', '' + (circleRadius));
 
-      const strokeWidth = this.strokeWidth();
+      const strokeWidth = this.strokeWidth;
       const outerCircle = this.outerCircle();
       this.renderer.setAttribute(outerCircle.nativeElement, 'stroke-dasharray', '' + this.getCircleLength(circleRadius + strokeWidth + 1));
       this.renderer.setAttribute(outerCircle.nativeElement, 'r', (circleRadius + strokeWidth + 1) + '');
@@ -79,7 +79,7 @@ export class StackDonutComponent {
     }
   }
 
-  timeAnimations(valOuter: number, outerCircleWasPresent: boolean, pctOuter: number) {
+  private timeAnimations(valOuter: number, outerCircleWasPresent: boolean, pctOuter: number) {
     if (valOuter === 0) {
       // wait until the animation to remove outer circle has finished
       if (outerCircleWasPresent) {
@@ -96,7 +96,7 @@ export class StackDonutComponent {
     }
   }
 
-  getCircleLength(radius: number) {
+  private getCircleLength(radius: number) {
     return 2 * radius * Math.PI;
   }
 }
