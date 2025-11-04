@@ -1,100 +1,85 @@
-<div class="content-sm p-1 selectable" (click)="openModal()">
-  <span class="font-bold">{{meal() | titlecase}}</span>
+<div class="selectable" (click)="openModal()">
+  <span class="font-bold col-span-9">{{meal() | titlecase}}</span>
 
   @for (entry of entries; track entry) {
-    <div class="flex col-gap-1">
-      <div class="flex-3">
-        <span class="">{{entry.food.name}}</span>
-      </div>
-      @if (entry.portion) {
-        <div class="flex-2">
-          <span class="">
-            {{entry.multiplier | number:'1.0-2'}} {{entry.portion.description}}
-          </span>
-        </div>
-      }
-      @if (!entry.portion) {
-        <div class="flex-2">
-          <span class="">
-            {{100.0 * entry.multiplier! | number:'1.0-2'}} grams
-          </span>
-        </div>
-      }
-      <div class="flex-1"></div>
-      <div class="flex-1">
-        <span class="">{{entry.macrosCalculated.protein |
-        number:'1.1-1'}}</span>
-      </div>
-      <div class="flex-1">
-        <span class="">{{entry.macrosCalculated.fat |
-        number:'1.1-1'}}</span>
-      </div>
-      <div class="flex-1">
-        <span class="">{{entry.macrosCalculated.carbs |
-        number:'1.1-1'}}</span>
-      </div>
-      <div class="flex-1">
-        <span class="">{{entry.macrosCalculated.calories |
-        number:'1.0-0'}}</span>
-      </div>
-    </div>
+  <span class="col-span-3">{{entry.food.name}}</span>
+
+  @if (entry.portion) {
+  <span class="col-span-2">
+    {{entry.multiplier | number:'1.0-2'}} {{entry.portion.description}}
+  </span>
+  } @else {
+  <span class="col-span-2">
+    {{100.0 * entry.multiplier! | number:'1.0-2'}} grams
+  </span>
+  }
+  <span class="col-span-1 self-end">{{entry.macrosCalculated.protein |
+    number:'1.1-1'}}</span>
+
+  <span class="col-span-1 self-end">{{entry.macrosCalculated.fat |
+    number:'1.1-1'}}</span>
+
+  <span class="col-span-1 self-end">{{entry.macrosCalculated.carbs |
+    number:'1.1-1'}}</span>
+
+  <span class="col-span-1 self-end">{{entry.macrosCalculated.calories |
+    number:'1.0-0'}}</span>
   }
 </div>
 
 @if (showModal) {
-  <ml-modal [title]="'Edit ' + meal()" (close$)="showModal = false">
-    <div class="content min-w-32">
-      @if (!modalEntries || modalEntries.length === 0) {
-        <div>Search for food to add entries to your
-        diary.</div>
-      }
-      <div class="flex col-gap-1">
-        <div class="flex-4 font-bold">Food</div>
-        <div class="flex-3 font-bold">Protion</div>
-        <div class="flex-1 font-bold">Amount</div>
-        <div class="flex-1"></div>
+<ml-modal [title]="'Edit ' + meal()" (close$)="showModal = false">
+  <div class="content min-w-32">
+    @if (!modalEntries || modalEntries.length === 0) {
+    <div>Search for food to add entries to your
+      diary.</div>
+    }
+    <div class="flex col-gap-1">
+      <div class="flex-4 font-bold">Food</div>
+      <div class="flex-3 font-bold">Protion</div>
+      <div class="flex-1 font-bold">Amount</div>
+      <div class="flex-1"></div>
+    </div>
+    @for (entry of modalEntries; track entry; let index = $index) {
+    <div class="flex col-gap-1 align-center">
+      <div class="flex-4">
+        {{entry.food.name}}
       </div>
-      @for (entry of modalEntries; track entry; let index = $index) {
-        <div class="flex col-gap-1 align-center">
-          <div class="flex-4">
-            {{entry.food.name}}
-          </div>
-          <div class="flex-3">
-            <select class="select" (change)="changePortion($event, index)">
-              <option [selected]="!entry.portion">grams</option>
-              @for (portion of entry.food.portions; track portion) {
-                <option [selected]="!!entry.portion && entry.portion.description === portion.description"
-                  value="{{portion.id}}">
-                  {{portion.description}}
-                </option>
-              }
-            </select>
-          </div>
-          <div class="flex-1">
-            @if (!entry.portion) {
-              <input class="input" value="{{entry.multiplier! * 100}}"
-                (keyup)="changeMultiplier($event, index)">
-            }
-            @if (entry.portion) {
-              <input class="input" value="{{entry.multiplier}}"
-                (keyup)="changeMultiplier($event, index)">
-            }
-          </div>
-          <div class="flex flex-1 justify-end">
-            <button class="icon-button" (click)="deleteEntry(index)">
-              <em class="fas fa-trash"></em>
-            </button>
-          </div>
-        </div>
-      }
-      <div>
-        <ml-autocomplete-food [includeDishes]="true" [placeholder]="'Search food...'"
-          (select$)="addEntry($event)">
-        </ml-autocomplete-food>
+      <div class="flex-3">
+        <select class="select" (change)="changePortion($event, index)">
+          <option [selected]="!entry.portion">grams</option>
+          @for (portion of entry.food.portions; track portion) {
+          <option [selected]="!!entry.portion && entry.portion.description === portion.description"
+            value="{{portion.id}}">
+            {{portion.description}}
+          </option>
+          }
+        </select>
       </div>
-      <div class="button-wrapper">
-        <button class="button button--primary" (click)="saveEntries()">Save</button>
+      <div class="flex-1">
+        @if (!entry.portion) {
+        <input class="input" value="{{entry.multiplier! * 100}}"
+          (keyup)="changeMultiplier($event, index)">
+        }
+        @if (entry.portion) {
+        <input class="input" value="{{entry.multiplier}}" (keyup)="changeMultiplier($event, index)">
+        }
+      </div>
+      <div class="flex flex-1 justify-end">
+        <button class="icon-button" (click)="deleteEntry(index)">
+          <em class="fas fa-trash"></em>
+        </button>
       </div>
     </div>
-  </ml-modal>
+    }
+    <div>
+      <ml-autocomplete-food [includeDishes]="true" [placeholder]="'Search food...'"
+        (select$)="addEntry($event)">
+      </ml-autocomplete-food>
+    </div>
+    <div class="button-wrapper">
+      <button class="button button--primary" (click)="saveEntries()">Save</button>
+    </div>
+  </div>
+</ml-modal>
 }

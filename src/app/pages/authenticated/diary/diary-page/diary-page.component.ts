@@ -13,6 +13,7 @@ import { EntryPageRowComponent } from '../entry-page-row/entry-page-row.componen
 @Component({
   selector: 'ml-diary-page',
   templateUrl: './diary-page.component.html',
+  styleUrl: './diary-page.component.css',
   imports: [EntryPageRowComponent, ActivityPageRowComponent, AsyncPipe, DecimalPipe]
 })
 export class DiaryPageComponent {

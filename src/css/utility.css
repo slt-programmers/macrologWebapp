@@ -39,6 +39,10 @@
   align-self: center;
 }
 
+.self-end {
+  justify-self: end;
+}
+
 .grid {
   display: grid;
 }
@@ -60,49 +64,46 @@
 }
 
 .m-1 {
-  margin: 1rem;
+  margin: 4px;
 }
 
 .m-2 {
-  margin: 2rem;
+  margin: 4px;
 }
 
 .m-4 {
-  margin: 4rem;
+  margin: 16px;
 }
 
 .mt-1 {
-  margin-top: 1rem;
+  margin-top: 4px;
 }
 
 .mt-2 {
-  margin-top: 2rem;
+  margin-top: 8px;
 }
 
 .mt-4 {
-  margin-top: 4rem;
+  margin-top: 16px;
 }
 
 
 .p-1 {
-  padding: 1rem;
+  padding: 4px;
 }
 
 .p-2 {
-  padding: 2rem;
+  padding: 8px;
 }
 
 .p-3 {
-  padding: 3rem;
+  padding: 12px;
 }
 
 .p-4 {
-  padding: 4rem;
+  padding: 16px;
 }
 
-.px-1 {
-  padding: 0 1rem;
-}
 
 .text-sm {
   font-size: 0.8rem;
