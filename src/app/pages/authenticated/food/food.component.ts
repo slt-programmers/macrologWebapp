@@ -1,21 +1,20 @@
+import { AsyncPipe, DecimalPipe } from '@angular/common';
 import { Component, OnDestroy, inject } from '@angular/core';
-import { Food } from '../../../shared/model/food';
-import { Store } from '@ngrx/store';
-import { selectAllFood, selectFoodLoading } from 'src/app/shared/store/selectors/food.selectors';
-import { Observable, Subscription } from 'rxjs';
 import { FormsModule } from '@angular/forms';
-import { NgClass, AsyncPipe, DecimalPipe } from '@angular/common';
-import { EditFoodComponent } from './edit-food/edit-food.component';
+import { Store } from '@ngrx/store';
+import { Observable, Subscription } from 'rxjs';
 import { Portion } from 'src/app/shared/model/portion';
+import { selectAllFood, selectFoodLoading } from 'src/app/shared/store/selectors/food.selectors';
+import { Food } from '../../../shared/model/food';
+import { EditFoodComponent } from './edit-food/edit-food.component';
 
 @Component({
-    selector: 'ml-food',
-    templateUrl: './food.component.html',
-    imports: [FormsModule, NgClass, EditFoodComponent, AsyncPipe, DecimalPipe]
+  selector: 'ml-food',
+  templateUrl: './food.component.html',
+  imports: [FormsModule, EditFoodComponent, AsyncPipe, DecimalPipe]
 })
 export class FoodComponent implements OnDestroy {
   private readonly store = inject(Store);
-
 
   // Displayed on one page
   public displayedFood: Food[] = [];
@@ -79,7 +78,7 @@ export class FoodComponent implements OnDestroy {
     if (food) {
       this.selectedFood = JSON.parse(JSON.stringify(food)) as Food;
     } else {
-      this.selectedFood = { portions: [] as Portion[]} as Food;
+      this.selectedFood = { portions: [] as Portion[] } as Food;
     }
     this.modalIsVisible = true;
   }

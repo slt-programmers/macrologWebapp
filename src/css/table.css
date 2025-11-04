@@ -1,0 +1,27 @@
+table {
+  width: 100%;
+}
+
+thead {
+  background-color: var(--mist);
+  border-bottom: none;
+  font-weight: 600;
+}
+
+th {
+  font-weight: 600;
+  text-align: start;
+}
+
+th,
+td {
+  padding: 8px;
+}
+
+tr {
+  border-bottom: 1px solid var(--lightBlue);
+
+  &:hover {
+    background-color: var(--lightBlue);
+  }
+}
