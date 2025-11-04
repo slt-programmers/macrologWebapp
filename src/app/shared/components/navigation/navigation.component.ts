@@ -1,36 +1,33 @@
-import { Component, inject } from '@angular/core';
-import { Router, RouterLink } from '@angular/router';
-import { AuthenticationService } from '../../services/auth.service';
-
+import { Component, inject } from "@angular/core";
+import { Router, RouterLink } from "@angular/router";
+import { AuthenticationService } from "../../services/auth.service";
 
 @Component({
-    selector: 'ml-navigation',
-    templateUrl: './navigation.component.html',
-    styleUrls: ['./navigation.component.scss'],
-    imports: [RouterLink]
+	selector: "ml-navigation",
+	templateUrl: "./navigation.component.html",
+	styleUrls: ["./navigation.component.css"],
+	imports: [RouterLink],
 })
-export class NavigationComponent{
-  private readonly authService = inject(AuthenticationService);
-  private readonly router = inject(Router);
+export class NavigationComponent {
+	private readonly authService = inject(AuthenticationService);
+	private readonly router = inject(Router);
 
+	menuOpen = false;
 
-  public menuOpen = false;
+	toggleMenu(): void {
+		this.menuOpen = !this.menuOpen;
+	}
 
-  public toggleMenu() {
-    this.menuOpen = !this.menuOpen;
-  }
+	logOut(): void {
+		this.authService.logout();
+		this.router.navigate([""]);
+	}
 
-  public logOut() {
-    this.authService.logout();
-    this.router.navigate(['']);
-  }
+	isLoggedIn(): boolean {
+		return this.authService.isAuthenticated();
+	}
 
-  public isLoggedIn() {
-    return this.authService.isAuthenticated();
-  }
-
-  public isAdmin() {
-    return this.authService.isAdmin();
-  }
-
+	isAdmin(): boolean {
+		return this.authService.isAdmin();
+	}
 }

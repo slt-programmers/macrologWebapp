@@ -1,44 +1,56 @@
-<div class="content">
-  <div class="card">
-    @if (intakeGoals && (totals$ | async)) {
-      <div class="flex flex-col align-center">
-        <div id="stackdonuts" class="flex">
-          <div class="stackdonut-wrapper">
-            <ml-stackdonut [goal]="intakeGoals[0]" [circleRadius]="circleRadius"
-              [strokeWidth]="strokeWidth" [text]="'Protein'" [achieved]="(totals$ | async)!.protein">
-            </ml-stackdonut>
-          </div>
-          <div class="stackdonut-wrapper">
-            <ml-stackdonut [goal]="intakeGoals[1]" [circleRadius]="circleRadius"
-              [strokeWidth]="strokeWidth" [text]="'Fat'" [achieved]="(totals$ | async)!.fat">
-            </ml-stackdonut>
-          </div>
-          <div class="stackdonut-wrapper">
-            <ml-stackdonut [goal]="intakeGoals[2]" [circleRadius]="circleRadius"
-              [strokeWidth]="strokeWidth" [text]="'Carbs'" [achieved]="(totals$ | async)!.carbs">
-            </ml-stackdonut>
-          </div>
-        </div>
-        <div id="caloriesText" class="flex">
-          <p>{{ (totals$ | async)!.calories | number: '1.0-0' }}/{{ goalCal }}
-            <span class="">Calories</span>
-          </p>
-        </div>
-      </div>
-    }
+<div class="card">
+	@if (intakeGoals && (totals$ | async)) {
+	<div class="flex flex-col align-center">
+		<div id="stackdonuts" class="flex">
+			<div class="stackdonut-wrapper">
+				<ml-stackdonut
+					[goal]="intakeGoals[0]"
+					[circleRadius]="circleRadius"
+					[strokeWidth]="strokeWidth"
+					[text]="'Protein'"
+					[achieved]="(totals$ | async)!.protein"
+				>
+				</ml-stackdonut>
+			</div>
+			<div class="stackdonut-wrapper">
+				<ml-stackdonut
+					[goal]="intakeGoals[1]"
+					[circleRadius]="circleRadius"
+					[strokeWidth]="strokeWidth"
+					[text]="'Fat'"
+					[achieved]="(totals$ | async)!.fat"
+				>
+				</ml-stackdonut>
+			</div>
+			<div class="stackdonut-wrapper">
+				<ml-stackdonut
+					[goal]="intakeGoals[2]"
+					[circleRadius]="circleRadius"
+					[strokeWidth]="strokeWidth"
+					[text]="'Carbs'"
+					[achieved]="(totals$ | async)!.carbs"
+				>
+				</ml-stackdonut>
+			</div>
+		</div>
+		<div id="caloriesText" class="flex">
+			<p>
+				{{ (totals$ | async)!.calories | number : "1.0-0" }}/{{ goalCal }}
+				<span class="">Calories</span>
+			</p>
+		</div>
+	</div>
+	} @if (!intakeGoals) {
+	<div id="caloriesText" class="flex justify-center">
+		<p>You haven't set your goal intake yet!</p>
+	</div>
+	}
+</div>
 
-    @if (!intakeGoals) {
-      <div id="caloriesText" class="flex justify-center">
-        <p>You haven't set your goal intake yet!</p>
-      </div>
-    }
-  </div>
+<div class="logday card">
+	<div class="logday__date">
+		<ml-datepicker (change$)="changeDate($event)"></ml-datepicker>
+	</div>
 
-  <div class="logday card">
-    <div class="logday__date">
-      <ml-datepicker (change$)="changeDate($event)"></ml-datepicker>
-    </div>
-
-    <ml-diary-page [date]="date"></ml-diary-page>
-  </div>
+	<ml-diary-page [date]="date"></ml-diary-page>
 </div>

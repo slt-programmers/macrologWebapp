@@ -1,5 +1,39 @@
-@import "../../../../css/variables.scss";
+:host {
+	display: flex;
+	height: 56px;
+}
 
+.navbar {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	z-index: 2;
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	height: 56px;
+	padding: 0 16px;
+  background-color: var(--white);
+	box-shadow: var(--boxShadow), var(--boxShadowWide);
+}
+
+.nav-items {
+	display: flex;
+	align-items: center;
+	gap: 12px;
+}
+
+.home-link {
+	color: var(--secondary);
+	font-size: 48px;
+	font-weight: 600;
+  
+	&:hover {
+		text-decoration: none;
+	}
+}
+/* 
 .navbar {
   @media (min-width: $sm) {
     position: fixed;
@@ -37,17 +71,4 @@
     }
   }
 }
-
-.navbar-placeholder {
-  @media (min-width: $sm) {
-    height: 4rem;
-  }
-  height: 1rem;
-}
-
-.logo {
-  margin: 0;
-  color: var(--secondary);
-  font-size: 3rem;
-  font-weight: 600;
-}
+*/
