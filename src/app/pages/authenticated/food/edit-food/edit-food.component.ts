@@ -6,10 +6,10 @@ import { foodActions } from "src/app/shared/store/actions/food.actions";
 import { ModalComponent } from "../../../../shared/components/modal/modal.component";
 import { FormsModule } from "@angular/forms";
 
-
 @Component({
     selector: 'ml-edit-food',
     templateUrl: './edit-food.component.html',
+    styleUrl: './edit-food.component.css',
     imports: [ModalComponent, FormsModule]
 })
 export class EditFoodComponent implements OnInit {
@@ -18,15 +18,15 @@ export class EditFoodComponent implements OnInit {
   readonly selectedFood = input.required<Food>();
   readonly close$ = output<boolean>();
 
-  public title = 'Add food';
+  title = 'Add food';
 
-  ngOnInit() {
+  ngOnInit(): void {
     if (this.selectedFood().id) {
       this.title = 'Edit food';
     }
   }
 
-  public saveFood(): void {
+  saveFood(): void {
     const newFood: Food = {
       name: this.selectedFood().name,
       protein: this.selectedFood().protein,
@@ -57,6 +57,5 @@ export class EditFoodComponent implements OnInit {
   public addNewPortion(): void {
     this.selectedFood().portions!.push({});
   }
-
 
 }
