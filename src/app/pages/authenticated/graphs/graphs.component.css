@@ -1,28 +1,3 @@
-.graph {
-  display: flex;
-  flex-direction: column;
-}
-
-.graph__wrapper {
-  display: flex;
-  flex-direction: column;
-}
-
-.graph__spinner-wrapper {
-  display: flex;
-  flex-grow: 1;
-  width: 100%;
-  justify-content: center;
-}
-
-.graph__graphs-container {
-  display: flex;
-  flex-direction: column;
-  flex-grow: 1;
-  align-items: center;
-  width: 100%;
-}
-
 .graph__bargraph-container {
   display: flex;
   flex-direction: column;
@@ -49,48 +24,4 @@
 
 .graph__bargraph--carbs {
   height: 200px;
-}
-
-.graph__options {
-  display: flex;
-  flex-direction: row;
-  margin-top: 1rem;
-  flex-wrap: wrap;
-  column-gap: 3rem;
-}
-
-.graph__options__group {
-  display: flex;
-  column-gap: 1rem;
-  flex-direction: column;
-}
-
-@media (min-width: 1024px) {
-  .graph__wrapper {
-    flex-direction: row;
-  }
-
-  .graph__graphs-container {
-    width: auto;
-    margin: 15px;
-  }
-
-  .graph__options {
-    flex-direction: column;
-    row-gap: 1rem;
-  }
-
-  .graph__options__group {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-}
-
-.month-picker {
-  display: flex;
-  flex-direction: row;
-  column-gap: 1rem;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
 }
