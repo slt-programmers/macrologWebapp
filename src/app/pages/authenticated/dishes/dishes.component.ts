@@ -16,6 +16,7 @@ import { AutocompleteFoodComponent } from '../../../shared/components/autocomple
 @Component({
     selector: 'ml-dishes',
     templateUrl: './dishes.component.html',
+    styleUrl: './dishes.component.css',
     imports: [PiechartComponent, ModalComponent, FormsModule, AutocompleteFoodComponent]
 })
 export class DishesComponent implements OnInit, OnDestroy {
