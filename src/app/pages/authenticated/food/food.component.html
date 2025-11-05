@@ -1,7 +1,7 @@
 <div class="card flex flex-col gap-4">
   <div class="flex items-center gap-2">
-    <label for="search" class="search-bar__label">Search</label>
-    <input id="search" class="input search-bar__input" [(ngModel)]="searchInput"
+    <label for="search">Search</label>
+    <input id="search" class="flex-grow" [(ngModel)]="searchInput"
       (input)="findFoodMatch()" />
 
     <button type="button" class="btn btn--primary" (click)="clearSearch()">
