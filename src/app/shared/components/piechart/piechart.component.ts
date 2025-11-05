@@ -12,7 +12,7 @@ import { Macros } from 'src/app/shared/model/macros';
 @Component({
   templateUrl: './piechart.component.html',
   selector: 'ml-piechart',
-  styleUrls: ['./piechart.component.scss'],
+  styleUrls: ['./piechart.component.css'],
   imports: [DecimalPipe]
 })
 export class PiechartComponent implements OnInit, AfterViewInit {

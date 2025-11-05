@@ -1,12 +1,12 @@
-@import '../../../../css/variables.scss';
+:root {
+  --yAxisWidth: 30px;
+  --xAxisHeight: 30px;
 
-@media (min-width: $xs) {
-  $yAxisWidth: 50px;
-  $xAxisHeight: 50px;
+  @media (min-width: 448px) {
+  --yAxisWidth: 50px;
+  --xAxisHeight: 50px;
 }
-
-$yAxisWidth: 30px;
-$xAxisHeight: 30px;
+}
 
 .linegraph {
   height: 100%;
@@ -29,7 +29,7 @@ $xAxisHeight: 30px;
   }
 
   .y-axis {
-    width: $yAxisWidth;
+    width: var(--yAxisWidth);
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -73,7 +73,7 @@ $xAxisHeight: 30px;
     align-self: flex-end;
     z-index: 1;
 
-    &__text {
+    .graph-point__text {
       display: flex;
       position: absolute;
       color: var(--primary);
@@ -118,14 +118,14 @@ $xAxisHeight: 30px;
 
   .x-axis-dummy-point {
     display: flex;
-    width: $yAxisWidth;
-    height: $xAxisHeight;
+    width: var(--yAxisWidth);
+    height: var(--xAxisHeight);
   }
 
   .x-axis {
     display: flex;
     flex-grow: 1;
-    height: $xAxisHeight;
+    height: var(--xAxisHeight);
     border-top: 1px solid var(--storm);
     justify-content: space-around;
   }

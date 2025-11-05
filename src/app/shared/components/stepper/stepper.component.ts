@@ -4,7 +4,7 @@ import { NgClass } from '@angular/common';
 @Component({
     selector: 'ml-stepper',
     templateUrl: './stepper.component.html',
-    styleUrls: ['./stepper.component.scss'],
+    styleUrls: ['./stepper.component.css'],
     imports: [NgClass]
 })
 export class StepperComponent implements OnInit {

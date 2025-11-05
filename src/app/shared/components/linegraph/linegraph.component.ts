@@ -10,7 +10,7 @@ import {
 @Component({
   selector: 'ml-linegraph',
   templateUrl: './linegraph.component.html',
-  styleUrls: ['./linegraph.component.scss'],
+  styleUrls: ['./linegraph.component.css'],
   imports: []
 })
 export class LinegraphComponent {

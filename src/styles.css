@@ -36,10 +36,42 @@
 	--boxShadowWideDark: 0 0 20px rgb(0, 0, 0);
 }
 
+.xs-only {
+	@media (min-width: 448px) {
+		display: none;
+	}
+}
 .sm-only {
 	@media (min-width: 640px) {
 		display: none;
 	}
 }
+.lg-only {
+	@media (min-width: 1024px) {
+		display: none;
+	}
+}
 
+.xs {
+	@media (max-width: (448px - 1)) {
+		display: none;
+	}
+}
+.sm {
+	@media (max-width: (640px - 1)) {
+		display: none;
+	}
+}
+.lg {
+	@media (max-width: (1024px - 1)) {
+		display: none;
+	}
+}
 
+.overlay {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+}

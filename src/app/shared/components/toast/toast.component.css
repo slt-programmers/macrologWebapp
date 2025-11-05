@@ -1,0 +1,62 @@
+.toast {
+	display: block;
+	margin-bottom: 1rem;
+	background-color: white;
+	box-shadow: 0 0 10px rgb(156, 169, 185);
+
+	border-radius: 4px;
+	color: #333333;
+	padding: 1rem;
+
+	min-height: 4rem;
+	max-width: calc(100vw - 4rem);
+	width: 20rem;
+
+	transition: margin-top 0.2s;
+
+	animation-duration: 0.3s;
+	animation-name: fade-in-up;
+
+	@media (min-width: 640px) {
+		max-width: 20rem;
+	}
+}
+
+@keyframes fade-in-up {
+	from {
+		margin-top: 1rem;
+		opacity: 0;
+	}
+	to {
+		margin-top: 0rem;
+		opacity: 1;
+	}
+}
+
+.toast-border {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	height: 4px;
+	border-radius: 4px 4px 0 0;
+	z-index: 25;
+	background-color: #2196f3;
+
+	&--error {
+		background-color: #dd3f00;
+	}
+}
+
+.toast-holder {
+	display: block;
+	position: fixed;
+	top: 1rem;
+	right: 1rem;
+	z-index: 24;
+
+	@media (min-width: 640px) {
+		top: 2rem;
+		right: 2rem;
+	}
+}
