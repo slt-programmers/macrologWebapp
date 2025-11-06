@@ -1,43 +1,33 @@
-<div class="flex">
-  <div class="p-1">
-    <img alt="powered by Strava" src="../assets/api_logo_pwrdBy_strava_stack_light.png" />
+<div class="flex gap-4">
+  <img alt="powered by Strava" src="../assets/api_logo_pwrdBy_strava_stack_light.png" />
+
+  <div class="flex flex-col gap-4">
+    @if (getStatus('STRAVA')) {
+    <p class="font-bold">The Strava webhook is enabled.</p>
+
+    <div class="grid grid-cols-1-1 gap-2">
+      <span class="flex-grow">Subscription ID: </span>
+      <span> {{ getStatus('STRAVA').id }}</span>
+      
+      <span class="flex-grow"> Created at:</span>
+      <span> {{ getStatus('STRAVA').created_at }}</span>
+      
+      <span class="flex-grow">Updated at:</span>
+      <span> {{ getStatus('STRAVA').updated_at }} </span>
+      
+      <span class="flex-grow">Callback url used:</span>
+      <span> {{ getStatus('STRAVA').callback_url }} </span>
+    </div>
+
+    <button class="btn btn--warning" (click)="disableWebhook('STRAVA')">
+      Disable
+    </button>
+    } @else {
+    <p class="font-bold">The Strava webhook is disabled.</p>
+
+    <button class="align-self-start btn btn--warning" (click)="enableWebhook('STRAVA')">
+      Enable
+    </button>
+    }
   </div>
-
-  @if (getStatus('STRAVA')) {
-    <div class="flex flex-col content" >
-      <p class="strong font-bold">The Strava webhook is enabled.</p>
-      <div class="flex">
-        <label class="flex-grow">Subscription ID </label>
-        <p> {{ getStatus('STRAVA').id }} </p>
-      </div>
-      <div class="flex">
-        <label class="flex-grow"> Created at</label>
-        <p> {{ getStatus('STRAVA').created_at }} </p>
-      </div>
-      <div class="flex">
-        <label class="flex-grow">Updated at</label>
-        <p> {{ getStatus('STRAVA').updated_at }} </p>
-      </div>
-      <div class="flex">
-        <label class="flex-grow">Callback url used</label>
-        <p> {{ getStatus('STRAVA').callback_url }} </p>
-      </div>
-      <div>
-        <button class="button button--warning" (click)="disableWebhook('STRAVA')">
-          Disable
-        </button>
-      </div>
-    </div>
-  }
-
-  @if (!getStatus('STRAVA')) {
-    <div class="flex flex-col content">
-      <p class="strong font-bold">The Strava webhook is disabled.</p>
-      <div>
-        <button class="button button--warning" (click)="enableWebhook('STRAVA')">
-          Enable
-        </button>
-      </div>
-    </div>
-  }
 </div>

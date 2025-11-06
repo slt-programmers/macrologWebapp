@@ -15,11 +15,9 @@
 .justify-center {
   justify-content: center;
 }
-
 .justify-end {
   justify-content: flex-end;
 }
-
 .justify-between {
   justify-content: space-between;
 }
@@ -27,11 +25,9 @@
 .items-center {
   align-items: center;
 }
-
 .items-start {
   align-items: flex-start;
 }
-
 .items-end {
   align-items: flex-end;
 }
@@ -53,11 +49,13 @@
 .grid {
   display: grid;
 }
+.grid-cols-1-1 {
+  grid-template-columns: 1fr 1fr;
+}
 
 .gap-1 {
   gap: 4px;
 }
-
 .gap-2 {
   gap: 8px;
 }
@@ -82,15 +80,6 @@
 }
 .m-4 {
   margin: 16px;
-}
-
-
-.mt-2 {
-  margin-top: 8px;
-}
-
-.mt-4 {
-  margin-top: 16px;
 }
 
 
