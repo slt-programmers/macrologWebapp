@@ -8,7 +8,7 @@
     "build": "ng build",
     "heroku-postbuild": "./checkPostBuild.sh",
     "test": "ng test --no-watch --browsers=ChromeHeadless",
-    "test:watch": "ng test",
+    "test:local": "ng test",
     "lint": "ng lint",
     "cypress:open": "cypress open --config-file cypress/cypress.local.json",
     "cypress:local": "cypress run --config-file cypress/cypress.local.json",

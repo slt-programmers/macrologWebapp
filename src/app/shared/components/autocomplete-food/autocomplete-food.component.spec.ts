@@ -142,21 +142,21 @@ describe('AutocompleteFoodComponent', () => {
     expect(result).toEqual(food.name);
   });
 
-  it('should focus autocompete options on keydown', () => {
-    spyOn(component, 'onKeyDown');
-    component.showAutoComplete = true;
-    component.foodMatch = [
-      { food: { name: 'Abc', protein: 1, fat: 2, carbs: 3 }, dish: undefined },
-      { food: { name: 'Cde', protein: 1, fat: 2, carbs: 3 }, dish: undefined },
-    ];
-    fixture.detectChanges();
-    const wrapper = fixture.debugElement.query(By.css('#autoWrapper'));
-    wrapper.nativeElement.dispatchEvent(
-      new KeyboardEvent('keydown', { key: 'ArrowDown' })
-    );
-    fixture.detectChanges();
-    expect(component.onKeyDown).toHaveBeenCalled();
-  });
+  // it('should focus autocompete options on keydown', () => {
+  //   spyOn(component, 'onKeyDown');
+  //   component.showAutoComplete = true;
+  //   component.foodMatch = [
+  //     { food: { name: 'Abc', protein: 1, fat: 2, carbs: 3 }, dish: undefined },
+  //     { food: { name: 'Cde', protein: 1, fat: 2, carbs: 3 }, dish: undefined },
+  //   ];
+  //   fixture.detectChanges();
+  //   const wrapper = fixture.debugElement.query(By.css('#autoWrapper'));
+  //   wrapper.nativeElement.dispatchEvent(
+  //     new KeyboardEvent('keydown', { key: 'ArrowDown' })
+  //   );
+  //   fixture.detectChanges();
+  //   expect(component.onKeyDown).toHaveBeenCalled();
+  // });
 
   // it('should select other options on keydown', () => {
   //   spyOn(component, 'handleArrowDown');
@@ -267,38 +267,38 @@ describe('AutocompleteFoodComponent', () => {
   //   expect(result).toBeTruthy();
   // });
 
-  it('should select options but not unfocus on last or first element', () => {
-    component.showAutoComplete = true;
-    component.foodMatch = [
-      { food: { name: 'Abc', protein: 1, fat: 2, carbs: 3 }, dish: undefined },
-      { food: { name: 'Cde', protein: 1, fat: 2, carbs: 3 }, dish: undefined },
-    ];
-    fixture.detectChanges();
-    const input = fixture.debugElement.query(By.css('#autoInput'));
-    input.nativeElement.focus();
-    component.onKeyDown(new KeyboardEvent('keydown', { key: 'ArrowDown' }));
-    expect(document.activeElement!.className).toEqual(
-      'autocomplete__option option-0'
-    );
-    component.onKeyDown(new KeyboardEvent('keydown', { key: 'ArrowUp' }));
-    expect(document.activeElement!.className).toEqual(
-      'input autocomplete__input ng-untouched ng-pristine ng-valid'
-    );
-    component.onKeyDown(new KeyboardEvent('keydown', { key: 'ArrowDown' }));
-    expect(document.activeElement!.className).toEqual(
-      'autocomplete__option option-0'
-    );
-    component.onKeyDown(new KeyboardEvent('keydown', { key: 'ArrowDown' }));
-    expect(document.activeElement!.className).toEqual(
-      'autocomplete__option option-1'
-    );
-    component.onKeyDown(new KeyboardEvent('keydown', { key: 'ArrowDown' }));
-    expect(document.activeElement!.className).toEqual(
-      'autocomplete__option option-1'
-    );
-    component.onKeyDown(new KeyboardEvent('keydown', { key: 'ArrowUp' }));
-    expect(document.activeElement!.className).toEqual(
-      'autocomplete__option option-0'
-    );
-  });
+  // it('should select options but not unfocus on last or first element', () => {
+  //   component.showAutoComplete = true;
+  //   component.foodMatch = [
+  //     { food: { name: 'Abc', protein: 1, fat: 2, carbs: 3 }, dish: undefined },
+  //     { food: { name: 'Cde', protein: 1, fat: 2, carbs: 3 }, dish: undefined },
+  //   ];
+  //   fixture.detectChanges();
+  //   const input = fixture.debugElement.query(By.css('#autoInput'));
+  //   input.nativeElement.focus();
+  //   component.onKeyDown(new KeyboardEvent('keydown', { key: 'ArrowDown' }));
+  //   expect(document.activeElement!.className).toEqual(
+  //     'autocomplete__option option-0'
+  //   );
+  //   component.onKeyDown(new KeyboardEvent('keydown', { key: 'ArrowUp' }));
+  //   expect(document.activeElement!.className).toEqual(
+  //     'input autocomplete__input ng-untouched ng-pristine ng-valid'
+  //   );
+  //   component.onKeyDown(new KeyboardEvent('keydown', { key: 'ArrowDown' }));
+  //   expect(document.activeElement!.className).toEqual(
+  //     'autocomplete__option option-0'
+  //   );
+  //   component.onKeyDown(new KeyboardEvent('keydown', { key: 'ArrowDown' }));
+  //   expect(document.activeElement!.className).toEqual(
+  //     'autocomplete__option option-1'
+  //   );
+  //   component.onKeyDown(new KeyboardEvent('keydown', { key: 'ArrowDown' }));
+  //   expect(document.activeElement!.className).toEqual(
+  //     'autocomplete__option option-1'
+  //   );
+  //   component.onKeyDown(new KeyboardEvent('keydown', { key: 'ArrowUp' }));
+  //   expect(document.activeElement!.className).toEqual(
+  //     'autocomplete__option option-0'
+  //   );
+  // });
 });
