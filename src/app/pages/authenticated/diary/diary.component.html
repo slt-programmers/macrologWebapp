@@ -12,14 +12,14 @@
     </ml-stackdonut>
   </div>
 
-  <p class="self-center">
+  <p class="align-self-center">
     {{ (totals$ | async)!.calories | number : "1.0-0" }}/{{ goalCal }}
     <span class="">Calories</span>
   </p>
   }
 
   @if (!intakeGoals) {
-  <p class="self-center">You haven't set your goal intake yet!</p>
+  <p class="align-self-center">You haven't set your goal intake yet!</p>
   }
 </div>
 

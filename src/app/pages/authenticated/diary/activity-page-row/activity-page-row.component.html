@@ -24,53 +24,42 @@
 
 @if (showModal) {
 <ml-modal [title]="'Edit activities'" (close$)="showModal = false">
-  <div class="content min-w-32">
+  <div class="flex flex-col gap-4">
     @if (!modalActivities || modalActivities.length === 0) {
-    <div>Add activities to your diary.
+    <span>Add activities to your diary.
+    </span>
+    } @else {
+    <span class="font-bold text-secondary">Current activities</span>
+
+    <div class="activity-grid">
+      <span>Activity name</span>
+
+      <span>Calories burned</span>
+
+      @for (activity of modalActivities; track activity; let index = $index) {
+      <input class="col-start-1" value="{{activity.name}}" (keyup)="changeName($event, index)">
+
+      <input value="{{activity.calories}}" step="1" type="number"
+        (keyup)="changeCalories($event, index)">
+
+      <button class="btn btn--icon text--primary fas fa-trash"
+        (click)="deleteActivity(index)"></button>
+      }
     </div>
     }
-    @if (modalActivities && modalActivities.length > 0) {
-    <div class="flex col-gap-1">
-      <div class="flex-4 font-bold">Activity name</div>
-      <div class="flex-2 font-bold">Calories burned</div>
-      <div class="flex-1"></div>
-    </div>
-    }
-    @for (activity of modalActivities; track activity; let index = $index) {
-    <div class="flex col-gap-1 align-center">
-      <div class="flex-4">
-        <input class="input" value="{{activity.name}}" (keyup)="changeName($event, index)">
-      </div>
-      <div class="flex-2">
-        <input class="input" value="{{activity.calories}}" step="1" type="number"
-          (keyup)="changeCalories($event, index)">
-      </div>
-      <div class="flex flex-1 justify-end">
-        <button class="icon-button fas fa-trash" (click)="deleteActivity(index)"></button>
-      </div>
-    </div>
-    }
-    <form [formGroup]="activityForm">
-      <div class="content mt-2">
-        <div class="flex align-center">
-          <label for="name" class="flex-1">Activity name</label>
-          <input formControlName="name" class="input flex-2" name="name">
-        </div>
-        <div class="flex align-center">
-          <label for="calories" class="flex-1">Calories burned</label>
-          <input formControlName="calories" class="input flex-2" name="calories" type="number"
-            step="1">
-        </div>
-        <div>
-          <button class="button button--primary" (click)="addActivity()">Add</button>
-        </div>
-      </div>
+    <span class="font-bold text-secondary">Add new activity</span>
+
+    <form [formGroup]="activityForm" class="new-activity-grid">
+      <label for="name">Activity name</label>
+      <input formControlName="name" name="name">
+
+      <label for="calories">Calories burned</label>
+      <input formControlName="calories" name="calories" type="number" step="1">
+
+      <button class="btn btn--primary" (click)="addActivity()">Add</button>
     </form>
-    <div>
-      <div class="button-wrapper">
-        <button class="button button--primary" (click)="saveActivities()">Save</button>
-      </div>
-    </div>
+
+    <button class="align-self-end btn btn--primary" (click)="saveActivities()">Save</button>
   </div>
 </ml-modal>
 }

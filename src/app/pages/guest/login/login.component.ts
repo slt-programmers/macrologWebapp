@@ -96,13 +96,15 @@ export class LoginComponent implements OnInit {
   public resetPassword() {
     if (this.forgotEmail) {
       this.authService.resetPassword(this.forgotEmail).subscribe(
-        () => {
+        (res) => {
           this.toastService.setMessage('We have send an email with your password!', false, 'Success!');
           this.toggleForgotPwModal(false);
           this.forgotError = '';
+          console.log('here')
         },
-        () => {
+        (error) => {
           this.forgotError = 'The email adress was not found';
+          console.log(error)
         }
       );
     }

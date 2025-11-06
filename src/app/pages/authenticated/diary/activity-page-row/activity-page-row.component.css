@@ -15,6 +15,21 @@
   grid-column-end: span 8;
 }
 
+.col-start-1{
+  grid-column-start: 1;
+}
 .col-start-9 {
   grid-column-start: 9;
+}
+
+.activity-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr auto;
+  gap: 8px;
+}
+.new-activity-grid {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 8px;
+  align-items: center;
 }
