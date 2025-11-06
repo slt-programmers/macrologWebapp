@@ -64,12 +64,12 @@
 }
 
 .phone-image {
+  display: none;
+	position: relative;
+	width: 300px;
 	@media (min-width: 1024px) {
 		display: block;
 	}
-	display: none;
-	position: relative;
-	width: 300px;
 }
 
 .phone-image__fill {
@@ -83,7 +83,6 @@
 .phone-image__frame {
 	position: relative;
 	height: 630px;
-	width: 100%;
 	z-index: 1;
 }
 
