@@ -8,13 +8,14 @@ describe('ModalComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ModalComponent ]
-    })
+    imports: [ModalComponent]
+})
     .compileComponents();
   });
 
   beforeEach(() => {
     fixture = TestBed.createComponent(ModalComponent);
+    fixture.componentRef.setInput('title', 'This is a title')
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

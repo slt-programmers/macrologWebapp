@@ -1,19 +1,23 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { UserAccount } from 'src/app/shared/model/userAccount';
 import { AdminService } from 'src/app/shared/services/admin.service';
 
+import { ModalComponent } from '../../../../shared/components/modal/modal.component';
+import { FormsModule } from '@angular/forms';
+
 @Component({
-  selector: 'ml-usermanagement',
-  templateUrl: './usermanagement.component.html'
+    selector: 'ml-usermanagement',
+    templateUrl: './usermanagement.component.html',
+    imports: [ModalComponent, FormsModule]
 })
 export class UserManagementComponent implements OnInit {
+  private adminService = inject(AdminService);
+
   public allUsers: UserAccount[] = []
   public isModalVisible = false;
-  public userName: string = undefined;
+  public userName?: string;
 
-  public selectedUser: UserAccount | undefined;
-
-  constructor(private adminService: AdminService) { }
+  public selectedUser?: UserAccount;
 
   ngOnInit() {
     this.getAllUsers();
@@ -36,7 +40,7 @@ export class UserManagementComponent implements OnInit {
 
   public deleteUser() {
     if (this.selectedUser) {
-      this.adminService.deleteUser(this.selectedUser).subscribe(it => {
+      this.adminService.deleteUser(this.selectedUser).subscribe(() => {
         this.getAllUsers();
         this.selectedUser = undefined;
         this.userName = undefined;

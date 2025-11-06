@@ -1,38 +1,40 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { AuthenticationService } from '../../../../shared/services/auth.service';
 import { ToastService } from '../../../../shared/services/toast.service';
 import { Router } from '@angular/router';
+import { FormsModule } from '@angular/forms';
+
+import { ModalComponent } from '../../../../shared/components/modal/modal.component';
 
 @Component({
   selector: 'ml-account',
   templateUrl: './account.component.html',
+  imports: [FormsModule, ModalComponent]
 })
 export class AccountComponent {
-  public message = '';
-  public oldPassword: string;
-  public newPassword: string;
-  public confirmPassword: string;
-  public modalOpen = false;
-  public password: string;
-  public errorMessage: string;
+  private authService = inject(AuthenticationService);
+  private toastService = inject(ToastService);
+  private router = inject(Router);
 
-  constructor(
-    private authService: AuthenticationService,
-    private toastService: ToastService,
-    private router: Router
-  ) {}
+  public message = '';
+  public oldPassword?: string;
+  public newPassword?: string;
+  public confirmPassword?: string;
+  public modalOpen = false;
+  public password?: string;
+  public errorMessage?: string;
 
   public changePassword() {
     this.message = '';
     if (this.newPassword !== this.confirmPassword) {
       this.message =
         'The confirmation password does not match with the new password.';
-    } else {
+    } else  {
       this.authService
         .changePassword(
-          this.oldPassword,
-          this.newPassword,
-          this.confirmPassword
+          this.oldPassword!,
+          this.newPassword!,
+          this.confirmPassword!
         )
         .subscribe(
           (data) => {
@@ -59,17 +61,19 @@ export class AccountComponent {
   }
 
   public deleteAccount() {
-    this.authService.deleteAccount(this.password).subscribe(
-      () => {
-        localStorage.clear();
-        this.router.navigate(['/']);
-      },
-      (err) => {
-        if (err.status === 401) {
-          this.errorMessage = 'Password is incorrect';
-        } 
-      }
-    );
+    if (this.password) {
+      this.authService.deleteAccount(this.password).subscribe(
+        () => {
+          localStorage.clear();
+          this.router.navigate(['/']);
+        },
+        (err) => {
+          if (err.status === 401) {
+            this.errorMessage = 'Password is incorrect';
+          }
+        }
+      );
+    }
   }
 
   public openModal() {

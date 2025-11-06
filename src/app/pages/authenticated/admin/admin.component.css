@@ -1,0 +1,20 @@
+.subnav {
+  border-bottom: 1px solid var(--smoke);
+  margin-bottom: 15px;
+}
+
+.subnav__item {
+  border-bottom: 2px solid transparent;
+  display: inline-block;
+  padding: 15px;
+
+  &:hover {
+    cursor: pointer;
+    color: var(--primary);
+    border-bottom: 2px solid var(--smoke);
+  }
+}
+
+.subnav__item--active {
+  border-bottom: 2px solid var(--primary);
+}

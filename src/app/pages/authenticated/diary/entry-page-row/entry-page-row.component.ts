@@ -1,4 +1,6 @@
-import { Component, Input, OnChanges, OnDestroy, SimpleChanges } from '@angular/core';
+import { DecimalPipe, TitleCasePipe } from '@angular/common';
+import { Component, OnDestroy, effect, inject, input } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
 import { Entry } from 'src/app/shared/model/entry';
@@ -7,33 +9,38 @@ import { Portion } from 'src/app/shared/model/portion';
 import { entriesActions } from 'src/app/shared/store/actions/entries.actions';
 import { selectEntriesDateMeal } from 'src/app/shared/store/selectors/entries.selectors';
 import { clone } from 'src/app/util/functions';
+import { AutocompleteFoodComponent } from '../../../../shared/components/autocomplete-food/autocomplete-food.component';
+import { ModalComponent } from '../../../../shared/components/modal/modal.component';
 
 @Component({
   selector: 'ml-entry-page-row',
   templateUrl: './entry-page-row.component.html',
-  styleUrls: ['./entry-page-row.component.scss']
+  styleUrls: ['./entry-page-row.component.css'],
+  imports: [ModalComponent, FormsModule, AutocompleteFoodComponent, DecimalPipe, TitleCasePipe]
 })
-export class EntryPageRowComponent implements OnChanges, OnDestroy {
+export class EntryPageRowComponent implements OnDestroy {
+  private readonly store = inject(Store);
 
-  @Input() meal: Meal;
-  @Input() date: string;
+  readonly meal = input.required<Meal>();
+  readonly date = input.required<string>();
 
-  public entries: Entry[];
-  public modalEntries: Entry[];
+  public entries: Entry[] = []
+  public modalEntries: Entry[] = [];
   public showModal = false;
 
   private subscriptions: Subscription[] = [];
 
-  constructor(private readonly store: Store) { }
-
-  ngOnChanges(changes: SimpleChanges): void {
-    this.subscriptions.push(this.store.select(selectEntriesDateMeal(this.date, this.meal)).subscribe(it => {
-      this.entries = clone(it);
-    }));
+  constructor() {
+    effect(() => {
+      this.subscriptions.push(
+        this.store.select(selectEntriesDateMeal(this.date(), this.meal())).subscribe(it => {
+        this.entries = clone(it)!;
+      }));
+    })
   }
 
   openModal(): void {
-    this.modalEntries = clone(this.entries);
+    this.modalEntries = clone(this.entries)!;
     this.showModal = true;
   }
 
@@ -42,7 +49,7 @@ export class EntryPageRowComponent implements OnChanges, OnDestroy {
       this.modalEntries[index].portion = undefined;
     } else {
       this.modalEntries[index].portion =
-        this.modalEntries[index].food.portions.filter(p => p.id === +event.target.value)[0];
+        this.modalEntries[index].food.portions!.filter(p => p.id === +event.target.value)[0];
     }
   }
 
@@ -59,21 +66,21 @@ export class EntryPageRowComponent implements OnChanges, OnDestroy {
       for (const ingredient of entry.dish.ingredients) {
         this.modalEntries.push({
           food: ingredient.food,
-          meal: this.meal,
-          day: this.date,
+          meal: this.meal(),
+          day: this.date(),
           portion: ingredient.portion ? ingredient.food.portions
             .filter((p: Portion) => p.id === ingredient.portion.id)[0] : undefined,
           multiplier: ingredient.multiplier
-        });
+        } as Entry);
       }
     } else {
       this.modalEntries.push({
         food: entry.food,
-        meal: this.meal,
-        day: this.date,
+        meal: this.meal(),
+        day: this.date(),
         portion: entry.food.portions ? entry.food.portions[0] : undefined,
         multiplier: 1
-      });
+      } as Entry);
     }
   }
 
@@ -90,9 +97,9 @@ export class EntryPageRowComponent implements OnChanges, OnDestroy {
       }
     }
     if (!missingInput) {
-      this.store.dispatch(entriesActions.post(this.modalEntries, { date: this.date, meal: this.meal }));
+      this.store.dispatch(entriesActions.post(this.modalEntries, { date: this.date(), meal: this.meal() }));
       this.showModal = false;
-      this.modalEntries = undefined;
+      this.modalEntries = [];
     }
   }
 

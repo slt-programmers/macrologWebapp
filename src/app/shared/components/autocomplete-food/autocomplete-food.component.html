@@ -1,13 +1,16 @@
-<div id="autoWrapper" class="autocomplete-wrapper" #newIngredient (keydown)="onKeyDown($event)">
-  <input aria-label="search for something" id="autoInput" class="input autocomplete__input" placeholder="{{placeholder}}"
-    (input)="findFoodMatch($event)" [(ngModel)]="foodName" (focus)="showAutoComplete = true">
+<div class="autocomplete-wrapper" #newIngredient (keydown)="onKeyDown($event)">
+  <input aria-label="search for something" id="autoInput" class="input autocomplete-input"
+    placeholder="{{placeholder()}}" (input)="findFoodMatch($event)" [(ngModel)]="foodName"
+    (focus)="showAutoComplete = true">
 
-  <div id="autoDropdown" #autoComplete class="autocomplete" *ngIf="showAutoComplete">
-    <ng-container *ngFor="let match of foodMatch; index as idx">
-      <div id="autoOption" ngClass="option-{{idx}}" class="autocomplete__option"
-        (click)="selectMatch(match)" tabindex="{{idx}}">
-        {{getDescription(match)}}
-      </div>
-    </ng-container>
+  @if (showAutoComplete) {
+  <div #autoComplete class="autocomplete">
+    @for (match of foodMatch; track match; let idx = $index) {
+    <div ngClass="option-{{idx}}" class="autocomplete__option" (click)="selectMatch(match)"
+      tabindex="{{idx}}">
+      {{getDescription(match)}}
+    </div>
+    }
   </div>
+  }
 </div>

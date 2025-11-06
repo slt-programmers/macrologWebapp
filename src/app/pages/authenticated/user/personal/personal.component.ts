@@ -1,16 +1,21 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { UserService } from '../../../../shared/services/user.service';
 import { Gender } from '../../../../shared/model/gender';
 import { ToastService } from '../../../../shared/services/toast.service';
 import { forkJoin } from 'rxjs';
 import { UserSettings } from 'src/app/shared/model/userSettings';
 import { format, parse } from 'date-fns';
+import { FormsModule } from '@angular/forms';
 
 @Component({
-  selector: 'ml-personal',
-  templateUrl: './personal.component.html',
+    selector: 'ml-personal',
+    templateUrl: './personal.component.html',
+    imports: [FormsModule]
 })
 export class PersonalComponent implements OnInit {
+  private userService = inject(UserService);
+  private toastService = inject(ToastService);
+
   private originalResult?: UserSettings;
 
   public name?: string;
@@ -23,7 +28,7 @@ export class PersonalComponent implements OnInit {
 
   public theme = 'light';
 
-  constructor(private userService: UserService, private toastService: ToastService) {
+  constructor() {
     const theme = localStorage.getItem('theme');
     this.theme = theme ? theme : 'light';
     this.setThemeToDocument();
@@ -52,14 +57,14 @@ export class PersonalComponent implements OnInit {
 
   public saveUserSettings(): void {
     forkJoin([
-      this.userService.addUserSetting('name', this.name),
-      this.userService.addUserSetting('birthday', this.birthday?.toString()),
-      this.userService.addUserSetting('gender', this.gender?.toString()),
-      this.userService.addUserSetting('height', this.height?.toString()),
-      this.userService.addUserSetting('weight', this.weight?.toString()),
-      this.userService.addUserSetting('activity', this.activity?.toString()),
+      this.userService.addUserSetting('name', this.name!),
+      this.userService.addUserSetting('birthday', this.birthday!.toString()),
+      this.userService.addUserSetting('gender', this.gender!.toString()),
+      this.userService.addUserSetting('height', this.height!.toString()),
+      this.userService.addUserSetting('weight', this.weight!.toString()),
+      this.userService.addUserSetting('activity', this.activity!.toString()),
     ]).subscribe(
-      (data) => this.toastService.setMessage('Your data is saved!', false, 'Success!'),
+      () => this.toastService.setMessage('Your data is saved!', false, 'Success!'),
       (error) => console.error(error)
     );
   }

@@ -1,13 +1,15 @@
-import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, inject } from '@angular/core';
+import { Router, RouterLink, RouterOutlet } from '@angular/router';
+import { NgClass } from '@angular/common';
 
 @Component({
-	selector: 'ml-user-page',
-	templateUrl: './user.component.html',
-	styleUrls:['./user.component.scss']
+    selector: 'ml-user-page',
+    templateUrl: './user.component.html',
+    styleUrls: ['./user.component.css'],
+    imports: [NgClass, RouterLink, RouterOutlet]
 })
 export class UserComponent {
+	router = inject(Router);
 
-	constructor(public router: Router) {}
 
 }

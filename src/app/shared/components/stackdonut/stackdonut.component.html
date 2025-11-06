@@ -1,18 +1,18 @@
-<div id="stackdonut--{{text}}" class="stackdonut">
-	<div class="stackdonut__center">
-		<div id="stackdonutText--{{text}}" class="stackdonut__center__text">{{achieved |  number:'1.0-0'}}/{{goal}}</div>
+<div class="center-text">
+  <span class="text">{{achieved() | number:'1.0-0'}}/{{goal()}}</span>
 
-		<div id="stackdonutSubtext--{{text}}" class="stackdonut__center__subtext">{{text}}</div>
-	</div>
-
-	<svg [attr.height]="height" [attr.width]="width" style="transform: rotate(-90deg)" #svg >
-		<circle [attr.cx]="height/2" [attr.cy]="height/2" #outerCircle class="stackdonut__circle stackdonut__circle--outer" fill="transparent"
-			stroke-dashoffset="0"></circle>
-
-		<circle [attr.cx]="height/2" [attr.cy]="height/2" #innerBackgroundCircle class="stackdonut__circle" fill="transparent"
-			stroke-dashoffset="0"></circle>
-
-		<circle [attr.cx]="height/2" [attr.cy]="height/2" #innerCircle class="stackdonut__circle stackdonut__circle--inner" fill="transparent"
-			stroke-dashoffset="0"></circle>
-	</svg>
+  <span class="subtext">{{text()}}</span>
 </div>
+
+<svg [attr.height]="height" [attr.width]="width" style="transform: rotate(-90deg)" #svg>
+  <circle [attr.cx]="height/2" [attr.cy]="height/2" #outerCircle
+    class="circle circle--outer" fill="transparent" stroke-dashoffset="0">
+  </circle>
+
+  <circle [attr.cx]="height/2" [attr.cy]="height/2" #innerBackgroundCircle
+    class="circle" fill="transparent" stroke-dashoffset="0"></circle>
+
+  <circle [attr.cx]="height/2" [attr.cy]="height/2" #innerCircle
+    class="circle circle--inner" fill="transparent" stroke-dashoffset="0">
+  </circle>
+</svg>

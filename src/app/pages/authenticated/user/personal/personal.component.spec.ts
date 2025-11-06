@@ -16,16 +16,13 @@ describe('PersonalComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports:[FormsModule, ReactiveFormsModule],
-      declarations: [
-        PersonalComponent,
-        MockComponent(StepperComponent)
-      ],
-      providers: [
+    imports: [FormsModule, ReactiveFormsModule, PersonalComponent,
+        MockComponent(StepperComponent)],
+    providers: [
         MockProvider(UserService),
         MockProvider(ToastService)
-      ]
-    }).compileComponents();
+    ]
+}).compileComponents();
 
     userService = TestBed.inject(UserService);
     fixture = TestBed.createComponent(PersonalComponent);

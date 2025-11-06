@@ -19,37 +19,34 @@
   </div>
 </div>
 
-<ml-modal [title]="'Set your daily intake'" (close$)="closeModal()" *ngIf="showModal">
-  <div class="min-w-32">
-    <div class="content">
-      <div class="form-field">
-        <label for="protein">Protein</label>
-        <input name="protein" class="input" (ngModelChange)="protein = $event; calcCalories()"
-          [ngModel]="protein" type="number">
-      </div>
-
-      <div class="form-field">
-        <label for="fat">Fat</label>
-        <input name="fat" class="input" [ngModel]="fat" (ngModelChange)="fat = $event; calcCalories()"
-          type="number">
-      </div>
-
-      <div class="form-field">
-        <label for="carbs">Carbs</label>
-        <input name="carbs" class="input" [ngModel]="carbs"  (ngModelChange)="carbs = $event; calcCalories()"
-          type="number">
-      </div>
-
-      <div class="flex col-gap-1">
-        <label class="flex-2">Calories</label>
-        <p class="flex-4">{{calories}}</p>
-      </div>
-      
-      <button class="button button--primary" (click)="fillStandard()">Fill with standard ratios</button>
-
-      <div class="button-wrapper">
-        <button class="button button--primary" (click)="saveIntake()">Save</button>
-      </div>
-    </div>
-  </div>
-</ml-modal>
+@if (showModal) {
+  <ml-modal [title]="'Set your daily intake'" (close$)="closeModal()">
+    <div class="min-w-32">
+      <div class="content">
+        <div class="form-field">
+          <label for="protein">Protein</label>
+          <input name="protein" class="input" (ngModelChange)="protein = $event; calcCalories()"
+            [ngModel]="protein" type="number">
+          </div>
+          <div class="form-field">
+            <label for="fat">Fat</label>
+            <input name="fat" class="input" [ngModel]="fat" (ngModelChange)="fat = $event; calcCalories()"
+              type="number">
+            </div>
+            <div class="form-field">
+              <label for="carbs">Carbs</label>
+              <input name="carbs" class="input" [ngModel]="carbs"  (ngModelChange)="carbs = $event; calcCalories()"
+                type="number">
+              </div>
+              <div class="flex col-gap-1">
+                <label class="flex-2">Calories</label>
+                <p class="flex-4">{{calories}}</p>
+              </div>
+              <button class="button button--primary" (click)="fillStandard()">Fill with standard ratios</button>
+              <div class="button-wrapper">
+                <button class="button button--primary" (click)="saveIntake()">Save</button>
+              </div>
+            </div>
+          </div>
+        </ml-modal>
+      }

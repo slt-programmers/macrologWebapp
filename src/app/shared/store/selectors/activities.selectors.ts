@@ -24,5 +24,5 @@ export const selectActivitiesDate = (date: string) => createSelector(selectActiv
     const array = state.data.filter(apd => apd.date === date)
     return array[0]?.activities;
   }
-  return undefined;
+  return [];
 });

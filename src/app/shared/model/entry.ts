@@ -5,12 +5,12 @@ import { Portion } from './portion';
 
 export interface Entry {
 
-  id?: number;
-  meal?: Meal;
-  food?: Food;
+  id: number;
+  meal: Meal;
+  food: Food;
   portion?: Portion;
   multiplier?: number;
-  day?: string;
-  macrosCalculated?: Macros;
+  day: string;
+  macrosCalculated: Macros;
 
 }

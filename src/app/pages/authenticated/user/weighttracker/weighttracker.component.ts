@@ -1,18 +1,22 @@
-import { Component, OnInit } from '@angular/core';
-import { DatePipe } from '@angular/common';
+import { Component, OnInit, inject } from '@angular/core';
+import { DatePipe, DecimalPipe } from '@angular/common';
 import { WeightService } from '../../../../shared/services/weight.service';
 import { Weight } from '../../../../shared/model/weight';
 import { DataPoint } from 'src/app/shared/components/linegraph/linegraph.component';
-import { NgForm } from '@angular/forms';
+import { NgForm, FormsModule } from '@angular/forms';
 import { format, isAfter, isBefore, parse } from 'date-fns';
+import { LinegraphComponent } from '../../../../shared/components/linegraph/linegraph.component';
 
 @Component({
   selector: 'ml-weighttracker',
   templateUrl: './weighttracker.component.html',
-  styleUrls: ['./weighttracker.component.scss'],
+  styleUrls: ['./weighttracker.component.css'],
+  imports: [LinegraphComponent, FormsModule, DecimalPipe, DatePipe]
 })
 export class WeightTrackerComponent implements OnInit {
-  public trackedWeights = new Array<Weight>();
+  private readonly weightService = inject(WeightService);
+
+  public trackedWeights: Weight[] = [];
   public measurementDate?: string;
   public weight?: number;
   public remark?: string;
@@ -21,11 +25,7 @@ export class WeightTrackerComponent implements OnInit {
   public dataset?: DataPoint[];
   public hasOffgridValue?: boolean;
 
-  private pipe: DatePipe;
-
-  constructor(private readonly weightService: WeightService) {
-    this.pipe = new DatePipe('en-US');
-  }
+  private pipe = new DatePipe('en-US');
 
   ngOnInit() {
     this.getAllWeights();
@@ -115,7 +115,7 @@ export class WeightTrackerComponent implements OnInit {
     newWeight.day = this.pipe.transform(date, 'yyyy-MM-dd') || undefined;
     newWeight.remark = this.remark;
 
-    this.weightService.addWeight(newWeight).subscribe(it => {
+    this.weightService.addWeight(newWeight).subscribe(() => {
       formUsed.reset();
       this.getAllWeights();
       this.init();
@@ -143,7 +143,7 @@ export class WeightTrackerComponent implements OnInit {
   }
 
   public deleteWeight(weight: Weight) {
-    this.weightService.deleteWeight(weight).subscribe(it => {
+    this.weightService.deleteWeight(weight).subscribe(() => {
       this.getAllWeights();
       this.openWeight = undefined;
     });
@@ -158,7 +158,7 @@ export class WeightTrackerComponent implements OnInit {
     newRequest.day = this.pipe.transform(date, 'yyyy-MM-dd') || undefined;
     newRequest.remark = weight.remark;
 
-    this.weightService.addWeight(newRequest).subscribe(it => {
+    this.weightService.addWeight(newRequest).subscribe(() => {
       this.getAllWeights();
       this.openWeight = undefined;
     });

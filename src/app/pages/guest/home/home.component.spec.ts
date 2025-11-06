@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { HomeComponent } from './home.component';
 import { AuthenticationService } from 'src/app/shared/services/auth.service';
 import { NavigationComponent } from 'src/app/shared/components/navigation/navigation.component';
@@ -8,16 +8,15 @@ describe('HomeComponent', () => {
   let component: HomeComponent;
   let fixture: ComponentFixture<HomeComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(async () => {
     TestBed.configureTestingModule({
-      declarations: [
-        HomeComponent,
+    imports: [HomeComponent,
         MockComponent(NavigationComponent)],
-      providers: [
+    providers: [
         MockProvider(AuthenticationService)
-      ],
-    }).compileComponents();
-  }));
+    ],
+}).compileComponents();
+  });
 
   beforeEach(() => {
     fixture = TestBed.createComponent(HomeComponent);

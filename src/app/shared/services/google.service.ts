@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 import { ConnectivityRequest } from '../model/connectivityRequest';
@@ -8,9 +8,9 @@ import { Observable } from 'rxjs';
 
 @Injectable()
 export class GoogleService {
-  private macrologBackendUrl = '//' + environment.backend + '/admin/mail';
+  private readonly http = inject(HttpClient);
 
-  constructor(private readonly http: HttpClient) { }
+  private macrologBackendUrl = '//' + environment.backend + '/admin/mail';
 
   public getStatus() {
     return this.http.get<ConnectivityStatus>(this.macrologBackendUrl + '/status');

@@ -2,19 +2,19 @@
   <div class="card">
     <div class="subnav">
       <div class="subnav__item" [ngClass]="{
-            'subnav__item--active': router.url === '/user/personal'
+            'subnav__item--active': router.url.includes('/user/personal')
           }" [routerLink]="['./personal']">
         Personal
       </div>
 
       <div class="subnav__item" [ngClass]="{
-            'subnav__item--active': router.url === '/user/foodintake'
+            'subnav__item--active': router.url.includes('/user/foodintake')
           }" [routerLink]="['./foodintake']">
         Food Intake
       </div>
 
       <div class="subnav__item" [ngClass]="{
-            'subnav__item--active': router.url === '/user/weighttracker'
+            'subnav__item--active': router.url.includes('/user/weighttracker')
           }" [routerLink]="['./weighttracker']">
         Weight Tracker
       </div>
@@ -26,7 +26,7 @@
       </div>
 
       <div class="subnav__item"
-        [ngClass]="{ 'subnav__item--active': router.url === '/user/account' }"
+        [ngClass]="{ 'subnav__item--active': router.url.includes('/user/account')}"
         [routerLink]="['./account']">
         Account
       </div>

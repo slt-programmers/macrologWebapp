@@ -1,24 +1,28 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { GoogleService } from 'src/app/shared/services/google.service';
 import { environment } from '../../../../../environments/environment';
 
+import { FormsModule } from '@angular/forms';
+
 @Component({
-  selector: 'ml-mail',
-  templateUrl: './mail.component.html'
+    selector: 'ml-mail',
+    templateUrl: './mail.component.html',
+    imports: [FormsModule]
 })
 export class MailComponent implements OnInit {
-  public googleConnectUrl: string = '';
+  private readonly googleService = inject(GoogleService);
+  private readonly route = inject(ActivatedRoute);
+
+  public googleConnectUrl = '';
   public isConnected = false;
-  public syncError: string = '';
+  public syncError = '';
   public emailAddress: string | null = null;
   public mailSend = false;
 
-  private clientId: string = '';
+  private clientId = '';
   private code: string | null = null;
   private scope: string | null = null;
-
-  constructor(private readonly googleService: GoogleService, private readonly route: ActivatedRoute) { }
 
   ngOnInit() {
     this.retrieveStatus();
@@ -65,9 +69,11 @@ export class MailComponent implements OnInit {
   }
 
   private storeConnection() {
-    this.googleService.storeMailSyncSettings(this.code).subscribe(() => {
-      this.isConnected = true;
-    });
+    if (this.code) {
+      this.googleService.storeMailSyncSettings(this.code).subscribe(() => {
+        this.isConnected = true;
+      });
+    }
   }
 
   private setGoogleUrl() {

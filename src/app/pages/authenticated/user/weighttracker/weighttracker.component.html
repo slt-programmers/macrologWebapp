@@ -1,8 +1,10 @@
 <div>
   <div class="weightgraph-wrapper">
     <div class="weightgraph">
+      @if(dataset) {
       <ml-linegraph [dataset]="dataset" [xAxisStep]="1" [yAxisStep]="0.5"
         [hasOffgridValue]="hasOffgridValue"></ml-linegraph>
+      }
     </div>
   </div>
 
@@ -40,49 +42,46 @@
       </div>
     </div>
 
-    <div class="table-row flex" *ngFor="let logWeight of trackedWeights" (click)="editWeight(logWeight)">
-      <ng-container *ngIf="!logWeight.editable">
-        <div class="table-cell flex-2">{{ logWeight.day | date: 'dd-MM-yyyy' }}</div>
-        <div class="table-cell flex-5">{{ logWeight.remark }}</div>
-        <div class="table-cell flex-2">
-          {{ logWeight.weight | number: '1.1-1' }}
+    @for (logWeight of trackedWeights; track logWeight) {
+    <div class="table-row flex" (click)="editWeight(logWeight)">
+      @if (!logWeight.editable) {
+      <div class="table-cell flex-2">{{ logWeight.day | date: 'dd-MM-yyyy' }}</div>
+      <div class="table-cell flex-5">{{ logWeight.remark }}</div>
+      <div class="table-cell flex-2">
+        {{ logWeight.weight | number: '1.1-1' }}
+      </div>
+      <div class="weight__hiddenbuttons"></div>
+      }
+      @if (logWeight.editable) {
+      <div class="table-cell flex flex-grow col-gap-1 items-center">
+        <div class="flex-col">
+          <label for="date">Date</label>
+          <input name="date" required class="input" validDate placeholder="DD-MM-YYYY"
+            [(ngModel)]="logWeight.day" />
         </div>
-        <div class="weight__hiddenbuttons"></div>
-      </ng-container>
-
-      <ng-container *ngIf="logWeight.editable">
-        <div class="table-cell flex flex-grow col-gap-1 items-center">
-          <div class="flex-col">
-            <label for="date">Date</label>
-            <input name="date" required class="input" validDate placeholder="DD-MM-YYYY"
-              [(ngModel)]="logWeight.day" />
-          </div>
-
-          <div class="flex-col">
-            <label for="weight">Weight</label>
-            <input class="input" name="weight" type="number" [(ngModel)]="logWeight.weight"
-              step="0.1" />
-          </div>
-
-          <div class="flex-col flex-grow">
-            <label for="comment">Comment</label>
-            <input required class="input" name="comment" type="text"
-              [(ngModel)]="logWeight.remark" [required]="false" />
-          </div>
-
-          <div class="flex">
-            <button class="icon-button" (click)="saveWeight(logWeight)">
-              <em class="fas fa-check"></em>
-            </button>
-          </div>
-
-          <div class="flex">
-            <button class="icon-button" (click)="deleteWeight(logWeight)">
-              <em class="fas fa-trash"></em>
-            </button>
-          </div>
+        <div class="flex-col">
+          <label for="weight">Weight</label>
+          <input class="input" name="weight" type="number" [(ngModel)]="logWeight.weight"
+            step="0.1" />
         </div>
-      </ng-container>
+        <div class="flex-col flex-grow">
+          <label for="comment">Comment</label>
+          <input required class="input" name="comment" type="text" [(ngModel)]="logWeight.remark"
+            [required]="false" />
+        </div>
+        <div class="flex">
+          <button class="icon-button" (click)="saveWeight(logWeight)">
+            <em class="fas fa-check"></em>
+          </button>
+        </div>
+        <div class="flex">
+          <button class="icon-button" (click)="deleteWeight(logWeight)">
+            <em class="fas fa-trash"></em>
+          </button>
+        </div>
+      </div>
+      }
     </div>
+    }
   </div>
 </div>

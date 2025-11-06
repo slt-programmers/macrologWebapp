@@ -1,10 +1,10 @@
-import { ComponentFixture, TestBed } from "@angular/core/testing"
-import { FoodComponent } from "./food.component"
-import { MockStore, provideMockStore } from "@ngrx/store/testing"
-import { selectAllFood, selectFoodLoading } from "src/app/shared/store/selectors/food.selectors";
-import { Food } from "src/app/shared/model/food";
+import { ComponentFixture, TestBed } from "@angular/core/testing";
+import { MockStore, provideMockStore } from "@ngrx/store/testing";
 import { MockComponent } from "ng-mocks";
+import { Food } from "src/app/shared/model/food";
+import { selectAllFood, selectFoodLoading } from "src/app/shared/store/selectors/food.selectors";
 import { EditFoodComponent } from "./edit-food/edit-food.component";
+import { FoodComponent } from "./food.component";
 
 
 describe('FoodComponent', () => {
@@ -14,10 +14,8 @@ describe('FoodComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [
-        FoodComponent,
-        MockComponent(EditFoodComponent)
-      ],
+      imports: [FoodComponent,
+        MockComponent(EditFoodComponent)],
       providers: [
         provideMockStore({
           selectors: [
@@ -50,7 +48,7 @@ describe('FoodComponent', () => {
       { name: 'Something else', protein: 1, fat: 2, carbs: 3 }
     ]);
     store.refreshState();
-    let result = component.displayedFood;
+    const result = component.displayedFood;
     expect(result).toEqual([
       { name: 'Name', protein: 1, fat: 2, carbs: 3 },
       { name: 'Other name', protein: 1, fat: 2, carbs: 3 },
@@ -67,12 +65,12 @@ describe('FoodComponent', () => {
   it('should open modal', () => {
     expect(component.modalIsVisible).toBeFalse();
     component.openModal(null);
-    expect(component.selectedFood).toEqual({ portions: [] });
+    expect(component.selectedFood).toEqual({ portions: [] } as unknown as Food);
     expect(component.modalIsVisible).toBeTrue();
 
     component.modalIsVisible = false;
-    component.openModal({ name: 'name', portions: [] });
-    expect(component.selectedFood).toEqual({ name: 'name', portions: [] });
+    component.openModal({ name: 'name', portions: [] } as unknown as Food);
+    expect(component.selectedFood).toEqual({ name: 'name', portions: [] } as unknown as Food);
     expect(component.modalIsVisible).toBeTrue();
   });
 

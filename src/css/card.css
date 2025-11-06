@@ -1,0 +1,10 @@
+.card {
+  background-color: white;
+	border-radius: 0.5rem;
+  box-shadow: var(--boxShadow);
+  padding: 1rem;
+  
+  @media (min-width: 448px) {
+    padding: 2rem;
+  }
+}

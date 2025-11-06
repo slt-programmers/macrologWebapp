@@ -1,18 +1,16 @@
+import { HttpClient } from '@angular/common/http';
+import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
 import {
-  TestBed,
   ComponentFixture,
-  fakeAsync,
-  tick,
+  TestBed
 } from '@angular/core/testing';
-import { HttpClient, HttpHandler } from '@angular/common/http';
-import { NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { AccountComponent } from './account.component';
-import { throwError, of } from 'rxjs';
 import { FormsModule } from '@angular/forms';
-import { RouterTestingModule } from '@angular/router/testing';
-import { Router } from '@angular/router';
+import { provideRouter, Router } from '@angular/router';
+import { MockProvider } from 'ng-mocks';
+import { of, throwError } from 'rxjs';
 import { AuthenticationService } from 'src/app/shared/services/auth.service';
 import { ToastService } from 'src/app/shared/services/toast.service';
+import { AccountComponent } from './account.component';
 
 describe('AccountComponent', () => {
   let component: AccountComponent;
@@ -23,11 +21,16 @@ describe('AccountComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [FormsModule, RouterTestingModule],
-      declarations: [AccountComponent],
-      providers: [AuthenticationService, ToastService, HttpClient, HttpHandler],
+      imports: [FormsModule, AccountComponent],
+      providers: [
+        provideRouter([]),
+        MockProvider(AuthenticationService),
+        MockProvider(ToastService),
+        MockProvider(HttpClient)
+      ],
       schemas: [NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
+
     fixture = TestBed.createComponent(AccountComponent);
     component = fixture.componentInstance;
     authService = TestBed.inject(AuthenticationService);
@@ -43,43 +46,40 @@ describe('AccountComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should change password', fakeAsync(() => {
+  it('should change password', () => {
     component.newPassword = 'newpw';
     component.confirmPassword = 'notnewpw';
     component.changePassword();
-    tick();
     expect(component.message).toEqual(
       'The confirmation password does not match with the new password.'
     );
 
     component.confirmPassword = 'newpw';
-    const authSpy = spyOn(authService, 'changePassword').and.returnValue(
+    const authSpy = spyOn(authService, 'changePassword')
+    authSpy.and.returnValue(
       throwError({ status: 400, error: 'passwords do not match' })
     );
     component.changePassword();
-    tick();
     expect(component.message).toEqual(
       'The confirmation password does not match with the new password.'
     );
 
     authSpy.and.returnValue(throwError({ status: 401 }));
     component.changePassword();
-    tick();
     expect(component.message).toEqual('Password invalid');
 
     authSpy.and.returnValue(of({ status: 200 }));
     spyOn(toastService, 'setMessage');
     component.changePassword();
-    tick();
     expect(toastService.setMessage).toHaveBeenCalledWith(
       'Your password has changed', false, 'Success!'
     );
     expect(component.oldPassword).toEqual('');
     expect(component.newPassword).toEqual('');
     expect(component.confirmPassword).toEqual('');
-  }));
+  });
 
-  it('should delete account', fakeAsync(() => {
+  it('should delete account', () => {
     const authSpy = spyOn(authService, 'deleteAccount').and.returnValue(
       of({ status: 200 })
     );
@@ -88,7 +88,6 @@ describe('AccountComponent', () => {
     component.password = 'password';
     component.deleteAccount();
     expect(authService.deleteAccount).toHaveBeenCalledWith('password');
-    tick();
     expect(router.navigate).toHaveBeenCalledWith(['/']);
     expect(localStorage.getItem('currentUser')).toBeNull();
 
@@ -96,8 +95,7 @@ describe('AccountComponent', () => {
     localStorage.setItem('currentUser', 'user');
     component.deleteAccount();
     expect(authService.deleteAccount).toHaveBeenCalledWith('password');
-    tick();
     expect(localStorage.getItem('currentUser')).toEqual('user');
     expect(component.errorMessage).toEqual('Password is incorrect');
-  }));
+  });
 });

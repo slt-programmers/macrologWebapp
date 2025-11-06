@@ -1,37 +1,35 @@
-import {
-  TestBed,
-  ComponentFixture,
-  fakeAsync,
-  tick,
-} from '@angular/core/testing';
-import { RouterTestingModule } from '@angular/router/testing';
-import { HttpClient, HttpHandler } from '@angular/common/http';
-import { Router, ActivatedRoute } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
-import { ConnectivityComponent } from './connectivity.component';
+import {
+  ComponentFixture,
+  TestBed
+} from '@angular/core/testing';
+import { ActivatedRoute, provideRouter } from '@angular/router';
+import { MockProvider } from 'ng-mocks';
 import { of } from 'rxjs';
 import { ToastService } from 'src/app/shared/services/toast.service';
 import { UserService } from 'src/app/shared/services/user.service';
+import { ConnectivityComponent } from './connectivity.component';
 
 describe('ConnectivityComponent', () => {
   let component: ConnectivityComponent;
   let fixture: ComponentFixture<ConnectivityComponent>;
-  let toastService: ToastService;
   let userService: UserService;
-  let router: Router;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [RouterTestingModule.withRoutes([])],
-      declarations: [ConnectivityComponent],
-      providers: [ToastService, UserService, HttpClient, HttpHandler],
+      imports: [ConnectivityComponent],
+      providers: [
+        provideRouter([]),
+        MockProvider(ToastService),
+        MockProvider(UserService),
+        MockProvider(HttpClient)
+      ],
       schemas: [NO_ERRORS_SCHEMA],
     }).compileComponents();
     fixture = TestBed.createComponent(ConnectivityComponent);
     component = fixture.componentInstance;
-    toastService = TestBed.inject(ToastService);
     userService = TestBed.inject(UserService);
-    router = TestBed.inject(Router);
   });
 
   afterEach(() => {
@@ -42,19 +40,18 @@ describe('ConnectivityComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should init connectivity component succesful', fakeAsync(() => {
+  it('should init connectivity component succesful', () => {
     const result = { id: 42, syncedApplicationId: 43 };
     spyOn(userService, 'getSyncSettings').and.returnValue(of(result));
     component.ngOnInit();
     expect(userService.getSyncSettings).toHaveBeenCalledWith('STRAVA');
-    tick();
     expect(component.syncError).toEqual('');
     expect(component.stravaConnectUrl).toEqual(
       'https://www.strava.com/oauth/authorize?approval_prompt=force&scope=activity:read_all&response_type=code&state=STRAVACONNECT&client_id=43&redirect_uri=http://localhost:4200/dashboard/user/connectivity'
     );
-  }));
+  });
 
-  it('should init connectivity component with code and bad scope', fakeAsync(() => {
+  it('should init connectivity component with code and bad scope', () => {
     const route = TestBed.inject(ActivatedRoute);
     route.queryParams = of({ code: 123, scope: 'badscope' });
 
@@ -63,13 +60,12 @@ describe('ConnectivityComponent', () => {
     component.ngOnInit();
 
     expect(userService.getSyncSettings).toHaveBeenCalledWith('STRAVA');
-    tick();
     expect(component.syncError).toEqual(
       'Please give access to view your activitities in order to allow Macrolog to read your Strava activities'
     );
-  }));
+  });
 
-  it('should init connectivity component with code and good scope', fakeAsync(() => {
+  it('should init connectivity component with code and good scope', () => {
     const route = TestBed.inject(ActivatedRoute);
     route.queryParams = of({ code: '123', scope: 'read,activity:read_all' });
 
@@ -81,9 +77,8 @@ describe('ConnectivityComponent', () => {
     component.ngOnInit();
 
     expect(userService.getSyncSettings).toHaveBeenCalledWith('STRAVA');
-    tick();
     expect(userService.storeSyncSettings).toHaveBeenCalledWith('STRAVA', '123');
-  }));
+  });
 
   it('should disconnect from platform', () => {
     spyOn(userService, 'getSyncSettings').and.returnValue(of({ status: 200 }));

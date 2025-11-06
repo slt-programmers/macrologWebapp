@@ -1,0 +1,74 @@
+.date {
+  align-items: center;
+  background-color: var(--primary);
+  border-radius: 4px;
+  color: var(--white);
+  display: flex;
+}
+
+.date-button {
+  color: white;
+  height: 32px;
+  width: 32px;
+  padding: 8px;
+}
+
+.date-display {
+  margin: 0 10px;
+}
+
+.overlay {
+  height: 100vh;
+  width: 100vw;
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.picker {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  background-color: var(--white);
+  border-radius: 8px;
+  padding: 12px;
+  position: relative;
+  width: 300px;
+  z-index: 2;
+  box-shadow: var(--boxShadow), var(--boxShadowWide);
+}
+
+.picker-button {
+  background-color: var(--primary);
+  border-radius: 4px;
+  color: white;
+  padding: 8px 16px;
+}
+.picker-days {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+}
+
+.picker-weekday {
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.picker-day {
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 0 8px;
+  border-radius: 4px;
+
+  &:hover:not(.placeholder) {
+    background-color: var(--lightBlue);
+  }
+}

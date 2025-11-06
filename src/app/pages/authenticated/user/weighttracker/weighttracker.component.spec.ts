@@ -1,12 +1,12 @@
-import { ComponentFixture, TestBed } from "@angular/core/testing"
+import { ComponentFixture, TestBed } from "@angular/core/testing";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
-import { MockComponent, MockProvider } from "ng-mocks"
+import { MockComponent, MockProvider } from "ng-mocks";
 import { of } from "rxjs";
 import { LinegraphComponent } from "src/app/shared/components/linegraph/linegraph.component";
 import { StepperComponent } from "src/app/shared/components/stepper/stepper.component";
 import { ToastService } from "src/app/shared/services/toast.service";
 import { WeightService } from "src/app/shared/services/weight.service";
-import { WeightTrackerComponent } from "./weighttracker.component"
+import { WeightTrackerComponent } from "./weighttracker.component";
 
 
 describe('WeighttrackerComponent', () => {
@@ -14,14 +14,11 @@ describe('WeighttrackerComponent', () => {
   let component: WeightTrackerComponent;
   let weightService: WeightService;
 
-  beforeEach(() => {
-    TestBed.configureTestingModule({
-      imports: [FormsModule, ReactiveFormsModule],
-      declarations: [
-        WeightTrackerComponent,
-        MockComponent(StepperComponent),
-        MockComponent(LinegraphComponent)
-      ],
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      imports: [FormsModule, ReactiveFormsModule, WeightTrackerComponent,
+        MockComponent(StepperComponent),        
+        LinegraphComponent],
       providers: [
         MockProvider(WeightService),
         MockProvider(ToastService)

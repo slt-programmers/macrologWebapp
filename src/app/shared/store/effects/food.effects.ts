@@ -1,5 +1,5 @@
 import { HttpClient } from "@angular/common/http";
-import { Injectable } from "@angular/core";
+import { Injectable, inject } from "@angular/core";
 import { createEffect, ofType, Actions } from "@ngrx/effects";
 import { of } from "rxjs";
 import { map, catchError, concatMap } from "rxjs/operators";
@@ -10,13 +10,15 @@ import { foodActions } from "../actions/food.actions";
 
 @Injectable()
 export class FoodEffects {
+  private readonly actions$ = inject(Actions);
+  private readonly http = inject(HttpClient);
 
   private backendUrl = '//' + environment.backend + '/food'
 
   getAllFood$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(foodActions.get),
-      concatMap((action) => {
+      concatMap(() => {
         return this.http.get<Food[]>(this.backendUrl).pipe(
           map(response => {
             return foodActions.success(response);
@@ -38,7 +40,7 @@ export class FoodEffects {
           'Access-Control-Allow-Origin': environment.origin,
         };
         const options = { headers: headers };
-        return this.http.post<Food>(this.backendUrl + '/', action.body, options).pipe(
+        return this.http.post<Food>(this.backendUrl, action.body, options).pipe(
           map(() => {
             return foodActions.get();
           }),
@@ -48,7 +50,5 @@ export class FoodEffects {
       })
     );
   })
-
-  constructor(private readonly actions$: Actions, private readonly http: HttpClient) { }
 
 }

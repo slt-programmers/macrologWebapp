@@ -12,7 +12,7 @@ export class DateValidator implements Validator {
 
   public validDate = true;
 
-  validate(c: AbstractControl): { [key: string]: any } {
+  validate(c: AbstractControl): Record<string, any> | null {
     const value = c.value;
     if (value !== null && value !== undefined && value !== '') {
       const date = parse(value, 'd-M-yyyy', new Date())

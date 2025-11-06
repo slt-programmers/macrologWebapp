@@ -1,62 +1,63 @@
-<nav class="navbar z-2">
-  <div class="flex align-center h-100">
-    <div class="navbar__item">
-      <h1 class="logo pointer" [routerLink]="['/']">M</h1>
-    </div>
+<nav class="navbar">
+	<div class="nav-items">
+		<a class="home-link" [routerLink]="['/']">M</a>
 
-    <div class="sm-only align-right">
-      <div role="button" class="navbar__item" aria-label="menu" aria-expanded="false"
-        (click)="toggleMenu()">
-        <div class="navbar__hamburger-line"></div>
-        <div class="navbar__hamburger-line"></div>
-        <div class="navbar__hamburger-line"></div>
-      </div>
-    </div>
+		@if (isLoggedIn()) {
+		<a id="menuDiary" [routerLink]="['/dashboard']">Diary</a>
+		<a id="menuFood" [routerLink]="['/dashboard', 'food']">Food</a>
+		<a id="menuDishes" [routerLink]="['/dashboard', 'dishes']">Dishes</a>
+		<a id="menuGraphs" [routerLink]="['/dashboard', 'graphs']">Graphs</a>
+		}
 
-    <div class="overlay" *ngIf="menuOpen" (click)="toggleMenu()"></div>
-    <div class="navbar__mobile-menu sm-only flex-col" *ngIf="menuOpen" (click)="toggleMenu()">
-      <a class="navbar__item" [routerLink]="['/about']">About</a>
-      <ng-container *ngIf="isLoggedIn()">
-        <a class="navbar__item" [routerLink]="['/dashboard']">Diary</a>
-        <a class="navbar__item" [routerLink]="['/dashboard', 'food']">Food</a>
-        <a class="navbar__item" [routerLink]="['/dashboard', 'dishes']">Dishes</a>
-        <a class="navbar__item" [routerLink]="['/dashboard', 'graphs']">Graphs</a>
-        <a class="navbar__item" [routerLink]="['/dashboard', 'user']">Profile</a>
-        <a class="navbar__item" *ngIf="isAdmin()" [routerLink]="['/dashboard', 'admin']">Admin</a>
-        <a class="navbar__item" (click)="logOut()">Log out</a>
-      </ng-container>
+		<a id="menuAbout" [routerLink]="['/about']">About</a>
+	</div>
 
-      <a id="menuLoginMobile" data-cy="menuLoginMobile" *ngIf="!isLoggedIn()" class="navbar__item" [routerLink]="['/login']">Log in</a>
-      <a id="menuRegisterMobile" data-cy="menuRegisterMobile" *ngIf="!isLoggedIn()" class="navbar__item" [routerLink]="['/login']">Register</a>
-    </div>
+	<div class="nav-items">
+		<button
+			class="sm-only"
+			type="button"
+			aria-label="menu"
+			aria-expanded="false"
+			(click)="toggleMenu()"
+		>
+			<em class="fas fa-bars"></em>
+		</button>
 
-    <div class="flex align-center sm">
-      <ng-container *ngIf="isLoggedIn()">
-        <a id="menuDiary" class="navbar__item" [routerLink]="['/dashboard']">Diary</a>
-        <a id="menuFood" class="navbar__item" [routerLink]="['/dashboard', 'food']">Food</a>
-        <a id="menuDishes" class="navbar__item" [routerLink]="['/dashboard', 'dishes']">Dishes</a>
-        <a id="menuGraphs" class="navbar__item" [routerLink]="['/dashboard', 'graphs']">Graphs</a>
-      </ng-container>
-      
-      <a id="menuAbout" class="navbar__item" [routerLink]="['/about']">About</a>
-    </div>
+		@if (menuOpen) {
+		<div class="overlay" (click)="toggleMenu()"></div>
 
-    <div class="flex align-center align-right sm">
-      <div *ngIf="isLoggedIn()" class="navbar__item">
-        <a id="menuProfile" class="navbar__item" [routerLink]="['/dashboard', 'user']">Profile</a>
-        <a id="menuAdmin" class="navbar__item" *ngIf="isAdmin()" [routerLink]="['/dashboard', 'admin']">Admin</a>
-        <a id="menuLogout" class="navbar__item" (click)="logOut()">Log out</a>
-      </div>
-
-      <div *ngIf="!isLoggedIn()" class="navbar__item">
-        <a id="menuLogin" data-cy="menuLogin" class="navbar__item" [routerLink]="['/login']">Log in</a>
-      </div>
-
-      <div *ngIf="!isLoggedIn()" class="navbar__item">
-        <button id="menuRegister" data-cy="menuRegister" class="button button--primary" [routerLink]="['/login']">Register</button>
-      </div>
-    </div>
-  </div>
+		<div class="navbar__mobile-menu sm-only flex-col" (click)="toggleMenu()">
+			<a class="navbar__item" [routerLink]="['/about']">About</a>
+			@if (isLoggedIn()) {
+			<a class="navbar__item" [routerLink]="['/dashboard']">Diary</a>
+			<a class="navbar__item" [routerLink]="['/dashboard', 'food']">Food</a>
+			<a class="navbar__item" [routerLink]="['/dashboard', 'dishes']">Dishes</a>
+			<a class="navbar__item" [routerLink]="['/dashboard', 'graphs']">Graphs</a>
+			<a class="navbar__item" [routerLink]="['/dashboard', 'user']">Profile</a>
+			@if (isAdmin()) {
+			<a class="navbar__item" [routerLink]="['/dashboard', 'admin']">Admin</a>
+			}
+			<a class="navbar__item" (click)="logOut()">Log out</a>
+			} @if (!isLoggedIn()) {
+			<a
+				id="menuLoginMobile"
+				data-cy="menuLoginMobile"
+				class="navbar__item"
+				[routerLink]="['/login']"
+				>Log in or Register</a
+			>
+			}
+		</div>
+		} @if (isLoggedIn()) {
+		<a id="menuProfile" [routerLink]="['/dashboard', 'user']">Profile</a>
+		@if (isAdmin()) {
+		<a id="menuAdmin" [routerLink]="['/dashboard', 'admin']">Admin</a>
+		}
+		<a id="menuLogout" (click)="logOut()">Log out</a>
+		} @if (!isLoggedIn()) {
+		<a id="menuLogin" data-cy="menuLogin" [routerLink]="['/login']">
+			Log in or Register</a
+		>
+		}
+	</div>
 </nav>
-
-<div class="navbar-placeholder"></div>

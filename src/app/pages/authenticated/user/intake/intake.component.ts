@@ -1,36 +1,40 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { UserService } from '../../../../shared/services/user.service';
 import { Gender } from '../../../../shared/model/gender';
 import { differenceInYears, parse } from 'date-fns';
 import { forkJoin } from 'rxjs';
 import { calculateTDEE } from 'src/app/util/functions';
 
+import { ModalComponent } from '../../../../shared/components/modal/modal.component';
+import { FormsModule } from '@angular/forms';
+
 @Component({
   selector: 'ml-intake',
   templateUrl: './intake.component.html',
+  imports: [ModalComponent, FormsModule]
 })
 export class IntakeComponent implements OnInit {
-  public goalProtein: number;
-  public goalFat: number;
-  public goalCarbs: number;
+  private userService = inject(UserService);
 
-  public protein: number;
-  public fat: number;
-  public carbs: number;
-  public calories: number;
+  public goalProtein = 0
+  public goalFat = 0
+  public goalCarbs = 0
 
-  public age: number;
-  public birthday: string;
-  public gender: Gender;
-  public height: number;
-  public weight: number;
-  public activity: number;
+  public protein = 0;
+  public fat = 0;
+  public carbs = 0;
+  public calories = 0;
+
+  public age = 18;
+  public birthday?: string;
+  public gender = Gender.Male;
+  public height = 0;
+  public weight = 0;
+  public activity = 1.2; // TODO make enum
 
   public showModal = false;
 
-  private tdee: number;
-
-  constructor(private userService: UserService) { }
+  private tdee = 0;
 
   ngOnInit(): void {
     this.userService.getUserSettings().subscribe((result) => {

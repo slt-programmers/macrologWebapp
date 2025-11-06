@@ -10,12 +10,15 @@
       "prefix": "ml",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:browser",
+          "builder": "@angular/build:application",
           "options": {
-            "outputPath": "dist",
+            "outputPath": {
+              "base": "dist"
+            },
             "index": "src/index.html",
-            "main": "src/main.ts",
-            "polyfills": "src/polyfills.ts",
+            "polyfills": [
+              "src/polyfills.ts"
+            ],
             "tsConfig": "tsconfig.app.json",
             "assets": [
               "src/favicon.ico",
@@ -23,15 +26,15 @@
               "src/google3bb89e24d542c3d5.html"
             ],
             "styles": [
-              "src/css/public.scss"
+              "src/css/public.css",
+              "src/styles.css"
             ],
             "scripts": [],
-            "vendorChunk": true,
             "extractLicenses": false,
-            "buildOptimizer": false,
             "sourceMap": true,
             "optimization": false,
-            "namedChunks": true
+            "namedChunks": true,
+            "browser": "src/main.ts"
           },
           "configurations": {
             "production": {
@@ -46,8 +49,6 @@
               "sourceMap": false,
               "namedChunks": false,
               "extractLicenses": true,
-              "vendorChunk": false,
-              "buildOptimizer": true,
               "budgets": [
                 {
                   "type": "initial",
@@ -73,8 +74,6 @@
               "sourceMap": false,
               "namedChunks": false,
               "extractLicenses": true,
-              "vendorChunk": false,
-              "buildOptimizer": true,
               "budgets": [
                 {
                   "type": "initial",
@@ -92,48 +91,42 @@
           "defaultConfiguration": ""
         },
         "serve": {
-          "builder": "@angular-devkit/build-angular:dev-server",
-          "options": {
-            "browserTarget": "macrolog-webapp:build",
-            "port": 4200
-          },
+          "builder": "@angular/build:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "macrolog-webapp:build:production"
+              "buildTarget": "macrolog-webapp:build:production"
             },
             "acceptance": {
-              "browserTarget": "macrolog-webapp:build:acceptance"
+              "buildTarget": "macrolog-webapp:build:acceptance"
+            },
+            "development": {
+              "buildTarget": "macrolog-webapp:build"
             }
-          }
+          },
+          "defaultConfiguration": "development"
         },
         "extract-i18n": {
-          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "builder": "@angular/build:extract-i18n",
           "options": {
-            "browserTarget": "macrolog-webapp:build"
+            "buildTarget": "macrolog-webapp:build"
           }
         },
         "test": {
-          "builder": "@angular-devkit/build-angular:karma",
+          "builder": "@angular/build:karma",
           "options": {
-            "main": "src/test.ts",
-            "polyfills": "src/polyfills.ts",
-            "karmaConfig": "karma.conf.js",
-            "styles": [
-              "src/css/public.scss"
+            "tsConfig": "tsconfig.spec.json",
+            "polyfills": [
+              "src/polyfills.ts"
             ],
-            "scripts": [],
+            "styles": [
+              "src/css/public.css",
+              "src/styles.css"
+            ],
             "assets": [
               "src/favicon.ico",
               "src/assets"
             ],
-            "tsConfig": "tsconfig.spec.json",
-            "codeCoverage": true,
-            "codeCoverageExclude": [
-              "src/test/**",
-              "src/app/app.module.ts",
-              "src/test/**/*.mock.ts",
-              "./test.ts"
-            ]
+            "codeCoverage": true
           }
         },
         "lint": {
@@ -148,9 +141,10 @@
       }
     }
   },
-  "defaultProject": "macrolog-webapp",
   "cli": {
     "analytics": "be3c8820-63e9-44ec-b7f7-d15f2eaa4756",
-    "defaultCollection": "@angular-eslint/schematics"
+    "schematicCollections": [
+      "angular-eslint"
+    ]
   }
 }

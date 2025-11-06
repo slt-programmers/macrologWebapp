@@ -1,0 +1,16 @@
+.loading-overlay {
+	align-items: center;
+	background-image: var(--backgroundGradient);
+	box-sizing: border-box;
+	color: var(--white);
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	height: 100%;
+	text-align: center;
+	padding: 2rem;
+	position: fixed;
+	top: 0;
+	width: 100%;
+	z-index: 20;
+}

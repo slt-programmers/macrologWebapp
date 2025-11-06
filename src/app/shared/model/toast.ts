@@ -1,5 +1,5 @@
 export class Toast {
-  public message: string = '';
-  public title: string = '';
+  public message = '';
+  public title = '';
   public isError = false;
 }
