@@ -17,8 +17,6 @@ export class ErrorInterceptor implements HttpInterceptor {
         return result;
       }),
       catchError((err) => {
-        console.log('here')
-        console.log(err)
         if (err.status === 403) {
           this.authService.logout();
           return throwError(err);
