@@ -1,52 +1,39 @@
-<div class="content">
-  <div class="flex col-gap-1">
-    <p class="flex-1">Protein</p>
-    <p class="flex-3">{{goalProtein ? goalProtein + ' gram' : ''}}</p>
-  </div>
+<div class="grid grid-cols-auto-1 gap-2">
+  <span>Protein</span>
+  <span class="font-bold">{{goalProtein ? goalProtein + ' gram' : ''}}</span>
 
-  <div class="flex col-gap-1">
-    <p class="flex-1">Fat</p>
-    <p class="flex-3">{{goalFat ? goalFat + ' gram' : ''}}</p>
-  </div>
+  <span>Fat</span>
+  <span class="font-bold">{{goalFat ? goalFat + ' gram' : ''}}</span>
 
-  <div class="flex col-gap-1">
-    <p class="flex-1">Carbs</p>
-    <p class="flex-3">{{goalCarbs ? goalCarbs + ' gram' : ''}}</p>
-  </div>
+  <span>Carbs</span>
+  <span class="font-bold">{{goalCarbs ? goalCarbs + ' gram' : ''}}</span>
 
-  <div class=" button-wrapper">
-    <button class="button button--primary" (click)="openModal()">Adjust intake</button>
-  </div>
+  <button class="btn btn--primary" (click)="openModal()">Adjust intake</button>
 </div>
 
 @if (showModal) {
-  <ml-modal [title]="'Set your daily intake'" (close$)="closeModal()">
-    <div class="min-w-32">
-      <div class="content">
-        <div class="form-field">
-          <label for="protein">Protein</label>
-          <input name="protein" class="input" (ngModelChange)="protein = $event; calcCalories()"
-            [ngModel]="protein" type="number">
-          </div>
-          <div class="form-field">
-            <label for="fat">Fat</label>
-            <input name="fat" class="input" [ngModel]="fat" (ngModelChange)="fat = $event; calcCalories()"
-              type="number">
-            </div>
-            <div class="form-field">
-              <label for="carbs">Carbs</label>
-              <input name="carbs" class="input" [ngModel]="carbs"  (ngModelChange)="carbs = $event; calcCalories()"
-                type="number">
-              </div>
-              <div class="flex col-gap-1">
-                <label class="flex-2">Calories</label>
-                <p class="flex-4">{{calories}}</p>
-              </div>
-              <button class="button button--primary" (click)="fillStandard()">Fill with standard ratios</button>
-              <div class="button-wrapper">
-                <button class="button button--primary" (click)="saveIntake()">Save</button>
-              </div>
-            </div>
-          </div>
-        </ml-modal>
-      }
+<ml-modal [title]="'Set your daily intake'" (close$)="closeModal()">
+  <div class="grid grid-cols-auto-1 gap-4">
+    <label for="protein">Protein</label>
+    <input name="protein" class="input" (ngModelChange)="protein = $event; calcCalories()"
+      [ngModel]="protein" type="number">
+
+    <label for="fat">Fat</label>
+    <input name="fat" class="input" [ngModel]="fat" (ngModelChange)="fat = $event; calcCalories()"
+      type="number">
+
+    <label for="carbs">Carbs</label>
+    <input name="carbs" class="input" [ngModel]="carbs"
+      (ngModelChange)="carbs = $event; calcCalories()" type="number">
+
+    <label class="flex-2">Calories</label>
+    <span class="flex-4">{{calories}}</span>
+
+  </div>
+
+  <button class="btn btn--primary" (click)="fillStandard()">Fill with standard
+    ratios</button>
+
+  <button class="btn btn--primary" (click)="saveIntake()">Save</button>
+</ml-modal>
+}

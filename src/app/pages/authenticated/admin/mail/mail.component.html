@@ -1,37 +1,33 @@
-<div class="flex">
-  <div class="p-2">
-    <img alt="powered by GMail" src="../assets/logo_gmail.png" />
-  </div>
+<div class="flex items-center gap-4">
+  <img class="align-self-center" alt="powered by GMail" src="../assets/logo_gmail.png" />
 
   @if (isConnected) {
-    <div class="flex flex-col content">
-      <p class="strong font-bold">GMail is connected</p>
+  <div class="flex flex-col gap-4">
+    <p class="strong font-bold">GMail is connected</p>
 
-      <div>
-        <label for="emailAddress">Email address</label>
-        <input id="emailAddress" class="input" [(ngModel)]="emailAddress" name="emailAddress" />
-      </div>
-      
-      <div>
-        <button id="testMail" class="button button--warning" (click)="sendTestMail()">
-          Send testmail
-        </button>
-      </div>
+    <div class="flex gap-2">
+      <label for="emailAddress">Email address</label>
+      <input id="emailAddress" class="input" [(ngModel)]="emailAddress" name="emailAddress" />
     </div>
+
+    <button class="btm btn--warning" (click)="sendTestMail()">
+      Send testmail
+    </button>
+  </div>
   }
 
   @if (!isConnected) {
-    <div class="flex flex-col justify-center content">
-      <p class="strong font-bold"> GMail is not connected </p>
-      @if (syncError) {
-        <p class="error">
-          Unable to proceed with connecting to GMAIL. {{ syncError }}
-        </p>
-      }
-      <a href="{{ googleConnectUrl }}">
-        <img alt="connect to GMail" src="../assets/sign-in-with-google-icon.png"
-          style="width: 200px" />
-        </a>
-      </div>
+  <div class="flex flex-col gap-2">
+    <p class="strong font-bold"> GMail is not connected </p>
+    @if (syncError) {
+    <p class="error">
+      Unable to proceed with connecting to GMAIL. {{ syncError }}
+    </p>
     }
+    <a href="{{ googleConnectUrl }}">
+      <img alt="connect to GMail" src="../assets/sign-in-with-google-icon.png"
+        style="width: 200px" />
+    </a>
   </div>
+  }
+</div>

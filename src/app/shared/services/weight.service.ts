@@ -23,7 +23,7 @@ export class WeightService {
       'Access-Control-Allow-Origin': environment.origin,
     };
     const options = { headers: headers };
-    return this.http.post<Weight>(this.macrologBackendUrl + '/', weight, options).pipe(
+    return this.http.post<Weight>(this.macrologBackendUrl, weight, options).pipe(
       catchError(() => { return of<any>(); }));
   }
 

@@ -5,7 +5,6 @@ import { NgClass } from '@angular/common';
 @Component({
     selector: 'ml-user-page',
     templateUrl: './user.component.html',
-    styleUrls: ['./user.component.css'],
     imports: [NgClass, RouterLink, RouterOutlet]
 })
 export class UserComponent {

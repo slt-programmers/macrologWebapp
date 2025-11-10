@@ -1,78 +1,55 @@
-<div class="">
-  <form #personalForm="ngForm" class="form">
-    <h3 class="font-semibold">Personal information</h3>
+<form #personalForm="ngForm" class="flex flex-col gap-4">
+  <h1 class="font-semibold">Personal information</h1>
 
-    <div class="form-field">
-      <label for="name">Name</label>
-      <input required class="input" name="name" type="text" [(ngModel)]="name">
+  <div class="grid grid-cols-auto-1 gap-4 items-center">
+    <label for="name">Name</label>
+    <input required class="input" name="name" type="text" [(ngModel)]="name">
+
+    <label for="birthday">Date of birth</label>
+    <input required class="input" validDate placeholder="DD-MM-YYYY" name="birthday"
+      [(ngModel)]="birthday">
+
+    <span>Gender</span>
+
+    <div class="flex gap-2 items-center">
+      <input type="radio" id="male" [(ngModel)]="gender" value="MALE">
+      <label for="male">Male</label>
+
+      <input type="radio" id="female" [(ngModel)]="gender" value="FEMALE">
+      <label for="female">Female</label>
     </div>
 
-    <div class="form-field">
-      <label for="birthday" >Date of birth</label>
-      <input required class="input" validDate placeholder="DD-MM-YYYY" name="birthday"
-        [(ngModel)]="birthday">
-    </div>
+    <label for="height">Height (cm)</label>
+    <input required class="input" name="height" type="number" [(ngModel)]="height">
 
-    <div class="form-field">
-      <div class="form-field__label">Gender</div>
+    <label for="weight">Weight (kg)</label>
+    <input required class="input" name="weight" type="number" [(ngModel)]="weight" step="0.1">
 
-      <div class="form-field__radio-group">
-        <div class="flex align-center">
-          <input type="radio" id="male" [(ngModel)]="gender" value="MALE">
-          <label for="male">Male</label>
-        </div>
+    <label for="activity">Activity level</label>
+    <select name="activity" [(ngModel)]="activity">
+      <option value="1.2">Sedentary</option>
+      <option value="1.375">Lightly active</option>
+      <option value="1.55">Moderately active</option>
+      <option value="1.725">Very active</option>
+      <option value="1.9">Extremely active</option>
+    </select>
+  </div>
 
-        <div class="flex align-center">
-          <input type="radio" id="female" [(ngModel)]="gender" value="FEMALE">
-          <label for="female">Female</label>
-        </div>
-      </div>
-    </div>
+  <button class="btn btn--primary align-self-end" (click)="saveUserSettings()"
+    [disabled]="isInputUnchanged() || personalForm.invalid">Save</button>
+</form>
 
-    <div class="form-field">
-      <label for="height">Height (cm)</label>
-      <input required class="input" name="height" type="number" [(ngModel)]="height">
-    </div>
+<form class="flex flex-col gap-4">
+  <h1 class="font-semibold">Theme settings</h1>
 
-    <div class="form-field">
-      <label for="weight">Weight (kg)</label>
-      <input required class="input" name="weight" type="number" [(ngModel)]="weight" step="0.1">
-    </div>
+  <span>Theme</span>
 
-    <div class="form-field">
-      <label for="activity">Activity level</label>
-      <select name="activity" [(ngModel)]="activity">
-        <option value="1.2">Sedentary</option>
-        <option value="1.375">Lightly active</option>
-        <option value="1.55">Moderately active</option>
-        <option value="1.725">Very active</option>
-        <option value="1.9">Extremely active</option>
-      </select>
-    </div>
+  <div class="flex gap-2 items-center">
+    <input type="radio" id="light" [ngModel]="theme" value="light"
+      (ngModelChange)="setTheme($event)">
+    <label for="light">Light</label>
 
-    <div class=" button-wrapper">
-      <button class="button button--primary" (click)="saveUserSettings()"
-        [disabled]="isInputUnchanged() || personalForm.invalid">Save</button>
-    </div>
-  </form>
-
-  <form class="form">
-    <h3 class="font-semibold">Theme settings</h3>
-
-    <div class="form-field">
-      <div class="form-field__label">Theme</div>
-
-      <div class="form-field__radio-group">
-        <div class="flex align-center">
-          <input type="radio" id="light" [ngModel]="theme" value="light" (ngModelChange)="setTheme($event)">
-          <label for="light">Light</label>
-        </div>
-
-        <div class="flex align-center">
-          <input type="radio" id="dark" [ngModel]="theme" value="dark" (ngModelChange)="setTheme($event)">
-          <label for="dark">Dark</label>
-        </div>
-      </div>
-    </div>
-  </form>
-</div>
+    <input type="radio" id="dark" [ngModel]="theme" value="dark" (ngModelChange)="setTheme($event)">
+    <label for="dark">Dark</label>
+  </div>
+</form>

@@ -10,7 +10,6 @@ import { LinegraphComponent } from '../../../../shared/components/linegraph/line
 @Component({
   selector: 'ml-weighttracker',
   templateUrl: './weighttracker.component.html',
-  styleUrls: ['./weighttracker.component.css'],
   imports: [LinegraphComponent, FormsModule, DecimalPipe, DatePipe]
 })
 export class WeightTrackerComponent implements OnInit {
@@ -125,9 +124,9 @@ export class WeightTrackerComponent implements OnInit {
   public editWeight(weight: Weight) {
     if (this.openWeight) {
       if (this.openWeight.id === weight.id) {
-        weight.editable = true;
+        weight.editMode = true;
       } else {
-        this.openWeight.editable = false;
+        this.openWeight.editMode = false;
         this.initOpenWeight(weight);
       }
     } else {
@@ -139,7 +138,7 @@ export class WeightTrackerComponent implements OnInit {
     this.openWeight = weight;
     const date = parse(this.openWeight.day || '', 'yyyy-MM-dd', new Date());
     this.openWeight.day = this.pipe.transform(date, 'dd-MM-yyyy') || undefined;
-    weight.editable = true;
+    weight.editMode = true;
   }
 
   public deleteWeight(weight: Weight) {

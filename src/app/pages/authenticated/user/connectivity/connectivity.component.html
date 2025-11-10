@@ -1,59 +1,55 @@
-<div class="connectivity">
-  <div class="connectivity__logo">
-    <img alt="powered by Strava" src="../assets/api_logo_pwrdBy_strava_stack_light.png" />
-  </div>
+<div class="flex gap-4">
+  <img class="align-self-start" alt="powered by Strava"
+    src="../assets/api_logo_pwrdBy_strava_stack_light.png" />
 
   @if (!isConnected()) {
-    <div class="connectivity__info">
-      <p class="connectivity__info__text">
-        Get your activities from Strava automatically added to Macrolog!
-      </p>
-      <p class="connectivity__info__text">
-        No need to manually add activities when they already have been registered
-        in Strava!
-      </p>
-      @if (syncError) {
-        <p class="error">
-          Unable to proceed with connecting to Strava. {{ syncError }}
-        </p>
-      }
-    </div>
-  }
-
-  @if (!isConnected()) {
-    <div class="connectivity__connection">
-      <a href="{{ stravaConnectUrl }}">
-        <img alt="connect to Strava" src="../assets/btn_strava_connectwith_light.png" />
-      </a>
-    </div>
-  }
-
-  @if (isConnected()) {
-    <div class="connectivity__info content">
-      <p class="connectivity__info__text connectivity__info__text--bold">
-        You have connected Strava to Macrolog! The activities from Strava will be automatically added
-        to Macrolog.
-      </p>
-      <p class="connectivity__info__text">
-        Number of activities synced:
-        <span class="font-bold"> {{ connection.numberActivitiesSynced }} </span>
-      </p>
-    </div>
-  }
-
-  @if (isConnected()) {
-    <div class="connectivity__connection content">
-      <img alt="strava profile picture" class="connectivity__connection__profile-pic"
-        src="{{ connection.image }}" />
-        <p class="connectivity__connection__link">
-          <a target="_blank" href="https://www.strava.com/athletes/{{ connection.syncedAccountId }}">{{
-          connection.name }}</a>
-        </p>
-        <div class=" button-wrapper">
-          <button class="button button--primary" (click)="disconnect()">
-            Disconnect
-          </button>
-        </div>
-      </div>
+  <div class="flex">
+    <p>
+      Get your activities from Strava automatically added to Macrolog!
+    </p>
+    <p>
+      No need to manually add activities when they already have been registered
+      in Strava!
+    </p>
+    @if (syncError) {
+    <p class="text-error">
+      Unable to proceed with connecting to Strava. {{ syncError }}
+    </p>
     }
   </div>
+
+  <div class="connectivity__connection">
+    <a href="{{ stravaConnectUrl }}">
+      <img alt="connect to Strava" src="../assets/btn_strava_connectwith_light.png" />
+    </a>
+  </div>
+  }
+
+  @if (isConnected()) {
+  <div class="flex flex-col gap-4">
+    <p class="font-bold">
+      You have connected Strava to Macrolog!
+    </p>
+
+    <p>
+      The activities from Strava will be automatically added to Macrolog.
+    </p>
+
+    <p>
+      Number of activities synced:
+      <span class="font-bold"> {{ connection.numberActivitiesSynced }} </span>
+    </p>
+  </div>
+
+  <div class="flex flex-col gap-2 items-center">
+    <img alt="strava profile picture" class="profile-pic" src="{{ connection.image }}" />
+
+    <a target="_blank" href="https://www.strava.com/athletes/{{ connection.syncedAccountId }}">{{
+      connection.name }}</a>
+
+    <button class="btn btn--warning" (click)="disconnect()">
+      Disconnect
+    </button>
+  </div>
+  }
+</div>

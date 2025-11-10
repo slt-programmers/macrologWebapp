@@ -4,7 +4,6 @@ import { Router, RouterLink, RouterOutlet } from '@angular/router';
 @Component({
   selector: 'ml-admin-page',
   templateUrl: './admin.component.html',
-  styleUrls: ['./admin.component.css'],
   imports: [RouterLink, RouterOutlet]
 })
 export class AdminComponent {
