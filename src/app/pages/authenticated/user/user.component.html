@@ -1,37 +1,35 @@
-<div class="content">
-  <div class="card">
-    <div class="subnav">
-      <div class="subnav__item" [ngClass]="{
+<div class="card">
+  <div class="subnav">
+    <div class="subnav__item" [ngClass]="{
             'subnav__item--active': router.url.includes('/user/personal')
           }" [routerLink]="['./personal']">
-        Personal
-      </div>
-
-      <div class="subnav__item" [ngClass]="{
-            'subnav__item--active': router.url.includes('/user/foodintake')
-          }" [routerLink]="['./foodintake']">
-        Food Intake
-      </div>
-
-      <div class="subnav__item" [ngClass]="{
-            'subnav__item--active': router.url.includes('/user/weighttracker')
-          }" [routerLink]="['./weighttracker']">
-        Weight Tracker
-      </div>
-
-      <div class="subnav__item" [ngClass]="{
-            'subnav__item--active': router.url.startsWith('/user/conne')
-          }" [routerLink]="['./connectivity']">
-        Connectivity
-      </div>
-
-      <div class="subnav__item"
-        [ngClass]="{ 'subnav__item--active': router.url.includes('/user/account')}"
-        [routerLink]="['./account']">
-        Account
-      </div>
+      Personal
     </div>
 
-    <router-outlet></router-outlet>
+    <div class="subnav__item" [ngClass]="{
+            'subnav__item--active': router.url.includes('/user/foodintake')
+          }" [routerLink]="['./foodintake']">
+      Food Intake
+    </div>
+
+    <div class="subnav__item" [ngClass]="{
+            'subnav__item--active': router.url.includes('/user/weighttracker')
+          }" [routerLink]="['./weighttracker']">
+      Weight Tracker
+    </div>
+
+    <div class="subnav__item" [ngClass]="{
+            'subnav__item--active': router.url.startsWith('/user/conne')
+          }" [routerLink]="['./connectivity']">
+      Connectivity
+    </div>
+
+    <div class="subnav__item"
+      [ngClass]="{ 'subnav__item--active': router.url.includes('/user/account')}"
+      [routerLink]="['./account']">
+      Account
+    </div>
   </div>
+
+  <router-outlet></router-outlet>
 </div>
