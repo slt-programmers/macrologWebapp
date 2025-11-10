@@ -5,21 +5,15 @@
     @if (getStatus('STRAVA')) {
     <p class="font-bold">The Strava webhook is enabled.</p>
 
-    <div class="grid grid-cols-1-1 gap-2">
+    <div class="grid grid-cols-auto-1 gap-2">
       <span class="flex-grow">Subscription ID: </span>
       <span> {{ getStatus('STRAVA').id }}</span>
-      
-      <span class="flex-grow"> Created at:</span>
-      <span> {{ getStatus('STRAVA').created_at }}</span>
-      
-      <span class="flex-grow">Updated at:</span>
-      <span> {{ getStatus('STRAVA').updated_at }} </span>
-      
+            
       <span class="flex-grow">Callback url used:</span>
       <span> {{ getStatus('STRAVA').callback_url }} </span>
     </div>
 
-    <button class="btn btn--warning" (click)="disableWebhook('STRAVA')">
+    <button class="align-self-start btn btn--warning" (click)="disableWebhook('STRAVA')">
       Disable
     </button>
     } @else {

@@ -5,12 +5,12 @@
   <div class="flex flex-col gap-4">
     <p class="strong font-bold">GMail is connected</p>
 
-    <div class="flex gap-2">
+    <div class="flex gap-2 items-center">
       <label for="emailAddress">Email address</label>
       <input id="emailAddress" class="input" [(ngModel)]="emailAddress" name="emailAddress" />
     </div>
 
-    <button class="btm btn--warning" (click)="sendTestMail()">
+    <button class="align-self-start btn btn--warning" (click)="sendTestMail()">
       Send testmail
     </button>
   </div>
