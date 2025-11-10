@@ -1,31 +1,5 @@
-.connectivity {
-  display: flex;
-  flex-direction: column;
-}
-
-.connectivity__info {
-  flex-direction: column;
-  display: flex;
-  flex-grow: 1;
-  justify-content: space-around;
-  padding: 15px;
-}
-
-.connectivity__connection {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-}
-
-.connectivity__connection__profile-pic {
+.profile-pic {
   border-radius: 50%;
   height: 90px;
   width: 90px;
-}
-
-@media (min-width: 1024px) {
-  .connectivity {
-    flex-direction: row;
-  }
 }

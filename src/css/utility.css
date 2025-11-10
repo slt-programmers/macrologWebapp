@@ -52,6 +52,9 @@
 .grid-cols-1-1 {
   grid-template-columns: 1fr 1fr;
 }
+.grid-cols-auto-1 {
+  grid-template-columns: auto 1fr;
+}
 
 .gap-1 {
   gap: 4px;
@@ -126,6 +129,9 @@
 
 .text-secondary {
   color: var(--secondary);
+}
+.text-error {
+  color: var(--error);
 }
 
 .font-semibold {

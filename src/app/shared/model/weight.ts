@@ -4,6 +4,6 @@ export interface Weight {
    day?: string;
    weight?: number;
    remark?: string;
-   editable?: boolean;
+   editMode?: boolean;
  
 }
