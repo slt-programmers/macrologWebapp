@@ -1,8 +1,10 @@
 <div class="stepper">
-  <div class="step-wrapper" *ngFor="let step of steps">
-    <div class="step" [ngClass]="{'step--current': step === currentStep}">
-      {{step}}
+  @for (step of steps; track step) {
+    <div class="step-wrapper">
+      <div class="step" [ngClass]="{'step--current': step === currentStep()}">
+        {{step}}
+      </div>
+      <div class="step-arrow" [ngClass]="{'step-arrow--last': step === steps.length}"></div>
     </div>
-    <div class="step-arrow" [ngClass]="{'step-arrow--last': step === steps.length}"></div>
-  </div>
+  }
 </div>

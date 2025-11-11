@@ -1,17 +1,11 @@
-<div class="modal-wrapper">
-  <div class="modal content">
-    <div class="flex flex-grow">
-      <h3 class="text-lg font-bold flex-grow">{{title}}</h3>
+<div class="modal">
+  <div class="flex justify-between">
+    <h3 class="text-lg font-bold ">{{title()}}</h3>
 
-      <button id="forgotClose" class="icon-button" aria-label="Close" (click)="closeModal()">
-        <em class="fas fa-times"></em>
-      </button>
-    </div>
-
-    <div>
-      <div class="mt-1">
-        <ng-content></ng-content>
-      </div>
-    </div>
+    <button class="btn btn--icon" aria-label="Close" (click)="closeModal()">
+      <em class="fas fa-times"></em>
+    </button>
   </div>
+
+  <ng-content></ng-content>
 </div>

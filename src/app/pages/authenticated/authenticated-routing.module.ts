@@ -1,59 +1,50 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { AdminComponent } from './admin/admin.component';
 import { AuthGuard } from './auth.guard';
-import { AuthenticatedComponent } from './authenticated.component';
-import { DiaryComponent } from './diary/diary.component';
-import { DishesComponent } from './dishes/dishes.component';
-import { FoodComponent } from './food/food.component';
-import { GraphsComponent } from './graphs/graphs.component';
-import { OnboardingComponent } from './onboarding/onboarding.component';
-import { UserComponent } from './user/user.component';
-
 
 export const authenticatedRoutes: Routes = [
   {
     path: '',
-    component: AuthenticatedComponent,
+    loadComponent: () => import('./authenticated.component').then(m => m.AuthenticatedComponent),
     canActivate: [AuthGuard],
     children: [
       {
         path: '',
-        component: DiaryComponent,
+        loadComponent: () => import('./diary/diary.component').then(m => m.DiaryComponent),
         canActivate: [AuthGuard],
       },
       {
         path: 'user',
-        component: UserComponent,
+        loadComponent: () => import('./user/user.component').then(m => m.UserComponent),
         canActivate: [AuthGuard],
         loadChildren: () =>
           import('./user/user.module').then((m) => m.UserModule)
       },
       {
         path: 'admin',
-        component: AdminComponent,
+        loadComponent: () => import('./admin/admin.component').then(m => m.AdminComponent),
         canActivate: [AuthGuard],
         loadChildren: () =>
           import('./admin/admin.module').then((m) => m.AdminModule)
       },
       {
         path: 'onboarding',
-        component: OnboardingComponent,
+        loadComponent: () => import('./onboarding/onboarding.component').then(m => m.OnboardingComponent),
         canActivate: [AuthGuard],
       },
       {
         path: 'food',
-        component: FoodComponent,
+        loadComponent: () => import('./food/food.component').then(m => m.FoodComponent),
         canActivate: [AuthGuard],
       },
       {
         path: 'dishes',
-        component: DishesComponent,
+        loadComponent: () => import('./dishes/dishes.component').then(m => m.DishesComponent),
         canActivate: [AuthGuard],
       },
       {
         path: 'graphs',
-        component: GraphsComponent,
+        loadComponent: () => import('./graphs/graphs.component').then(m => m.GraphsComponent),
         canActivate: [AuthGuard],
       },
     ],

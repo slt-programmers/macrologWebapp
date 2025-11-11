@@ -1,20 +1,17 @@
 import {
-  TestBed,
   ComponentFixture,
-  fakeAsync,
-  tick,
+  TestBed
 } from '@angular/core/testing';
-import { RouterTestingModule } from '@angular/router/testing';
-import { AppComponent } from './app.component';
-import { HealthcheckService } from './shared/services/healthcheck.service';
-import { Router } from '@angular/router';
-import { of, throwError } from 'rxjs';
-import { ToastComponent } from './shared/components/toast/toast.component';
+import { provideRouter, RouterOutlet } from '@angular/router';
 import { MockComponent, MockProvider } from 'ng-mocks';
+import { of, throwError } from 'rxjs';
+import { AppComponent } from './app.component';
+import { ToastComponent } from './shared/components/toast/toast.component';
+import { HealthcheckService } from './shared/services/healthcheck.service';
 
 
 class MockDocument {
-  getElementsByTagName(tag: string) { }
+  getElementsByTagName(tag: string) { console.log(tag)}
 }
 
 describe('AppComponent', () => {
@@ -25,14 +22,9 @@ describe('AppComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [
-        RouterTestingModule.withRoutes([{ path: 'user', redirectTo: '' }]),
-      ],
-      declarations: [
-        AppComponent,
-        MockComponent(ToastComponent)
-      ],
+      imports: [RouterOutlet, MockComponent(ToastComponent), AppComponent],
       providers: [
+        provideRouter([]),
         { provide: Document, useValue: new MockDocument() },
         MockProvider(HealthcheckService)
       ]
@@ -53,39 +45,35 @@ describe('AppComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should set theme on init', fakeAsync(() => {
+  it('should set theme on init', () => {
     localStorage.setItem('theme', 'dark');
     spyOn(healthcheckService, 'checkState').and.returnValue(of(true));
     const addSpy = jasmine.createSpy();
-    spyOn(document, 'getElementsByTagName').and.returnValue([{classList: {add: addSpy}}] as any)
+    spyOn(document, 'getElementsByTagName').and.returnValue([{ classList: { add: addSpy } }] as any)
     component.ngOnInit();
-    tick();
     expect(document.getElementsByTagName).toHaveBeenCalledWith('body');
     expect(addSpy).toHaveBeenCalledWith('theme--dark')
-  }));
+  });
 
-  it('should init the app component', fakeAsync(() => {
+  it('should init the app component', () => {
     spyOn(healthcheckService, 'checkState').and.returnValue(of(true));
     component.ngOnInit();
-    tick();
     expect(component.isAsleep()).toEqual(false);
-  }));
+  });
 
-  it('should do healthcheck unauthorized', fakeAsync(() => {
+  it('should do healthcheck unauthorized', () => {
     spyOn(healthcheckService, 'checkState').and.returnValue(
       throwError({ status: 403 })
     );
     component.ngOnInit();
-    tick();
     expect(component.isAsleep()).toEqual(false);
-  }));
+  });
 
-  it('should do healthcheck random error', fakeAsync(() => {
+  it('should do healthcheck random error', () => {
     spyOn(healthcheckService, 'checkState').and.returnValue(
       throwError({ status: 500 })
     );
     component.ngOnInit();
-    tick();
     expect(component.isAsleep()).toEqual(true);
-  }));
+  });
 });

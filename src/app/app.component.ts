@@ -1,17 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { HealthcheckService } from './shared/services/healthcheck.service';
+import { RouterOutlet } from '@angular/router';
+import { ToastComponent } from './shared/components/toast/toast.component';
 
 @Component({
-  selector: 'ml-root',
-  templateUrl: './app.component.html',
+    selector: 'ml-root',
+    templateUrl: './app.component.html',
+    imports: [RouterOutlet, ToastComponent]
 })
 export class AppComponent implements OnInit {
+  private readonly healthcheckService = inject(HealthcheckService);
+  private readonly document = inject(Document);
 
   private asleep = true;
-  private theme: string;
-
-  constructor(private readonly healthcheckService: HealthcheckService,
-    private readonly document: Document) { }
 
   ngOnInit(): void {
     this.healthcheck();

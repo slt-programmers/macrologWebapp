@@ -1,10 +1,12 @@
-import { Injectable, Renderer2, RendererFactory2 } from '@angular/core';
+import { Injectable, Renderer2, RendererFactory2, inject } from '@angular/core';
 
 @Injectable()
 export class ScrollBehaviourService {
+  private rendererFactory2 = inject(RendererFactory2);
+
   private renderer2: Renderer2;
 
-  constructor(private rendererFactory2: RendererFactory2) {
+  constructor() {
     this.renderer2 = this.rendererFactory2.createRenderer(null, null);
   }
 

@@ -7,23 +7,18 @@ import { IntakeComponent } from './intake/intake.component';
 import { PersonalComponent } from './personal/personal.component';
 import { WeightTrackerComponent } from './weighttracker/weighttracker.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { ComponentsModule } from 'src/app/shared/components/components.module';
-import { UserComponent } from './user.component';
 
 @NgModule({
-  imports: [
+    imports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    ComponentsModule,
     UserRoutingModule,
-  ],
-  declarations: [
     PersonalComponent,
     IntakeComponent,
     WeightTrackerComponent,
     ConnectivityComponent,
-    AccountComponent
-  ]
+    AccountComponent,
+]
 })
 export class UserModule { }

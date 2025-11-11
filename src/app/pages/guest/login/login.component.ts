@@ -1,31 +1,35 @@
-import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Router, ActivatedRoute } from '@angular/router';
+
+import { Component, OnInit, signal, inject } from '@angular/core';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ModalComponent } from '../../../shared/components/modal/modal.component';
+import { NavigationComponent } from '../../../shared/components/navigation/navigation.component';
 import { AuthenticationService } from '../../../shared/services/auth.service';
 import { ToastService } from '../../../shared/services/toast.service';
 
 @Component({
   templateUrl: 'login.component.html',
-  styleUrls: ['./login.component.scss'],
+  styleUrls: ['./login.component.css'],
+  imports: [NavigationComponent, FormsModule, ReactiveFormsModule, ModalComponent]
 })
 export class LoginComponent implements OnInit {
-  private returnUrl: string;
+  private route = inject(ActivatedRoute);
+  private router = inject(Router);
+  private authService = inject(AuthenticationService);
+  private toastService = inject(ToastService);
+
+  private returnUrl = 'dashboard';
 
   public loginForm: FormGroup;
   public registerForm: FormGroup;
   public loginError = '';
   public registerError = '';
-  public forgotEmail: string;
-  public forgotError: string;
+  public forgotEmail?: string;
+  public forgotError = '';
 
-  public showForgotPwModal = false;
+  showForgotPwModal = signal(false);
 
-  constructor(
-    private route: ActivatedRoute,
-    private router: Router,
-    private authService: AuthenticationService,
-    private toastService: ToastService
-  ) {
+  constructor() {
     this.loginForm = new FormGroup({
       username: new FormControl('', Validators.required),
       password: new FormControl('', Validators.required)
@@ -86,19 +90,21 @@ export class LoginComponent implements OnInit {
   }
 
   public toggleForgotPwModal(toggle: boolean) {
-    this.showForgotPwModal = toggle;
+    this.showForgotPwModal.set(toggle);
   }
 
   public resetPassword() {
-    this.forgotError = '';
-    this.authService.resetPassword(this.forgotEmail).subscribe(
-      () => {
-        this.toastService.setMessage('We have send an email with your password!', false, 'Success!');
-        this.toggleForgotPwModal(false);
-      },
-      () => {
-        this.forgotError = 'The email adress was not found';
-      }
-    );
+    if (this.forgotEmail) {
+      this.authService.resetPassword(this.forgotEmail).subscribe(
+        () => {
+          this.toastService.setMessage('We have send an email with your password!', false, 'Success!');
+          this.toggleForgotPwModal(false);
+          this.forgotError = '';
+        },
+        () => {
+          this.forgotError = 'The email adress was not found';
+        }
+      );
+    }
   }
 }

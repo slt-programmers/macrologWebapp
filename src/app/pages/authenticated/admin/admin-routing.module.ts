@@ -1,14 +1,11 @@
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
-import { MailComponent } from "./mail/mail.component";
-import { UserManagementComponent } from "./usermanagement/usermanagement.component";
-import { WebhooksComponent } from "./webhooks/webhooks.component";
 
 export const adminRoutes: Routes = [
   { path: '', redirectTo: 'usermanagement' },
-  { path: 'usermanagement', component: UserManagementComponent },
-  { path: 'webhooks', component: WebhooksComponent },
-  { path: 'mail', component: MailComponent },
+  { path: 'usermanagement', loadComponent: () => import('./usermanagement/usermanagement.component').then(m => m.UserManagementComponent) },
+  { path: 'webhooks', loadComponent: () => import('./webhooks/webhooks.component').then(m => m.WebhooksComponent) },
+  { path: 'mail', loadComponent: () => import('./mail/mail.component').then(m => m.MailComponent) },
 ];
 
 @NgModule({

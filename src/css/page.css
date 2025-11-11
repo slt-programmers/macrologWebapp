@@ -1,0 +1,4 @@
+.page {
+  background: var(--lightBlue);
+  min-height: 100vh;
+}

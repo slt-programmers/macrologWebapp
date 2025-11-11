@@ -3,7 +3,7 @@ import { Portion } from './portion';
 
 export interface Ingredient {
 
-  food?: Food;
+  food: Food;
   portion?: Portion; 
   multiplier?: number;
 

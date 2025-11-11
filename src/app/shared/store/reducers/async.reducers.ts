@@ -3,7 +3,7 @@ import { AsyncActions } from "../actions/async.actions";
 
 export interface AsyncState<T> {
   data?: T,
-  loading?: boolean,
+  loading: boolean,
   error?: any,
   pagination?: any,
   params?: any

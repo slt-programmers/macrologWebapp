@@ -1,0 +1,76 @@
+* {
+  margin: 0;
+  padding: 0;
+  font-family: "Assistant", sans-serif;
+  font-size: 16px;
+}
+
+html {
+  width: 100vw;
+  box-sizing: border-box;
+  font-size: 16px;
+  overflow-y: inherit;
+}
+
+body {
+  background-color: var(--white);
+  box-sizing: border-box;
+  color: var(--storm);
+  font-family: "Assistant", sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  position: static;
+  overflow-x: hidden;
+  width: 100vw;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-size: 16px;
+  font-weight: 400;
+}
+
+p {
+  line-height: 1.5;
+}
+
+button {
+  border: 0;
+  background-color: transparent;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+a {
+  text-decoration: none;
+  color: var(--primary);
+
+  &:hover {
+    cursor: pointer;
+    text-decoration: underline;
+  }
+}
+
+a.button {
+  &:hover {
+    text-decoration: none;
+    color: inherit;
+  }
+}
+
+table {
+  border-collapse: collapse;
+}
+
+th,
+td {
+  vertical-align: middle;
+}
+
+ul {
+  list-style: inside;
+}

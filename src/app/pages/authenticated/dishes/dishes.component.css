@@ -1,0 +1,26 @@
+.dish-form {
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr auto;
+	align-items: center;
+	gap: 8px;
+}
+
+.min-w-500 {
+  min-width: 500px;
+}
+
+.col-start-1 {
+	grid-column-start: 1;
+}
+
+.col-span-2 {
+	grid-column-end: span 2;
+}
+
+.col-span-3 {
+	grid-column-end: span 3;
+}
+
+.col-span-4 {
+	grid-column-end: span 4;
+}

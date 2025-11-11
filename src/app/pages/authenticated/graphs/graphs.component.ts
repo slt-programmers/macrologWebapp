@@ -1,17 +1,24 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { DiaryService } from '../../../shared/services/diary.service';
 import { UserService } from '../../../shared/services/user.service';
 import { DataPoint } from 'src/app/shared/components/linegraph/linegraph.component';
 import { MacrosPerDay } from 'src/app/shared/model/macrosPerDay';
 import { Macros } from 'src/app/shared/model/macros';
 import { format } from 'date-fns';
+import { DatePipe } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { BargraphComponent } from '../../../shared/components/bargraph/bargraph.component';
 
 @Component({
-  selector: 'ml-graphs',
-  templateUrl: './graphs.component.html',
-  styleUrls: ['./graphs.component.scss'],
+    selector: 'ml-graphs',
+    templateUrl: './graphs.component.html',
+    styleUrls: ['./graphs.component.css'],
+    imports: [FormsModule, BargraphComponent, DatePipe]
 })
 export class GraphsComponent implements OnInit {
+  private logService = inject(DiaryService);
+  private userService = inject(UserService);
+
 
   public measurement = 'calories';
   public measurementOption = 'total';
@@ -19,10 +26,10 @@ export class GraphsComponent implements OnInit {
   public splitted = false;
   public percentages = false;
   public loading = true;
-  public dateTo: Date;
-  public dateFrom: Date;
+  public dateTo?: Date;
+  public dateFrom?: Date;
 
-  private userGoals: any[];
+  private userGoals: any[] = [];
   private goalCalories = 0;
   private allMacros: MacrosPerDay[] = [];
 
@@ -34,32 +41,21 @@ export class GraphsComponent implements OnInit {
   public fatGraphLabel = 'Total calories from fat per day';
   public carbsGraphLabel = 'Total calories from carbs per day';
 
-  public proteinDataset: DataPoint[];
-  public fatDataset: DataPoint[];
-  public carbsDataset: DataPoint[];
+  public proteinDataset: DataPoint[] = []
+  public fatDataset: DataPoint[] = []
+  public carbsDataset: DataPoint[] = []
 
-  public proteinRatioDataset: DataPoint[];
-  public fatRatioDataset: DataPoint[];
-  public carbsRatioDataset: DataPoint[];
+  public proteinRatioDataset: DataPoint[] = []
+  public fatRatioDataset: DataPoint[] = []
+  public carbsRatioDataset: DataPoint[] = []
 
-  public proteinMarker: number;
-  public fatMarker: number;
-  public carbsMarker: number;
+  public proteinMarker?: number;
+  public fatMarker?: number;
+  public carbsMarker?: number;
   public markers: any[] = [];
   public ratioMarkers: any[] = [];
 
   private numberOfValues = 30;
-  // Types of graphs:
-  // Grams
-  //    Total grams per day grouped by macros -- done
-  //    Splitted total grams per day per macro -- done
-  //    Percentage/ratio gramps per marco per day
-  // Energy (calories)
-  //    Total calories per day grouped by macros -- done
-  //    Splitted total calories per day per macro -- done
-  //    Percentage/ratio calories per macro per day (streched bars)
-
-  constructor(private logService: DiaryService, private userService: UserService) { }
 
   ngOnInit() {
     this.dateTo = new Date();
@@ -95,8 +91,8 @@ export class GraphsComponent implements OnInit {
   }
 
   public monthBack() {
-    this.dateTo = new Date(this.dateFrom);
-    this.dateTo.setDate(this.dateFrom.getDate() - 1);
+    this.dateTo = new Date(this.dateFrom!);
+    this.dateTo.setDate(this.dateFrom!.getDate() - 1);
     this.dateFrom = new Date(this.dateTo);
     this.dateFrom.setMonth(this.dateFrom.getMonth() - 1);
     this.dateFrom.setDate(this.dateFrom.getDate() + 1);
@@ -104,7 +100,7 @@ export class GraphsComponent implements OnInit {
   }
 
   public monthForward() {
-    this.dateFrom = new Date(this.dateTo);
+    this.dateFrom = new Date(this.dateTo!);
     this.dateFrom.setDate(this.dateFrom.getDate() + 1);
     this.dateTo = new Date(this.dateFrom);
     this.dateTo.setMonth(this.dateTo.getMonth() + 1);
@@ -115,7 +111,7 @@ export class GraphsComponent implements OnInit {
   private getLogData() {
     this.loading = true;
     this.allMacros = [];
-    this.logService.getMacrosPerDay(format(this.dateFrom, 'yyyy-MM-dd'), format(this.dateTo, 'yyyy-MM-dd')).subscribe(
+    this.logService.getMacrosPerDay(format(this.dateFrom!, 'yyyy-MM-dd'), format(this.dateTo!, 'yyyy-MM-dd')).subscribe(
       (data) => {
         this.allMacros = data;
         this.getGoals();
@@ -128,17 +124,17 @@ export class GraphsComponent implements OnInit {
 
   private getGoals() {
     this.userService
-      .getUserGoalStats(format(this.dateFrom, 'yyyy-MM-dd'))
+      .getUserGoalStats(format(this.dateFrom!, 'yyyy-MM-dd'))
       .subscribe(
         (data) => {
           if (data[0] === null) {
-            this.userGoals = null;
+            this.userGoals = [];
           } else {
             this.userGoals = data;
           }
           this.setGoalCalories();
           this.numberOfValues =
-            (this.dateTo.getTime() - this.dateFrom.getTime()) /
+            (this.dateTo!.getTime() - this.dateFrom!.getTime()) /
             1000 /
             60 /
             60 /
@@ -166,7 +162,7 @@ export class GraphsComponent implements OnInit {
     const fatRatioDataset = [];
     const carbsRatioDataset = [];
     for (let i = 0; i < this.numberOfValues; i++) {
-      const day = new Date(this.dateTo);
+      const day = new Date(this.dateTo!);
       day.setDate(day.getDate() - i);
 
       const daynumber = day.getDate();
@@ -175,7 +171,7 @@ export class GraphsComponent implements OnInit {
       let carbsForDay: number;
       if (type === 'calories') {
         proteinForDay =
-          this.getMacroForDay(day, this.numberOfValues, 'protein') * 4;
+          this.getMacroForDay(day, this.numberOfValues, 'protein') * 4
         fatForDay = this.getMacroForDay(day, this.numberOfValues, 'fat') * 9;
         carbsForDay =
           this.getMacroForDay(day, this.numberOfValues, 'carbs') * 4;
@@ -255,11 +251,11 @@ export class GraphsComponent implements OnInit {
       this.markers = [this.proteinMarker, this.fatMarker, this.carbsMarker];
 
       const ratioProteinMarker = Math.round(
-        (this.proteinMarker / totalGoals) * 100
+        (this.proteinMarker! / totalGoals) * 100
       );
-      const ratioFatMarker = Math.round((this.fatMarker / totalGoals) * 100);
+      const ratioFatMarker = Math.round((this.fatMarker! / totalGoals) * 100);
       const ratioCarbsMarker = Math.round(
-        (this.carbsMarker / totalGoals) * 100
+        (this.carbsMarker! / totalGoals) * 100
       );
 
       this.ratioMarkers = [
@@ -288,8 +284,8 @@ export class GraphsComponent implements OnInit {
     }
   }
 
-  private getMacroForDay(date: Date, numberOfValues: number, macro: string) {
-    let indexMax = Math.min(numberOfValues, this.allMacros.length);
+  private getMacroForDay(date: Date, numberOfValues: number, macro: string): number {
+    const indexMax = Math.min(numberOfValues, this.allMacros.length);
     for (let i = 0; i < indexMax; i++) {
       const macrosPerDay = this.allMacros[i]; 
       const macrosString = format(new Date(macrosPerDay.day), 'yyyy-MM-dd');
@@ -298,6 +294,6 @@ export class GraphsComponent implements OnInit {
         return Math.round(macrosPerDay.macros[macro as keyof Macros]);
       }
     }
-    return undefined;
+    return 0;
   }
 }

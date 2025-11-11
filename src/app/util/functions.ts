@@ -14,7 +14,7 @@ export function calculateTDEE(
   }
 }
 
-export function clone<T>(array: T[]): T[] {
+export function clone<T>(array: T[] | null | undefined): T[] | null | undefined {
   if (!array) return array;
   return JSON.parse(JSON.stringify(array));
 }

@@ -1,102 +1,106 @@
 <div class="page">
   <ml-navigation></ml-navigation>
 
-  <div class="container">
-    <div class="flex col-gap-2 row-gap-2 flex-wrap justify-center align-start">
-      <div class="card login-form">
-        <div class="flex-col">
-          <form [formGroup]="loginForm" class="form form--vertical">
-            <h1 class="text-lg font-bold">Log in</h1>
+  <div class="container flex gap-8 justify-center">
+    <div class="card flex flex-col gap-4">
+      <h1 class="text-lg font-bold">Log in</h1>
 
-            <div class="form-field">
-              <label for="usernameOrEmail"> Username or email </label>
-              <input id="username" class="input" type="text" formControlName="username"
-                name="usernameOrEmail" />
-            </div>
+      <form [formGroup]="loginForm" class="flex flex-col gap-4">
+        <div class="flex flex-col gap-1">
+          <label for="usernameOrEmail"> Username or email </label>
+          <input id="username" type="text" formControlName="username" name="usernameOrEmail" />
 
-            <p id="usernameRequired" class="error" *ngIf="loginForm.controls.username.touched && 
-                loginForm.controls.username.invalid">Username is required</p>
-
-            <div class="form-field">
-              <label for="password"> Password </label>
-              <input id="password" class="input" type="password" formControlName="password"
-                (keyup.enter)="login()" name="password" />
-            </div>
-
-            <p id="passwordRequired" class="error" *ngIf="loginForm.controls.password.touched && 
-                loginForm.controls.password.invalid">Password is required</p>
-
-            <p id="loginError" class="error" *ngIf="loginError">{{loginError}}</p>
-
-            <a id="forgotLink" (click)="toggleForgotPwModal(true)">Forgot password?</a>
-
-            <button id="loginButton" class="button button--primary mt-2" (click)="login()">Log in
-            </button>
-          </form>
+          @if (loginForm.get('username')!.touched &&
+          loginForm.get('username')!.invalid) {
+          <p id="usernameRequired" class="error">Username is required</p>
+          }
         </div>
-      </div>
 
-      <div class="card register-form">
-        <div class="flex-col">
-          <form [formGroup]="registerForm" class="form form--vertical">
-            <h1 class="text-lg font-bold">Register</h1>
+        <div class="flex flex-col gap-1">
+          <label for="password"> Password </label>
+          <input id="password" type="password" formControlName="password" (keyup.enter)="login()"
+            name="password" />
 
-            <div class="form-field">
-              <label for="newUsername">Username</label>
-              <input id="usernameRegister" class="input" type="text" formControlName="username"
-                name="newUsername" />
-            </div>
-
-            <p id="usernameRegisterRequired" class="error" *ngIf="registerForm.controls.username.touched && 
-              registerForm.controls.username.invalid">Username is required</p>
-
-            <div class="form-field">
-              <label for="newEmal">Email</label>
-              <input id="email" class="input" type="email" formControlName="email"
-                name="newEmail" />
-            </div>
-
-            <p id="emailRequired" class="error" *ngIf="registerForm.controls.email.touched && 
-              registerForm.controls.email.invalid">Email is required</p>
-
-            <div class="form-field">
-              <label for="newPassword">Password</label>
-              <input id="passwordRegister" class="input" type="password" formControlName="password"
-                name="newPassword" (keyup.enter)="register()" />
-            </div>
-
-            <p id="passwordRegisterRequired" class="error" *ngIf="registerForm.controls.password.touched && 
-                registerForm.controls.password.invalid">Password is required</p>
-
-            <p id="registerError" class="error" *ngIf="registerError">{{registerError}}</p>
-
-            <button id="registerButton" class="button button--primary mt-2"
-              (click)="register()">Register
-            </button>
-          </form>
+          @if (loginForm.get('password')!.touched &&
+          loginForm.get('password')!.invalid) {
+          <p id="passwordRequired" class="error">Password is required</p>
+          }
         </div>
-      </div>
+
+        @if (loginError) {
+        <p id="loginError" class="error">{{loginError}}</p>
+        }
+
+        <a id="forgotLink" (click)="toggleForgotPwModal(true)">Forgot password?</a>
+
+        <button class="btn btn--primary" (click)="login()">Log in</button>
+      </form>
+    </div>
+
+    <div class="card flex flex-col gap-4">
+      <h1 class="text-lg font-bold">Register</h1>
+
+      <form [formGroup]="registerForm" class="flex flex-col gap-4">
+
+        <div class="flex flex-col gap-1">
+          <label for="newUsername">Username</label>
+          <input id="usernameRegister" type="text" formControlName="username" name="newUsername" />
+
+          @if (registerForm.get('username')!.touched &&
+          registerForm.get('username')!.invalid) {
+          <p id="usernameRegisterRequired" class="error">Username is required</p>
+          }
+        </div>
+
+        <div class="flex flex-col gap-1">
+          <label for="newEmal">Email</label>
+          <input id="email" type="email" formControlName="email" name="newEmail" />
+
+          @if (registerForm.get('email')!.touched &&
+          registerForm.get('email')!.invalid) {
+          <p id="emailRequired" class="error">Email is required</p>
+          }
+        </div>
+
+        <div class="flex flex-col gap-1">
+          <label for="newPassword">Password</label>
+          <input id="passwordRegister" type="password" formControlName="password" name="newPassword"
+            (keyup.enter)="register()" />
+
+          @if (registerForm.get('password')!.touched &&
+          registerForm.get('password')!.invalid) {
+          <p id="passwordRegisterRequired" class="error">Password is required</p>
+          }
+        </div>
+
+        @if (registerError) {
+        <p id="registerError" class="error">{{registerError}}</p>
+        }
+
+        <button id="registerButton" class="btn btn--primary" (click)="register()">Register
+        </button>
+      </form>
     </div>
   </div>
 </div>
 
-<ml-modal [title]="'Forgot your password?'" (close$)="toggleForgotPwModal(false)"
-  *ngIf="showForgotPwModal">
-  <form #forgotForm="ngForm" class="form">
+@if(showForgotPwModal()) {
+<ml-modal [title]="'Forgot your password?'" (close$)="toggleForgotPwModal(false)">
+  <form #forgotForm="ngForm" class="flex flex-col gap-4">
     <p>Please enter your email so we can send a link to reset your password</p>
 
-    <div class="form-field">
+    <div class="flex items-center gap-4">
       <label for="forgotEmail">Email</label>
-      <input class="input" type="email" #forgotEmailField
-        [(ngModel)]="forgotEmail" name="forgotEmail" />
+      <input class="flex-grow" type="email" #forgotEmailField [(ngModel)]="forgotEmail" name="forgotEmail" />
     </div>
 
-    <p class="error" *ngIf="forgotError">{{forgotError}}</p>
+    @if (forgotError) {
+    <p class="error">{{forgotError}}</p>
+    }
 
-    <div class="button-wrapper button-wrapper--left">
-      <button id="resetBtn" class="button button--primary" [disabled]="forgotForm.invalid"
-        (click)="resetPassword()">Send
-      </button>
-    </div>
+    <button id="resetBtn" class="align-self-end btn btn--primary" [disabled]="forgotForm.invalid"
+      (click)="resetPassword()">Send
+    </button>
   </form>
 </ml-modal>
+}

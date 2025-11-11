@@ -1,15 +1,14 @@
 import { HttpClient } from "@angular/common/http";
 import { TestBed } from "@angular/core/testing";
 import { Actions } from "@ngrx/effects";
-import { MockStore, provideMockStore } from "@ngrx/store/testing";
 import { provideMockActions } from "@ngrx/effects/testing";
+import { provideMockStore } from "@ngrx/store/testing";
 import { MockProvider } from "ng-mocks";
 import { of, throwError } from "rxjs";
 import { foodActions } from "../actions/food.actions";
 import { FoodEffects } from "./food.effects";
 
 describe('Food Effects', () => {
-  let store: MockStore;
   let actions$: Actions;
   let http: HttpClient;
   let effects: FoodEffects;
@@ -24,7 +23,6 @@ describe('Food Effects', () => {
       ]
     }).compileComponents();
 
-    store = TestBed.inject(MockStore);
     http = TestBed.inject(HttpClient);
     actions$ = TestBed.inject(Actions);
     effects = TestBed.inject(FoodEffects)
@@ -36,7 +34,7 @@ describe('Food Effects', () => {
     const result = await effects.getAllFood$.toPromise();
     expect(result).toEqual(foodActions.success([]));
   });
-  
+
   it('should handle error on get all food', async () => {
     actions$ = of(foodActions.get);
     spyOn(http, 'get').and.returnValue(throwError({ status: 404 }))

@@ -1,0 +1,49 @@
+.stepper {
+	display: flex;
+	margin-bottom: 2rem;
+}
+
+.step-wrapper {
+	display: flex;
+	align-items: center;
+}
+
+.step {
+	display: flex;
+	border-radius: 50%;
+	border: 1px solid var(--secondary);
+	color: var(--secondary);
+	padding: 3px;
+	width: 1rem;
+	height: 1rem;
+	justify-content: center;
+	align-items: center;
+	font-weight: 400;
+
+	@media (min-width: 768px) {
+		padding: 5px;
+		width: 2rem;
+		height: 2rem;
+	}
+}
+
+.step--current {
+	background-color: var(--secondary);
+	color: white;
+}
+
+.step-arrow {
+	display: flex;
+	background-color: var(--smoke);
+	height: 3px;
+	width: 30px;
+	margin: 10px;
+	
+	@media (min-width: 768px) {
+		width: 100px;
+	}
+}
+
+.step-arrow--last {
+	display: none;
+}

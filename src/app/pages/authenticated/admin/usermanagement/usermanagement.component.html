@@ -1,51 +1,67 @@
 <div>
-  <table class="users" *ngIf="allUsers">
-    <thead>
-      <tr class="table-header">
-        <th>Id</th>
-        <th>Name</th>
-        <th>Email</th>
-        <th>Delete account</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let element of allUsers">
-        <td>{{ element.id }}</td>
-        <td>{{ element.userName }}</td>
-        <td>{{ element.email }}</td>
-        <td>
-          <button id="deleteBtn" *ngIf="!element.admin" class="button button--warning"
-            (click)="openModalWithUser(element)">
-            Delete
-          </button>
-
-          <span *ngIf="element.admin">Admin</span>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+	@if (allUsers) {
+	<table class="users">
+		<thead>
+			<tr class="table-header">
+				<th>Id</th>
+				<th>Name</th>
+				<th>Email</th>
+				<th>Delete account</th>
+			</tr>
+		</thead>
+		<tbody>
+			@for (element of allUsers; track element) {
+			<tr>
+				<td>{{ element.id }}</td>
+				<td>{{ element.userName }}</td>
+				<td>{{ element.email }}</td>
+				<td>
+					@if (!element.admin) {
+					<button
+						id="deleteBtn"
+						class="button button--warning"
+						(click)="openModalWithUser(element)"
+					>
+						Delete
+					</button>
+					} @if (element.admin) {
+					<span>Admin</span>
+					}
+				</td>
+			</tr>
+			}
+		</tbody>
+	</table>
+	}
 </div>
 
-<ml-modal [title]="'Delete user account'" *ngIf="isModalVisible" (close$)="closeModal()">
-  <div class="content">
-    <p>
-      Are you sure you want to delete
-      <strong>{{ selectedUser.userName }}</strong>'s account? This action is irreversable.
-    </p>
-
-    <form #deleteForm="ngForm" class="form">
-      <label for="username"> Enter the name of the user </label>
-      <input class="input" type="text" #usernameField [(ngModel)]="userName"
-        name="username" required />
-
-      <div class="flex justify-end col-gap-1">
-        <button class="button" (click)="closeModal()">No</button>
-
-        <button [disabled]="selectedUser.userName !== userName" class="button button--warning"
-          (click)="deleteUser()">
-          Yes
-        </button>
-      </div>
-    </form>
-  </div>
+@if (isModalVisible && selectedUser) {
+<ml-modal [title]="'Delete user account'" (close$)="closeModal()">
+	<p>
+		Are you sure you want to delete
+		<strong>{{ selectedUser.userName }}</strong
+		>'s account? This action is irreversable.
+	</p>
+	<form #deleteForm="ngForm" class="form">
+		<label for="username"> Enter the name of the user </label>
+		<input
+			class="input"
+			type="text"
+			#usernameField
+			[(ngModel)]="userName"
+			name="username"
+			required
+		/>
+		<div class="flex justify-end col-gap-1">
+			<button class="button" (click)="closeModal()">No</button>
+			<button
+				[disabled]="selectedUser.userName !== userName"
+				class="button button--warning"
+				(click)="deleteUser()"
+			>
+				Yes
+			</button>
+		</div>
+	</form>
 </ml-modal>
+}

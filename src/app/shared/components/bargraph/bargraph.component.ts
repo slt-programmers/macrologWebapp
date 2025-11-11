@@ -1,66 +1,67 @@
+import { NgClass } from '@angular/common';
 import {
+  afterRenderEffect,
   Component,
-  ViewChild,
+  effect,
   ElementRef,
-  Input,
-  OnChanges,
-  SimpleChanges,
-  AfterViewInit,
+  input,
+  viewChild
 } from '@angular/core';
 import { DataPoint, GraphPoint } from '../linegraph/linegraph.component';
 
 @Component({
   selector: 'ml-bargraph',
   templateUrl: './bargraph.component.html',
-  styleUrls: ['./bargraph.component.scss'],
+  styleUrls: ['./bargraph.component.css'],
+  imports: [NgClass]
 })
-export class BargraphComponent implements OnChanges, AfterViewInit {
-  @ViewChild('yAxis', { static: false }) public yAxisElement: ElementRef;
-  @ViewChild('xAxis', { static: false }) public xAxisElement: ElementRef;
+export class BargraphComponent {
+  public readonly yAxisElement = viewChild.required<ElementRef>('yAxis');
+  public readonly xAxisElement = viewChild.required<ElementRef>('xAxis');
 
-  @Input() datasets: DataPoint[][];
-  @Input() yAxisStep: number;
-  @Input() xAxisStep: number;
-  @Input() markers: number[] = [];
-  @Input() colors: string[] = [];
-  @Input() fillColors: string[] = [];
+  readonly datasets = input.required<DataPoint[][]>();
+  readonly yAxisStep = input.required<number>();
+  readonly xAxisStep = input.required<number>();
+  readonly markers = input<number[]>([]);
+  readonly colors = input<string[]>([]);
+  readonly fillColors = input<string[]>([]);
 
-  public graphPoints: GraphPoint[][];
-  public yAxisPoints: number[];
-  public xAxisPoints: number[];
+  public graphPoints: GraphPoint[][] = []
+  public yAxisPoints: number[] = []
+  public xAxisPoints: number[] = []
 
-  yAxisHeight: number;
-  xAxisWidth: number;
-  xAxisHeight: number;
-  markerHeights: number[];
+  yAxisHeight = 0
+  xAxisWidth = 0
+  xAxisHeight = 0
+  markerHeights: number[] = []
 
-  ngAfterViewInit() {
-    this.yAxisHeight = this.yAxisElement.nativeElement.clientHeight;
-    this.xAxisWidth = this.xAxisElement.nativeElement.clientWidth;
-    this.xAxisHeight = this.xAxisElement.nativeElement.clientHeight;
-    if (this.datasets !== undefined) {
+  constructor() {
+    effect(() => {
       this.yAxisPoints = this.determineYAxisPoints();
       this.xAxisPoints = this.determineXAxisPoints();
       this.graphPoints = this.convertDatasetToPoints();
-    }
-  }
-
-  ngOnChanges(changes: SimpleChanges) {
-    if (changes['datasets'] && this.datasets !== undefined) {
-      this.yAxisPoints = this.determineYAxisPoints();
-      this.xAxisPoints = this.determineXAxisPoints();
-      this.graphPoints = this.convertDatasetToPoints();
-    }
+    });
+    afterRenderEffect(() => {
+      this.yAxisHeight = this.yAxisElement().nativeElement.clientHeight;
+      this.xAxisWidth = this.xAxisElement().nativeElement.clientWidth;
+      this.xAxisHeight = this.xAxisElement().nativeElement.clientHeight;
+      if (this.datasets()) {
+        this.yAxisPoints = this.determineYAxisPoints();
+        this.xAxisPoints = this.determineXAxisPoints();
+        this.graphPoints = this.convertDatasetToPoints();
+      }
+    })
   }
 
   private determineYAxisPoints(): number[] {
     const yAxisPoints: number[] = [];
     const yValues = [];
-    for (let i = 0; i < this.datasets[0].length; i++) {
+    for (let i = 0; i < this.datasets()[0].length; i++) {
       let yValue = 0;
-      for (let j = 0; j < this.datasets.length; j++) {
-        if (this.datasets[j][i].y) {
-          yValue += this.datasets[j][i].y;
+      for (let j = 0; j < this.datasets().length; j++) {
+        const datasets = this.datasets();
+        if (datasets[j][i].y) {
+          yValue += datasets[j][i].y;
         }
       }
       yValues.push(yValue);
@@ -73,14 +74,14 @@ export class BargraphComponent implements OnChanges, AfterViewInit {
     const difference = highest - lowest;
 
     yAxisPoints.push(lowest);
-    let yValuesToAdd = Math.round(difference / this.yAxisStep);
+    let yValuesToAdd = Math.round(difference / this.yAxisStep());
     if (yValuesToAdd === 1 || yValuesToAdd === 2) {
       yValuesToAdd += 1;
     }
 
     for (let j = 0; j < yValuesToAdd; j++) {
       let value = yAxisPoints[j];
-      value += this.yAxisStep;
+      value += this.yAxisStep();
       yAxisPoints.push(value);
     }
     yAxisPoints.reverse();
@@ -91,7 +92,7 @@ export class BargraphComponent implements OnChanges, AfterViewInit {
   private determineHighestYValue(yValues: number[]): number {
     let highest = yValues[yValues.length - 1];
     let markersTotal = 0;
-    for (const marker of this.markers) {
+    for (const marker of this.markers()) {
       markersTotal += marker;
     }
     if (markersTotal > highest) {
@@ -102,8 +103,8 @@ export class BargraphComponent implements OnChanges, AfterViewInit {
 
   private determineXAxisPoints(): number[] {
     const xAxisPoints = [];
-    for (let i = 0; i < this.datasets[0].length; i++) {
-      xAxisPoints.push(this.datasets[0][i].x);
+    for (const datapoint of this.datasets()[0]) {
+      xAxisPoints.push(datapoint.x);
     }
     return xAxisPoints;
   }
@@ -111,10 +112,10 @@ export class BargraphComponent implements OnChanges, AfterViewInit {
   private convertDatasetToPoints(): GraphPoint[][] {
     const graphPoints = [];
     const differenceHighestLowestYValue = this.yAxisPoints[0];
-    for (let i = 0; i < this.datasets.length; i++) {
+    for (const dataset of this.datasets()) {
       const graphPointSet = [];
-      for (const dataPoint of this.datasets[i]) {
-        let height: number;
+      for (const dataPoint of dataset) {
+        let height = 0
         if (dataPoint.y !== undefined) {
           height =
             dataPoint.y * (this.yAxisHeight / differenceHighestLowestYValue);
@@ -130,15 +131,15 @@ export class BargraphComponent implements OnChanges, AfterViewInit {
 
   private calculateMarkerHeights(differenceHighestLowestYValue: number): void {
     this.markerHeights = [];
-    for (let i = 0; i < this.markers.length; i++) {
+    for (let i = 0; i < this.markers().length; i++) {
       let markerValue = 0;
       for (let j = 0; j <= i; j++) {
-        markerValue += this.markers[j];
+        markerValue += this.markers()[j];
       }
       this.markerHeights.push(
         markerValue * (this.yAxisHeight / differenceHighestLowestYValue) +
-          2 * i +
-          1
+        2 * i +
+        1
       ); // border correction
     }
   }

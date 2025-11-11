@@ -1,0 +1,77 @@
+:root {
+	/* grayscale */
+	--black: #000000;
+	--coal: #191919;
+	--storm: #333333;
+	--platinum: #b1bcc9;
+	--smoke: #c8d0d9;
+	--mist: #dcdee3;
+	--white: #ffffff;
+
+	/* colors */
+	--primary: #3f51b5;
+	--primaryDark: #283593;
+	--secondary: #2196f3;
+	--lightBlue: #e1e6f1;
+	--warning: #030303;
+	--error: #dd3f00;
+
+	/* breakpoints */
+	--xs: 448px;
+	--sm: 640px;
+	--md: 768px;
+	--lg: 1024px;
+	--xl: 1280px;
+	--xxl: 1536px;
+
+	--backgroundGradient: linear-gradient(
+		to bottom,
+		var(--primary),
+		var(--secondary)
+	);
+
+	--boxShadow: 0 0 5px rgb(183, 193, 206);
+	--boxShadowDark: 0 0 5px rgb(0, 0, 0);
+	--boxShadowWide: 0 0 20px rgb(183, 193, 206);
+	--boxShadowWideDark: 0 0 20px rgb(0, 0, 0);
+}
+
+.xs-only {
+	@media (min-width: 448px) {
+		display: none;
+	}
+}
+.sm-only {
+	@media (min-width: 640px) {
+		display: none;
+	}
+}
+.lg-only {
+	@media (min-width: 1024px) {
+		display: none;
+	}
+}
+
+.xs {
+	@media (max-width: (448px - 1)) {
+		display: none;
+	}
+}
+.sm {
+	@media (max-width: (640px - 1)) {
+		display: none;
+	}
+}
+.lg {
+	@media (max-width: (1024px - 1)) {
+		display: none;
+	}
+}
+
+.overlay {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+}

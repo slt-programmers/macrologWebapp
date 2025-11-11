@@ -60,7 +60,7 @@ describe('Activities Effects', () => {
     store.overrideSelector(selectActivities, [{ date: '2022-01-01', activities: [{ calories: 123 } as Activity] }])
     actions$ = of(activitiesActions.get(true, { date: '2022-01-01', sync: true }));
     spyOn(http, 'get').and.returnValue(of([{ calories: 234 } as Activity]))
-    const result = await effects.getActivitiesForDate$.toPromise();
+    await effects.getActivitiesForDate$.toPromise();
     expect(http.get).toHaveBeenCalledWith('//localhost:8090/activities/day/2022-01-01?forceSync=true');
   });
 

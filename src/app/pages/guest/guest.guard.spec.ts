@@ -1,9 +1,9 @@
 import { TestBed } from '@angular/core/testing';
 import { GuestGuard } from './guest.guard';
 import { AuthenticationService } from '../../shared/services/auth.service';
-import { Router } from '@angular/router';
-import { RouterTestingModule } from '@angular/router/testing';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { provideRouter, Router } from '@angular/router';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 describe('GuestGuardService', () => {
   let service: GuestGuard;
@@ -12,9 +12,15 @@ describe('GuestGuardService', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [GuestGuard, AuthenticationService],
-      imports: [RouterTestingModule, HttpClientTestingModule],
-    });
+    imports: [],
+    providers: [
+        GuestGuard,
+        AuthenticationService,
+        provideRouter([]),
+        provideHttpClient(withInterceptorsFromDi()),
+        provideHttpClientTesting()
+    ]
+});
     service = TestBed.inject(GuestGuard);
     authService = TestBed.inject(AuthenticationService);
     router = TestBed.inject(Router);

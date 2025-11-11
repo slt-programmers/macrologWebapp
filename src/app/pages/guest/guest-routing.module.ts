@@ -1,22 +1,19 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { AboutComponent } from './about/about.component';
 import { GuestGuard } from './guest.guard';
-import { HomeComponent } from './home/home.component';
-import { LoginComponent } from './login/login.component';
 
 export const guestRoutes: Routes = [
   {
     path: '',
-    component: HomeComponent
+    loadComponent: () => import('./home/home.component').then(m => m.HomeComponent)
   },
   {
     path: 'about',
-    component: AboutComponent
+    loadComponent: () => import('./about/about.component').then(m => m.AboutComponent)
   },
   {
     path: 'login',
-    component: LoginComponent,
+    loadComponent: () => import('./login/login.component').then(m => m.LoginComponent),
     canActivate: [GuestGuard],
   },
 ];

@@ -3,38 +3,44 @@
     <div class="axes">
       <div class="y-axis-wrapper">
         <div #yAxis class="y-axis">
-          <div class="y-axis-point" *ngFor="let yPoint of yAxisPoints">
-            {{yPoint}}
-          </div>
+          @for (yPoint of yAxisPoints; track yPoint) {
+            <div class="y-axis-point">
+              {{yPoint}}
+            </div>
+          }
         </div>
 
         <div class="graph-content">
-          <ng-container *ngFor="let marker of markers; index as index">
+          @for (marker of markers(); track marker; let index = $index) {
             <div class="graph-marker" [style.height.px]="markerHeights[index]"
-              [style.border-top-color]="colors[index]">
+              [style.border-top-color]="colors()[index]">
             </div>
-          </ng-container>
+          }
 
-          <ng-container *ngIf="graphPoints !== undefined && graphPoints[0] !== undefined">
-            <div class="graph-points-lane"
-              *ngFor="let graphPoint of graphPoints[0]; index as pointIndex">
-              <div class="graph-point" *ngFor="let set of graphPoints; index as setIndex"
-                [style.border-color]="colors[setIndex]"
-                [style.background-color]="fillColors[setIndex]"
-                [style.height.px]="graphPoints[setIndex][pointIndex].height"
-                [ngClass]="{'graph-point--empty': !graphPoints[setIndex][pointIndex].height}">
+          @if (graphPoints !== undefined && graphPoints[0] !== undefined) {
+            @for (graphPoint of graphPoints[0]; track graphPoint; let pointIndex = $index) {
+              <div class="graph-points-lane"
+                >
+                @for (set of graphPoints; track set; let setIndex = $index) {
+                  <div class="graph-point"
+                    [style.border-color]="colors()[setIndex]"
+                    [style.background-color]="fillColors()[setIndex]"
+                    [style.height.px]="graphPoints[setIndex][pointIndex].height"
+                    [ngClass]="{'graph-point--empty': !graphPoints[setIndex][pointIndex].height}">
+                  </div>
+                }
               </div>
-            </div>
-          </ng-container>
+            }
+          }
         </div>
 
         <div class="graph-marker-numbers">
-          <ng-container *ngFor="let marker of markers; index as index">
+          @for (marker of markers(); track marker; let index = $index) {
             <div class="graph-marker graph-marker--narrow" [style.height.px]="markerHeights[index]"
-              [style.border-top-color]="colors[index]">
+              [style.border-top-color]="colors()[index]">
               <div class="graph-marker__text">{{marker}}</div>
             </div>
-          </ng-container>
+          }
         </div>
       </div>
 
@@ -42,11 +48,13 @@
         <div class="x-axis-dummy-point"></div>
 
         <div #xAxis class="x-axis">
-          <div class="x-axis-point" *ngFor="let xPoint of xAxisPoints">
-            <div class="x-axis-point-text">
-              {{xPoint}}
+          @for (xPoint of xAxisPoints; track xPoint) {
+            <div class="x-axis-point">
+              <div class="x-axis-point-text">
+                {{xPoint}}
+              </div>
             </div>
-          </div>
+          }
         </div>
 
         <div class="x-axis-dummy-point"></div>

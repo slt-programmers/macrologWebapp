@@ -12,11 +12,11 @@ describe('ToastComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [ToastComponent],
-      providers: [
+    imports: [ToastComponent],
+    providers: [
         MockProvider(ToastService)
-      ]
-    }).compileComponents();
+    ]
+}).compileComponents();
 
     service = TestBed.inject(ToastService);
     service.messageObservable = of({title: 'title', message: 'message', isError: true} as Toast);

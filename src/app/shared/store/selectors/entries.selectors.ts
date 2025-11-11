@@ -24,11 +24,11 @@ export const selectEntriesDate = (date: string) => createSelector(selectEntriesS
 export const selectEntriesDateMeal = (date: string, meal: string) => createSelector(selectEntriesState, (state) => {
   if (state && state.data) {
     const entriesForDate = state.data.filter(epd => epd.date === date)[0];
-    if (!!entriesForDate) {
+    if (entriesForDate) {
       return entriesForDate.entries.filter(entry => entry.meal === meal.toUpperCase());
     }
   }
-  return undefined;
+  return [];
 });
 
 export const selectTotalsForDate = (date: string) => createSelector(selectEntriesDate(date), (entries) => {

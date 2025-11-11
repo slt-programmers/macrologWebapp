@@ -1,88 +1,82 @@
-<div>
-  <div class="weightgraph-wrapper">
-    <div class="weightgraph">
-      <ml-linegraph [dataset]="dataset" [xAxisStep]="1" [yAxisStep]="0.5"
-        [hasOffgridValue]="hasOffgridValue"></ml-linegraph>
-    </div>
-  </div>
+<div class="flex flex-col gap-8">
+  @if(dataset) {
+  <ml-linegraph [dataset]="dataset" [xAxisStep]="1" [yAxisStep]="0.5"
+    [hasOffgridValue]="hasOffgridValue"></ml-linegraph>
+  }
 
-  <form #weightForm="ngForm" class="form">
-    <div class="form-field">
-      <label for="measurementDate">Measurement date</label>
-      <input required class="input" validDate placeholder="DD-MM-YYYY" name="measurementDate"
-        [(ngModel)]="measurementDate" />
-    </div>
+  <form #weightForm="ngForm" class="grid grid-cols-auto-1 gap-4 items-center">
+    <label for="measurementDate">Measurement date</label>
+    <input required class="input" validDate placeholder="DD-MM-YYYY" name="measurementDate"
+      [(ngModel)]="measurementDate" />
 
-    <div class="form-field">
-      <label for="weight">Weight (kg)</label>
-      <input required class="input" name="weight" type="number" [(ngModel)]="weight" step="0.1" />
-    </div>
+    <label for="weight">Weight (kg)</label>
+    <input required class="input" name="weight" type="number" [(ngModel)]="weight" step="0.1" />
 
-    <div class="form-field">
-      <label for="remark">Remark</label>
-      <input class="input" name="remark" type="text" [(ngModel)]="remark" />
-    </div>
+    <label for="remark">Remark</label>
+    <input class="input" name="remark" type="text" [(ngModel)]="remark" />
 
-    <div class="button-wrapper">
-      <button class="button button--primary" (click)="saveNewWeight(weightForm)"
-        [disabled]="weightForm.invalid">
-        Save
-      </button>
-    </div>
+    <button class="btn btn--primary" (click)="saveNewWeight(weightForm)"
+      [disabled]="weightForm.invalid">
+      Save
+    </button>
   </form>
 
-  <div class="table-wrapper">
-    <div class="table">
-      <div class="table-header flex">
-        <div class="table-cell flex-2">Date</div>
-        <div class="table-cell flex-5">Remark</div>
-        <div class="table-cell flex-2">Weight</div>
-      </div>
-    </div>
+  <table>
+    <thead>
+      <tr>
+        <th>Date</th>
+        <th>Remark</th>
+        <th>Weight</th>
+      </tr>
+    </thead>
 
-    <div class="table-row flex" *ngFor="let logWeight of trackedWeights" (click)="editWeight(logWeight)">
-      <ng-container *ngIf="!logWeight.editable">
-        <div class="table-cell flex-2">{{ logWeight.day | date: 'dd-MM-yyyy' }}</div>
-        <div class="table-cell flex-5">{{ logWeight.remark }}</div>
-        <div class="table-cell flex-2">
+    <tbody>
+      @for (logWeight of trackedWeights; track logWeight) {
+      <tr (click)="editWeight(logWeight)">
+        @if (!logWeight.editMode) {
+        <td>{{ logWeight.day | date: 'dd-MM-yyyy' }}</td>
+        <td>{{ logWeight.remark }}</td>
+        <td>
           {{ logWeight.weight | number: '1.1-1' }}
-        </div>
+        </td>
         <div class="weight__hiddenbuttons"></div>
-      </ng-container>
-
-      <ng-container *ngIf="logWeight.editable">
-        <div class="table-cell flex flex-grow col-gap-1 items-center">
-          <div class="flex-col">
+        }
+        @if (logWeight.editMode) {
+        <td>
+          <div class="flex gap-2 items-center">
             <label for="date">Date</label>
-            <input name="date" required class="input" validDate placeholder="DD-MM-YYYY"
+            <input name="date" required validDate placeholder="DD-MM-YYYY"
               [(ngModel)]="logWeight.day" />
           </div>
+        </td>
 
-          <div class="flex-col">
+        <td>
+          <div class="flex gap-2 items-center">
             <label for="weight">Weight</label>
-            <input class="input" name="weight" type="number" [(ngModel)]="logWeight.weight"
+            <input name="weight" type="number" [(ngModel)]="logWeight.weight"
               step="0.1" />
           </div>
+        </td>
 
-          <div class="flex-col flex-grow">
+        <td>
+          <div class="flex gap-2 items-center">
             <label for="comment">Comment</label>
-            <input required class="input" name="comment" type="text"
-              [(ngModel)]="logWeight.remark" [required]="false" />
-          </div>
+            <input required class="fles-grow" name="comment" type="text" [(ngModel)]="logWeight.remark"
+              [required]="false" />
 
-          <div class="flex">
-            <button class="icon-button" (click)="saveWeight(logWeight)">
+            <button class="btn--icon" (click)="saveWeight(logWeight)">
               <em class="fas fa-check"></em>
             </button>
-          </div>
 
-          <div class="flex">
-            <button class="icon-button" (click)="deleteWeight(logWeight)">
+            <button class="btn--icon" (click)="deleteWeight(logWeight)">
               <em class="fas fa-trash"></em>
             </button>
           </div>
-        </div>
-      </ng-container>
-    </div>
-  </div>
+        </td>
+        }
+      </tr>
+      }
+    </tbody>
+
+  </table>
 </div>

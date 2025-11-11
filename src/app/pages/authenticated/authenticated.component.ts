@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, OnInit, inject } from '@angular/core';
+import { Router, RouterOutlet } from '@angular/router';
 import { ScrollBehaviourService } from '../../shared/services/scroll-behaviour.service';
 import { AuthenticationService } from '../../shared/services/auth.service';
 import { HealthcheckService } from 'src/app/shared/services/healthcheck.service';
@@ -7,23 +7,24 @@ import { foodActions } from 'src/app/shared/store/actions/food.actions';
 import { Store } from '@ngrx/store';
 import { dishesActions } from 'src/app/shared/store/actions/dishes.actions';
 
+import { NavigationComponent } from '../../shared/components/navigation/navigation.component';
+
 @Component({
-  selector: 'ml-authenticated',
-  templateUrl: './authenticated.component.html'
+    selector: 'ml-authenticated',
+    templateUrl: './authenticated.component.html',
+    imports: [NavigationComponent, RouterOutlet]
 })
 export class AuthenticatedComponent implements OnInit {
+  private readonly router = inject(Router);
+  private readonly healthcheckService = inject(HealthcheckService);
+  private readonly authService = inject(AuthenticationService);
+  private readonly store = inject(Store);
+  private readonly scrollBehaviourService = inject(ScrollBehaviourService);
+
 
   public smallMenuOpen = false;
 
   private asleep = true;
-
-  constructor(
-    private readonly router: Router,
-    private readonly healthcheckService: HealthcheckService,
-    private readonly authService: AuthenticationService,
-    private readonly store: Store,
-    private readonly scrollBehaviourService: ScrollBehaviourService
-  ) {}
 
   ngOnInit() {
     this.healthcheckService.checkState().subscribe(

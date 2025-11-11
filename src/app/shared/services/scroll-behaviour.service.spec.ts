@@ -3,8 +3,8 @@ import { ScrollBehaviourService } from './scroll-behaviour.service';
 import { Renderer2 } from '@angular/core';
 
 class MockRenderer {
-  removeClass() {}
-  addClass() {}
+  removeClass() { console.log('dummy') }
+  addClass() { console.log('dummy') }
 }
 
 describe('ScrollBehaviourService', () => {

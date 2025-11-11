@@ -1,14 +1,20 @@
-import { Component, OnDestroy } from '@angular/core';
-import { Food } from '../../../shared/model/food';
+import { AsyncPipe, DecimalPipe } from '@angular/common';
+import { Component, OnDestroy, inject } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { selectAllFood, selectFoodLoading } from 'src/app/shared/store/selectors/food.selectors';
 import { Observable, Subscription } from 'rxjs';
+import { Portion } from 'src/app/shared/model/portion';
+import { selectAllFood, selectFoodLoading } from 'src/app/shared/store/selectors/food.selectors';
+import { Food } from '../../../shared/model/food';
+import { EditFoodComponent } from './edit-food/edit-food.component';
 
 @Component({
   selector: 'ml-food',
-  templateUrl: './food.component.html'
+  templateUrl: './food.component.html',
+  imports: [FormsModule, EditFoodComponent, AsyncPipe, DecimalPipe]
 })
 export class FoodComponent implements OnDestroy {
+  private readonly store = inject(Store);
 
   // Displayed on one page
   public displayedFood: Food[] = [];
@@ -16,7 +22,7 @@ export class FoodComponent implements OnDestroy {
   public modalIsVisible = false;
   public currentPageIndex = 0;
   public itemsPerPage = 15;
-  public selectedFood: Food = null; // input voor modal popup
+  public selectedFood: Food | null = null; // input voor modal popup
   public searchInput = '';
   public currentSortHeader = 'name';
   public sortReverse = false;
@@ -29,7 +35,7 @@ export class FoodComponent implements OnDestroy {
   private searchableFood: Food[] = [];
   private foodSubscription: Subscription;
 
-  constructor(private readonly store: Store) {
+  constructor() {
     this.foodSubscription = this.store.select(selectAllFood).subscribe(it => {
       this.allFood = it;
       this.percentageFood = this.calculatePercentages();
@@ -68,11 +74,11 @@ export class FoodComponent implements OnDestroy {
     this.getPagedFood(0);
   }
 
-  public openModal(food: Food) {
+  public openModal(food: Food | null) {
     if (food) {
       this.selectedFood = JSON.parse(JSON.stringify(food)) as Food;
     } else {
-      this.selectedFood = { portions: [] }
+      this.selectedFood = { portions: [] as Portion[] } as Food;
     }
     this.modalIsVisible = true;
   }
@@ -91,9 +97,9 @@ export class FoodComponent implements OnDestroy {
     this.setReversed(header);
     const sortedArray = this.searchableFood;
     sortedArray.sort((a: Food, b: Food) => {
-      if (a[header as keyof Food] < b[header as keyof Food]) {
+      if (a[header as keyof Food]! < b[header as keyof Food]!) { // TODO refactor
         return 1;
-      } else if (a[header as keyof Food] > b[header as keyof Food]) {
+      } else if (a[header as keyof Food]! > b[header as keyof Food]!) {
         return -1;
       } else {
         return 0;

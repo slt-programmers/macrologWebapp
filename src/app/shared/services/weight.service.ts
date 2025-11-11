@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Weight } from '../model/weight';
 import { environment } from '../../../environments/environment';
@@ -7,14 +7,14 @@ import { Observable, of } from 'rxjs';
 
 @Injectable()
 export class WeightService {
-  macrologBackendUrl = '//' + environment.backend + '/weight';
-  activities = new Array();
+  private http = inject(HttpClient);
 
-  constructor(private http: HttpClient) { }
+  macrologBackendUrl = '//' + environment.backend + '/weight';
+  activities = [];
 
   public getAllWeights() {
     return this.http.get<Weight[]>(this.macrologBackendUrl).pipe(
-      catchError((error) => { return of([]); }));
+      catchError(() => { return of([]); }));
   }
 
   public addWeight(weight: Weight): Observable<any> {
@@ -23,8 +23,8 @@ export class WeightService {
       'Access-Control-Allow-Origin': environment.origin,
     };
     const options = { headers: headers };
-    return this.http.post<Weight>(this.macrologBackendUrl + '/', weight, options).pipe(
-      catchError((error) => { return of<any>(); }));
+    return this.http.post<Weight>(this.macrologBackendUrl, weight, options).pipe(
+      catchError(() => { return of<any>(); }));
   }
 
   public deleteWeight(weight: Weight): Observable<any> {
@@ -34,6 +34,6 @@ export class WeightService {
     };
     const options = { headers: headers };
     return this.http.delete<number>(this.macrologBackendUrl + '/' + weight.id, options).pipe(
-      catchError((error) => { return of<number>(); }));
+      catchError(() => { return of<number>(); }));
   }
 }

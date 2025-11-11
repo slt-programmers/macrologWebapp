@@ -1,59 +1,54 @@
 import {
   Component,
-  Input,
-  ViewChild,
   ElementRef,
-  AfterViewInit,
-  SimpleChanges,
-  OnChanges,
+  afterRenderEffect,
+  effect,
+  input,
+  viewChild
 } from '@angular/core';
 
 @Component({
   selector: 'ml-linegraph',
   templateUrl: './linegraph.component.html',
-  styleUrls: ['./linegraph.component.scss'],
+  styleUrls: ['./linegraph.component.css'],
+  imports: []
 })
-export class LinegraphComponent implements AfterViewInit, OnChanges {
-  @ViewChild('yAxis', { static: false }) public yAxisElement: ElementRef;
-  @ViewChild('xAxis', { static: false }) public xAxisElement: ElementRef;
+export class LinegraphComponent {
+  public readonly yAxisElement = viewChild.required<ElementRef>('yAxis');
+  public readonly xAxisElement = viewChild.required<ElementRef>('xAxis');
 
-  @Input() dataset: DataPoint[];
-  @Input() yAxisStep: number;
-  @Input() xAxisStep: number;
-  @Input() hasOffgridValue: boolean;
+  readonly dataset = input.required<DataPoint[]>();
+  readonly yAxisStep = input.required<number>();
+  readonly xAxisStep = input.required<number>();
+  readonly hasOffgridValue = input<boolean>();
 
-  public graphPoints: GraphPoint[];
-  public yAxisPoints: number[];
-  public xAxisPoints: number[];
-  public svgPath: string;
-  public trendPath: string;
+  public graphPoints: GraphPoint[] = [];
+  public yAxisPoints: number[] = [];
+  public xAxisPoints: number[] = [];
+  public svgPath = ''
+  public trendPath = ''
 
-  public yAxisHeight: number;
+  public yAxisHeight = 0;
+  private xAxisWidth = 0
+  private xAxisPointWidth = 0
 
-  private xAxisWidth: number;
-  private xAxisPointWidth: number;
-
-  ngOnChanges(changes: SimpleChanges) {
-    if (changes['dataset'] && this.dataset !== undefined) {
+  constructor() {
+    effect(() => {
       this.yAxisPoints = this.determineYAxisPoints();
       this.xAxisPoints = this.determineXAxisPoints();
-      this.graphPoints = this.convertDatasetToPoints();
+    });
 
+    afterRenderEffect(() => {
+      this.yAxisHeight = this.yAxisElement().nativeElement.clientHeight;
+      this.xAxisWidth = this.xAxisElement().nativeElement.clientWidth;
+      this.graphPoints = this.convertDatasetToPoints();
       this.calculateGraph();
       this.calculateTrend();
-    }
-  }
-
-  ngAfterViewInit() {
-    this.yAxisHeight = this.yAxisElement.nativeElement.clientHeight;
-    this.xAxisWidth = this.xAxisElement.nativeElement.clientWidth;
-    if (this.dataset !== undefined) {
-      this.graphPoints = this.convertDatasetToPoints();
-    }
+    });
   }
 
   calculateGraph() {
-    this.xAxisPointWidth = this.xAxisWidth / this.dataset.length;
+    this.xAxisPointWidth = this.xAxisWidth / this.dataset().length;
     const yStartPosition = this.determineYStartPosition();
     const xStartPosition = this.determineXStartPosition();
 
@@ -105,8 +100,8 @@ export class LinegraphComponent implements AfterViewInit, OnChanges {
       ' Z';
   }
 
-  private calcPreviousYPosition(i: number) {
-    let previousYPosition: number;
+  private calcPreviousYPosition(i: number): number {
+    let previousYPosition = 0;
     let j = i - 1;
     while (j >= 0) {
       if (this.graphPoints[j].height !== undefined) {
@@ -121,8 +116,8 @@ export class LinegraphComponent implements AfterViewInit, OnChanges {
   calculateTrend() {
     const valueset = [];
     const convertedDataset = [];
-    for (let i = 1; i <= this.dataset.length; i++) {
-      const newPoint = this.dataset[i - 1];
+    for (let i = 1; i <= this.dataset().length; i++) {
+      const newPoint = this.dataset()[i - 1];
       newPoint.x = i;
       convertedDataset.push(newPoint);
     }
@@ -155,7 +150,7 @@ export class LinegraphComponent implements AfterViewInit, OnChanges {
 
     // y = slope * x + intercept
     let yStart = intercept;
-    let yEnd = slope * (this.dataset.length - 0.5) + intercept;
+    let yEnd = slope * (this.dataset().length - 0.5) + intercept;
 
     const lowest = this.yAxisPoints[this.yAxisPoints.length - 1];
     const difference = this.yAxisPoints[0] - lowest;
@@ -184,7 +179,7 @@ export class LinegraphComponent implements AfterViewInit, OnChanges {
   }
 
   private determineXStartPosition(): number {
-    if (this.hasOffgridValue) {
+    if (this.hasOffgridValue()) {
       return 0;
     }
     for (let i = 0; i < this.graphPoints.length; i++) {
@@ -197,10 +192,9 @@ export class LinegraphComponent implements AfterViewInit, OnChanges {
   }
 
   private determineYStartPosition(): number {
-    for (let j = 0; j < this.graphPoints.length; j++) {
-      const dataPoint = this.graphPoints[j];
-      if (dataPoint.height !== undefined) {
-        return this.yAxisHeight - dataPoint.height;
+    for (const graphpoint of this.graphPoints) {
+      if (graphpoint.height !== undefined) {
+        return this.yAxisHeight - graphpoint.height;
       }
     }
     return 0;
@@ -209,9 +203,10 @@ export class LinegraphComponent implements AfterViewInit, OnChanges {
   determineYAxisPoints() {
     const yAxisPoints = [];
     const yValues = [];
-    for (let i = 0; i < this.dataset.length; i++) {
-      if (this.dataset[i].y !== undefined) {
-        yValues.push(this.dataset[i].y);
+    for (let i = 0; i < this.dataset().length; i++) {
+      const dataset = this.dataset();
+      if (dataset[i].y !== undefined) {
+        yValues.push(dataset[i].y);
       }
     }
     yValues.sort((a, b) => a > b ? 1 : -1);
@@ -219,13 +214,13 @@ export class LinegraphComponent implements AfterViewInit, OnChanges {
     const highest = yValues[yValues.length - 1];
     const lowest = yValues[0];
     const difference = highest - lowest;
-    const leftover = lowest % this.yAxisStep;
+    const leftover = lowest % this.yAxisStep();
 
     yAxisPoints.push(lowest - leftover);
-    const yValuesToAdd = Math.round(difference / this.yAxisStep) + 1;
+    const yValuesToAdd = Math.round(difference / this.yAxisStep()) + 1;
     for (let j = 0; j < yValuesToAdd; j++) {
       let value = yAxisPoints[j] as number;
-      value += this.yAxisStep;
+      value += this.yAxisStep();
       yAxisPoints.push(value);
     }
     yAxisPoints.reverse();
@@ -234,18 +229,18 @@ export class LinegraphComponent implements AfterViewInit, OnChanges {
 
   determineXAxisPoints() {
     const xAxisPoints = [];
-    for (let i = 0; i < this.dataset.length; i++) {
-      xAxisPoints.push(this.dataset[i].x);
+    for (const datapoint of this.dataset()) {
+      xAxisPoints.push(datapoint.x);
     }
     return xAxisPoints;
   }
 
   convertDatasetToPoints() {
     const graphPoints = [];
-    for (const dataPoint of this.dataset) {
+    for (const dataPoint of this.dataset()) {
       const lowestYValue = this.yAxisPoints[this.yAxisPoints.length - 1];
       const differenceHighestLowestYValue = this.yAxisPoints[0] - lowestYValue;
-      let height: number;
+      let height = 0;
       if (dataPoint.y !== undefined) {
         height =
           (dataPoint.y - lowestYValue) *

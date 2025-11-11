@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, inject } from '@angular/core';
 import { Ingredient } from '../../../shared/model/ingredient';
 import { Dish } from '../../../shared/model/dish';
 import { Portion } from 'src/app/shared/model/portion';
@@ -8,17 +8,25 @@ import { Store } from '@ngrx/store';
 import { dishesActions } from 'src/app/shared/store/actions/dishes.actions';
 import { selectAllDishes } from 'src/app/shared/store/selectors/dishes.selectors';
 import { Subscription } from 'rxjs';
+import { PiechartComponent } from '../../../shared/components/piechart/piechart.component';
+import { ModalComponent } from '../../../shared/components/modal/modal.component';
+import { FormsModule } from '@angular/forms';
+import { AutocompleteFoodComponent } from '../../../shared/components/autocomplete-food/autocomplete-food.component';
 
 @Component({
-  selector: 'ml-dishes',
-  templateUrl: './dishes.component.html'
+    selector: 'ml-dishes',
+    templateUrl: './dishes.component.html',
+    styleUrl: './dishes.component.css',
+    imports: [PiechartComponent, ModalComponent, FormsModule, AutocompleteFoodComponent]
 })
 export class DishesComponent implements OnInit, OnDestroy {
+  private readonly store = inject(Store);
+
   public allDishes: Dish[] = [];
-  public selectedDish: Dish;
+  public selectedDish?: Dish;
   public modalIsVisible = false;
 
-  public modalTitle: string;
+  public modalTitle = '';
   public dishName = '';
   public ingredients: Ingredient[] = [];
 
@@ -27,8 +35,7 @@ export class DishesComponent implements OnInit, OnDestroy {
   public unitName = 'grams';
 
   private unitGrams = 100.0;
-  private subscription: Subscription;
-  constructor(private readonly store: Store) { }
+  private subscription?: Subscription;
 
   ngOnInit() {
     this.store.dispatch(dishesActions.get());
@@ -37,14 +44,14 @@ export class DishesComponent implements OnInit, OnDestroy {
     });
   }
 
-  public openModal(dish: Dish): void {
-    if (!!dish) {
+  public openModal(dish: Dish | null): void {
+    if (dish) {
       this.modalTitle = 'Edit dish';
       const ingredients = [];
-      for (let ingredient of dish.ingredients) {
+      for (const ingredient of dish.ingredients) {
         ingredients.push({
           ...ingredient,
-          portion: ingredient.portion? this.getPortion(ingredient, ingredient.portion.id) : {}
+          portion: ingredient.portion? this.getPortion(ingredient, ingredient.portion.id!) : {}
         });
       }
       this.selectedDish = { ...dish, ingredients: ingredients };
@@ -64,7 +71,7 @@ export class DishesComponent implements OnInit, OnDestroy {
   }
 
   public getPortion(ingredient: Ingredient, portionId: number): Portion {
-    for (const portion of ingredient.food.portions) {
+    for (const portion of ingredient.food.portions!) {
       if (portion.id === portionId) {
         return portion;
       }
@@ -74,10 +81,10 @@ export class DishesComponent implements OnInit, OnDestroy {
 
   public getIngredientDescription(ingredient: Ingredient): string {
     if (ingredient.portion) {
-      const usedPortion = this.getPortion(ingredient, ingredient.portion.id);
+      const usedPortion = this.getPortion(ingredient, ingredient.portion.id!);
       return ingredient.multiplier + ' ' + usedPortion.description;
     } else {
-      return ingredient.multiplier * 100 + ' gram';
+      return ingredient.multiplier! * 100 + ' gram';
     }
   }
 
@@ -86,9 +93,8 @@ export class DishesComponent implements OnInit, OnDestroy {
   }
 
   public addIngredient(foodSearchable: FoodSearchable) {
-    const ingredient: Ingredient = { multiplier: 1 };
-    ingredient.food = foodSearchable.food;
-    this.selectedDish.ingredients.push(ingredient);
+    const ingredient: Ingredient = { multiplier: 1, food: foodSearchable.food! };
+    this.selectedDish!.ingredients.push(ingredient);
   }
 
   public saveDish(): void {
@@ -97,14 +103,14 @@ export class DishesComponent implements OnInit, OnDestroy {
   }
 
   public removeIngredient(index: number): void {
-    this.selectedDish.ingredients.splice(index, 1);
+    this.selectedDish!.ingredients.splice(index, 1);
   }
 
   public portionChange(ingredient: Ingredient, eventTarget: any) {
     if (eventTarget.value === this.unitName) {
       ingredient.portion = undefined;
     } else {
-      for (const portion of ingredient.food.portions) {
+      for (const portion of ingredient.food.portions!) {
         if (portion.description === eventTarget.value) {
           ingredient.portion = portion;
           break;
@@ -132,14 +138,14 @@ export class DishesComponent implements OnInit, OnDestroy {
 
   public getValue(ingredient: Ingredient): number {
     if (ingredient.portion === undefined) {
-      return Math.round(this.unitGrams * ingredient.multiplier);
+      return Math.round(this.unitGrams * ingredient.multiplier!);
     } else {
-      return ingredient.multiplier;
+      return ingredient.multiplier!;
     }
   }
 
   public deleteDish(): void {
-    this.store.dispatch(dishesActions.delete(this.selectedDish.id));
+    this.store.dispatch(dishesActions.delete(this.selectedDish!.id));
     this.closeModal();
   }
 

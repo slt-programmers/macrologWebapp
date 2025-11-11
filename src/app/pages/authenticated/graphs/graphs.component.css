@@ -1,0 +1,27 @@
+.graph__bargraph-container {
+  display: flex;
+  flex-direction: column;
+  row-gap: 1rem;
+  width: 100%;
+}
+
+.graph__bargraph {
+  height: 350px;
+  width: 100%;
+}
+
+.graph__bargraph--stacked {
+  height: 500px;
+}
+
+.graph__bargraph--protein {
+  height: 200px;
+}
+
+.graph__bargraph--fat {
+  height: 200px;
+}
+
+.graph__bargraph--carbs {
+  height: 200px;
+}

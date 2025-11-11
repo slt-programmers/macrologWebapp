@@ -1,25 +1,33 @@
-<div class="content">
-  <div class="card">
-    <div class="subnav">
-      <div class="subnav__item" *ngIf="isAdmin()" [ngClass]="{
-            'subnav__item--active': router.url === '/admin/usermanagement'
-          }" [routerLink]="['./usermanagement']">
-        User Management
-      </div>
+<div class="card">
+	@if (isAdmin()) {
+	<div class="subnav">
+		<div
+			class="subnav__item"
+			[class.subnav__item--active]="
+				router.url.includes('/admin/usermanagement')
+			"
+			[routerLink]="['./usermanagement']"
+		>
+			User Management
+		</div>
 
-      <div class="subnav__item" *ngIf="isAdmin()" [ngClass]="{
-            'subnav__item--active': router.url === '/admin/webhooks'
-          }" [routerLink]="['./webhooks']">
-        Webhooks
-      </div>
+		<div
+			class="subnav__item"
+			[class.subnav__item--active]="router.url.includes('/admin/webhooks')"
+			[routerLink]="['./webhooks']"
+		>
+			Webhooks
+		</div>
 
-      <div class="subnav__item" *ngIf="isAdmin()"
-        [ngClass]="{ 'subnav__item--active': router.url === '/admin/mail' }"
-        [routerLink]="['./mail']">
-        Mail
-      </div>
-    </div>
+		<div
+			class="subnav__item"
+			[class.subnav__item--active]="router.url.includes('/admin/mail')"
+			[routerLink]="['./mail']"
+		>
+			Mail
+		</div>
+	</div>
+	}
 
-    <router-outlet></router-outlet>
-  </div>
+	<router-outlet></router-outlet>
 </div>

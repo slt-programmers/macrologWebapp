@@ -1,5 +1,5 @@
 import { HttpClient } from "@angular/common/http";
-import { Injectable } from "@angular/core";
+import { Injectable, inject } from "@angular/core";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { Store } from "@ngrx/store";
 import { of } from "rxjs";
@@ -10,13 +10,17 @@ import { dishesActions } from "../actions/dishes.actions";
 
 @Injectable()
 export class DishesEffects {
+  private readonly actions$ = inject(Actions);
+  private readonly http = inject(HttpClient);
+  private readonly store = inject(Store);
+
 
   private backendUrl = '//' + environment.backend + '/dishes'
 
   getAllDishes$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(dishesActions.get),
-      concatMap((action) => {
+      concatMap(() => {
         return this.http.get<Dish[]>(this.backendUrl).pipe(
           map(response => {
             return dishesActions.success(response);
@@ -71,7 +75,4 @@ export class DishesEffects {
       })
     )
   })
-
-  constructor(private readonly actions$: Actions, private readonly http: HttpClient,
-    private readonly store: Store) { }
 }

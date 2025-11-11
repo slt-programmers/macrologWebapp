@@ -1,0 +1,18 @@
+.food-form {
+  display: grid;
+  grid-template-columns: auto 1fr 1fr;
+  align-items: center;
+  gap: 8px;
+}
+
+.min-w-500 {
+  min-width: 500px;
+}
+
+.col-start-1 {
+  grid-column-start: 1;
+}
+
+.col-span-3 {
+  grid-column-end: span 3;
+}
