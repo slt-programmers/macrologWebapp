@@ -38,7 +38,7 @@
 			<a class="navbar__item" [routerLink]="['/dashboard', 'admin']">Admin</a>
 			}
 			<a class="navbar__item" (click)="logOut()">Log out</a>
-			} @if (!isLoggedIn()) {
+			} @else {
 			<a
 				id="menuLoginMobile"
 				data-cy="menuLoginMobile"
@@ -54,7 +54,7 @@
 		<a id="menuAdmin" [routerLink]="['/dashboard', 'admin']">Admin</a>
 		}
 		<a id="menuLogout" (click)="logOut()">Log out</a>
-		} @if (!isLoggedIn()) {
+		} @else {
 		<a id="menuLogin" data-cy="menuLogin" [routerLink]="['/login']">
 			Log in or Register</a
 		>
