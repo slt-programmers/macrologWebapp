@@ -10,7 +10,6 @@ export class ErrorInterceptor implements HttpInterceptor {
   private authService = inject(AuthenticationService);
   private readonly toastService = inject(ToastService);
 
-
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     return next.handle(request).pipe(
       map((result) => {
@@ -19,11 +18,10 @@ export class ErrorInterceptor implements HttpInterceptor {
       catchError((err) => {
         if (err.status === 403) {
           this.authService.logout();
-          return throwError(err);
-        } else {
+        } else if (err.status === 500) {
           this.toastService.setMessage(err.message, true, 'Failed!');
-          return throwError(err);
         }
+        return throwError(() => err);
       })
     );
   }

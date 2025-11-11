@@ -1,7 +1,7 @@
-
-import { Component, OnInit, signal, inject } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
+import { AuthenticationStore } from 'src/app/shared/store/auth.store';
 import { ModalComponent } from '../../../shared/components/modal/modal.component';
 import { NavigationComponent } from '../../../shared/components/navigation/navigation.component';
 import { AuthenticationService } from '../../../shared/services/auth.service';
@@ -9,21 +9,20 @@ import { ToastService } from '../../../shared/services/toast.service';
 
 @Component({
   templateUrl: 'login.component.html',
-  styleUrls: ['./login.component.css'],
   imports: [NavigationComponent, FormsModule, ReactiveFormsModule, ModalComponent]
 })
-export class LoginComponent implements OnInit {
-  private route = inject(ActivatedRoute);
+export class LoginComponent {
   private router = inject(Router);
   private authService = inject(AuthenticationService);
+  private authStore = inject(AuthenticationStore);
   private toastService = inject(ToastService);
-
-  private returnUrl = 'dashboard';
 
   public loginForm: FormGroup;
   public registerForm: FormGroup;
-  public loginError = '';
-  public registerError = '';
+
+  public loginError = this.authStore.loginError;
+  public registerError = this.authStore.registerError;
+
   public forgotEmail?: string;
   public forgotError = '';
 
@@ -31,7 +30,7 @@ export class LoginComponent implements OnInit {
 
   constructor() {
     this.loginForm = new FormGroup({
-      username: new FormControl('', Validators.required),
+      usernameOrEmail: new FormControl('', Validators.required),
       password: new FormControl('', Validators.required)
     });
 
@@ -42,50 +41,35 @@ export class LoginComponent implements OnInit {
     })
   }
 
-  ngOnInit() {
-    this.authService.logout();
-    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || 'dashboard';
-  }
-
   public login() {
     this.loginForm.markAllAsTouched();
     if (this.loginForm.valid) {
-      this.loginError = '';
-      const data = this.loginForm.value;
-      this.authService.login(data.username, data.password).subscribe(
-        () => {
-          this.router.navigate([this.returnUrl]);
-        },
-        () => {
-          this.loginError = 'Username or password incorrect';
-        }
-      );
+      this.authStore.login(this.loginForm.value);
     }
   }
 
   public register() {
     this.registerForm.markAllAsTouched();
     if (this.registerForm.valid) {
-      this.registerError = '';
-      const data = this.registerForm.value;
-      this.authService.register(data.username, data.email, data.password).subscribe(() => {
-        this.authService.login(data.username, data.password).subscribe(
-          () => {
-            this.router.navigate(['dashboard', 'onboarding']);
-          }
-        );
-      }, (error) => {
-        if (error.status === 401) {
-          if (error.error === 'Username or email already in use') {
-            this.registerError =
-              "Username or email is already in use. Please try a different username or use 'Forgot password' to retrieve a new password.";
-          } else {
-            this.registerError = 'Unknown error during registration.';
-          }
-        } else {
-          this.registerError = 'Unknown error during registration.';
-        }
-      });
+      this.authStore.register(this.registerForm.value);
+      // this.authService.register(data.username, data.email, data.password).subscribe(() => {
+      //   this.authService.login(data.username, data.password).subscribe(
+      //     () => {
+      //       this.router.navigate(['dashboard', 'onboarding']);
+      //     }
+      //   );
+      // }, (error) => {
+      //   if (error.status === 401) {
+      //     if (error.error === 'Username or email already in use') {
+      //       this.registerError =
+      //         "Username or email is already in use. Please try a different username or use 'Forgot password' to retrieve a new password.";
+      //     } else {
+      //       this.registerError = 'Unknown error during registration.';
+      //     }
+      //   } else {
+      //     this.registerError = 'Unknown error during registration.';
+      //   }
+      // });
     }
   }
 

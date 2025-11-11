@@ -1,7 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
-import { Observable, of, throwError } from 'rxjs';
-import { catchError, map } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environment';
 import { UserAccount } from '../model/userAccount';
 
@@ -21,18 +20,25 @@ export class AuthenticationService {
     return !!currentUser && JSON.parse(currentUser).admin;
   }
 
-  public login(usernameOrEmail: string, password: string): Observable<UserAccount | void> {
+  public login(usernameOrEmail: string, password: string): Observable<UserAccount> {
     return this.http.post<UserAccount>(this.macrologBackendUrl + '/authenticate', {
       username: usernameOrEmail,
       password: password,
-    }).pipe(
-      map((res: UserAccount) => {
-        if (res && res.token) {
-          localStorage.setItem('currentUser', JSON.stringify(res));
-        }
-      }),
-      catchError(error => throwError(() => error))
-    );
+    });
+  }
+
+  public register(username: string, email: string, password: string): Observable<any> {
+    return this.http.post<any>(this.macrologBackendUrl + '/signup', {
+      username: username,
+      email: email,
+      password: password,
+    });
+  }
+
+  public resetPassword(email: string): Observable<any> {
+    return this.http.post<any>(this.macrologBackendUrl + '/resetPassword', {
+      email: email,
+    });
   }
 
   public logout(): void {
@@ -44,21 +50,7 @@ export class AuthenticationService {
       oldPassword: oldPassword,
       newPassword: newPassword,
       confirmPassword: confirmPassword,
-    }).pipe(catchError(() => of()));
-  }
-
-  public register(username: string, email: string, password: string): Observable<any> {
-    return this.http.post<any>(this.macrologBackendUrl + '/signup', {
-      username: username,
-      email: email,
-      password: password,
-    }).pipe(catchError(error => of(error)));
-  }
-
-  public resetPassword(email: string): Observable<any> {
-    return this.http.post<any>(this.macrologBackendUrl + '/resetPassword', {
-      email: email,
-    }).pipe(catchError(() => of()));
+    });
   }
 
   public deleteAccount(password: string): Observable<any> {
@@ -71,6 +63,6 @@ export class AuthenticationService {
       this.macrologBackendUrl + '/deleteAccount',
       null,
       options
-    ).pipe(catchError(() => of()));
+    );
   }
 }
