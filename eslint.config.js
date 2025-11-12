@@ -26,6 +26,28 @@ module.exports = defineConfig([
       "@typescript-eslint/no-explicit-any": "warn",
     },
   },
+    {
+    files: ["**/*.spec.ts"],
+    extends: [
+      eslint.configs.recommended,
+      ...tseslint.configs.recommended,
+      ...tseslint.configs.stylistic,
+      ...angular.configs.tsRecommended,
+    ],
+    processor: angular.processInlineTemplates,
+    rules: {
+      "@angular-eslint/component-selector": [
+        "error",
+        {
+          type: "element",
+          prefix: "ml",
+          style: "kebab-case",
+        },
+      ],
+      "@typescript-eslint/no-explicit-any": "off",
+      "@typescript-eslint/no-empty-function": 'off'
+    },
+  },
   {
     files: ["**/*.html"],
     // @ts-ignore

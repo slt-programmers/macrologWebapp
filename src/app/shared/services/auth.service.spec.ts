@@ -1,9 +1,9 @@
-import { TestBed } from "@angular/core/testing";
-import { AuthenticationService } from "./auth.service";
 import { HttpClient } from "@angular/common/http";
+import { TestBed } from "@angular/core/testing";
 import { MockProvider } from "ng-mocks";
-import { of, throwError } from "rxjs";
+import { of } from "rxjs";
 import { environment } from "src/environments/environment";
+import { AuthenticationService } from "./auth.service";
 
 describe("AuthService", () => {
 	let http: HttpClient;

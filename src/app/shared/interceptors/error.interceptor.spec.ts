@@ -15,7 +15,7 @@ describe('AuthService', () => {
       providers: [
         ErrorInterceptor,
         MockProvider(ToastService),
-        MockProvider(AuthenticationStore, {logout: () => {}}),
+        MockProvider(AuthenticationStore, {logout: () => {console.log('dummy')}}),
         { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
       ],
     });

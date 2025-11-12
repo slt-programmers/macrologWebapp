@@ -236,12 +236,12 @@ describe("AuthenticationStore", () => {
 		);
 	});
 
-  it('shoud log out', () => {
-    localStorage.setItem('currentUser', JSON.stringify({username: 'blaat'}));
-    store = TestBed.inject(AuthenticationStore);
-    expect(store.isAuthenticated()).toBeTrue();
-    store.logout();
-    expect(store.isAuthenticated()).toBeFalse();
-    expect(localStorage.getItem('currentUser')).toBeNull();
-  })
+	it("shoud log out", () => {
+		localStorage.setItem("currentUser", JSON.stringify({ username: "blaat" }));
+		store = TestBed.inject(AuthenticationStore);
+		expect(store.isAuthenticated()).toBeTrue();
+		store.logout();
+		expect(store.isAuthenticated()).toBeFalse();
+		expect(localStorage.getItem("currentUser")).toBeNull();
+	});
 });

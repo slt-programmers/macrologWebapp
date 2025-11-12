@@ -1,11 +1,10 @@
 import { HttpClient } from "@angular/common/http";
+import { signal } from "@angular/core";
 import { TestBed } from "@angular/core/testing";
 import { provideRouter, Router } from "@angular/router";
 import { MockProvider } from "ng-mocks";
-import { AuthenticationService } from "../../shared/services/auth.service";
-import { AuthGuard } from "./auth.guard";
 import { AuthenticationStore } from "src/app/shared/store/auth.store";
-import { signal } from "@angular/core";
+import { AuthGuard } from "./auth.guard";
 
 describe("AuthGuardService", () => {
 	let authStore: any;
@@ -32,7 +31,7 @@ describe("AuthGuardService", () => {
 		expect(router.navigate).toHaveBeenCalledWith([""]);
 		expect(result).toBeFalsy();
 
-    authStore.isAuthenticated.set(true)
+		authStore.isAuthenticated.set(true);
 		result = service.canActivate();
 		expect(result).toBeTruthy();
 	});

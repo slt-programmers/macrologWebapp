@@ -15,8 +15,11 @@ import { UserAccount } from "../model/userAccount";
 import { HttpErrorResponse } from "@angular/common/http";
 import { Router } from "@angular/router";
 import { ToastService } from "../services/toast.service";
+import { LoginRequest } from "../model/loginRequest";
+import { RegisterRequest } from "../model/registerRequest";
+import { ChangePasswordRequest } from "../model/changePasswordRequest";
 
-type AuthState = {
+interface AuthState {
 	isLoading: boolean;
 	isAuthenticated: boolean;
 	isAdmin: boolean;
@@ -25,7 +28,7 @@ type AuthState = {
 	deleteError: string;
 	changePasswordError: string;
 	forgotEmailError: string;
-};
+}
 
 const initialState: AuthState = {
 	isLoading: false,
@@ -35,7 +38,7 @@ const initialState: AuthState = {
 	registerError: "",
 	deleteError: "",
 	changePasswordError: "",
-	forgotEmailError: ""
+	forgotEmailError: "",
 };
 
 export const AuthenticationStore = signalStore(
@@ -128,7 +131,10 @@ export const AuthenticationStore = signalStore(
 									store.router.navigate(["dashboard", "onboarding"]);
 								},
 								error: (error: HttpErrorResponse) => {
-									patchState(store, { isLoading: false, loginError: error.message });
+									patchState(store, {
+										isLoading: false,
+										loginError: error.message,
+									});
 								},
 							})
 						);
@@ -184,7 +190,7 @@ export const AuthenticationStore = signalStore(
 										"Success!"
 									);
 								},
-								error: (error: HttpErrorResponse) => {
+								error: () => {
 									patchState(store, {
 										changePasswordError: "Password invalid",
 									});
@@ -206,8 +212,10 @@ export const AuthenticationStore = signalStore(
 									"Success!"
 								);
 							},
-							error: (error: HttpErrorResponse) => {
-								patchState(store, {forgotEmailError: 'Emailadress was not found.'})
+							error: () => {
+								patchState(store, {
+									forgotEmailError: "Emailadress was not found.",
+								});
 							},
 						})
 					);
