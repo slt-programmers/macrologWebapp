@@ -9,6 +9,7 @@ import {
 import { AuthenticationStore } from "src/app/shared/store/auth.store";
 import { ModalComponent } from "../../../../shared/components/modal/modal.component";
 import { CustomValidators } from "src/app/util/validators";
+import { ChangePasswordRequest } from "src/app/shared/model/changePasswordRequest";
 
 @Component({
 	selector: "ml-account",
