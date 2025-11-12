@@ -27,8 +27,8 @@ export class AuthenticationService {
 		});
 	}
 
-	resetPassword(email: string): Observable<string> {
-		return this.http.post<string>(this.macrologBackendUrl + "/resetPassword", {
+	resetPassword(email: string): Observable<void> {
+		return this.http.post<void>(this.macrologBackendUrl + "/resetPassword", {
 			email: email,
 		});
 	}
@@ -37,9 +37,8 @@ export class AuthenticationService {
 		oldPassword: string,
 		newPassword: string,
 		confirmPassword: string
-	): Observable<string> {
-    // TODO 'OK' response JSON parse error, something with headers
-		return this.http.post<string>(this.macrologBackendUrl + "/changePassword", {
+	): Observable<void> {
+		return this.http.post<void>(this.macrologBackendUrl + "/changePassword", {
 			oldPassword: oldPassword,
 			newPassword: newPassword,
 			confirmPassword: confirmPassword,

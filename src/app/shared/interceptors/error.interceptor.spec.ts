@@ -2,25 +2,25 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TestBed } from '@angular/core/testing';
 import { MockProvider } from 'ng-mocks';
 import { of, throwError } from 'rxjs';
-import { AuthenticationService } from '../services/auth.service';
 import { ToastService } from '../services/toast.service';
 import { ErrorInterceptor } from './error.interceptor';
+import { AuthenticationStore } from '../store/auth.store';
 
 describe('AuthService', () => {
   let interceptor: ErrorInterceptor;
-  let authService: AuthenticationService;
+  let authStore: any;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [
         ErrorInterceptor,
         MockProvider(ToastService),
-        MockProvider(AuthenticationService),
+        MockProvider(AuthenticationStore, {logout: () => {}}),
         { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
       ],
     });
+    authStore = TestBed.inject(AuthenticationStore);
     interceptor = TestBed.inject(ErrorInterceptor);
-    authService = TestBed.inject(AuthenticationService);
   });
 
   afterEach(() => {
@@ -32,7 +32,7 @@ describe('AuthService', () => {
   });
 
   it('should intercept forbidden status', () => {
-    spyOn(authService, 'logout');
+    spyOn(authStore, 'logout');
     const httpRequestSpy = jasmine.createSpyObj('HttpRequest', [
       'doesNotMatter',
     ]);
@@ -42,13 +42,13 @@ describe('AuthService', () => {
     interceptor.intercept(httpRequestSpy, httpHandlerSpy).subscribe(
       () => { console.log('dummy') },
       () => {
-        expect(authService.logout).toHaveBeenCalled();
+        expect(authStore.logout).toHaveBeenCalled();
       }
     );
   });
 
   it('should not intercept other error status', () => {
-    spyOn(authService, 'logout');
+    spyOn(authStore, 'logout');
     const httpRequestSpy = jasmine.createSpyObj('HttpRequest', [
       'doesNotMatter',
     ]);
@@ -58,13 +58,13 @@ describe('AuthService', () => {
     interceptor.intercept(httpRequestSpy, httpHandlerSpy).subscribe(
       () => { console.log('dummy') },
       () => {
-        expect(authService.logout).not.toHaveBeenCalled();
+        expect(authStore.logout).not.toHaveBeenCalled();
       }
     );
   });
 
   it('should not intercept valid requests', () => {
-    spyOn(authService, 'logout');
+    spyOn(authStore, 'logout');
     const httpRequestSpy = jasmine.createSpyObj('HttpRequest', [
       'doesNotMatter',
     ]);
@@ -72,7 +72,7 @@ describe('AuthService', () => {
     httpHandlerSpy.handle.and.returnValue(of({ status: 200 }));
 
     interceptor.intercept(httpRequestSpy, httpHandlerSpy).subscribe(() => {
-      expect(authService.logout).not.toHaveBeenCalled();
+      expect(authStore.logout).not.toHaveBeenCalled();
     });
   });
 });

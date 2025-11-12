@@ -87,8 +87,8 @@
         name="forgotEmail" />
     </div>
 
-    @if (forgotError) {
-    <p class="error">{{forgotError}}</p>
+    @if (forgotEmailError()) {
+    <p class="error">{{forgotEmailError()}}</p>
     }
 
     <button id="resetBtn" class="align-self-end btn btn--primary" [disabled]="forgotForm.invalid"

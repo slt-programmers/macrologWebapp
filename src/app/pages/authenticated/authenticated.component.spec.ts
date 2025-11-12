@@ -1,120 +1,124 @@
-import {
-  ComponentFixture,
-  TestBed
-} from '@angular/core/testing';
-import { provideRouter, Router, RouterOutlet } from '@angular/router';
-import { provideMockStore } from '@ngrx/store/testing';
-import { MockComponent, MockProvider } from 'ng-mocks';
-import { of, throwError } from 'rxjs';
-import { NavigationComponent } from 'src/app/shared/components/navigation/navigation.component';
-import { AuthenticationService } from 'src/app/shared/services/auth.service';
-import { HealthcheckService } from '../../shared/services/healthcheck.service';
-import { ScrollBehaviourService } from '../../shared/services/scroll-behaviour.service';
-import { AuthenticatedComponent } from './authenticated.component';
+import { ComponentFixture, TestBed } from "@angular/core/testing";
+import { provideRouter, Router, RouterOutlet } from "@angular/router";
+import { provideMockStore } from "@ngrx/store/testing";
+import { MockComponent, MockProvider } from "ng-mocks";
+import { of, throwError } from "rxjs";
+import { NavigationComponent } from "src/app/shared/components/navigation/navigation.component";
+import { AuthenticationStore } from "src/app/shared/store/auth.store";
+import { HealthcheckService } from "../../shared/services/healthcheck.service";
+import { ScrollBehaviourService } from "../../shared/services/scroll-behaviour.service";
+import { AuthenticatedComponent } from "./authenticated.component";
+import { signal } from "@angular/core";
 
-describe('AuthenticatedComponent', () => {
-  let component: AuthenticatedComponent;
-  let fixture: ComponentFixture<AuthenticatedComponent>;
-  let healthcheckService: HealthcheckService;
-  let scrollBehaviourService: ScrollBehaviourService;
-  let authService: AuthenticationService;
-  let router: Router;
+describe("AuthenticatedComponent", () => {
+	let component: AuthenticatedComponent;
+	let fixture: ComponentFixture<AuthenticatedComponent>;
+	let healthcheckService: HealthcheckService;
+	let scrollBehaviourService: ScrollBehaviourService;
+	let authStore: any;
+	let router: Router;
 
-  beforeEach(() => {
-    TestBed.configureTestingModule({
-      imports: [RouterOutlet, AuthenticatedComponent,
-        MockComponent(NavigationComponent)],
-      providers: [
-        provideRouter([]),
-        provideMockStore(),
-        MockProvider(HealthcheckService),
-        MockProvider(ScrollBehaviourService),
-        MockProvider(AuthenticationService),
-      ],
-    }).compileComponents();
+	beforeEach(() => {
+		TestBed.configureTestingModule({
+			imports: [
+				RouterOutlet,
+				AuthenticatedComponent,
+				MockComponent(NavigationComponent),
+			],
+			providers: [
+				provideRouter([]),
+				provideMockStore(),
+				MockProvider(HealthcheckService),
+				MockProvider(ScrollBehaviourService),
+				MockProvider(AuthenticationStore, {
+					logout: () => {},
+					isAdmin: signal(false),
+				}),
+			],
+		}).compileComponents();
 
-    fixture = TestBed.createComponent(AuthenticatedComponent);
-    component = fixture.componentInstance;
-    healthcheckService = TestBed.inject(HealthcheckService);
-    scrollBehaviourService = TestBed.inject(ScrollBehaviourService);
-    authService = TestBed.inject(AuthenticationService);
-    router = TestBed.inject(Router);
-  });
+		fixture = TestBed.createComponent(AuthenticatedComponent);
+		component = fixture.componentInstance;
+		healthcheckService = TestBed.inject(HealthcheckService);
+		scrollBehaviourService = TestBed.inject(ScrollBehaviourService);
+		authStore = TestBed.inject(AuthenticationStore);
+		router = TestBed.inject(Router);
+	});
 
-  afterEach(() => {
-    localStorage.clear();
-  });
+	afterEach(() => {
+		localStorage.clear();
+	});
 
-  it('should create authenticated component', () => {
-    expect(component).toBeTruthy();
-  });
+	it("should create authenticated component", () => {
+		expect(component).toBeTruthy();
+	});
 
-  it('should init the app component', () => {
-    const healthSpy = spyOn(healthcheckService, 'checkState').and.returnValue(
-      of(true)
-    );
-    let result = component.stillSleeping();
-    expect(result).toBeTruthy();
-    component.ngOnInit();
-    fixture.detectChanges();
-    expect(healthcheckService.checkState).toHaveBeenCalled();
-    result = component.stillSleeping();
-    expect(result).toBeFalsy();
+	it("should init the app component", () => {
+		const healthSpy = spyOn(healthcheckService, "checkState").and.returnValue(
+			of(true)
+		);
+		let result = component.stillSleeping();
+		expect(result).toBeTruthy();
+		component.ngOnInit();
+		fixture.detectChanges();
+		expect(healthcheckService.checkState).toHaveBeenCalled();
+		result = component.stillSleeping();
+		expect(result).toBeFalsy();
 
-    healthSpy.and.returnValue(throwError({ status: 403 }));
-    component.ngOnInit();
-    fixture.detectChanges();
-    result = component.stillSleeping();
-    expect(result).toBeFalsy();
+		healthSpy.and.returnValue(throwError({ status: 403 }));
+		component.ngOnInit();
+		fixture.detectChanges();
+		result = component.stillSleeping();
+		expect(result).toBeFalsy();
 
-    component = TestBed.createComponent(AuthenticatedComponent).componentInstance;
-    result = component.stillSleeping();
-    expect(result).toBeTruthy();
-    healthSpy.and.returnValue(throwError({ status: 404 }));
-    component.ngOnInit();
-    fixture.detectChanges();
-    result = component.stillSleeping();
-    expect(result).toBeTruthy();
-  });
+		component = TestBed.createComponent(
+			AuthenticatedComponent
+		).componentInstance;
+		result = component.stillSleeping();
+		expect(result).toBeTruthy();
+		healthSpy.and.returnValue(throwError({ status: 404 }));
+		component.ngOnInit();
+		fixture.detectChanges();
+		result = component.stillSleeping();
+		expect(result).toBeTruthy();
+	});
 
-  it('should open menu', () => {
-    spyOn(scrollBehaviourService, 'preventScrolling');
-    component.smallMenuOpen = false;
-    component.openMenu();
-    expect(component.smallMenuOpen).toBeTruthy();
+	it("should open menu", () => {
+		spyOn(scrollBehaviourService, "preventScrolling");
+		component.smallMenuOpen = false;
+		component.openMenu();
+		expect(component.smallMenuOpen).toBeTruthy();
 
-    component.openMenu();
-    expect(component.smallMenuOpen).toBeFalsy();
-  });
+		component.openMenu();
+		expect(component.smallMenuOpen).toBeFalsy();
+	});
 
-  it('should close menu', () => {
-    spyOn(scrollBehaviourService, 'preventScrolling');
-    component.smallMenuOpen = true;
-    component.closeMenu();
-    expect(component.smallMenuOpen).toBeFalsy();
-  });
+	it("should close menu", () => {
+		spyOn(scrollBehaviourService, "preventScrolling");
+		component.smallMenuOpen = true;
+		component.closeMenu();
+		expect(component.smallMenuOpen).toBeFalsy();
+	});
 
-  it('should determine if admin', () => {
-    const authspy = spyOn(authService, 'isAdmin')
-    authspy.and.returnValue(false);
-    let result = component.isAdmin();
-    expect(result).toBeFalse();
+	it("should determine if admin", () => {
+		let result = component.isAdmin();
+		expect(result).toBeFalse();
 
-    authspy.and.returnValue(true);
-    result = component.isAdmin();
-    expect(result).toBeTrue();
-  });
+		authStore.isAdmin.set(true);
+		result = component.isAdmin();
+		expect(result).toBeTrue();
+	});
 
-  it('should log user out', () => {
-    spyOn(router, 'navigate');
-    spyOn(scrollBehaviourService, 'preventScrolling');
-    spyOn(authService, 'logout');
-    component.smallMenuOpen = true;
+	it("should log user out", () => {
+		spyOn(router, "navigate");
+		spyOn(scrollBehaviourService, "preventScrolling");
+		spyOn(authStore, "logout");
+		component.smallMenuOpen = true;
 
-    component.logOut();
-    expect(router.navigate).toHaveBeenCalledWith(['']);
-    expect(scrollBehaviourService.preventScrolling).toHaveBeenCalledWith(false);
-    expect(authService.logout).toHaveBeenCalled();
-    expect(component.smallMenuOpen).toBeFalse();
-  });
+		component.logOut();
+		expect(router.navigate).toHaveBeenCalledWith([""]);
+		expect(scrollBehaviourService.preventScrolling).toHaveBeenCalledWith(false);
+		expect(authStore.logout).toHaveBeenCalled();
+		expect(component.smallMenuOpen).toBeFalse();
+	});
 });

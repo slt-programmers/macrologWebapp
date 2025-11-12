@@ -1,101 +1,65 @@
-import { HttpClient } from '@angular/common/http';
-import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
-import {
-  ComponentFixture,
-  TestBed
-} from '@angular/core/testing';
-import { FormsModule } from '@angular/forms';
-import { provideRouter, Router } from '@angular/router';
-import { MockProvider } from 'ng-mocks';
-import { of, throwError } from 'rxjs';
-import { AuthenticationService } from 'src/app/shared/services/auth.service';
-import { ToastService } from 'src/app/shared/services/toast.service';
-import { AccountComponent } from './account.component';
+import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from "@angular/core";
+import { ComponentFixture, TestBed } from "@angular/core/testing";
+import { FormsModule } from "@angular/forms";
+import { provideRouter } from "@angular/router";
+import { MockProvider } from "ng-mocks";
+import { AuthenticationStore } from "src/app/shared/store/auth.store";
+import { AccountComponent } from "./account.component";
 
-describe('AccountComponent', () => {
-  let component: AccountComponent;
-  let fixture: ComponentFixture<AccountComponent>;
-  let authService: AuthenticationService;
-  let toastService: ToastService;
-  let router: Router;
+describe("AccountComponent", () => {
+	let component: AccountComponent;
+	let fixture: ComponentFixture<AccountComponent>;
+	let authStore: any;
 
-  beforeEach(() => {
-    TestBed.configureTestingModule({
-      imports: [FormsModule, AccountComponent],
-      providers: [
-        provideRouter([]),
-        MockProvider(AuthenticationService),
-        MockProvider(ToastService),
-        MockProvider(HttpClient)
-      ],
-      schemas: [NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA],
-    }).compileComponents();
+	beforeEach(() => {
+		TestBed.configureTestingModule({
+			imports: [FormsModule, AccountComponent],
+			providers: [
+				provideRouter([]),
+				MockProvider(AuthenticationStore, {
+					changePassword: () => {},
+					deleteAccount: () => {},
+				}),
+			],
+			schemas: [NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA],
+		}).compileComponents();
 
-    fixture = TestBed.createComponent(AccountComponent);
-    component = fixture.componentInstance;
-    authService = TestBed.inject(AuthenticationService);
-    toastService = TestBed.inject(ToastService);
-    router = TestBed.inject(Router);
-  });
+		authStore = TestBed.inject(AuthenticationStore);
 
-  afterEach(() => {
-    localStorage.clear();
-  });
+		fixture = TestBed.createComponent(AccountComponent);
+		component = fixture.componentInstance;
+	});
 
-  it('should create account component', () => {
-    expect(component).toBeTruthy();
-  });
+	afterEach(() => {
+		localStorage.clear();
+	});
 
-  it('should change password', () => {
-    component.newPassword = 'newpw';
-    component.confirmPassword = 'notnewpw';
-    component.changePassword();
-    expect(component.message).toEqual(
-      'The confirmation password does not match with the new password.'
-    );
+	it("should create account component", () => {
+		expect(component).toBeTruthy();
+	});
 
-    component.confirmPassword = 'newpw';
-    const authSpy = spyOn(authService, 'changePassword')
-    authSpy.and.returnValue(
-      throwError({ status: 400, error: 'passwords do not match' })
-    );
-    component.changePassword();
-    expect(component.message).toEqual(
-      'The confirmation password does not match with the new password.'
-    );
+	it("should change password", () => {
+		spyOn(authStore, "changePassword");
+		component.changePassword();
+		expect(authStore.changePassword as unknown).not.toHaveBeenCalled();
 
-    authSpy.and.returnValue(throwError({ status: 401 }));
-    component.changePassword();
-    expect(component.message).toEqual('Password invalid');
+		component.form.patchValue({ oldPassword: "old", newPassword: "newpw" });
+		component.changePassword();
+		expect(component.form.valid).toBeFalsy();
+		expect(authStore.changePassword as unknown).not.toHaveBeenCalled();
 
-    authSpy.and.returnValue(of({ status: 200 }));
-    spyOn(toastService, 'setMessage');
-    component.changePassword();
-    expect(toastService.setMessage).toHaveBeenCalledWith(
-      'Your password has changed', false, 'Success!'
-    );
-    expect(component.oldPassword).toEqual('');
-    expect(component.newPassword).toEqual('');
-    expect(component.confirmPassword).toEqual('');
-  });
+		component.form.patchValue({
+			confirmPassword: "newpw",
+		});
+		expect(component.form.valid).toBeTruthy();
+		component.changePassword();
+		expect(authStore.changePassword as unknown).toHaveBeenCalled();
+	});
 
-  it('should delete account', () => {
-    const authSpy = spyOn(authService, 'deleteAccount').and.returnValue(
-      of({ status: 200 })
-    );
-    spyOn(router, 'navigate');
-    localStorage.setItem('currentUser', 'user');
-    component.password = 'password';
-    component.deleteAccount();
-    expect(authService.deleteAccount).toHaveBeenCalledWith('password');
-    expect(router.navigate).toHaveBeenCalledWith(['/']);
-    expect(localStorage.getItem('currentUser')).toBeNull();
-
-    authSpy.and.returnValue(throwError({ status: 401 }));
-    localStorage.setItem('currentUser', 'user');
-    component.deleteAccount();
-    expect(authService.deleteAccount).toHaveBeenCalledWith('password');
-    expect(localStorage.getItem('currentUser')).toEqual('user');
-    expect(component.errorMessage).toEqual('Password is incorrect');
-  });
+	it("should delete account", () => {
+		spyOn(authStore, "deleteAccount");
+		component.password = "password";
+		component.deleteAccount();
+		expect(authStore.deleteAccount).toHaveBeenCalledWith("password");
+	});
 });

@@ -9,8 +9,6 @@ import {
 import { AuthenticationStore } from "src/app/shared/store/auth.store";
 import { ModalComponent } from "../../../shared/components/modal/modal.component";
 import { NavigationComponent } from "../../../shared/components/navigation/navigation.component";
-import { AuthenticationService } from "../../../shared/services/auth.service";
-import { ToastService } from "../../../shared/services/toast.service";
 
 @Component({
 	templateUrl: "login.component.html",
@@ -22,18 +20,16 @@ import { ToastService } from "../../../shared/services/toast.service";
 	],
 })
 export class LoginComponent {
-	private authService = inject(AuthenticationService);
 	private authStore = inject(AuthenticationStore);
-	private toastService = inject(ToastService);
 
 	loginError = this.authStore.loginError;
 	registerError = this.authStore.registerError;
+	forgotEmailError = this.authStore.forgotEmailError;
 
 	loginForm: FormGroup;
 	registerForm: FormGroup;
 
 	forgotEmail?: string;
-	forgotError = "";
 
 	showForgotPwModal = signal(false);
 
@@ -70,20 +66,8 @@ export class LoginComponent {
 
 	resetPassword() {
 		if (this.forgotEmail) {
-			this.authService.resetPassword(this.forgotEmail).subscribe(
-				() => {
-					this.toastService.setMessage(
-						"We have send an email with your password!",
-						false,
-						"Success!"
-					);
-					this.toggleForgotPwModal(false);
-					this.forgotError = "";
-				},
-				() => {
-					this.forgotError = "The email adress was not found";
-				}
-			);
+			this.authStore.resetPassword(this.forgotEmail);
+			this.toggleForgotPwModal(false);
 		}
 	}
 }

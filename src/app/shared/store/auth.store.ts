@@ -24,6 +24,7 @@ type AuthState = {
 	registerError: string;
 	deleteError: string;
 	changePasswordError: string;
+	forgotEmailError: string;
 };
 
 const initialState: AuthState = {
@@ -34,6 +35,7 @@ const initialState: AuthState = {
 	registerError: "",
 	deleteError: "",
 	changePasswordError: "",
+	forgotEmailError: ""
 };
 
 export const AuthenticationStore = signalStore(
@@ -184,8 +186,7 @@ export const AuthenticationStore = signalStore(
 						)
 						.pipe(
 							tapResponse({
-								next: (password: string) => {
-                  console.log(password)
+								next: () => {
 									store.toastService.setMessage(
 										"Your password has changed",
 										false,
@@ -193,14 +194,32 @@ export const AuthenticationStore = signalStore(
 									);
 								},
 								error: (error: HttpErrorResponse) => {
-                  console.log('here error')
-                  console.log(error)
 									patchState(store, {
 										changePasswordError: "Password invalid",
 									});
 								},
 							})
 						);
+				})
+			)
+		),
+		resetPassword: rxMethod<string>(
+			pipe(
+				concatMap((request: string) => {
+					return store.authService.resetPassword(request).pipe(
+						tapResponse({
+							next: () => {
+								store.toastService.setMessage(
+									"We have send an email to reset your password.",
+									false,
+									"Success!"
+								);
+							},
+							error: (error: HttpErrorResponse) => {
+								patchState(store, {forgotEmailError: 'Emailadress was not found.'})
+							},
+						})
+					);
 				})
 			)
 		),

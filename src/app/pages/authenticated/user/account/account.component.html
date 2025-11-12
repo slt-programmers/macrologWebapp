@@ -1,12 +1,12 @@
 <div class="flex flex-col gap-4">
-	<form #updateForm="ngForm" class="flex flex-col gap-4">
+	<form [formGroup]="form" class="flex flex-col gap-4">
 		<h1 class="font-bold">Change password</h1>
 
 		<div class="grid grid-cols-auto-1 items-center gap-2">
 			<label for="oldPassword">Old password</label>
 			<input
 				type="password"
-				[(ngModel)]="oldPassword"
+				formControlName="oldPassword"
 				id="oldPassword"
 				required
 			/>
@@ -14,7 +14,7 @@
 			<label for="newPassword">New password</label>
 			<input
 				type="password"
-				[(ngModel)]="newPassword"
+				formControlName="newPassword"
 				id="newPassword"
 				required
 			/>
@@ -22,7 +22,7 @@
 			<label for="confirmPassword">Confirm new password</label>
 			<input
 				type="password"
-				[(ngModel)]="confirmPassword"
+				formControlName="confirmPassword"
 				id="confirmPassword"
 				required
 			/>
@@ -35,7 +35,7 @@
 		<button
 			type="button"
 			class="align-self-start btn btn--primary"
-			[disabled]="updateForm.invalid"
+			[disabled]="form.invalid"
 			(click)="changePassword()"
 		>
 			Change password

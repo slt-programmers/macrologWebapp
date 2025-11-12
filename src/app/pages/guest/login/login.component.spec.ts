@@ -1,169 +1,107 @@
-import {
-  ComponentFixture,
-  TestBed
-} from '@angular/core/testing';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { By } from '@angular/platform-browser';
-import { provideRouter, Router } from '@angular/router';
-import { MockComponent, MockProvider } from 'ng-mocks';
-import { of, throwError } from 'rxjs';
-import { ModalComponent } from 'src/app/shared/components/modal/modal.component';
-import { NavigationComponent } from 'src/app/shared/components/navigation/navigation.component';
-import { AuthenticationService } from 'src/app/shared/services/auth.service';
-import { ToastService } from 'src/app/shared/services/toast.service';
-import { LoginComponent } from './login.component';
+import { ComponentFixture, TestBed } from "@angular/core/testing";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { By } from "@angular/platform-browser";
+import { provideRouter } from "@angular/router";
+import { MockComponent, MockProvider } from "ng-mocks";
+import { throwError } from "rxjs";
+import { ModalComponent } from "src/app/shared/components/modal/modal.component";
+import { NavigationComponent } from "src/app/shared/components/navigation/navigation.component";
+import { AuthenticationStore } from "src/app/shared/store/auth.store";
+import { LoginComponent } from "./login.component";
+import { signal } from "@angular/core";
 
-describe('LoginComponent', () => {
-  let component: LoginComponent;
-  let fixture: ComponentFixture<LoginComponent>;
-  let authService: AuthenticationService;
-  let toastService: ToastService;
-  let router: Router;
+describe("LoginComponent", () => {
+	let component: LoginComponent;
+	let fixture: ComponentFixture<LoginComponent>;
+	let authStore: any;
 
-  beforeEach(() => {
-    TestBed.configureTestingModule({
-      imports: [FormsModule, ReactiveFormsModule, LoginComponent,
-        MockComponent(NavigationComponent),
-        MockComponent(ModalComponent)],
-      providers: [
-        MockProvider(AuthenticationService),
-        MockProvider(ToastService),
-        provideRouter([])
-      ]
-    }).compileComponents();
-    fixture = TestBed.createComponent(LoginComponent);
-    component = fixture.componentInstance;
-    authService = TestBed.inject(AuthenticationService);
-    toastService = TestBed.inject(ToastService);
-    router = TestBed.inject(Router);
-    fixture.detectChanges();
-  });
+	beforeEach(() => {
+		TestBed.configureTestingModule({
+			imports: [
+				FormsModule,
+				ReactiveFormsModule,
+				LoginComponent,
+				MockComponent(NavigationComponent),
+				MockComponent(ModalComponent),
+			],
+			providers: [
+				MockProvider(AuthenticationStore, {
+					loginError: signal(""),
+					registerError: signal(""),
+					forgotEmailError: signal(""),
+					login: () => {},
+					register: () => {},
+					resetPassword: () => {},
+				}),
+				provideRouter([]),
+			],
+		}).compileComponents();
+		fixture = TestBed.createComponent(LoginComponent);
+		component = fixture.componentInstance;
+		authStore = TestBed.inject(AuthenticationStore);
+		fixture.detectChanges();
+	});
 
-  it('should create component', () => {
-    expect(component).toBeTruthy();
-  });
+	it("should create component", () => {
+		expect(component).toBeTruthy();
+	});
 
-  it('should log in', () => {
-    spyOn(authService, 'login').and.returnValue(of(undefined));
-    spyOn(router, 'navigate');
+	it("should log in", () => {
+		spyOn(authStore, "login");
+		component.login();
+		expect(authStore.login).not.toHaveBeenCalled();
 
-    component.login();
-    expect(authService.login).not.toHaveBeenCalled();
+		component.loginForm.patchValue({
+			usernameOrEmail: "username",
+			password: "password",
+		});
+		component.login();
+		expect(authStore.login).toHaveBeenCalledWith({
+			usernameOrEmail: "username",
+			password: "password",
+		});
+	});
 
-    component.loginForm.patchValue({
-      username: 'username',
-      password: 'password'
-    });
-    component.login();
-    expect(authService.login).toHaveBeenCalledWith('username', 'password');
-    expect(router.navigate).toHaveBeenCalledWith(['dashboard']);
-    expect(component.loginError).toEqual('');
-  });
+	it("should register new user", () => {
+		spyOn(authStore, "register");
+		component.register();
+		expect(authStore.register).not.toHaveBeenCalled();
 
-  it('should error on log in', () => {
-    spyOn(authService, 'login').and.returnValue(throwError({ status: 500 }));
-    spyOn(router, 'navigate');
-    component.loginForm.patchValue({
-      username: 'username',
-      password: 'password'
-    });
-    component.login();
-    expect(router.navigate).not.toHaveBeenCalledWith(['dashboard']);
-    expect(component.loginError).toEqual('Username or password incorrect');
-  });
+		component.registerForm.patchValue({
+			username: "name",
+			email: "email@email.com",
+			password: "secret",
+		});
+		component.register();
+		expect(authStore.register).toHaveBeenCalled();
+	});
 
-  it('should register new user', () => {
-    spyOn(authService, 'register').and.returnValue(of({}));
-    spyOn(authService, 'login').and.returnValue(of(undefined));
-    spyOn(router, 'navigate');
+	it("should toggle forgot password modal", () => {
+		const forgotLink = fixture.debugElement.query(By.css("#forgotLink"));
+		expect(component.showForgotPwModal()).toBeFalsy();
+		forgotLink.nativeElement.click();
+		fixture.detectChanges();
+		expect(component.showForgotPwModal()).toBeTruthy();
+	});
 
-    component.register();
-    expect(authService.register).not.toHaveBeenCalled();
+	it("should reset password", () => {
+		const resetSpy = spyOn(authStore, "resetPassword");
+		component.forgotEmail = "email@email.com";
 
-    component.registerForm.patchValue({
-      username: 'name',
-      email: 'email@email.com',
-      password: 'secret'
-    });
-    component.register();
+		const forgotLink = fixture.debugElement.query(By.css("#forgotLink"));
+		forgotLink.nativeElement.click();
+		fixture.detectChanges();
 
-    expect(router.navigate).toHaveBeenCalledWith(['dashboard', 'onboarding']);
-  });
+		let resetBtn = fixture.debugElement.query(By.css("#resetBtn"));
+		resetBtn.nativeElement.click();
+		expect(resetSpy).toHaveBeenCalledWith("email@email.com");
+		fixture.detectChanges();
+		expect(component.showForgotPwModal()).toBeFalsy();
 
-  it('should error on register', () => {
-    spyOn(authService, 'register').and.returnValue(throwError({ status: 500 }));
-    spyOn(router, 'navigate');
-    component.registerForm.patchValue({
-      username: 'name',
-      email: 'email@email.com',
-      password: 'secret'
-    });
-    component.register();
-    expect(router.navigate).not.toHaveBeenCalledWith(['dashboard', 'onboarding']);
-    expect(component.registerError).toEqual('Unknown error during registration.');
-  });
-
-  it('should error on register', () => {
-    spyOn(authService, 'register').and.returnValue(throwError({ status: 401, error: 'Some other error' }));
-    spyOn(router, 'navigate');
-    component.registerForm.patchValue({
-      username: 'name',
-      email: 'email@email.com',
-      password: 'secret'
-    });
-    component.register();
-    expect(router.navigate).not.toHaveBeenCalledWith(['dashboard', 'onboarding']);
-    expect(component.registerError).toEqual('Unknown error during registration.');
-  });
-
-  it('should error on register if account allready exists', () => {
-    spyOn(authService, 'register').and.returnValue(throwError({ status: 401, error: 'Username or email already in use' }));
-    spyOn(router, 'navigate');
-    component.registerForm.patchValue({
-      username: 'name',
-      email: 'email@email.com',
-      password: 'secret'
-    });
-    component.register();
-    expect(router.navigate).not.toHaveBeenCalledWith(['dashboard', 'onboarding']);
-    expect(component.registerError).toEqual('Username or email is already in use. Please try a different username or use \'Forgot password\' to retrieve a new password.');
-  });
-
-  it('should toggle forgot password modal', () => {
-    const forgotLink = fixture.debugElement.query(By.css('#forgotLink'));
-    expect(component.showForgotPwModal()).toBeFalsy();
-    forgotLink.nativeElement.click();
-    fixture.detectChanges();
-    expect(component.showForgotPwModal()).toBeTruthy();
-  });
-
-  it('should reset password', () => {
-    const resetSpy = spyOn(authService, 'resetPassword').and.returnValue(
-      of({})
-    );
-    spyOn(toastService, 'setMessage');
-    component.forgotError = 'error';
-    component.forgotEmail = 'email@email.com';
-
-    const forgotLink = fixture.debugElement.query(By.css('#forgotLink'));
-    forgotLink.nativeElement.click();
-    fixture.detectChanges();
-
-    let resetBtn = fixture.debugElement.query(By.css('#resetBtn'));
-    resetBtn.nativeElement.click();
-    expect(resetSpy).toHaveBeenCalledWith('email@email.com');
-    expect(component.forgotError).toEqual('');
-    fixture.detectChanges();
-    expect(toastService.setMessage).toHaveBeenCalled();
-    expect(component.showForgotPwModal()).toBeFalsy();
-
-    resetSpy.and.returnValue(throwError({ status: 404 }));
-    forgotLink.nativeElement.click();
-    fixture.detectChanges();
-    resetBtn = fixture.debugElement.query(By.css('#resetBtn'));
-    // the button was gone when the model was closed
-    resetBtn.nativeElement.click();
-    fixture.detectChanges();
-    expect(component.forgotError).toEqual('The email adress was not found');
-  });
+		resetSpy.and.returnValue(throwError({ status: 404 }));
+		forgotLink.nativeElement.click();
+		fixture.detectChanges();
+		resetBtn = fixture.debugElement.query(By.css("#resetBtn"));
+		resetBtn.nativeElement.click();
+	});
 });
