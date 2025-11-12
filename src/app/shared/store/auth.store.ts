@@ -47,9 +47,6 @@ export const AuthenticationStore = signalStore(
 		toastService: inject(ToastService),
 	})),
 	withMethods((store) => ({
-		setChangePasswordError(changePasswordError: string) {
-			patchState(store, { changePasswordError });
-		},
 		login: rxMethod<LoginRequest>(
 			pipe(
 				tap(() => {
@@ -131,13 +128,7 @@ export const AuthenticationStore = signalStore(
 									store.router.navigate(["dashboard", "onboarding"]);
 								},
 								error: (error: HttpErrorResponse) => {
-									const loginError =
-										error.status === 401 ||
-										error.status === 403 ||
-										error.status === 404
-											? "Username or password incorrect"
-											: error.message;
-									patchState(store, { isLoading: false, loginError });
+									patchState(store, { isLoading: false, loginError: error.message });
 								},
 							})
 						);
