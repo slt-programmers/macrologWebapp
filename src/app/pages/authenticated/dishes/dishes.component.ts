@@ -2,11 +2,10 @@ import { Component, OnDestroy, OnInit, inject } from "@angular/core";
 import { FormsModule } from "@angular/forms";
 import { Store } from "@ngrx/store";
 import { Subscription } from "rxjs";
-import { Food } from "src/app/shared/model/food";
-import { FoodSearchable } from "src/app/shared/model/foodSearchable";
 import { Portion } from "src/app/shared/model/portion";
 import { dishesActions } from "src/app/shared/store/actions/dishes.actions";
 import { selectAllDishes } from "src/app/shared/store/selectors/dishes.selectors";
+import { clone } from "src/app/util/functions";
 import { PiechartComponent } from "../../../shared/components/piechart/piechart.component";
 import { Dish } from "../../../shared/model/dish";
 import { Ingredient } from "../../../shared/model/ingredient";
@@ -20,16 +19,9 @@ import { EditDishComponent } from "./edit-dish/edit-dish.component";
 export class DishesComponent implements OnInit, OnDestroy {
 	private readonly store = inject(Store);
 
-	public allDishes: Dish[] = [];
-	public selectedDish?: Dish;
-	public modalIsVisible = false;
-
-	public dishName = "";
-	public ingredients: Ingredient[] = [];
-
-	public food: Food[] = [];
-	public searchables: FoodSearchable[] = [];
-	public unitName = "grams";
+	allDishes: Dish[] = [];
+	selectedDish?: Dish;
+	modalIsVisible = false;
 
 	private subscription?: Subscription;
 
@@ -40,18 +32,12 @@ export class DishesComponent implements OnInit, OnDestroy {
 		});
 	}
 
-	public openModal(dish: Dish | null): void {
+	openModal(dish: Dish | null): void {
 		if (dish) {
-			const ingredients = [];
-			for (const ingredient of dish.ingredients) {
-				ingredients.push({
-					...ingredient,
-					portion: ingredient.portion
-						? this.getPortion(ingredient, ingredient.portion.id!)
-						: {},
-				});
-			}
-			this.selectedDish = { ...dish, ingredients: ingredients };
+			this.selectedDish = {
+				...dish,
+				ingredients: clone(dish.ingredients) || [],
+			};
 		} else {
 			this.selectedDish = {
 				name: "",
@@ -66,16 +52,11 @@ export class DishesComponent implements OnInit, OnDestroy {
 		this.selectedDish = undefined;
 	}
 
-	public getPortion(ingredient: Ingredient, portionId: number): Portion {
-		for (const portion of ingredient.food.portions!) {
-			if (portion.id === portionId) {
-				return portion;
-			}
-		}
-		return {} as Portion;
+	getTotal(dish: Dish) {
+		return dish.macrosCalculated;
 	}
 
-	public getIngredientDescription(ingredient: Ingredient): string {
+	getIngredientDescription(ingredient: Ingredient): string {
 		if (ingredient.portion) {
 			const usedPortion = this.getPortion(ingredient, ingredient.portion.id!);
 			return ingredient.multiplier + " " + usedPortion.description;
@@ -84,10 +65,14 @@ export class DishesComponent implements OnInit, OnDestroy {
 		}
 	}
 
-	public getTotal(dish: Dish) {
-		return dish.macrosCalculated;
+	private getPortion(ingredient: Ingredient, portionId: number): Portion {
+		for (const portion of ingredient.food.portions!) {
+			if (portion.id === portionId) {
+				return portion;
+			}
+		}
+		return {} as Portion;
 	}
-
 
 	ngOnDestroy(): void {
 		if (this.subscription) {

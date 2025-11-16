@@ -20,9 +20,9 @@ export class EditDishComponent implements OnInit {
 	readonly close$ = output<boolean>();
 
 	private unitGrams = 100.0;
+	readonly unitName = "grams";
 
 	title = "Add a dish";
-	unitName = "grams";
 
 	ngOnInit(): void {
 		if (this.selectedDish().id) {

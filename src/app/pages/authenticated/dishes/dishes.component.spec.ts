@@ -64,14 +64,6 @@ describe('DishesComponent', () => {
     });
   });
 
-  it('should get portion', () => {
-    const ingredient: Ingredient = { food: { portions: [{ id: 1 } as Portion] } as unknown as Food }
-    let result = component.getPortion(ingredient, 1);
-    expect(result).toEqual({ id: 1 });
-    result = component.getPortion(ingredient, 2);
-    expect(result).toEqual({});
-  });
-
   it('should get description', () => {
     const ingredient: Ingredient = {
       portion: { id: 1, description: 'portionDesc' },

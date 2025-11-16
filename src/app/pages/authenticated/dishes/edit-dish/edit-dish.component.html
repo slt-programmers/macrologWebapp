@@ -12,17 +12,19 @@
 
 		@if (selectedDish().ingredients!.length > 0) {
 		<h1 class="font-semibold text-secondary col-start-1">Ingredients</h1>
-		} @for (ingr of selectedDish().ingredients!; track ingr; let i = $index) {
-		<span class="col-start-1">{{ ingr.food.name }}</span>
+		} 
+		
+		@for (ingredient of selectedDish().ingredients!; track ingredient; let i = $index) {
+		<span class="col-start-1">{{ ingredient.food.name }}</span>
 
-		<select aria-label="portion" (change)="portionChange(ingr, $event.target)">
+		<select aria-label="portion" (change)="portionChange(ingredient, $event.target)">
 			<!-- 100 grams -->
 			<option>{{ unitName }}</option>
 			<!-- portion amount -->
-			@for (portion of ingr.food.portions; track portion) {
+			@for (portion of ingredient.food.portions; track portion) {
 			<option
 				value="{{ portion.description }}"
-				[selected]="portion.id === ingr.portion?.id"
+				[selected]="portion.id === ingredient.portion?.id"
 			>
 				{{ portion.description }}
 			</option>
@@ -33,9 +35,9 @@
 			aria-label="amount"
 			name="ingrAmount"
 			type="number"
-			[value]="getValue(ingr)"
-			(input)="calculateMultiplier($event, ingr)"
-			step="{{ getStep(ingr) }}"
+			[value]="getValue(ingredient)"
+			(input)="calculateMultiplier($event, ingredient)"
+			step="{{ getStep(ingredient) }}"
 			min="0"
 		/>
 
@@ -57,7 +59,7 @@
 
 	<div class="flex justify-end gap-4">
 		@if (selectedDish()) {
-		<button type="button" class="btn" (click)="deleteDish()">Delete</button>
+		<button type="button" class="btn btn--warning" (click)="deleteDish()">Delete</button>
 		}
 		<button
 			type="button"
