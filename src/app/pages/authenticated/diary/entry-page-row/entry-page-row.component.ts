@@ -23,14 +23,14 @@ import { ModalComponent } from "../../../../shared/components/modal/modal.compon
 })
 export class EntryPageRowComponent {
 	private readonly entryStore = inject(EntryStore);
-
-	private entriesPerDay = this.entryStore.entriesPerDay;
+	private readonly entriesPerDay = this.entryStore.entriesPerDay;
+	
 	readonly meal = input.required<Meal>();
 	readonly date = input.required<string>();
 
 	entries: Entry[] = [];
-	public modalEntries: Entry[] = [];
-	public showModal = false;
+	modalEntries: Entry[] = [];
+	showModal = false;
 
 	constructor() {
 		effect(() => {

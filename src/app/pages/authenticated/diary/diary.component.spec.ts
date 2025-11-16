@@ -14,7 +14,6 @@ describe("DiaryComponent", () => {
   let fixture: ComponentFixture<DiaryComponent>;
   let component: DiaryComponent;
   let userService: UserService;
-  let entryStore: any;
   let dateStore: any;
 
   beforeEach(() => {
@@ -38,7 +37,6 @@ describe("DiaryComponent", () => {
     }).compileComponents();
 
     userService = TestBed.inject(UserService);
-    entryStore = TestBed.inject(EntryStore);
     dateStore = TestBed.inject(DateStore);
     fixture = TestBed.createComponent(DiaryComponent);
     component = fixture.componentInstance;
