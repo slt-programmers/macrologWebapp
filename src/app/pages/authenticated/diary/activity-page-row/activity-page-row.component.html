@@ -3,7 +3,7 @@
 
   <div class="col-span-8">
     @if (showSync()) {
-    <button type="button" class="text-primary" (click)="syncActivities()">
+    <button type="button" class="text-primary" (click)="syncActivities(); $event.stopPropagation()">
       <em title="Synchronize with external sources." class="fas fa-sync-alt primary">
       </em>
     </button>

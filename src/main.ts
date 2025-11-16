@@ -11,7 +11,6 @@ import { reducers } from './app/shared/store/reducers';
 import { EffectsModule } from '@ngrx/effects';
 import { FoodEffects } from './app/shared/store/effects/food.effects';
 import { DishesEffects } from './app/shared/store/effects/dishes.effects';
-import { ActivitiesEffects } from './app/shared/store/effects/activities.effects';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { AppComponent } from './app/app.component';
 
@@ -24,7 +23,6 @@ bootstrapApplication(AppComponent, {
     importProvidersFrom(BrowserModule, ServicesModule, AppRoutingModule, StoreModule.forRoot(reducers), EffectsModule.forRoot([
       FoodEffects,
       DishesEffects,
-      ActivitiesEffects
     ]), FontAwesomeModule),
     { provide: Window, useValue: window },
     { provide: Document, useValue: document },

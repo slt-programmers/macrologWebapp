@@ -4,17 +4,20 @@ import { EntryService } from "../services/entry.service";
 import { MockProvider } from "ng-mocks";
 import { of } from "rxjs";
 import { Meal } from "../model/meal";
+import { DateStore } from "./date.store";
 
 describe("EntryStore", () => {
   let store: any;
   let entryService: EntryService
+  let dateStore: any;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [EntryStore, MockProvider(EntryService)]
+      providers: [EntryStore, DateStore, MockProvider(EntryService)]
     });
 
     entryService = TestBed.inject(EntryService);
+    dateStore = TestBed.inject(DateStore)
     store = TestBed.inject(EntryStore);
   });
 
@@ -58,7 +61,7 @@ describe("EntryStore", () => {
     serviceSpy.and.returnValue(of([entry1, entry1, entry1]));
     store.getEntriesForDay('2020-01-01');
 
-    store.setDisplayDate('2020-01-01');
+    dateStore.setDisplayDate('2020-01-01');
     const result = store.totalsForDay();
     expect(result).toEqual({ protein: 3, fat: 6, carbs: 9, calories: 369 });
   });

@@ -8,45 +8,50 @@ import { DiaryPageComponent } from "./diary-page/diary-page.component";
 import { DiaryComponent } from "./diary.component";
 import { EntryStore } from "src/app/shared/store/entries.store";
 import { signal } from "@angular/core";
+import { DateStore } from "src/app/shared/store/date.store";
 
 describe("DiaryComponent", () => {
-	let fixture: ComponentFixture<DiaryComponent>;
-	let component: DiaryComponent;
-	let userService: UserService;
-	let entriesStore: any;
+  let fixture: ComponentFixture<DiaryComponent>;
+  let component: DiaryComponent;
+  let userService: UserService;
+  let entriesStore: any;
+  let dateStore: any;
 
-	beforeEach(() => {
-		TestBed.configureTestingModule({
-			imports: [
-				DiaryComponent,
-				MockComponent(DatepickerComponent),
-				MockComponent(StackDonutComponent),
-				MockComponent(DiaryPageComponent),
-			],
-			providers: [
-				MockProvider(UserService),
-				MockProvider(EntryStore, {
-					totalsForDay: signal({ protein: 0, fat: 0, carbs: 0, calories: 0 }),
-					setDisplayDate: () => {},
-					getEntriesForDay: () => {},
-				}),
-			],
-		}).compileComponents();
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      imports: [
+        DiaryComponent,
+        MockComponent(DatepickerComponent),
+        MockComponent(StackDonutComponent),
+        MockComponent(DiaryPageComponent),
+      ],
+      providers: [
+        MockProvider(UserService),
+        MockProvider(EntryStore, {
+          totalsForDay: signal({ protein: 0, fat: 0, carbs: 0, calories: 0 }),
+          getEntriesForDay: () => { },
+        }),
+        MockProvider(DateStore, {
+          setDisplayDate: () => { },
+        })
+      ],
+    }).compileComponents();
 
-		userService = TestBed.inject(UserService);
-		entriesStore = TestBed.inject(EntryStore);
-		fixture = TestBed.createComponent(DiaryComponent);
-		component = fixture.componentInstance;
-	});
+    userService = TestBed.inject(UserService);
+    entriesStore = TestBed.inject(EntryStore);
+    dateStore = TestBed.inject(DateStore);
+    fixture = TestBed.createComponent(DiaryComponent);
+    component = fixture.componentInstance;
+  });
 
-	it("should create", () => {
-		expect(component).toBeTruthy();
-	});
+  it("should create", () => {
+    expect(component).toBeTruthy();
+  });
 
-	it("should change date", () => {
-		spyOn(userService, "getUserGoalStats").and.returnValue(of([]));
-		spyOn(entriesStore, "setDisplayDate");
-		component.changeDate("2022-01-01");
-		expect(component.date).toEqual("2022-01-01");
-	});
+  it("should change date", () => {
+    spyOn(userService, "getUserGoalStats").and.returnValue(of([]));
+    spyOn(dateStore, "setDisplayDate");
+    component.changeDate("2022-01-01");
+    expect(component.date).toEqual("2022-01-01");
+  });
 });

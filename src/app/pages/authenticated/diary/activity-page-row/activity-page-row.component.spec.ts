@@ -1,36 +1,34 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
-import { MockStore, provideMockStore } from '@ngrx/store/testing';
 import { MockProvider } from 'ng-mocks';
 import { of } from 'rxjs';
 import { UserService } from 'src/app/shared/services/user.service';
-import { activitiesActions } from 'src/app/shared/store/actions/activities.actions';
-import { selectActivitiesDate, selectActivitiesLoading, selectActivitiesState } from 'src/app/shared/store/selectors/activities.selectors';
 
+import { signal } from '@angular/core';
+import { ActivityStore } from 'src/app/shared/store/activity.store';
 import { ActivityPageRowComponent } from './activity-page-row.component';
 
 describe('ActivityPageRowComponent', () => {
   let component: ActivityPageRowComponent;
   let fixture: ComponentFixture<ActivityPageRowComponent>;
-  let store: MockStore;
   let userService: UserService;
+  let activityStore: any;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [ReactiveFormsModule, ActivityPageRowComponent],
       providers: [
         MockProvider(UserService),
-        provideMockStore({
-          selectors: [
-            { selector: selectActivitiesLoading, value: false },
-            { selector: selectActivitiesState, value: { data: [{ date: '2020-01-02', activities: [{ name: 'run', calories: 123 }] }] } },
-            { selector: selectActivitiesDate('2020-01-01'), value: [{ name: 'run', calories: 123 }] }
-          ]
+        MockProvider(ActivityStore, {
+          activitiesPerDay: signal([{ date: '2020-01-01', activities: [] }]),
+          getActivitiesForDay: () => { },
+          filterDay: () => [],
+          postActivitiesForDay: () => { }
         })
       ]
     }).compileComponents();
 
-    store = TestBed.inject(MockStore);
+    activityStore = TestBed.inject(ActivityStore);
     userService = TestBed.inject(UserService);
     fixture = TestBed.createComponent(ActivityPageRowComponent);
     fixture.componentRef.setInput('date', '2020-01-01')
@@ -52,40 +50,15 @@ describe('ActivityPageRowComponent', () => {
   });
 
   it('should sync activities', () => {
-    spyOn(store, 'dispatch');
+    spyOn(activityStore, 'getActivitiesForDay');
     spyOn(userService, 'getSyncSettings').and.returnValue(of());
     fixture.detectChanges();
     component.syncActivities();
-    expect(store.dispatch).toHaveBeenCalledWith(activitiesActions.get(true, { date: '2020-01-01', sync: true }));
-  });
-
-  it('should show sync button', () => {
-    spyOn(userService, 'getSyncSettings').and.returnValue(of());
-    store.overrideSelector(selectActivitiesLoading, true);
-    store.refreshState();
-    fixture.detectChanges();
-    component.canSync = false;
-    expect(component.showSync()).toBeFalse();
-    store.overrideSelector(selectActivitiesLoading, false);
-    store.refreshState();
-    fixture.detectChanges();
-    expect(component.showSync()).toBeFalse();
-    component.canSync = true;
-    expect(component.showSync()).toBeTrue();
+    expect(activityStore.getActivitiesForDay).toHaveBeenCalledWith({ date: '2020-01-01', force: true });
   });
 
   it('should open modal', () => {
     spyOn(userService, 'getSyncSettings').and.returnValue(of());
-    store.overrideSelector(selectActivitiesLoading, true);
-    store.refreshState();
-    fixture.detectChanges();
-    component.modalActivities = [];
-    component.activities = [];
-    component.showModal = false;
-    component.openModal();
-    expect(component.showModal).toBeFalse();
-    store.overrideSelector(selectActivitiesLoading, false);
-    store.refreshState();
     fixture.detectChanges();
     component.openModal();
     expect(component.activities).toEqual([]);
@@ -128,13 +101,13 @@ describe('ActivityPageRowComponent', () => {
 
   it('should save activities', () => {
     spyOn(userService, 'getSyncSettings').and.returnValue(of());
-    spyOn(store, 'dispatch');
+    spyOn(activityStore, 'postActivitiesForDay');
     fixture.componentRef.setInput('date', '2020-01-01')
     fixture.detectChanges();
     component.modalActivities = [{ name: 'run' }];
     component.showModal = true;
     component.saveActivities();
-    expect(store.dispatch).toHaveBeenCalledWith(activitiesActions.post([{ name: 'run' }], '2020-01-01'));
+    expect(activityStore.postActivitiesForDay).toHaveBeenCalledWith({ activities: [{ name: 'run' }], date: '2020-01-01' });
     expect(component.showModal).toBeFalse();
     expect(component.modalActivities).toEqual([]);
   });

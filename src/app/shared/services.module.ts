@@ -8,12 +8,14 @@ import { ToastService } from './services/toast.service';
 import { UserService } from './services/user.service';
 import { WebhookService } from './services/webhook.service';
 import { WeightService } from './services/weight.service';
+import { ActivityService } from './services/activity.service';
 
 @NgModule({
   imports: [
     CommonModule
   ], 
   providers: [
+    ActivityService,
     AdminService,
     EntryService,
     UserService,

@@ -12,22 +12,20 @@ import { EntryService } from "../services/entry.service";
 import { computed, inject } from "@angular/core";
 import { tapResponse } from "@ngrx/operators";
 import { Entry } from "../model/entry";
-import { formatDate } from "@angular/common";
 import { Macros } from "../model/macros";
 import { Meal } from "../model/meal";
+import { DateStore } from "./date.store";
 
-interface EntriesPerDay {
+export interface EntriesPerDay {
   date: string;
   entries: Entry[];
 }
 
 interface EntriesState {
-  displayDate: string;
   entriesPerDay: EntriesPerDay[];
 }
 
 const initialState: EntriesState = {
-  displayDate: formatDate(new Date(), "yyyy-MM-dd", "en-US"),
   entriesPerDay: [],
 };
 
@@ -35,6 +33,7 @@ export const EntryStore = signalStore(
   { providedIn: "root" },
   withState(initialState),
   withProps(() => ({
+    dateStore: inject(DateStore),
     entryService: inject(EntryService),
   })),
   withComputed((store) => ({
@@ -47,7 +46,7 @@ export const EntryStore = signalStore(
       };
       const entriesForDay = store
         .entriesPerDay()
-        .filter((epd) => epd.date === store.displayDate())[0];
+        .filter((epd) => epd.date === store.dateStore.displayDate())[0];
       if (entriesForDay) {
         for (const entry of entriesForDay.entries) {
           totals.protein += entry.macrosCalculated.protein;
@@ -71,9 +70,6 @@ export const EntryStore = signalStore(
     },
   })),
   withMethods((store) => ({
-    setDisplayDate(displayDate: string) {
-      patchState(store, { displayDate });
-    },
     getEntriesForDay: rxMethod<string>(
       pipe(
         concatMap((date: string) => {
