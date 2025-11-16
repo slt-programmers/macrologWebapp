@@ -1,5 +1,5 @@
 import { Component, OnInit, inject } from '@angular/core';
-import { DiaryService } from '../../../shared/services/diary.service';
+import { EntryService } from '../../../shared/services/entry.service';
 import { UserService } from '../../../shared/services/user.service';
 import { DataPoint } from 'src/app/shared/components/linegraph/linegraph.component';
 import { MacrosPerDay } from 'src/app/shared/model/macrosPerDay';
@@ -16,7 +16,7 @@ import { BargraphComponent } from '../../../shared/components/bargraph/bargraph.
     imports: [FormsModule, BargraphComponent, DatePipe]
 })
 export class GraphsComponent implements OnInit {
-  private logService = inject(DiaryService);
+  private logService = inject(EntryService);
   private userService = inject(UserService);
 
 

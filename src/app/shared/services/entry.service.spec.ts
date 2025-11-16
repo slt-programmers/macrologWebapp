@@ -4,18 +4,18 @@ import { MockProvider } from 'ng-mocks';
 import { of } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { MacrosPerDay } from '../model/macrosPerDay';
-import { DiaryService } from './diary.service';
+import { EntryService } from './entry.service';
 
-describe('DiaryService', () => {
-  let service: DiaryService;
+describe('EntryService', () => {
+  let service: EntryService;
   let http: HttpClient;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [DiaryService,
+      providers: [EntryService,
         MockProvider(HttpClient)],
     });
-    service = TestBed.inject(DiaryService);
+    service = TestBed.inject(EntryService);
     http = TestBed.inject(HttpClient);
   });
 

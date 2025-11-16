@@ -6,7 +6,7 @@ import { StackDonutComponent } from "src/app/shared/components/stackdonut/stackd
 import { UserService } from "src/app/shared/services/user.service";
 import { DiaryPageComponent } from "./diary-page/diary-page.component";
 import { DiaryComponent } from "./diary.component";
-import { EntriesStore } from "src/app/shared/store/entries.store";
+import { EntryStore } from "src/app/shared/store/entries.store";
 import { signal } from "@angular/core";
 
 describe("DiaryComponent", () => {
@@ -25,7 +25,7 @@ describe("DiaryComponent", () => {
 			],
 			providers: [
 				MockProvider(UserService),
-				MockProvider(EntriesStore, {
+				MockProvider(EntryStore, {
 					totalsForDay: signal({ protein: 0, fat: 0, carbs: 0, calories: 0 }),
 					setDisplayDate: () => {},
 					getEntriesForDay: () => {},
@@ -34,7 +34,7 @@ describe("DiaryComponent", () => {
 		}).compileComponents();
 
 		userService = TestBed.inject(UserService);
-		entriesStore = TestBed.inject(EntriesStore);
+		entriesStore = TestBed.inject(EntryStore);
 		fixture = TestBed.createComponent(DiaryComponent);
 		component = fixture.componentInstance;
 	});

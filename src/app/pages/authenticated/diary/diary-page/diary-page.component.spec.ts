@@ -4,7 +4,7 @@ import { ActivityPageRowComponent } from "../activity-page-row/activity-page-row
 import { EntryPageRowComponent } from "../entry-page-row/entry-page-row.component";
 
 import { signal } from "@angular/core";
-import { EntriesStore } from "src/app/shared/store/entries.store";
+import { EntryStore } from "src/app/shared/store/entries.store";
 import { DiaryPageComponent } from "./diary-page.component";
 import { provideMockStore } from "@ngrx/store/testing";
 
@@ -21,7 +21,7 @@ describe("DiaryPageComponent", () => {
 			],
 			providers: [
 				provideMockStore({}),
-				MockProvider(EntriesStore, {
+				MockProvider(EntryStore, {
 					getEntriesForDay: () => {},
 					totalsForDay: signal({ protein: 0, fat: 0, carbs: 0, calories: 0 }),
 					entriesPerDay: signal([

@@ -7,7 +7,7 @@ import { MacrosPerDay } from "../model/macrosPerDay";
 import { Meal } from "../model/meal";
 
 @Injectable()
-export class DiaryService {
+export class EntryService {
 	private readonly http = inject(HttpClient);
 	private readonly macrologBackendUrl = "//" + environment.backend + "/logs";
 
@@ -24,7 +24,7 @@ export class DiaryService {
 		});
 	}
 
-	postMacrosPerDayPerMeal(entries: Entry[], date: string, meal: Meal) {
+	postEntriesPerDayPerMeal(entries: Entry[], date: string, meal: Meal) {
 		return this.http.post<Entry[]>(
 			this.macrologBackendUrl + "/day/" + date + "/" + meal,
 			entries

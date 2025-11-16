@@ -4,7 +4,7 @@ import { FormsModule } from "@angular/forms";
 import { Entry } from "src/app/shared/model/entry";
 import { Meal } from "src/app/shared/model/meal";
 import { Portion } from "src/app/shared/model/portion";
-import { EntriesStore } from "src/app/shared/store/entries.store";
+import { EntryStore } from "src/app/shared/store/entries.store";
 import { clone } from "src/app/util/functions";
 import { AutocompleteFoodComponent } from "../../../../shared/components/autocomplete-food/autocomplete-food.component";
 import { ModalComponent } from "../../../../shared/components/modal/modal.component";
@@ -22,7 +22,7 @@ import { ModalComponent } from "../../../../shared/components/modal/modal.compon
 	],
 })
 export class EntryPageRowComponent {
-	private readonly entriesStore = inject(EntriesStore);
+	private readonly entriesStore = inject(EntryStore);
 
 	private entriesPerDay = this.entriesStore.entriesPerDay;
 	readonly meal = input.required<Meal>();
