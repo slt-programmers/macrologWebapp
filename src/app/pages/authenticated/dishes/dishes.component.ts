@@ -1,10 +1,7 @@
-import { Component, OnDestroy, OnInit, inject } from "@angular/core";
+import { Component, OnInit, inject } from "@angular/core";
 import { FormsModule } from "@angular/forms";
-import { Store } from "@ngrx/store";
-import { Subscription } from "rxjs";
 import { Portion } from "src/app/shared/model/portion";
-import { dishesActions } from "src/app/shared/store/actions/dishes.actions";
-import { selectAllDishes } from "src/app/shared/store/selectors/dishes.selectors";
+import { DishStore } from "src/app/shared/store/dish.store";
 import { clone } from "src/app/util/functions";
 import { PiechartComponent } from "../../../shared/components/piechart/piechart.component";
 import { Dish } from "../../../shared/model/dish";
@@ -16,20 +13,16 @@ import { EditDishComponent } from "./edit-dish/edit-dish.component";
 	templateUrl: "./dishes.component.html",
 	imports: [PiechartComponent, EditDishComponent, FormsModule],
 })
-export class DishesComponent implements OnInit, OnDestroy {
-	private readonly store = inject(Store);
+export class DishesComponent implements OnInit {
+	private readonly dishStore = inject(DishStore);
 
-	allDishes: Dish[] = [];
+	allDishes = this.dishStore.dishes;
 	selectedDish?: Dish;
 	modalIsVisible = false;
 
-	private subscription?: Subscription;
-
 	ngOnInit() {
-		this.store.dispatch(dishesActions.get());
-		this.subscription = this.store.select(selectAllDishes).subscribe((it) => {
-			this.allDishes = it;
-		});
+		// TODO move to init store
+		this.dishStore.getDishes();
 	}
 
 	openModal(dish: Dish | null): void {
@@ -72,11 +65,5 @@ export class DishesComponent implements OnInit, OnDestroy {
 			}
 		}
 		return {} as Portion;
-	}
-
-	ngOnDestroy(): void {
-		if (this.subscription) {
-			this.subscription.unsubscribe();
-		}
 	}
 }

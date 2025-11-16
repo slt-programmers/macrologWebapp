@@ -1,12 +1,11 @@
 import { Component, inject, input, OnInit, output } from "@angular/core";
 import { FormsModule } from "@angular/forms";
-import { Store } from "@ngrx/store";
 import { AutocompleteFoodComponent } from "src/app/shared/components/autocomplete-food/autocomplete-food.component";
 import { ModalComponent } from "src/app/shared/components/modal/modal.component";
 import { Dish } from "src/app/shared/model/dish";
 import { FoodSearchable } from "src/app/shared/model/foodSearchable";
 import { Ingredient } from "src/app/shared/model/ingredient";
-import { dishesActions } from "src/app/shared/store/actions/dishes.actions";
+import { DishStore } from "src/app/shared/store/dish.store";
 
 @Component({
 	selector: "ml-edit-dish",
@@ -15,7 +14,7 @@ import { dishesActions } from "src/app/shared/store/actions/dishes.actions";
 	styleUrl: "./edit-dish.component.css",
 })
 export class EditDishComponent implements OnInit {
-	private readonly store = inject(Store);
+	private readonly dishStore = inject(DishStore);
 	readonly selectedDish = input.required<Dish>();
 	readonly close$ = output<boolean>();
 
@@ -81,12 +80,12 @@ export class EditDishComponent implements OnInit {
 	}
 
 	saveDish(): void {
-		this.store.dispatch(dishesActions.post(this.selectedDish()));
+		this.dishStore.postDish(this.selectedDish());
 		this.close$.emit(false);
 	}
 
 	deleteDish(): void {
-		this.store.dispatch(dishesActions.delete(this.selectedDish().id));
+		this.dishStore.deleteDish(this.selectedDish().id!);
 		this.close$.emit(false);
 	}
 }

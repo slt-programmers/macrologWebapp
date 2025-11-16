@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from "@angular/core/testing";
-
+import { MockProvider } from "ng-mocks";
+import { DishStore } from "src/app/shared/store/dish.store";
 import { EditDishComponent } from "./edit-dish.component";
-import { provideMockStore } from "@ngrx/store/testing";
 
 describe("EditDish", () => {
 	let component: EditDishComponent;
@@ -10,11 +10,11 @@ describe("EditDish", () => {
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
 			imports: [EditDishComponent],
-			providers: [provideMockStore({})],
+			providers: [MockProvider(DishStore)],
 		}).compileComponents();
 
 		fixture = TestBed.createComponent(EditDishComponent);
-    fixture.componentRef.setInput('selectedDish', {ingredients: []})
+		fixture.componentRef.setInput("selectedDish", { ingredients: [] });
 		component = fixture.componentInstance;
 		fixture.detectChanges();
 	});

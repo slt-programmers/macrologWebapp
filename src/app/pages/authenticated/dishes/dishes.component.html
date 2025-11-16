@@ -1,10 +1,10 @@
-@if (allDishes.length === 0) {
+@if (allDishes().length === 0) {
 <div class="card">
 	<p>You havent created any dishes yet!</p>
 </div>
-} @if (allDishes.length !== 0) {
+} @else {
 <div class="flex justify-center gap-4">
-	@for (dish of allDishes; track dish) {
+	@for (dish of allDishes(); track dish) {
 	<div class="card flex flex-col gap-4" (click)="openModal(dish)">
 		<span class="font-bold">{{ dish.name }}</span>
 
