@@ -4,7 +4,7 @@ import { FormsModule } from "@angular/forms";
 import { Entry } from "src/app/shared/model/entry";
 import { Meal } from "src/app/shared/model/meal";
 import { Portion } from "src/app/shared/model/portion";
-import { EntryStore } from "src/app/shared/store/entries.store";
+import { EntryStore } from "src/app/shared/store/entry.store";
 import { clone } from "src/app/util/functions";
 import { AutocompleteFoodComponent } from "../../../../shared/components/autocomplete-food/autocomplete-food.component";
 import { ModalComponent } from "../../../../shared/components/modal/modal.component";
@@ -22,9 +22,9 @@ import { ModalComponent } from "../../../../shared/components/modal/modal.compon
 	],
 })
 export class EntryPageRowComponent {
-	private readonly entriesStore = inject(EntryStore);
+	private readonly entryStore = inject(EntryStore);
 
-	private entriesPerDay = this.entriesStore.entriesPerDay;
+	private entriesPerDay = this.entryStore.entriesPerDay;
 	readonly meal = input.required<Meal>();
 	readonly date = input.required<string>();
 
@@ -35,8 +35,8 @@ export class EntryPageRowComponent {
 	constructor() {
 		effect(() => {
 			if (this.entriesPerDay()) {
-				this.entries = this.entriesStore.filterMeal(
-					this.entriesStore.filterDay(this.entriesPerDay(), this.date()),
+				this.entries = this.entryStore.filterMeal(
+					this.entryStore.filterDay(this.entriesPerDay(), this.date()),
 					this.meal()
 				);
 			}
@@ -105,7 +105,7 @@ export class EntryPageRowComponent {
 			}
 		}
 		if (!missingInput) {
-			this.entriesStore.postEntriesForDayAndMeal({
+			this.entryStore.postEntriesForDayAndMeal({
 				entries: this.modalEntries,
 				date: this.date(),
 				meal: this.meal(),

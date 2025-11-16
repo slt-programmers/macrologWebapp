@@ -1,5 +1,5 @@
 import { TestBed } from "@angular/core/testing"
-import { EntryStore } from "./entries.store";
+import { EntryStore } from "./entry.store";
 import { EntryService } from "../services/entry.service";
 import { MockProvider } from "ng-mocks";
 import { of } from "rxjs";

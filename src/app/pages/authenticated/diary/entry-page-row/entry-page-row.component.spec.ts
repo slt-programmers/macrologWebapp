@@ -3,7 +3,7 @@ import { Entry } from "src/app/shared/model/entry";
 import { Meal } from "src/app/shared/model/meal";
 import { EntryPageRowComponent } from "./entry-page-row.component";
 import { MockProvider } from "ng-mocks";
-import { EntryStore } from "src/app/shared/store/entries.store";
+import { EntryStore } from "src/app/shared/store/entry.store";
 import { signal } from "@angular/core";
 
 describe("EntryPageRowComponent", () => {

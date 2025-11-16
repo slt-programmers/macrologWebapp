@@ -6,7 +6,7 @@ import { StackDonutComponent } from "src/app/shared/components/stackdonut/stackd
 import { UserService } from "src/app/shared/services/user.service";
 import { DiaryPageComponent } from "./diary-page/diary-page.component";
 import { DiaryComponent } from "./diary.component";
-import { EntryStore } from "src/app/shared/store/entries.store";
+import { EntryStore } from "src/app/shared/store/entry.store";
 import { signal } from "@angular/core";
 import { DateStore } from "src/app/shared/store/date.store";
 
@@ -14,7 +14,7 @@ describe("DiaryComponent", () => {
   let fixture: ComponentFixture<DiaryComponent>;
   let component: DiaryComponent;
   let userService: UserService;
-  let entriesStore: any;
+  let entryStore: any;
   let dateStore: any;
 
   beforeEach(() => {
@@ -38,7 +38,7 @@ describe("DiaryComponent", () => {
     }).compileComponents();
 
     userService = TestBed.inject(UserService);
-    entriesStore = TestBed.inject(EntryStore);
+    entryStore = TestBed.inject(EntryStore);
     dateStore = TestBed.inject(DateStore);
     fixture = TestBed.createComponent(DiaryComponent);
     component = fixture.componentInstance;

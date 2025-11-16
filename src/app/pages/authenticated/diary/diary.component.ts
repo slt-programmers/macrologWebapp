@@ -1,6 +1,6 @@
 import { DecimalPipe, formatDate } from "@angular/common";
 import { Component, OnInit, inject } from "@angular/core";
-import { EntryStore } from "src/app/shared/store/entries.store";
+import { EntryStore } from "src/app/shared/store/entry.store";
 import { DatepickerComponent } from "../../../shared/components/datepicker/datepicker.component";
 import { StackDonutComponent } from "../../../shared/components/stackdonut/stackdonut.component";
 import { UserService } from "../../../shared/services/user.service";
@@ -24,11 +24,11 @@ import { DateStore } from "src/app/shared/store/date.store";
 })
 export class DiaryComponent implements OnInit {
 	private readonly userService = inject(UserService);
-	private readonly entriesStore = inject(EntryStore);
+	private readonly entryStore = inject(EntryStore);
   private readonly dateStore = inject(DateStore);
 
 	date = formatDate(new Date(), "yyyy-MM-dd", "en-US")!;
-	totals = this.entriesStore.totalsForDay;
+	totals = this.entryStore.totalsForDay;
 
 	intakeGoals: any[] = [];
 	goalCal = 0;

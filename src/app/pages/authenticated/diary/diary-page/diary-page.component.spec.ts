@@ -4,7 +4,7 @@ import { ActivityPageRowComponent } from "../activity-page-row/activity-page-row
 import { EntryPageRowComponent } from "../entry-page-row/entry-page-row.component";
 
 import { signal } from "@angular/core";
-import { EntryStore } from "src/app/shared/store/entries.store";
+import { EntryStore } from "src/app/shared/store/entry.store";
 import { DiaryPageComponent } from "./diary-page.component";
 import { provideMockStore } from "@ngrx/store/testing";
 import { ActivityStore } from "src/app/shared/store/activity.store";
