@@ -23,6 +23,7 @@ interface AuthState {
 	isLoading: boolean;
 	isAuthenticated: boolean;
 	isAdmin: boolean;
+	token: string;
 	loginError: string;
 	registerError: string;
 	deleteError: string;
@@ -34,6 +35,7 @@ const initialState: AuthState = {
 	isLoading: false,
 	isAuthenticated: false,
 	isAdmin: false,
+	token: "",
 	loginError: "",
 	registerError: "",
 	deleteError: "",
@@ -70,6 +72,7 @@ export const AuthenticationStore = signalStore(
 										isLoading: false,
 										isAuthenticated: !!account.token,
 										isAdmin: account.admin,
+										token: account.token,
 									});
 									store.router.navigate(["dashboard"]);
 								},
@@ -127,6 +130,7 @@ export const AuthenticationStore = signalStore(
 										isLoading: false,
 										isAuthenticated: !!account.token,
 										isAdmin: account.admin,
+										token: account.token
 									});
 									store.router.navigate(["dashboard", "onboarding"]);
 								},
@@ -158,6 +162,7 @@ export const AuthenticationStore = signalStore(
 									isAuthenticated: false,
 									isAdmin: false,
 									isLoading: false,
+									token: "",
 									deleteError: "",
 								});
 								store.router.navigate(["/"]);
@@ -227,6 +232,7 @@ export const AuthenticationStore = signalStore(
 				isLoading: false,
 				isAuthenticated: false,
 				isAdmin: false,
+				token: "",
 				loginError: "",
 				registerError: "",
 			});
@@ -241,6 +247,7 @@ export const AuthenticationStore = signalStore(
 				patchState(store, {
 					isAuthenticated: true,
 					isAdmin: formattedUser.admin,
+					token: formattedUser.token,
 				});
 			}
 		},

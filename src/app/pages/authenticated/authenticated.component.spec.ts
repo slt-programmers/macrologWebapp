@@ -1,7 +1,6 @@
 import { signal } from "@angular/core";
 import { ComponentFixture, TestBed } from "@angular/core/testing";
 import { provideRouter, Router, RouterOutlet } from "@angular/router";
-import { provideMockStore } from "@ngrx/store/testing";
 import { MockComponent, MockProvider } from "ng-mocks";
 import { NavigationComponent } from "src/app/shared/components/navigation/navigation.component";
 import { AuthenticationStore } from "src/app/shared/store/auth.store";
@@ -25,7 +24,6 @@ describe("AuthenticatedComponent", () => {
 			],
 			providers: [
 				provideRouter([]),
-				provideMockStore(),
 				MockProvider(HealthcheckService),
 				MockProvider(ScrollBehaviourService),
 				MockProvider(AuthenticationStore, {
