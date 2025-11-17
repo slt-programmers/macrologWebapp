@@ -38,15 +38,12 @@ export const ActivityStore = signalStore(
         return store.activitesService.getActivitiesForDay(request.date, request.force).pipe(tapResponse({
           next: (response) => {
             const allActivitiesPerDay = store.activitiesPerDay();
-            console.log(allActivitiesPerDay)
             const activitiesOnDay = store._filterDay(allActivitiesPerDay, request.date);
-            console.log(activitiesOnDay)
             if (activitiesOnDay) {
               activitiesOnDay.activities = response;
             } else {
               allActivitiesPerDay.push({ date: request.date, activities: response });
             }
-            console.log(allActivitiesPerDay)
             patchState(store, { activitiesPerDay: [...allActivitiesPerDay] });
           },
           error: () => {

@@ -15,10 +15,12 @@ import { DishStore } from "src/app/shared/store/dish.store";
 })
 export class EditDishComponent implements OnInit {
 	private readonly dishStore = inject(DishStore);
+	
 	readonly selectedDish = input.required<Dish>();
 	readonly close$ = output<boolean>();
 
 	private unitGrams = 100.0;
+
 	readonly unitName = "grams";
 
 	title = "Add a dish";

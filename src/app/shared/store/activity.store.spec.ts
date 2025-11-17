@@ -75,8 +75,6 @@ describe("ActivityStore", () => {
 		const activity1 = getSimpleActivity();
 		const serviceSpy = spyOn(activityService, "postActivitiesForDay");
 		serviceSpy.and.returnValue(of([activity1]));
-		console.log();
-
 		store.postActivitiesForDay({ activities: [activity1], date: "2020-01-01" });
 		expect(activityService.postActivitiesForDay).toHaveBeenCalled();
 		let result = store.activitiesPerDay();

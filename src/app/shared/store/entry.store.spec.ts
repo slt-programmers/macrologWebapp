@@ -87,8 +87,6 @@ describe("EntryStore", () => {
     const entry1 = getSimpleEntry();
     const serviceSpy = spyOn(entryService, 'postEntriesPerDayPerMeal')
     serviceSpy.and.returnValue(of([entry1]));
-    console.log()
-
     store.postEntriesForDayAndMeal({ entries: [entry1], date: '2020-01-01', meal: Meal.Breakfast });
     expect(entryService.postEntriesPerDayPerMeal).toHaveBeenCalled();
     let result = store.entriesPerDay();

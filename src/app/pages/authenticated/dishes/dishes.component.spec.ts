@@ -4,6 +4,7 @@ import { Dish } from "src/app/shared/model/dish";
 import { Ingredient } from "src/app/shared/model/ingredient";
 import { DishStore } from "src/app/shared/store/dish.store";
 import { DishesComponent } from "./dishes.component";
+import { signal } from "@angular/core";
 
 describe("DishesComponent", () => {
 	let fixture: ComponentFixture<DishesComponent>;
@@ -12,7 +13,15 @@ describe("DishesComponent", () => {
 	beforeEach(() => {
 		TestBed.configureTestingModule({
 			imports: [DishesComponent],
-			providers: [MockProvider(DishStore)],
+			providers: [
+				MockProvider(DishStore, {
+					getDishes: () => {},
+					dishes: signal([
+						{ name: "dish1" } as unknown as Dish,
+						{ name: "dish2" } as unknown as Dish,
+					]),
+				}),
+			],
 		}).compileComponents();
 
 		fixture = TestBed.createComponent(DishesComponent);
@@ -25,7 +34,7 @@ describe("DishesComponent", () => {
 
 	it("should init component", () => {
 		component.ngOnInit();
-		expect(component.allDishes).toEqual([
+		expect(component.allDishes()).toEqual([
 			{ name: "dish1" } as unknown as Dish,
 			{ name: "dish2" } as unknown as Dish,
 		]);
@@ -65,7 +74,6 @@ describe("DishesComponent", () => {
 						carbs: 3,
 						portions: [{ id: 1, description: "desc", grams: 50 }],
 					},
-					portion: {},
 				},
 			],
 		});

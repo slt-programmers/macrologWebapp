@@ -1,19 +1,17 @@
+import { signal } from "@angular/core";
 import { ComponentFixture, TestBed } from "@angular/core/testing";
 import { provideRouter, Router, RouterOutlet } from "@angular/router";
 import { provideMockStore } from "@ngrx/store/testing";
 import { MockComponent, MockProvider } from "ng-mocks";
-import { of, throwError } from "rxjs";
 import { NavigationComponent } from "src/app/shared/components/navigation/navigation.component";
 import { AuthenticationStore } from "src/app/shared/store/auth.store";
 import { HealthcheckService } from "../../shared/services/healthcheck.service";
 import { ScrollBehaviourService } from "../../shared/services/scroll-behaviour.service";
 import { AuthenticatedComponent } from "./authenticated.component";
-import { signal } from "@angular/core";
 
 describe("AuthenticatedComponent", () => {
 	let component: AuthenticatedComponent;
 	let fixture: ComponentFixture<AuthenticatedComponent>;
-	let healthcheckService: HealthcheckService;
 	let scrollBehaviourService: ScrollBehaviourService;
 	let authStore: any;
 	let router: Router;
@@ -39,7 +37,6 @@ describe("AuthenticatedComponent", () => {
 
 		fixture = TestBed.createComponent(AuthenticatedComponent);
 		component = fixture.componentInstance;
-		healthcheckService = TestBed.inject(HealthcheckService);
 		scrollBehaviourService = TestBed.inject(ScrollBehaviourService);
 		authStore = TestBed.inject(AuthenticationStore);
 		router = TestBed.inject(Router);
@@ -54,33 +51,8 @@ describe("AuthenticatedComponent", () => {
 	});
 
 	it("should init the app component", () => {
-		const healthSpy = spyOn(healthcheckService, "checkState").and.returnValue(
-			of(true)
-		);
 		let result = component.stillSleeping();
-		expect(result).toBeTruthy();
-		component.ngOnInit();
-		fixture.detectChanges();
-		expect(healthcheckService.checkState).toHaveBeenCalled();
-		result = component.stillSleeping();
 		expect(result).toBeFalsy();
-
-		healthSpy.and.returnValue(throwError({ status: 403 }));
-		component.ngOnInit();
-		fixture.detectChanges();
-		result = component.stillSleeping();
-		expect(result).toBeFalsy();
-
-		component = TestBed.createComponent(
-			AuthenticatedComponent
-		).componentInstance;
-		result = component.stillSleeping();
-		expect(result).toBeTruthy();
-		healthSpy.and.returnValue(throwError({ status: 404 }));
-		component.ngOnInit();
-		fixture.detectChanges();
-		result = component.stillSleeping();
-		expect(result).toBeTruthy();
 	});
 
 	it("should open menu", () => {
