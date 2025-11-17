@@ -1,86 +1,58 @@
-import { Component, inject } from '@angular/core';
-import { AuthenticationService } from '../../../../shared/services/auth.service';
-import { ToastService } from '../../../../shared/services/toast.service';
-import { Router } from '@angular/router';
-import { FormsModule } from '@angular/forms';
-
-import { ModalComponent } from '../../../../shared/components/modal/modal.component';
+import { Component, inject } from "@angular/core";
+import {
+	FormControl,
+	FormGroup,
+	FormsModule,
+	ReactiveFormsModule,
+	Validators,
+} from "@angular/forms";
+import { AuthenticationStore } from "src/app/shared/store/auth.store";
+import { ModalComponent } from "../../../../shared/components/modal/modal.component";
+import { CustomValidators } from "src/app/util/validators";
+import { ChangePasswordRequest } from "src/app/shared/model/changePasswordRequest";
 
 @Component({
-  selector: 'ml-account',
-  templateUrl: './account.component.html',
-  imports: [FormsModule, ModalComponent]
+	selector: "ml-account",
+	templateUrl: "./account.component.html",
+	imports: [FormsModule, ReactiveFormsModule, ModalComponent],
 })
 export class AccountComponent {
-  private authService = inject(AuthenticationService);
-  private toastService = inject(ToastService);
-  private router = inject(Router);
+	private readonly authStore = inject(AuthenticationStore);
 
-  public message = '';
-  public oldPassword?: string;
-  public newPassword?: string;
-  public confirmPassword?: string;
-  public modalOpen = false;
-  public password?: string;
-  public errorMessage?: string;
+	form = new FormGroup(
+		{
+			oldPassword: new FormControl("", Validators.required),
+			newPassword: new FormControl("", Validators.required),
+			confirmPassword: new FormControl("", Validators.required),
+		},
+		{ validators: [CustomValidators.equals("newPassword", "confirmPassword")] }
+	);
 
-  public changePassword() {
-    this.message = '';
-    if (this.newPassword !== this.confirmPassword) {
-      this.message =
-        'The confirmation password does not match with the new password.';
-    } else  {
-      this.authService
-        .changePassword(
-          this.oldPassword!,
-          this.newPassword!,
-          this.confirmPassword!
-        )
-        .subscribe(
-          (data) => {
-            if (data.status === 200) {
-              this.toastService.setMessage('Your password has changed', false, 'Success!');
-              this.oldPassword = '';
-              this.newPassword = '';
-              this.confirmPassword = '';
-            }
-          },
-          (error) => {
-            if (
-              error.status === 400 &&
-              error.error === 'passwords do not match'
-            ) {
-              this.message =
-                'The confirmation password does not match with the new password.';
-            } else if (error.status === 401) {
-              this.message = 'Password invalid';
-            }
-          }
-        );
-    }
-  }
+	deleteError = this.authStore.deleteError;
+	message = this.authStore.changePasswordError;
 
-  public deleteAccount() {
-    if (this.password) {
-      this.authService.deleteAccount(this.password).subscribe(
-        () => {
-          localStorage.clear();
-          this.router.navigate(['/']);
-        },
-        (err) => {
-          if (err.status === 401) {
-            this.errorMessage = 'Password is incorrect';
-          }
-        }
-      );
-    }
-  }
+	modalOpen = false;
+	password?: string;
 
-  public openModal() {
-    this.modalOpen = true;
-  }
+	changePassword() {
+		this.form.markAllAsTouched();
+		if (this.form.valid) {
+			this.authStore.changePassword(this.form.value as ChangePasswordRequest);
+			this.form.reset();
+		}
+	}
 
-  public closeModal() {
-    this.modalOpen = false;
-  }
+	deleteAccount() {
+		if (this.password) {
+			this.authStore.deleteAccount(this.password);
+		}
+	}
+
+	openModal() {
+		this.modalOpen = true;
+	}
+
+	closeModal() {
+		this.modalOpen = false;
+	}
 }

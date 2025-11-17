@@ -13,28 +13,28 @@ import { FoodComponent } from "./food/food.component";
 import { GraphsComponent } from "./graphs/graphs.component";
 import { OnboardingComponent } from "./onboarding/onboarding.component";
 import { UserComponent } from "./user/user.component";
-import { EntryPageRowComponent } from './diary/entry-page-row/entry-page-row.component';
-import { ActivityPageRowComponent } from './diary/activity-page-row/activity-page-row.component';
+import { EntryPageRowComponent } from "./diary/entry-page-row/entry-page-row.component";
+import { ActivityPageRowComponent } from "./diary/activity-page-row/activity-page-row.component";
 
 @NgModule({
-    imports: [
-    CommonModule,
-    FormsModule,
-    ReactiveFormsModule,
-    AuthenticatedRoutingModule,
-    AuthenticatedComponent,
-    DiaryComponent,
-    UserComponent,
-    AdminComponent,
-    OnboardingComponent,
-    FoodComponent,
-    EditFoodComponent,
-    DishesComponent,
-    GraphsComponent,
-    DiaryPageComponent,
-    EntryPageRowComponent,
-    ActivityPageRowComponent,
-],
-    exports: []
+	imports: [
+		CommonModule,
+		FormsModule,
+		ReactiveFormsModule,
+		AuthenticatedRoutingModule,
+		AuthenticatedComponent,
+		DiaryComponent,
+		UserComponent,
+		AdminComponent,
+		OnboardingComponent,
+		FoodComponent,
+		EditFoodComponent,
+		DishesComponent,
+		GraphsComponent,
+		DiaryPageComponent,
+		EntryPageRowComponent,
+		ActivityPageRowComponent,
+	],
+	exports: [],
 })
-export class AuthenticatedModule { }
+export class AuthenticatedModule {}

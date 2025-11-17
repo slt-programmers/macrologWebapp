@@ -1,26 +1,26 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MockProvider } from 'ng-mocks';
 import { of } from 'rxjs';
-import { DiaryService } from 'src/app/shared/services/diary.service';
+import { EntryService } from 'src/app/shared/services/entry.service';
 import { UserService } from 'src/app/shared/services/user.service';
 import { GraphsComponent } from './graphs.component';
 
 describe('GraphsComponent', () => {
   let component: GraphsComponent;
   let fixture: ComponentFixture<GraphsComponent>;
-  let diaryService: DiaryService;
+  let diaryService: EntryService;
   let userService: UserService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [GraphsComponent],
       providers: [
-        MockProvider(DiaryService),
+        MockProvider(EntryService),
         MockProvider(UserService),
       ]
     }).compileComponents();
 
-    diaryService = TestBed.inject(DiaryService);
+    diaryService = TestBed.inject(EntryService);
     userService = TestBed.inject(UserService);
     fixture = TestBed.createComponent(GraphsComponent);
     component = fixture.componentInstance;

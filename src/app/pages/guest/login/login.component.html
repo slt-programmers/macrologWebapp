@@ -8,27 +8,25 @@
       <form [formGroup]="loginForm" class="flex flex-col gap-4">
         <div class="flex flex-col gap-1">
           <label for="usernameOrEmail"> Username or email </label>
-          <input id="username" type="text" formControlName="username" name="usernameOrEmail" />
+          <input id="usernameOrEmail" type="text" formControlName="usernameOrEmail" />
 
-          @if (loginForm.get('username')!.touched &&
-          loginForm.get('username')!.invalid) {
-          <p id="usernameRequired" class="error">Username is required</p>
+          @if (loginForm.get('usernameOrEmail')!.touched &&
+          loginForm.get('usernameOrEmail')!.invalid) {
+          <span class="text-error text-sm">Username is required</span>
           }
         </div>
 
         <div class="flex flex-col gap-1">
           <label for="password"> Password </label>
-          <input id="password" type="password" formControlName="password" (keyup.enter)="login()"
-            name="password" />
+          <input id="password" type="password" formControlName="password" />
 
-          @if (loginForm.get('password')!.touched &&
-          loginForm.get('password')!.invalid) {
-          <p id="passwordRequired" class="error">Password is required</p>
+          @if (loginForm.get('password')!.touched && loginForm.get('password')!.invalid) {
+          <span class="text-error text-sm">Password is required</span>
           }
         </div>
 
-        @if (loginError) {
-        <p id="loginError" class="error">{{loginError}}</p>
+        @if (loginError()) {
+        <span class="text-error text-sm">{{loginError()}}</span>
         }
 
         <a id="forgotLink" (click)="toggleForgotPwModal(true)">Forgot password?</a>
@@ -41,44 +39,38 @@
       <h1 class="text-lg font-bold">Register</h1>
 
       <form [formGroup]="registerForm" class="flex flex-col gap-4">
-
         <div class="flex flex-col gap-1">
           <label for="newUsername">Username</label>
-          <input id="usernameRegister" type="text" formControlName="username" name="newUsername" />
+          <input id="newUsername" type="text" formControlName="username" />
 
-          @if (registerForm.get('username')!.touched &&
-          registerForm.get('username')!.invalid) {
-          <p id="usernameRegisterRequired" class="error">Username is required</p>
+          @if (registerForm.get('username')!.touched && registerForm.get('username')!.invalid) {
+          <span class="text-error text-sm">Username is required</span>
           }
         </div>
 
         <div class="flex flex-col gap-1">
           <label for="newEmal">Email</label>
-          <input id="email" type="email" formControlName="email" name="newEmail" />
+          <input id="newEmail" type="email" formControlName="email" />
 
-          @if (registerForm.get('email')!.touched &&
-          registerForm.get('email')!.invalid) {
-          <p id="emailRequired" class="error">Email is required</p>
+          @if (registerForm.get('email')!.touched && registerForm.get('email')!.invalid) {
+          <span class="text-error text-sm">Email is required</span>
           }
         </div>
 
         <div class="flex flex-col gap-1">
           <label for="newPassword">Password</label>
-          <input id="passwordRegister" type="password" formControlName="password" name="newPassword"
-            (keyup.enter)="register()" />
+          <input id="newPassword" type="password" formControlName="password" />
 
-          @if (registerForm.get('password')!.touched &&
-          registerForm.get('password')!.invalid) {
-          <p id="passwordRegisterRequired" class="error">Password is required</p>
+          @if (registerForm.get('password')!.touched && registerForm.get('password')!.invalid) {
+          <span class="text-error text-sm">Password is required</span>
           }
         </div>
 
-        @if (registerError) {
-        <p id="registerError" class="error">{{registerError}}</p>
+        @if (registerError()) {
+        <span class="text-error text-sm">{{registerError()}}</span>
         }
 
-        <button id="registerButton" class="btn btn--primary" (click)="register()">Register
-        </button>
+        <button class="btn btn--primary" (click)="register()">Register </button>
       </form>
     </div>
   </div>
@@ -91,11 +83,12 @@
 
     <div class="flex items-center gap-4">
       <label for="forgotEmail">Email</label>
-      <input class="flex-grow" type="email" #forgotEmailField [(ngModel)]="forgotEmail" name="forgotEmail" />
+      <input class="flex-grow" type="email" #forgotEmailField [(ngModel)]="forgotEmail"
+        name="forgotEmail" />
     </div>
 
-    @if (forgotError) {
-    <p class="error">{{forgotError}}</p>
+    @if (forgotEmailError()) {
+    <p class="error">{{forgotEmailError()}}</p>
     }
 
     <button id="resetBtn" class="align-self-end btn btn--primary" [disabled]="forgotForm.invalid"

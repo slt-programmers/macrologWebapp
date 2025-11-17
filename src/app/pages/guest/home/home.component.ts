@@ -7,6 +7,4 @@ import { NavigationComponent } from '../../../shared/components/navigation/navig
     styleUrls: ['./home.component.css'],
     imports: [NavigationComponent]
 })
-export class HomeComponent {
-
-}
+export class HomeComponent {}

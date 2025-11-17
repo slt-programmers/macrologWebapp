@@ -1,12 +1,11 @@
 import { Injectable, inject } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthenticationService } from '../../shared/services/auth.service';
+import { AuthenticationStore } from 'src/app/shared/store/auth.store';
 
 @Injectable()
 export class AuthGuard  {
-  auth = inject(AuthenticationService);
-  router = inject(Router);
-
+  private readonly auth = inject(AuthenticationStore);
+  private readonly router = inject(Router);
 
   canActivate(): boolean {
     if (!this.auth.isAuthenticated()) {

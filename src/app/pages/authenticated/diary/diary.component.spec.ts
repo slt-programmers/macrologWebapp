@@ -1,81 +1,55 @@
-import { ComponentFixture, TestBed } from "@angular/core/testing"
-import { MockStore, provideMockStore } from "@ngrx/store/testing"
-import { MockComponent, MockProvider } from "ng-mocks"
-import { of } from "rxjs"
-import { DatepickerComponent } from "src/app/shared/components/datepicker/datepicker.component"
-import { StackDonutComponent } from "src/app/shared/components/stackdonut/stackdonut.component"
-import { UserService } from "src/app/shared/services/user.service"
-import { DiaryPageComponent } from "./diary-page/diary-page.component"
-import { DiaryComponent } from "./diary.component"
+import { ComponentFixture, TestBed } from "@angular/core/testing";
+import { MockComponent, MockProvider } from "ng-mocks";
+import { of } from "rxjs";
+import { DatepickerComponent } from "src/app/shared/components/datepicker/datepicker.component";
+import { StackDonutComponent } from "src/app/shared/components/stackdonut/stackdonut.component";
+import { UserService } from "src/app/shared/services/user.service";
+import { DiaryPageComponent } from "./diary-page/diary-page.component";
+import { DiaryComponent } from "./diary.component";
+import { EntryStore } from "src/app/shared/store/entry.store";
+import { signal } from "@angular/core";
+import { DateStore } from "src/app/shared/store/date.store";
 
-class MockWindow {
-  private _innerWidth = 0;
-
-  get innerWidth() {
-    return this._innerWidth;
-  }
-  set innerWidth(width: number) {
-    this._innerWidth = width;
-  }
-}
-
-describe('DiaryComponent', () => {
+describe("DiaryComponent", () => {
   let fixture: ComponentFixture<DiaryComponent>;
   let component: DiaryComponent;
   let userService: UserService;
-  let window: Window;
-  let store: MockStore;
+  let dateStore: any;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [DiaryComponent,
-        DatepickerComponent,
+      imports: [
+        DiaryComponent,
+        MockComponent(DatepickerComponent),
         MockComponent(StackDonutComponent),
-        MockComponent(DiaryPageComponent)],
+        MockComponent(DiaryPageComponent),
+      ],
       providers: [
         MockProvider(UserService),
-        provideMockStore({}),
-        MockProvider(MockWindow),
-        { provide: Window, useValue: new MockWindow() }
-      ]
+        MockProvider(EntryStore, {
+          totalsForDay: signal({ protein: 0, fat: 0, carbs: 0, calories: 0 }),
+          getEntriesForDay: () => { },
+        }),
+        MockProvider(DateStore, {
+          setDisplayDate: () => { },
+        })
+      ],
     }).compileComponents();
 
     userService = TestBed.inject(UserService);
-    window = TestBed.inject(Window);
-    store = TestBed.inject(MockStore);
+    dateStore = TestBed.inject(DateStore);
     fixture = TestBed.createComponent(DiaryComponent);
     component = fixture.componentInstance;
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 
-  it('should init component', async () => {
-    spyOn(userService, 'getUserGoalStats').and.returnValue(of([]));
-    spyOnProperty(window, 'innerWidth', 'get').and.returnValue(123);
-
-    fixture.detectChanges();
-    component.ngOnInit();
-    expect(userService.getUserGoalStats).toHaveBeenCalled();
+  it("should change date", () => {
+    spyOn(userService, "getUserGoalStats").and.returnValue(of([]));
+    spyOn(dateStore, "setDisplayDate");
+    component.changeDate("2022-01-01");
+    expect(component.date).toEqual("2022-01-01");
   });
-
-  it('should init component with large window', async () => {
-    spyOn(userService, 'getUserGoalStats').and.returnValue(of([]));
-    spyOnProperty(window, 'innerWidth', 'get').and.returnValue(500);
-
-    fixture.detectChanges();
-    component.ngOnInit();
-    expect(userService.getUserGoalStats).toHaveBeenCalled();
-  });
-
-  it('should change date', () => {
-    spyOn(userService, 'getUserGoalStats').and.returnValue(of([]));
-    spyOnProperty(window, 'innerWidth', 'get').and.returnValue(500);
-    spyOn(store, 'select').and.returnValue(of({}));
-    component.changeDate('2022-01-01');
-    expect(component.date).toEqual('2022-01-01');
-    expect(component.totals$).toBeDefined();
-  });
-
 });

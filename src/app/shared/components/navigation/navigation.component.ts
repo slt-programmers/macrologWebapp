@@ -1,6 +1,6 @@
 import { Component, inject } from "@angular/core";
 import { Router, RouterLink } from "@angular/router";
-import { AuthenticationService } from "../../services/auth.service";
+import { AuthenticationStore } from "../../store/auth.store";
 
 @Component({
 	selector: "ml-navigation",
@@ -9,9 +9,11 @@ import { AuthenticationService } from "../../services/auth.service";
 	imports: [RouterLink],
 })
 export class NavigationComponent {
-	private readonly authService = inject(AuthenticationService);
+	private readonly authStore = inject(AuthenticationStore);
 	private readonly router = inject(Router);
 
+	isLoggedIn = this.authStore.isAuthenticated;
+	isAdmin = this.authStore.isAdmin;
 	menuOpen = false;
 
 	toggleMenu(): void {
@@ -19,15 +21,7 @@ export class NavigationComponent {
 	}
 
 	logOut(): void {
-		this.authService.logout();
+		this.authStore.logout();
 		this.router.navigate([""]);
-	}
-
-	isLoggedIn(): boolean {
-		return this.authService.isAuthenticated();
-	}
-
-	isAdmin(): boolean {
-		return this.authService.isAdmin();
 	}
 }

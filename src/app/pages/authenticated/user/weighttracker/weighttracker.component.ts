@@ -6,6 +6,7 @@ import { DataPoint } from 'src/app/shared/components/linegraph/linegraph.compone
 import { NgForm, FormsModule } from '@angular/forms';
 import { format, isAfter, isBefore, parse } from 'date-fns';
 import { LinegraphComponent } from '../../../../shared/components/linegraph/linegraph.component';
+import { take } from 'rxjs';
 
 @Component({
   selector: 'ml-weighttracker',
@@ -32,7 +33,7 @@ export class WeightTrackerComponent implements OnInit {
   }
 
   private getAllWeights() {
-    this.weightService.getAllWeights().subscribe(it => {
+    this.weightService.getAllWeights().pipe(take(1)).subscribe(it => {
       this.trackedWeights = it;
       this.trackedWeights.sort((a, b) => {
         if (a.day && b.day) {
@@ -142,7 +143,7 @@ export class WeightTrackerComponent implements OnInit {
   }
 
   public deleteWeight(weight: Weight) {
-    this.weightService.deleteWeight(weight).subscribe(() => {
+    this.weightService.deleteWeight(weight).pipe(take(1)).subscribe(() => {
       this.getAllWeights();
       this.openWeight = undefined;
     });
@@ -157,7 +158,7 @@ export class WeightTrackerComponent implements OnInit {
     newRequest.day = this.pipe.transform(date, 'yyyy-MM-dd') || undefined;
     newRequest.remark = weight.remark;
 
-    this.weightService.addWeight(newRequest).subscribe(() => {
+    this.weightService.addWeight(newRequest).pipe(take(1)).subscribe(() => {
       this.getAllWeights();
       this.openWeight = undefined;
     });
