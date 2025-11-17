@@ -2,7 +2,7 @@ import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
 
 export const userRoutes: Routes = [
-  { path: '', redirectTo: 'personal' },
+  { path: '', redirectTo: 'personal', pathMatch: 'full' },
   { path: 'personal', loadComponent: () => import('./personal/personal.component').then(m => m.PersonalComponent) },
   { path: 'foodintake', loadComponent: () => import('./intake/intake.component').then(m => m.IntakeComponent) },
   { path: 'weighttracker', loadComponent: () => import('./weighttracker/weighttracker.component').then(m => m.WeightTrackerComponent) },
