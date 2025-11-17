@@ -1,10 +1,9 @@
 import { TestBed } from "@angular/core/testing";
-import { DishStore } from "./dish.store";
 import { MockProvider } from "ng-mocks";
-import { HttpClient } from "@angular/common/http";
-import { DishService } from "../services/dish.service";
 import { of } from "rxjs";
 import { Dish } from "../model/dish";
+import { DishService } from "../services/dish.service";
+import { DishStore } from "./dish.store";
 
 describe("DishStore", () => {
 	let store: any;
@@ -16,15 +15,26 @@ describe("DishStore", () => {
 		});
 
 		service = TestBed.inject(DishService);
-		store = TestBed.inject(DishStore);
 	});
 
 	it("should get dishes", () => {
 		spyOn(service, "getDishes").and.returnValue(of([getSimpleDish()]));
-    store.getDishes();
-    const result = store.dishes();
-    expect(result).toEqual([getSimpleDish()]);
+		store = TestBed.inject(DishStore);
+
+		store.getDishes();
+		const result = store.dishes();
+		expect(result).toEqual([getSimpleDish()]);
 	});
+
+	it('should post dish', () => {
+		spyOn(service, "getDishes").and.returnValue(of([getSimpleDish()]));
+		spyOn(service, 'postDish').and.returnValue(of(undefined));
+		store = TestBed.inject(DishStore);
+		const dish = getSimpleDish();
+		dish.name = 'newdish'
+		store.postDish(dish);
+		expect(service.postDish).toHaveBeenCalledOnceWith(dish)
+	})
 });
 
 function getSimpleDish(): Dish {

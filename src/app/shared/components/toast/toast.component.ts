@@ -12,7 +12,6 @@ import { ToastService } from '../../services/toast.service';
 export class ToastComponent {
   private toastService = inject(ToastService);
 
-
   public toasts: Toast[] = [];
 
   constructor() {

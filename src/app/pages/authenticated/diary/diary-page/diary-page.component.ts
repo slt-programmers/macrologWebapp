@@ -31,9 +31,6 @@ export class DiaryPageComponent {
       // TODO move to oninit in store
       this.entryStore.getEntriesForDay(date);
       this.activityStore.getActivitiesForDay({date, force: false})
-      // this.store.dispatch(
-      // 	activitiesActions.get(false, { date: date, sync: false })
-      // );
     });
   }
 }

@@ -1,11 +1,12 @@
 import { inject } from "@angular/core";
 import { tapResponse } from "@ngrx/operators";
 import {
-  patchState,
-  signalStore,
-  withMethods,
-  withProps,
-  withState,
+	patchState,
+	signalStore,
+	withHooks,
+	withMethods,
+	withProps,
+	withState,
 } from "@ngrx/signals";
 import { rxMethod } from "@ngrx/signals/rxjs-interop";
 import { concatMap, pipe } from "rxjs";
@@ -68,5 +69,10 @@ export const DishStore = signalStore(
 				})
 			)
 		),
-	}))
+	})),
+	withHooks({
+		onInit(store) {
+			store.getDishes();
+		},
+	})
 );

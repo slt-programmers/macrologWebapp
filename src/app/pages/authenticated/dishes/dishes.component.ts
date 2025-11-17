@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from "@angular/core";
+import { Component, inject } from "@angular/core";
 import { FormsModule } from "@angular/forms";
 import { Portion } from "src/app/shared/model/portion";
 import { DishStore } from "src/app/shared/store/dish.store";
@@ -13,17 +13,12 @@ import { EditDishComponent } from "./edit-dish/edit-dish.component";
 	templateUrl: "./dishes.component.html",
 	imports: [PiechartComponent, EditDishComponent, FormsModule],
 })
-export class DishesComponent implements OnInit {
+export class DishesComponent {
 	private readonly dishStore = inject(DishStore);
 
 	allDishes = this.dishStore.dishes;
 	selectedDish?: Dish;
 	modalIsVisible = false;
-
-	ngOnInit() {
-		// TODO move to init store
-		this.dishStore.getDishes();
-	}
 
 	openModal(dish: Dish | null): void {
 		if (dish) {

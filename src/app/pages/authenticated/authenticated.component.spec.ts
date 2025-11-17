@@ -51,7 +51,7 @@ describe("AuthenticatedComponent", () => {
 	});
 
 	it("should init the app component", () => {
-		let result = component.stillSleeping();
+		const result = component.stillSleeping();
 		expect(result).toBeFalsy();
 	});
 

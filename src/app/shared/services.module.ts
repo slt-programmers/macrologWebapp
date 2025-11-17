@@ -10,6 +10,7 @@ import { WebhookService } from './services/webhook.service';
 import { WeightService } from './services/weight.service';
 import { ActivityService } from './services/activity.service';
 import { DishService } from './services/dish.service';
+import { FoodService } from './services/food.service';
 
 @NgModule({
   imports: [
@@ -20,6 +21,7 @@ import { DishService } from './services/dish.service';
     AdminService,
     DishService,
     EntryService,
+    FoodService,
     UserService,
     ToastService,
     WeightService,

@@ -32,14 +32,6 @@ describe("DishesComponent", () => {
 		expect(component).toBeTruthy();
 	});
 
-	it("should init component", () => {
-		component.ngOnInit();
-		expect(component.allDishes()).toEqual([
-			{ name: "dish1" } as unknown as Dish,
-			{ name: "dish2" } as unknown as Dish,
-		]);
-	});
-
 	it("should open and close modal", () => {
 		component.openModal(null);
 		expect(component.modalIsVisible).toBeTrue();
