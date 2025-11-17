@@ -3,7 +3,7 @@
 	<p>You havent created any dishes yet!</p>
 </div>
 } @else {
-<div class="flex justify-center gap-4">
+<div class="flex justify-center gap-4 wrap">
 	@for (dish of allDishes(); track dish) {
 	<div class="card flex flex-col gap-4" (click)="openModal(dish)">
 		<span class="font-bold">{{ dish.name }}</span>
