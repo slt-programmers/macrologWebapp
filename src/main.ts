@@ -5,7 +5,6 @@ import {
 } from "@angular/common/http";
 import { enableProdMode, importProvidersFrom } from "@angular/core";
 import { BrowserModule, bootstrapApplication } from "@angular/platform-browser";
-import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 import { AppRoutingModule } from "./app/app-routing.module";
 import { AppComponent } from "./app/app.component";
 import { ErrorInterceptor } from "./app/shared/interceptors/error.interceptor";
@@ -23,7 +22,6 @@ bootstrapApplication(AppComponent, {
 			BrowserModule,
 			ServicesModule,
 			AppRoutingModule,
-			FontAwesomeModule
 		),
 		{ provide: Window, useValue: window },
 		{ provide: Document, useValue: document },

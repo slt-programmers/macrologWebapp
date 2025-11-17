@@ -3,7 +3,7 @@
     src="../assets/api_logo_pwrdBy_strava_stack_light.png" />
 
   @if (loading) {
-		<em class="fas fa-spinner"></em>
+		<ml-spinner />
   } @else {
   <div class="flex flex-col gap-4">
     @if (getStatus('STRAVA')) {

@@ -5,11 +5,12 @@ import { Portion } from "src/app/shared/model/portion";
 import { FoodStore } from "src/app/shared/store/food.store";
 import { Food } from "../../../shared/model/food";
 import { EditFoodComponent } from "./edit-food/edit-food.component";
+import { Spinner } from "src/app/shared/components/spinner/spinner";
 
 @Component({
 	selector: "ml-food",
 	templateUrl: "./food.component.html",
-	imports: [FormsModule, EditFoodComponent, DecimalPipe],
+	imports: [FormsModule, EditFoodComponent, DecimalPipe, Spinner],
 })
 export class FoodComponent {
 	private readonly foodStore = inject(FoodStore);
