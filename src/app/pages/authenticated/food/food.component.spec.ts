@@ -21,6 +21,7 @@ describe("FoodComponent", () => {
 						{ id: 3, name: "Something else", protein: 18, fat: 67, carbs: 43 },
 					]),
 					getFood: () => {},
+          loading: signal(false)
 				}),
 			],
 		}).compileComponents();

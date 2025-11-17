@@ -13,25 +13,28 @@ import { EditFoodComponent } from "./edit-food/edit-food.component";
 })
 export class FoodComponent {
 	private readonly foodStore = inject(FoodStore);
-
-	// Displayed on one page
-	public displayedFood: Food[] = [];
-	public modalIsVisible = false;
-	public currentPageIndex = 0;
-  
-	public selectedFood: Food | null = null; // input voor modal popup
-	public searchInput = "";
-	public currentSortHeader = "name";
-	public sortReverse = false;
-	public displayMode = "grams";
-  
-	public readonly itemsPerPage = 15;
-	public readonly unitName = "gram";
-	public readonly unitGrams = 100.0;
-
-	private allFood = this.foodStore.food;
+  private allFood = this.foodStore.food;
 	private percentageFood: Food[] = [];
 	private searchableFood: Food[] = [];
+
+  loading = this.foodStore.loading;
+
+	// Displayed on one page
+	displayedFood: Food[] = [];
+	modalIsVisible = false;
+	currentPageIndex = 0;
+  
+	selectedFood: Food | null = null; // input voor modal popup
+	searchInput = "";
+	currentSortHeader = "name";
+	sortReverse = false;
+	displayMode = "grams";
+  
+	readonly itemsPerPage = 15;
+	readonly unitName = "gram";
+	readonly unitGrams = 100.0;
+
+
 
 	constructor() {
 		effect(() => {
