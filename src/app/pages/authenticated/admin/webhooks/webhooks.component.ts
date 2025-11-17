@@ -10,9 +10,9 @@ import { WebhookService } from 'src/app/shared/services/webhook.service';
 })
 export class WebhooksComponent implements OnInit {
   private readonly webhookService = inject(WebhookService);
+  private allWebhooks: any[] = [];
 
-
-  public allWebhooks: any[] = [];
+  loading = true;
 
   ngOnInit() {
     this.retrieveStatus('STRAVA');
@@ -43,10 +43,10 @@ export class WebhooksComponent implements OnInit {
   }
 
   private retrieveStatus(connectedApp: string) {
-    // delete old one. Only strava now, so delete all :p
     this.allWebhooks = [];
     this.webhookService.getWebhookStatus(connectedApp).subscribe(it => {
       this.allWebhooks.push({ connectedApp: connectedApp, webhook: it });
+      this.loading = false;
     });
   }
 }
