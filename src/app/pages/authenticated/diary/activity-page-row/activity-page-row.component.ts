@@ -1,12 +1,9 @@
 import { DecimalPipe } from '@angular/common';
-import { Component, OnDestroy, OnInit, effect, inject, input } from '@angular/core';
+import { Component, OnInit, effect, inject, input } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Store } from '@ngrx/store';
-import { Subscription } from 'rxjs';
 import { Activity } from 'src/app/shared/model/activity';
 import { UserService } from 'src/app/shared/services/user.service';
-import { activitiesActions } from 'src/app/shared/store/actions/activities.actions';
-import { selectActivitiesDate, selectActivitiesLoading } from 'src/app/shared/store/selectors/activities.selectors';
+import { ActivityStore } from 'src/app/shared/store/activity.store';
 import { clone } from 'src/app/util/functions';
 import { ModalComponent } from '../../../../shared/components/modal/modal.component';
 
@@ -16,56 +13,47 @@ import { ModalComponent } from '../../../../shared/components/modal/modal.compon
   styleUrls: ['./activity-page-row.component.css'],
   imports: [ModalComponent, FormsModule, ReactiveFormsModule, DecimalPipe]
 })
-export class ActivityPageRowComponent implements OnInit, OnDestroy {
+export class ActivityPageRowComponent implements OnInit {
   private readonly userService = inject(UserService);
-  private readonly store = inject(Store);
+  private readonly activityStore = inject(ActivityStore);
   private readonly formBuilder = inject(FormBuilder);
 
   readonly date = input.required<string>();
 
-  public canSync = false;
+  private activitiesPerDay = this.activityStore.activitiesPerDay;
   public activities: Activity[] = [];
+
+  public canSync = false;
   public modalActivities: Activity[] = []
   public showModal = false;
-  public activityForm: FormGroup;
-
-  private loading = false;
-  private subscriptions: Subscription[] = [];
-  private loadingSubscription?: Subscription;
+  public activityForm: FormGroup = this.formBuilder.group({
+    name: ['', Validators.required],
+    calories: [undefined, Validators.required]
+  });
 
   constructor() {
-    this.activityForm = this.formBuilder.group({
-      name: ['', Validators.required],
-      calories: [undefined, Validators.required]
-    });
-
     effect(() => {
-      this.subscriptions.push(this.store.select(selectActivitiesDate(this.date())).subscribe(it => {
-        this.activities = clone(it)!;
-      }));
-    })
+      if (this.activitiesPerDay()) {
+        this.activities = this.activityStore.filterDay(this.activitiesPerDay(), this.date())
+      }
+    });
   }
 
   ngOnInit(): void {
     this.getSyncSettings();
-    this.loadingSubscription = this.store.select(selectActivitiesLoading).subscribe(it => {
-      this.loading = it;
-    });
   }
 
   syncActivities(): void {
-    this.store.dispatch(activitiesActions.get(true, { date: this.date(), sync: true }));
+    this.activityStore.getActivitiesForDay({ date: this.date(), force: true })
   }
 
   showSync(): boolean {
-    return this.canSync && !this.loading
+    return this.canSync
   }
 
   openModal() {
-    if (!this.loading) {
-      this.modalActivities = clone(this.activities)!;
-      this.showModal = true;
-    }
+    this.modalActivities = clone(this.activities)!;
+    this.showModal = true;
   }
 
   changeName(event: any, index: number): void {
@@ -90,18 +78,9 @@ export class ActivityPageRowComponent implements OnInit, OnDestroy {
   }
 
   saveActivities() {
-    this.store.dispatch(activitiesActions.post(this.modalActivities, this.date()));
+    this.activityStore.postActivitiesForDay({ activities: this.modalActivities, date: this.date() });
     this.showModal = false;
     this.modalActivities = [];
-  }
-
-  ngOnDestroy(): void {
-    for (const sub of this.subscriptions) {
-      sub.unsubscribe();
-    }
-    if (this.loadingSubscription) {
-      this.loadingSubscription.unsubscribe();
-    }
   }
 
   private getSyncSettings(): void {

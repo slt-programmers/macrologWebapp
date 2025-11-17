@@ -1,23 +1,19 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { HttpRequest, HttpHandler, HttpEvent, HttpInterceptor } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 import { Observable } from 'rxjs';
+import { AuthenticationStore } from '../store/auth.store';
 
 @Injectable()
 export class JwtInterceptor implements HttpInterceptor {
-  intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    // add authorization header with jwt token if available
-    const user = localStorage.getItem('currentUser');
-    let currentUser = null;
-    if (user) {
-      currentUser = JSON.parse(user);
-    }
+  private readonly authStore = inject(AuthenticationStore);
 
-    if (currentUser && currentUser.token) {
-      // Secured request
+  intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+    const token = this.authStore.token();
+    if (token) {
       request = request.clone({
         setHeaders: {
-          Authorization: `Bearer ${currentUser.token}`,
+          Authorization: `Bearer ${token}`,
           'Access-Control-Allow-Origin': environment.origin,
           'Access-Control-Allow-Methods': 'PUT, GET, POST, DELETE, OPTIONS',
           'Access-Control-Allow-Headers':
@@ -25,7 +21,6 @@ export class JwtInterceptor implements HttpInterceptor {
         },
       });
     } else {
-      // Not logged in request
       request = request.clone({
         setHeaders: {
           'Access-Control-Allow-Headers':

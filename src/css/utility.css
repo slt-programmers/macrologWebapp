@@ -85,36 +85,28 @@
   margin: 16px;
 }
 
-
 .p-1 {
   padding: 4px;
 }
-
 .p-2 {
   padding: 8px;
 }
-
 .p-3 {
   padding: 12px;
 }
-
 .p-4 {
   padding: 16px;
 }
 
-
 .text-sm {
   font-size: 0.8rem;
 }
-
 .text-md {
   font-size: 1rem;
 }
-
 .text-lg {
   font-size: 1.25rem;
 }
-
 .text-xl {
   font-size: 1.5rem;
 }
@@ -122,11 +114,9 @@
 .text-white {
   color: var(--white);
 }
-
 .text-primary {
   color: var(--primary);
 }
-
 .text-secondary {
   color: var(--secondary);
 }
@@ -137,7 +127,6 @@
 .font-semibold {
   font-weight: 600;
 }
-
 .font-bold,
 .strong {
   font-weight: 700;

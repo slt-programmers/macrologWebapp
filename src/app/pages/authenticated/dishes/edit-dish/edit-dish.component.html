@@ -1,0 +1,73 @@
+<ml-modal [title]="title" (close$)="close$.emit(false)">
+	<form #makeDishForm="ngForm" class="dish-form min-w-500">
+		<label for="dishName">Name</label>
+		<input
+			class="col-span-2"
+			[(ngModel)]="selectedDish().name"
+			type="text"
+			name="dishName"
+			id="dishName"
+			required
+		/>
+
+		@if (selectedDish().ingredients!.length > 0) {
+		<h1 class="font-semibold text-secondary col-start-1">Ingredients</h1>
+		} 
+		
+		@for (ingredient of selectedDish().ingredients!; track ingredient; let i = $index) {
+		<span class="col-start-1">{{ ingredient.food.name }}</span>
+
+		<select aria-label="portion" (change)="portionChange(ingredient, $event.target)">
+			<!-- 100 grams -->
+			<option>{{ unitName }}</option>
+			<!-- portion amount -->
+			@for (portion of ingredient.food.portions; track portion) {
+			<option
+				value="{{ portion.description }}"
+				[selected]="portion.id === ingredient.portion?.id"
+			>
+				{{ portion.description }}
+			</option>
+			}
+		</select>
+
+		<input
+			aria-label="amount"
+			name="ingrAmount"
+			type="number"
+			[value]="getValue(ingredient)"
+			(input)="calculateMultiplier($event, ingredient)"
+			step="{{ getStep(ingredient) }}"
+			min="0"
+		/>
+
+		<button class="btn btn--icon text--primary" (click)="removeIngredient(i)">
+			<em class="fas fa-trash"></em>
+		</button>
+		}
+
+		<h1 class="text-secondary font-semibold col-start-1 col-span-4">
+			Add ingredients
+		</h1>
+
+		<ml-autocomplete-food
+			class="col-start-1 col-span-4"
+			[placeholder]="'Search for food'"
+			(select$)="addIngredient($event)"
+		/>
+	</form>
+
+	<div class="flex justify-end gap-4">
+		@if (selectedDish()) {
+		<button type="button" class="btn btn--warning" (click)="deleteDish()">Delete</button>
+		}
+		<button
+			type="button"
+			class="btn btn--primary"
+			[disabled]="makeDishForm.invalid"
+			(click)="saveDish()"
+		>
+			Save
+		</button>
+	</div>
+</ml-modal>

@@ -1,13 +1,11 @@
+import { DecimalPipe, formatDate } from "@angular/common";
 import { Component, OnInit, inject } from "@angular/core";
-import { UserService } from "../../../shared/services/user.service";
-import { DatePipe, AsyncPipe, DecimalPipe } from "@angular/common";
-import { Store } from "@ngrx/store";
-import { selectTotalsForDate } from "src/app/shared/store/selectors/entries.selectors";
-import { Observable } from "rxjs";
-import { Macros } from "src/app/shared/model/macros";
-import { StackDonutComponent } from "../../../shared/components/stackdonut/stackdonut.component";
+import { EntryStore } from "src/app/shared/store/entry.store";
 import { DatepickerComponent } from "../../../shared/components/datepicker/datepicker.component";
+import { StackDonutComponent } from "../../../shared/components/stackdonut/stackdonut.component";
+import { UserService } from "../../../shared/services/user.service";
 import { DiaryPageComponent } from "./diary-page/diary-page.component";
+import { DateStore } from "src/app/shared/store/date.store";
 
 @Component({
 	selector: "ml-diary",
@@ -16,7 +14,6 @@ import { DiaryPageComponent } from "./diary-page/diary-page.component";
 		StackDonutComponent,
 		DatepickerComponent,
 		DiaryPageComponent,
-		AsyncPipe,
 		DecimalPipe,
 	],
 	styles: `:host { 
@@ -27,26 +24,23 @@ import { DiaryPageComponent } from "./diary-page/diary-page.component";
 })
 export class DiaryComponent implements OnInit {
 	private readonly userService = inject(UserService);
-	private readonly store = inject(Store);
-	private readonly window = inject(Window);
+	private readonly entryStore = inject(EntryStore);
+  private readonly dateStore = inject(DateStore);
 
-	private pipe = new DatePipe("en-US");
+	date = formatDate(new Date(), "yyyy-MM-dd", "en-US")!;
+	totals = this.entryStore.totalsForDay;
 
-	public date = this.pipe.transform(new Date(), "yyyy-MM-dd")!;
-	public totals$: Observable<Macros> = this.store.select(
-		selectTotalsForDate(this.date)
-	);
-	public intakeGoals: any[] = [];
-	public goalCal = 0;
+	intakeGoals: any[] = [];
+	goalCal = 0;
 
 	ngOnInit() {
 		this.getUserGoals(this.date);
 	}
 
-	public changeDate(event: any) {
+	changeDate(event: any) {
 		this.date = event;
 		this.getUserGoals(this.date);
-		this.totals$ = this.store.select(selectTotalsForDate(this.date));
+		this.dateStore.setDisplayDate(this.date);
 	}
 
 	private getUserGoals(date: string): void {
