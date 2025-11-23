@@ -13,6 +13,8 @@ describe('PeriodPicker', () => {
     .compileComponents();
 
     fixture = TestBed.createComponent(PeriodPicker);
+    fixture.componentRef.setInput('dateFrom', '2020-01-01');
+    fixture.componentRef.setInput('dateTo', '2020-02-01');
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -1,5 +1,5 @@
 import { DecimalPipe } from '@angular/common';
-import { Component, effect, inject, input } from '@angular/core';
+import { Component, effect, inject, input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faSyncAlt, faTrash } from '@fortawesome/free-solid-svg-icons';
@@ -15,7 +15,7 @@ import { ModalComponent } from '../../../../shared/components/modal/modal.compon
   styleUrls: ['./activity-page-row.component.css'],
   imports: [ModalComponent, FormsModule, ReactiveFormsModule, DecimalPipe, FontAwesomeModule]
 })
-export class ActivityPageRowComponent {
+export class ActivityPageRowComponent implements OnInit {
   faTrash = faTrash;
   faSyncAlt = faSyncAlt;
 
@@ -38,12 +38,15 @@ export class ActivityPageRowComponent {
   });
 
   constructor() {
-    this.getSyncSettings();
     effect(() => {
       if (this.activitiesPerDay()) {
         this.activities = this.activityStore.filterDay(this.activitiesPerDay(), this.date())
       }
     });
+  }
+
+  ngOnInit(): void {
+    this.getSyncSettings();
   }
 
   syncActivities(): void {

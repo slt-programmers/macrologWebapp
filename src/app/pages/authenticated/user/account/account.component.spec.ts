@@ -21,11 +21,9 @@ describe("AccountComponent", () => {
 					deleteAccount: () => {},
 				}),
 			],
-			schemas: [NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA],
 		}).compileComponents();
 
 		authStore = TestBed.inject(AuthenticationStore);
-
 		fixture = TestBed.createComponent(AccountComponent);
 		component = fixture.componentInstance;
 	});

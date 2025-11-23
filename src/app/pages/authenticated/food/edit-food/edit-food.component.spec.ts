@@ -4,6 +4,7 @@ import { MockComponent, MockProvider } from "ng-mocks";
 import { ModalComponent } from "src/app/shared/components/modal/modal.component";
 import { FoodStore } from "src/app/shared/store/food.store";
 import { EditFoodComponent } from "./edit-food.component";
+import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 
 describe("EditFoodComponent", () => {
 	let fixture: ComponentFixture<EditFoodComponent>;
@@ -15,6 +16,7 @@ describe("EditFoodComponent", () => {
 			imports: [
 				FormsModule,
 				ReactiveFormsModule,
+        FontAwesomeModule,
 				EditFoodComponent,
 				MockComponent(ModalComponent),
 			],
