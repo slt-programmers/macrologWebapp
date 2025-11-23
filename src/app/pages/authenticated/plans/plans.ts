@@ -4,8 +4,7 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'ml-plans',
   imports: [],
-  templateUrl: './plans.html',
-  styleUrl: './plans.css',
+  templateUrl: './plans.html'
 })
 export class Plans {
   private readonly router = inject(Router);

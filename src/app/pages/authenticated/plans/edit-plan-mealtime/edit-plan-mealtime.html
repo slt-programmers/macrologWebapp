@@ -1,0 +1,35 @@
+<button class="btn btn--icon align-self-start" [routerLink]="['/dashboard', 'plans', 1]">
+  <fa-icon [icon]="faChevronLeft" />
+  Back to plan
+</button>
+
+<div class="card flex flex-col gap-4">
+  <h1 class="strong">Monday - Breakfast</h1>
+
+  <ul>
+    @for(item of items; track $index) {
+    <li>
+      <div class="inline-flex gap-4">
+        <span> {{item.name}} </span>
+
+        @if(isDish(item)) {
+        <ul>
+          @for(ingredient of asDish(item).ingredients; track $index) {
+          <li>{{ingredient.food.name}}</li>
+          }
+        </ul>
+        }
+
+        <button class="btn btn--icon text--primary">
+          <fa-icon [icon]="faTrash" (click)="removeItem($index)" />
+        </button>
+      </div>
+    </li>
+    }
+  </ul>
+
+  <ml-autocomplete-food [includeDishes]="true" [placeholder]="'Search food or dishes...'"
+    (select)="selectItem($event)" />
+
+  <button type="button" class="btn btn--primary align-self-end">Save</button>
+</div>

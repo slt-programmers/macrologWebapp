@@ -24,7 +24,7 @@ export class AutocompleteFoodComponent {
 
 	readonly placeholder = input("");
 	readonly includeDishes = input(false);
-	readonly select$ = output<FoodSearchable>();
+	readonly select = output<FoodSearchable>();
 
 	public searchables: any[] = [];
 	public foodMatch: any[] = [];
@@ -67,7 +67,7 @@ export class AutocompleteFoodComponent {
 	public selectMatch(match: FoodSearchable) {
 		this.foodName = "";
 		this.showAutoComplete = false;
-		this.select$.emit(match);
+		this.select.emit(match);
 	}
 
 	public getDescription(foodSearchable: FoodSearchable): string {
