@@ -6,6 +6,7 @@
     <a id="menuDiary" [routerLink]="['/dashboard']">Diary</a>
     <a id="menuFood" [routerLink]="['/dashboard', 'food']">Food</a>
     <a id="menuDishes" [routerLink]="['/dashboard', 'dishes']">Dishes</a>
+    <a id="menuPlans" [routerLink]="['/dashboard', 'plans']">Plans</a>
     <a id="menuGraphs" [routerLink]="['/dashboard', 'graphs']">Graphs</a>
     }
 
@@ -27,6 +28,7 @@
       <a class="navbar__item" [routerLink]="['/dashboard']">Diary</a>
       <a class="navbar__item" [routerLink]="['/dashboard', 'food']">Food</a>
       <a class="navbar__item" [routerLink]="['/dashboard', 'dishes']">Dishes</a>
+      <a class="navbar__item" [routerLink]="['/dashboard', 'plans']">Plans</a>
       <a class="navbar__item" [routerLink]="['/dashboard', 'graphs']">Graphs</a>
       <a class="navbar__item" [routerLink]="['/dashboard', 'user']">Profile</a>
       @if (isAdmin()) {
