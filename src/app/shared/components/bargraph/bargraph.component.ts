@@ -2,6 +2,7 @@ import { NgClass } from '@angular/common';
 import {
   afterRenderEffect,
   Component,
+  computed,
   effect,
   ElementRef,
   input,
@@ -13,13 +14,19 @@ import { DataPoint, GraphPoint } from '../linegraph/linegraph.component';
   selector: 'ml-bargraph',
   templateUrl: './bargraph.component.html',
   styleUrls: ['./bargraph.component.css'],
-  imports: [NgClass]
+  imports: [NgClass], 
+  host: {
+    'role': 'heading',
+    '[style.width]': '800 + "px"',
+    '[style.height]': 'this.height() + "px"'
+  }
 })
 export class BargraphComponent {
   public readonly yAxisElement = viewChild.required<ElementRef>('yAxis');
   public readonly xAxisElement = viewChild.required<ElementRef>('xAxis');
 
   readonly datasets = input.required<DataPoint[][]>();
+  readonly height = input.required<number>();
   readonly yAxisStep = input.required<number>();
   readonly xAxisStep = input.required<number>();
   readonly markers = input<number[]>([]);
@@ -30,27 +37,29 @@ export class BargraphComponent {
   public yAxisPoints: number[] = []
   public xAxisPoints: number[] = []
 
-  yAxisHeight = 0
+  yAxisHeight = 0;
   xAxisWidth = 0
   xAxisHeight = 0
   markerHeights: number[] = []
 
   constructor() {
     effect(() => {
+      this.yAxisHeight = this.height() - 50 - 1 // --xAxisHeight + border
+
       this.yAxisPoints = this.determineYAxisPoints();
       this.xAxisPoints = this.determineXAxisPoints();
       this.graphPoints = this.convertDatasetToPoints();
     });
-    afterRenderEffect(() => {
-      this.yAxisHeight = this.yAxisElement().nativeElement.clientHeight;
-      this.xAxisWidth = this.xAxisElement().nativeElement.clientWidth;
-      this.xAxisHeight = this.xAxisElement().nativeElement.clientHeight;
-      if (this.datasets()) {
-        this.yAxisPoints = this.determineYAxisPoints();
-        this.xAxisPoints = this.determineXAxisPoints();
-        this.graphPoints = this.convertDatasetToPoints();
-      }
-    })
+    // afterRenderEffect(() => {
+    //   this.yAxisHeight = this.yAxisElement().nativeElement.clientHeight;
+    //   this.xAxisWidth = this.xAxisElement().nativeElement.clientWidth;
+    //   this.xAxisHeight = this.xAxisElement().nativeElement.clientHeight;
+    //   if (this.datasets()) {
+    //     this.yAxisPoints = this.determineYAxisPoints();
+    //     this.xAxisPoints = this.determineXAxisPoints();
+    //     this.graphPoints = this.convertDatasetToPoints();
+    //   }
+    // })
   }
 
   private determineYAxisPoints(): number[] {
