@@ -1,8 +1,6 @@
 import { NgClass } from '@angular/common';
 import {
-  afterRenderEffect,
   Component,
-  computed,
   effect,
   ElementRef,
   input,
@@ -14,7 +12,7 @@ import { DataPoint, GraphPoint } from '../linegraph/linegraph.component';
   selector: 'ml-bargraph',
   templateUrl: './bargraph.component.html',
   styleUrls: ['./bargraph.component.css'],
-  imports: [NgClass], 
+  imports: [NgClass],
   host: {
     'role': 'heading',
     '[style.width]': '800 + "px"',
@@ -50,16 +48,6 @@ export class BargraphComponent {
       this.xAxisPoints = this.determineXAxisPoints();
       this.graphPoints = this.convertDatasetToPoints();
     });
-    // afterRenderEffect(() => {
-    //   this.yAxisHeight = this.yAxisElement().nativeElement.clientHeight;
-    //   this.xAxisWidth = this.xAxisElement().nativeElement.clientWidth;
-    //   this.xAxisHeight = this.xAxisElement().nativeElement.clientHeight;
-    //   if (this.datasets()) {
-    //     this.yAxisPoints = this.determineYAxisPoints();
-    //     this.xAxisPoints = this.determineXAxisPoints();
-    //     this.graphPoints = this.convertDatasetToPoints();
-    //   }
-    // })
   }
 
   private determineYAxisPoints(): number[] {
