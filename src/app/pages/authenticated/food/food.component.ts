@@ -6,13 +6,19 @@ import { FoodStore } from "src/app/shared/store/food.store";
 import { Food } from "../../../shared/model/food";
 import { EditFoodComponent } from "./edit-food/edit-food.component";
 import { Spinner } from "src/app/shared/components/spinner/spinner";
+import { faChevronLeft, faChevronRight, faPlus } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 
 @Component({
 	selector: "ml-food",
 	templateUrl: "./food.component.html",
-	imports: [FormsModule, EditFoodComponent, DecimalPipe, Spinner],
+	imports: [FormsModule, EditFoodComponent, DecimalPipe, Spinner, FontAwesomeModule],
 })
 export class FoodComponent {
+  faChevronLeft = faChevronLeft;
+  faChevronRight = faChevronRight;
+  faPlus = faPlus;
+
 	private readonly foodStore = inject(FoodStore);
   private allFood = this.foodStore.food;
 	private percentageFood: Food[] = [];
@@ -34,8 +40,6 @@ export class FoodComponent {
 	readonly itemsPerPage = 15;
 	readonly unitName = "gram";
 	readonly unitGrams = 100.0;
-
-
 
 	constructor() {
 		effect(() => {

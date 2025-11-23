@@ -1,19 +1,23 @@
-import { Component, OnInit, inject } from '@angular/core';
 import { DatePipe, DecimalPipe } from '@angular/common';
-import { WeightService } from '../../../../shared/services/weight.service';
-import { Weight } from '../../../../shared/model/weight';
-import { DataPoint } from 'src/app/shared/components/linegraph/linegraph.component';
-import { NgForm, FormsModule } from '@angular/forms';
+import { Component, OnInit, inject } from '@angular/core';
+import { FormsModule, NgForm } from '@angular/forms';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { faCheck, faTractor } from '@fortawesome/free-solid-svg-icons';
 import { format, isAfter, isBefore, parse } from 'date-fns';
-import { LinegraphComponent } from '../../../../shared/components/linegraph/linegraph.component';
 import { take } from 'rxjs';
+import { DataPoint } from 'src/app/shared/components/linegraph/linegraph.component';
+import { LinegraphComponent } from '../../../../shared/components/linegraph/linegraph.component';
+import { Weight } from '../../../../shared/model/weight';
+import { WeightService } from '../../../../shared/services/weight.service';
 
 @Component({
   selector: 'ml-weighttracker',
   templateUrl: './weighttracker.component.html',
-  imports: [LinegraphComponent, FormsModule, DecimalPipe, DatePipe]
+  imports: [LinegraphComponent, FormsModule, DecimalPipe, DatePipe, FontAwesomeModule]
 })
 export class WeightTrackerComponent implements OnInit {
+  faCheck = faCheck;
+  faTrash = faTractor;
   private readonly weightService = inject(WeightService);
 
   public trackedWeights: Weight[] = [];

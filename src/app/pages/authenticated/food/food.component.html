@@ -23,7 +23,7 @@
   </div>
 
   @if (loading()) {
-    <ml-spinner />
+  <ml-spinner />
   } @else {
   <table>
     <thead>
@@ -110,7 +110,7 @@
     <div>
       @if (currentPageIndex > 0) {
       <button type="button" class="btn btn--icon" (click)="getPagedFood(currentPageIndex - 1)">
-        <em class="fas fa-chevron-left"></em>
+        <fa-icon [icon]="faChevronLeft"></fa-icon>
         Previous
       </button>
       }
@@ -119,14 +119,14 @@
     @if (hasNextPage()) {
     <button type="button" class="btn btn--icon" (click)="getPagedFood(currentPageIndex + 1)">
       Next
-      <em class="fas fa-chevron-right"></em>
+      <fa-icon [icon]="faChevronRight"></fa-icon>
     </button>
     }
   </div>
 </div>
 
 <button class="floating-action-button" (click)="openModal(null)">
-  <em class="fas fa-plus"></em>
+  <fa-icon [icon]="faPlus"></fa-icon>
 </button>
 
 @if (modalIsVisible && selectedFood) {

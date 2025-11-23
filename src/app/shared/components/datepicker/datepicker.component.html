@@ -1,13 +1,12 @@
 <div class="date">
   <button type="button" class="date-button" (click)="previousDay()">
-    <em class=" fas fa-chevron-left"></em>
+    <fa-icon [icon]="faChevronLeft"></fa-icon>
   </button>
 
   <div class="date-display" (click)="toggleOpen()">{{selectedDate | date: dateformat}}</div>
 
   <button type="button" class="date-button" (click)="nextDay()">
-    <em class="fas fa-chevron-right"></em>
-  </button>
+    <fa-icon [icon]="faChevronRight"></fa-icon> </button>
 </div>
 
 @if (isOpen) {
@@ -15,14 +14,13 @@
   <div class="picker">
     <div class="flex justify-between items-center">
       <button class="picker-button" (click)="previousMonth()">
-        <em class=" fas fa-chevron-left"></em>
+        <fa-icon [icon]="faChevronLeft"></fa-icon>
       </button>
 
       <span>{{selectedDate | date: 'MMMM'}}</span>
 
       <button class="picker-button" (click)="nextMonth()">
-        <em class="fas fa-chevron-right"></em>
-      </button>
+        <fa-icon [icon]="faChevronRight"></fa-icon> </button>
     </div>
 
     <div class="picker-days">

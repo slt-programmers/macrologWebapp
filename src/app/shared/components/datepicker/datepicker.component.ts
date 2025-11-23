@@ -1,13 +1,17 @@
 import { DatePipe, formatDate } from '@angular/common';
 import { Component, output } from '@angular/core';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'ml-datepicker',
   templateUrl: './datepicker.component.html',
   styleUrls: ['./datepicker.component.css'],
-  imports: [DatePipe]
+  imports: [DatePipe, FontAwesomeModule]
 })
 export class DatepickerComponent {
+  faChevronLeft = faChevronLeft;
+  faChevronRight = faChevronRight;
   readonly change$ = output<string>();
 
   readonly dateformat = 'dd-MM-yyyy';

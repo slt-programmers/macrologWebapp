@@ -8,6 +8,8 @@ import { EntryStore } from "src/app/shared/store/entry.store";
 import { clone } from "src/app/util/functions";
 import { AutocompleteFoodComponent } from "../../../../shared/components/autocomplete-food/autocomplete-food.component";
 import { ModalComponent } from "../../../../shared/components/modal/modal.component";
+import { faTrash } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 
 @Component({
 	selector: "ml-entry-page-row",
@@ -15,6 +17,7 @@ import { ModalComponent } from "../../../../shared/components/modal/modal.compon
 	styleUrls: ["./entry-page-row.component.css"],
 	imports: [
 		ModalComponent,
+    FontAwesomeModule,
 		FormsModule,
 		AutocompleteFoodComponent,
 		DecimalPipe,
@@ -22,6 +25,7 @@ import { ModalComponent } from "../../../../shared/components/modal/modal.compon
 	],
 })
 export class EntryPageRowComponent {
+  faTrash = faTrash;
 	private readonly entryStore = inject(EntryStore);
 	private readonly entriesPerDay = this.entryStore.entriesPerDay;
 	

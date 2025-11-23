@@ -1,32 +1,32 @@
 @if (allDishes().length === 0) {
 <div class="card">
-	<p>You havent created any dishes yet!</p>
+  <p>You havent created any dishes yet!</p>
 </div>
 } @else {
 <div class="flex justify-center gap-4 wrap">
-	@for (dish of allDishes(); track dish) {
-	<div class="card flex flex-col gap-4" (click)="openModal(dish)">
-		<span class="font-bold">{{ dish.name }}</span>
+  @for (dish of allDishes(); track dish) {
+  <div class="card flex flex-col gap-4" (click)="openModal(dish)">
+    <span class="font-bold">{{ dish.name }}</span>
 
-		<ml-piechart [mealId]="dish.id!" [macros]="getTotal(dish)" />
+    <ml-piechart [mealId]="dish.id!" [macros]="getTotal(dish)" />
 
-		<ul>
-			@for (ingredient of dish.ingredients; track ingredient) {
-			<li>
-				{{ getIngredientDescription(ingredient) }}
-				{{ ingredient.food.name }}
-			</li>
-			}
-		</ul>
-	</div>
-	}
+    <ul>
+      @for (ingredient of dish.ingredients; track ingredient) {
+      <li>
+        {{ getIngredientDescription(ingredient) }}
+        {{ ingredient.food.name }}
+      </li>
+      }
+    </ul>
+  </div>
+  }
 </div>
 }
 
 <button class="floating-action-button" (click)="openModal(null)">
-	<em class="fas fa-plus"></em>
+  <fa-icon [icon]="faPlus"></fa-icon>
 </button>
 
 @if (modalIsVisible && selectedDish) {
-<ml-edit-dish [selectedDish]="selectedDish" (close$)="closeModal()"/>
+<ml-edit-dish [selectedDish]="selectedDish" (close$)="closeModal()" />
 }

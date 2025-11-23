@@ -9,8 +9,7 @@
               {{ toast.title || 'An error has occurred' }}
             </div>
             <div (click)="closeToast(index)" (keyup.esc)="closeToast(index)">
-              <em class="fas fa-times"></em>
-            </div>
+<fa-icon [icon]="faTimes"></fa-icon>             </div>
           </div>
           <div class="flex-grow"> {{ toast.message }} </div>
         </div>

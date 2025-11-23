@@ -61,7 +61,7 @@
 			/>
 			@if (isNewPortion(port)) {
 			<button class="btn btn--icon text-primary" (click)="removePortion(i)">
-				<em class="fas fa-minus"></em>
+        <fa-icon [icon]="faMinus"></fa-icon>
 			</button>
 			}
 
@@ -81,7 +81,7 @@
 			class="btn btn--icon text-primary col-start-1"
 			(click)="addNewPortion()"
 		>
-			<em class="fas fa-plus"></em>
+        <fa-icon [icon]="faPlus"></fa-icon>
 		</button>
 
 		<div class="flex justify-end gap-4">

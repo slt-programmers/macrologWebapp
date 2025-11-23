@@ -53,23 +53,22 @@
         <td>
           <div class="flex gap-2 items-center">
             <label for="weight">Weight</label>
-            <input name="weight" type="number" [(ngModel)]="logWeight.weight"
-              step="0.1" />
+            <input name="weight" type="number" [(ngModel)]="logWeight.weight" step="0.1" />
           </div>
         </td>
 
         <td>
           <div class="flex gap-2 items-center">
             <label for="comment">Comment</label>
-            <input required class="fles-grow" name="comment" type="text" [(ngModel)]="logWeight.remark"
-              [required]="false" />
+            <input required class="fles-grow" name="comment" type="text"
+              [(ngModel)]="logWeight.remark" [required]="false" />
 
             <button class="btn--icon" (click)="saveWeight(logWeight)">
-              <em class="fas fa-check"></em>
+              <fa-icon [icon]="faCheck"></fa-icon>
             </button>
 
             <button class="btn--icon" (click)="deleteWeight(logWeight)">
-              <em class="fas fa-trash"></em>
+              <fa-icon [icon]="faTrash"></fa-icon>
             </button>
           </div>
         </td>

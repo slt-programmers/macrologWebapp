@@ -4,8 +4,7 @@
   <div class="col-span-8">
     @if (showSync()) {
     <button type="button" class="text-primary" (click)="syncActivities(); $event.stopPropagation()">
-      <em title="Synchronize with external sources." class="fas fa-sync-alt primary">
-      </em>
+      <fa-icon [icon]="faSyncAlt"></fa-icon>
     </button>
     }
   </div>
@@ -42,8 +41,10 @@
       <input value="{{activity.calories}}" step="1" type="number"
         (keyup)="changeCalories($event, index)">
 
-      <button class="btn btn--icon text--primary fas fa-trash"
-        (click)="deleteActivity(index)"></button>
+      <button class="btn btn--icon text--primary"
+        (click)="deleteActivity(index)">
+        <fa-icon [icon]="faTrash"></fa-icon>
+      </button>
       }
     </div>
     }
