@@ -1,9 +1,7 @@
-import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Injectable, inject } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import { WebhookStatus } from '../model/webhookStatus';
-import { catchError } from 'rxjs/operators';
-import { of } from 'rxjs';
 
 @Injectable()
 export class WebhookService {
@@ -11,38 +9,15 @@ export class WebhookService {
 
   private macrologBackendUrl = '//' + environment.backend + '/webhooks';
 
-  public getWebhookStatus(connectedApp: string) {
-    return this.http.get<WebhookStatus>(this.macrologBackendUrl + '/' + connectedApp).pipe(
-      catchError(error => {
-        console.log(error);
-        return of()
-      }));
+  getWebhookStatus(connectedApp: string) {
+    return this.http.get<WebhookStatus>(this.macrologBackendUrl + '/' + connectedApp)
   }
 
-  public startWebhook(connectedApp: string) {
-    const headers = {
-      'Content-Type': 'application/json',
-      'Access-Control-Allow-Origin': environment.origin,
-    };
-    const options = { headers: headers };
-    return this.http.post(this.macrologBackendUrl + '/' + connectedApp, {}, options).pipe(
-      catchError(error => {
-        console.log(error);
-        return of();
-      }));
+  startWebhook(connectedApp: string) {
+    return this.http.post(this.macrologBackendUrl + '/' + connectedApp, {})
   }
 
-  public endWebhook(connectedApp: string, hookId: number) {
-    const headers = {
-      'Content-Type': 'application/json',
-      'Access-Control-Allow-Origin': environment.origin,
-    };
-    const options = { headers: headers };
-    return this.http.delete(this.macrologBackendUrl + '/' + connectedApp + '/' + hookId, options).pipe(
-      catchError(error => {
-        console.log(error);
-        return of();
-      })
-    )
+  endWebhook(connectedApp: string, hookId: number) {
+    return this.http.delete(this.macrologBackendUrl + '/' + connectedApp + '/' + hookId)
   }
 }

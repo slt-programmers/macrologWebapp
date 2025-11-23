@@ -1,14 +1,17 @@
 import { Component, inject } from "@angular/core";
 import { Router, RouterLink } from "@angular/router";
 import { AuthenticationStore } from "../../store/auth.store";
+import { faBars } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 
 @Component({
 	selector: "ml-navigation",
 	templateUrl: "./navigation.component.html",
 	styleUrls: ["./navigation.component.css"],
-	imports: [RouterLink],
+	imports: [RouterLink, FontAwesomeModule],
 })
 export class NavigationComponent {
+  faBars = faBars;
 	private readonly authStore = inject(AuthenticationStore);
 	private readonly router = inject(Router);
 

@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { MockComponent } from 'ng-mocks';
 import { NavigationComponent } from 'src/app/shared/components/navigation/navigation.component';
 import { HomeComponent } from './home.component';
@@ -9,9 +10,10 @@ describe('HomeComponent', () => {
 
   beforeEach(async () => {
     TestBed.configureTestingModule({
-    imports: [HomeComponent,
+      imports: [HomeComponent,
+        FontAwesomeModule,
         MockComponent(NavigationComponent)],
-}).compileComponents();
+    }).compileComponents();
   });
 
   beforeEach(() => {

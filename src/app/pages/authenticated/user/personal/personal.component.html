@@ -3,27 +3,26 @@
 
   <div class="grid grid-cols-auto-1 gap-4 items-center">
     <label for="name">Name</label>
-    <input required class="input" name="name" type="text" [(ngModel)]="name">
+    <input required type="text" [(ngModel)]="name" name="name">
 
     <label for="birthday">Date of birth</label>
-    <input required class="input" validDate placeholder="DD-MM-YYYY" name="birthday"
-      [(ngModel)]="birthday">
+    <input required validDate placeholder="DD-MM-YYYY" name="birthday" [(ngModel)]="birthday">
 
     <span>Gender</span>
 
     <div class="flex gap-2 items-center">
-      <input type="radio" id="male" [(ngModel)]="gender" value="MALE">
+      <input type="radio" id="male" [(ngModel)]="gender" value="MALE" name="gender">
       <label for="male">Male</label>
 
-      <input type="radio" id="female" [(ngModel)]="gender" value="FEMALE">
+      <input type="radio" id="female" [(ngModel)]="gender" value="FEMALE" name="gender">
       <label for="female">Female</label>
     </div>
 
     <label for="height">Height (cm)</label>
-    <input required class="input" name="height" type="number" [(ngModel)]="height">
+    <input required name="height" type="number" [(ngModel)]="height">
 
     <label for="weight">Weight (kg)</label>
-    <input required class="input" name="weight" type="number" [(ngModel)]="weight" step="0.1">
+    <input required name="weight" type="number" [(ngModel)]="weight" step="0.1">
 
     <label for="activity">Activity level</label>
     <select name="activity" [(ngModel)]="activity">
@@ -39,7 +38,7 @@
     [disabled]="isInputUnchanged() || personalForm.invalid">Save</button>
 </form>
 
-<form class="flex flex-col gap-4">
+<div class="flex flex-col gap-4">
   <h1 class="font-semibold">Theme settings</h1>
 
   <span>Theme</span>
@@ -52,4 +51,4 @@
     <input type="radio" id="dark" [ngModel]="theme" value="dark" (ngModelChange)="setTheme($event)">
     <label for="dark">Dark</label>
   </div>
-</form>
+</div>

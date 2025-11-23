@@ -5,20 +5,20 @@ import { DataPoint } from 'src/app/shared/components/linegraph/linegraph.compone
 import { MacrosPerDay } from 'src/app/shared/model/macrosPerDay';
 import { Macros } from 'src/app/shared/model/macros';
 import { format } from 'date-fns';
-import { DatePipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { BargraphComponent } from '../../../shared/components/bargraph/bargraph.component';
+import { Spinner } from "src/app/shared/components/spinner/spinner";
+import { PeriodPicker } from "src/app/shared/components/period-picker/period-picker";
 
 @Component({
-    selector: 'ml-graphs',
-    templateUrl: './graphs.component.html',
-    styleUrls: ['./graphs.component.css'],
-    imports: [FormsModule, BargraphComponent, DatePipe]
+  selector: 'ml-graphs',
+  templateUrl: './graphs.component.html',
+  styleUrls: ['./graphs.component.css'],
+  imports: [FormsModule, BargraphComponent, Spinner, PeriodPicker]
 })
 export class GraphsComponent implements OnInit {
   private logService = inject(EntryService);
   private userService = inject(UserService);
-
 
   public measurement = 'calories';
   public measurementOption = 'total';
@@ -26,8 +26,8 @@ export class GraphsComponent implements OnInit {
   public splitted = false;
   public percentages = false;
   public loading = true;
-  public dateTo?: Date;
-  public dateFrom?: Date;
+  public dateTo: Date;
+  public dateFrom: Date;
 
   private userGoals: any[] = [];
   private goalCalories = 0;
@@ -57,11 +57,14 @@ export class GraphsComponent implements OnInit {
 
   private numberOfValues = 30;
 
-  ngOnInit() {
+  constructor() {
     this.dateTo = new Date();
     this.dateFrom = new Date();
     this.dateFrom.setMonth(this.dateFrom.getMonth() - 1);
     this.dateFrom.setDate(this.dateFrom.getDate() + 1);
+  }
+
+  ngOnInit() {
     this.getLogData();
   }
 
@@ -287,7 +290,7 @@ export class GraphsComponent implements OnInit {
   private getMacroForDay(date: Date, numberOfValues: number, macro: string): number {
     const indexMax = Math.min(numberOfValues, this.allMacros.length);
     for (let i = 0; i < indexMax; i++) {
-      const macrosPerDay = this.allMacros[i]; 
+      const macrosPerDay = this.allMacros[i];
       const macrosString = format(new Date(macrosPerDay.day), 'yyyy-MM-dd');
       const dateString = format(date, 'yyyy-MM-dd');
       if (macrosPerDay && macrosString === dateString) {

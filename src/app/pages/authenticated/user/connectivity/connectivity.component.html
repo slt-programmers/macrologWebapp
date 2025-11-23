@@ -3,13 +3,9 @@
     src="../assets/api_logo_pwrdBy_strava_stack_light.png" />
 
   @if (!isConnected()) {
-  <div class="flex">
+  <div class="flex flex-col gap-4">
     <p>
       Get your activities from Strava automatically added to Macrolog!
-    </p>
-    <p>
-      No need to manually add activities when they already have been registered
-      in Strava!
     </p>
     @if (syncError) {
     <p class="text-error">

@@ -15,6 +15,7 @@ describe('BargraphComponent', () => {
     fixture.componentRef.setInput('datasets', makeDataSets());
     fixture.componentRef.setInput('yAxisStep', 10);
     fixture.componentRef.setInput('xAxisStep', 1);
+    fixture.componentRef.setInput('height', 500);
     fixture.detectChanges();
   });
 

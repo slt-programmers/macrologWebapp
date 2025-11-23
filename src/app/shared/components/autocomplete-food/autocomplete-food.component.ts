@@ -89,6 +89,5 @@ export class AutocompleteFoodComponent {
 			}
 		}
 		this.searchables = searchList;
-		console.log(this.searchables);
 	}
 }

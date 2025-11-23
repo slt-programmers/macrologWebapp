@@ -1,8 +1,7 @@
 <div class="card flex flex-col gap-4">
   <div class="flex items-center gap-2">
     <label for="search">Search</label>
-    <input id="search" class="flex-grow" [(ngModel)]="searchInput"
-      (input)="findFoodMatch()" />
+    <input id="search" class="flex-grow" [(ngModel)]="searchInput" (input)="findFoodMatch()" />
 
     <button type="button" class="btn btn--primary" (click)="clearSearch()">
       Clear
@@ -23,6 +22,9 @@
     </div>
   </div>
 
+  @if (loading()) {
+  <ml-spinner />
+  } @else {
   <table>
     <thead>
       <tr>
@@ -36,7 +38,6 @@
       </tr>
     </thead>
 
-    @if (displayedFood) {
     <tbody>
       @for (food of displayedFood; track food) {
       <tr (click)="openModal(food)">
@@ -102,14 +103,14 @@
       </tr>
       }
     </tbody>
-    }
   </table>
+  }
 
   <div class="flex justify-between">
     <div>
       @if (currentPageIndex > 0) {
       <button type="button" class="btn btn--icon" (click)="getPagedFood(currentPageIndex - 1)">
-        <em class="fas fa-chevron-left"></em>
+        <fa-icon [icon]="faChevronLeft"></fa-icon>
         Previous
       </button>
       }
@@ -118,14 +119,14 @@
     @if (hasNextPage()) {
     <button type="button" class="btn btn--icon" (click)="getPagedFood(currentPageIndex + 1)">
       Next
-      <em class="fas fa-chevron-right"></em>
+      <fa-icon [icon]="faChevronRight"></fa-icon>
     </button>
     }
   </div>
 </div>
 
 <button class="floating-action-button" (click)="openModal(null)">
-  <em class="fas fa-plus"></em>
+  <fa-icon [icon]="faPlus"></fa-icon>
 </button>
 
 @if (modalIsVisible && selectedFood) {
