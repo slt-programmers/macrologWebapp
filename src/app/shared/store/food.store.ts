@@ -1,10 +1,10 @@
+import { inject } from "@angular/core";
+import { tapResponse } from "@ngrx/operators";
 import { patchState, signalStore, withHooks, withMethods, withProps, withState } from "@ngrx/signals";
-import { Food } from "../model/food";
 import { rxMethod } from "@ngrx/signals/rxjs-interop";
 import { concatMap, pipe } from "rxjs";
-import { inject } from "@angular/core";
+import { Food } from "../model/food";
 import { FoodService } from "../services/food.service";
-import { tapResponse } from "@ngrx/operators";
 
 interface FoodState {
   loading: boolean;
@@ -56,9 +56,7 @@ export const FoodStore = signalStore(
   })),
   withHooks({
     onInit(store) {
-      setTimeout(() => {
-        store.getFood();
-      }, 5000)
+      store.getFood();
     }
   })
 );

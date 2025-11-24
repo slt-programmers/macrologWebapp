@@ -4,7 +4,11 @@ import { Portion } from './portion';
 export interface Ingredient {
 
   food: Food;
+  
+  grams?: number;
   portion?: Portion; 
-  multiplier?: number;
+  portionMultiplier?: number;
+
+  multiplier: number; // Deprecated
 
 }

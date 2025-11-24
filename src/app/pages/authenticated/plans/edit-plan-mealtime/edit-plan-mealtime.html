@@ -1,35 +1,56 @@
-<button class="btn btn--icon align-self-start" [routerLink]="['/dashboard', 'plans', 1]">
-  <fa-icon [icon]="faChevronLeft" />
-  Back to plan
-</button>
+<div class="flex justify-between">
+  <button class="btn btn--icon align-self-start" [routerLink]="['/dashboard', 'plans', 1]">
+    <fa-icon [icon]="faChevronLeft" />
+    Back to plan
+  </button>
+
+  <button class="btn btn--primary" type="button" (click)="save()">Save</button>
+</div>
 
 <div class="card flex flex-col gap-4">
   <h1 class="strong">Monday - Breakfast</h1>
 
-  <ul>
-    @for(item of items; track $index) {
-    <li>
-      <div class="inline-flex gap-4">
-        <span> {{item.name}} </span>
+  @if (items.length > 0) {
+  <div class="grid grid-cols-1-1 gap-4">
+    <ul>
+      @for(item of items; track $index; let index = $index) {
+      <li>
+        <div class="inline-flex items-center gap-4">
+          <span> {{item.food.name}} </span>
 
-        @if(isDish(item)) {
-        <ul>
-          @for(ingredient of asDish(item).ingredients; track $index) {
-          <li>{{ingredient.food.name}}</li>
+          <select name="portion" [(ngModel)]="item.portion">
+            <option [ngValue]="undefined">grams</option>
+
+            @for (portion of item.food.portions; track $index) {
+            <option [value]="portion">
+              {{portion.description}}
+            </option>
+            }
+          </select>
+
+          @if (item.portion) {
+          <!-- TODO kijken of dit mooier kan -->
+          <input name="multiplier" value="{{item.multiplier}}" type="number"
+            (keyup)="changeMultiplier(+$event.target.value, index)">
+          } @else {
+          <input name="multiplier" value="{{item.multiplier * 100}}" type="number"
+            (keyup)="changeMultiplier(+$event.target.value, index)">
           }
-        </ul>
-        }
 
-        <button class="btn btn--icon text--primary">
-          <fa-icon [icon]="faTrash" (click)="removeItem($index)" />
-        </button>
-      </div>
-    </li>
-    }
-  </ul>
+          <button class="btn btn--icon text--primary">
+            <fa-icon [icon]="faTrash" (click)="removeItem($index)" />
+          </button>
+        </div>
+      </li>
+      }
+    </ul>
+
+    <span>
+      TODO macro totals here
+    </span>
+  </div>
+  }
 
   <ml-autocomplete-food [includeDishes]="true" [placeholder]="'Search food or dishes...'"
     (select)="selectItem($event)" />
-
-  <button type="button" class="btn btn--primary align-self-end">Save</button>
 </div>

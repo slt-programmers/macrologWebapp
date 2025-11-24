@@ -1,15 +1,15 @@
 import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faChevronLeft, faPlus, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { AutocompleteFoodComponent } from 'src/app/shared/components/autocomplete-food/autocomplete-food.component';
-import { Dish } from 'src/app/shared/model/dish';
-import { Food } from 'src/app/shared/model/food';
 import { FoodSearchable } from 'src/app/shared/model/foodSearchable';
+import { Ingredient } from 'src/app/shared/model/ingredient';
 
 @Component({
   selector: 'ml-edit-plan-mealtime',
-  imports: [RouterLink, FontAwesomeModule, AutocompleteFoodComponent],
+  imports: [RouterLink, FontAwesomeModule, AutocompleteFoodComponent, FormsModule],
   templateUrl: './edit-plan-mealtime.html',
   styles: `
     :host {
@@ -24,25 +24,36 @@ export class EditPlanMealtime {
   faPlus = faPlus;
   faTrash = faTrash;
 
-  items: Array<Food | Dish> = []
+  items: Ingredient[] = [];
 
-  selectItem(foodOrDish: FoodSearchable) {
+  selectItem(foodOrDish: FoodSearchable): void {
     if (foodOrDish.food) {
-      this.items.push(foodOrDish.food)
+      const food = foodOrDish.food;
+      const portion = food.portions[0];
+      this.items.push({
+        food,
+        portion: portion,
+        multiplier: 1
+      })
     } else if (foodOrDish.dish) {
-      this.items.push(foodOrDish.dish)
+      this.items.push(...foodOrDish.dish.ingredients);
     }
   }
 
-  removeItem(index: number) {
+  changeMultiplier(multiplier: number, index: number):void {
+    if (!this.items[index].portion) {
+      this.items[index].multiplier = multiplier / 100;
+    } else {
+      this.items[index].multiplier = multiplier;
+    }
+  }
+
+  removeItem(index: number): void {
     this.items.splice(index, 1);
   }
 
-  isDish(item: Object): boolean {
-    return 'ingredients' in item;
+  save(): void {
+    
   }
 
-  asDish(item: Object): Dish {
-    return item as Dish
-  }
 }

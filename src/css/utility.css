@@ -126,6 +126,9 @@
 .text-error {
   color: var(--error);
 }
+.text-lightgray {
+  color: var(--smoke);
+}
 
 .font-semibold {
   font-weight: 600;

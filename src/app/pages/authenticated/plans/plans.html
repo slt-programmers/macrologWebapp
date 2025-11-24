@@ -1,13 +1,15 @@
+<button class="btn btn--primary align-self-end" (click)="createPlan()">Make new plan</button>
+
 <div class="flex flex-col gap-4">
-  <div class="card" (click)="openPlan(1)">
-    <h1>Plan One</h1>
+  @if (plans().length > 0) {
+  @for(plan of plans(); track $index) {
+  <div class="card" (click)="openPlan(plan.id)">
+    <h1>{{plan.title}}</h1>
   </div>
-
-  <div class="card" (click)="openPlan(2)">
-    <h1>Plan Two</h1>
+  }
+  } @else {
+  <div class="card">
+    <h1>You haven't created any mealplans yet.</h1>
   </div>
-
-  <div class="card" (click)="openPlan(3)">
-    <h1>Plan Three</h1>
-  </div>
+  }
 </div>

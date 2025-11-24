@@ -39,14 +39,14 @@
     </thead>
 
     <tbody>
-      @for (food of displayedFood; track food) {
+      @for (food of displayedFood; track $index) {
       <tr (click)="openModal(food)">
         <td>
           <div class="flex flex-col gap-2">
             <span> {{ food.name }} </span>
 
             @if (displayMode === 'grams') {
-            @for (portion of food.portions; track portion) {
+            @for (portion of food.portions; track $index) {
             <span>{{portion.description}}</span>
             }
             }
@@ -57,7 +57,7 @@
           <div class="flex flex-col gap-2">
             <span> {{ unitGrams }} {{ unitName }} </span>
 
-            @for (portion of food.portions; track portion) {
+            @for (portion of food.portions; track $index) {
             <span> {{ portion.grams }} {{ unitName }}</span>
             }
           </div>
@@ -68,7 +68,7 @@
             <span> {{ food.protein | number: '1.1-1' }} </span>
 
             @if (displayMode === 'grams') {
-            @for (portion of food.portions; track portion) {
+            @for (portion of food.portions; track $index) {
             <span> {{ portion.macros!.protein | number: '1.1-1' }} </span>
             }
             }
@@ -81,7 +81,7 @@
             </span>
 
             @if (displayMode === 'grams') {
-            @for (portion of food.portions; track portion) {
+            @for (portion of food.portions; track $index) {
             <span> {{ portion.macros!.fat | number: '1.1-1' }} </span>
             }
             }
@@ -94,7 +94,7 @@
             </span>
 
             @if (displayMode === 'grams') {
-            @for (portion of food.portions; track portion) {
+            @for (portion of food.portions; track $index) {
             <span> {{ portion.macros!.carbs | number: '1.1-1' }} </span>
             }
             }

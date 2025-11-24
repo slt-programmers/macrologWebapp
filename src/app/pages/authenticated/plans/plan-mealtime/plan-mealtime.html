@@ -1,6 +1,11 @@
-<ul (click)="openPlanMealtime(1)">
-  <li>Food name 1</li>
-  <li>Food name 2</li>
-  <li>Food name 3</li>
-  <li>Dish name 1</li>
-</ul>
+<div (click)="openPlanMealtime(1)">
+  @if(items.length > 0) {
+  <ul>
+    @for(item of items; track $index) {
+    <li>{{item.name}}</li>
+    }
+  </ul>
+  } @else {
+  <fa-icon [icon]="faPlus" class="text-lightgray" />
+  }
+</div>

@@ -162,6 +162,7 @@ export class FoodComponent {
 			const newFood = {
 				id: food.id,
 				name: food.name,
+        portions: food.portions,
 				protein: newProtein,
 				fat: newFat,
 				carbs: newCarbs,

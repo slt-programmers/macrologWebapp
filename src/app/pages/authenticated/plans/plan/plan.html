@@ -2,9 +2,24 @@
   <fa-icon [icon]="faChevronLeft" />
   Back to plans
 </button>
+@if(plan) {
 
 <div class="card flex flex-col gap-4">
-  <h1>Plan Title</h1>
+  <div class="flex gap-4">
+    @if (editTitle()) {
+    <input type="text" [(ngModel)]="plan.title" placeholder="Plan title"
+      (keydown.enter)="editTitle.set(false)">
+    <button class="btn btn--icon" (click)="editTitle.set(false)">
+      <fa-icon [icon]="faCheck" />
+    </button>
+    } @else {
+    <h1 class="text-xl strong">{{plan.title}}</h1>
+
+    <button class="btn btn--icon" (click)="editTitle.set(true)">
+      <fa-icon [icon]="faPencil" />
+    </button>
+    }
+  </div>
 
   <table>
     <thead>
@@ -125,3 +140,4 @@
     </tbody>
   </table>
 </div>
+}
