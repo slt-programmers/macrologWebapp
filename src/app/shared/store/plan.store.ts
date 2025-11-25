@@ -66,8 +66,8 @@ export const PlanStore = signalStore(
 					const plan = store.getPlan(planId);
 					plan.mealtimes = plan.mealtimes.filter(
 						(m) =>
-							m.weekday !== mealtime.weekday &&
-							m.meal !== mealtime.meal
+							!(m.weekday === mealtime.weekday &&
+							m.meal === mealtime.meal)
 					);
           plan.mealtimes.push(mealtime)
 					return store.planService.savePlan(plan).pipe(
