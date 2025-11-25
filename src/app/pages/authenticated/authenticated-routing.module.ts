@@ -53,7 +53,7 @@ export const authenticatedRoutes: Routes = [
         canActivate: [AuthGuard],
       },
       {
-        path: 'plans/:planId/edit/:mealtimeId',
+        path: 'plans/:planId/edit',
         loadComponent: () => import('./plans/edit-plan-mealtime/edit-plan-mealtime').then(m => m.EditPlanMealtime),
         canActivate: [AuthGuard],
       },

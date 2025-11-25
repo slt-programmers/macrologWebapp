@@ -1,4 +1,5 @@
 import { Food } from "./food";
+import { Ingredient } from "./ingredient";
 import { Meal } from "./meal";
 import { Weekday } from "./weekday";
 
@@ -7,6 +8,6 @@ export interface Mealtime {
   meal: Meal;
   weekday: Weekday;
   name: string;
-  items: Food[];
+  items: Ingredient[];
 }
 

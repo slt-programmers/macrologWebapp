@@ -11,6 +11,7 @@ import { WeightService } from './services/weight.service';
 import { ActivityService } from './services/activity.service';
 import { DishService } from './services/dish.service';
 import { FoodService } from './services/food.service';
+import { PlanService } from './services/plan.service';
 
 @NgModule({
   imports: [
@@ -28,6 +29,7 @@ import { FoodService } from './services/food.service';
     ScrollBehaviourService,
     WebhookService,
     GoogleService,
+    PlanService
   ]
 })
 export class ServicesModule { }

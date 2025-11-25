@@ -1,143 +1,206 @@
-<button class="btn btn--icon align-self-start" [routerLink]="['/dashboard', 'plans']">
-  <fa-icon [icon]="faChevronLeft" />
-  Back to plans
+<button
+	class="btn btn--icon align-self-start"
+	[routerLink]="['/dashboard', 'plans']"
+>
+	<fa-icon [icon]="faChevronLeft" />
+	Back to plans
 </button>
 @if(plan) {
 
 <div class="card flex flex-col gap-4">
-  <div class="flex gap-4">
-    @if (editTitle()) {
-    <input type="text" [(ngModel)]="plan.title" placeholder="Plan title"
-      (keydown.enter)="editTitle.set(false)">
-    <button class="btn btn--icon" (click)="editTitle.set(false)">
-      <fa-icon [icon]="faCheck" />
-    </button>
-    } @else {
-    <h1 class="text-xl strong">{{plan.title}}</h1>
+	<div class="flex gap-4">
+		@if (editTitle()) {
+		<input
+			type="text"
+			[(ngModel)]="plan.title"
+			placeholder="Plan title"
+			(keydown.enter)="editTitle.set(false)"
+		/>
+		<button class="btn btn--icon" (click)="editTitle.set(false)">
+			<fa-icon [icon]="faCheck" />
+		</button>
+		} @else {
+		<h1 class="text-xl strong">{{plan.title}}</h1>
 
-    <button class="btn btn--icon" (click)="editTitle.set(true)">
-      <fa-icon [icon]="faPencil" />
-    </button>
-    }
-  </div>
+		<button class="btn btn--icon" (click)="editTitle.set(true)">
+			<fa-icon [icon]="faPencil" />
+		</button>
+		}
+	</div>
 
-  <table>
-    <thead>
-      <tr>
-        <th>Day</th>
-        <th>Breakfast</th>
-        <th>Lunch</th>
-        <th>Diner</th>
-        <th>Snacks</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>Monday</td>
-        <td>
-          <ml-plan-mealtime />
-        </td>
-        <td>
-          <ml-plan-mealtime />
-        </td>
-        <td>
-          <ml-plan-mealtime />
-        </td>
-        <td>
-          <ml-plan-mealtime />
-        </td>
-      </tr>
-      <tr>
-        <td>Tuesday</td>
-        <td>
-          <ml-plan-mealtime />
-        </td>
-        <td>
-          <ml-plan-mealtime />
-        </td>
-        <td>
-          <ml-plan-mealtime />
-        </td>
-        <td>
-          <ml-plan-mealtime />
-        </td>
-      </tr>
-      <tr>
-        <td>Wednesday</td>
-        <td>
-          <ml-plan-mealtime />
-        </td>
-        <td>
-          <ml-plan-mealtime />
-        </td>
-        <td>
-          <ml-plan-mealtime />
-        </td>
-        <td>
-          <ml-plan-mealtime />
-        </td>
-      </tr>
-      <tr>
-        <td>Thursday</td>
-        <td>
-          <ml-plan-mealtime />
-        </td>
-        <td>
-          <ml-plan-mealtime />
-        </td>
-        <td>
-          <ml-plan-mealtime />
-        </td>
-        <td>
-          <ml-plan-mealtime />
-        </td>
-      </tr>
-      <tr>
-        <td>Friday</td>
-        <td>
-          <ml-plan-mealtime />
-        </td>
-        <td>
-          <ml-plan-mealtime />
-        </td>
-        <td>
-          <ml-plan-mealtime />
-        </td>
-        <td>
-          <ml-plan-mealtime />
-        </td>
-      </tr>
-      <tr>
-        <td>Saturday</td>
-        <td>
-          <ml-plan-mealtime />
-        </td>
-        <td>
-          <ml-plan-mealtime />
-        </td>
-        <td>
-          <ml-plan-mealtime />
-        </td>
-        <td>
-          <ml-plan-mealtime />
-        </td>
-      </tr>
-      <tr>
-        <td>Sunday</td>
-        <td>
-          <ml-plan-mealtime />
-        </td>
-        <td>
-          <ml-plan-mealtime />
-        </td>
-        <td>
-          <ml-plan-mealtime />
-        </td>
-        <td>
-          <ml-plan-mealtime />
-        </td>
-      </tr>
-    </tbody>
-  </table>
+	<table>
+		<thead>
+			<tr>
+				<th>Day</th>
+				<th>Breakfast</th>
+				<th>Lunch</th>
+				<th>Diner</th>
+				<th>Snacks</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>Monday</td>
+				<td>
+					<ml-plan-mealtime
+						[mealtime]="getMealtime(Weekday.Monday, Meal.Breakfast)"
+					/>
+				</td>
+				<td>
+					<ml-plan-mealtime
+						[mealtime]="getMealtime(Weekday.Monday, Meal.Lunch)"
+					/>
+				</td>
+				<td>
+					<ml-plan-mealtime
+						[mealtime]="getMealtime(Weekday.Monday, Meal.Dinner)"
+					/>
+				</td>
+				<td>
+					<ml-plan-mealtime
+						[mealtime]="getMealtime(Weekday.Monday, Meal.Snacks)"
+					/>
+				</td>
+			</tr>
+			<tr>
+				<td>Tuesday</td>
+				<td>
+					<ml-plan-mealtime
+						[mealtime]="getMealtime(Weekday.Tuesday, Meal.Breakfast)"
+					/>
+				</td>
+				<td>
+					<ml-plan-mealtime
+						[mealtime]="getMealtime(Weekday.Tuesday, Meal.Lunch)"
+					/>
+				</td>
+				<td>
+					<ml-plan-mealtime
+						[mealtime]="getMealtime(Weekday.Tuesday, Meal.Dinner)"
+					/>
+				</td>
+				<td>
+					<ml-plan-mealtime
+						[mealtime]="getMealtime(Weekday.Tuesday, Meal.Snacks)"
+					/>
+				</td>
+			</tr>
+			<tr>
+				<td>Wednesday</td>
+				<td>
+					<ml-plan-mealtime
+						[mealtime]="getMealtime(Weekday.Wednesday, Meal.Breakfast)"
+					/>
+				</td>
+				<td>
+					<ml-plan-mealtime
+						[mealtime]="getMealtime(Weekday.Wednesday, Meal.Lunch)"
+					/>
+				</td>
+				<td>
+					<ml-plan-mealtime
+						[mealtime]="getMealtime(Weekday.Wednesday, Meal.Dinner)"
+					/>
+				</td>
+				<td>
+					<ml-plan-mealtime
+						[mealtime]="getMealtime(Weekday.Wednesday, Meal.Snacks)"
+					/>
+				</td>
+			</tr>
+			<tr>
+				<td>Thursday</td>
+				<td>
+					<ml-plan-mealtime
+						[mealtime]="getMealtime(Weekday.Thursday, Meal.Breakfast)"
+					/>
+				</td>
+				<td>
+					<ml-plan-mealtime
+						[mealtime]="getMealtime(Weekday.Thursday, Meal.Lunch)"
+					/>
+				</td>
+				<td>
+					<ml-plan-mealtime
+						[mealtime]="getMealtime(Weekday.Thursday, Meal.Dinner)"
+					/>
+				</td>
+				<td>
+					<ml-plan-mealtime
+						[mealtime]="getMealtime(Weekday.Thursday, Meal.Snacks)"
+					/>
+				</td>
+			</tr>
+			<tr>
+				<td>Friday</td>
+				<td>
+					<ml-plan-mealtime
+						[mealtime]="getMealtime(Weekday.Friday, Meal.Breakfast)"
+					/>
+				</td>
+				<td>
+					<ml-plan-mealtime
+						[mealtime]="getMealtime(Weekday.Friday, Meal.Lunch)"
+					/>
+				</td>
+				<td>
+					<ml-plan-mealtime
+						[mealtime]="getMealtime(Weekday.Friday, Meal.Dinner)"
+					/>
+				</td>
+				<td>
+					<ml-plan-mealtime
+						[mealtime]="getMealtime(Weekday.Friday, Meal.Snacks)"
+					/>
+				</td>
+			</tr>
+			<tr>
+				<td>Saturday</td>
+				<td>
+					<ml-plan-mealtime
+						[mealtime]="getMealtime(Weekday.Saturday, Meal.Breakfast)"
+					/>
+				</td>
+				<td>
+					<ml-plan-mealtime
+						[mealtime]="getMealtime(Weekday.Saturday, Meal.Lunch)"
+					/>
+				</td>
+				<td>
+					<ml-plan-mealtime
+						[mealtime]="getMealtime(Weekday.Saturday, Meal.Dinner)"
+					/>
+				</td>
+				<td>
+					<ml-plan-mealtime
+						[mealtime]="getMealtime(Weekday.Saturday, Meal.Snacks)"
+					/>
+				</td>
+			</tr>
+			<tr>
+				<td>Sunday</td>
+				<td>
+					<ml-plan-mealtime
+						[mealtime]="getMealtime(Weekday.Sunday, Meal.Breakfast)"
+					/>
+				</td>
+				<td>
+					<ml-plan-mealtime
+						[mealtime]="getMealtime(Weekday.Sunday, Meal.Lunch)"
+					/>
+				</td>
+				<td>
+					<ml-plan-mealtime
+						[mealtime]="getMealtime(Weekday.Sunday, Meal.Dinner)"
+					/>
+				</td>
+				<td>
+					<ml-plan-mealtime
+						[mealtime]="getMealtime(Weekday.Sunday, Meal.Snacks)"
+					Ø/>
+				</td>
+			</tr>
+		</tbody>
+	</table>
 </div>
 }
