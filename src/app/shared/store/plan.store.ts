@@ -94,7 +94,9 @@ export const PlanStore = signalStore(
             const plans = store.plans().filter(p => p.id !== id);
             patchState(store, {plans: [...plans]})
           },
-          error: () => {}
+          error: () => {
+            // TODO
+          }
         }))
       })
     ))
