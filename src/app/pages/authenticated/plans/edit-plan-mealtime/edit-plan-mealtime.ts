@@ -9,6 +9,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { AutocompleteFoodComponent } from "src/app/shared/components/autocomplete-food/autocomplete-food.component";
 import { FoodSearchable } from "src/app/shared/model/foodSearchable";
+import { Ingredient } from "src/app/shared/model/ingredient";
 import { Mealtime } from "src/app/shared/model/mealtime";
 import { PlanStore } from "src/app/shared/store/plan.store";
 
@@ -51,26 +52,26 @@ export class EditPlanMealtime {
 		if (foodOrDish.food) {
 			const food = foodOrDish.food;
 			const portion = food.portions[0];
-			this.mealtime.items.push({
+			this.mealtime.ingredients.push({
 				food,
 				portion: portion,
 				multiplier: 1,
-			});
+			} as Ingredient);
 		} else if (foodOrDish.dish) {
-			this.mealtime.items.push(...foodOrDish.dish.ingredients);
+			this.mealtime.ingredients.push(...foodOrDish.dish.ingredients);
 		}
 	}
 
 	changeMultiplier(multiplier: number, index: number): void {
-		if (!this.mealtime.items[index].portion) {
-			this.mealtime.items[index].multiplier = multiplier / 100;
+		if (!this.mealtime.ingredients[index].portion) {
+			this.mealtime.ingredients[index].multiplier = multiplier / 100;
 		} else {
-			this.mealtime.items[index].multiplier = multiplier;
+			this.mealtime.ingredients[index].multiplier = multiplier;
 		}
 	}
 
 	removeItem(index: number): void {
-		this.mealtime.items.splice(index, 1);
+		this.mealtime.ingredients.splice(index, 1);
 	}
 
 	save(): void {

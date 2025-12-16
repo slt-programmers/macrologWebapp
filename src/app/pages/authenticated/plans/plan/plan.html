@@ -14,9 +14,9 @@
 			type="text"
 			[(ngModel)]="plan.title"
 			placeholder="Plan title"
-			(keydown.enter)="editTitle.set(false)"
+			(keydown.enter)="saveTitle()"
 		/>
-		<button class="btn btn--icon" (click)="editTitle.set(false)">
+		<button class="btn btn--icon" (click)="saveTitle()">
 			<fa-icon [icon]="faCheck" />
 		</button>
 		} @else {
@@ -197,7 +197,7 @@
 				<td>
 					<ml-plan-mealtime
 						[mealtime]="getMealtime(Weekday.Sunday, Meal.Snacks)"
-					Ø/>
+					/>
 				</td>
 			</tr>
 		</tbody>

@@ -14,10 +14,10 @@
 <div class="card flex flex-col gap-4">
 	<h1 class="strong">{{mealtime.weekday}} - {{mealtime.meal}}</h1>
 
-	@if (mealtime.items.length > 0) {
+	@if (mealtime.ingredients.length > 0) {
 	<div class="grid grid-cols-1-1 gap-4">
 		<ul>
-			@for(item of mealtime.items; track $index; let index = $index) {
+			@for(item of mealtime.ingredients; track $index; let index = $index) {
 			<li>
 				<div class="inline-flex items-center gap-4">
 					<span> {{item.food.name}} </span>

@@ -7,7 +7,6 @@ export interface Mealtime {
   id: number;
   meal: Meal;
   weekday: Weekday;
-  name: string;
-  items: Ingredient[];
+  ingredients: Ingredient[];
 }
 

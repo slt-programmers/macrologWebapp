@@ -54,7 +54,12 @@ export class Plan {
 		return (
 			this.plan.mealtimes.filter(
 				(m) => m.weekday === weekday && m.meal === meal
-			)[0] ?? { weekday, meal, items: [] }
+			)[0] ?? { weekday, meal, ingredients: [] }
 		);
 	}
+
+  saveTitle() {
+    this.planStore.saveMealplanTitle(this.plan.id);
+    this.editTitle.set(false)
+  }
 }

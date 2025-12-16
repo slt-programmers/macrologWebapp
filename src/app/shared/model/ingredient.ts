@@ -3,12 +3,11 @@ import { Portion } from './portion';
 
 export interface Ingredient {
 
+  id: number;
   food: Food;
-  
-  grams?: number;
   portion?: Portion; 
-  portionMultiplier?: number;
-
   multiplier: number; // Deprecated
-
+  
+  // grams?: number;
+  // portionMultiplier?: number;
 }

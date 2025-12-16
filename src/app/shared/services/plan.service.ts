@@ -1,50 +1,30 @@
 import { HttpClient } from "@angular/common/http";
-import { inject, Injectable, signal } from "@angular/core";
-import { catchError, Observable, of } from "rxjs";
+import { inject, Injectable } from "@angular/core";
+import { Observable } from "rxjs";
 import { environment } from "src/environments/environment";
 import { Mealplan } from "../model/mealplan";
+import { MealplanRequest } from "../model/requests/mealplan-request";
 
 @Injectable({
-	providedIn: "root",
+  providedIn: "root",
 })
 export class PlanService {
-	private readonly http = inject(HttpClient);
-	private readonly backendUrl = "//" + environment.backend + "/plans";
+  private readonly http = inject(HttpClient);
+  private readonly backendUrl = "//" + environment.backend + "/mealplans";
 
-	// TODO remove
-	newId = signal(0);
+  getPlans(): Observable<Mealplan[]> {
+    return this.http.get<Mealplan[]>(this.backendUrl);
+  }
 
-	createPlan(): Observable<Mealplan> {
-		return this.http
-			.post<Mealplan>(this.backendUrl, {
-				title: "New mealplan",
-				mealtimes: [],
-			})
-			.pipe(
-				catchError(() => {
-					this.newId.set(this.newId() + 1);
-					return of({
-						id: this.newId(),
-						title: "New mealplan",
-						mealtimes: [],
-					});
-				})
-			);
-	}
+  createPlan(): Observable<Mealplan> {
+    return this.http.post<Mealplan>(this.backendUrl, { title: "New mealplan", mealtimes: [] })
+  }
 
-	savePlan(mealplan: Mealplan): Observable<Mealplan> {
-		return this.http.put<Mealplan>(this.backendUrl, mealplan).pipe(
-			catchError(() => {
-				return of(mealplan);
-			})
-		);
-	}
+  savePlan(mealplan: MealplanRequest | Mealplan): Observable<Mealplan> {
+    return this.http.put<Mealplan>(this.backendUrl, mealplan);
+  }
 
-	deletePlan(id: number): Observable<void> {
-		return this.http.delete<void>(this.backendUrl + "/" + id).pipe(
-			catchError(() => {
-				return of(undefined);
-			})
-		);
-	}
+  deletePlan(id: number): Observable<void> {
+    return this.http.delete<void>(this.backendUrl + "/" + id);
+  }
 }

@@ -1,7 +1,7 @@
 <div (click)="openPlanMealtime()">
-  @if(mealtime().items.length > 0) {
+  @if(mealtime().ingredients.length > 0) {
   <ul>
-    @for(item of mealtime().items; track $index) {
+    @for(item of mealtime().ingredients; track $index) {
     <li>{{item.food.name}}</li>
     }
   </ul>
