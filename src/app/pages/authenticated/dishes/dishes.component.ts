@@ -1,6 +1,5 @@
 import { Component, inject } from "@angular/core";
 import { FormsModule } from "@angular/forms";
-import { Portion } from "src/app/shared/model/portion";
 import { DishStore } from "src/app/shared/store/dish.store";
 import { clone } from "src/app/util/functions";
 import { PiechartComponent } from "../../../shared/components/piechart/piechart.component";
@@ -49,19 +48,10 @@ export class DishesComponent {
 
 	getIngredientDescription(ingredient: Ingredient): string {
 		if (ingredient.portion) {
-			const usedPortion = this.getPortion(ingredient, ingredient.portion.id!);
-			return ingredient.multiplier + " " + usedPortion.description;
+			return ingredient.multiplier + " " + ingredient.portion.description;
 		} else {
 			return ingredient.multiplier! * 100 + " gram";
 		}
 	}
 
-	private getPortion(ingredient: Ingredient, portionId: number): Portion {
-		for (const portion of ingredient.food.portions!) {
-			if (portion.id === portionId) {
-				return portion;
-			}
-		}
-		return {} as Portion;
-	}
 }
