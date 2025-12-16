@@ -12,12 +12,12 @@
     <span>Display in:</span>
 
     <div class="flex items-center gap-1">
-      <input type="radio" id="grams" [(ngModel)]="displayMode" value="grams">
+      <input type="radio" id="grams" [(ngModel)]="displayMode" (input)="changeDisplay('grams')"  value="grams">
       <label for="grams">Grams</label>
     </div>
 
     <div class="flex items-center gap-1">
-      <input type="radio" id="percentage" [(ngModel)]="displayMode" value="percentage">
+      <input type="radio" id="percentage" [(ngModel)]="displayMode" (input)="changeDisplay('percentage')" value="percentage">
       <label for="percentage">Percentage</label>
     </div>
   </div>
