@@ -14,7 +14,6 @@ import { concatMap, pipe } from "rxjs";
 import { Mealplan } from "../model/mealplan";
 import { Mealtime } from "../model/mealtime";
 import { PlanService } from "../services/plan.service";
-import { MealplanMapper } from "../mapping/mealplan-mapper";
 
 interface PlanState {
   mealtimeToEdit?: Mealtime;
@@ -61,6 +60,7 @@ export const PlanStore = signalStore(
           return store.planService.createPlan().pipe(
             tapResponse({
               next: (mealplan: Mealplan) => {
+                console.log(mealplan)
                 patchState(store, {
                   plans: [...store.plans(), mealplan],
                 });
@@ -77,7 +77,7 @@ export const PlanStore = signalStore(
     saveMealplanTitle: rxMethod<number>(
       pipe(concatMap((planId) => {
         const plan = store.getPlan(planId);
-        return store.planService.savePlan(MealplanMapper.mapToRequest(plan)).pipe(
+        return store.planService.savePlan(plan).pipe(
             tapResponse({
               next: (mealplan: Mealplan) => {
                 const plans = store.plans().filter(p => p.id !== mealplan.id);
