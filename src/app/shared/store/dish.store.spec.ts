@@ -26,15 +26,15 @@ describe("DishStore", () => {
 		expect(result).toEqual([getSimpleDish()]);
 	});
 
-	it('should post dish', () => {
+	it("should post dish", () => {
 		spyOn(service, "getDishes").and.returnValue(of([getSimpleDish()]));
-		spyOn(service, 'postDish').and.returnValue(of(undefined));
+		spyOn(service, "postDish").and.returnValue(of(undefined));
 		store = TestBed.inject(DishStore);
 		const dish = getSimpleDish();
-		dish.name = 'newdish'
+		dish.name = "newdish";
 		store.postDish(dish);
-		expect(service.postDish).toHaveBeenCalledOnceWith(dish)
-	})
+		expect(service.postDish).toHaveBeenCalledOnceWith(dish);
+	});
 });
 
 function getSimpleDish(): Dish {
@@ -42,7 +42,18 @@ function getSimpleDish(): Dish {
 		id: 1,
 		name: "dish1",
 		ingredients: [
-			{ food: { id: 1, name: "food1", protein: 1, fat: 2, carbs: 3 } },
+			{
+				id: 1,
+				multiplier: 1,
+				food: {
+					id: 1,
+					name: "food1",
+					protein: 1,
+					fat: 2,
+					carbs: 3,
+					portions: [],
+				},
+			},
 		],
 	};
 }

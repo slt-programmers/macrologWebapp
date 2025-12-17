@@ -42,6 +42,8 @@ describe("DishesComponent", () => {
 			name: "dish",
 			ingredients: [
 				{
+					multiplier: 1,
+					id: 1,
 					food: {
 						id: 1,
 						name: "name",
@@ -58,6 +60,8 @@ describe("DishesComponent", () => {
 			name: "dish",
 			ingredients: [
 				{
+					multiplier: 1,
+					id: 1,
 					food: {
 						id: 1,
 						name: "name",
@@ -73,7 +77,8 @@ describe("DishesComponent", () => {
 
 	it("should get description", () => {
 		const ingredient: Ingredient = {
-			portion: { id: 1, description: "portionDesc" },
+			id: 1,
+			portion: { id: 1, grams: 10, description: "portionDesc" },
 			multiplier: 1,
 			food: {
 				portions: [{ id: 1, description: "portionDesc" }],
@@ -90,5 +95,4 @@ describe("DishesComponent", () => {
 		const result = component.getTotal({ macrosCalculated: 123 } as any);
 		expect(result).toEqual(123);
 	});
-
 });

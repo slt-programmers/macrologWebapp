@@ -30,6 +30,7 @@ describe("FoodService", () => {
 			protein: 1,
 			fat: 2,
 			carbs: 3,
+			portions: []
 		};
 		spyOn(http, "post");
 		service.postFood(food);

@@ -43,6 +43,7 @@ function getSimpleFood(): Food {
 		name: "food1",
     protein: 1, 
     fat: 2,
-    carbs: 3
+    carbs: 3,
+		portions: []
 	};
 }
