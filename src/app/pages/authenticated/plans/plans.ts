@@ -2,7 +2,6 @@ import { Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
-import { Mealplan } from 'src/app/shared/model/mealplan';
 import { PlanStore } from 'src/app/shared/store/plan.store';
 
 @Component({

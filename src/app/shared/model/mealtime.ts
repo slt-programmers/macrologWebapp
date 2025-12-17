@@ -1,4 +1,3 @@
-import { Food } from "./food";
 import { Ingredient } from "./ingredient";
 import { Meal } from "./meal";
 import { Weekday } from "./weekday";

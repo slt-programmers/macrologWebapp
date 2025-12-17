@@ -68,7 +68,7 @@
     </div>
 
     <ml-autocomplete-food [includeDishes]="true" [placeholder]="'Search food...'"
-      (select)="addEntry($event)" />
+      (selected)="addEntry($event)" />
 
     <button type="button" class="btn btn--primary align-self-end"
       (click)="saveEntries()">Save</button>
