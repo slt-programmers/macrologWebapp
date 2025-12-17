@@ -21,9 +21,30 @@ describe("FoodComponent", () => {
 			providers: [
 				MockProvider(FoodStore, {
 					food: signal([
-						{ id: 1, name: "Name", protein: 1, fat: 24, carbs: 13 },
-						{ id: 2, name: "Other name", protein: 31, fat: 2, carbs: 13 },
-						{ id: 3, name: "Something else", protein: 18, fat: 67, carbs: 43 },
+						{
+							id: 1,
+							name: "Name",
+							protein: 1,
+							fat: 24,
+							carbs: 13,
+							portions: [],
+						},
+						{
+							id: 2,
+							name: "Other name",
+							protein: 31,
+							fat: 2,
+							carbs: 13,
+							portions: [],
+						},
+						{
+							id: 3,
+							name: "Something else",
+							protein: 18,
+							fat: 67,
+							carbs: 43,
+							portions: [],
+						},
 					]),
 					getFood: () => {},
 					loading: signal(false),
