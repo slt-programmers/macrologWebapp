@@ -36,7 +36,7 @@
         diary.</div>
       } @else {
       <span class="font-bold">Food</span>
-      <span class="font-bold">Protion</span>
+      <span class="font-bold">Portion</span>
       <span class="font-bold">Amount</span>
       }
 
@@ -68,8 +68,7 @@
     </div>
 
     <ml-autocomplete-food [includeDishes]="true" [placeholder]="'Search food...'"
-      (select$)="addEntry($event)">
-    </ml-autocomplete-food>
+      (selected)="addEntry($event)" />
 
     <button type="button" class="btn btn--primary align-self-end"
       (click)="saveEntries()">Save</button>

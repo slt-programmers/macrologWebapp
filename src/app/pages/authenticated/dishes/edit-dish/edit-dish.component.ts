@@ -77,10 +77,10 @@ export class EditDishComponent implements OnInit {
 	}
 
 	addIngredient(foodSearchable: FoodSearchable) {
-		const ingredient: Ingredient = {
+		const ingredient = {
 			multiplier: 1,
 			food: foodSearchable.food!,
-		};
+		} as Ingredient;
 		this.selectedDish().ingredients.push(ingredient);
 	}
 

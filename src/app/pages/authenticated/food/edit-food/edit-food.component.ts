@@ -35,6 +35,7 @@ export class EditFoodComponent implements OnInit {
       protein: this.selectedFood().protein,
       fat: this.selectedFood().fat,
       carbs: this.selectedFood().carbs,
+      portions: this.selectedFood().portions
     };
 
     const selectedFood = this.selectedFood();
@@ -58,6 +59,6 @@ export class EditFoodComponent implements OnInit {
   }
 
   public addNewPortion(): void {
-    this.selectedFood().portions!.push({});
+    this.selectedFood().portions!.push({} as Portion);
   }
 }

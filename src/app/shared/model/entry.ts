@@ -8,9 +8,14 @@ export interface Entry {
   id: number;
   meal: Meal;
   food: Food;
+  // grams: number;
+
   portion?: Portion;
-  multiplier?: number;
+  // portionMultiplier?: number;
+
   day: string;
   macrosCalculated: Macros;
+
+  multiplier?: number; // Deprecated
 
 }

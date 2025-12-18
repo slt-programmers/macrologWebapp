@@ -1,0 +1,11 @@
+<div (click)="openPlanMealtime()">
+  @if(mealtime().ingredients.length > 0) {
+  <ul>
+    @for(item of mealtime().ingredients; track $index) {
+    <li>{{item.food.name}}</li>
+    }
+  </ul>
+  } @else {
+  <fa-icon [icon]="faPlus" class="text-lightgray" />
+  }
+</div>
