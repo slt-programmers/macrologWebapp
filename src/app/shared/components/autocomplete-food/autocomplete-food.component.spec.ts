@@ -139,7 +139,7 @@ describe("AutocompleteFoodComponent", () => {
 		let result = component.getDescription({ food: undefined, dish: dish });
 		expect(result).toEqual(dish.name + " (dish)");
 
-		const food = { name: "Somefood", protein: 1, fat: 2, carbs: 3 };
+		const food = { name: "Somefood", protein: 1, fat: 2, carbs: 3 , portions: []};
 		result = component.getDescription({ food: food, dish: dish });
 		expect(result).toEqual(dish.name + " (dish)");
 

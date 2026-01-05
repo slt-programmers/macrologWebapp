@@ -1,0 +1,14 @@
+<div class="flex justify-center items-center gap-4">
+  <button type="button" class="btn btn--icon text--primary" (click)="monthBack()">
+    <fa-icon [icon]="faChevronLeft"/>
+  </button>
+
+  <span class="month-picker__datelabel">
+    {{ dateFrom() | date : "dd MMMM yyyy" }} -
+    {{ dateTo() | date : "dd MMMM yyyy" }}
+  </span>
+
+  <button type="button" class="btn btn--icon text--primary" (click)="monthForward()">
+    <fa-icon [icon]="faChevronRight"/>
+  </button>
+</div>

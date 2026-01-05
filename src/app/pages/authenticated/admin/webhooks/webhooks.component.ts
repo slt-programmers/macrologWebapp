@@ -1,18 +1,19 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { WebhookStatus } from 'src/app/shared/model/webhookStatus';
 import { WebhookService } from 'src/app/shared/services/webhook.service';
+import { Spinner } from "src/app/shared/components/spinner/spinner";
 
 
 @Component({
-    selector: 'ml-webhooks',
-    templateUrl: './webhooks.component.html',
-    imports: []
+  selector: 'ml-webhooks',
+  templateUrl: './webhooks.component.html',
+  imports: [Spinner]
 })
 export class WebhooksComponent implements OnInit {
   private readonly webhookService = inject(WebhookService);
+  private allWebhooks: any[] = [];
 
-
-  public allWebhooks: any[] = [];
+  loading = true;
 
   ngOnInit() {
     this.retrieveStatus('STRAVA');
@@ -43,10 +44,10 @@ export class WebhooksComponent implements OnInit {
   }
 
   private retrieveStatus(connectedApp: string) {
-    // delete old one. Only strava now, so delete all :p
     this.allWebhooks = [];
     this.webhookService.getWebhookStatus(connectedApp).subscribe(it => {
       this.allWebhooks.push({ connectedApp: connectedApp, webhook: it });
+      this.loading = false;
     });
   }
 }

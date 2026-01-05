@@ -1,6 +1,8 @@
 import { DecimalPipe } from '@angular/common';
-import { Component, OnInit, effect, inject, input } from '@angular/core';
+import { Component, effect, inject, input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { faSyncAlt, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { Activity } from 'src/app/shared/model/activity';
 import { UserService } from 'src/app/shared/services/user.service';
 import { ActivityStore } from 'src/app/shared/store/activity.store';
@@ -11,9 +13,12 @@ import { ModalComponent } from '../../../../shared/components/modal/modal.compon
   selector: 'ml-activity-page-row',
   templateUrl: './activity-page-row.component.html',
   styleUrls: ['./activity-page-row.component.css'],
-  imports: [ModalComponent, FormsModule, ReactiveFormsModule, DecimalPipe]
+  imports: [ModalComponent, FormsModule, ReactiveFormsModule, DecimalPipe, FontAwesomeModule]
 })
 export class ActivityPageRowComponent implements OnInit {
+  faTrash = faTrash;
+  faSyncAlt = faSyncAlt;
+
   private readonly userService = inject(UserService);
   private readonly activityStore = inject(ActivityStore);
   private readonly formBuilder = inject(FormBuilder);
@@ -21,12 +26,13 @@ export class ActivityPageRowComponent implements OnInit {
   readonly date = input.required<string>();
 
   private activitiesPerDay = this.activityStore.activitiesPerDay;
-  public activities: Activity[] = [];
 
-  public canSync = false;
-  public modalActivities: Activity[] = []
-  public showModal = false;
-  public activityForm: FormGroup = this.formBuilder.group({
+  activities: Activity[] = [];
+
+  canSync = false;
+  modalActivities: Activity[] = []
+  showModal = false;
+  activityForm: FormGroup = this.formBuilder.group({
     name: ['', Validators.required],
     calories: [undefined, Validators.required]
   });

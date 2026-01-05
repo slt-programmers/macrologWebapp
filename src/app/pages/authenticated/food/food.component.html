@@ -1,8 +1,7 @@
 <div class="card flex flex-col gap-4">
   <div class="flex items-center gap-2">
     <label for="search">Search</label>
-    <input id="search" class="flex-grow" [(ngModel)]="searchInput"
-      (input)="findFoodMatch()" />
+    <input id="search" class="flex-grow" [(ngModel)]="searchInput" (input)="findFoodMatch()" />
 
     <button type="button" class="btn btn--primary" (click)="clearSearch()">
       Clear
@@ -13,16 +12,19 @@
     <span>Display in:</span>
 
     <div class="flex items-center gap-1">
-      <input type="radio" id="grams" [(ngModel)]="displayMode" value="grams">
+      <input type="radio" id="grams" [(ngModel)]="displayMode" (input)="changeDisplay('grams')"  value="grams">
       <label for="grams">Grams</label>
     </div>
 
     <div class="flex items-center gap-1">
-      <input type="radio" id="percentage" [(ngModel)]="displayMode" value="percentage">
+      <input type="radio" id="percentage" [(ngModel)]="displayMode" (input)="changeDisplay('percentage')" value="percentage">
       <label for="percentage">Percentage</label>
     </div>
   </div>
 
+  @if (loading()) {
+  <ml-spinner />
+  } @else {
   <table>
     <thead>
       <tr>
@@ -36,16 +38,15 @@
       </tr>
     </thead>
 
-    @if (displayedFood) {
     <tbody>
-      @for (food of displayedFood; track food) {
+      @for (food of displayedFood; track $index) {
       <tr (click)="openModal(food)">
         <td>
           <div class="flex flex-col gap-2">
             <span> {{ food.name }} </span>
 
             @if (displayMode === 'grams') {
-            @for (portion of food.portions; track portion) {
+            @for (portion of food.portions; track $index) {
             <span>{{portion.description}}</span>
             }
             }
@@ -56,7 +57,7 @@
           <div class="flex flex-col gap-2">
             <span> {{ unitGrams }} {{ unitName }} </span>
 
-            @for (portion of food.portions; track portion) {
+            @for (portion of food.portions; track $index) {
             <span> {{ portion.grams }} {{ unitName }}</span>
             }
           </div>
@@ -67,7 +68,7 @@
             <span> {{ food.protein | number: '1.1-1' }} </span>
 
             @if (displayMode === 'grams') {
-            @for (portion of food.portions; track portion) {
+            @for (portion of food.portions; track $index) {
             <span> {{ portion.macros!.protein | number: '1.1-1' }} </span>
             }
             }
@@ -80,7 +81,7 @@
             </span>
 
             @if (displayMode === 'grams') {
-            @for (portion of food.portions; track portion) {
+            @for (portion of food.portions; track $index) {
             <span> {{ portion.macros!.fat | number: '1.1-1' }} </span>
             }
             }
@@ -93,7 +94,7 @@
             </span>
 
             @if (displayMode === 'grams') {
-            @for (portion of food.portions; track portion) {
+            @for (portion of food.portions; track $index) {
             <span> {{ portion.macros!.carbs | number: '1.1-1' }} </span>
             }
             }
@@ -102,14 +103,14 @@
       </tr>
       }
     </tbody>
-    }
   </table>
+  }
 
   <div class="flex justify-between">
     <div>
       @if (currentPageIndex > 0) {
       <button type="button" class="btn btn--icon" (click)="getPagedFood(currentPageIndex - 1)">
-        <em class="fas fa-chevron-left"></em>
+        <fa-icon [icon]="faChevronLeft"></fa-icon>
         Previous
       </button>
       }
@@ -118,14 +119,14 @@
     @if (hasNextPage()) {
     <button type="button" class="btn btn--icon" (click)="getPagedFood(currentPageIndex + 1)">
       Next
-      <em class="fas fa-chevron-right"></em>
+      <fa-icon [icon]="faChevronRight"></fa-icon>
     </button>
     }
   </div>
 </div>
 
 <button class="floating-action-button" (click)="openModal(null)">
-  <em class="fas fa-plus"></em>
+  <fa-icon [icon]="faPlus"></fa-icon>
 </button>
 
 @if (modalIsVisible && selectedFood) {

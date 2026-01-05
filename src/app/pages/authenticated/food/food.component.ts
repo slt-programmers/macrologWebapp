@@ -5,33 +5,41 @@ import { Portion } from "src/app/shared/model/portion";
 import { FoodStore } from "src/app/shared/store/food.store";
 import { Food } from "../../../shared/model/food";
 import { EditFoodComponent } from "./edit-food/edit-food.component";
+import { Spinner } from "src/app/shared/components/spinner/spinner";
+import { faChevronLeft, faChevronRight, faPlus } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 
 @Component({
 	selector: "ml-food",
 	templateUrl: "./food.component.html",
-	imports: [FormsModule, EditFoodComponent, DecimalPipe],
+	imports: [FormsModule, EditFoodComponent, DecimalPipe, Spinner, FontAwesomeModule],
 })
 export class FoodComponent {
+  faChevronLeft = faChevronLeft;
+  faChevronRight = faChevronRight;
+  faPlus = faPlus;
+
 	private readonly foodStore = inject(FoodStore);
-
-	// Displayed on one page
-	public displayedFood: Food[] = [];
-	public modalIsVisible = false;
-	public currentPageIndex = 0;
-  
-	public selectedFood: Food | null = null; // input voor modal popup
-	public searchInput = "";
-	public currentSortHeader = "name";
-	public sortReverse = false;
-	public displayMode = "grams";
-  
-	public readonly itemsPerPage = 15;
-	public readonly unitName = "gram";
-	public readonly unitGrams = 100.0;
-
-	private allFood = this.foodStore.food;
+  private allFood = this.foodStore.food;
 	private percentageFood: Food[] = [];
 	private searchableFood: Food[] = [];
+
+  loading = this.foodStore.loading;
+
+	// Displayed on one page
+	displayedFood: Food[] = [];
+	modalIsVisible = false;
+	currentPageIndex = 0;
+  
+	selectedFood: Food | null = null; // input voor modal popup
+	searchInput = "";
+	currentSortHeader = "name";
+	sortReverse = false;
+	displayMode = "grams";
+  
+	readonly itemsPerPage = 15;
+	readonly unitName = "gram";
+	readonly unitGrams = 100.0;
 
 	constructor() {
 		effect(() => {
@@ -154,6 +162,7 @@ export class FoodComponent {
 			const newFood = {
 				id: food.id,
 				name: food.name,
+        portions: food.portions,
 				protein: newProtein,
 				fat: newFat,
 				carbs: newCarbs,

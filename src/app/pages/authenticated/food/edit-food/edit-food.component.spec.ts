@@ -4,6 +4,8 @@ import { MockComponent, MockProvider } from "ng-mocks";
 import { ModalComponent } from "src/app/shared/components/modal/modal.component";
 import { FoodStore } from "src/app/shared/store/food.store";
 import { EditFoodComponent } from "./edit-food.component";
+import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
+import { Portion } from "src/app/shared/model/portion";
 
 describe("EditFoodComponent", () => {
 	let fixture: ComponentFixture<EditFoodComponent>;
@@ -15,6 +17,7 @@ describe("EditFoodComponent", () => {
 			imports: [
 				FormsModule,
 				ReactiveFormsModule,
+        FontAwesomeModule,
 				EditFoodComponent,
 				MockComponent(ModalComponent),
 			],
@@ -76,11 +79,9 @@ describe("EditFoodComponent", () => {
 	});
 
 	it("should check if new portion", () => {
-		let result = component.isNewPortion({});
+		let result = component.isNewPortion({ id: 0, grams: 10, description: 'desc' });
 		expect(result).toBeTrue();
-		result = component.isNewPortion({ id: 0 });
-		expect(result).toBeTrue();
-		result = component.isNewPortion({ id: 1 });
+		result = component.isNewPortion({ id: 1,grams: 10, description: 'desc'  });
 		expect(result).toBeFalse();
 	});
 
@@ -88,6 +89,6 @@ describe("EditFoodComponent", () => {
 		fixture.componentRef.setInput("selectedFood", { portions: [] });
 		fixture.detectChanges();
 		component.addNewPortion();
-		expect(component.selectedFood().portions).toEqual([{}]);
+		expect(component.selectedFood().portions).toEqual([{} as unknown as Portion]);
 	});
 });

@@ -5,6 +5,7 @@ import { MockProvider } from "ng-mocks";
 import { of } from "rxjs";
 import { Meal } from "../model/meal";
 import { DateStore } from "./date.store";
+import { Entry } from "../model/entry";
 
 describe("EntryStore", () => {
   let store: any;
@@ -99,12 +100,13 @@ describe("EntryStore", () => {
   });
 });
 
-function getSimpleEntry() {
+function getSimpleEntry(): Entry {
   return {
     id: 1,
     food: {
       id: 1, name: 'food1',
-      protein: 1, fat: 2, carbs: 3
+      protein: 1, fat: 2, carbs: 3,
+      portions: []
     },
     meal: Meal.Breakfast,
     day: '2020-01-01',

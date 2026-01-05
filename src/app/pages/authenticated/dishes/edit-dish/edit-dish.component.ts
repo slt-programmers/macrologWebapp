@@ -1,5 +1,7 @@
 import { Component, inject, input, OnInit, output } from "@angular/core";
 import { FormsModule } from "@angular/forms";
+import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
+import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import { AutocompleteFoodComponent } from "src/app/shared/components/autocomplete-food/autocomplete-food.component";
 import { ModalComponent } from "src/app/shared/components/modal/modal.component";
 import { Dish } from "src/app/shared/model/dish";
@@ -9,11 +11,12 @@ import { DishStore } from "src/app/shared/store/dish.store";
 
 @Component({
 	selector: "ml-edit-dish",
-	imports: [ModalComponent, AutocompleteFoodComponent, FormsModule],
+	imports: [ModalComponent, AutocompleteFoodComponent, FormsModule, FontAwesomeModule],
 	templateUrl: "./edit-dish.component.html",
 	styleUrl: "./edit-dish.component.css",
 })
 export class EditDishComponent implements OnInit {
+  faTrash = faTrash
 	private readonly dishStore = inject(DishStore);
 	
 	readonly selectedDish = input.required<Dish>();
@@ -74,10 +77,10 @@ export class EditDishComponent implements OnInit {
 	}
 
 	addIngredient(foodSearchable: FoodSearchable) {
-		const ingredient: Ingredient = {
+		const ingredient = {
 			multiplier: 1,
 			food: foodSearchable.food!,
-		};
+		} as Ingredient;
 		this.selectedDish().ingredients.push(ingredient);
 	}
 

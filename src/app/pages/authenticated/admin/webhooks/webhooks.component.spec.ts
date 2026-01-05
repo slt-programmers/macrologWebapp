@@ -11,17 +11,13 @@ describe('WebhooksComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-    imports: [WebhooksComponent],
-    providers: [
+      imports: [WebhooksComponent],
+      providers: [
         MockProvider(WebhookService),
-    ]
-}).compileComponents();
+      ]
+    }).compileComponents();
 
     webhookService = TestBed.inject(WebhookService);
-  });
-
-  afterEach(() => {
-    localStorage.clear();
   });
 
   it('should create', () => {
@@ -31,7 +27,7 @@ describe('WebhooksComponent', () => {
   });
 
   it('should init component', () => {
-    spyOn(webhookService, 'getWebhookStatus').and.returnValue(of({ id: 1 }));
+    spyOn(webhookService, 'getWebhookStatus').and.returnValue(of({ id: 1, callback_url: 'blaat' }));
     fixture = TestBed.createComponent(WebhooksComponent);
     component = fixture.componentInstance;
     component.ngOnInit();
@@ -40,26 +36,27 @@ describe('WebhooksComponent', () => {
 
   it('should disable webhook', () => {
     spyOn(webhookService, 'endWebhook').and.returnValue(of({ status: 200 }));
-    spyOn(webhookService, 'getWebhookStatus').and.returnValue(of({ id: 2 }));
+    spyOn(webhookService, 'getWebhookStatus').and.returnValue(of({ id: 2, callback_url: 'blaat' }));
     fixture = TestBed.createComponent(WebhooksComponent);
     component = fixture.componentInstance;
-    component.allWebhooks = [{ connectedApp: 'STRAVA', webhook: { id: 1 } }]
+    fixture.detectChanges()
     component.disableWebhook('STRAVA');
-    expect(webhookService.endWebhook).toHaveBeenCalledWith('STRAVA', 1);
+    expect(webhookService.endWebhook).toHaveBeenCalledWith('STRAVA', 2);
   });
 
   it('should not disable webhook if name not found in webhooklist', () => {
     spyOn(webhookService, 'endWebhook');
+    spyOn(webhookService, 'getWebhookStatus').and.returnValue(of({ id: 2, callback_url: 'blaat' }));
     fixture = TestBed.createComponent(WebhooksComponent);
     component = fixture.componentInstance;
-    component.allWebhooks = [{ connectedApp: 'NOTSTRAVA', webhook: { id: 1 } }]
-    component.disableWebhook('STRAVA');
-    expect(webhookService.endWebhook).not.toHaveBeenCalledWith('STRAVA', 1);
+    fixture.detectChanges();
+    component.disableWebhook('NOSTRAVA');
+    expect(webhookService.endWebhook).not.toHaveBeenCalledWith('NOSTRAVA', 1);
   });
 
   it('should enable webhook', () => {
     spyOn(webhookService, 'startWebhook').and.returnValue(of({ status: 200 }));
-    spyOn(webhookService, 'getWebhookStatus').and.returnValue(of({ id: 2 }));
+    spyOn(webhookService, 'getWebhookStatus').and.returnValue(of({ id: 2, callback_url: 'blaat' }));
     fixture = TestBed.createComponent(WebhooksComponent);
     component = fixture.componentInstance;
     component.enableWebhook('STRAVA');

@@ -1,5 +1,6 @@
 import { signal } from "@angular/core";
 import { ComponentFixture, TestBed } from "@angular/core/testing";
+import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 import { MockComponent, MockProvider } from "ng-mocks";
 import { Food } from "src/app/shared/model/food";
 import { FoodStore } from "src/app/shared/store/food.store";
@@ -12,15 +13,41 @@ describe("FoodComponent", () => {
 
 	beforeEach(() => {
 		TestBed.configureTestingModule({
-			imports: [FoodComponent, MockComponent(EditFoodComponent)],
+			imports: [
+				FoodComponent,
+				FontAwesomeModule,
+				MockComponent(EditFoodComponent),
+			],
 			providers: [
 				MockProvider(FoodStore, {
 					food: signal([
-						{ id: 1, name: "Name", protein: 1, fat: 24, carbs: 13 },
-						{ id: 2, name: "Other name", protein: 31, fat: 2, carbs: 13 },
-						{ id: 3, name: "Something else", protein: 18, fat: 67, carbs: 43 },
+						{
+							id: 1,
+							name: "Name",
+							protein: 1,
+							fat: 24,
+							carbs: 13,
+							portions: [],
+						},
+						{
+							id: 2,
+							name: "Other name",
+							protein: 31,
+							fat: 2,
+							carbs: 13,
+							portions: [],
+						},
+						{
+							id: 3,
+							name: "Something else",
+							protein: 18,
+							fat: 67,
+							carbs: 43,
+							portions: [],
+						},
 					]),
 					getFood: () => {},
+					loading: signal(false),
 				}),
 			],
 		}).compileComponents();
@@ -36,15 +63,36 @@ describe("FoodComponent", () => {
 
 	it("should find food match", () => {
 		expect(component.displayedFood).toEqual([
-			{ id: 1, name: "Name", protein: 1, fat: 24, carbs: 13 },
-			{ id: 2, name: "Other name", protein: 31, fat: 2, carbs: 13 },
-			{ id: 3, name: "Something else", protein: 18, fat: 67, carbs: 43 },
+			{ id: 1, name: "Name", protein: 1, fat: 24, carbs: 13, portions: [] },
+			{
+				id: 2,
+				name: "Other name",
+				protein: 31,
+				fat: 2,
+				carbs: 13,
+				portions: [],
+			},
+			{
+				id: 3,
+				name: "Something else",
+				protein: 18,
+				fat: 67,
+				carbs: 43,
+				portions: [],
+			},
 		]);
 		component.searchInput = "Na";
 		component.findFoodMatch();
 		expect(component.displayedFood).toEqual([
-			{ id: 1, name: "Name", protein: 1, fat: 24, carbs: 13 },
-			{ id: 2, name: "Other name", protein: 31, fat: 2, carbs: 13 },
+			{ id: 1, name: "Name", protein: 1, fat: 24, carbs: 13, portions: [] },
+			{
+				id: 2,
+				name: "Other name",
+				protein: 31,
+				fat: 2,
+				carbs: 13,
+				portions: [],
+			},
 		]);
 	});
 
@@ -75,30 +123,86 @@ describe("FoodComponent", () => {
 		component.clearSearch();
 		expect(component.searchInput).toEqual("");
 		expect(component.displayedFood).toEqual([
-			{ id: 1, name: "Name", protein: 1, fat: 24, carbs: 13 },
-			{ id: 2, name: "Other name", protein: 31, fat: 2, carbs: 13 },
-			{ id: 3, name: "Something else", protein: 18, fat: 67, carbs: 43 },
+			{ id: 1, name: "Name", protein: 1, fat: 24, carbs: 13, portions: [] },
+			{
+				id: 2,
+				name: "Other name",
+				protein: 31,
+				fat: 2,
+				carbs: 13,
+				portions: [],
+			},
+			{
+				id: 3,
+				name: "Something else",
+				protein: 18,
+				fat: 67,
+				carbs: 43,
+				portions: [],
+			},
 		]);
 	});
 
 	it("should sort food", () => {
 		component.sortBy("protein");
 		expect(component.displayedFood).toEqual([
-			{ id: 2, name: "Other name", protein: 31, fat: 2, carbs: 13 },
-			{ id: 3, name: "Something else", protein: 18, fat: 67, carbs: 43 },
-			{ id: 1, name: "Name", protein: 1, fat: 24, carbs: 13 },
+			{
+				id: 2,
+				name: "Other name",
+				protein: 31,
+				fat: 2,
+				carbs: 13,
+				portions: [],
+			},
+			{
+				id: 3,
+				name: "Something else",
+				protein: 18,
+				fat: 67,
+				carbs: 43,
+				portions: [],
+			},
+			{ id: 1, name: "Name", protein: 1, fat: 24, carbs: 13, portions: [] },
 		]);
 		component.sortBy("protein");
 		expect(component.displayedFood).toEqual([
-			{ id: 1, name: "Name", protein: 1, fat: 24, carbs: 13 },
-			{ id: 3, name: "Something else", protein: 18, fat: 67, carbs: 43 },
-			{ id: 2, name: "Other name", protein: 31, fat: 2, carbs: 13 },
+			{ id: 1, name: "Name", protein: 1, fat: 24, carbs: 13, portions: [] },
+			{
+				id: 3,
+				name: "Something else",
+				protein: 18,
+				fat: 67,
+				carbs: 43,
+				portions: [],
+			},
+			{
+				id: 2,
+				name: "Other name",
+				protein: 31,
+				fat: 2,
+				carbs: 13,
+				portions: [],
+			},
 		]);
 		component.sortBy("carbs");
 		expect(component.displayedFood).toEqual([
-			{ id: 3, name: "Something else", protein: 18, fat: 67, carbs: 43 },
-			{ id: 1, name: "Name", protein: 1, fat: 24, carbs: 13 },
-			{ id: 2, name: "Other name", protein: 31, fat: 2, carbs: 13 },
+			{
+				id: 3,
+				name: "Something else",
+				protein: 18,
+				fat: 67,
+				carbs: 43,
+				portions: [],
+			},
+			{ id: 1, name: "Name", protein: 1, fat: 24, carbs: 13, portions: [] },
+			{
+				id: 2,
+				name: "Other name",
+				protein: 31,
+				fat: 2,
+				carbs: 13,
+				portions: [],
+			},
 		]);
 	});
 
@@ -112,6 +216,7 @@ describe("FoodComponent", () => {
 				protein: 2.631578947368421,
 				fat: 63.1578947368421,
 				carbs: 34.21052631578947,
+				portions: [],
 			},
 			{
 				id: 2,
@@ -119,6 +224,7 @@ describe("FoodComponent", () => {
 				protein: 67.3913043478261,
 				fat: 4.3478260869565215,
 				carbs: 28.26086956521739,
+				portions: [],
 			},
 			{
 				id: 3,
@@ -126,14 +232,29 @@ describe("FoodComponent", () => {
 				protein: 14.0625,
 				fat: 52.34375,
 				carbs: 33.59375,
+				portions: [],
 			},
 		]);
 		component.changeDisplay("grams");
 		expect(component.displayMode).toEqual("grams");
 		expect(component.displayedFood).toEqual([
-			{ id: 1, name: "Name", protein: 1, fat: 24, carbs: 13 },
-			{ id: 2, name: "Other name", protein: 31, fat: 2, carbs: 13 },
-			{ id: 3, name: "Something else", protein: 18, fat: 67, carbs: 43 },
+			{ id: 1, name: "Name", protein: 1, fat: 24, carbs: 13, portions: [] },
+			{
+				id: 2,
+				name: "Other name",
+				protein: 31,
+				fat: 2,
+				carbs: 13,
+				portions: [],
+			},
+			{
+				id: 3,
+				name: "Something else",
+				protein: 18,
+				fat: 67,
+				carbs: 43,
+				portions: [],
+			},
 		]);
 	});
 });
