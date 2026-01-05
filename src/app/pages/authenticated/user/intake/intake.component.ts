@@ -79,9 +79,9 @@ export class IntakeComponent implements OnInit {
 
   public saveIntake() {
     forkJoin([
-      this.userService.addUserSetting('goalProtein', Math.round(this.protein).toString()),
-      this.userService.addUserSetting('goalFat', Math.round(this.fat).toString()),
-      this.userService.addUserSetting('goalCarbs', Math.round(this.carbs).toString()),
+      this.userService.putUserSetting('goalProtein', Math.round(this.protein).toString()),
+      this.userService.putUserSetting('goalFat', Math.round(this.fat).toString()),
+      this.userService.putUserSetting('goalCarbs', Math.round(this.carbs).toString()),
     ]).subscribe(() => {
       this.goalProtein = Math.round(this.protein);
       this.goalFat = Math.round(this.fat);

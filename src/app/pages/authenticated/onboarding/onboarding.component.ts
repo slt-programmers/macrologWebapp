@@ -106,12 +106,12 @@ export class OnboardingComponent {
 		if (this.userForm.valid) {
 			const data = this.userForm.value;
 			forkJoin([
-				this.userService.addUserSetting("name", data.name),
-				this.userService.addUserSetting("birthday", data.birthday.toString()),
-				this.userService.addUserSetting("gender", data.gender.toString()),
-				this.userService.addUserSetting("height", data.height.toString()),
-				this.userService.addUserSetting("weight", data.weight.toString()),
-				this.userService.addUserSetting("activity", data.activity.toString()),
+				this.userService.putUserSetting("name", data.name),
+				this.userService.putUserSetting("birthday", data.birthday.toString()),
+				this.userService.putUserSetting("gender", data.gender.toString()),
+				this.userService.putUserSetting("height", data.height.toString()),
+				this.userService.putUserSetting("weight", data.weight.toString()),
+				this.userService.putUserSetting("activity", data.activity.toString()),
 			]).subscribe(
 				() => {
 					this.nextStep();
@@ -123,15 +123,15 @@ export class OnboardingComponent {
 
 	public saveIntake() {
 		forkJoin([
-			this.userService.addUserSetting(
+			this.userService.putUserSetting(
 				"goalProtein",
 				Math.round(this.protein).toString()
 			),
-			this.userService.addUserSetting(
+			this.userService.putUserSetting(
 				"goalFat",
 				Math.round(this.fat).toString()
 			),
-			this.userService.addUserSetting(
+			this.userService.putUserSetting(
 				"goalCarbs",
 				Math.round(this.carbs).toString()
 			),
