@@ -43,7 +43,7 @@ describe("UserService", () => {
 
 	it("should add user settings", async () => {
 		spyOn(http, "put").and.returnValue(of({}));
-		const result = await service.addUserSetting("name", "tester").toPromise();
+		const result = await service.putUserSetting("name", "tester").toPromise();
 		expect(result).toEqual({});
 		expect(http.put).toHaveBeenCalledWith(
 			"//" + environment.backend + "/settings",

@@ -101,12 +101,12 @@ describe('IntakeComponent', () => {
       goalFat: 60,
       goalCarbs: 236
     }));
-    spyOn(userService, 'addUserSetting').and.returnValue(of({}));
+    spyOn(userService, 'putUserSetting').and.returnValue(of({}));
     component.ngOnInit();
     component.openModal();
     component.fillStandard();
     component.saveIntake();
-    expect(userService.addUserSetting).toHaveBeenCalledTimes(3);
+    expect(userService.putUserSetting).toHaveBeenCalledTimes(3);
     expect(component.goalProtein).toEqual(119);
     expect(component.goalFat).toEqual(53);
     expect(component.goalCarbs).toEqual(228);
