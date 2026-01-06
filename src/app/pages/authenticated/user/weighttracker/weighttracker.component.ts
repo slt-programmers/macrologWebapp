@@ -2,7 +2,7 @@ import { DatePipe, DecimalPipe } from '@angular/common';
 import { Component, OnInit, inject } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { faCheck, faTractor } from '@fortawesome/free-solid-svg-icons';
+import { faCheck, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { format, isAfter, isBefore, parse } from 'date-fns';
 import { take } from 'rxjs';
 import { DataPoint } from 'src/app/shared/components/linegraph/linegraph.component';
@@ -17,7 +17,7 @@ import { WeightService } from '../../../../shared/services/weight.service';
 })
 export class WeightTrackerComponent implements OnInit {
   faCheck = faCheck;
-  faTrash = faTractor;
+  faTrash = faTrash;
   private readonly weightService = inject(WeightService);
 
   public trackedWeights: Weight[] = [];

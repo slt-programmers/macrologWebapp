@@ -28,7 +28,7 @@ export class UserService {
 		]);
 	}
 
-	addUserSetting(key: string, value: string): Observable<any> {
+	putUserSetting(key: string, value: string): Observable<any> {
 		const setting = { name: key, value: value };
 		return this.http.put<any>(this.macrologBackendUrl, setting);
 	}

@@ -21,7 +21,7 @@ export class PlanService {
   }
 
   savePlan(mealplan: MealplanRequest | Mealplan): Observable<Mealplan> {
-    return this.http.put<Mealplan>(this.backendUrl, mealplan);
+    return this.http.post<Mealplan>(this.backendUrl, mealplan);
   }
 
   deletePlan(id: number): Observable<void> {
