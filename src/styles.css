@@ -2,7 +2,9 @@
 	/* grayscale */
 	--black: #000000;
 	--coal: #191919;
+	--slate: #222222;
 	--storm: #333333;
+	--granite: #444444;
 	--platinum: #b1bcc9;
 	--smoke: #c8d0d9;
 	--mist: #dcdee3;
@@ -28,11 +30,6 @@
 		var(--primary),
 		var(--secondary)
 	);
-
-	--boxShadow: 0 0 5px rgb(183, 193, 206);
-	--boxShadowDark: 0 0 5px rgb(0, 0, 0);
-	--boxShadowWide: 0 0 20px rgb(183, 193, 206);
-	--boxShadowWideDark: 0 0 20px rgb(0, 0, 0);
 }
 
 .xs-only {

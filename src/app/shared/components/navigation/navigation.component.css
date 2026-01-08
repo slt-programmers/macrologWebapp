@@ -14,14 +14,14 @@
 	right: 0;
 	height: 56px;
 	padding: 0 16px;
-  background-color: var(--white);
+  background-color: var(--navbar-background);
 	box-shadow: var(--boxShadow), var(--boxShadowWide);
 }
 
 .nav-items {
 	display: flex;
 	align-items: center;
-	gap: 12px;
+	gap: 24px;
 }
 
 .home-link {
