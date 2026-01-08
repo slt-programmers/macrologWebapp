@@ -1,5 +1,5 @@
 .subnav {
-  border-bottom: 1px solid var(--smoke);
+  border-bottom: 1px solid var(--subnav-border);
   margin-bottom: 15px;
 }
 
@@ -10,11 +10,12 @@
 
   &:hover {
     cursor: pointer;
-    color: var(--primary);
-    border-bottom: 2px solid var(--smoke);
+    color: var(--subnav-item-hover-color);
+    border-bottom: 2px solid var(--subnav-border);
   }
 }
 
 .subnav__item--active {
-  border-bottom: 2px solid var(--primary);
+  color: var(--subnav-item-active-color);
+  border-bottom: 2px solid var(--subnav-item-active-color);
 }
