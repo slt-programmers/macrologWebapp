@@ -7,7 +7,7 @@
   padding: 8px;
 
   &:hover {
-    background-color: var(--lightBlue);
+    background-color: var(--table-hover);
   }
 }
 

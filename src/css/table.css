@@ -3,9 +3,15 @@ table {
 }
 
 thead {
-  background-color: var(--mist);
+  background-color: var(--table-header-background);
   border-bottom: none;
   font-weight: 600;
+}
+
+thead tr {
+  &:hover {
+    background-color: inherit;
+  }
 }
 
 th {
@@ -19,9 +25,9 @@ td {
 }
 
 tr {
-  border-bottom: 1px solid var(--lightBlue);
+  border-bottom: 1px solid var(--table-border);
 
   &:hover {
-    background-color: var(--lightBlue);
+    background-color: var(--table-hover);
   }
 }

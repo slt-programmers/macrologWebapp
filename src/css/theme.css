@@ -1,0 +1,39 @@
+:root {
+  --body-background: var(--white);
+  --text-color: var(--storm);
+  --link-color: var(--primary);
+  --page-background: var(--lightBlue);
+  --navbar-background: var(--white);
+  --card-background: var(--white);
+  --input-background: var(--white);
+  --input-border: var(--smoke);
+  --subnav-border: var(--smoke);
+  --subnav-item-hover-color: var(--primary);
+  --subnav-item-active-color: var(--primary);
+  --table-header-background: var(--mist);
+  --table-border: var(--lightBlue);
+  --table-hover: var(--lightBlue);
+
+	--boxShadow: 0 0 5px rgb(183, 193, 206);
+	--boxShadowWide: 0 0 20px rgb(183, 193, 206);
+
+  body.theme--dark {
+    --body-background: var(--coal);
+    --text-color: var(--lightBlue);
+    --link-color: var(--secondary);
+    --page-background: var(--coal);
+    --navbar-background: var(--coal);
+    --card-background: var(--slate);
+    --input-background: var(--coal);
+    --input-border: var(--secondary);
+    --subnav-border: var(--secondary);
+    --subnav-item-hover-color: var(--secondary);
+    --subnav-item-active-color: var(--secondary);
+    --table-header-background: var(--storm);
+    --table-border: var(--granite);
+    --table-hover: var(--granite);
+
+    --boxShadow: 0 0 5px rgb(0, 0, 0);
+	  --boxShadowWide: 0 0 20px rgb(0, 0, 0);
+  }
+}

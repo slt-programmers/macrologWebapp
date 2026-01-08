@@ -1,9 +1,9 @@
 input {
-  background-color: var(--white);
-  border: 1px solid var(--smoke);
+  background-color: var(--input-background);
+  border: 1px solid var(--input-border);
   border-radius: 8px;
   padding: 8px 12px;
-  color: var(--storm);
+  color: var(--text-color);
 
   &::placeholder {
     color: var(--platinum);
