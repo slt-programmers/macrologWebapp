@@ -1,10 +1,11 @@
 .card {
   background-color: var(--card-background);
-	border-radius: 0.5rem;
+	border-radius: 0;
   box-shadow: var(--boxShadow);
-  padding: 1rem;
+  padding: 8px;
   
   @media (min-width: 448px) {
-    padding: 2rem;
+    padding: 32px;
+    border-radius: 8px;
   }
 }

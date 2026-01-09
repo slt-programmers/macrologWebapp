@@ -19,7 +19,11 @@ import { DateStore } from "src/app/shared/store/date.store";
 	styles: `:host { 
     display: flex;
     flex-direction: column;
-    gap: 16px;
+		gap: 8px;
+
+		@media (min-width: 640px) {
+      gap: 16px;
+		}
   }`,
 })
 export class DiaryComponent implements OnInit {

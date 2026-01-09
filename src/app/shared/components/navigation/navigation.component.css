@@ -33,3 +33,29 @@
 		text-decoration: none;
 	}
 }
+
+.mobile-navbar {
+	position: absolute;
+	width: 100vw;
+	height: 100vh;
+	top: 0;
+	left: 0;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 8px;
+	background-color: var(--navbar-background);
+	box-shadow: var(--boxShadow), var(--boxShadowWide);
+}
+
+.mobile-close-button {
+	display: flex;
+	height: 56px;
+	padding: 0 16px;
+	align-self: end;
+	align-items: center;
+}
+
+.mobile-nav-item {
+	padding: 12px;
+}

@@ -43,5 +43,9 @@
 }
 
 .min-w-600 {
-  min-width: 600px;
+  min-width: 100vw;
+  
+  @media (min-widh: 640px) {
+    min-width: 600px;
+  }
 }

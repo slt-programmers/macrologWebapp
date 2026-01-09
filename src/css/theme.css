@@ -13,6 +13,9 @@
   --table-header-background: var(--mist);
   --table-border: var(--lightBlue);
   --table-hover: var(--lightBlue);
+  --icon-button: var(--primary);
+  --modal-background: var(--white);
+  --modal-overlay: rgba(0, 0, 0, 0.2);
 
 	--boxShadow: 0 0 5px rgb(183, 193, 206);
 	--boxShadowWide: 0 0 20px rgb(183, 193, 206);
@@ -32,6 +35,9 @@
     --table-header-background: var(--storm);
     --table-border: var(--granite);
     --table-hover: var(--granite);
+    --icon-button: var(--secondary);
+    --modal-background: var(--coal);
+    --modal-overlay: rgba(0, 0, 0, 0.6);
 
     --boxShadow: 0 0 5px rgb(0, 0, 0);
 	  --boxShadowWide: 0 0 20px rgb(0, 0, 0);
