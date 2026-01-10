@@ -4,7 +4,7 @@
 }
 
 .autocomplete {
-	box-shadow: 0 0 10px rgb(156, 169, 185);
+	box-shadow: var(--box-shadow-medium);
 	border-radius: 5px;
 	max-height: 250px;
 	overflow-y: auto;
@@ -16,7 +16,7 @@
 
 .autocomplete__option {
 	padding: 8px;
-	background-color: white;
+	background-color: var(--autocomplete-background);
 	border-top: 0;
 	text-align: left;
 
