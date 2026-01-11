@@ -24,7 +24,7 @@
 }
 
 .btn--icon {
-  color: var(--primary);
+  color: var(--icon-button);
   border: none;
   display: flex;
   align-items: center;

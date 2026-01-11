@@ -6,9 +6,13 @@
 
 .header {
   padding: 8px;
-  display: grid;
   grid-template-columns: repeat(9, 1fr);
-  gap: 4px
+  gap: 4px;
+  display: none;
+  
+  @media(min-width: 640px) {
+    display: grid;
+  }
 }
 
 .totals {

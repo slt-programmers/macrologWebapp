@@ -17,8 +17,8 @@ export class StackDonutComponent {
   readonly goal = input.required<number>();
   readonly achieved = input.required<number>();
   readonly text = input.required<string>();
-  readonly circleRadius = 60;
-  readonly strokeWidth = 8;
+  readonly circleRadius = window.innerWidth > 640 ? 60 : 40;
+  readonly strokeWidth = window.innerWidth > 640 ? 8 : 4;
 
   public height = (this.circleRadius + (this.strokeWidth * 2) + 1) * 2;
   public width = this.height;
@@ -26,7 +26,7 @@ export class StackDonutComponent {
   constructor() {
     effect(() => {
       this.drawProgressCircle(this.achieved());
-    })
+    });
 
     afterRenderEffect(() => {
       const circleRadius = this.circleRadius;
@@ -44,7 +44,7 @@ export class StackDonutComponent {
       this.renderer.setAttribute(outerCircle.nativeElement, 'r', (circleRadius + strokeWidth + 1) + '');
 
       this.drawProgressCircle(0);
-    })
+    });
   }
 
   private drawProgressCircle(oldValue: number) {

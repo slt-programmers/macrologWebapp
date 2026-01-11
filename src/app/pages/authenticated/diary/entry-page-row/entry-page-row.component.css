@@ -1,47 +1,65 @@
 .selectable {
-  border-radius: 0.25rem;
-  cursor: pointer;
-  display: grid;
-  grid-template-columns: repeat(9, 1fr);
-  gap: 4px;
-  padding: 8px;
+	border-radius: 0.25rem;
+	cursor: pointer;
+	display: grid;
+	grid-template-columns: repeat(9, 1fr);
+	gap: 4px;
+	padding: 8px;
 
-  &:hover {
-    background-color: var(--table-hover);
-  }
+	&:hover {
+		background-color: var(--table-hover);
+	}
 }
 
 .col-start-1 {
-  grid-column-start: 1;
+	grid-column-start: 1;
 }
 
 .col-span-1 {
-  grid-column: span 1;
+	grid-column: span 1;
 }
 
 .col-span-2 {
-  grid-column: span 2;
+	grid-column: span 2;
 }
 
 .col-span-3 {
-  grid-column: span 3;
+	grid-column: span 3;
 }
 
 .col-span-4 {
-  grid-column: span 4;
+	grid-column: span 4;
 }
 
 .col-span-9 {
-  grid-column: span 9;
+	grid-column: span 9;
 }
 
-.food-grid {
-  display: grid;
-  gap: 12px;
-  grid-template-columns: 1fr 1fr 1fr auto;
+.modal-entry,
+.modal-entry-header {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
   align-items: center;
+	gap: 8px;
+
+	.delete {
+		grid-row-start: 1;
+		grid-column-start: 2;
+		justify-self: end;
+	}
+
+	@media (min-width: 640px) {
+		grid-template-columns: 1fr 1fr 1fr 20px;
+		gap: 12px;
+
+		.delete {
+			grid-column-start: 4;
+		}
+	}
 }
 
 .min-w-600 {
-  min-width: 600px;
+	@media (min-widh: 640px) {
+		min-width: 600px;
+	}
 }

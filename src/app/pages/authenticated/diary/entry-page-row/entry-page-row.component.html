@@ -30,42 +30,44 @@
 @if (showModal) {
 <ml-modal [title]="'Edit ' + meal().toLowerCase()" (close$)="showModal = false">
   <div class="flex flex-col gap-4 min-w-600">
-    <div class="food-grid">
       @if (!modalEntries || modalEntries.length === 0) {
       <div class="col-span-4">Search for food to add entries to your
         diary.</div>
       } @else {
-      <span class="font-bold">Food</span>
-      <span class="font-bold">Portion</span>
-      <span class="font-bold">Amount</span>
+        <div class="modal-entry-header">
+          <span class="font-bold sm">Food</span>
+          <span class="font-bold sm">Portion</span>
+          <span class="font-bold sm">Amount</span>
+        </div>
       }
 
       @for (entry of modalEntries; track entry; let index = $index) {
-      <span class="col-start-1"> {{entry.food.name}} </span>
-
-      <select class="select" (change)="changePortion($event, index)">
-        <option [selected]="!entry.portion">grams</option>
-
-        @for (portion of entry.food.portions; track portion) {
-        <option [selected]="!!entry.portion && entry.portion.description === portion.description"
-          value="{{portion.id}}">
-          {{portion.description}}
-        </option>
+        <div class="modal-entry">
+          <span class="food"> {{entry.food.name}} </span>
+          
+          <select name="portion" class="select portion" (change)="changePortion($event, index)">
+            <option [selected]="!entry.portion">grams</option>
+            
+            @for (portion of entry.food.portions; track portion) {
+              <option [selected]="!!entry.portion && entry.portion.description === portion.description"
+              value="{{portion.id}}">
+              {{portion.description}}
+            </option>
+          }
+        </select>
+        
+        @if (entry.portion) {
+          <input class="amount" value="{{entry.multiplier}}" (keyup)="changeMultiplier($event, index)">
+        } @else {
+          <input class="amount" value="{{entry.multiplier! * 100}}"
+          (keyup)="changeMultiplier($event, index)">
         }
-      </select>
-
-      @if (entry.portion) {
-      <input class="input" value="{{entry.multiplier}}" (keyup)="changeMultiplier($event, index)">
-      } @else {
-      <input class="input" value="{{entry.multiplier! * 100}}"
-        (keyup)="changeMultiplier($event, index)">
+        
+        <button class="btn btn--icon text-primary delete" (click)="deleteEntry(index)">
+          <fa-icon [icon]="faTrash"></fa-icon>
+        </button>
+      </div>
       }
-
-      <button class="icon-button text-primary" (click)="deleteEntry(index)">
-        <fa-icon [icon]="faTrash"></fa-icon>
-      </button>
-      }
-    </div>
 
     <ml-autocomplete-food [includeDishes]="true" [placeholder]="'Search food...'"
       (selected)="addEntry($event)" />

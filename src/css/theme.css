@@ -13,9 +13,14 @@
   --table-header-background: var(--mist);
   --table-border: var(--lightBlue);
   --table-hover: var(--lightBlue);
+  --icon-button: var(--primary);
+  --modal-background: var(--white);
+  --modal-overlay: rgba(0, 0, 0, 0.2);
+  --autocomplete-background: var(--white);
 
-	--boxShadow: 0 0 5px rgb(183, 193, 206);
-	--boxShadowWide: 0 0 20px rgb(183, 193, 206);
+	--box-shadow: 0 0 5px rgb(183, 193, 206);
+  --box-shadow-medium: 0 0 10px rgb(183, 193, 206);
+	--box-shadow-wide: 0 0 20px rgb(183, 193, 206);
 
   body.theme--dark {
     --body-background: var(--coal);
@@ -32,8 +37,13 @@
     --table-header-background: var(--storm);
     --table-border: var(--granite);
     --table-hover: var(--granite);
+    --icon-button: var(--secondary);
+    --modal-background: var(--coal);
+    --modal-overlay: rgba(0, 0, 0, 0.6);
+    --autocomplete-background: var(--coal);
 
-    --boxShadow: 0 0 5px rgb(0, 0, 0);
-	  --boxShadowWide: 0 0 20px rgb(0, 0, 0);
+    --box-shadow: 0 0 5px rgb(0, 0, 0);
+    --box-shadow-medium: 0 0 10px rgb(0, 0, 0);
+	  --box-shadow-wide: 0 0 20px rgb(0, 0, 0);
   }
 }

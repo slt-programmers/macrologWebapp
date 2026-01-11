@@ -49,17 +49,17 @@
 }
 
 .xs {
-	@media (max-width: (448px - 1)) {
+	@media (max-width: 448px) {
 		display: none;
 	}
 }
 .sm {
-	@media (max-width: (640px - 1)) {
+	@media (max-width: 640px) {
 		display: none;
 	}
 }
 .lg {
-	@media (max-width: (1024px - 1)) {
+	@media (max-width: 1024px) {
 		display: none;
 	}
 }
