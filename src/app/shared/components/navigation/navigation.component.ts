@@ -1,7 +1,7 @@
 import { Component, inject } from "@angular/core";
 import { Router, RouterLink } from "@angular/router";
 import { AuthenticationStore } from "../../store/auth.store";
-import { faBars } from "@fortawesome/free-solid-svg-icons";
+import { faBars, faTimes } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 
 @Component({
@@ -12,6 +12,7 @@ import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 })
 export class NavigationComponent {
   faBars = faBars;
+	faTimes = faTimes
 	private readonly authStore = inject(AuthenticationStore);
 	private readonly router = inject(Router);
 

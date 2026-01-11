@@ -3,49 +3,56 @@
     <a class="home-link" [routerLink]="['/']">M</a>
 
     @if (isLoggedIn()) {
-    <a id="menuDiary" [routerLink]="['/dashboard']">Diary</a>
-    <a id="menuFood" [routerLink]="['/dashboard', 'food']">Food</a>
-    <a id="menuDishes" [routerLink]="['/dashboard', 'dishes']">Dishes</a>
-    <a id="menuPlans" [routerLink]="['/dashboard', 'plans']">Plans</a>
-    <a id="menuGraphs" [routerLink]="['/dashboard', 'graphs']">Graphs</a>
+    <a class="sm" id="menuDiary" [routerLink]="['/dashboard']">Diary</a>
+    <a class="sm" id="menuFood" [routerLink]="['/dashboard', 'food']">Food</a>
+    <a class="sm" id="menuDishes" [routerLink]="['/dashboard', 'dishes']">Dishes</a>
+    <a class="sm" id="menuPlans" [routerLink]="['/dashboard', 'plans']">Plans</a>
+    <a class="sm" id="menuGraphs" [routerLink]="['/dashboard', 'graphs']">Graphs</a>
     }
 
-    <a id="menuAbout" [routerLink]="['/about']">About</a>
+    <a class="sm" id="menuAbout" [routerLink]="['/about']">About</a>
   </div>
 
   <div class="nav-items">
-    <button class="sm-only" type="button" aria-label="menu" aria-expanded="false"
+    <button class="sm-only btn btn--icon" type="button" aria-label="menu" aria-expanded="false"
       (click)="toggleMenu()">
-      <fa-icon [icon]="faBars"></fa-icon>
+      <fa-icon [icon]="faBars"/>
     </button>
 
     @if (menuOpen) {
     <div class="overlay" (click)="toggleMenu()"></div>
 
-    <div class="navbar__mobile-menu sm-only flex-col" (click)="toggleMenu()">
-      <a class="navbar__item" [routerLink]="['/about']">About</a>
+    <div class="mobile-navbar sm-only" (click)="toggleMenu()">
+      <div class="mobile-close-button">
+        <button class="btn btn--icon btn--secondary" type="button" arial-label="close menu" (click)="toggleMenu()">
+          <fa-icon [icon]="faTimes"/>
+        </button>
+      </div>
+      <a class="mobile-nav-item" [routerLink]="['/about']">About</a>
       @if (isLoggedIn()) {
-      <a class="navbar__item" [routerLink]="['/dashboard']">Diary</a>
-      <a class="navbar__item" [routerLink]="['/dashboard', 'food']">Food</a>
-      <a class="navbar__item" [routerLink]="['/dashboard', 'dishes']">Dishes</a>
-      <a class="navbar__item" [routerLink]="['/dashboard', 'plans']">Plans</a>
-      <a class="navbar__item" [routerLink]="['/dashboard', 'graphs']">Graphs</a>
-      <a class="navbar__item" [routerLink]="['/dashboard', 'user']">Profile</a>
+      <a class="mobile-nav-item" [routerLink]="['/dashboard']">Diary</a>
+      <a class="mobile-nav-item" [routerLink]="['/dashboard', 'food']">Food</a>
+      <a class="mobile-nav-item" [routerLink]="['/dashboard', 'dishes']">Dishes</a>
+      <a class="mobile-nav-item" [routerLink]="['/dashboard', 'plans']">Plans</a>
+      <a class="mobile-nav-item" [routerLink]="['/dashboard', 'graphs']">Graphs</a>
+      <a class="mobile-nav-item" [routerLink]="['/dashboard', 'user']">Profile</a>
       @if (isAdmin()) {
-      <a class="navbar__item" [routerLink]="['/dashboard', 'admin']">Admin</a>
+      <a class="mobile-nav-item" [routerLink]="['/dashboard', 'admin']">Admin</a>
       }
-      <a class="navbar__item" (click)="logOut()">Log out</a>
+      <a class="mobile-nav-item" (click)="logOut()">Log out</a>
       } @else {
-      <a id="menuLoginMobile" data-cy="menuLoginMobile" class="navbar__item"
+      <a id="menuLoginMobile" data-cy="menuLoginMobile" class="mobile-nav-item"
         [routerLink]="['/login']">Log in or Register</a>
       }
     </div>
-    } @if (isLoggedIn()) {
-    <a id="menuProfile" [routerLink]="['/dashboard', 'user']">Profile</a>
-    @if (isAdmin()) {
-    <a id="menuAdmin" [routerLink]="['/dashboard', 'admin']">Admin</a>
-    }
-    <a id="menuLogout" (click)="logOut()">Log out</a>
+    } 
+    
+    @if (isLoggedIn()) {
+    <a class="sm" id="menuProfile" [routerLink]="['/dashboard', 'user']">Profile</a>
+      @if (isAdmin()) {
+      <a class="sm" id="menuAdmin" [routerLink]="['/dashboard', 'admin']">Admin</a>
+      }
+    <a class="sm" id="menuLogout" (click)="logOut()">Log out</a>
     } @else {
     <a id="menuLogin" data-cy="menuLogin" [routerLink]="['/login']">
       Log in or Register</a>

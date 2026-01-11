@@ -37,7 +37,7 @@
   position: relative;
   width: 300px;
   z-index: 2;
-  box-shadow: var(--boxShadow), var(--boxShadowWide);
+  box-shadow: var(--box-shadow), var(--box-shadow-wide);
 }
 
 .picker-button {
