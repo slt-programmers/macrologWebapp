@@ -1,6 +1,11 @@
 :host {
 	display: flex;
 	height: 56px;
+	margin-bottom: 8px;
+	
+	@media(min-width: 640px) {
+		margin-bottom: 16px;
+	}
 }
 
 .navbar {
