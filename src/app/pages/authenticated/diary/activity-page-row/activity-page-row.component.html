@@ -3,7 +3,7 @@
 
   <div class="col-span-8">
     @if (showSync()) {
-    <button type="button" class="text-primary" (click)="syncActivities(); $event.stopPropagation()">
+    <button type="button" class="btn btn--icon text-primary" (click)="syncActivities(); $event.stopPropagation()">
       <fa-icon [icon]="faSyncAlt"></fa-icon>
     </button>
     }
