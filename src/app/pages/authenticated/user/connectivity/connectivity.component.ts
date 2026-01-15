@@ -2,6 +2,7 @@ import { Component, OnInit, inject } from '@angular/core';
 import { UserService } from '../../../../shared/services/user.service';
 import { ActivatedRoute } from '@angular/router';
 import { environment } from '../../../../../environments/environment';
+import { StravaSyncedAccount } from 'src/app/shared/model/stravaSynchedAccount';
 
 @Component({
   selector: 'ml-connectivity',
@@ -15,11 +16,11 @@ export class ConnectivityComponent implements OnInit {
 
   public syncError = ''
   public stravaConnectUrl = ''
-  public connection: any;
+  public connection?: StravaSyncedAccount;
 
   private code?: string | null;
   private scope?: string | null;
-  private clientId = 0;
+  private clientId?: number;
 
   ngOnInit() {
     this.getSyncSettings();

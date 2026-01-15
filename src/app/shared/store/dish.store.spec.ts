@@ -55,5 +55,6 @@ function getSimpleDish(): Dish {
 				},
 			},
 		],
+		macrosCalculated: { protein: 1, fat: 2, carbs: 3, calories: 123}
 	};
 }

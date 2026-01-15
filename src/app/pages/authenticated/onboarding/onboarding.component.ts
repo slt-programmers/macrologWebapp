@@ -36,6 +36,7 @@ export class OnboardingComponent {
 	public expandMoreInfo = false;
 
 	// Step 4
+	// TODO use formatDate
 	public datePipe = new DatePipe("en-US");
 	public displayDate = this.datePipe.transform(new Date(), "yyyy-MM-dd")!;
 	public breakfastOpen = false;

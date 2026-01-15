@@ -7,7 +7,6 @@ import {
 	output
 } from "@angular/core";
 import { FormsModule } from "@angular/forms";
-import { Food } from "../../model/food";
 import { FoodSearchable } from "../../model/foodSearchable";
 import { DishStore } from "../../store/dish.store";
 import { FoodStore } from "../../store/food.store";
@@ -26,8 +25,8 @@ export class AutocompleteFoodComponent {
 	readonly includeDishes = input(false);
 	readonly selected = output<FoodSearchable>();
 
-	public searchables: any[] = [];
-	public foodMatch: any[] = [];
+	public searchables: FoodSearchable[] = [];
+	public foodMatch: FoodSearchable[] = [];
 	public foodName = "";
 	public showAutoComplete = false;
 
@@ -42,9 +41,9 @@ export class AutocompleteFoodComponent {
 		});
 	}
 
-	public findFoodMatch(event: any) {
-		this.foodMatch = new Array<Food>();
-		if (event.data !== null) {
+	public findFoodMatch(event: Event) {
+		this.foodMatch = [];
+		if (event instanceof InputEvent && event.data !== null) {
 			for (const item of this.searchables) {
 				let matchFoodName = false;
 				let matchDishName = false;
@@ -52,10 +51,8 @@ export class AutocompleteFoodComponent {
 					matchFoodName =
 						item.food.name.toLowerCase().indexOf(this.foodName.toLowerCase()) >=
 						0;
-				} else {
-					matchDishName =
-						item.dish.name.toLowerCase().indexOf(this.foodName.toLowerCase()) >=
-						0;
+				} else if (item.dish) {
+					matchDishName =	item.dish.name.toLowerCase().indexOf(this.foodName.toLowerCase()) >= 0;
 				}
 				if (matchFoodName || matchDishName) {
 					this.foodMatch.push(item);
@@ -78,7 +75,7 @@ export class AutocompleteFoodComponent {
 	}
 
 	private getFoodSearchableList(): void {
-		const searchList = [];
+		const searchList: FoodSearchable[] = [];
 		for (const item of this.allFood()) {
 			const searchable: FoodSearchable = { food: item };
 			searchList.push(searchable);
