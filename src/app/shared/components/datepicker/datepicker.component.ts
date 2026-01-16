@@ -27,9 +27,9 @@ export class DatepickerComponent {
     this.getWeekdayPlaceholders();
   }
 
-  toggleOpen(event?: any): void {
+  toggleOpen(event?: Event): void {
     if (event) {
-      if (event.target && event.target.classList.value === 'overlay') {
+      if (event.target && event.target instanceof HTMLElement && event.target.classList.value === 'overlay') {
         this.isOpen = !this.isOpen;
       }
     } else {

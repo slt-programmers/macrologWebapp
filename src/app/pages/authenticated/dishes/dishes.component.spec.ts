@@ -54,6 +54,7 @@ describe("DishesComponent", () => {
 					},
 				},
 			],
+			macrosCalculated: { protein: 1, fat: 2, carbs: 3, calories: 123 },
 		});
 		expect(component.selectedDish).toEqual({
 			id: 1,
@@ -72,6 +73,7 @@ describe("DishesComponent", () => {
 					},
 				},
 			],
+			macrosCalculated: { protein: 1, fat: 2, carbs: 3, calories: 123 },
 		});
 	});
 
@@ -89,10 +91,5 @@ describe("DishesComponent", () => {
 		ingredient.portion = undefined;
 		result = component.getIngredientDescription(ingredient);
 		expect(result).toEqual("100 gram");
-	});
-
-	it("should get total", () => {
-		const result = component.getTotal({ macrosCalculated: 123 } as any);
-		expect(result).toEqual(123);
 	});
 });

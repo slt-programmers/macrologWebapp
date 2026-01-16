@@ -17,7 +17,7 @@
 		@for (ingredient of selectedDish().ingredients!; track ingredient; let i = $index) {
 		<span class="col-start-1">{{ ingredient.food.name }}</span>
 
-		<select aria-label="portion" (change)="portionChange(ingredient, $event.target)">
+		<select aria-label="portion" (change)="portionChange(ingredient, $event)">
 			<!-- 100 grams -->
 			<option>{{ unitName }}</option>
 			<!-- portion amount -->

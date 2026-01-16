@@ -32,6 +32,9 @@ export class DishesComponent {
 			this.selectedDish = {
 				name: "",
 				ingredients: [],
+				macrosCalculated: { 
+					protein: 0, fat: 0, carbs: 0, calories: 0
+				}
 			};
 		}
 		this.modalIsVisible = true;
@@ -40,10 +43,6 @@ export class DishesComponent {
 	closeModal(): void {
 		this.modalIsVisible = false;
 		this.selectedDish = undefined;
-	}
-
-	getTotal(dish: Dish) {
-		return dish.macrosCalculated;
 	}
 
 	getIngredientDescription(ingredient: Ingredient): string {

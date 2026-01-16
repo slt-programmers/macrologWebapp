@@ -2,6 +2,7 @@ import { Component, OnInit, inject } from '@angular/core';
 import { WebhookStatus } from 'src/app/shared/model/webhookStatus';
 import { WebhookService } from 'src/app/shared/services/webhook.service';
 import { Spinner } from "src/app/shared/components/spinner/spinner";
+import { Webhook } from 'src/app/shared/model/webhook';
 
 
 @Component({
@@ -11,7 +12,7 @@ import { Spinner } from "src/app/shared/components/spinner/spinner";
 })
 export class WebhooksComponent implements OnInit {
   private readonly webhookService = inject(WebhookService);
-  private allWebhooks: any[] = [];
+  private allWebhooks: Webhook[] = [];
 
   loading = true;
 
@@ -37,7 +38,7 @@ export class WebhooksComponent implements OnInit {
   getStatus(connectedApp: string): WebhookStatus {
     for (const hook of this.allWebhooks) {
       if (hook.connectedApp === connectedApp) {
-        return hook.webhook;
+        return hook.webhookStatus;
       }
     }
     return {} as WebhookStatus;
@@ -46,7 +47,7 @@ export class WebhooksComponent implements OnInit {
   private retrieveStatus(connectedApp: string) {
     this.allWebhooks = [];
     this.webhookService.getWebhookStatus(connectedApp).subscribe(it => {
-      this.allWebhooks.push({ connectedApp: connectedApp, webhook: it });
+      this.allWebhooks.push({ connectedApp: connectedApp, webhookStatus: it });
       this.loading = false;
     });
   }

@@ -1,5 +1,5 @@
-export class Toast {
-  public message = '';
-  public title = '';
-  public isError = false;
+export interface Toast {
+   message : string;
+   title:string;
+   isError: boolean;
 }

@@ -1,6 +1,6 @@
 export interface WebhookStatus {
 
-	 id: number;
+	id: number;
    callback_url: string;
 
 }

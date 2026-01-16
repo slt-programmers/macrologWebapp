@@ -69,7 +69,7 @@ describe('UserManagementComponent', () => {
 
   it('should delete user', () => {
     spyOn(adminService, 'getAllUsers').and.returnValue(of(allUsers));
-    spyOn(adminService, 'deleteUser').and.returnValue(of({}));
+    spyOn(adminService, 'deleteUser').and.returnValue(of(undefined));
     const userAccount: UserAccount = {} as UserAccount;
     userAccount.id = 123;
     component.selectedUser = userAccount;

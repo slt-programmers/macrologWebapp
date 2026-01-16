@@ -29,7 +29,7 @@ export class GraphsComponent implements OnInit {
   public dateTo: Date;
   public dateFrom: Date;
 
-  private userGoals: any[] = [];
+  private userGoals: number[] = [];
   private goalCalories = 0;
   private allMacros: MacrosPerDay[] = [];
 
@@ -52,7 +52,7 @@ export class GraphsComponent implements OnInit {
   public proteinMarker?: number;
   public fatMarker?: number;
   public carbsMarker?: number;
-  public markers: any[] = [];
+  public markers: number[] = [];
   public ratioMarkers: any[] = [];
 
   private numberOfValues = 30;
@@ -77,7 +77,7 @@ export class GraphsComponent implements OnInit {
       this.proteinGraphLabel = 'Total grams of protein per day';
       this.fatGraphLabel = 'Total grams of fat per day';
       this.carbsGraphLabel = 'Total grams of carbs per day';
-      this.markers = [this.proteinMarker, this.fatMarker, this.carbsMarker];
+      this.markers = [this.proteinMarker!, this.fatMarker!, this.carbsMarker!];
     } else {
       this.getDatasetsForType('calories');
       this.graphLabel = 'Total calories per day grouped by macronutrient';

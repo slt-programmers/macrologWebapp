@@ -101,7 +101,7 @@ describe('IntakeComponent', () => {
       goalFat: 60,
       goalCarbs: 236
     }));
-    spyOn(userService, 'putUserSetting').and.returnValue(of({}));
+    spyOn(userService, 'putUserSetting').and.returnValue(of(undefined));
     component.ngOnInit();
     component.openModal();
     component.fillStandard();

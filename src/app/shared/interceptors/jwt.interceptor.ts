@@ -8,6 +8,7 @@ import { AuthenticationStore } from '../store/auth.store';
 export class JwtInterceptor implements HttpInterceptor {
   private readonly authStore = inject(AuthenticationStore);
 
+  /* eslint-disable  @typescript-eslint/no-explicit-any */
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     const token = this.authStore.token();
     if (token) {

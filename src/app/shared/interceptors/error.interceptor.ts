@@ -10,6 +10,7 @@ export class ErrorInterceptor implements HttpInterceptor {
   private readonly authStore = inject(AuthenticationStore);
   private readonly toastService = inject(ToastService);
 
+  /* eslint-disable  @typescript-eslint/no-explicit-any */
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     return next.handle(request).pipe(
       map((result) => {

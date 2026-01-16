@@ -64,12 +64,12 @@ describe("EntryPageRowComponent", () => {
 		component.modalEntries = [
 			{ food: { id: 1, portions: [{ id: 1 }, { id: 2 }] }, portion: { id: 1 } },
 		] as any;
-		component.changePortion({ target: { value: "2" } }, 0);
+		component.changePortion({ target: { value: "2" } }as unknown as Event, 0);
 		expect(component.modalEntries[0]).toEqual({
 			food: { id: 1, portions: [{ id: 1 }, { id: 2 }] },
 			portion: { id: 2 },
 		} as any);
-		component.changePortion({ target: { value: "grams" } }, 0);
+		component.changePortion({ target: { value: "grams" } }as unknown as Event, 0);
 		expect(component.modalEntries[0]).toEqual({
 			food: { id: 1, portions: [{ id: 1 }, { id: 2 }] },
 			portion: undefined,
@@ -84,12 +84,12 @@ describe("EntryPageRowComponent", () => {
 				multiplier: 1,
 			},
 		] as any;
-		component.changeMultiplier({ target: { value: "2" } }, 0);
+		component.changeMultiplier({ target: { value: "2" } } as unknown as Event, 0);
 		expect(component.modalEntries[0].multiplier).toEqual(2);
 		component.modalEntries = [
 			{ food: { id: 1, portions: [{ id: 1 }, { id: 2 }] }, multiplier: 1 },
 		] as any;
-		component.changeMultiplier({ target: { value: "120" } }, 0);
+		component.changeMultiplier({ target: { value: "120" } }as unknown as Event, 0);
 		expect(component.modalEntries[0].multiplier).toEqual(1.2);
 	});
 

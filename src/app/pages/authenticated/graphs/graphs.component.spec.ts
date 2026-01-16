@@ -33,7 +33,7 @@ describe('GraphsComponent', () => {
       { day: "2021-11-05", macros: { protein: 6.98, fat: 11.235, carbs: 1.16, calories: 133.675 } },
       { day: "2021-11-07", macros: { protein: 3.51, fat: 8.145, carbs: 6.21, calories: 112.185 } }]
     ))
-    spyOn(userService, 'getUserGoalStats').and.returnValue(of(['100', '130', '40']));
+    spyOn(userService, 'getUserGoalStats').and.returnValue(of([100, 130, 40]));
     component.ngOnInit();
     expect(component).toBeTruthy();
   });

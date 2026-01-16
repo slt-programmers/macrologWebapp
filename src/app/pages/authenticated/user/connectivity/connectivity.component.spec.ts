@@ -10,6 +10,7 @@ import { of } from 'rxjs';
 import { ToastService } from 'src/app/shared/services/toast.service';
 import { UserService } from 'src/app/shared/services/user.service';
 import { ConnectivityComponent } from './connectivity.component';
+import { StravaSyncedAccount } from 'src/app/shared/model/stravaSynchedAccount';
 
 describe('ConnectivityComponent', () => {
   let component: ConnectivityComponent;
@@ -41,7 +42,7 @@ describe('ConnectivityComponent', () => {
   });
 
   it('should init connectivity component succesful', () => {
-    const result = { id: 42, syncedApplicationId: 43 };
+    const result = { id: 42, syncedApplicationId: 43 } as unknown as StravaSyncedAccount;
     spyOn(userService, 'getSyncSettings').and.returnValue(of(result));
     component.ngOnInit();
     expect(userService.getSyncSettings).toHaveBeenCalledWith('STRAVA');
@@ -55,7 +56,7 @@ describe('ConnectivityComponent', () => {
     const route = TestBed.inject(ActivatedRoute);
     route.queryParams = of({ code: 123, scope: 'badscope' });
 
-    const result = { id: 42, syncedApplicationId: 43 };
+    const result = { id: 42, syncedApplicationId: 43 } as unknown as StravaSyncedAccount;
     spyOn(userService, 'getSyncSettings').and.returnValue(of(result));
     component.ngOnInit();
 
@@ -69,11 +70,9 @@ describe('ConnectivityComponent', () => {
     const route = TestBed.inject(ActivatedRoute);
     route.queryParams = of({ code: '123', scope: 'read,activity:read_all' });
 
-    const result = { id: 42, syncedApplicationId: 43 };
+    const result = { id: 42, syncedApplicationId: 43 } as unknown as StravaSyncedAccount;
     spyOn(userService, 'getSyncSettings').and.returnValue(of(result));
-    spyOn(userService, 'storeSyncSettings').and.returnValue(
-      of({ status: 200 })
-    );
+    spyOn(userService, 'storeSyncSettings').and.returnValue(of(result));
     component.ngOnInit();
 
     expect(userService.getSyncSettings).toHaveBeenCalledWith('STRAVA');
@@ -81,9 +80,10 @@ describe('ConnectivityComponent', () => {
   });
 
   it('should disconnect from platform', () => {
-    spyOn(userService, 'getSyncSettings').and.returnValue(of({ status: 200 }));
+    const result = { id: 42, syncedApplicationId: 43 } as unknown as StravaSyncedAccount;
+    spyOn(userService, 'getSyncSettings').and.returnValue(of(result));
     spyOn(userService, 'disconnectSyncSettings').and.returnValue(
-      of({ status: 200 })
+      of(undefined)
     );
     component.disconnect();
     expect(userService.disconnectSyncSettings).toHaveBeenCalledWith('STRAVA');

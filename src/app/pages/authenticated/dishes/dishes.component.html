@@ -8,7 +8,7 @@
   <div class="card flex flex-col gap-4" (click)="openModal(dish)">
     <span class="font-bold">{{ dish.name }}</span>
 
-    <ml-piechart [mealId]="dish.id!" [macros]="getTotal(dish)" />
+    <ml-piechart [mealId]="dish.id!" [macros]="dish.macrosCalculated" />
 
     <ul>
       @for (ingredient of dish.ingredients; track ingredient) {

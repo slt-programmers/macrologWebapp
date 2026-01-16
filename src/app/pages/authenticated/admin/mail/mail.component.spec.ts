@@ -88,7 +88,7 @@ describe('MailComponent', () => {
   // });
 
   it('should send testmail', () => {
-    spyOn(googleService, 'sendTestMail').and.returnValue(of({}));
+    spyOn(googleService, 'sendTestMail').and.returnValue(of(undefined));
     fixture = TestBed.createComponent(MailComponent);
     component = fixture.componentInstance;
     component.sendTestMail();

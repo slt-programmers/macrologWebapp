@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { TestBed } from '@angular/core/testing';
 import { MockProvider } from 'ng-mocks';
-import { of } from 'rxjs';
+import { firstValueFrom, of } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { MacrosPerDay } from '../model/macrosPerDay';
 import { EntryService } from './entry.service';
@@ -29,7 +29,7 @@ describe('EntryService', () => {
 
   it('should get macros', async () => {
     spyOn(http, 'get').and.returnValue(of([{}]));
-    const result = await service.getMacrosPerDay('2019-01-01', '2019-02-01').toPromise();
+    const result = await firstValueFrom(service.getMacrosPerDay('2019-01-01', '2019-02-01'));
     expect(result).toEqual([{} as MacrosPerDay]);
     expect(http.get).toHaveBeenCalledWith('//' + environment.backend + '/logs/macros', {
       params: { from: '2019-01-01', to: '2019-02-01' }
