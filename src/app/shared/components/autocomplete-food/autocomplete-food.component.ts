@@ -43,7 +43,7 @@ export class AutocompleteFoodComponent {
 
 	public findFoodMatch(event: Event) {
 		this.foodMatch = [];
-		if (event instanceof InputEvent && event.data !== null) {
+		if ((event as InputEvent).data !== null) {
 			for (const item of this.searchables) {
 				let matchFoodName = false;
 				let matchDishName = false;
