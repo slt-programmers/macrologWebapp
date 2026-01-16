@@ -34,14 +34,14 @@ export class DiaryComponent implements OnInit {
 	date = formatDate(new Date(), "yyyy-MM-dd", "en-US")!;
 	totals = this.entryStore.totalsForDay;
 
-	intakeGoals: any[] = [];
+	intakeGoals: number[] = [];
 	goalCal = 0;
 
 	ngOnInit() {
 		this.getUserGoals(this.date);
 	}
 
-	changeDate(event: any) {
+	changeDate(event: string) {
 		this.date = event;
 		this.getUserGoals(this.date);
 		this.dateStore.setDisplayDate(this.date);
