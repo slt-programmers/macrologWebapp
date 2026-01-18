@@ -17,9 +17,8 @@ describe('StepperComponent', () => {
   });
 
   it('should create', () => {
-    component.ngOnInit();
     expect(component).toBeTruthy();
-    expect(component.steps).toEqual([1, 2]);
+    expect(component.steps()).toEqual([1, 2]);
   });
 
 });

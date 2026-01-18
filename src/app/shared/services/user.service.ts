@@ -1,8 +1,9 @@
 import { HttpClient } from "@angular/common/http";
 import { inject, Injectable } from "@angular/core";
-import { forkJoin, Observable } from "rxjs";
+import { forkJoin, map, Observable } from "rxjs";
 import { environment } from "../../../environments/environment";
 import { UserSettings } from "../model/userSettings";
+import { StravaSyncedAccount } from "../model/stravaSynchedAccount";
 
 @Injectable()
 export class UserService {
@@ -20,33 +21,33 @@ export class UserService {
 		return this.http.get<UserSettings>(this.macrologBackendUrl + "/user");
 	}
 
-	getUserGoalStats(date: string): Observable<string[]> {
+	getUserGoalStats(date: string): Observable<number[]> {
 		return forkJoin([
-			this.getSetting("goalProtein", date),
-			this.getSetting("goalFat", date),
-			this.getSetting("goalCarbs", date),
+			this.getSetting("goalProtein", date).pipe(map(s => +s)),
+			this.getSetting("goalFat", date).pipe(map(s => +s)),
+			this.getSetting("goalCarbs", date).pipe(map(s => +s)),
 		]);
 	}
 
-	putUserSetting(key: string, value: string): Observable<any> {
+	putUserSetting(key: string, value: string): Observable<void> {
 		const setting = { name: key, value: value };
-		return this.http.put<any>(this.macrologBackendUrl, setting);
+		return this.http.put<void>(this.macrologBackendUrl, setting);
 	}
 
-	getSyncSettings(key: string): Observable<any> {
-		return this.http.get<any>(this.macrologBackendUrl + "/connectivity/" + key);
+	getSyncSettings(key: string): Observable<StravaSyncedAccount> {
+		return this.http.get<StravaSyncedAccount>(this.macrologBackendUrl + "/connectivity/" + key);
 	}
 
-	storeSyncSettings(syncWith: string, code: string): Observable<any> {
+	storeSyncSettings(syncWith: string, code: string): Observable<StravaSyncedAccount> {
 		const userInfo = { name: "code", value: code };
-		return this.http.post<any>(
+		return this.http.post<StravaSyncedAccount>(
 			this.macrologBackendUrl + "/connectivity/" + syncWith,
 			userInfo
 		);
 	}
 
-	disconnectSyncSettings(syncWith: string): Observable<any> {
-		return this.http.delete<any>(
+	disconnectSyncSettings(syncWith: string): Observable<void> {
+		return this.http.delete<void>(
 			this.macrologBackendUrl + "/connectivity/" + syncWith
 		);
 	}

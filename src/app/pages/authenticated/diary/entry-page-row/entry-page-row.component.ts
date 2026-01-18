@@ -10,6 +10,7 @@ import { AutocompleteFoodComponent } from "../../../../shared/components/autocom
 import { ModalComponent } from "../../../../shared/components/modal/modal.component";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
+import { FoodSearchable } from "src/app/shared/model/foodSearchable";
 
 @Component({
 	selector: "ml-entry-page-row",
@@ -17,7 +18,7 @@ import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 	styleUrls: ["./entry-page-row.component.css"],
 	imports: [
 		ModalComponent,
-    FontAwesomeModule,
+		FontAwesomeModule,
 		FormsModule,
 		AutocompleteFoodComponent,
 		DecimalPipe,
@@ -25,10 +26,10 @@ import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 	],
 })
 export class EntryPageRowComponent {
-  faTrash = faTrash;
+	faTrash = faTrash;
 	private readonly entryStore = inject(EntryStore);
 	private readonly entriesPerDay = this.entryStore.entriesPerDay;
-	
+
 	readonly meal = input.required<Meal>();
 	readonly date = input.required<string>();
 
@@ -52,25 +53,27 @@ export class EntryPageRowComponent {
 		this.showModal = true;
 	}
 
-	changePortion(event: any, index: number) {
-		if (event.target.value === "grams") {
+	changePortion(event: Event, index: number) {
+		const value = (event.target as HTMLSelectElement).value;
+		if (value === "grams") {
 			this.modalEntries[index].portion = undefined;
 		} else {
 			this.modalEntries[index].portion = this.modalEntries[
 				index
-			].food.portions!.filter((p) => p.id === +event.target.value)[0];
+			].food.portions!.filter((p) => p.id === +value)[0];
 		}
 	}
 
-	changeMultiplier(event: any, index: number) {
+	changeMultiplier(event: Event, index: number) {
+		const value = (event.target as HTMLInputElement).value;
 		if (!this.modalEntries[index].portion) {
-			this.modalEntries[index].multiplier = +event.target.value / 100;
+			this.modalEntries[index].multiplier = +value / 100;
 		} else {
-			this.modalEntries[index].multiplier = +event.target.value;
+			this.modalEntries[index].multiplier = +value;
 		}
 	}
 
-	addEntry(entry: any) {
+	addEntry(entry: FoodSearchable) {
 		if (entry.dish) {
 			for (const ingredient of entry.dish.ingredients) {
 				this.modalEntries.push({
@@ -79,13 +82,13 @@ export class EntryPageRowComponent {
 					day: this.date(),
 					portion: ingredient.portion
 						? ingredient.food.portions.filter(
-								(p: Portion) => p.id === ingredient.portion.id
+								(p: Portion) => p.id === ingredient.portion!.id
 						  )[0]
 						: undefined,
 					multiplier: ingredient.multiplier,
 				} as Entry);
 			}
-		} else {
+		} else if (entry.food) {
 			this.modalEntries.push({
 				food: entry.food,
 				meal: this.meal(),

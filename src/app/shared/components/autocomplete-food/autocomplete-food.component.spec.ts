@@ -44,80 +44,80 @@ describe("AutocompleteFoodComponent", () => {
 
 	it("should find food match", () => {
 		component.searchables = [
-			{ food: { name: "Abc", protein: 1, fat: 2, carbs: 3 }, dish: undefined },
-			{ food: { name: "Def", protein: 1, fat: 2, carbs: 3 }, dish: undefined },
+			{ food: { name: "Abc", protein: 1, fat: 2, carbs: 3, portions: [] }, dish: undefined },
+			{ food: { name: "Def", protein: 1, fat: 2, carbs: 3, portions: [] }, dish: undefined },
 		];
 		component.foodName = "A";
 		expect(component.foodMatch).toEqual([]);
-		component.findFoodMatch({ data: "somedata" });
+		component.findFoodMatch({ data: "somedata" } as InputEvent);
 		let result = [
-			{ food: { name: "Abc", protein: 1, fat: 2, carbs: 3 }, dish: undefined },
+			{ food: { name: "Abc", protein: 1, fat: 2, carbs: 3, portions: [] }, dish: undefined },
 		];
 		expect(component.foodMatch).toEqual(result);
 
 		component.searchables = [
-			{ food: { name: "Abc", protein: 1, fat: 2, carbs: 3 }, dish: undefined },
-			{ food: { name: "Cde", protein: 1, fat: 2, carbs: 3 }, dish: undefined },
+			{ food: { name: "Abc", protein: 1, fat: 2, carbs: 3, portions: [] }, dish: undefined },
+			{ food: { name: "Cde", protein: 1, fat: 2, carbs: 3, portions: [] }, dish: undefined },
 		];
 		component.foodName = "C";
-		component.findFoodMatch({ data: "somedata" });
+		component.findFoodMatch({ data: "somedata" } as InputEvent);
 		result = [
-			{ food: { name: "Abc", protein: 1, fat: 2, carbs: 3 }, dish: undefined },
-			{ food: { name: "Cde", protein: 1, fat: 2, carbs: 3 }, dish: undefined },
+			{ food: { name: "Abc", protein: 1, fat: 2, carbs: 3, portions: [] }, dish: undefined },
+			{ food: { name: "Cde", protein: 1, fat: 2, carbs: 3, portions: [] }, dish: undefined },
 		];
 		expect(component.foodMatch).toEqual(result);
 
 		component.searchables = [
-			{ food: { name: "Abc", protein: 1, fat: 2, carbs: 3 }, dish: undefined },
-			{ food: { name: "Cde", protein: 1, fat: 2, carbs: 3 }, dish: undefined },
+			{ food: { name: "Abc", protein: 1, fat: 2, carbs: 3, portions: [] }, dish: undefined },
+			{ food: { name: "Cde", protein: 1, fat: 2, carbs: 3, portions: [] }, dish: undefined },
 		];
 		component.foodName = "Aa";
-		component.findFoodMatch({ data: "somedata" });
+		component.findFoodMatch({ data: "somedata" } as InputEvent);
 		result = [];
 		expect(component.foodMatch).toEqual(result);
 
-		component.findFoodMatch({ data: null });
+		component.findFoodMatch({ data: null } as InputEvent);
 		expect(component.foodMatch).toEqual(result);
 	});
 
 	it("should find dish match", () => {
 		component.searchables = [
-			{ food: undefined, dish: { name: "Abc" } },
-			{ food: undefined, dish: { name: "Def" } },
+			{ food: undefined, dish: { name: "Abc", ingredients: [], macrosCalculated: {protein: 0, fat: 0, carbs: 0, calories: 0} } },
+			{ food: undefined, dish: { name: "Def", ingredients: [], macrosCalculated: {protein: 0, fat: 0, carbs: 0, calories: 0} } },
 		];
 		component.foodName = "A";
 		expect(component.foodMatch).toEqual([]);
-		component.findFoodMatch({ data: "somedata" });
-		let result = [{ food: undefined, dish: { name: "Abc" } }] as any[];
+		component.findFoodMatch({ data: "somedata" } as InputEvent);
+		let result = [{ food: undefined, dish: { name: "Abc", ingredients: [], macrosCalculated: {protein: 0, fat: 0, carbs: 0, calories: 0}  } }] as any[];
 		expect(component.foodMatch).toEqual(result);
 
 		component.searchables = [
-			{ food: undefined, dish: { name: "Abc" } },
-			{ food: undefined, dish: { name: "Cde" } },
+			{ food: undefined, dish: { name: "Abc", ingredients: [], macrosCalculated: {protein: 0, fat: 0, carbs: 0, calories: 0} } },
+			{ food: undefined, dish: { name: "Cde", ingredients: [], macrosCalculated: {protein: 0, fat: 0, carbs: 0, calories: 0} } },
 		];
 		component.foodName = "C";
-		component.findFoodMatch({ data: "somedata" });
+		component.findFoodMatch({ data: "somedata" } as InputEvent);
 		result = [
-			{ food: undefined, dish: { name: "Abc" } },
-			{ food: undefined, dish: { name: "Cde" } },
+			{ food: undefined, dish: { name: "Abc", ingredients: [], macrosCalculated: {protein: 0, fat: 0, carbs: 0, calories: 0} } },
+			{ food: undefined, dish: { name: "Cde", ingredients: [], macrosCalculated: {protein: 0, fat: 0, carbs: 0, calories: 0} } },
 		];
 		expect(component.foodMatch).toEqual(result);
 
 		component.searchables = [
 			{
-				food: { name: "Abc", protein: 1, fat: 2, carbs: 3 },
-				dish: { name: "Abc with Def" },
+				food: { name: "Abc", protein: 1, fat: 2, carbs: 3, portions: [] },
+				dish: { name: "Abc with Def", ingredients: [], macrosCalculated: {protein: 0, fat: 0, carbs: 0, calories: 0} },
 			},
-			{ food: { name: "Cde", protein: 1, fat: 2, carbs: 3 }, dish: undefined },
+			{ food: { name: "Cde", protein: 1, fat: 2, carbs: 3, portions: [] }, dish: undefined },
 		];
 		component.foodName = "c";
-		component.findFoodMatch({ data: "somedata" });
+		component.findFoodMatch({ data: "somedata" } as InputEvent);
 		result = [
 			{
-				food: { name: "Abc", protein: 1, fat: 2, carbs: 3 },
-				dish: { name: "Abc with Def" },
+				food: { name: "Abc", protein: 1, fat: 2, carbs: 3, portions: [] },
+				dish: { name: "Abc with Def", ingredients: [], macrosCalculated: {protein: 0, fat: 0, carbs: 0, calories: 0}  },
 			},
-			{ food: { name: "Cde", protein: 1, fat: 2, carbs: 3 }, dish: undefined },
+			{ food: { name: "Cde", protein: 1, fat: 2, carbs: 3, portions: [] }, dish: undefined },
 		];
 		expect(component.foodMatch).toEqual(result);
 	});
@@ -127,8 +127,8 @@ describe("AutocompleteFoodComponent", () => {
 		const input = fixture.debugElement.query(By.css("#autoInput"));
 		input.nativeElement.dispatchEvent(new Event("focus"));
 		component.foodMatch = [
-			{ food: { name: "Abc", protein: 1, fat: 2, carbs: 3 }, dish: undefined },
-			{ food: { name: "Cde", protein: 1, fat: 2, carbs: 3 }, dish: undefined },
+			{ food: { name: "Abc", protein: 1, fat: 2, carbs: 3, portions: [] }, dish: undefined },
+			{ food: { name: "Cde", protein: 1, fat: 2, carbs: 3, portions: [] }, dish: undefined },
 		];
 		fixture.detectChanges();
 		expect(component.getDescription).toHaveBeenCalled();

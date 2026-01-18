@@ -19,8 +19,8 @@ export class AuthenticationService {
 		);
 	}
 
-	register(username: string, email: string, password: string): Observable<any> {
-		return this.http.post<any>(this.macrologBackendUrl + "/signup", {
+	register(username: string, email: string, password: string): Observable<UserAccount> {
+		return this.http.post<UserAccount>(this.macrologBackendUrl + "/signup", {
 			username: username,
 			email: email,
 			password: password,

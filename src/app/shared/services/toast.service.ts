@@ -1,18 +1,19 @@
 import { Injectable } from '@angular/core';
 import { Subject, Observable } from 'rxjs';
+import { Toast } from '../model/toast';
 
 @Injectable()
 export class ToastService {
+  public messageObservable: Observable<Toast>;
   
-  public messageObservable: Observable<any>;
-  private message: Subject<any>;
+  private message: Subject<Toast>;
 
   constructor() {
-    this.message = new Subject<any>();
+    this.message = new Subject<Toast>();
     this.messageObservable = this.message.asObservable();
   }
 
-  public setMessage(message: string, isError?: boolean, title?: string) {
+  public setMessage(message: string, isError: boolean, title: string) {
     this.message.next({ message, isError, title });
   }
 }

@@ -1,7 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 import { MockProvider } from 'ng-mocks';
 import { HttpClient } from '@angular/common/http';
-import { of } from 'rxjs';
+import { firstValueFrom, of } from 'rxjs';
 import { HealthcheckService } from './healthcheck.service';
 
 describe('HealthcheckService', () => {
@@ -24,7 +24,7 @@ describe('HealthcheckService', () => {
 
   it('should check state', async () => {
     spyOn(http, 'get').and.returnValue(of(true));
-    const result = await service.checkState().toPromise();
+    const result = await firstValueFrom(service.checkState());
     expect(result).toBeTrue();
   });
 });
