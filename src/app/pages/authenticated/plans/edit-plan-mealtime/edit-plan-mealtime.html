@@ -17,31 +17,31 @@
 	@if (mealtime.ingredients.length > 0) {
 	<div class="grid grid-cols-1-1 gap-4">
 		<ul>
-			@for(item of mealtime.ingredients; track $index; let index = $index) {
+			@for(ingredient of mealtime.ingredients; track $index; let index = $index) {
 			<li>
 				<div class="inline-flex items-center gap-4">
-					<span> {{item.food.name}} </span>
+					<span> {{ingredient.food.name}} </span>
 
-					<select name="portion" [(ngModel)]="item.portion">
+					<select name="portion" [(ngModel)]="ingredient.portion">
 						<option [ngValue]="undefined">grams</option>
 
-						@for (portion of item.food.portions; track $index) {
+						@for (portion of ingredient.food.portions; track $index) {
 						<option [value]="portion">{{portion.description}}</option>
 						}
 					</select>
 
-					@if (item.portion) {
+					@if (ingredient.portion) {
 					<!-- TODO kijken of dit mooier kan -->
 					<input
 						name="multiplier"
-						value="{{item.multiplier}}"
+						value="{{ingredient.multiplier}}"
 						type="number"
 						(keyup)="changeMultiplier(+$event.target.value, index)"
 					/>
 					} @else {
 					<input
 						name="multiplier"
-						value="{{item.multiplier * 100}}"
+						value="{{ingredient.multiplier * 100}}"
 						type="number"
 						(keyup)="changeMultiplier(+$event.target.value, index)"
 					/>
