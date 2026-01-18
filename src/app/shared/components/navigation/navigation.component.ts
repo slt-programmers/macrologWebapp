@@ -12,7 +12,7 @@ import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 })
 export class NavigationComponent {
   faBars = faBars;
-	faTimes = faTimes
+	faTimes = faTimes;
 	private readonly authStore = inject(AuthenticationStore);
 	private readonly router = inject(Router);
 

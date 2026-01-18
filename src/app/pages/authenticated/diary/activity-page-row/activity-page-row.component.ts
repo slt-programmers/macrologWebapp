@@ -62,12 +62,12 @@ export class ActivityPageRowComponent implements OnInit {
     this.showModal = true;
   }
 
-  changeName(event: any, index: number): void {
-    this.modalActivities[index].name = event.target.value;
+  changeName(event: KeyboardEvent, index: number): void {
+    this.modalActivities[index].name = (event.target as HTMLInputElement).value;
   }
 
-  changeCalories(event: any, index: number): void {
-    this.modalActivities[index].calories = +event.target.value;
+  changeCalories(event: KeyboardEvent, index: number): void {
+    this.modalActivities[index].calories = +(event.target as HTMLInputElement).value;
   }
 
   deleteActivity(index: number) {

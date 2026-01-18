@@ -1,5 +1,5 @@
 <div class="stepper">
-  @for (step of steps; track step) {
+  @for (step of steps(); track step) {
     <div class="step-wrapper">
       <div class="step" [ngClass]="{'step--current': step === currentStep()}">
         {{step}}

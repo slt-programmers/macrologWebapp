@@ -34,12 +34,13 @@ export class EditDishComponent implements OnInit {
 		}
 	}
 
-	portionChange(ingredient: Ingredient, eventTarget: any) {
-		if (eventTarget.value === this.unitName) {
+	portionChange(ingredient: Ingredient, event: Event) {
+		const value = (event.target as HTMLSelectElement).value;
+		if (value === this.unitName) {
 			ingredient.portion = undefined;
 		} else {
 			for (const portion of ingredient.food.portions!) {
-				if (portion.description === eventTarget.value) {
+				if (portion.description === value) {
 					ingredient.portion = portion;
 					break;
 				}
@@ -56,11 +57,12 @@ export class EditDishComponent implements OnInit {
 		}
 	}
 
-	calculateMultiplier(event: any, ingredient: Ingredient): void {
+	calculateMultiplier(event: Event, ingredient: Ingredient): void {
+		const value = (event.target as HTMLInputElement).value;
 		if (ingredient.portion === undefined) {
-			ingredient.multiplier = event.target.value / this.unitGrams;
+			ingredient.multiplier = +value / this.unitGrams;
 		} else {
-			ingredient.multiplier = event.target.value;
+			ingredient.multiplier = +value;
 		}
 	}
 

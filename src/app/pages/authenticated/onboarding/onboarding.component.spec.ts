@@ -46,7 +46,7 @@ describe('OnboardingComponent', () => {
   });
 
   it('should save usersettings', () => {
-    spyOn(userService, 'putUserSetting').and.returnValue(of({}));
+    spyOn(userService, 'putUserSetting').and.returnValue(of(undefined));
     component.saveUserSettings();
     expect(userService.putUserSetting).not.toHaveBeenCalled();
     component.userForm.patchValue({ name: 'test', birthday: '01-01-1990', gender: 'FEMALE', height: 165, weight: 65, activity: 1.375 });

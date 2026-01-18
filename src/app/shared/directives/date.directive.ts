@@ -2,6 +2,7 @@ import { Directive, forwardRef } from '@angular/core';
 import { Validator, AbstractControl, NG_VALIDATORS } from '@angular/forms';
 import { parse, isValid } from 'date-fns';
 
+// TODO replace with form validator and use input date type
 @Directive({
   selector: '[validDate]',
   providers: [
