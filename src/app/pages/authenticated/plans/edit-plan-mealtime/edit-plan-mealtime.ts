@@ -3,9 +3,9 @@ import { FormsModule } from "@angular/forms";
 import { ActivatedRoute, Router, RouterLink } from "@angular/router";
 import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 import {
-  faChevronLeft,
-  faPlus,
-  faTrash,
+	faChevronLeft,
+	faPlus,
+	faTrash,
 } from "@fortawesome/free-solid-svg-icons";
 import { AutocompleteFoodComponent } from "src/app/shared/components/autocomplete-food/autocomplete-food.component";
 import { FoodSearchable } from "src/app/shared/model/foodSearchable";
@@ -58,7 +58,13 @@ export class EditPlanMealtime {
 				multiplier: 1,
 			} as Ingredient);
 		} else if (foodOrDish.dish) {
-			this.mealtime.ingredients.push(...foodOrDish.dish.ingredients);
+			for (const ingredient of foodOrDish.dish.ingredients) {
+				this.mealtime.ingredients.push({
+					food: ingredient.food,
+					portion: ingredient.portion,
+					multiplier: ingredient.multiplier,
+				} as Ingredient);
+			}
 		}
 	}
 
