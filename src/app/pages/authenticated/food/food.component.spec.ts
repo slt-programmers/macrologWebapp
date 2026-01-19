@@ -98,7 +98,7 @@ describe("FoodComponent", () => {
 
 	it("should open modal", () => {
 		expect(component.modalIsVisible).toBeFalse();
-		component.openModal(null);
+		component.openModal();
 		expect(component.selectedFood).toEqual({ portions: [] } as unknown as Food);
 		expect(component.modalIsVisible).toBeTrue();
 
