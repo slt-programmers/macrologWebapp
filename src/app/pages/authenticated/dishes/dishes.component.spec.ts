@@ -33,7 +33,7 @@ describe("DishesComponent", () => {
 	});
 
 	it("should open and close modal", () => {
-		component.openModal(null);
+		component.openModal();
 		expect(component.modalIsVisible).toBeTrue();
 		component.closeModal();
 		expect(component.modalIsVisible).toBeFalse();
