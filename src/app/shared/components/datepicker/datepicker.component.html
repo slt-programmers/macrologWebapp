@@ -1,12 +1,17 @@
 <div class="date">
-  <button type="button" class="date-button" (click)="previousDay()">
-    <fa-icon [icon]="faChevronLeft"></fa-icon>
-  </button>
+  @if(showArrows()) { 
+    <button type="button" class="date-button" (click)="previousDay()">
+      <fa-icon [icon]="faChevronLeft"></fa-icon>
+    </button>
+  }
 
   <div class="date-display" (click)="toggleOpen()">{{selectedDate | date: dateformat}}</div>
 
+  @if(showArrows()) { 
   <button type="button" class="date-button" (click)="nextDay()">
-    <fa-icon [icon]="faChevronRight"></fa-icon> </button>
+    <fa-icon [icon]="faChevronRight"></fa-icon> 
+  </button>
+  }
 </div>
 
 @if (isOpen) {

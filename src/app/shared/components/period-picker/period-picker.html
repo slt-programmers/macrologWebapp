@@ -1,14 +1,9 @@
 <div class="flex justify-center items-center gap-4">
-  <button type="button" class="btn btn--icon text--primary" (click)="monthBack()">
-    <fa-icon [icon]="faChevronLeft"/>
-  </button>
+  <span>From:</span>
 
-  <span class="month-picker__datelabel">
-    {{ dateFrom() | date : "dd MMMM yyyy" }} -
-    {{ dateTo() | date : "dd MMMM yyyy" }}
-  </span>
+  <ml-datepicker [showArrows]="false" [initialDate]="initialDateFrom" (dateSelected)="changeFromDate($event)"/>
 
-  <button type="button" class="btn btn--icon text--primary" (click)="monthForward()">
-    <fa-icon [icon]="faChevronRight"/>
-  </button>
+  <span>To:</span>
+
+  <ml-datepicker [showArrows]="false" (dateSelected)="changeToDate($event)"/>
 </div>
