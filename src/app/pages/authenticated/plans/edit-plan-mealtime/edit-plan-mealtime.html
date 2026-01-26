@@ -22,11 +22,11 @@
 				<div class="inline-flex items-center gap-4">
 					<span> {{ingredient.food.name}} </span>
 
-					<select name="portion" [(ngModel)]="ingredient.portion">
+					<select name="portion" [(ngModel)]="ingredient.portion" [compareWith]="compareId">
 						<option [ngValue]="undefined">grams</option>
 
 						@for (portion of ingredient.food.portions; track $index) {
-						<option [value]="portion">{{portion.description}}</option>
+						<option [ngValue]="portion">{{portion.description}}</option>
 						}
 					</select>
 

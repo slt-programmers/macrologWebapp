@@ -11,6 +11,7 @@ import { AutocompleteFoodComponent } from "src/app/shared/components/autocomplet
 import { FoodSearchable } from "src/app/shared/model/foodSearchable";
 import { Ingredient } from "src/app/shared/model/ingredient";
 import { Mealtime } from "src/app/shared/model/mealtime";
+import { Portion } from "src/app/shared/model/portion";
 import { PlanStore } from "src/app/shared/store/plan.store";
 
 @Component({
@@ -46,14 +47,12 @@ export class EditPlanMealtime {
 			this.router.navigate(["dashboard", "plans"]);
 		}
 		this.mealtime = mealtime!()!;
-		console.log("Edit constructor: " + JSON.stringify(this.mealtime))
 	}
 
 	selectItem(foodOrDish: FoodSearchable): void {
 		if (foodOrDish.food) {
 			const food = foodOrDish.food;
 			const portion = food.portions[0];
-			console.log("Select item (food): " + JSON.stringify(portion))
 			this.mealtime.ingredients.push({
 				food,
 				portion: portion,
@@ -61,7 +60,6 @@ export class EditPlanMealtime {
 			} as Ingredient);
 		} else if (foodOrDish.dish) {
 			for (const ingredient of foodOrDish.dish.ingredients) {
-				console.log("Select item (food): " + JSON.stringify(ingredient.portion))
 				this.mealtime.ingredients.push({
 					food: ingredient.food,
 					portion: ingredient.portion,
@@ -69,6 +67,13 @@ export class EditPlanMealtime {
 				} as Ingredient);
 			}
 		}
+	}
+
+	compareId(portion1: Portion | undefined, portion2: Portion | undefined): boolean {
+		if (!portion1 && !portion2) {
+			return true;
+		}
+		return !!(portion1 && portion2 && portion1.id === portion2.id);
 	}
 
 	changeMultiplier(multiplier: number, index: number): void {
@@ -85,7 +90,6 @@ export class EditPlanMealtime {
 
 	save(): void {
 		const planId = +this.route.snapshot.params["planId"];
-		console.log("Edit save mealtime: " + JSON.stringify(this.mealtime))
 		this.planStore.saveMealtime({ planId, mealtime: this.mealtime });
 	}
 }
