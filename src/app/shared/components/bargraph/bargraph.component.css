@@ -51,7 +51,6 @@
   flex-direction: column;
   align-self: flex-end;
   width: 100%;
-  z-index: 2;
 }
 
 .graph-marker--narrow {
@@ -75,7 +74,6 @@
   flex-grow: 1;
   margin-right: -1px;
   align-self: flex-end;
-  z-index: 1;
 }
 
 .graph-point {

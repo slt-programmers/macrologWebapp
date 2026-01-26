@@ -1,28 +1,37 @@
-import { DatePipe } from '@angular/common';
 import { Component, input, output } from '@angular/core';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
+import { DatepickerComponent } from '../datepicker/datepicker.component';
+import { formatDate } from '@angular/common';
 
 @Component({
   selector: 'ml-period-picker',
-  imports: [DatePipe, FontAwesomeModule],
+  imports: [DatepickerComponent, FontAwesomeModule],
   templateUrl: './period-picker.html'
 })
 export class PeriodPicker {
   readonly dateFrom = input.required<Date>();
   readonly dateTo = input.required<Date>();
 
-  readonly next = output<void>();
-  readonly previous = output<void>();
+  readonly dateFromChange = output<Date>();
+  readonly dateToChange = output<Date>();
 
   faChevronLeft = faChevronLeft;
   faChevronRight = faChevronRight;
 
-  monthForward(): void {
-    this.next.emit();
+  initialDateFrom = this.getInitialDateFrom();
+
+  changeFromDate(newFromDate: string): void {
+    this.dateFromChange.emit(new Date(newFromDate));
   }
 
-  monthBack(): void {
-    this.previous.emit();
+  changeToDate(newToDate: string): void {
+    this.dateToChange.emit(new Date(newToDate));
+  }
+
+  getInitialDateFrom(): Date {
+    const today = new Date();
+    const lastMonth = new Date(today.getFullYear(), today.getMonth() - 1, today.getDate() + 1);
+    return lastMonth;
   }
 }

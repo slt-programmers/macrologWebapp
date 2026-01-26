@@ -1,5 +1,5 @@
 import { DatePipe, formatDate } from '@angular/common';
-import { Component, output } from '@angular/core';
+import { Component, effect, input, output } from '@angular/core';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
 
@@ -12,17 +12,26 @@ import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons
 export class DatepickerComponent {
   faChevronLeft = faChevronLeft;
   faChevronRight = faChevronRight;
-  readonly change$ = output<string>();
+
+  private readonly defautlInitialDate = new Date();
+  
+  readonly initialDate = input<Date>(this.defautlInitialDate);
+  readonly showArrows = input<boolean>(true);
+  readonly dateSelected = output<string>();
 
   readonly dateformat = 'dd-MM-yyyy';
   readonly weekdays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-  selectedDate = new Date();;
+
+  selectedDate = this.defautlInitialDate;
   daysInMonth = 30;
   daysInMonthArray: number[] = [];
   placeholders: number[] = [];
   isOpen = false;
 
   constructor() {
+    effect(() => {
+      this.selectedDate = this.initialDate();
+    })
     this.setDaysInMonthArray();
     this.getWeekdayPlaceholders();
   }
@@ -45,7 +54,7 @@ export class DatepickerComponent {
     );
     this.setDaysInMonthArray();
     this.getWeekdayPlaceholders();
-    this.change$.emit(formatDate(this.selectedDate, 'yyyy-MM-dd', 'en-US'));
+    this.dateSelected.emit(formatDate(this.selectedDate, 'yyyy-MM-dd', 'en-US'));
   }
 
   previousDay() {
@@ -56,7 +65,7 @@ export class DatepickerComponent {
     );
     this.setDaysInMonthArray();
     this.getWeekdayPlaceholders();
-    this.change$.emit(formatDate(this.selectedDate, 'yyyy-MM-dd', 'en-US'));
+    this.dateSelected.emit(formatDate(this.selectedDate, 'yyyy-MM-dd', 'en-US'));
   }
 
   nextMonth() {
@@ -86,7 +95,7 @@ export class DatepickerComponent {
       day
     );
     this.isOpen = false;
-    this.change$.emit(formatDate(this.selectedDate, 'yyyy-MM-dd', 'en-US'));
+    this.dateSelected.emit(formatDate(this.selectedDate, 'yyyy-MM-dd', 'en-US'));
   }
 
   private setDaysInMonthArray() {

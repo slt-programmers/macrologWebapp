@@ -30,7 +30,7 @@
 </div>
 
 <div class="card flex flex-col gap-4 items-center">
-	<ml-datepicker (change$)="changeDate($event)" />
+	<ml-datepicker (dateSelected)="changeDate($event)" />
 
 	<ml-diary-page [date]="date" />
 </div>

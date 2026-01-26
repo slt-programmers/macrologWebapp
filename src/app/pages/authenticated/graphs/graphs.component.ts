@@ -93,21 +93,13 @@ export class GraphsComponent implements OnInit {
     this.measurementOption = option;
   }
 
-  public monthBack() {
-    this.dateTo = new Date(this.dateFrom!);
-    this.dateTo.setDate(this.dateFrom!.getDate() - 1);
-    this.dateFrom = new Date(this.dateTo);
-    this.dateFrom.setMonth(this.dateFrom.getMonth() - 1);
-    this.dateFrom.setDate(this.dateFrom.getDate() + 1);
+  changeDateTo(newDateTo: Date) {
+    this.dateTo = newDateTo;
     this.getLogData();
   }
 
-  public monthForward() {
-    this.dateFrom = new Date(this.dateTo!);
-    this.dateFrom.setDate(this.dateFrom.getDate() + 1);
-    this.dateTo = new Date(this.dateFrom);
-    this.dateTo.setMonth(this.dateTo.getMonth() + 1);
-    this.dateTo.setDate(this.dateTo.getDate() - 1);
+  changeDateFrom(newDateFrom: Date) {
+    this.dateFrom = newDateFrom;
     this.getLogData();
   }
 
