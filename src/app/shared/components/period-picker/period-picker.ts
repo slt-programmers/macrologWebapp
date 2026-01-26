@@ -2,7 +2,6 @@ import { Component, input, output } from '@angular/core';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
 import { DatepickerComponent } from '../datepicker/datepicker.component';
-import { formatDate } from '@angular/common';
 
 @Component({
   selector: 'ml-period-picker',
