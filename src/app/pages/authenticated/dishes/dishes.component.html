@@ -1,3 +1,5 @@
+<button class="btn btn--primary align-self-end m-2" (click)="openModal()">Add new dish</button>
+
 @if (allDishes().length === 0) {
 <div class="card">
   <p>You havent created any dishes yet!</p>
@@ -22,10 +24,6 @@
   }
 </div>
 }
-
-<button class="floating-action-button" (click)="openModal(null)">
-  <fa-icon [icon]="faPlus"></fa-icon>
-</button>
 
 @if (modalIsVisible && selectedDish) {
 <ml-edit-dish [selectedDish]="selectedDish" (close$)="closeModal()" />

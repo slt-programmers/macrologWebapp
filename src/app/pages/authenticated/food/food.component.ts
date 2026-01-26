@@ -6,18 +6,24 @@ import { FoodStore } from "src/app/shared/store/food.store";
 import { Food } from "../../../shared/model/food";
 import { EditFoodComponent } from "./edit-food/edit-food.component";
 import { Spinner } from "src/app/shared/components/spinner/spinner";
-import { faChevronLeft, faChevronRight, faPlus } from "@fortawesome/free-solid-svg-icons";
+import { faChevronLeft, faChevronRight } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 
 @Component({
 	selector: "ml-food",
 	templateUrl: "./food.component.html",
 	imports: [FormsModule, EditFoodComponent, DecimalPipe, Spinner, FontAwesomeModule],
+	styles: `
+		:host {
+			display: flex;
+			flex-direction: column;
+			gap: 16px;
+		}
+	`
 })
 export class FoodComponent {
   faChevronLeft = faChevronLeft;
   faChevronRight = faChevronRight;
-  faPlus = faPlus;
 
 	private readonly foodStore = inject(FoodStore);
   private allFood = this.foodStore.food;
@@ -86,7 +92,7 @@ export class FoodComponent {
 		this.getPagedFood(0);
 	}
 
-	public openModal(food: Food | null) {
+	public openModal(food?: Food) {
 		if (food) {
 			this.selectedFood = JSON.parse(JSON.stringify(food)) as Food;
 		} else {

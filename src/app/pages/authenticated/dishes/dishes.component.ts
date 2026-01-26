@@ -6,23 +6,28 @@ import { PiechartComponent } from "../../../shared/components/piechart/piechart.
 import { Dish } from "../../../shared/model/dish";
 import { Ingredient } from "../../../shared/model/ingredient";
 import { EditDishComponent } from "./edit-dish/edit-dish.component";
-import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 
 @Component({
 	selector: "ml-dishes",
 	templateUrl: "./dishes.component.html",
 	imports: [PiechartComponent, EditDishComponent, FormsModule, FontAwesomeModule],
+	styles: `
+		:host {
+			display: flex;
+			flex-direction: column;
+			gap: 16px;
+		}
+	`
 })
 export class DishesComponent {
-  faPlus = faPlus
 	private readonly dishStore = inject(DishStore);
 
 	allDishes = this.dishStore.dishes;
 	selectedDish?: Dish;
 	modalIsVisible = false;
 
-	openModal(dish: Dish | null): void {
+	openModal(dish?: Dish): void {
 		if (dish) {
 			this.selectedDish = {
 				...dish,

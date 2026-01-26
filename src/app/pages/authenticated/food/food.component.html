@@ -1,3 +1,5 @@
+<button class="btn btn--primary align-self-end m-2" (click)="openModal()">Add new food</button>
+
 <div class="card flex flex-col gap-4">
   <div class="flex items-center gap-2">
     <label for="search">Search</label>
@@ -124,10 +126,6 @@
     }
   </div>
 </div>
-
-<button class="floating-action-button" (click)="openModal(null)">
-  <fa-icon [icon]="faPlus"></fa-icon>
-</button>
 
 @if (modalIsVisible && selectedFood) {
 <ml-edit-food [selectedFood]="selectedFood" (close$)="closeModal()" />
