@@ -60,7 +60,6 @@ export const PlanStore = signalStore(
           return store.planService.createPlan().pipe(
             tapResponse({
               next: (mealplan: Mealplan) => {
-                console.log(mealplan)
                 patchState(store, {
                   plans: [...store.plans(), mealplan],
                 });
@@ -102,7 +101,6 @@ export const PlanStore = signalStore(
                 m.meal === mealtime.meal)
           );
           plan.mealtimes.push(mealtime);
-          console.log("Store save mealtime: " + JSON.stringify(plan))
           return store.planService.savePlan(plan).pipe(
             tapResponse({
               next: (mealplan: Mealplan) => {
