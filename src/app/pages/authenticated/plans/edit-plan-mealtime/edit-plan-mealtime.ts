@@ -46,12 +46,14 @@ export class EditPlanMealtime {
 			this.router.navigate(["dashboard", "plans"]);
 		}
 		this.mealtime = mealtime!()!;
+		console.log("Edit constructor: " + JSON.stringify(this.mealtime))
 	}
 
 	selectItem(foodOrDish: FoodSearchable): void {
 		if (foodOrDish.food) {
 			const food = foodOrDish.food;
 			const portion = food.portions[0];
+			console.log("Select item (food): " + JSON.stringify(portion))
 			this.mealtime.ingredients.push({
 				food,
 				portion: portion,
@@ -59,6 +61,7 @@ export class EditPlanMealtime {
 			} as Ingredient);
 		} else if (foodOrDish.dish) {
 			for (const ingredient of foodOrDish.dish.ingredients) {
+				console.log("Select item (food): " + JSON.stringify(ingredient.portion))
 				this.mealtime.ingredients.push({
 					food: ingredient.food,
 					portion: ingredient.portion,
@@ -82,6 +85,7 @@ export class EditPlanMealtime {
 
 	save(): void {
 		const planId = +this.route.snapshot.params["planId"];
+		console.log("Edit save mealtime: " + JSON.stringify(this.mealtime))
 		this.planStore.saveMealtime({ planId, mealtime: this.mealtime });
 	}
 }
